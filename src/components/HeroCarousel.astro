@@ -1,0 +1,119 @@
+---
+import { content } from "../i18n/content";
+import type { Lang } from "../i18n/ui";
+
+interface Props {
+  lang: Lang;
+}
+const { lang } = Astro.props;
+const alts = content[lang].home.heroSlidesAlt;
+
+// The 6 photos from the legacy site's Nivo slider (public/images/slider/).
+const slides = [1, 2, 3, 4, 5, 6].map((n, i) => ({
+  src: `/images/slider/slide-${n}.jpg`,
+  alt: alts[i] ?? "",
+}));
+---
+
+<section
+  class="hero-carousel relative isolate overflow-hidden bg-fcs-blue-dark"
+  data-interval="3500"
+>
+  <!-- Rotating photos -->
+  <div class="absolute inset-0 -z-10">
+    {
+      slides.map((s, i) => (
+        <img
+          src={s.src}
+          alt={s.alt}
+          loading={i === 0 ? "eager" : "lazy"}
+          decoding="async"
+          data-slide={i}
+          class:list={[
+            "absolute inset-0 h-full w-full object-cover transition-opacity duration-1000 motion-reduce:transition-none",
+            i === 0 ? "opacity-100" : "opacity-0",
+          ]}
+        />
+      ))
+    }
+    <!-- Blue/ink gradient overlay keeps the headline legible over any photo -->
+    <div
+      class="absolute inset-0 bg-gradient-to-r from-fcs-blue-dark/85 via-fcs-blue-dark/65 to-fcs-ink/40"
+    >
+    </div>
+  </div>
+
+  <!-- Foreground content (hero text + CTAs) -->
+  <div class="mx-auto max-w-6xl px-4 py-20 sm:py-28">
+    <slot />
+  </div>
+
+  <!-- Dot navigation -->
+  <div
+    class="absolute inset-x-0 bottom-4 z-10 flex justify-center gap-2"
+    role="tablist"
+    aria-label="Slides"
+  >
+    {
+      slides.map((s, i) => (
+        <button
+          type="button"
+          data-dot={i}
+          aria-label={s.alt}
+          aria-selected={i === 0 ? "true" : "false"}
+          class:list={[
+            "h-2.5 w-2.5 rounded-full border border-white/80 transition",
+            i === 0 ? "bg-white" : "bg-white/30 hover:bg-white/60",
+          ]}
+        />
+      ))
+    }
+  </div>
+</section>
+
+<script>
+  document.querySelectorAll<HTMLElement>(".hero-carousel").forEach((root) => {
+    const imgs = Array.from(
+      root.querySelectorAll<HTMLImageElement>("[data-slide]"),
+    );
+    const dots = Array.from(
+      root.querySelectorAll<HTMLButtonElement>("[data-dot]"),
+    );
+    if (imgs.length < 2) return;
+
+    const interval = Number(root.dataset.interval) || 3500;
+    const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    let current = 0;
+    let timer: number | undefined;
+
+    const show = (next: number) => {
+      imgs[current]?.classList.replace("opacity-100", "opacity-0");
+      dots[current]?.classList.replace("bg-white", "bg-white/30");
+      dots[current]?.setAttribute("aria-selected", "false");
+      current = (next + imgs.length) % imgs.length;
+      imgs[current]?.classList.replace("opacity-0", "opacity-100");
+      dots[current]?.classList.replace("bg-white/30", "bg-white");
+      dots[current]?.setAttribute("aria-selected", "true");
+    };
+
+    const start = () => {
+      if (reduce) return;
+      stop();
+      timer = window.setInterval(() => show(current + 1), interval);
+    };
+    const stop = () => {
+      if (timer) window.clearInterval(timer);
+    };
+
+    dots.forEach((dot, i) =>
+      dot.addEventListener("click", () => {
+        show(i);
+        start();
+      }),
+    );
+    root.addEventListener("mouseenter", stop);
+    root.addEventListener("mouseleave", start);
+
+    start();
+  });
+</script>

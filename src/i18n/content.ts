@@ -29,6 +29,14 @@ export const content = {
       heroTitle: 'Fremont Chinese School',
       heroSubtitle:
         'A WASC-accredited, non-profit weekend school teaching Chinese language and culture in the East Bay since 1972.',
+      heroSlidesAlt: [
+        'Chinese New Year celebration with award winners',
+        'FCS students marching in a community parade',
+        'Academic contest winners with the FCS school flag',
+        'FCS families at a community parade',
+        'Students performing on stage',
+        'Lunar New Year awards ceremony',
+      ],
       ctaPrimary: 'Enroll Now',
       ctaSecondary: 'Explore Programs',
       facts: [
@@ -182,6 +190,14 @@ export const content = {
       heroTitle: '費利蒙中文學校',
       heroSubtitle:
         '自 1972 年起，於東灣地區教授中華語文與文化，為通過 WASC 認證的非營利週末學校。',
+      heroSlidesAlt: [
+        '新春聯歡會與得獎學生',
+        '本校學生參加社區遊行',
+        '學術比賽得獎學生與校旗合影',
+        '本校家庭參加社區遊行',
+        '學生舞台表演',
+        '新春頒獎典禮',
+      ],
       ctaPrimary: '立即報名',
       ctaSecondary: '瀏覽課程',
       facts: [

@@ -1,6 +1,7 @@
 ---
 import { content, links } from "../../i18n/content";
 import { localizedPath, type Lang } from "../../i18n/ui";
+import HeroCarousel from "../HeroCarousel.astro";
 
 interface Props {
   lang: Lang;
@@ -9,27 +10,29 @@ const { lang } = Astro.props;
 const c = content[lang].home;
 ---
 
-<!-- Hero -->
-<section class="bg-fcs-blue">
-  <div class="mx-auto max-w-6xl px-4 py-16 sm:py-24">
-    <h1 class="max-w-3xl text-4xl font-bold text-white sm:text-5xl">
-      {c.heroTitle}
-    </h1>
-    <p class="mt-5 max-w-2xl text-lg text-white/95">{c.heroSubtitle}</p>
-    <div class="mt-8 flex flex-wrap gap-3">
-      <a
-        href={links.register}
-        class="rounded-full bg-white px-6 py-3 font-semibold text-fcs-blue-dark shadow-sm transition hover:bg-fcs-ink hover:text-white"
-        >{c.ctaPrimary}</a
-      >
-      <a
-        href={localizedPath(lang, "programs")}
-        class="rounded-full border border-white px-6 py-3 font-semibold text-white transition hover:bg-white/15"
-        >{c.ctaSecondary}</a
-      >
-    </div>
+<!-- Hero with rotating photo backdrop -->
+<HeroCarousel lang={lang}>
+  <h1
+    class="max-w-3xl text-4xl font-bold text-white drop-shadow-sm sm:text-5xl"
+  >
+    {c.heroTitle}
+  </h1>
+  <p class="mt-5 max-w-2xl text-lg text-white/95 drop-shadow-sm">
+    {c.heroSubtitle}
+  </p>
+  <div class="mt-8 flex flex-wrap gap-3">
+    <a
+      href={links.register}
+      class="rounded-full bg-white px-6 py-3 font-semibold text-fcs-blue-dark shadow-sm transition hover:bg-fcs-ink hover:text-white"
+      >{c.ctaPrimary}</a
+    >
+    <a
+      href={localizedPath(lang, "programs")}
+      class="rounded-full border border-white px-6 py-3 font-semibold text-white transition hover:bg-white/15"
+      >{c.ctaSecondary}</a
+    >
   </div>
-</section>
+</HeroCarousel>
 
 <!-- Facts strip -->
 <section class="border-b border-gray-100 bg-white">
