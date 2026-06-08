@@ -1,6 +1,54 @@
-# FremontChineseSchool.github.io
+# Fremont Chinese School — website
 
-Fremont Chinese School website
+The website for [Fremont Chinese School](https://fremontchineseschool.org), a
+WASC-accredited non-profit weekend Chinese school in Fremont, CA, founded in
+1972. This is a fresh rebuild of the school's old Joomla site.
+
+- **Stack:** [Astro](https://astro.build) 5 + [Tailwind CSS](https://tailwindcss.com) 4 — a static, fast site.
+- **Bilingual:** English (`/`) and Traditional Chinese (`/zh/`).
+- **Hosting:** GitHub Pages, deployed automatically on push to `main`.
+
+## Getting started
+
+Requires [Node.js](https://nodejs.org) 18+.
+
+```sh
+npm install        # install dependencies
+npm run dev        # local dev server at http://localhost:4321
+npm run build      # build the static site to dist/
+npm run preview    # preview the built site locally
+```
+
+To share a preview with someone on the same Wi-Fi, run `npm run dev -- --host`
+and give them the `Network` URL it prints.
+
+## Editing content
+
+Almost all page text — in **both languages** — lives in one file:
+**`src/i18n/content.ts`**. Edit the copy there; English and Chinese sit side by
+side with the same structure. Page layout/markup is separate (in
+`src/components/pages/`), so non-developers can usually update wording without
+touching design. Navigation labels and the site name live in `src/i18n/ui.ts`.
+
+The brand color (banner blue `#8FBDDF`) and fonts are in
+`src/styles/global.css`. The logo is `public/images/logo.png`.
+
+See [`CLAUDE.md`](./CLAUDE.md) for the full architecture and how to add a new
+page.
+
+## Deployment
+
+Pushing to `main` triggers `.github/workflows/deploy.yml`, which builds the site
+and publishes it to GitHub Pages. For this to work, repo **Settings → Pages →
+Source** must be set to **GitHub Actions**.
+
+## `old_website/`
+
+A reference archive of the legacy Joomla pages, kept for content only — it is
+not part of the built site. `old_website/SITEMAP.md` maps each file to its
+original URL.
+
+---
 
 ## Per-repo Claude Code login (macOS)
 
