@@ -1,0 +1,54 @@
+---
+import { ui, navOrder, localizedPath, type Lang } from "../i18n/ui";
+import { links, contactInfo } from "../i18n/content";
+
+interface Props {
+  lang: Lang;
+}
+const { lang } = Astro.props;
+const t = ui[lang];
+const year = 2026;
+---
+
+<footer class="mt-16 bg-fcs-ink text-gray-300">
+  <div
+    class="mx-auto grid max-w-6xl gap-8 px-4 py-10 sm:grid-cols-2 lg:grid-cols-3"
+  >
+    <div>
+      <p class="text-lg font-semibold text-white">{t.siteName}</p>
+      <p class="mt-2 text-sm">{t.tagline}</p>
+      <p class="mt-4 text-sm">{contactInfo.classroom}</p>
+      <p class="text-sm">{contactInfo.voicemail}</p>
+    </div>
+
+    <nav aria-label="Footer" class="text-sm">
+      <ul class="space-y-2">
+        {
+          navOrder.map((key) => (
+            <li>
+              <a class="hover:text-white" href={localizedPath(lang, key)}>
+                {t.nav[key]}
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+    </nav>
+
+    <div class="text-sm">
+      <a
+        class="inline-flex items-center gap-2 hover:text-white"
+        href={links.facebook}
+        rel="noopener"
+        target="_blank"
+      >
+        Facebook
+      </a>
+      <p class="mt-4">{t.footer.nonprofit}</p>
+    </div>
+  </div>
+
+  <div class="border-t border-white/10 py-4 text-center text-xs text-gray-400">
+    © {year} {t.siteName}. {t.footer.rights}
+  </div>
+</footer>

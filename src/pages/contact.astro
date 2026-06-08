@@ -1,0 +1,10 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import ContactPage from "../components/pages/ContactPage.astro";
+import { content } from "../i18n/content";
+const lang = "en" as const;
+---
+
+<BaseLayout lang={lang} title={content[lang].contact.title}>
+  <ContactPage lang={lang} />
+</BaseLayout>

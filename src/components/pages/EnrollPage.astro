@@ -1,0 +1,50 @@
+---
+import { content, links } from "../../i18n/content";
+import { localizedPath, type Lang } from "../../i18n/ui";
+
+interface Props {
+  lang: Lang;
+}
+const { lang } = Astro.props;
+const c = content[lang].enroll;
+---
+
+<section class="mx-auto max-w-3xl px-4 py-14">
+  <h1 class="text-3xl font-bold sm:text-4xl">{c.title}</h1>
+  <p class="mt-4 text-lg text-gray-700">{c.intro}</p>
+
+  <ol class="mt-10 space-y-6">
+    {
+      c.steps.map((step, i) => (
+        <li class="flex gap-4">
+          <span class="flex h-9 w-9 flex-none items-center justify-center rounded-full bg-fcs-blue font-bold text-white">
+            {i + 1}
+          </span>
+          <div>
+            <h2 class="text-lg font-semibold">{step.heading}</h2>
+            <p class="mt-1 text-gray-700">{step.body}</p>
+            {"link" in step && step.link && (
+              <a
+                href={links[step.link as keyof typeof links]}
+                target="_blank"
+                rel="noopener"
+                class="mt-2 inline-block font-semibold text-fcs-blue-dark hover:underline"
+              >
+                {step.linkLabel} →
+              </a>
+            )}
+          </div>
+        </li>
+      ))
+    }
+  </ol>
+
+  <p class="mt-10 rounded-lg bg-fcs-blue/15 p-4 text-sm text-gray-700">
+    {c.calendarNote}{" "}
+    <a
+      href={localizedPath(lang, "calendar")}
+      class="font-semibold text-fcs-blue-dark hover:underline"
+      >{content[lang].calendar.title} →</a
+    >
+  </p>
+</section>

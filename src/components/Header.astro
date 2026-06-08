@@ -1,0 +1,105 @@
+---
+import { ui, navOrder, localizedPath, type Lang } from "../i18n/ui";
+import { links } from "../i18n/content";
+import LangSwitch from "./LangSwitch.astro";
+
+interface Props {
+  lang: Lang;
+}
+const { lang } = Astro.props;
+const t = ui[lang];
+const current = Astro.url.pathname.replace(/\/$/, "") || "/";
+
+const navItems = navOrder.map((key) => {
+  const href = localizedPath(lang, key);
+  return { key, href, label: t.nav[key], active: href === current };
+});
+---
+
+<header class="bg-fcs-blue text-white shadow-sm">
+  <div class="mx-auto flex max-w-6xl items-center justify-between gap-4 px-4 py-3">
+    <a href={localizedPath(lang, "home")} class="flex items-center gap-3">
+      <img
+        src="/images/logo.png"
+        alt={t.logoAlt}
+        class="h-10 w-auto md:h-12"
+        width="500"
+        height="108"
+      />
+      <span class="sr-only">{t.siteName}</span>
+    </a>
+
+    <!-- Desktop nav -->
+    <nav aria-label="Primary" class="hidden items-center gap-1 lg:flex">
+      {
+        navItems.map((item) => (
+          <a
+            href={item.href}
+            aria-current={item.active ? "page" : undefined}
+            class:list={[
+              "rounded px-3 py-2 text-sm font-medium transition hover:bg-white/20",
+              item.active && "bg-white/25",
+            ]}
+          >
+            {item.label}
+          </a>
+        ))
+      }
+    </nav>
+
+    <div class="flex items-center gap-2">
+      <a
+        href={links.register}
+        class="hidden rounded-full bg-white px-4 py-2 text-sm font-semibold text-fcs-blue-dark shadow-sm transition hover:bg-fcs-ink hover:text-white sm:inline-block"
+        >{t.enrollCta}</a
+      >
+      <LangSwitch lang={lang} />
+      <!-- Mobile menu toggle -->
+      <details class="relative lg:hidden">
+        <summary
+          class="flex cursor-pointer list-none items-center rounded p-2 hover:bg-white/20"
+          aria-label="Menu"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+          >
+            <line x1="3" y1="6" x2="21" y2="6"></line>
+            <line x1="3" y1="12" x2="21" y2="12"></line>
+            <line x1="3" y1="18" x2="21" y2="18"></line>
+          </svg>
+        </summary>
+        <nav
+          aria-label="Mobile"
+          class="absolute right-0 z-40 mt-2 w-56 rounded-lg bg-white py-2 text-fcs-ink shadow-lg"
+        >
+          {
+            navItems.map((item) => (
+              <a
+                href={item.href}
+                aria-current={item.active ? "page" : undefined}
+                class:list={[
+                  "block px-4 py-2 text-sm hover:bg-fcs-blue/20",
+                  item.active && "font-semibold",
+                ]}
+              >
+                {item.label}
+              </a>
+            ))
+          }
+          <a
+            href={links.register}
+            class="mt-1 block border-t border-gray-100 px-4 py-2 text-sm font-semibold text-fcs-blue-dark"
+            >{t.enrollCta}</a
+          >
+        </nav>
+      </details>
+    </div>
+  </div>
+</header>

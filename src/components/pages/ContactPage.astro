@@ -1,0 +1,61 @@
+---
+import { content, contactInfo, links } from "../../i18n/content";
+import type { Lang } from "../../i18n/ui";
+
+interface Props {
+  lang: Lang;
+}
+const { lang } = Astro.props;
+const c = content[lang].contact;
+const L = c.labels;
+
+const rows = [
+  {
+    label: L.principal,
+    value: `${contactInfo.principalName} — ${contactInfo.principal}`,
+    href: `mailto:${contactInfo.principal}`,
+  },
+  {
+    label: L.office,
+    value: contactInfo.office,
+    href: `mailto:${contactInfo.office}`,
+  },
+  {
+    label: L.registration,
+    value: contactInfo.registration,
+    href: `mailto:${contactInfo.registration}`,
+  },
+  { label: L.voicemail, value: contactInfo.voicemail, href: null },
+  { label: L.mailing, value: contactInfo.mailing, href: null },
+  { label: L.classroom, value: contactInfo.classroom, href: null },
+  { label: L.facebook, value: "facebook.com/fremontchineseschool", href: links.facebook },
+];
+---
+
+<section class="mx-auto max-w-3xl px-4 py-14">
+  <h1 class="text-3xl font-bold sm:text-4xl">{c.title}</h1>
+
+  <dl class="mt-8 divide-y divide-gray-100">
+    {
+      rows.map((r) => (
+        <div class="grid gap-1 py-4 sm:grid-cols-3">
+          <dt class="font-semibold text-gray-500">{r.label}</dt>
+          <dd class="sm:col-span-2">
+            {r.href ? (
+              <a
+                href={r.href}
+                target={r.href.startsWith("http") ? "_blank" : undefined}
+                rel={r.href.startsWith("http") ? "noopener" : undefined}
+                class="text-fcs-blue-dark hover:underline"
+              >
+                {r.value}
+              </a>
+            ) : (
+              <span class="text-gray-700">{r.value}</span>
+            )}
+          </dd>
+        </div>
+      ))
+    }
+  </dl>
+</section>

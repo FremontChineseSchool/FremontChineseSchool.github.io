@@ -1,0 +1,10 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import EnrollPage from "../components/pages/EnrollPage.astro";
+import { content } from "../i18n/content";
+const lang = "en" as const;
+---
+
+<BaseLayout lang={lang} title={content[lang].enroll.title}>
+  <EnrollPage lang={lang} />
+</BaseLayout>

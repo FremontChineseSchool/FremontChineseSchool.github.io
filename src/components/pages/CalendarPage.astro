@@ -1,0 +1,33 @@
+---
+import { content, links } from "../../i18n/content";
+import type { Lang } from "../../i18n/ui";
+
+interface Props {
+  lang: Lang;
+}
+const { lang } = Astro.props;
+const c = content[lang].calendar;
+---
+
+<section class="mx-auto max-w-3xl px-4 py-14">
+  <h1 class="text-3xl font-bold sm:text-4xl">{c.title}</h1>
+  <p class="mt-2 text-lg font-medium text-fcs-blue-dark">{c.yearLabel}</p>
+  <p class="mt-6 text-gray-700">{c.intro}</p>
+
+  <div class="mt-6 flex flex-wrap gap-3">
+    <a
+      href={links.calendarEn}
+      target="_blank"
+      rel="noopener"
+      class="rounded-full bg-fcs-blue px-6 py-3 font-semibold text-white transition hover:bg-fcs-blue-dark"
+      >{c.downloadEn}</a
+    >
+    <a
+      href={links.calendarZh}
+      target="_blank"
+      rel="noopener"
+      class="rounded-full border border-fcs-blue-dark px-6 py-3 font-semibold text-fcs-blue-dark transition hover:bg-fcs-blue hover:text-white"
+      >{c.downloadZh}</a
+    >
+  </div>
+</section>

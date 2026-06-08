@@ -1,0 +1,18 @@
+@import "tailwindcss";
+
+/* FCS brand — banner blue from the legacy logo background (#8FBDDF) */
+@theme {
+  --color-fcs-blue: #8fbddf;
+  --color-fcs-blue-dark: #5a93bd;
+  --color-fcs-ink: #1f2a37;
+  --font-sans: "Helvetica Neue", "PingFang TC", "Microsoft JhengHei",
+    "Noto Sans TC", system-ui, sans-serif;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  @apply font-sans text-fcs-ink antialiased;
+}

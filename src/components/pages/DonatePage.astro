@@ -1,0 +1,30 @@
+---
+import { content, contactInfo } from "../../i18n/content";
+import type { Lang } from "../../i18n/ui";
+
+interface Props {
+  lang: Lang;
+}
+const { lang } = Astro.props;
+const c = content[lang].donate;
+---
+
+<section class="mx-auto max-w-3xl px-4 py-14">
+  <h1 class="text-3xl font-bold sm:text-4xl">{c.title}</h1>
+
+  <div class="mt-6 space-y-4">
+    {c.body.map((p) => <p class="leading-relaxed text-gray-700">{p}</p>)}
+  </div>
+
+  <div class="mt-10 rounded-xl border border-gray-200 p-6">
+    <h2 class="text-xl font-semibold text-fcs-blue-dark">
+      {c.sponsorHeading}
+    </h2>
+    <p class="mt-3 text-gray-700">{c.sponsorBody}</p>
+    <a
+      href={`mailto:${contactInfo.principal}`}
+      class="mt-3 inline-block font-semibold text-fcs-blue-dark hover:underline"
+      >{c.contactEmailLabel}: {contactInfo.principal}</a
+    >
+  </div>
+</section>

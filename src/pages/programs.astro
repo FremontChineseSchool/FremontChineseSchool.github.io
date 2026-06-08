@@ -1,0 +1,10 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import ProgramsPage from "../components/pages/ProgramsPage.astro";
+import { content } from "../i18n/content";
+const lang = "en" as const;
+---
+
+<BaseLayout lang={lang} title={content[lang].programs.title}>
+  <ProgramsPage lang={lang} />
+</BaseLayout>

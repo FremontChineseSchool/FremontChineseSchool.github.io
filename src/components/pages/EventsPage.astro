@@ -1,0 +1,36 @@
+---
+import { content, links } from "../../i18n/content";
+import type { Lang } from "../../i18n/ui";
+
+interface Props {
+  lang: Lang;
+}
+const { lang } = Astro.props;
+const c = content[lang].events;
+---
+
+<section class="mx-auto max-w-3xl px-4 py-14">
+  <h1 class="text-3xl font-bold sm:text-4xl">{c.title}</h1>
+  <p class="mt-4 text-lg text-gray-700">{c.intro}</p>
+
+  <h2 class="mt-10 text-xl font-semibold text-fcs-blue-dark">
+    {c.annualTitle}
+  </h2>
+  <ul class="mt-6 grid gap-3 sm:grid-cols-2">
+    {
+      c.annual.map((e) => (
+        <li class="rounded-lg border border-gray-200 px-4 py-3 text-gray-700">
+          {e}
+        </li>
+      ))
+    }
+  </ul>
+
+  <a
+    href={links.facebook}
+    target="_blank"
+    rel="noopener"
+    class="mt-8 inline-block font-semibold text-fcs-blue-dark hover:underline"
+    >Facebook →</a
+  >
+</section>

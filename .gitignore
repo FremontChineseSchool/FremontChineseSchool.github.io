@@ -1,0 +1,11 @@
+# Local environment / secrets
+.env
+.envrc
+
+# Build output / deps / Astro
+node_modules/
+dist/
+.astro/
+
+# macOS
+.DS_Store

@@ -1,0 +1,10 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import AboutPage from "../../components/pages/AboutPage.astro";
+import { content } from "../../i18n/content";
+const lang = "zh" as const;
+---
+
+<BaseLayout lang={lang} title={content[lang].about.title}>
+  <AboutPage lang={lang} />
+</BaseLayout>

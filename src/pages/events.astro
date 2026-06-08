@@ -1,0 +1,10 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import EventsPage from "../components/pages/EventsPage.astro";
+import { content } from "../i18n/content";
+const lang = "en" as const;
+---
+
+<BaseLayout lang={lang} title={content[lang].events.title}>
+  <EventsPage lang={lang} />
+</BaseLayout>

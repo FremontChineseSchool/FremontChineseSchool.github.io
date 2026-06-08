@@ -1,0 +1,15 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import HomePage from "../components/pages/HomePage.astro";
+import { ui } from "../i18n/ui";
+import { content } from "../i18n/content";
+const lang = "en" as const;
+---
+
+<BaseLayout
+  lang={lang}
+  title={ui[lang].nav.home}
+  description={content[lang].home.heroSubtitle}
+>
+  <HomePage lang={lang} />
+</BaseLayout>
