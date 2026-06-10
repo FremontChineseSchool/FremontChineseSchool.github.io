@@ -19,6 +19,7 @@ export const routes: Record<string, string> = {
   about: 'about',
   programs: 'programs',
   enroll: 'enroll',
+  payment: 'payment',
   calendar: 'calendar',
   events: 'events',
   donate: 'donate',

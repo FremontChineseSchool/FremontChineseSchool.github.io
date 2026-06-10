@@ -11,8 +11,54 @@
 
 html {
   scroll-behavior: smooth;
+  /* Sticky header offset for in-page anchor jumps */
+  scroll-padding-top: 5rem;
 }
 
 body {
   @apply font-sans text-fcs-ink antialiased;
+}
+
+/* ---------------------------------------------------------------------------
+   Scroll-reveal: elements tagged [data-reveal] fade + rise + settle into view.
+   A tiny IntersectionObserver in BaseLayout adds .is-visible. Stagger siblings
+   with an inline `--reveal-delay`. Fully disabled under reduced-motion (and the
+   observer just reveals everything immediately), so content is never hidden.
+--------------------------------------------------------------------------- */
+@media (prefers-reduced-motion: no-preference) {
+  [data-reveal] {
+    opacity: 0;
+    transform: translateY(28px) scale(0.97);
+    transition:
+      opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1),
+      transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+    transition-delay: var(--reveal-delay, 0ms);
+    will-change: opacity, transform;
+  }
+
+  [data-reveal].is-visible {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+/* Scroll-scrubbed parallax for showcase media — native scroll-driven animation
+   where supported; a no-op everywhere else. Restrained on purpose. */
+@supports (animation-timeline: view()) {
+  @media (prefers-reduced-motion: no-preference) {
+    .parallax-zoom {
+      animation: parallax-zoom linear both;
+      animation-timeline: view();
+      animation-range: cover 0% cover 100%;
+    }
+  }
+}
+
+@keyframes parallax-zoom {
+  from {
+    transform: scale(1.18) translateY(-3%);
+  }
+  to {
+    transform: scale(1) translateY(3%);
+  }
 }

@@ -1,0 +1,10 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import PaymentPage from "../components/pages/PaymentPage.astro";
+import { content } from "../i18n/content";
+const lang = "en" as const;
+---
+
+<BaseLayout lang={lang} title={content[lang].payment.title}>
+  <PaymentPage lang={lang} />
+</BaseLayout>

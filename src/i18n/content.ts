@@ -3,7 +3,7 @@
 // translated) and centralized so they're easy to update in one place.
 
 export const links = {
-  register: 'https://fremontchineseschool.org/registration',
+  register: 'https://sites.google.com/fremontchineseschool.org/mainpage/home',
   payment: 'https://fremontchineseschool.org/online-payment',
   calendarZh:
     'https://drive.google.com/file/d/1LgAKCRMIiecG3fpMC2w6Hwx2zpWYXGd3/view',
@@ -63,6 +63,35 @@ export const content = {
           route: 'calendar',
         },
       ],
+      featuresTitle: 'Why families choose FCS',
+      featuresSubtitle:
+        'A warm, community-centered place to learn Mandarin and grow up connected to Chinese culture.',
+      features: [
+        {
+          title: '50+ years of community',
+          body: 'Since 1972, generations of East Bay families have learned and grown at FCS.',
+        },
+        {
+          title: 'WASC-accredited',
+          body: 'Earn real high-school credit through our accredited Chinese curriculum.',
+        },
+        {
+          title: 'Every level welcome',
+          body: 'From first characters to advanced fluency, plus electives like painting and yo-yo.',
+        },
+        {
+          title: 'More than a classroom',
+          body: 'New Year celebrations, contests, and performances — culture you can feel.',
+        },
+      ],
+      showcaseAlt: 'FCS students celebrating together at a school event',
+      eventsTitle: 'Life at FCS',
+      eventsLead:
+        'Learning spills beyond the classroom into celebrations families look forward to all year.',
+      eventsCta: 'See all events',
+      ctaTitle: 'Ready to join us this year?',
+      ctaBody:
+        "Enrollment is open to new and returning families. Reserve your child's place for the 2026–2027 school year.",
     },
     about: {
       title: 'About FCS',
@@ -102,7 +131,8 @@ export const content = {
       sections: [
         {
           heading: 'Chinese Language',
-          body: 'Classes from beginner through advanced, following established Mandarin curricula. Students build reading, writing, listening, and speaking skills in a supportive weekend setting.',
+          // TODO(verify): confirm exact grade range and track names with the school office.
+          body: 'Weekend classes run from pre-K through 12th grade, all taught in Traditional Chinese. Choose the full-Chinese track for students from Mandarin-speaking families, or the bilingual track designed for beginners and heritage learners easing into the language. Students build reading, writing, listening, and speaking skills following established Mandarin curricula.',
         },
         {
           heading: 'Accredited Curriculum (AC / 學分班)',
@@ -110,7 +140,7 @@ export const content = {
         },
         {
           heading: 'Electives',
-          body: 'Enrichment classes such as Chinese painting and Chinese yo-yo give students a fun, hands-on connection to Chinese culture.',
+          body: 'Enrichment classes such as Chinese painting, Chinese yo-yo, coding, and basketball give students a fun, hands-on connection to Chinese culture and a chance to make friends beyond the language classroom.',
         },
       ],
     },
@@ -129,7 +159,7 @@ export const content = {
           heading: 'Pay tuition & fees',
           body: 'Tuition and fees (including AC placement and other fees) are paid through the FCS online payment page.',
           linkLabel: 'Go to online payment',
-          link: 'payment',
+          route: 'payment',
         },
         {
           heading: 'AC placement test',
@@ -138,6 +168,13 @@ export const content = {
       ],
       calendarNote:
         'Check the school calendar for the first day of class and important dates.',
+    },
+    payment: {
+      title: 'Online Payment',
+      intro:
+        'Pay tuition and school fees right here. Browse the items below, add what you need to your cart, and check out securely — all on this page.',
+      loading: 'Loading the payment store…',
+      note: 'Payments are processed securely through our school store. If you are unsure which item to pay, check your registration confirmation or contact the school office.',
     },
     calendar: {
       title: 'School Calendar',
@@ -224,6 +261,33 @@ export const content = {
           route: 'calendar',
         },
       ],
+      featuresTitle: '家庭選擇本校的理由',
+      featuresSubtitle:
+        '在溫馨、以社區為本的環境中學習中文，伴隨孩子親近中華文化、共同成長。',
+      features: [
+        {
+          title: '五十餘年社區傳承',
+          body: '自 1972 年以來，東灣一代又一代的家庭在本校學習、成長。',
+        },
+        {
+          title: 'WASC 認證',
+          body: '透過本校認證的中文課程，取得正式高中學分。',
+        },
+        {
+          title: '適合各種程度',
+          body: '從第一個字到流利進階，另設國畫、扯鈴等才藝選修。',
+        },
+        {
+          title: '不只是課堂',
+          body: '新春聯歡、學術比賽、舞台表演——讓你親身感受文化。',
+        },
+      ],
+      showcaseAlt: '本校學生於校園活動中歡聚同樂',
+      eventsTitle: '校園生活',
+      eventsLead: '學習延伸到課堂之外，化為全家人整年期待的精彩活動。',
+      eventsCta: '查看所有活動',
+      ctaTitle: '準備好今年加入我們了嗎？',
+      ctaBody: '新生與舊生皆可報名。為您的孩子預留 2026–2027 學年的名額。',
     },
     about: {
       title: '關於本校',
@@ -263,7 +327,8 @@ export const content = {
       sections: [
         {
           heading: '中文課程',
-          body: '課程涵蓋初級至高級，採用成熟的中文教材，於溫馨的週末環境中培養學生聽、說、讀、寫的能力。',
+          // TODO(verify): confirm exact grade range and track names with the school office.
+          body: '週末班級涵蓋學前班（Pre-K）至十二年級，全程以正體（繁體）中文授課。可選擇適合來自華語家庭學生的全中文班，或專為初學者與華裔子弟設計、循序漸進的雙語班。學生依循成熟的中文教材，培養聽、說、讀、寫的能力。',
         },
         {
           heading: '學分班（Accredited Curriculum / AC）',
@@ -271,7 +336,7 @@ export const content = {
         },
         {
           heading: '才藝選修',
-          body: '國畫、扯鈴等才藝課程，讓學生以有趣且實作的方式親近中華文化。',
+          body: '國畫、扯鈴、程式設計（coding）與籃球等才藝選修課程，讓學生以有趣且實作的方式親近中華文化，並在語文課堂之外結交朋友。',
         },
       ],
     },
@@ -290,7 +355,7 @@ export const content = {
           heading: '繳交學費與費用',
           body: '學費與各項費用（含學分班分班考試費及其他費用）皆透過本校線上付款頁面繳交。',
           linkLabel: '前往線上付款',
-          link: 'payment',
+          route: 'payment',
         },
         {
           heading: '學分班分班考試',
@@ -298,6 +363,13 @@ export const content = {
         },
       ],
       calendarNote: '開學日與重要日期請參閱學校行事曆。',
+    },
+    payment: {
+      title: '線上付款',
+      intro:
+        '直接在此頁繳交學費與各項學校費用。瀏覽下方項目，將所需項目加入購物車，並於本頁安全結帳。',
+      loading: '正在載入付款商店…',
+      note: '款項皆透過本校商店安全處理。若不確定應繳交哪一項目，請查看您的報名確認資訊，或聯絡學校辦公室。',
     },
     calendar: {
       title: '學校行事曆',

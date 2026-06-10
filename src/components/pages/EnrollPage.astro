@@ -23,7 +23,14 @@ const c = content[lang].enroll;
           <div>
             <h2 class="text-lg font-semibold">{step.heading}</h2>
             <p class="mt-1 text-gray-700">{step.body}</p>
-            {"link" in step && step.link && (
+            {"route" in step && step.route ? (
+              <a
+                href={localizedPath(lang, step.route)}
+                class="mt-2 inline-block font-semibold text-fcs-blue-dark hover:underline"
+              >
+                {step.linkLabel} →
+              </a>
+            ) : "link" in step && step.link ? (
               <a
                 href={links[step.link as keyof typeof links]}
                 target="_blank"
@@ -32,7 +39,7 @@ const c = content[lang].enroll;
               >
                 {step.linkLabel} →
               </a>
-            )}
+            ) : null}
           </div>
         </li>
       ))

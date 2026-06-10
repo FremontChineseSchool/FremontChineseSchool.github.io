@@ -16,13 +16,18 @@ const navItems = navOrder.map((key) => {
 });
 ---
 
-<header class="bg-fcs-blue text-white shadow-sm">
-  <div class="mx-auto flex max-w-6xl items-center justify-between gap-4 px-4 py-3">
+<header
+  id="site-header"
+  class="group sticky top-0 z-50 bg-fcs-blue text-white shadow-sm transition-[background-color,box-shadow,backdrop-filter] duration-300 data-[scrolled]:bg-fcs-blue/90 data-[scrolled]:shadow-md data-[scrolled]:backdrop-blur-md"
+>
+  <div
+    class="mx-auto flex max-w-6xl items-center justify-between gap-4 px-4 py-3 transition-[padding] duration-300 group-data-[scrolled]:py-1.5"
+  >
     <a href={localizedPath(lang, "home")} class="flex items-center gap-3">
       <img
         src="/images/logo.png"
         alt={t.logoAlt}
-        class="h-10 w-auto md:h-12"
+        class="h-10 w-auto transition-[height] duration-300 group-data-[scrolled]:h-8 md:h-12 md:group-data-[scrolled]:h-9"
         width="500"
         height="108"
       />
@@ -103,3 +108,26 @@ const navItems = navOrder.map((key) => {
     </div>
   </div>
 </header>
+
+<script>
+  // Condense the sticky header once the page is scrolled past the hero edge.
+  const header = document.getElementById("site-header");
+  if (header) {
+    let ticking = false;
+    const sync = () => {
+      header.toggleAttribute("data-scrolled", window.scrollY > 16);
+      ticking = false;
+    };
+    window.addEventListener(
+      "scroll",
+      () => {
+        if (!ticking) {
+          ticking = true;
+          window.requestAnimationFrame(sync);
+        }
+      },
+      { passive: true },
+    );
+    sync();
+  }
+</script>

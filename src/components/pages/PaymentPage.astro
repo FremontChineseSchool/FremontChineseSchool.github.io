@@ -1,0 +1,51 @@
+---
+import { content } from "../../i18n/content";
+import type { Lang } from "../../i18n/ui";
+
+interface Props {
+  lang: Lang;
+}
+const { lang } = Astro.props;
+const c = content[lang].payment;
+
+// Ecwid store the school already uses (id lifted from the legacy site's embed).
+// The storefront widget renders the live catalog, prices, add-to-cart, an
+// on-page cart and Ecwid-hosted checkout — all inline, no click-through.
+const STORE_ID = "25817941";
+const ecwidLang = lang === "zh" ? "zh" : "en";
+---
+
+<section class="mx-auto max-w-5xl px-4 py-14">
+  <h1 class="text-3xl font-bold sm:text-4xl">{c.title}</h1>
+  <p class="mt-4 max-w-2xl text-lg text-gray-700">{c.intro}</p>
+
+  <!-- Ecwid storefront mounts here -->
+  <div id={`my-store-${STORE_ID}`} class="mt-10 min-h-64">
+    <p class="text-gray-500" data-ecwid-loading>{c.loading}</p>
+  </div>
+
+  <p class="mt-8 rounded-lg bg-fcs-blue/15 p-4 text-sm text-gray-700">
+    {c.note}
+  </p>
+</section>
+
+<!-- Set the storefront language before the Ecwid script loads. -->
+<script is:inline define:vars={{ ecwidLang }}>
+  window.ec = window.ec || {};
+  window.ec.config = window.ec.config || {};
+  window.ec.storefront = window.ec.storefront || {};
+  window.ec.storefront.lang = ecwidLang;
+</script>
+<script
+  is:inline
+  src={`https://app.ecwid.com/script.js?${STORE_ID}&data_platform=astro`}
+  charset="utf-8"></script>
+<script is:inline define:vars={{ STORE_ID }}>
+  xProductBrowser(
+    "categoriesPerRow=3",
+    "views=grid(20,3) list(60) table(60)",
+    "categoryView=grid",
+    "searchView=list",
+    "id=my-store-" + STORE_ID,
+  );
+</script>
