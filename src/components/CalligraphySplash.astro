@@ -2,15 +2,15 @@
 /**
  * CalligraphySplash — homepage intro that brush-paints the school name.
  *
- * The visible ink is the crisp 王漢宗中行書 (wt071) outline of each character
- * (src/data/glyphs.json). The painted characters are revealed stroke-by-stroke
- * along hand-aligned, variable-width centerlines (src/data/strokes.json, made
- * with tools/stroke-aligner.html): each stroke's ribbon clips a swept reveal,
- * and the reveal mask is blurred so ink *blooms/bleeds* in as the brush moves
- * rather than wiping in with a hard edge.
+ * The visible ink is the crisp Yuji Boku outline of each character
+ * (src/data/glyphs.json). Painted characters are revealed stroke-by-stroke:
+ * each stroke has a hand-aligned centerline and a non-overlapping territory
+ * (src/data/strokes.json, made with the offline tools/stroke-aligner.html).
+ * The bloom — a blurred wipe swept along the centerline, widening over time —
+ * is clipped to that territory, so ink blooms outward from the brush path and
+ * stops at the boundary (no cross-bleed between strokes).
  *
- * ANIMATED lists which characters are painted (the rest fly in as finished
- * outlines). Add 利/蒙 here once they're aligned in the tool.
+ * ANIMATED lists which characters are painted; the rest fly in as outlines.
  *
  * Click / tap / any key fast-forwards. Skipped entirely under reduced-motion
  * and without JS (the overlay is display:none until the inline script runs).
@@ -21,27 +21,36 @@ import strokes from "../data/strokes.json";
 const ANIMATED = ["費", "利", "蒙"]; // characters painted stroke-by-stroke
 
 type Pt = number[];
+type Stroke = { pts: Pt[]; boundary?: Pt[] };
 const lineD = (pts: Pt[]) => "M" + pts.map((p) => `${p[0]},${p[1]}`).join("L");
-const maxW = (pts: Pt[]) => Math.max(...pts.map((p) => p[2] ?? 60));
-function ribbonD(pts: Pt[]): string {
-  if (pts.length < 2) return "";
-  const n = pts.length, L: Pt[] = [], R: Pt[] = [];
-  for (let i = 0; i < n; i++) {
-    const a = pts[Math.max(0, i - 1)], b = pts[Math.min(n - 1, i + 1)];
-    let tx = b[0] - a[0], ty = b[1] - a[1];
-    const len = Math.hypot(tx, ty) || 1; tx /= len; ty /= len;
-    const nx = -ty, ny = tx, hw = (pts[i][2] ?? 60) / 2;
-    L.push([pts[i][0] + nx * hw, pts[i][1] + ny * hw]);
-    R.push([pts[i][0] - nx * hw, pts[i][1] - ny * hw]);
+const polyStr = (pts: Pt[]) => pts.map((p) => `${p[0]},${p[1]}`).join(" ");
+
+/** Distance from a point to a polyline (the centerline). */
+function distToLine(pt: Pt, line: Pt[]): number {
+  if (line.length === 1) return Math.hypot(pt[0] - line[0][0], pt[1] - line[0][1]);
+  let m = Infinity;
+  for (let i = 0; i < line.length - 1; i++) {
+    const a = line[i], b = line[i + 1];
+    const dx = b[0] - a[0], dy = b[1] - a[1];
+    const L2 = dx * dx + dy * dy || 1;
+    const t = Math.max(0, Math.min(1, ((pt[0] - a[0]) * dx + (pt[1] - a[1]) * dy) / L2));
+    m = Math.min(m, Math.hypot(pt[0] - (a[0] + t * dx), pt[1] - (a[1] + t * dy)));
   }
-  const all = L.concat(R.reverse());
-  return "M" + all.map((p) => `${p[0].toFixed(1)},${p[1].toFixed(1)}`).join("L") + "Z";
+  return m;
+}
+/** Bloom reach: wide enough (with margin) to fill the stroke's territory when
+    clipped to its boundary, so the ink blooms out to — and stops at — the edge. */
+function bloomWidth(st: Stroke): number {
+  if (!st.boundary || !st.boundary.length) return 80;
+  let mx = 0;
+  for (const bp of st.boundary) mx = Math.max(mx, distToLine(bp, st.pts));
+  return Math.max(24, mx * 2 * 1.3);
 }
 
 const chars = glyphs.chars.map((c) => ({
   ...c,
   animated: ANIMATED.includes(c.char),
-  strokes: (strokes.chars as Record<string, { pts: Pt[] }[]>)[c.char] ?? [],
+  strokes: ((strokes.chars as Record<string, Stroke[]>)[c.char] ?? []),
 }));
 const paint = chars.filter((c) => c.animated);
 const rest = chars.filter((c) => !c.animated);
@@ -59,7 +68,7 @@ const paintAspect = paint.reduce((a, c) => a + c.w / c.h, 0);
       {/* Wet-ink edge texture on the glyph fill. */}
       <filter id="fcs-ink" x="-25%" y="-25%" width="150%" height="150%" color-interpolation-filters="sRGB">
         <feTurbulence type="fractalNoise" baseFrequency="0.022 0.026" numOctaves="2" seed="7" result="noise"></feTurbulence>
-        <feDisplacementMap in="SourceGraphic" in2="noise" scale="3.5" xChannelSelector="R" yChannelSelector="G" result="rough"></feDisplacementMap>
+        <feDisplacementMap in="SourceGraphic" in2="noise" scale="2.2" xChannelSelector="R" yChannelSelector="G" result="rough"></feDisplacementMap>
         <feGaussianBlur in="rough" stdDev="1.6" result="bleed"></feGaussianBlur>
         <feComponentTransfer in="bleed" result="halo"><feFuncA type="linear" slope="0.5"></feFuncA></feComponentTransfer>
         <feMerge><feMergeNode in="halo"></feMergeNode><feMergeNode in="rough"></feMergeNode></feMerge>
@@ -77,13 +86,13 @@ const paintAspect = paint.reduce((a, c) => a + c.w / c.h, 0);
             <svg class="glyph-svg" viewBox={`0 0 ${c.w} ${c.h}`} data-char={c.char}>
               <defs>
                 {c.strokes.map((st, si) => (
-                  <clipPath id={`rb-${c.char}-${si}`}><path d={ribbonD(st.pts)} /></clipPath>
+                  <clipPath id={`bc-${c.char}-${si}`}><polygon points={polyStr(st.boundary ?? [])} /></clipPath>
                 ))}
                 <mask id={`rev-${c.char}`} maskUnits="userSpaceOnUse" x="-80" y="-80" width={c.w + 160} height={c.h + 160}>
                   <g filter="url(#bloom)">
                     {c.strokes.map((st, si) => (
-                      <g clip-path={`url(#rb-${c.char}-${si})`}>
-                        <path class="wipe" d={lineD(st.pts)} stroke-width={maxW(st.pts) + 12} data-wipe />
+                      <g clip-path={`url(#bc-${c.char}-${si})`}>
+                        <path class="wipe" d={lineD(st.pts)} stroke-width={bloomWidth(st)} data-wipe />
                       </g>
                     ))}
                   </g>
@@ -161,9 +170,9 @@ const paintAspect = paint.reduce((a, c) => a + c.w / c.h, 0);
     paintEl.style.transformOrigin = "center bottom";
     paintEl.style.transform = `scale(${scaleP})`;
 
-    // How much longer the ink keeps blooming outward than the brush takes to
-    // sweep the stroke. 1 = bloom locked to stroke speed; higher = slower bloom.
-    const BLOOM_FACTOR = 4;
+    // Timing knobs:
+    const BLOOM_FACTOR = 2.2; // ink keeps blooming this × longer than the sweep
+    const START_NEXT = 0.35;  // next stroke begins at this fraction of the current sweep (overlap)
 
     const wipes = [...paintEl.querySelectorAll<SVGPathElement>("[data-wipe]")];
     wipes.forEach((p) => {
@@ -173,38 +182,43 @@ const paintAspect = paint.reduce((a, c) => a + c.w / c.h, 0);
       p.style.strokeDasharray = `${L}`;
       p.style.strokeDashoffset = `${L}`;     // sweep starts hidden
       p.style.strokeWidth = `${(p as any)._core}`; // bloom starts as a thin core
+      p.style.visibility = "hidden";         // nothing renders before its turn (no stray spots)
     });
 
-    let skipped = false, assembled = false, cur: Animation | null = null;
-    const blooms: Animation[] = [];
+    let skipped = false, assembled = false;
+    const sweeps: Animation[] = [], blooms: Animation[] = [];
+    const delay = (ms: number) => new Promise((r) => setTimeout(r, ms));
 
     const paint = async () => {
       for (const p of wipes) {
         if (skipped) return;
         const L = (p as any)._L as number, full = (p as any)._full, core = (p as any)._core;
-        const strokeDur = Math.min(1500, Math.max(450, L / 0.65)); // brush sweep — slowed
-        // 1) brush sweeps the centerline at stroke speed (sets the cadence)
-        cur = p.animate([{ strokeDashoffset: L }, { strokeDashoffset: 0 }],
-          { duration: strokeDur, easing: "cubic-bezier(0.3,0.1,0.3,1)", fill: "forwards" });
-        // 2) ink blooms thin-core -> full ribbon over a longer time, trailing the brush
+        const strokeDur = Math.min(1500, Math.max(600, L / 0.55)); // deliberate sweep
+        p.style.visibility = "visible";
+        // brush sweeps the centerline; ink blooms out from it (slower), clipped to territory
+        sweeps.push(p.animate([{ strokeDashoffset: L }, { strokeDashoffset: 0 }],
+          { duration: strokeDur, easing: "cubic-bezier(0.3,0.2,0.3,1)", fill: "forwards" }));
         blooms.push(p.animate([{ strokeWidth: core }, { strokeWidth: full }],
           { duration: strokeDur * BLOOM_FACTOR, easing: "ease-out", fill: "forwards" }));
-        try { await cur.finished; } catch { return; }
+        // overlap: start the next stroke before this one finishes — slow strokes, shorter total
+        await delay(strokeDur * START_NEXT);
       }
       if (skipped) return;
-      await Promise.all(blooms.map((a) => a.finished.catch(() => {}))); // let blooms settle
+      await Promise.all(sweeps.map((a) => a.finished.catch(() => {})));
+      await delay(450); // brief settle, not a full bloom wait
       assemble();
     };
     const finishNow = () => {
       if (skipped || assembled) return;
-      skipped = true; cur?.cancel(); blooms.forEach((a) => a.cancel());
-      wipes.forEach((p) => { p.style.strokeDashoffset = "0"; p.style.strokeWidth = `${(p as any)._full}`; });
+      skipped = true;
+      [...sweeps, ...blooms].forEach((a) => a.cancel());
+      wipes.forEach((p) => { p.style.visibility = "visible"; p.style.strokeDashoffset = "0"; p.style.strokeWidth = `${(p as any)._full}`; });
       assemble();
     };
     const onSkip = () => finishNow();
     splash.addEventListener("click", onSkip);
     window.addEventListener("keydown", onSkip);
-    setTimeout(paint, 350);
+    setTimeout(paint, 250);
 
     function assemble() {
       if (assembled) return;
