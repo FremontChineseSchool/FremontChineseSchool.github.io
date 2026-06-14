@@ -9,3 +9,14 @@ dist/
 
 # macOS
 .DS_Store
+
+# GPL source font for the splash glyphs (re-downloaded by scripts/build_glyph_data.py)
+tools/wt071.ttf
+
+# Python bytecode
+__pycache__/
+*.pyc
+
+# Developer tooling for the calligraphy splash (not shipped)
+scripts/
+tools/

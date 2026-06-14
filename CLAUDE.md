@@ -61,6 +61,46 @@ Brand tokens live in `src/styles/global.css` under Tailwind's `@theme` (Tailwind
 CSS-based config — there is no `tailwind.config.js`). The banner color is the FCS logo
 blue `#8FBDDF` (`--color-fcs-blue`); the logo is `public/images/logo.png`.
 
+## Homepage calligraphy intro (`CalligraphySplash`)
+
+The homepage opens with a one-shot splash that brush-paints the school name:
+`費利蒙` is revealed **stroke-by-stroke** in Yuji Boku brush
+calligraphy with a variable-width **ink-bloom** (ink spreads outward, trailing the
+brush), then `中文學校` fly in to complete `費利蒙中文學校`, and the whole name shrinks
+into the header logo as the page emerges.
+
+- **`src/components/CalligraphySplash.astro`** — the whole effect (markup + SVG
+  filters + animation). Mounted in both `src/pages/index.astro` and
+  `src/pages/zh/index.astro`. It is progressively enhanced: the overlay is
+  `display:none` until an inline script activates it, so it's skipped entirely
+  under `prefers-reduced-motion` and without JS, and never blocks content.
+- It runs off **two committed data files** (and nothing else at runtime):
+  - **`src/data/glyphs.json`** — crisp glyph **outline** paths (+ `w`/`h`) for all 7
+    characters, extracted from the font. This is the visible ink.
+  - **`src/data/strokes.json`** — per-character, per-**point** variable-width stroke
+    **centerlines** (hand-aligned). The reveal builds a ribbon per stroke and sweeps
+    a blurred mask (the bloom) along it, clipped to the outline.
+- **`const ANIMATED`** in the component lists which characters paint stroke-by-stroke
+  (currently `["費","利","蒙"]`); the rest fly in as finished outlines. Tuning knobs
+  live at the top of the client script: `BLOOM_FACTOR` (bloom slowness), the
+  `strokeDur` formula (sweep speed), and the `#bloom` / `#fcs-ink` SVG filters.
+
+**Authoring/regeneration tooling is NOT committed** (it's gitignored under `scripts/`
+and `tools/`, kept locally):
+
+- `scripts/build_glyph_data.py` extracts the outlines from the SIL OFL font
+  **Yuji Boku** (`yujiboku`, re-downloaded on demand) → writes the lean
+  `src/data/glyphs.json` for the site and a full `tools/glyphs.js` for the editor.
+- `tools/stroke-aligner.html` is a bespoke in-browser editor for aligning the
+  per-point stroke centerlines/widths over each glyph; **export → `src/data/strokes.json`**.
+- `scripts/validate_strokes.py` renders a per-stroke contact sheet to check
+  order/direction/coverage.
+
+So: to re-tune strokes, open the aligner and re-export; to add 費利蒙-style painting
+to more characters, align them and add to `ANIMATED`. The font is **Yuji Boku**
+(SIL OFL, free for commercial use); only the 7 glyph outlines are embedded, not
+the font itself.
+
 ## Deployment
 
 `.github/workflows/deploy.yml` builds and deploys `dist/` to GitHub Pages on every push
