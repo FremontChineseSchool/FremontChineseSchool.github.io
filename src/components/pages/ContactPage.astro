@@ -9,10 +9,15 @@ const { lang } = Astro.props;
 const c = content[lang].contact;
 const L = c.labels;
 
+const principalName =
+  lang === "zh"
+    ? `${contactInfo.principalNameZh} (${contactInfo.principalName})`
+    : `${contactInfo.principalName} (${contactInfo.principalNameZh})`;
+
 const rows = [
   {
     label: L.principal,
-    value: `${contactInfo.principalName} — ${contactInfo.principal}`,
+    value: `${principalName} — ${contactInfo.principal}`,
     href: `mailto:${contactInfo.principal}`,
   },
   {

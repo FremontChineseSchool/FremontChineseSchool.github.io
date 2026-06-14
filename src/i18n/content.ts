@@ -21,6 +21,7 @@ export const contactInfo = {
   mailing: 'PO Box 1309, Fremont, CA 94538',
   classroom: '41800 Blacow Road, Fremont, CA 94538',
   principalName: 'Angela Ha',
+  principalNameZh: '夏芷筠',
 } as const;
 
 export const content = {
