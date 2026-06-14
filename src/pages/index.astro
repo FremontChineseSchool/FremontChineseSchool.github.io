@@ -3,15 +3,10 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 import HomePage from "../components/pages/HomePage.astro";
 import CalligraphySplash from "../components/CalligraphySplash.astro";
 import { ui } from "../i18n/ui";
-import { content } from "../i18n/content";
 const lang = "en" as const;
 ---
 
-<BaseLayout
-  lang={lang}
-  title={ui[lang].nav.home}
-  description={content[lang].home.heroSubtitle}
->
+<BaseLayout lang={lang} title={ui[lang].nav.home}>
   <CalligraphySplash />
   <HomePage lang={lang} />
 </BaseLayout>
