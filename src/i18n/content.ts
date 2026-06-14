@@ -24,6 +24,51 @@ export const contactInfo = {
   principalNameZh: '夏芷筠',
 } as const;
 
+// Per-page meta descriptions (SEO snippets), keyed by route key. Kept separate
+// from on-page copy so search/social snippets can be tuned without disturbing
+// layout text. BaseLayout looks these up by the current route; passing a
+// `description` prop to BaseLayout overrides the lookup. Aim for ~150 chars.
+export const descriptions: Record<'en' | 'zh', Record<string, string>> = {
+  en: {
+    home: 'Fremont Chinese School is a WASC-accredited, non-profit weekend school teaching Mandarin Chinese language and culture in Fremont, CA since 1972.',
+    about:
+      'Fremont Chinese School (FCS) — a WASC-accredited non-profit founded in 1972 and one of the largest Chinese schools in the East Bay.',
+    programs:
+      'Mandarin Chinese classes for pre-K through 12th grade, a WASC-accredited high-school credit track, and electives like Chinese painting and yo-yo.',
+    enroll:
+      'Enroll at Fremont Chinese School. New and returning families register online — see tuition, fees, and AC placement-test details for the school year.',
+    payment:
+      'Pay Fremont Chinese School tuition and fees securely online — browse items, add to your cart, and check out right on the page.',
+    calendar:
+      'Download the Fremont Chinese School 2026–2027 school-year calendar in English or Chinese, with the first day of class and key dates.',
+    events:
+      'Chinese New Year celebrations, food festival, academic contests, and more — community events for FCS students and families throughout the year.',
+    donate:
+      'Support Fremont Chinese School with a tax-deductible gift to our 501(c) non-profit and help bring Mandarin classes to more East Bay families.',
+    contact:
+      'Contact Fremont Chinese School — principal, school office, registration, mailing address, classroom location in Fremont, CA, and Facebook.',
+  },
+  zh: {
+    home: '費利蒙中文學校（FCS）自 1972 年起於加州費利蒙教授中文語文與文化，是通過 WASC 認證的非營利週末學校。',
+    about:
+      '認識費利蒙中文學校（FCS）——創立於 1972 年、通過 WASC 認證的非營利組織，是東灣規模最大的中文學校之一。',
+    programs:
+      '提供學前班至十二年級的中文課程、通過 WASC 認證可抵高中學分的學分班，以及國畫、扯鈴等才藝選修課程。',
+    enroll:
+      '在費利蒙中文學校報名。新生與舊生線上註冊，並查看學費、各項費用與學分班分班考試的詳情。',
+    payment:
+      '直接在線上安全繳交費利蒙中文學校的學費與各項費用——瀏覽項目、加入購物車並於本頁結帳。',
+    calendar:
+      '下載費利蒙中文學校 2026–2027 學年行事曆（中文版或英文版），查看開學日與重要日期。',
+    events:
+      '新春聯歡、小吃義賣、學術比賽等——費利蒙中文學校全年為學生與家庭舉辦的精彩社區活動。',
+    donate:
+      '以可抵稅的捐款支持費利蒙中文學校 501(c) 非營利組織，協助更多東灣家庭學習中文。',
+    contact:
+      '聯絡費利蒙中文學校——校長、學校辦公室、報名註冊、通訊地址、加州費利蒙上課地點與 Facebook。',
+  },
+};
+
 export const content = {
   en: {
     home: {

@@ -2,7 +2,8 @@
 import "../styles/global.css";
 import Header from "../components/Header.astro";
 import Footer from "../components/Footer.astro";
-import { ui, type Lang } from "../i18n/ui";
+import { ui, routes, type Lang } from "../i18n/ui";
+import { descriptions, contactInfo } from "../i18n/content";
 
 interface Props {
   lang: Lang;
@@ -12,7 +13,58 @@ interface Props {
 
 const { lang, title, description } = Astro.props;
 const t = ui[lang];
-const fullTitle = `${title} · ${t.siteName}`;
+
+// --- SEO ----------------------------------------------------------------
+const site = Astro.site!; // set in astro.config.mjs
+
+// Resolve the current route key from the path (locale-stripped) so we can look
+// up a per-page meta description and detect the homepage without each route
+// wrapper having to pass anything extra.
+const bareSlug = Astro.url.pathname
+  .replace(/^\/+|\/+$/g, "")
+  .replace(/^zh\/?/, "");
+const routeKey = Object.keys(routes).find((k) => routes[k] === bareSlug) ?? "home";
+const isHome = routeKey === "home";
+
+const fullTitle = isHome ? t.homeTitle : `${title} · ${t.siteName}`;
+const ogTitle = isHome ? t.homeTitle : title;
+const metaDescription = description ?? descriptions[lang][routeKey] ?? t.tagline;
+
+// Canonical + hreflang. Trailing slashes match Astro's directory output and the
+// generated sitemap, so canonical points at the final URL (no redirect hop).
+const enPath = bareSlug ? `/${bareSlug}/` : "/";
+const zhPath = bareSlug ? `/zh/${bareSlug}/` : "/zh/";
+const enURL = new URL(enPath, site).href;
+const zhURL = new URL(zhPath, site).href;
+const canonicalURL = lang === "zh" ? zhURL : enURL;
+
+const ogImage = new URL("/images/slider/slide-3.jpg", site).href;
+const ogLocale = lang === "zh" ? "zh_TW" : "en_US";
+const ogLocaleAlt = lang === "zh" ? "en_US" : "zh_TW";
+
+// Organization structured data (site-wide; describes the school itself).
+const orgSchema = {
+  "@context": "https://schema.org",
+  "@type": "EducationalOrganization",
+  name: "Fremont Chinese School",
+  alternateName: "費利蒙中文學校",
+  url: new URL("/", site).href,
+  logo: new URL("/images/logo.png", site).href,
+  image: ogImage,
+  foundingDate: "1972",
+  description: descriptions.en.home,
+  telephone: "+1-510-468-9905",
+  email: contactInfo.office,
+  address: {
+    "@type": "PostalAddress",
+    streetAddress: "41800 Blacow Road",
+    addressLocality: "Fremont",
+    addressRegion: "CA",
+    postalCode: "94538",
+    addressCountry: "US",
+  },
+  sameAs: ["https://www.facebook.com/fremontchineseschool"],
+};
 ---
 
 <!doctype html>
@@ -24,10 +76,32 @@ const fullTitle = `${title} · ${t.siteName}`;
     <link rel="icon" sizes="any" href="/favicon.ico" />
     <link rel="apple-touch-icon" href="/favicon.png" />
     <title>{fullTitle}</title>
-    {description && <meta name="description" content={description} />}
-    <meta property="og:title" content={fullTitle} />
-    {description && <meta property="og:description" content={description} />}
+    <meta name="description" content={metaDescription} />
+    <link rel="canonical" href={canonicalURL} />
+
+    <!-- Locale alternates -->
+    <link rel="alternate" hreflang="en" href={enURL} />
+    <link rel="alternate" hreflang="zh-Hant" href={zhURL} />
+    <link rel="alternate" hreflang="x-default" href={enURL} />
+
+    <!-- Open Graph -->
     <meta property="og:type" content="website" />
+    <meta property="og:site_name" content={t.siteName} />
+    <meta property="og:title" content={ogTitle} />
+    <meta property="og:description" content={metaDescription} />
+    <meta property="og:url" content={canonicalURL} />
+    <meta property="og:image" content={ogImage} />
+    <meta property="og:locale" content={ogLocale} />
+    <meta property="og:locale:alternate" content={ogLocaleAlt} />
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={ogTitle} />
+    <meta name="twitter:description" content={metaDescription} />
+    <meta name="twitter:image" content={ogImage} />
+
+    <script type="application/ld+json" set:html={JSON.stringify(orgSchema)} is:inline
+    ></script>
   </head>
   <body class="flex min-h-screen flex-col bg-white">
     <a

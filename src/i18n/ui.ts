@@ -29,6 +29,8 @@ export const routes: Record<string, string> = {
 export const ui = {
   en: {
     siteName: 'Fremont Chinese School',
+    // Standalone <title> for the homepage (keyword-rich, no site-name suffix).
+    homeTitle: 'Fremont Chinese School — Weekend Mandarin Chinese School in Fremont, CA',
     tagline: 'Teaching Chinese language and culture since 1972',
     logoAlt: 'Fremont Chinese School',
     skipToContent: 'Skip to content',
@@ -51,6 +53,7 @@ export const ui = {
   },
   zh: {
     siteName: '費利蒙中文學校',
+    homeTitle: '費利蒙中文學校 — 加州費利蒙週末中文學校',
     tagline: '自 1972 年傳授中華語文與文化',
     logoAlt: '費利蒙中文學校',
     skipToContent: '跳至主要內容',

@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://fremontchineseschool.github.io/sitemap-index.xml
