@@ -1,6 +1,7 @@
 ---
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import HomePage from "../../components/pages/HomePage.astro";
+import CalligraphySplash from "../../components/CalligraphySplash.astro";
 import { ui } from "../../i18n/ui";
 import { content } from "../../i18n/content";
 const lang = "zh" as const;
@@ -11,5 +12,6 @@ const lang = "zh" as const;
   title={ui[lang].nav.home}
   description={content[lang].home.heroSubtitle}
 >
+  <CalligraphySplash />
   <HomePage lang={lang} />
 </BaseLayout>

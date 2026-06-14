@@ -1,0 +1,257 @@
+---
+/**
+ * CalligraphySplash — homepage intro that brush-paints the school name.
+ *
+ * The visible ink is the crisp 王漢宗中行書 (wt071) outline of each character
+ * (src/data/glyphs.json). The painted characters are revealed stroke-by-stroke
+ * along hand-aligned, variable-width centerlines (src/data/strokes.json, made
+ * with tools/stroke-aligner.html): each stroke's ribbon clips a swept reveal,
+ * and the reveal mask is blurred so ink *blooms/bleeds* in as the brush moves
+ * rather than wiping in with a hard edge.
+ *
+ * ANIMATED lists which characters are painted (the rest fly in as finished
+ * outlines). Add 利/蒙 here once they're aligned in the tool.
+ *
+ * Click / tap / any key fast-forwards. Skipped entirely under reduced-motion
+ * and without JS (the overlay is display:none until the inline script runs).
+ */
+import glyphs from "../data/glyphs.json";
+import strokes from "../data/strokes.json";
+
+const ANIMATED = ["費", "利", "蒙"]; // characters painted stroke-by-stroke
+
+type Pt = number[];
+const lineD = (pts: Pt[]) => "M" + pts.map((p) => `${p[0]},${p[1]}`).join("L");
+const maxW = (pts: Pt[]) => Math.max(...pts.map((p) => p[2] ?? 60));
+function ribbonD(pts: Pt[]): string {
+  if (pts.length < 2) return "";
+  const n = pts.length, L: Pt[] = [], R: Pt[] = [];
+  for (let i = 0; i < n; i++) {
+    const a = pts[Math.max(0, i - 1)], b = pts[Math.min(n - 1, i + 1)];
+    let tx = b[0] - a[0], ty = b[1] - a[1];
+    const len = Math.hypot(tx, ty) || 1; tx /= len; ty /= len;
+    const nx = -ty, ny = tx, hw = (pts[i][2] ?? 60) / 2;
+    L.push([pts[i][0] + nx * hw, pts[i][1] + ny * hw]);
+    R.push([pts[i][0] - nx * hw, pts[i][1] - ny * hw]);
+  }
+  const all = L.concat(R.reverse());
+  return "M" + all.map((p) => `${p[0].toFixed(1)},${p[1].toFixed(1)}`).join("L") + "Z";
+}
+
+const chars = glyphs.chars.map((c) => ({
+  ...c,
+  animated: ANIMATED.includes(c.char),
+  strokes: (strokes.chars as Record<string, { pts: Pt[] }[]>)[c.char] ?? [],
+}));
+const paint = chars.filter((c) => c.animated);
+const rest = chars.filter((c) => !c.animated);
+const sumAspect = chars.reduce((a, c) => a + c.w / c.h, 0);
+const paintAspect = paint.reduce((a, c) => a + c.w / c.h, 0);
+---
+
+<div id="calligraphy-splash" class="splash" role="presentation" aria-hidden="true">
+  <svg class="splash__defs" aria-hidden="true" focusable="false">
+    <defs>
+      {/* Soft bloom for the reveal mask — ink fades/bleeds in along the brush. */}
+      <filter id="bloom" x="-40%" y="-40%" width="180%" height="180%">
+        <feGaussianBlur stdDev="7"></feGaussianBlur>
+      </filter>
+      {/* Wet-ink edge texture on the glyph fill. */}
+      <filter id="fcs-ink" x="-25%" y="-25%" width="150%" height="150%" color-interpolation-filters="sRGB">
+        <feTurbulence type="fractalNoise" baseFrequency="0.022 0.026" numOctaves="2" seed="7" result="noise"></feTurbulence>
+        <feDisplacementMap in="SourceGraphic" in2="noise" scale="3.5" xChannelSelector="R" yChannelSelector="G" result="rough"></feDisplacementMap>
+        <feGaussianBlur in="rough" stdDev="1.6" result="bleed"></feGaussianBlur>
+        <feComponentTransfer in="bleed" result="halo"><feFuncA type="linear" slope="0.5"></feFuncA></feComponentTransfer>
+        <feMerge><feMergeNode in="halo"></feMergeNode><feMergeNode in="rough"></feMergeNode></feMerge>
+      </filter>
+    </defs>
+  </svg>
+
+  <div class="splash__paper"></div>
+
+  <div class="splash__name" id="splash-name" data-aspect={sumAspect.toFixed(3)} data-paint-aspect={paintAspect.toFixed(3)}>
+    <div class="seg seg--paint" id="seg-paint">
+      {
+        paint.map((c) => (
+          <div class="glyph" style={`--ar:${(c.w / c.h).toFixed(3)}`}>
+            <svg class="glyph-svg" viewBox={`0 0 ${c.w} ${c.h}`} data-char={c.char}>
+              <defs>
+                {c.strokes.map((st, si) => (
+                  <clipPath id={`rb-${c.char}-${si}`}><path d={ribbonD(st.pts)} /></clipPath>
+                ))}
+                <mask id={`rev-${c.char}`} maskUnits="userSpaceOnUse" x="-80" y="-80" width={c.w + 160} height={c.h + 160}>
+                  <g filter="url(#bloom)">
+                    {c.strokes.map((st, si) => (
+                      <g clip-path={`url(#rb-${c.char}-${si})`}>
+                        <path class="wipe" d={lineD(st.pts)} stroke-width={maxW(st.pts) + 12} data-wipe />
+                      </g>
+                    ))}
+                  </g>
+                </mask>
+              </defs>
+              <path class="ink" d={c.d} mask={`url(#rev-${c.char})`} />
+            </svg>
+          </div>
+        ))
+      }
+    </div>
+    <div class="seg seg--rest" id="seg-rest">
+      {
+        rest.map((c) => (
+          <div class="glyph" style={`--ar:${(c.w / c.h).toFixed(3)}`}>
+            <svg class="glyph-svg" viewBox={`0 0 ${c.w} ${c.h}`}>
+              <path class="ink" d={c.d} />
+            </svg>
+          </div>
+        ))
+      }
+    </div>
+  </div>
+</div>
+
+<script is:inline>
+  (function () {
+    var el = document.getElementById("calligraphy-splash");
+    if (!el) return;
+    var reduce = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    if (reduce) el.remove(); else el.classList.add("is-active");
+  })();
+</script>
+
+<style>
+  .splash { display:none; position:fixed; inset:0; z-index:100; align-items:center; justify-content:center; overflow:hidden; cursor:pointer; }
+  .splash.is-active { display:flex; }
+  .splash__defs { position:absolute; width:0; height:0; overflow:hidden; }
+
+  .splash__paper { position:absolute; inset:0; transition:opacity 0.9s ease;
+    background:radial-gradient(ellipse at center,#fbf8f1 0%,#f4eee1 55%,#e9deca 100%); }
+  .splash__paper::after { content:""; position:absolute; inset:0; opacity:0.05; mix-blend-mode:multiply;
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E"); }
+
+  .splash__name { position:relative; display:flex; align-items:flex-end; gap:calc(var(--glyph,96px)*0.08); will-change:transform,opacity; }
+  .seg { display:flex; align-items:flex-end; gap:calc(var(--glyph,96px)*0.08); }
+  .seg--paint { transform:scale(1.75); transform-origin:center bottom; }
+  .seg--rest { display:none; }
+
+  .glyph { height:var(--glyph,96px); }
+  .glyph-svg { height:100%; width:auto; display:block; overflow:visible; filter:url(#fcs-ink); }
+  .ink { fill:#211b14; }
+  .wipe { fill:none; stroke:#fff; stroke-linecap:round; stroke-linejoin:round; stroke-dasharray:99999; stroke-dashoffset:99999; }
+</style>
+
+<script>
+  const splash = document.getElementById("calligraphy-splash");
+  const nameEl = document.getElementById("splash-name");
+  const paintEl = document.getElementById("seg-paint");
+  const restEl = document.getElementById("seg-rest");
+
+  if (splash && splash.classList.contains("is-active") && nameEl && paintEl && restEl) {
+    run(splash, nameEl, paintEl, restEl);
+  }
+
+  function run(splash: HTMLElement, nameEl: HTMLElement, paintEl: HTMLElement, restEl: HTMLElement) {
+    const aspect = parseFloat(nameEl.dataset.aspect || "6") || 6;            // full 7-char name
+    const paintAspect = parseFloat(nameEl.dataset.paintAspect || "2.3") || 2.3; // painted trio
+    // Size glyphs so the full assembled name fits ~92% wide / 34% tall...
+    const H = Math.min((window.innerWidth * 0.92) / aspect, window.innerHeight * 0.34);
+    // ...then scale the painted trio up to ~80% of the screen width while it paints.
+    let scaleP = (window.innerWidth * 0.8) / (H * paintAspect);
+    scaleP = Math.max(1, Math.min(scaleP, (window.innerHeight * 0.72) / H));
+    splash.style.setProperty("--glyph", `${H}px`);
+    paintEl.style.transformOrigin = "center bottom";
+    paintEl.style.transform = `scale(${scaleP})`;
+
+    // How much longer the ink keeps blooming outward than the brush takes to
+    // sweep the stroke. 1 = bloom locked to stroke speed; higher = slower bloom.
+    const BLOOM_FACTOR = 4;
+
+    const wipes = [...paintEl.querySelectorAll<SVGPathElement>("[data-wipe]")];
+    wipes.forEach((p) => {
+      const L = p.getTotalLength() || 1;
+      const full = parseFloat(p.getAttribute("stroke-width") || "40");
+      (p as any)._L = L; (p as any)._full = full; (p as any)._core = Math.max(6, full * 0.22);
+      p.style.strokeDasharray = `${L}`;
+      p.style.strokeDashoffset = `${L}`;     // sweep starts hidden
+      p.style.strokeWidth = `${(p as any)._core}`; // bloom starts as a thin core
+    });
+
+    let skipped = false, assembled = false, cur: Animation | null = null;
+    const blooms: Animation[] = [];
+
+    const paint = async () => {
+      for (const p of wipes) {
+        if (skipped) return;
+        const L = (p as any)._L as number, full = (p as any)._full, core = (p as any)._core;
+        const strokeDur = Math.min(1500, Math.max(450, L / 0.65)); // brush sweep — slowed
+        // 1) brush sweeps the centerline at stroke speed (sets the cadence)
+        cur = p.animate([{ strokeDashoffset: L }, { strokeDashoffset: 0 }],
+          { duration: strokeDur, easing: "cubic-bezier(0.3,0.1,0.3,1)", fill: "forwards" });
+        // 2) ink blooms thin-core -> full ribbon over a longer time, trailing the brush
+        blooms.push(p.animate([{ strokeWidth: core }, { strokeWidth: full }],
+          { duration: strokeDur * BLOOM_FACTOR, easing: "ease-out", fill: "forwards" }));
+        try { await cur.finished; } catch { return; }
+      }
+      if (skipped) return;
+      await Promise.all(blooms.map((a) => a.finished.catch(() => {}))); // let blooms settle
+      assemble();
+    };
+    const finishNow = () => {
+      if (skipped || assembled) return;
+      skipped = true; cur?.cancel(); blooms.forEach((a) => a.cancel());
+      wipes.forEach((p) => { p.style.strokeDashoffset = "0"; p.style.strokeWidth = `${(p as any)._full}`; });
+      assemble();
+    };
+    const onSkip = () => finishNow();
+    splash.addEventListener("click", onSkip);
+    window.addEventListener("keydown", onSkip);
+    setTimeout(paint, 350);
+
+    function assemble() {
+      if (assembled) return;
+      assembled = true;
+      splash.removeEventListener("click", onSkip);
+      window.removeEventListener("keydown", onSkip);
+      splash.style.cursor = "default";
+
+      const first = paintEl.getBoundingClientRect();
+      restEl.style.display = "flex";
+      paintEl.style.transform = "none";
+      const last = paintEl.getBoundingClientRect();
+      const dx = first.left - last.left, dy = first.top - last.top, scale = first.width / last.width;
+      paintEl.style.transformOrigin = "top left";
+      paintEl.style.transform = `translate(${dx}px, ${dy}px) scale(${scale})`;
+      restEl.style.opacity = "0";
+      restEl.style.transform = `translateX(${H * 0.5}px)`;
+
+      requestAnimationFrame(() => requestAnimationFrame(() => {
+        paintEl.style.transition = "transform 0.75s cubic-bezier(0.16,1,0.3,1)";
+        restEl.style.transition = "opacity 0.6s ease 0.15s, transform 0.7s cubic-bezier(0.16,1,0.3,1) 0.15s";
+        paintEl.style.transform = "none";
+        restEl.style.opacity = "1";
+        restEl.style.transform = "none";
+      }));
+
+      setTimeout(handoff, 1500);
+    }
+
+    function handoff() {
+      const logo = document.querySelector<HTMLImageElement>("#site-header img");
+      const paper = splash.querySelector<HTMLElement>(".splash__paper");
+      const name = nameEl.getBoundingClientRect();
+      if (logo) {
+        const target = logo.getBoundingClientRect();
+        const scale = Math.min(1, target.height / name.height);
+        const tx = target.left + target.width / 2 - (name.left + name.width / 2);
+        const ty = target.top + target.height / 2 - (name.top + name.height / 2);
+        nameEl.style.transformOrigin = "center center";
+        nameEl.style.transition = "transform 0.95s cubic-bezier(0.7,0,0.3,1), opacity 0.5s ease 0.5s";
+        nameEl.style.transform = `translate(${tx}px, ${ty}px) scale(${scale})`;
+      } else {
+        nameEl.style.transition = "opacity 0.6s ease";
+      }
+      nameEl.style.opacity = "0";
+      if (paper) paper.style.opacity = "0";
+      window.setTimeout(() => { splash.remove(); document.documentElement.classList.add("splash-done"); }, 1000);
+    }
+  }
+</script>

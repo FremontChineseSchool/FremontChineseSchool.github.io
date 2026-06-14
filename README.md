@@ -36,6 +36,20 @@ The brand color (banner blue `#8FBDDF`) and fonts are in
 See [`CLAUDE.md`](./CLAUDE.md) for the full architecture and how to add a new
 page.
 
+## Homepage intro animation
+
+The homepage opens with a brush-calligraphy animation that paints the school
+name (費利蒙) stroke-by-stroke with a wet ink-bloom, then completes and settles
+into the header logo. It's skipped automatically for visitors who prefer reduced
+motion, and a click/tap/keypress fast-forwards it.
+
+It runs entirely from two committed data files —
+`src/data/glyphs.json` (the glyph outlines) and `src/data/strokes.json` (the
+hand-aligned brush strokes) — consumed by `src/components/CalligraphySplash.astro`.
+The offline tooling that produced those files (a font-extraction script and a
+custom stroke-alignment editor) is kept locally and not part of the repo; see
+[`CLAUDE.md`](./CLAUDE.md) for how to regenerate or extend it.
+
 ## Deployment
 
 Pushing to `main` triggers `.github/workflows/deploy.yml`, which builds the site
