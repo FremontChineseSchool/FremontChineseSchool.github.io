@@ -123,7 +123,17 @@ const paintAspect = paint.reduce((a, c) => a + c.w / c.h, 0);
     var el = document.getElementById("calligraphy-splash");
     if (!el) return;
     var reduce = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    if (reduce) el.remove(); else el.classList.add("is-active");
+    // Play once per tab session: skip on revisits (navigating away and back, or
+    // returning to the tab) without re-running. Cleared when the tab closes, so
+    // a fresh visit replays it.
+    var seen = false;
+    try { seen = sessionStorage.getItem("fcs-splash-seen") === "1"; } catch (e) {}
+    if (reduce || seen) {
+      el.remove();
+    } else {
+      try { sessionStorage.setItem("fcs-splash-seen", "1"); } catch (e) {}
+      el.classList.add("is-active");
+    }
   })();
 </script>
 
