@@ -1,12 +1,32 @@
 @import "tailwindcss";
+@import url('https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@400;700&family=Inter:wght@400;500;600;700&display=swap');
 
-/* FCS brand — banner blue from the legacy logo background (#8FBDDF) */
 @theme {
-  --color-fcs-blue: #8fbddf;
+  /* Legacy blue tokens — kept for CalligraphySplash and any remaining references */
+  --color-fcs-blue:      #8fbddf;
   --color-fcs-blue-dark: #5a93bd;
-  --color-fcs-ink: #1f2a37;
+  --color-fcs-ink:       #1f2a37; /* legacy body text — superseded by fcs-black below */
+
+  /* Legacy font stack — kept as fallback; body now uses --font-body */
   --font-sans: "Helvetica Neue", "PingFang TC", "Microsoft JhengHei",
     "Noto Sans TC", system-ui, sans-serif;
+
+  /* Brand colors */
+  --color-fcs-green:        #3A7D44;
+  --color-fcs-green-dark:   #2D6235;
+  --color-fcs-green-light:  #F0F7F2;
+  --color-fcs-orange:       #E06820;
+  --color-fcs-orange-light: #FEF0E6;
+  --color-fcs-gold:         #D4980A;
+  --color-fcs-black:        #1C1208;
+  --color-fcs-white:        #FFF8F0;
+  --color-fcs-border:       #E8DDD0;
+  --color-fcs-muted:        #7A6A58;
+
+  /* Typography */
+  --font-display-zh: 'Noto Serif TC', serif;
+  --font-display-en: 'Inter', sans-serif;
+  --font-body:       'Inter', sans-serif;
 }
 
 html {
@@ -16,8 +36,41 @@ html {
 }
 
 body {
-  @apply font-sans text-fcs-ink antialiased;
+  font-family: var(--font-body);
+  font-size: 15px;
+  line-height: 1.7;
+  color: var(--color-fcs-black);
+  @apply antialiased;
 }
+
+/* Chinese text always uses Noto Serif TC */
+[lang="zh"],
+.zh,
+.font-zh {
+  font-family: var(--font-display-zh);
+}
+
+/* Eyebrow labels */
+.eyebrow {
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--color-fcs-gold);
+}
+
+/* Badges */
+.badge {
+  padding: 3px 10px;
+  border-radius: 100px;
+  font-size: 10px;
+  font-weight: 600;
+  display: inline-block;
+}
+.badge-green  { background: #D6EDD9; color: #1E4D25; }
+.badge-orange { background: #FEF0E6; color: #7A3200; }
+.badge-gold   { background: #FEF3DC; color: #7A5500; }
+.badge-dark   { background: #1C1208; color: #FFF8F0; }
 
 /* ---------------------------------------------------------------------------
    Scroll-reveal: elements tagged [data-reveal] fade + rise + settle into view.

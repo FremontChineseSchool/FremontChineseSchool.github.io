@@ -9,24 +9,26 @@ const { lang } = Astro.props;
 const c = content[lang].enroll;
 ---
 
-<section class="mx-auto max-w-3xl px-4 py-14">
-  <h1 class="text-3xl font-bold sm:text-4xl">{c.title}</h1>
-  <p class="mt-4 text-lg text-gray-700">{c.intro}</p>
+<section style="background: #FFF8F0;" class="mx-auto max-w-3xl px-4 py-14">
+  <p class="eyebrow mb-3">Enroll</p>
+  <h1 class="text-3xl font-semibold sm:text-4xl" style="letter-spacing: -0.02em; color: var(--color-fcs-black);">{c.title}</h1>
+  <p class="mt-4 text-lg" style="color: var(--color-fcs-muted);">{c.intro}</p>
 
   <ol class="mt-10 space-y-6">
     {
       c.steps.map((step, i) => (
         <li class="flex gap-4">
-          <span class="flex h-9 w-9 flex-none items-center justify-center rounded-full bg-fcs-blue font-bold text-white">
+          <span class="flex h-9 w-9 flex-none items-center justify-center rounded-full font-bold text-white" style="background: var(--color-fcs-green);">
             {i + 1}
           </span>
           <div>
-            <h2 class="text-lg font-semibold">{step.heading}</h2>
-            <p class="mt-1 text-gray-700">{step.body}</p>
+            <h2 class="text-lg font-semibold" style="color: var(--color-fcs-black);">{step.heading}</h2>
+            <p class="mt-1" style="color: var(--color-fcs-muted);">{step.body}</p>
             {"route" in step && step.route ? (
               <a
                 href={localizedPath(lang, step.route)}
-                class="mt-2 inline-block font-semibold text-fcs-blue-dark hover:underline"
+                class="mt-2 inline-block font-semibold hover:underline"
+                style="color: var(--color-fcs-green);"
               >
                 {step.linkLabel} →
               </a>
@@ -35,7 +37,8 @@ const c = content[lang].enroll;
                 href={links[step.link as keyof typeof links]}
                 target="_blank"
                 rel="noopener"
-                class="mt-2 inline-block font-semibold text-fcs-blue-dark hover:underline"
+                class="mt-2 inline-block font-semibold hover:underline"
+                style="color: var(--color-fcs-green);"
               >
                 {step.linkLabel} →
               </a>
@@ -46,12 +49,12 @@ const c = content[lang].enroll;
     }
   </ol>
 
-  <p class="mt-10 rounded-lg bg-fcs-blue/15 p-4 text-sm text-gray-700">
+  <p class="mt-10 rounded-[10px] p-4 text-sm" style="background: var(--color-fcs-green-light); color: var(--color-fcs-muted); border: 1px solid var(--color-fcs-border);">
     {c.calendarNote}{" "}
     <a
       href={localizedPath(lang, "calendar")}
-      class="font-semibold text-fcs-blue-dark hover:underline"
-      >{content[lang].calendar.title} →</a
-    >
+      class="font-semibold hover:underline"
+      style="color: var(--color-fcs-green);"
+    >{content[lang].calendar.title} →</a>
   </p>
 </section>

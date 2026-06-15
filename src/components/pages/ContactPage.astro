@@ -37,26 +37,28 @@ const rows = [
 ];
 ---
 
-<section class="mx-auto max-w-3xl px-4 py-14">
-  <h1 class="text-3xl font-bold sm:text-4xl">{c.title}</h1>
+<section style="background: #FFF8F0;" class="mx-auto max-w-3xl px-4 py-14">
+  <p class="eyebrow mb-3">Contact</p>
+  <h1 class="text-3xl font-semibold sm:text-4xl" style="letter-spacing: -0.02em; color: var(--color-fcs-black);">{c.title}</h1>
 
-  <dl class="mt-8 divide-y divide-gray-100">
+  <dl class="mt-8" style="border-top: 1px solid var(--color-fcs-border);">
     {
       rows.map((r) => (
-        <div class="grid gap-1 py-4 sm:grid-cols-3">
-          <dt class="font-semibold text-gray-500">{r.label}</dt>
+        <div class="grid gap-1 py-4 sm:grid-cols-3" style="border-bottom: 1px solid var(--color-fcs-border);">
+          <dt class="font-semibold" style="color: var(--color-fcs-muted);">{r.label}</dt>
           <dd class="sm:col-span-2">
             {r.href ? (
               <a
                 href={r.href}
                 target={r.href.startsWith("http") ? "_blank" : undefined}
                 rel={r.href.startsWith("http") ? "noopener" : undefined}
-                class="text-fcs-blue-dark hover:underline"
+                class="hover:underline"
+                style="color: var(--color-fcs-green);"
               >
                 {r.value}
               </a>
             ) : (
-              <span class="text-gray-700">{r.value}</span>
+              <span style="color: var(--color-fcs-black);">{r.value}</span>
             )}
           </dd>
         </div>

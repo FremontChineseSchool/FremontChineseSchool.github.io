@@ -18,23 +18,25 @@ const navItems = navOrder.map((key) => {
 
 <header
   id="site-header"
-  class="group sticky top-0 z-50 bg-fcs-blue text-white shadow-sm transition-[background-color,box-shadow,backdrop-filter] duration-300 data-[scrolled]:bg-fcs-blue/90 data-[scrolled]:shadow-md data-[scrolled]:backdrop-blur-md"
+  class="group sticky top-0 z-50 bg-fcs-green transition-[background-color,box-shadow,backdrop-filter] duration-300 data-[scrolled]:bg-fcs-green/95 data-[scrolled]:shadow-md data-[scrolled]:backdrop-blur-md"
+  style="height:56px;"
 >
   <div
-    class="mx-auto flex max-w-6xl items-center justify-between gap-4 px-4 py-3 transition-[padding] duration-300 group-data-[scrolled]:py-1.5"
+    class="mx-auto flex h-full max-w-6xl items-center justify-between px-8"
   >
-    <a href={localizedPath(lang, "home")} class="flex items-center gap-3">
+    <!-- Logo -->
+    <a href={localizedPath(lang, "home")} class="flex shrink-0 items-center gap-3">
       <img
         src="/images/logo.png"
         alt={t.logoAlt}
-        class="h-10 w-auto transition-[height] duration-300 group-data-[scrolled]:h-8 md:h-12 md:group-data-[scrolled]:h-9"
+        class="h-10 w-auto"
         width="500"
         height="108"
       />
       <span class="sr-only">{t.siteName}</span>
     </a>
 
-    <!-- Desktop nav -->
+    <!-- Desktop nav — centered -->
     <nav aria-label="Primary" class="hidden items-center gap-1 lg:flex">
       {
         navItems.map((item) => (
@@ -42,8 +44,11 @@ const navItems = navOrder.map((key) => {
             href={item.href}
             aria-current={item.active ? "page" : undefined}
             class:list={[
-              "rounded px-3 py-2 text-sm font-medium transition hover:bg-white/20",
-              item.active && "bg-white/25",
+              "px-3 py-2 transition-colors duration-150",
+              "text-[11px] font-medium tracking-wide",
+              item.active
+                ? "text-fcs-white underline underline-offset-4"
+                : "text-white/80 hover:text-fcs-white",
             ]}
           >
             {item.label}
@@ -52,23 +57,24 @@ const navItems = navOrder.map((key) => {
       }
     </nav>
 
-    <div class="flex items-center gap-2">
+    <!-- Right side: Enroll + lang switch + mobile toggle -->
+    <div class="flex items-center gap-3">
       <a
         href={links.register}
-        class="hidden rounded-full bg-white px-4 py-2 text-sm font-semibold text-fcs-blue-dark shadow-sm transition hover:bg-fcs-ink hover:text-white sm:inline-block"
-        >{t.enrollCta}</a
-      >
+        class="hidden rounded-[6px] bg-fcs-orange px-4 py-2 text-[11px] font-semibold text-fcs-white transition-colors duration-150 hover:bg-[#C85A10] sm:inline-block"
+      >{t.enrollCta}</a>
       <LangSwitch lang={lang} />
+
       <!-- Mobile menu toggle -->
       <details class="relative lg:hidden">
         <summary
-          class="flex cursor-pointer list-none items-center rounded p-2 hover:bg-white/20"
+          class="flex cursor-pointer list-none items-center rounded p-2 text-fcs-white hover:bg-white/20"
           aria-label="Menu"
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"
-            width="24"
-            height="24"
+            width="22"
+            height="22"
             viewBox="0 0 24 24"
             fill="none"
             stroke="currentColor"
@@ -82,7 +88,7 @@ const navItems = navOrder.map((key) => {
         </summary>
         <nav
           aria-label="Mobile"
-          class="absolute right-0 z-40 mt-2 w-56 rounded-lg bg-white py-2 text-fcs-ink shadow-lg"
+          class="absolute right-0 z-40 mt-2 w-56 overflow-hidden rounded-lg bg-fcs-green-dark py-2 shadow-lg"
         >
           {
             navItems.map((item) => (
@@ -90,8 +96,10 @@ const navItems = navOrder.map((key) => {
                 href={item.href}
                 aria-current={item.active ? "page" : undefined}
                 class:list={[
-                  "block px-4 py-2 text-sm hover:bg-fcs-blue/20",
-                  item.active && "font-semibold",
+                  "block px-4 py-2 text-[11px] font-medium transition-colors hover:bg-white/10",
+                  item.active
+                    ? "text-fcs-white font-semibold"
+                    : "text-white/80",
                 ]}
               >
                 {item.label}
@@ -100,9 +108,8 @@ const navItems = navOrder.map((key) => {
           }
           <a
             href={links.register}
-            class="mt-1 block border-t border-gray-100 px-4 py-2 text-sm font-semibold text-fcs-blue-dark"
-            >{t.enrollCta}</a
-          >
+            class="mt-1 block border-t border-white/10 px-4 py-2 text-[11px] font-semibold text-fcs-orange"
+          >{t.enrollCta}</a>
         </nav>
       </details>
     </div>

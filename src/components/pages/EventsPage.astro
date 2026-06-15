@@ -18,15 +18,16 @@ const c = content[lang].events;
   <p class="mt-4 max-w-2xl text-lg text-white/95 drop-shadow-sm">{c.intro}</p>
 </HeroCarousel>
 
-<section class="mx-auto max-w-3xl px-4 py-14">
-  <h2 class="text-xl font-semibold text-fcs-blue-dark" data-reveal>
+<section style="background: #FFF8F0;" class="mx-auto max-w-3xl px-4 py-14">
+  <h2 class="text-xl font-semibold" style="color: var(--color-fcs-green-dark);" data-reveal>
     {c.annualTitle}
   </h2>
   <ul class="mt-6 grid gap-3 sm:grid-cols-2">
     {
       c.annual.map((e, i) => (
         <li
-          class="rounded-lg border border-gray-200 px-4 py-3 text-gray-700 transition duration-300 hover:-translate-y-1 hover:border-fcs-blue hover:shadow-md"
+          class="rounded-[10px] px-4 py-3 transition-colors duration-150"
+          style="background: var(--color-fcs-white); border: 1px solid var(--color-fcs-border); color: var(--color-fcs-black);"
           data-reveal
           style={`--reveal-delay: ${(i % 2) * 90}ms`}
         >
@@ -40,7 +41,7 @@ const c = content[lang].events;
     href={links.facebook}
     target="_blank"
     rel="noopener"
-    class="mt-8 inline-block font-semibold text-fcs-blue-dark hover:underline"
-    >Facebook →</a
-  >
+    class="mt-8 inline-block font-semibold hover:underline"
+    style="color: var(--color-fcs-green);"
+  >Facebook →</a>
 </section>

@@ -9,25 +9,26 @@ const { lang } = Astro.props;
 const c = content[lang].calendar;
 ---
 
-<section class="mx-auto max-w-3xl px-4 py-14">
-  <h1 class="text-3xl font-bold sm:text-4xl">{c.title}</h1>
-  <p class="mt-2 text-lg font-medium text-fcs-blue-dark">{c.yearLabel}</p>
-  <p class="mt-6 text-gray-700">{c.intro}</p>
+<section style="background: #FFF8F0;" class="mx-auto max-w-3xl px-4 py-14">
+  <p class="eyebrow mb-3">Calendar</p>
+  <h1 class="text-3xl font-semibold sm:text-4xl" style="letter-spacing: -0.02em; color: var(--color-fcs-black);">{c.title}</h1>
+  <p class="mt-2 text-lg font-medium" style="color: var(--color-fcs-green);">{c.yearLabel}</p>
+  <p class="mt-6" style="color: var(--color-fcs-muted);">{c.intro}</p>
 
   <div class="mt-6 flex flex-wrap gap-3">
     <a
       href={links.calendarEn}
       target="_blank"
       rel="noopener"
-      class="rounded-full bg-fcs-blue px-6 py-3 font-semibold text-white transition hover:bg-fcs-blue-dark"
-      >{c.downloadEn}</a
-    >
+      class="rounded-[6px] px-6 py-3 font-semibold text-fcs-white transition-colors duration-150 hover:bg-[#C85A10]"
+      style="background: var(--color-fcs-orange);"
+    >{c.downloadEn}</a>
     <a
       href={links.calendarZh}
       target="_blank"
       rel="noopener"
-      class="rounded-full border border-fcs-blue-dark px-6 py-3 font-semibold text-fcs-blue-dark transition hover:bg-fcs-blue hover:text-white"
-      >{c.downloadZh}</a
-    >
+      class="rounded-[6px] px-6 py-3 font-semibold transition-colors duration-150"
+      style="border: 1.5px solid var(--color-fcs-green); color: var(--color-fcs-green);"
+    >{c.downloadZh}</a>
   </div>
 </section>

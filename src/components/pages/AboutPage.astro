@@ -10,16 +10,17 @@ const c = content[lang].about;
 const regulationsUrl = "https://bit.ly/2yxYRLB";
 ---
 
-<section class="mx-auto max-w-3xl px-4 py-14">
-  <h1 class="text-3xl font-bold sm:text-4xl">{c.title}</h1>
+<section style="background: #FFF8F0;" class="mx-auto max-w-3xl px-4 py-14">
+  <p class="eyebrow mb-3">About</p>
+  <h1 class="text-3xl font-semibold sm:text-4xl" style="letter-spacing: -0.02em; color: var(--color-fcs-black);">{c.title}</h1>
 
   <div class="mt-8 space-y-10">
     {
       c.sections.map((s) => (
         <div>
-          <h2 class="text-xl font-semibold text-fcs-blue-dark">{s.heading}</h2>
+          <h2 class="text-xl font-semibold" style="color: var(--color-fcs-green-dark);">{s.heading}</h2>
           {s.body.map((p) => (
-            <p class="mt-3 leading-relaxed text-gray-700">{p}</p>
+            <p class="mt-3 leading-relaxed" style="color: var(--color-fcs-muted);">{p}</p>
           ))}
         </div>
       ))
@@ -30,7 +31,7 @@ const regulationsUrl = "https://bit.ly/2yxYRLB";
     href={regulationsUrl}
     target="_blank"
     rel="noopener"
-    class="mt-10 inline-block rounded-full border border-fcs-blue-dark px-5 py-2 text-sm font-semibold text-fcs-blue-dark transition hover:bg-fcs-blue hover:text-white"
-    >{c.regulationsLabel}</a
-  >
+    class="mt-10 inline-block rounded-[6px] px-5 py-2 text-sm font-semibold transition-colors duration-150"
+    style="border: 1.5px solid var(--color-fcs-green); color: var(--color-fcs-green);"
+  >{c.regulationsLabel}</a>
 </section>
