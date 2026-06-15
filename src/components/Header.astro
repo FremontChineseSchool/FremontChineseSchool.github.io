@@ -111,11 +111,19 @@ const navItems = navOrder.map((key) => {
 
 <script>
   // Condense the sticky header once the page is scrolled past the hero edge.
+  // Uses hysteresis (condense at >80, expand at <24): the sticky header shrinks
+  // ~24px when condensed, which shortens the page and shifts scrollY. A single
+  // threshold would let that shift bounce scrollY back across the line and the
+  // header would oscillate ("spazz"). The gap between the two thresholds is
+  // wider than the height change, so a toggle can never re-cross the boundary.
   const header = document.getElementById("site-header");
   if (header) {
     let ticking = false;
     const sync = () => {
-      header.toggleAttribute("data-scrolled", window.scrollY > 16);
+      const scrolled = header.hasAttribute("data-scrolled");
+      const y = window.scrollY;
+      if (!scrolled && y > 80) header.setAttribute("data-scrolled", "");
+      else if (scrolled && y < 24) header.removeAttribute("data-scrolled");
       ticking = false;
     };
     window.addEventListener(
