@@ -9,6 +9,8 @@ export const links = {
     'https://drive.google.com/file/d/1LgAKCRMIiecG3fpMC2w6Hwx2zpWYXGd3/view',
   calendarEn:
     'https://drive.google.com/file/d/1jEHtmbAqxjldM-q1NdFuryYcHENRhDui/view',
+  // TODO: replace with shareable Google Drive link to the tuition PDF
+  tuitionPdf: 'https://fremontchineseschool.org/online-payment',
   facebook: 'https://facebook.com/fremontchineseschool',
 } as const;
 
@@ -192,6 +194,24 @@ export const content = {
           body: 'Enrichment classes such as Chinese painting, Chinese yo-yo, coding, and basketball give students a fun, hands-on connection to Chinese culture and a chance to make friends beyond the language classroom.',
         },
       ],
+      tuition: {
+        title: 'Tuition & Fees',
+        earlyBirdLabel: 'Early Bird',
+        regularLabel: 'Regular',
+        earlyBirdNote:
+          'Register and pay by May 16, 2026 to receive the Early Bird rate.',
+        rows: [
+          { track: 'CSL language class only (K–8)', earlyBird: 'from $780', regular: 'from $880' },
+          { track: 'CSL + electives (K–8)', earlyBird: 'from $1,310', regular: 'from $1,510' },
+          { track: 'AC accredited track (8–12)', earlyBird: 'from $1,300', regular: 'from $1,670' },
+          { track: 'Electives only (K–12, adult)', earlyBird: 'from $630', regular: 'from $720' },
+        ],
+        notes: [
+          'New student registration fee: +$50.',
+          'Online payment via PayPal has a non-refundable 5% surcharge.',
+        ],
+        pdfLabel: 'Download full tuition schedule (PDF)',
+      },
     },
     enroll: {
       title: 'Enroll',
@@ -391,6 +411,23 @@ export const content = {
           body: '國畫、扯鈴、程式設計（coding）與籃球等才藝選修課程，讓學生以有趣且實作的方式親近中華文化，並在語文課堂之外結交朋友。',
         },
       ],
+      tuition: {
+        title: '學費與費用',
+        earlyBirdLabel: '早鳥優惠',
+        regularLabel: '一般費用',
+        earlyBirdNote: '於 2026 年 5 月 16 日前完成報名並繳費，即可享早鳥優惠。',
+        rows: [
+          { track: '中文課程（僅語文班，K–8）', earlyBird: '起 $780', regular: '起 $880' },
+          { track: '中文課程＋才藝選修（K–8）', earlyBird: '起 $1,310', regular: '起 $1,510' },
+          { track: '學分班（8–12 年級）', earlyBird: '起 $1,300', regular: '起 $1,670' },
+          { track: '僅才藝選修（K–12，成人）', earlyBird: '起 $630', regular: '起 $720' },
+        ],
+        notes: [
+          '新生報名費：另加 $50。',
+          '透過 PayPal 線上付款將加收不可退還之 5% 手續費。',
+        ],
+        pdfLabel: '下載完整學費說明（PDF）',
+      },
     },
     enroll: {
       title: '報名註冊',
