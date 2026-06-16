@@ -92,14 +92,38 @@ keyword-rich `homeTitle`, not "Home". Site-wide there is `dist/robots.txt` and
    address, telephone, url, logo, sameAs) are current, then validate it with Google's
    Rich Results Test — https://search.google.com/test/rich-results — whenever the org
    details change.
-7. Report findings by severity (Critical / High / Medium / Low) with `file:line` and a
+7. **Deployment-host consistency (always-true invariant — Critical if violated).**
+   These three must all agree; if any disagree, the served domain and the
+   canonical/OG/sitemap URLs point at different places:
+   - `site` in `astro.config.mjs` equals the host actually being served.
+   - `public/CNAME` is consistent with `site` — present and matching the apex domain
+     when `site` is the custom domain; absent when `site` is the `…github.io` host.
+   - the `Sitemap:` host in `public/robots.txt` matches `site`.
+   This is a *consistency* check (does the repo agree with itself / with reality?), not
+   an assertion of a specific value — so it never false-flags the pre-cutover state.
+   What it does **not** cover: whether to cut over, DNS propagation, or Search Console
+   setup. Those are external (the skill can't observe them) or decision-dependent, so
+   they live in the cutover issue, not here — see below.
+8. Report findings by severity (Critical / High / Medium / Low) with `file:line` and a
    concrete fix — mirror the structure of the original audit.
 
-## One-time tasks (not tracked here)
+## What's tracked in the cutover issue instead (and why)
 
-The custom-domain cutover (CNAME/DNS, flipping `site` to `.org`, redirecting the old
-host, Search Console verification, sitemap submission) is **one-time work, not a
-repeatable procedure**, so it is tracked in the GitHub issue
+The custom-domain cutover work is tracked in the GitHub issue
 **"SEO: complete cutover to fremontchineseschool.org custom domain"** — the canonical
-checklist. This skill only describes what is always true about SEO on the site; do not
-re-add a cutover checklist here.
+checklist. Some of it could be phrased as a check but still doesn't belong here. The
+test for whether something is an audit step vs. issue work is **not** "one-time vs.
+repeatable" (almost any task can be reworded as a check). It is:
+
+- **Observable?** Can this audit see the answer from the repo + `dist/`? Search Console
+  verification and DNS propagation live in external systems the skill can't query, so a
+  "check" for them could never self-clear — it'd be a permanent nag, not a finding.
+- **Decision-independent?** Is there one always-true answer, or does "correct" depend on
+  a project decision the skill can't see? "A CNAME *must exist*" fails this — pre-cutover,
+  having none is the intended state, so it would false-flag every run. (The CNAME
+  *consistency* check in step 7 is fine precisely because it's decision-independent:
+  it only requires `CNAME` and `site` to agree, whichever era we're in.)
+
+So: internal-consistency invariants the audit can observe → steps above. External
+milestones, or assertions whose correctness depends on an unmade decision → the issue.
+Do not re-add a cutover checklist here.
