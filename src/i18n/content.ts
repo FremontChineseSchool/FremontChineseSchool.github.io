@@ -3,7 +3,12 @@
 // translated) and centralized so they're easy to update in one place.
 
 export const links = {
-  register: 'https://sites.google.com/fremontchineseschool.org/mainpage/home',
+  // Direct Google Form — bypasses the old Google Sites hub
+  register: 'https://docs.google.com/forms/d/175aEJTOm76f6rOUqXarUuwNtlfV1n8o-GTWFmJA-5Gg/viewform',
+  addDropTransfer: 'https://docs.google.com/forms/d/1X-RYHC61egynClnz_Bu17IokmcIMY1j8cwuwWzvVIzo/viewform',
+  registrationGuide: 'https://docs.google.com/document/d/1Xk7q5gsK8CrA9PoW9EQoqs3RVP_wltkYIZ_H4TXJn8Q/view',
+  gradeChart: 'https://drive.google.com/file/d/1qLV_WTqvwzNGEyjS5eoVIbe9pC3aOq5T/view',
+  electiveList: 'https://docs.google.com/document/d/1WDBeqIcvrPU3i4yFUAt5mSVNFKYoWNjRWQ1Uy-wNBTs/view',
   payment: 'https://fremontchineseschool.org/online-payment',
   calendarZh:
     'https://drive.google.com/file/d/1LgAKCRMIiecG3fpMC2w6Hwx2zpWYXGd3/view',
@@ -216,24 +221,82 @@ export const content = {
     enroll: {
       title: 'Enroll',
       intro:
-        'New and returning families are welcome. Registration and payments are handled through our existing school portal.',
+        'New and returning families register each year. The steps below walk you through registration, payment, and any placement testing.',
+      newFamilyNote: 'New family? Read the registration guidelines before you begin.',
+      newFamilyGuideLabel: 'Registration guidelines & policy',
+      stepsTitle: 'How to register',
       steps: [
         {
           heading: 'Register online',
-          body: 'Complete registration through the FCS registration portal.',
-          linkLabel: 'Go to registration',
+          body: 'Complete the FCS registration form — choose your program track, class level, and electives.',
+          linkLabel: 'Go to registration form',
           link: 'register',
         },
         {
           heading: 'Pay tuition & fees',
-          body: 'Tuition and fees (including AC placement and other fees) are paid through the FCS online payment page.',
+          body: 'Register and pay by May 16, 2026 for the Early Bird rate. See Programs for full tuition details. Online payment via PayPal has a 5% surcharge.',
           linkLabel: 'Go to online payment',
           route: 'payment',
         },
         {
-          heading: 'AC placement test',
+          heading: 'AC placement test (if applicable)',
           body: 'Students new to the Accredited Curriculum take a placement test. Watch for the placement-test announcement and register online when it opens.',
         },
+      ],
+      returningNote: 'Returning student? Need to add, drop, or transfer a class after registering?',
+      returningLinkLabel: 'Submit a class change request',
+      keyDatesTitle: 'Key Dates',
+      keyDates: [
+        {
+          label: 'Early Bird deadline',
+          date: 'May 16, 2026',
+          note: 'Register and pay by this date to save $100–$150.',
+        },
+        {
+          label: 'Refund cutoff',
+          // TODO: confirm 2026-2027 refund cutoff date with school office
+          date: 'See registration guidelines',
+          note: 'No refunds after this date. Email finance@fremontchineseschool.org with questions.',
+        },
+      ],
+      placementTitle: 'Finding the right class level',
+      placementBody:
+        'FCS classes are organized by language ability, not school grade. Use the FUSD grade chart as a starting point — contact the school office if you\'re unsure.',
+      placementLinkLabel: 'Download FUSD grade chart',
+      electivesTitle: 'Electives',
+      electivesBody:
+        'Enrich your child\'s experience with electives like Chinese painting, Chinese yo-yo, coding, and basketball. You\'ll select electives during the registration form.',
+      electivesLinkLabel: 'View full elective list',
+      faqTitle: 'Frequently Asked Questions',
+      faq: [
+        {
+          q: 'What is the tuition?',
+          a: 'See the Programs page for a full tuition summary by track. The complete tuition schedule is also available as a PDF download.',
+        },
+        {
+          q: 'How do I get a refund?',
+          a: 'Submit a withdrawal form before the refund cutoff date. The finance team processes refunds to the original payment method, or mails a check if unable to process within 6 months. Email finance@fremontchineseschool.org for status.',
+        },
+        {
+          q: 'How do I add, drop, or transfer a class after registering?',
+          a: 'Submit the class change request form. Changes are subject to availability.',
+        },
+        {
+          q: 'How do I update my contact information?',
+          a: 'Email registration@fremontchineseschool.org and computer@fremontchineseschool.org with your child\'s name, FCS ID, and class code.',
+        },
+        {
+          q: 'What electives are available?',
+          a: 'Current offerings include Chinese painting, Chinese yo-yo, coding, and basketball. See the full elective list for details and scheduling.',
+        },
+      ],
+      resourcesTitle: 'All Registration Documents',
+      resources: [
+        { label: 'Registration guidelines & policy', link: 'registrationGuide' },
+        { label: 'FUSD grade placement chart', link: 'gradeChart' },
+        { label: 'Elective class list', link: 'electiveList' },
+        { label: 'Full tuition schedule', link: 'tuitionPdf' },
+        { label: 'Class change request form', link: 'addDropTransfer' },
       ],
       calendarNote:
         'Check the school calendar for the first day of class and important dates.',
@@ -433,24 +496,81 @@ export const content = {
     enroll: {
       title: '報名註冊',
       intro:
-        '歡迎新生與舊生報名。報名與繳費皆透過本校現有的入口網站辦理。',
+        '新生與舊生每年皆須完成報名。以下步驟將引導您完成報名、繳費及分班流程。',
+      newFamilyNote: '初次報名？請於開始前先閱讀報名規章。',
+      newFamilyGuideLabel: '報名規章與注意事項',
+      stepsTitle: '報名流程',
       steps: [
         {
           heading: '線上報名',
-          body: '請透過本校報名系統完成註冊。',
-          linkLabel: '前往報名系統',
+          body: '填寫本校報名表，選擇課程班別、程度及才藝選修課程。',
+          linkLabel: '前往報名表',
           link: 'register',
         },
         {
           heading: '繳交學費與費用',
-          body: '學費與各項費用（含學分班分班考試費及其他費用）皆透過本校線上付款頁面繳交。',
+          body: '於 2026 年 5 月 16 日前完成繳費，可享早鳥優惠。詳細學費請見「課程」頁面。透過 PayPal 線上付款將加收 5% 手續費。',
           linkLabel: '前往線上付款',
           route: 'payment',
         },
         {
-          heading: '學分班分班考試',
+          heading: '學分班分班考試（如適用）',
           body: '初次修讀學分班的學生須參加分班考試。請留意分班考試公告，並於開放時線上報名。',
         },
+      ],
+      returningNote: '舊生若需加課、退課或換課，請填寫申請表。',
+      returningLinkLabel: '提交課程異動申請',
+      keyDatesTitle: '重要日期',
+      keyDates: [
+        {
+          label: '早鳥優惠截止',
+          date: '2026 年 5 月 16 日',
+          note: '於此日期前完成報名並繳費，可省 $100–$150。',
+        },
+        {
+          label: '退費截止',
+          date: '詳見報名規章',
+          note: '截止日期後不予退費。如有問題請來信 finance@fremontchineseschool.org。',
+        },
+      ],
+      placementTitle: '如何確認適合的班級程度',
+      placementBody:
+        '本校依語文程度分班，非依學校年級。可參考學區年級對照表（FUSD Grade Chart）作為初步依據，如有疑問請聯絡學校辦公室。',
+      placementLinkLabel: '下載學區年級對照表',
+      electivesTitle: '才藝選修課程',
+      electivesBody:
+        '選修課程包括國畫、扯鈴、程式設計與籃球等，於報名時一併選擇。',
+      electivesLinkLabel: '查看完整選修課程列表',
+      faqTitle: '常見問題',
+      faq: [
+        {
+          q: '學費是多少？',
+          a: '請至「課程」頁面查看各班別學費摘要，或下載完整學費方案 PDF。',
+        },
+        {
+          q: '如何申請退費？',
+          a: '請於退費截止日前提交退課申請表。財務組將退款至原付款方式，或於六個月內無法處理時以支票寄送。如需查詢退費狀態，請來信 finance@fremontchineseschool.org。',
+        },
+        {
+          q: '報名後如何加課、退課或換課？',
+          a: '請填寫課程異動申請表，名額異動視班級餘額而定。',
+        },
+        {
+          q: '如何更新聯絡資料？',
+          a: '請將學生姓名、本校學號及班級代碼來信至 registration@fremontchineseschool.org 及 computer@fremontchineseschool.org。',
+        },
+        {
+          q: '有哪些才藝選修課程？',
+          a: '目前提供國畫、扯鈴、程式設計及籃球等課程。詳情請查看完整選修課程列表。',
+        },
+      ],
+      resourcesTitle: '所有報名文件',
+      resources: [
+        { label: '報名規章與注意事項', link: 'registrationGuide' },
+        { label: '學區年級對照表', link: 'gradeChart' },
+        { label: '才藝選修課程列表', link: 'electiveList' },
+        { label: '完整學費方案', link: 'tuitionPdf' },
+        { label: '課程異動申請表', link: 'addDropTransfer' },
       ],
       calendarNote: '開學日與重要日期請參閱學校行事曆。',
     },
