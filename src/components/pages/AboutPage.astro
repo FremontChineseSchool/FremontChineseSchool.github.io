@@ -29,13 +29,35 @@ const regulationsUrl = "https://bit.ly/2yxYRLB";
   <!-- Content sections -->
   <div class="mt-10 space-y-10">
     {
-      c.sections.map((s) => (
-        <div>
-          <h2 class="text-xl font-semibold" style="color: var(--color-fcs-green-dark);">{s.heading}</h2>
-          {s.body.map((p) => (
-            <p class="mt-3 leading-relaxed" style="color: var(--color-fcs-muted);">{p}</p>
-          ))}
-        </div>
+      c.sections.map((s, i) => (
+        i === 0 ? (
+          /* First section — two-column with photo */
+          <div class="grid gap-8 lg:grid-cols-2 lg:gap-12 lg:items-start">
+            <div>
+              <h2 class="text-xl font-semibold" style="color: var(--color-fcs-green-dark);">{s.heading}</h2>
+              {s.body.map((p) => (
+                <p class="mt-3 leading-relaxed" style="color: var(--color-fcs-muted);">{p}</p>
+              ))}
+            </div>
+            <div class="overflow-hidden rounded-[10px] lg:sticky lg:top-24">
+              <img
+                src="/images/slider/slide-3.jpg"
+                alt="FCS students and families at a school event"
+                loading="lazy"
+                decoding="async"
+                class="h-full w-full object-cover"
+                style="aspect-ratio: 4/3;"
+              />
+            </div>
+          </div>
+        ) : (
+          <div>
+            <h2 class="text-xl font-semibold" style="color: var(--color-fcs-green-dark);">{s.heading}</h2>
+            {s.body.map((p) => (
+              <p class="mt-3 leading-relaxed" style="color: var(--color-fcs-muted);">{p}</p>
+            ))}
+          </div>
+        )
       ))
     }
   </div>
