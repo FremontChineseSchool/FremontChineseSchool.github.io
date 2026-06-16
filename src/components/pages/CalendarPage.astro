@@ -10,205 +10,141 @@ interface Props {
 const { lang } = Astro.props;
 const c = content[lang].calendar;
 
-// Group entries by semester then month
-function monthKey(dateStr: string) {
-  const d = new Date(dateStr + 'T12:00:00');
-  return d.toLocaleDateString('en-US', { month: 'long', year: 'numeric' });
-}
 function formatDate(dateStr: string) {
   const d = new Date(dateStr + 'T12:00:00');
-  return d.toLocaleDateString('en-US', { weekday: 'short', month: 'short', day: 'numeric' });
-}
-function groupByMonth(entries: typeof calendarEntries) {
-  const groups: { month: string; entries: typeof calendarEntries }[] = [];
-  for (const e of entries) {
-    const m = monthKey(e.date);
-    let g = groups.find(x => x.month === m);
-    if (!g) { g = { month: m, entries: [] }; groups.push(g); }
-    g.entries.push(e);
-  }
-  return groups;
+  return d.toLocaleDateString('en-US', { month: '2-digit', day: '2-digit', year: '2-digit' });
 }
 
-const sem1Groups = groupByMonth(calendarEntries.filter(e => e.sem === 1));
-const sem2Groups = groupByMonth(calendarEntries.filter(e => e.sem === 2));
+const sem1 = calendarEntries.filter(e => e.sem === 1);
+const sem2 = calendarEntries.filter(e => e.sem === 2);
 
-const badgeStyles: Record<EventType, { bg: string; color: string }> = {
-  milestone: { bg: 'var(--color-fcs-black)',   color: '#fff' },
-  'no-school': { bg: '#FEE2E2',                color: '#991B1B' },
-  event:       { bg: '#DCFCE7',                color: '#166534' },
-  ac:          { bg: '#DBEAFE',                color: '#1E40AF' },
-  exam:        { bg: '#FEF3C7',                color: '#92400E' },
-  admin:       { bg: '#F3F4F6',                color: '#374151' },
+// Pad the shorter semester so rows align
+const maxRows = Math.max(sem1.length, sem2.length);
+const rows = Array.from({ length: maxRows }, (_, i) => ({
+  left:  sem1[i] ?? null,
+  right: sem2[i] ?? null,
+}));
+
+const eventColor: Record<EventType, string> = {
+  milestone:  'color: var(--color-fcs-black); font-weight: 700;',
+  'no-school': 'color: #B91C1C;',
+  event:       'color: #166534;',
+  ac:          'color: #1D4ED8;',
+  exam:        'color: #92400E; font-weight: 600;',
+  admin:       'color: #6B7280;',
 };
-
-const legendItems: { type: EventType; label: string }[] = [
-  { type: 'milestone',  label: c.legend.milestone },
-  { type: 'no-school',  label: c.legend.noSchool },
-  { type: 'event',      label: c.legend.event },
-  { type: 'ac',         label: c.legend.ac },
-  { type: 'exam',       label: c.legend.exam },
-  { type: 'admin',      label: c.legend.admin },
-];
 ---
 
-<section style="background: #FFF8F0;" class="mx-auto max-w-3xl px-4 py-14">
-  <!-- Header -->
-  <p class="eyebrow mb-3">Calendar</p>
-  <div class="flex flex-wrap items-baseline justify-between gap-3">
-    <h1 class="text-3xl font-semibold sm:text-4xl" style="letter-spacing: -0.02em; color: var(--color-fcs-black);">{c.title}</h1>
-    <span class="text-xs" style="color: var(--color-fcs-muted);">{c.updated}</span>
-  </div>
-  <p class="mt-1 text-lg font-medium" style="color: var(--color-fcs-green);">{c.yearLabel}</p>
-
-  <!-- Legend -->
-  <div class="mt-5 flex flex-wrap gap-2">
-    {legendItems.map(({ type, label }) => (
-      <span
-        class="rounded-full px-2.5 py-0.5 text-xs font-medium"
-        style={`background: ${badgeStyles[type].bg}; color: ${badgeStyles[type].color};`}
-      >{label}</span>
-    ))}
-  </div>
-
-  <!-- Semester tabs -->
-  <div class="mt-8 flex gap-0" style="border-bottom: 2px solid var(--color-fcs-border);">
-    <button id="tab-s1"
-      class="px-5 py-2.5 text-sm font-semibold transition-colors"
-      style="border-bottom: 2px solid var(--color-fcs-green); margin-bottom: -2px; color: var(--color-fcs-green);"
-    >
-      {c.sem1Label}
-      <span class="ml-1.5 text-xs font-normal" style="color: var(--color-fcs-muted);">{c.sem1Dates}</span>
-    </button>
-    <button id="tab-s2"
-      class="px-5 py-2.5 text-sm font-semibold transition-colors"
-      style="border-bottom: 2px solid transparent; margin-bottom: -2px; color: var(--color-fcs-muted);"
-    >
-      {c.sem2Label}
-      <span class="ml-1.5 text-xs font-normal">{c.sem2Dates}</span>
-    </button>
-  </div>
-
-  <!-- Semester 1 -->
-  <div id="sem-1">
-    {sem1Groups.map(({ month, entries }) => (
-      <div class="mt-8">
-        <h2 class="mb-3 text-xs font-semibold uppercase tracking-widest" style="color: var(--color-fcs-muted);">{month}</h2>
-        <div class="space-y-1">
-          {entries.map((entry) => (
-            <div
-              class="flex min-h-[44px] items-start gap-3 rounded-[8px] px-4 py-3"
-              style={entry.noSchool
-                ? 'background: #FEF2F2; border: 1px solid #FECACA;'
-                : 'background: var(--color-fcs-white); border: 1px solid var(--color-fcs-border);'}
-            >
-              <!-- Date + week -->
-              <div class="w-32 shrink-0">
-                <p class="text-sm font-semibold" style={entry.noSchool ? 'color: #991B1B;' : 'color: var(--color-fcs-black);'}>
-                  {formatDate(entry.date)}
-                </p>
-                {entry.week !== null && (
-                  <p class="text-xs" style="color: var(--color-fcs-muted);">
-                    {c.weekLabel} {entry.week}
-                  </p>
-                )}
-              </div>
-              <!-- Events -->
-              <div class="flex min-w-0 flex-1 flex-wrap gap-1.5 pt-0.5">
-                {entry.events.length === 0 ? (
-                  <span class="text-xs" style="color: var(--color-fcs-muted);">—</span>
-                ) : (
-                  entry.events.map((ev) => (
-                    <span
-                      class="rounded-full px-2.5 py-0.5 text-xs font-medium"
-                      style={`background: ${badgeStyles[ev.type].bg}; color: ${badgeStyles[ev.type].color};`}
-                    >{lang === 'zh' ? ev.textZh : ev.text}</span>
-                  ))
-                )}
-              </div>
-            </div>
-          ))}
-        </div>
+<section style="background: #FFF8F0;" class="px-4 py-14">
+  <div class="mx-auto max-w-5xl">
+    <!-- Header -->
+    <p class="eyebrow mb-3">Calendar</p>
+    <div class="flex flex-wrap items-baseline justify-between gap-3">
+      <div>
+        <h1 class="text-3xl font-semibold sm:text-4xl" style="letter-spacing: -0.02em; color: var(--color-fcs-black);">{c.title}</h1>
+        <p class="mt-1 text-lg font-medium" style="color: var(--color-fcs-green);">{c.yearLabel}</p>
       </div>
-    ))}
-  </div>
+      <span class="text-xs" style="color: var(--color-fcs-muted);">{c.updated}</span>
+    </div>
 
-  <!-- Semester 2 (hidden by default) -->
-  <div id="sem-2" style="display: none;">
-    {sem2Groups.map(({ month, entries }) => (
-      <div class="mt-8">
-        <h2 class="mb-3 text-xs font-semibold uppercase tracking-widest" style="color: var(--color-fcs-muted);">{month}</h2>
-        <div class="space-y-1">
-          {entries.map((entry) => (
-            <div
-              class="flex min-h-[44px] items-start gap-3 rounded-[8px] px-4 py-3"
-              style={entry.noSchool
-                ? 'background: #FEF2F2; border: 1px solid #FECACA;'
-                : 'background: var(--color-fcs-white); border: 1px solid var(--color-fcs-border);'}
-            >
-              <div class="w-32 shrink-0">
-                <p class="text-sm font-semibold" style={entry.noSchool ? 'color: #991B1B;' : 'color: var(--color-fcs-black);'}>
-                  {formatDate(entry.date)}
-                </p>
-                {entry.week !== null && (
-                  <p class="text-xs" style="color: var(--color-fcs-muted);">
-                    {c.weekLabel} {entry.week}
-                  </p>
-                )}
-              </div>
-              <div class="flex min-w-0 flex-1 flex-wrap gap-1.5 pt-0.5">
-                {entry.events.length === 0 ? (
-                  <span class="text-xs" style="color: var(--color-fcs-muted);">—</span>
-                ) : (
-                  entry.events.map((ev) => (
-                    <span
-                      class="rounded-full px-2.5 py-0.5 text-xs font-medium"
-                      style={`background: ${badgeStyles[ev.type].bg}; color: ${badgeStyles[ev.type].color};`}
-                    >{lang === 'zh' ? ev.textZh : ev.text}</span>
-                  ))
-                )}
-              </div>
-            </div>
-          ))}
-        </div>
-      </div>
-    ))}
-  </div>
+    <!-- Legend -->
+    <div class="mt-4 flex flex-wrap items-center gap-x-4 gap-y-1 text-xs" style="color: var(--color-fcs-muted);">
+      <span style="color: var(--color-fcs-black); font-weight: 700;">● {c.legend.milestone}</span>
+      <span style="color: #B91C1C;">● {c.legend.noSchool}</span>
+      <span style="color: #166534;">● {c.legend.event}</span>
+      <span style="color: #1D4ED8;">● {c.legend.ac}</span>
+      <span style="color: #92400E; font-weight: 600;">● {c.legend.exam}</span>
+      <span style="color: #6B7280;">● {c.legend.admin}</span>
+    </div>
 
-  <!-- Download links -->
-  <div class="mt-10 flex flex-wrap gap-4" style="border-top: 1px solid var(--color-fcs-border); padding-top: 1.5rem;">
-    <a href={links.calendarEn} target="_blank" rel="noopener"
-      class="inline-flex items-center gap-1.5 text-sm font-semibold hover:underline"
-      style="color: var(--color-fcs-green);">
-      <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
-      {c.downloadEn}
-    </a>
-    <a href={links.calendarZh} target="_blank" rel="noopener"
-      class="inline-flex items-center gap-1.5 text-sm font-semibold hover:underline"
-      style="color: var(--color-fcs-green);">
-      <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
-      {c.downloadZh}
-    </a>
+    <!-- Two-column table -->
+    <div class="mt-6 overflow-x-auto rounded-[10px]" style="border: 1px solid var(--color-fcs-border);">
+      <table class="w-full text-sm" style="border-collapse: collapse; min-width: 560px;">
+        <!-- Column groups for proportional widths -->
+        <colgroup>
+          <col style="width: 5%;" />
+          <col style="width: 11%;" />
+          <col style="width: 34%;" />
+          <col style="width: 5%;" />
+          <col style="width: 11%;" />
+          <col style="width: 34%;" />
+        </colgroup>
+        <thead>
+          <tr style="background: var(--color-fcs-green); color: white;">
+            <th colspan="3" class="px-3 py-2 text-left text-xs font-semibold uppercase tracking-wider">
+              {c.sem1Label} · {c.sem1Dates}
+            </th>
+            <th colspan="3" class="px-3 py-2 text-left text-xs font-semibold uppercase tracking-wider" style="border-left: 1px solid rgba(255,255,255,0.2);">
+              {c.sem2Label} · {c.sem2Dates}
+            </th>
+          </tr>
+          <tr style="background: var(--color-fcs-white); border-bottom: 2px solid var(--color-fcs-border);">
+            {['Wk', 'Date', 'Remarks', 'Wk', 'Date', 'Remarks'].map((h, i) => (
+              <th
+                class="px-3 py-1.5 text-left text-xs font-semibold uppercase tracking-wide"
+                style={`color: var(--color-fcs-muted);${i === 3 ? ' border-left: 2px solid var(--color-fcs-border);' : ''}`}
+              >{h}</th>
+            ))}
+          </tr>
+        </thead>
+        <tbody>
+          {rows.map(({ left, right }, idx) => {
+            const leftNo  = left?.noSchool  ?? false;
+            const rightNo = right?.noSchool ?? false;
+            const rowBg = idx % 2 === 0 ? 'var(--color-fcs-white)' : '#FAFAF8';
+            return (
+              <tr style={`background: ${rowBg};`}>
+                {/* ── Left cell ── */}
+                <td class="px-3 py-2 text-center text-xs" style="color: var(--color-fcs-muted); white-space: nowrap;">
+                  {left?.week ?? ''}
+                </td>
+                <td class="px-3 py-2 text-xs font-medium" style={`white-space: nowrap; ${leftNo ? 'color:#B91C1C;' : 'color: var(--color-fcs-black);'}`}>
+                  {left ? formatDate(left.date) : ''}
+                </td>
+                <td class="px-3 py-2 text-xs leading-snug">
+                  {left?.events.map((ev, ei) => (
+                    <span>
+                      {ei > 0 && <span style="color: var(--color-fcs-border);"> · </span>}
+                      <span style={eventColor[ev.type]}>{lang === 'zh' ? ev.textZh : ev.text}</span>
+                    </span>
+                  ))}
+                </td>
+                {/* ── Right cell ── */}
+                <td class="px-3 py-2 text-center text-xs" style="color: var(--color-fcs-muted); white-space: nowrap; border-left: 2px solid var(--color-fcs-border);">
+                  {right?.week ?? ''}
+                </td>
+                <td class="px-3 py-2 text-xs font-medium" style={`white-space: nowrap; ${rightNo ? 'color:#B91C1C;' : 'color: var(--color-fcs-black);'}`}>
+                  {right ? formatDate(right.date) : ''}
+                </td>
+                <td class="px-3 py-2 text-xs leading-snug">
+                  {right?.events.map((ev, ei) => (
+                    <span>
+                      {ei > 0 && <span style="color: var(--color-fcs-border);"> · </span>}
+                      <span style={eventColor[ev.type]}>{lang === 'zh' ? ev.textZh : ev.text}</span>
+                    </span>
+                  ))}
+                </td>
+              </tr>
+            );
+          })}
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Download links -->
+    <div class="mt-6 flex flex-wrap gap-4">
+      <a href={links.calendarEn} target="_blank" rel="noopener"
+        class="inline-flex items-center gap-1.5 text-sm font-semibold hover:underline"
+        style="color: var(--color-fcs-green);">
+        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+        {c.downloadEn}
+      </a>
+      <a href={links.calendarZh} target="_blank" rel="noopener"
+        class="inline-flex items-center gap-1.5 text-sm font-semibold hover:underline"
+        style="color: var(--color-fcs-green);">
+        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+        {c.downloadZh}
+      </a>
+    </div>
   </div>
 </section>
-
-<script>
-  const t1 = document.getElementById('tab-s1');
-  const t2 = document.getElementById('tab-s2');
-  const s1 = document.getElementById('sem-1');
-  const s2 = document.getElementById('sem-2');
-
-  const activeTab  = `border-bottom: 2px solid var(--color-fcs-green); margin-bottom: -2px; color: var(--color-fcs-green);`;
-  const inactiveTab = `border-bottom: 2px solid transparent; margin-bottom: -2px; color: var(--color-fcs-muted);`;
-
-  if (t1 && t2 && s1 && s2) {
-    t1.addEventListener('click', () => {
-      s1.style.display = ''; s2.style.display = 'none';
-      t1.style.cssText = activeTab; t2.style.cssText = inactiveTab;
-    });
-    t2.addEventListener('click', () => {
-      s2.style.display = ''; s1.style.display = 'none';
-      t2.style.cssText = activeTab; t1.style.cssText = inactiveTab;
-    });
-  }
-</script>
