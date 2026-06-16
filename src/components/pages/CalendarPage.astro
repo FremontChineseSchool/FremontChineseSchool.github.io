@@ -80,19 +80,20 @@ const altLabel     = lang === 'zh' ? c.downloadEn : c.downloadZh;
   const tabDefault = document.getElementById('cal-tab-default') as HTMLButtonElement | null;
   const tabAlt     = document.getElementById('cal-tab-alt')     as HTMLButtonElement | null;
   const frame      = document.getElementById('cal-frame')       as HTMLIFrameElement | null;
-  if (!tabDefault || !tabAlt || !frame) return;
 
-  const activeStyle   = 'background: var(--color-fcs-white); border: 1px solid var(--color-fcs-border); border-bottom: none; color: var(--color-fcs-black);';
-  const inactiveStyle = 'background: transparent; border: 1px solid transparent; color: var(--color-fcs-muted);';
+  if (tabDefault && tabAlt && frame) {
+    const activeStyle   = 'background: var(--color-fcs-white); border: 1px solid var(--color-fcs-border); border-bottom: none; color: var(--color-fcs-black);';
+    const inactiveStyle = 'background: transparent; border: 1px solid transparent; color: var(--color-fcs-muted);';
 
-  tabDefault.addEventListener('click', () => {
-    frame.src = frame.dataset.default!;
-    tabDefault.style.cssText = activeStyle;
-    tabAlt.style.cssText = inactiveStyle;
-  });
-  tabAlt.addEventListener('click', () => {
-    frame.src = frame.dataset.alt!;
-    tabAlt.style.cssText = activeStyle;
-    tabDefault.style.cssText = inactiveStyle;
-  });
+    tabDefault.addEventListener('click', () => {
+      frame.src = frame.dataset.default!;
+      tabDefault.style.cssText = activeStyle;
+      tabAlt.style.cssText = inactiveStyle;
+    });
+    tabAlt.addEventListener('click', () => {
+      frame.src = frame.dataset.alt!;
+      tabAlt.style.cssText = activeStyle;
+      tabDefault.style.cssText = inactiveStyle;
+    });
+  }
 </script>

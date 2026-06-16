@@ -241,7 +241,7 @@ export const content = {
       title: 'Enroll',
       intro:
         'New and returning families register each year. The steps below walk you through registration, payment, and any placement testing.',
-      newFamilyNote: 'New family? Read the registration guidelines before you begin.',
+      newFamilyNote: 'New family? The registration guidelines and refund policy are covered on this page. Start with the steps below.',
       newFamilyGuideLabel: 'Registration guidelines & policy',
       stepsTitle: 'How to register',
       steps: [
@@ -272,10 +272,9 @@ export const content = {
           note: 'Register and pay by this date to save $100–$150.',
         },
         {
-          label: 'Refund cutoff',
-          // TODO: confirm 2026-2027 refund cutoff date with school office
-          date: 'See registration guidelines',
-          note: 'No refunds after this date. Email finance@fremontchineseschool.org with questions.',
+          label: 'Last day for full refund',
+          date: 'May 16, 2026',
+          note: 'No processing fee before this date. 30% fee May 17–Aug 22. No refund after Aug 22.',
         },
       ],
       placementTitle: 'Finding the right class level',
@@ -294,7 +293,7 @@ export const content = {
         },
         {
           q: 'How do I get a refund?',
-          a: 'Submit a withdrawal form before the refund cutoff date. The finance team processes refunds to the original payment method, or mails a check if unable to process within 6 months. Email finance@fremontchineseschool.org for status.',
+          a: 'Submit a withdrawal request before August 22, 2026. Before May 17: full refund, no fee. May 17–August 22: tuition refunded minus a 30% processing fee. After August 22: no refund. Email finance@fremontchineseschool.org for status.',
         },
         {
           q: 'How do I add, drop, or transfer a class after registering?',
@@ -309,12 +308,31 @@ export const content = {
           a: 'Current offerings include Chinese painting, Chinese yo-yo, coding, and basketball. See the full elective list for details and scheduling.',
         },
       ],
+      refundTitle: 'Withdrawal & Refund Policy',
+      refundPaymentNote: 'Online payment via PayPal incurs a 5% processing fee. Checks are accepted with no surcharge.',
+      refundTiers: [
+        {
+          period: 'Before May 17, 2026',
+          rule: 'Full refund — no processing fee',
+          highlight: true,
+        },
+        {
+          period: 'May 17 – August 22, 2026',
+          rule: '30% processing fee deducted from refund',
+          highlight: false,
+        },
+        {
+          period: 'After August 22, 2026',
+          rule: 'No refund',
+          highlight: false,
+        },
+      ],
+      refundContact: 'Questions? Email finance@fremontchineseschool.org',
       volunteerTitle: 'Volunteer hours',
       volunteerBody:
         'Each enrolled family is required to contribute 3 volunteer hours per semester. Volunteer opportunities include helping at school events, serving as a classroom aide, and supporting administrative tasks. Hours are tracked by the school office.',
       resourcesTitle: 'All Registration Documents',
       resources: [
-        { label: 'Registration guidelines & policy', link: 'registrationGuide' },
         { label: 'FUSD grade placement chart', link: 'gradeChart' },
         { label: 'Elective class list', link: 'electiveList' },
         { label: 'Full tuition schedule', link: 'tuitionPdf' },
@@ -614,7 +632,7 @@ export const content = {
       title: '報名註冊',
       intro:
         '新生與舊生每年皆須完成報名。以下步驟將引導您完成報名、繳費及分班流程。',
-      newFamilyNote: '初次報名？請於開始前先閱讀報名規章。',
+      newFamilyNote: '初次報名？報名規章與退費政策說明均已收錄於本頁，請先閱讀以下各步驟。',
       newFamilyGuideLabel: '報名規章與注意事項',
       stepsTitle: '報名流程',
       steps: [
@@ -645,9 +663,9 @@ export const content = {
           note: '於此日期前完成報名並繳費，可省 $100–$150。',
         },
         {
-          label: '退費截止',
-          date: '詳見報名規章',
-          note: '截止日期後不予退費。如有問題請來信 finance@fremontchineseschool.org。',
+          label: '全額退費截止',
+          date: '2026 年 5 月 16 日',
+          note: '此日期前申請不收手續費。5 月 17 日至 8 月 22 日扣 30%。8 月 22 日後不退費。',
         },
       ],
       placementTitle: '如何確認適合的班級程度',
@@ -666,7 +684,7 @@ export const content = {
         },
         {
           q: '如何申請退費？',
-          a: '請於退費截止日前提交退課申請表。財務組將退款至原付款方式，或於六個月內無法處理時以支票寄送。如需查詢退費狀態，請來信 finance@fremontchineseschool.org。',
+          a: '請於 2026 年 8 月 22 日前提交退課申請。5 月 17 日前：全額退費，免手續費。5 月 17 日至 8 月 22 日：退費扣除 30% 手續費。8 月 22 日後：不予退費。如需查詢，請來信 finance@fremontchineseschool.org。',
         },
         {
           q: '報名後如何加課、退課或換課？',
@@ -681,12 +699,31 @@ export const content = {
           a: '目前提供國畫、扯鈴、程式設計及籃球等課程。詳情請查看完整選修課程列表。',
         },
       ],
+      refundTitle: '退費與退課政策',
+      refundPaymentNote: '透過 PayPal 線上付款須加收 5% 手續費；以支票繳費則不另收費。',
+      refundTiers: [
+        {
+          period: '2026 年 5 月 17 日前',
+          rule: '全額退費，免收手續費',
+          highlight: true,
+        },
+        {
+          period: '2026 年 5 月 17 日至 8 月 22 日',
+          rule: '退費扣除 30% 手續費',
+          highlight: false,
+        },
+        {
+          period: '2026 年 8 月 22 日後',
+          rule: '不予退費',
+          highlight: false,
+        },
+      ],
+      refundContact: '如有疑問，請來信 finance@fremontchineseschool.org',
       volunteerTitle: '義工時數',
       volunteerBody:
         '每位在學學生的家庭每學期須完成 3 小時義工服務。義工機會包括協助學校活動、擔任教室助理及支援行政事務，時數由學校辦公室統計記錄。',
       resourcesTitle: '所有報名文件',
       resources: [
-        { label: '報名規章與注意事項', link: 'registrationGuide' },
         { label: '學區年級對照表', link: 'gradeChart' },
         { label: '才藝選修課程列表', link: 'electiveList' },
         { label: '完整學費方案', link: 'tuitionPdf' },
