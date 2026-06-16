@@ -210,6 +210,7 @@ export const content = {
           'Online payment via PayPal has a non-refundable 5% surcharge.',
         ],
         pdfLabel: 'Download full tuition schedule (PDF)',
+        enrollCta: 'Enroll Now',
       },
     },
     enroll: {
@@ -426,6 +427,7 @@ export const content = {
           '透過 PayPal 線上付款將加收不可退還之 5% 手續費。',
         ],
         pdfLabel: '下載完整學費說明（PDF）',
+        enrollCta: '立即報名',
       },
     },
     enroll: {

@@ -1,6 +1,6 @@
 ---
 import { content, links } from "../../i18n/content";
-import type { Lang } from "../../i18n/ui";
+import { localizedPath, type Lang } from "../../i18n/ui";
 
 interface Props {
   lang: Lang;
@@ -36,8 +36,13 @@ const t = c.tuition;
     </p>
 
     <!-- Fee table -->
-    <div class="mt-5 overflow-x-auto">
-      <table class="w-full text-sm">
+    <div class="mt-5">
+      <table class="w-full text-sm" style="table-layout: fixed;">
+        <colgroup>
+          <col style="width: 50%;" />
+          <col style="width: 25%;" />
+          <col style="width: 25%;" />
+        </colgroup>
         <thead>
           <tr style="border-bottom: 2px solid var(--color-fcs-border);">
             <th class="pb-2 text-left font-semibold" style="color: var(--color-fcs-black);"></th>
@@ -48,9 +53,9 @@ const t = c.tuition;
         <tbody>
           {t.rows.map((row) => (
             <tr style="border-bottom: 1px solid var(--color-fcs-border);">
-              <td class="py-3 pr-4 leading-snug" style="color: var(--color-fcs-muted);">{row.track}</td>
-              <td class="py-3 text-right font-semibold tabular-nums whitespace-nowrap" style="color: var(--color-fcs-green-dark);">{row.earlyBird}</td>
-              <td class="py-3 text-right tabular-nums whitespace-nowrap" style="color: var(--color-fcs-muted);">{row.regular}</td>
+              <td class="py-3 pr-3 text-xs leading-snug sm:text-sm" style="color: var(--color-fcs-muted);">{row.track}</td>
+              <td class="py-3 text-right text-xs font-semibold tabular-nums sm:text-sm" style="color: var(--color-fcs-green-dark);">{row.earlyBird}</td>
+              <td class="py-3 text-right text-xs tabular-nums sm:text-sm" style="color: var(--color-fcs-muted);">{row.regular}</td>
             </tr>
           ))}
         </tbody>
@@ -64,16 +69,25 @@ const t = c.tuition;
       ))}
     </ul>
 
-    <!-- PDF link -->
-    <a
-      href={links.tuitionPdf}
-      target="_blank"
-      rel="noopener noreferrer"
-      class="mt-5 inline-flex items-center gap-1.5 text-sm font-semibold"
-      style="color: var(--color-fcs-green);"
-    >
-      {t.pdfLabel}
-      <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
-    </a>
+    <!-- PDF link + Enroll CTA -->
+    <div class="mt-5 flex flex-wrap items-center gap-4">
+      <a
+        href={links.tuitionPdf}
+        target="_blank"
+        rel="noopener noreferrer"
+        class="inline-flex items-center gap-1.5 text-sm font-semibold"
+        style="color: var(--color-fcs-green);"
+      >
+        {t.pdfLabel}
+        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+      </a>
+      <a
+        href={localizedPath(lang, 'enroll')}
+        class="inline-block rounded-md px-5 py-2.5 text-sm font-semibold text-white transition-opacity hover:opacity-90"
+        style="background: var(--color-fcs-orange);"
+      >
+        {t.enrollCta}
+      </a>
+    </div>
   </div>
 </section>
