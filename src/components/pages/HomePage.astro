@@ -159,26 +159,32 @@ const featureIcons = [
   </div>
 </section>
 
-<!-- Showcase band — scroll-scrubbed parallax photo -->
-<section class="relative isolate h-[60vh] overflow-hidden" style="background: var(--color-fcs-green-dark);">
-  <img
-    src="/images/slider/slide-1.jpg"
-    alt={c.showcaseAlt}
-    loading="lazy"
-    decoding="async"
-    class="parallax-zoom absolute inset-0 -z-10 h-full w-full object-cover"
-  />
-  <div
-    class="absolute inset-0 -z-10"
-    style="background: linear-gradient(to top, rgba(28,18,8,0.7), rgba(28,18,8,0.2), transparent);"
-  ></div>
-  <div
-    class="mx-auto flex h-full max-w-6xl items-end px-4 pb-12"
-    data-reveal
-  >
-    <p class="max-w-xl text-2xl font-semibold text-white drop-shadow sm:text-3xl">
-      {c.eventsLead}
-    </p>
+<!-- Showcase band — dark split: quote left, photo right -->
+<section class="grid lg:grid-cols-2" style="background: var(--color-fcs-black);">
+  <div class="flex items-center px-8 py-20 sm:px-16 sm:py-24 lg:py-28" data-reveal>
+    <div>
+      <p class="eyebrow mb-4" style="color: var(--color-fcs-gold);">Life at FCS</p>
+      <p class="text-3xl font-bold leading-snug text-white sm:text-4xl" style="letter-spacing: -0.02em;">
+        {c.eventsLead}
+      </p>
+      <a
+        href="#events-section"
+        class="mt-8 inline-flex items-center gap-2 text-sm font-semibold hover:underline"
+        style="color: var(--color-fcs-gold);"
+      >
+        {c.eventsCta}
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14m-6-6 6 6-6 6"/></svg>
+      </a>
+    </div>
+  </div>
+  <div class="h-72 overflow-hidden lg:h-auto">
+    <img
+      src="/images/slider/slide-1.jpg"
+      alt={c.showcaseAlt}
+      loading="lazy"
+      decoding="async"
+      class="h-full w-full object-cover"
+    />
   </div>
 </section>
 

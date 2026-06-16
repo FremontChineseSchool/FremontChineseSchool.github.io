@@ -29,7 +29,8 @@ const navItems = navOrder.map((key) => {
       <img
         src="/images/logo.png"
         alt={t.logoAlt}
-        class="h-10 w-auto"
+        class="h-11 w-auto"
+        style="filter: brightness(0) invert(1);"
         width="500"
         height="108"
       />
@@ -45,7 +46,7 @@ const navItems = navOrder.map((key) => {
             aria-current={item.active ? "page" : undefined}
             class:list={[
               "px-3 py-2 transition-colors duration-150",
-              "text-[11px] font-medium tracking-wide",
+              "text-xs font-medium tracking-wide",
               item.active
                 ? "text-fcs-white underline underline-offset-4"
                 : "text-white/80 hover:text-fcs-white",
