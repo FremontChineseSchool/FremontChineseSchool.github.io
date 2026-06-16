@@ -7,28 +7,92 @@ interface Props {
 }
 const { lang } = Astro.props;
 const c = content[lang].calendar;
+
+// Google Drive /preview endpoint renders the PDF inline without forcing download
+const enEmbed = links.calendarEn.replace('/view', '/preview');
+const zhEmbed = links.calendarZh.replace('/view', '/preview');
+const defaultEmbed = lang === 'zh' ? zhEmbed : enEmbed;
+const altEmbed    = lang === 'zh' ? enEmbed : zhEmbed;
+const defaultLabel = lang === 'zh' ? c.downloadZh : c.downloadEn;
+const altLabel     = lang === 'zh' ? c.downloadEn : c.downloadZh;
 ---
 
 <section style="background: #FFF8F0;" class="mx-auto max-w-3xl px-4 py-14">
   <p class="eyebrow mb-3">Calendar</p>
   <h1 class="text-3xl font-semibold sm:text-4xl" style="letter-spacing: -0.02em; color: var(--color-fcs-black);">{c.title}</h1>
   <p class="mt-2 text-lg font-medium" style="color: var(--color-fcs-green);">{c.yearLabel}</p>
-  <p class="mt-6" style="color: var(--color-fcs-muted);">{c.intro}</p>
 
-  <div class="mt-6 flex flex-wrap gap-3">
+  <!-- Language tabs -->
+  <div class="mt-8 flex gap-2">
+    <button
+      id="cal-tab-default"
+      class="rounded-t-[6px] px-5 py-2 text-sm font-semibold transition-colors duration-150"
+      style="background: var(--color-fcs-white); border: 1px solid var(--color-fcs-border); border-bottom: none; color: var(--color-fcs-black);"
+    >{defaultLabel}</button>
+    <button
+      id="cal-tab-alt"
+      class="rounded-t-[6px] px-5 py-2 text-sm font-semibold transition-colors duration-150"
+      style="background: transparent; border: 1px solid transparent; color: var(--color-fcs-muted);"
+    >{altLabel}</button>
+  </div>
+
+  <!-- PDF embed -->
+  <div style="border: 1px solid var(--color-fcs-border); border-radius: 0 6px 6px 6px; overflow: hidden; background: var(--color-fcs-white);">
+    <iframe
+      id="cal-frame"
+      src={defaultEmbed}
+      data-default={defaultEmbed}
+      data-alt={altEmbed}
+      width="100%"
+      height="640"
+      allow="autoplay"
+      style="display: block; border: none;"
+      title={c.title}
+    ></iframe>
+  </div>
+
+  <!-- Download buttons -->
+  <div class="mt-5 flex flex-wrap gap-3">
     <a
       href={links.calendarEn}
       target="_blank"
       rel="noopener"
-      class="rounded-[6px] px-6 py-3 font-semibold text-fcs-white transition-colors duration-150 hover:bg-[#C85A10]"
-      style="background: var(--color-fcs-orange);"
-    >{c.downloadEn}</a>
+      class="inline-flex items-center gap-1.5 text-sm font-semibold hover:underline"
+      style="color: var(--color-fcs-green);"
+    >
+      <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+      {c.downloadEn}
+    </a>
     <a
       href={links.calendarZh}
       target="_blank"
       rel="noopener"
-      class="rounded-[6px] px-6 py-3 font-semibold transition-colors duration-150"
-      style="border: 1.5px solid var(--color-fcs-green); color: var(--color-fcs-green);"
-    >{c.downloadZh}</a>
+      class="inline-flex items-center gap-1.5 text-sm font-semibold hover:underline"
+      style="color: var(--color-fcs-green);"
+    >
+      <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+      {c.downloadZh}
+    </a>
   </div>
 </section>
+
+<script>
+  const tabDefault = document.getElementById('cal-tab-default') as HTMLButtonElement | null;
+  const tabAlt     = document.getElementById('cal-tab-alt')     as HTMLButtonElement | null;
+  const frame      = document.getElementById('cal-frame')       as HTMLIFrameElement | null;
+  if (!tabDefault || !tabAlt || !frame) return;
+
+  const activeStyle   = 'background: var(--color-fcs-white); border: 1px solid var(--color-fcs-border); border-bottom: none; color: var(--color-fcs-black);';
+  const inactiveStyle = 'background: transparent; border: 1px solid transparent; color: var(--color-fcs-muted);';
+
+  tabDefault.addEventListener('click', () => {
+    frame.src = frame.dataset.default!;
+    tabDefault.style.cssText = activeStyle;
+    tabAlt.style.cssText = inactiveStyle;
+  });
+  tabAlt.addEventListener('click', () => {
+    frame.src = frame.dataset.alt!;
+    tabAlt.style.cssText = activeStyle;
+    tabDefault.style.cssText = inactiveStyle;
+  });
+</script>
