@@ -49,7 +49,7 @@ const featureIcons = [
 <!-- Facts strip -->
 <section style="background: linear-gradient(to bottom, #F5FBF6, #FFF8F0);">
   <div
-    class="mx-auto grid max-w-6xl grid-cols-2 gap-px px-4 py-10 sm:grid-cols-4"
+    class="mx-auto grid max-w-6xl grid-cols-2 gap-x-4 gap-y-8 px-8 py-12 sm:grid-cols-4"
   >
     {
       c.facts.map((f, i) => (
@@ -58,7 +58,7 @@ const featureIcons = [
           data-reveal
           style={`--reveal-delay: ${i * 90}ms`}
         >
-          <div class="text-3xl font-bold sm:text-4xl" style="color: var(--color-fcs-green-dark);">
+          <div class="text-2xl font-bold sm:text-4xl" style="color: var(--color-fcs-green-dark); white-space: nowrap;">
             {f.value}
           </div>
           <div class="eyebrow mt-1">
