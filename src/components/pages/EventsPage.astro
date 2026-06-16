@@ -21,29 +21,77 @@ const c = content[lang].events;
 <section style="background: #FFF8F0;" class="mx-auto max-w-3xl px-4 py-14">
 
   <!-- Annual events -->
-  <h2 class="text-xl font-semibold" style="color: var(--color-fcs-black);">{c.annualTitle}</h2>
-  <div class="mt-6 space-y-4">
-    {c.annual.map((e, i) => (
-      <div
-        class="rounded-[10px] p-5"
-        style="background: var(--color-fcs-white); border: 1px solid var(--color-fcs-border); border-left: 4px solid var(--color-fcs-green);"
-        data-reveal
-        style={`--reveal-delay: ${(i % 3) * 60}ms`}
-      >
-        <h3 class="font-semibold" style="color: var(--color-fcs-green-dark);">{e.name}</h3>
-        <p class="mt-1 text-sm leading-relaxed" style="color: var(--color-fcs-muted);">{e.body}</p>
-        {"route" in e && e.route && (
-          <a
-            href={localizedPath(lang, e.route)}
-            class="mt-2 inline-block text-sm font-semibold hover:underline"
-            style="color: var(--color-fcs-green);"
-          >
-            {lang === 'en' ? 'Learn more' : '了解更多'} →
-          </a>
-        )}
+  {(() => {
+    // Placeholder photos using existing slider images — swap in real photos@ URLs when ready.
+    // Order matches c.annual array: Open House, CNY, Food Festival, AC, ANCCS, Yo-Yo, Double Ten, Confucius, Appreciation, Graduation
+    const eventPhotos = [
+      '/images/slider/slide-3.jpg',
+      '/images/slider/slide-5.jpg',
+      '/images/slider/slide-2.jpg',
+      '/images/slider/slide-4.jpg',
+      '/images/slider/slide-1.jpg',
+      null,
+      null,
+      null,
+      '/images/slider/slide-6.jpg',
+      '/images/slider/slide-3.jpg',
+    ];
+    return (
+      <div>
+        <h2 class="text-xl font-semibold" style="color: var(--color-fcs-black);">{c.annualTitle}</h2>
+        <div class="mt-6 space-y-4">
+          {c.annual.map((e, i) => (
+            <div
+              class="overflow-hidden rounded-[10px]"
+              style="background: var(--color-fcs-white); border: 1px solid var(--color-fcs-border);"
+              data-reveal
+            >
+              <div class={eventPhotos[i] ? "flex flex-col sm:flex-row" : ""}>
+                {/* Photo */}
+                {eventPhotos[i] ? (
+                  <div class="relative h-44 shrink-0 overflow-hidden sm:h-auto sm:w-48">
+                    <img
+                      src={eventPhotos[i]}
+                      alt={e.name}
+                      loading="lazy"
+                      decoding="async"
+                      class="h-full w-full object-cover"
+                    />
+                    <div class="absolute inset-0 flex items-end">
+                      <span class="m-2 rounded px-1.5 py-0.5 text-[10px] font-medium text-white/80" style="background: rgba(0,0,0,0.35);">
+                        Placeholder photo
+                      </span>
+                    </div>
+                  </div>
+                ) : (
+                  <div class="flex h-32 shrink-0 items-center justify-center sm:h-auto sm:w-48" style="background: var(--color-fcs-green-light);">
+                    <div class="text-center">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="mx-auto" style="color: var(--color-fcs-green);"><path d="M14.5 4h-5L7 7H4a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2h-3l-2.5-3z"/><circle cx="12" cy="13" r="3"/></svg>
+                      <p class="mt-1 text-xs" style="color: var(--color-fcs-green);">Photo coming soon</p>
+                    </div>
+                  </div>
+                )}
+                {/* Text */}
+                <div class="flex-1 p-5" style="border-left: 4px solid var(--color-fcs-green);">
+                  <h3 class="font-semibold" style="color: var(--color-fcs-green-dark);">{e.name}</h3>
+                  <p class="mt-1 text-sm leading-relaxed" style="color: var(--color-fcs-muted);">{e.body}</p>
+                  {"route" in e && e.route && (
+                    <a
+                      href={localizedPath(lang, e.route)}
+                      class="mt-2 inline-block text-sm font-semibold hover:underline"
+                      style="color: var(--color-fcs-green);"
+                    >
+                      {lang === 'en' ? 'Learn more' : '了解更多'} →
+                    </a>
+                  )}
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
       </div>
-    ))}
-  </div>
+    );
+  })()}
 
   <!-- Calendar note -->
   <p class="mt-8 rounded-[10px] p-4 text-sm" style="background: var(--color-fcs-green-light); color: var(--color-fcs-muted); border: 1px solid var(--color-fcs-border);">
