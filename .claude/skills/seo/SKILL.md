@@ -3,9 +3,8 @@ name: seo
 description: >-
   Audit and maintain SEO for the Fremont Chinese School site. Use when asked to
   run an SEO audit, add/verify meta tags, descriptions, canonical/hreflang,
-  Open Graph, structured data (JSON-LD), the sitemap or robots.txt — or when
-  adding/changing a page and SEO must not regress. Also tracks the outstanding
-  SEO work tied to the custom-domain cutover.
+  Open Graph, structured data (JSON-LD), image alt text, the sitemap or
+  robots.txt — or when adding/changing a page and SEO must not regress.
 ---
 
 # SEO for the FCS site
@@ -25,7 +24,8 @@ of it.
   happens here or in the data it reads.**
 - **`src/i18n/content.ts` → `descriptions`** — per-page meta descriptions, keyed by
   route key, for both `en` and `zh`. Add a key here for every new page (both locales).
-  Aim for ~150 chars, keyword-rich, lead with "Fremont Chinese School" / the school
+  Keep them **120–160 characters** (under ~120 Google often rewrites the snippet; over
+  ~160 it truncates), keyword-rich, leading with "Fremont Chinese School" / the school
   name where natural. A `description` prop passed to `BaseLayout` overrides the lookup.
 - **`src/i18n/ui.ts` → `homeTitle`** — the keyword-rich standalone `<title>` for the
   homepage (BaseLayout uses it instead of the `· siteName` pattern when `isHome`).
@@ -40,7 +40,7 @@ of it.
 canonical / hreflang / OG URL and the sitemap are built from it. Today that is
 `https://fremontchineseschool.github.io`. Pointing it at `fremontchineseschool.org`
 before the domain is cut over would aim canonicals at the **legacy Joomla site** still
-living there. Only flip it as part of the cutover (see Outstanding work).
+living there. Only flip it as part of the cutover (see One-time tasks below).
 
 ## Rule: adding or changing a page must not regress SEO
 
@@ -54,56 +54,49 @@ When a new top-level page is added (on top of the steps in `CLAUDE.md`):
    from the route existing in both locale trees.
 3. Verify with the audit below.
 
+## What every page should emit (audit baseline)
+
+On every page, in both locale trees, `<head>` must contain: a unique
+`<meta name="description">`, a self-referencing `<link rel="canonical">`, `hreflang`
+alternates (`en` / `zh-Hant` / `x-default`), Open Graph
+(`og:title/description/url/image/locale`), a Twitter card, and exactly one
+`application/ld+json` block (`EducationalOrganization`). The homepage `<title>` is the
+keyword-rich `homeTitle`, not "Home". Site-wide there is `dist/robots.txt` and
+`dist/sitemap-index.xml` + `dist/sitemap-0.xml`.
+
 ## Running an SEO audit
 
 1. `npm run build` — must pass (it type-checks `.astro` and fails on broken templates).
-2. Inspect the emitted `dist/` output, not just the source:
-   - `dist/sitemap-index.xml` + `dist/sitemap-0.xml` exist and list all pages with
-     `xhtml:link hreflang` alternates.
-   - `dist/robots.txt` has the correct `Sitemap:` host.
-   - On a sample EN page and its ZH counterpart, confirm `<head>` has: unique
-     `<meta name="description">`, self-referencing `<link rel="canonical">`,
-     `hreflang` en/zh-Hant/x-default, OG (`og:title/description/url/image/locale`),
-     Twitter card, and one `application/ld+json` block.
-   - Homepage `<title>` is the keyword-rich `homeTitle`, not "Home".
-   Useful: `grep -oE '<(title|meta|link)[^>]*>' dist/about/index.html | grep -iE 'desc|canonical|hreflang|og:|twitter'`
-3. Cross-check every `routes` key has a `descriptions` entry in both locales.
-4. Validate the JSON-LD (Google Rich Results Test) when the org details change.
-5. Report findings by severity (Critical / High / Medium / Low) with the file:line and
-   a concrete fix — mirror the structure of the original audit.
+   Audit the emitted `dist/` output, not just the source.
+2. **Per-page head tags.** On a sample page, confirm the baseline tags above are
+   present and well-formed.
+   `grep -oE '<(title|meta|link)[^>]*>' dist/about/index.html | grep -iE 'desc|canonical|hreflang|og:|twitter'`
+3. **Both locales + hreflang reciprocity (fragile — check every audit).** A page added
+   to `/` but not `/zh/` (or vice versa) silently breaks the alternates. Sample at least
+   one page from **each** tree (e.g. `dist/about/` and `dist/zh/about/`) and verify:
+   - both files exist for every route, and
+   - each page's `hreflang="en"` / `hreflang="zh-Hant"` links point at the *other*
+     locale's URL (en → `/about/`, zh → `/zh/about/`), with `x-default` → the en URL.
+   - the same reciprocity holds in `dist/sitemap-0.xml` (each `<url>` has both alternates).
+4. **Descriptions coverage + length.** Every `routes` key has a `descriptions` entry in
+   **both** `en` and `zh`, each 120–160 chars.
+5. **Image alt text.** Meaningful images need descriptive, non-empty `alt`. Alt copy is
+   authored in `content.ts` (`heroSlidesAlt`, `showcaseAlt`, etc.) and components; flag
+   any `<img>` with a missing or empty `alt` (decorative images may be intentionally
+   `alt=""`, so judge by role):
+   `grep -rEoh '<img[^>]*>' dist | grep -vE 'alt="[^"]+"'`
+6. **JSON-LD.** Confirm the `EducationalOrganization` block parses and its fields (name,
+   address, telephone, url, logo, sameAs) are current, then validate it with Google's
+   Rich Results Test — https://search.google.com/test/rich-results — whenever the org
+   details change.
+7. Report findings by severity (Critical / High / Medium / Low) with `file:line` and a
+   concrete fix — mirror the structure of the original audit.
 
-## Outstanding work (status)
+## One-time tasks (not tracked here)
 
-This skill is the in-repo record of what's left; it is mirrored in the GitHub issue
-**"SEO: complete cutover to fremontchineseschool.org custom domain"** (link the issue
-number here once known: #___). Keep the two in sync, or pick one as canonical and note
-it. Check items off here as they land.
-
-### Shipped (commit `acda717`, PR #4)
-
-- [x] Sitemap (`@astrojs/sitemap`) + `robots.txt`
-- [x] Per-page meta descriptions (all 18 pages, both locales)
-- [x] Canonical tags + `hreflang` alternates (en / zh-Hant / x-default)
-- [x] Open Graph + Twitter cards (incl. `og:image`, `og:locale`)
-- [x] `EducationalOrganization` JSON-LD
-- [x] Keyword-rich homepage `<title>`
-
-### At domain cutover
-
-- [ ] Add `public/CNAME` with `fremontchineseschool.org`
-- [ ] Point DNS at GitHub Pages (apex A/AAAA + `www` CNAME); enable Enforce HTTPS
-- [ ] Flip `site` in `astro.config.mjs` to `https://fremontchineseschool.org` (one line)
-- [ ] Update the `Sitemap:` host in `public/robots.txt`
-- [ ] Redirect the old `.github.io` host to `.org` (avoid duplicate content)
-- [ ] Confirm the legacy Joomla site at `.org` is fully replaced first
-
-### Measurement (can start independently)
-
-- [ ] Verify the property in Google Search Console (meta tag in `BaseLayout` or DNS TXT)
-- [ ] Submit the sitemap (`/sitemap-index.xml`) once verified
-- [ ] (Optional) Add privacy-friendly analytics (e.g. Plausible)
-
-### Post-cutover validation
-
-- [ ] Re-run the audit: canonical/hreflang/OG and sitemap all show `.org`
-- [ ] Re-validate the JSON-LD via Rich Results Test
+The custom-domain cutover (CNAME/DNS, flipping `site` to `.org`, redirecting the old
+host, Search Console verification, sitemap submission) is **one-time work, not a
+repeatable procedure**, so it is tracked in the GitHub issue
+**"SEO: complete cutover to fremontchineseschool.org custom domain"** — the canonical
+checklist. This skill only describes what is always true about SEO on the site; do not
+re-add a cutover checklist here.
