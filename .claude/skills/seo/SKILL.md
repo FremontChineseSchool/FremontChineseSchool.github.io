@@ -79,7 +79,10 @@ keyword-rich `homeTitle`, not "Home". Site-wide there is `dist/robots.txt` and
      locale's URL (en → `/about/`, zh → `/zh/about/`), with `x-default` → the en URL.
    - the same reciprocity holds in `dist/sitemap-0.xml` (each `<url>` has both alternates).
 4. **Descriptions coverage + length.** Every `routes` key has a `descriptions` entry in
-   **both** `en` and `zh`, each 120–160 chars.
+   **both** `en` and `zh`. 120–160 is the target for **English** (Google measures snippet
+   width in pixels, not characters). **Chinese (`zh`) is expected to be much shorter by
+   character count** — CJK glyphs are far wider and denser, so a ~40–60-char `zh`
+   description fills a comparable width; do not flag short `zh` counts as a finding.
 5. **Image alt text.** Meaningful images need descriptive, non-empty `alt`. Alt copy is
    authored in `content.ts` (`heroSlidesAlt`, `showcaseAlt`, etc.) and components; flag
    any `<img>` with a missing or empty `alt` (decorative images may be intentionally
