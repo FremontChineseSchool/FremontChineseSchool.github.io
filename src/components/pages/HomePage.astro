@@ -213,7 +213,7 @@ const featureIcons = [
     </div>
     <div class="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
       {
-        events.annual.map((name, i) => (
+        events.annual.map((e, i) => (
           <div
             class="flex items-center gap-3 rounded-[10px] px-5 py-4 transition-colors duration-150"
             style="background: var(--color-fcs-white); border: 1px solid var(--color-fcs-border);"
@@ -221,7 +221,7 @@ const featureIcons = [
             style={`--reveal-delay: ${(i % 3) * 90}ms`}
           >
             <span class="h-2.5 w-2.5 shrink-0 rounded-full" style="background: var(--color-fcs-green);" />
-            <span class="font-medium" style="color: var(--color-fcs-black);">{name}</span>
+            <span class="font-medium" style="color: var(--color-fcs-black);">{e.name}</span>
           </div>
         ))
       }

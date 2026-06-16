@@ -22,6 +22,7 @@ export const routes: Record<string, string> = {
   payment: 'payment',
   calendar: 'calendar',
   events: 'events',
+  'academic-contest': 'academic-contest',
   donate: 'donate',
   contact: 'contact',
 };

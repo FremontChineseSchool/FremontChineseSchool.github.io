@@ -118,6 +118,17 @@ const c = content[lang].enroll;
     ))}
   </div>
 
+  <!-- Volunteer hours -->
+  <div class="mt-10 flex gap-4 rounded-[10px] p-5" style="background: var(--color-fcs-white); border: 1px solid var(--color-fcs-border);">
+    <span style="flex-shrink:0; margin-top:2px; color: var(--color-fcs-green);">
+      <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+    </span>
+    <div>
+      <h2 class="font-semibold" style="color: var(--color-fcs-black);">{c.volunteerTitle}</h2>
+      <p class="mt-1 text-sm leading-relaxed" style="color: var(--color-fcs-muted);">{c.volunteerBody}</p>
+    </div>
+  </div>
+
   <!-- Resources grid -->
   <h2 class="mt-12 text-xl font-semibold" style="color: var(--color-fcs-black);">{c.resourcesTitle}</h2>
   <div class="mt-4 grid gap-3 sm:grid-cols-2">

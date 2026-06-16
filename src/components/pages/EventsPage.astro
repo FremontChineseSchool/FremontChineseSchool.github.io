@@ -1,6 +1,6 @@
 ---
 import { content, links } from "../../i18n/content";
-import type { Lang } from "../../i18n/ui";
+import { localizedPath, type Lang } from "../../i18n/ui";
 import HeroCarousel from "../HeroCarousel.astro";
 
 interface Props {
@@ -19,29 +19,64 @@ const c = content[lang].events;
 </HeroCarousel>
 
 <section style="background: #FFF8F0;" class="mx-auto max-w-3xl px-4 py-14">
-  <h2 class="text-xl font-semibold" style="color: var(--color-fcs-green-dark);" data-reveal>
-    {c.annualTitle}
-  </h2>
-  <ul class="mt-6 grid gap-3 sm:grid-cols-2">
-    {
-      c.annual.map((e, i) => (
-        <li
-          class="rounded-[10px] px-4 py-3 transition-colors duration-150"
-          style="background: var(--color-fcs-white); border: 1px solid var(--color-fcs-border); color: var(--color-fcs-black);"
-          data-reveal
-          style={`--reveal-delay: ${(i % 2) * 90}ms`}
-        >
-          {e}
-        </li>
-      ))
-    }
-  </ul>
 
-  <a
-    href={links.facebook}
-    target="_blank"
-    rel="noopener"
-    class="mt-8 inline-block font-semibold hover:underline"
-    style="color: var(--color-fcs-green);"
-  >Facebook →</a>
+  <!-- Annual events -->
+  <h2 class="text-xl font-semibold" style="color: var(--color-fcs-black);">{c.annualTitle}</h2>
+  <div class="mt-6 space-y-4">
+    {c.annual.map((e, i) => (
+      <div
+        class="rounded-[10px] p-5"
+        style="background: var(--color-fcs-white); border: 1px solid var(--color-fcs-border); border-left: 4px solid var(--color-fcs-green);"
+        data-reveal
+        style={`--reveal-delay: ${(i % 3) * 60}ms`}
+      >
+        <h3 class="font-semibold" style="color: var(--color-fcs-green-dark);">{e.name}</h3>
+        <p class="mt-1 text-sm leading-relaxed" style="color: var(--color-fcs-muted);">{e.body}</p>
+        {"route" in e && e.route && (
+          <a
+            href={localizedPath(lang, e.route)}
+            class="mt-2 inline-block text-sm font-semibold hover:underline"
+            style="color: var(--color-fcs-green);"
+          >
+            {lang === 'en' ? 'Learn more' : '了解更多'} →
+          </a>
+        )}
+      </div>
+    ))}
+  </div>
+
+  <!-- Calendar note -->
+  <p class="mt-8 rounded-[10px] p-4 text-sm" style="background: var(--color-fcs-green-light); color: var(--color-fcs-muted); border: 1px solid var(--color-fcs-border);">
+    {c.calendarNote}{" "}
+    <a href={localizedPath(lang, "calendar")} class="font-semibold hover:underline" style="color: var(--color-fcs-green);">{content[lang].calendar.title} →</a>
+  </p>
+
+  <!-- Past photos & videos -->
+  <div class="mt-12 rounded-[10px] p-6" style="background: var(--color-fcs-white); border: 1px solid var(--color-fcs-border); border-top: 5px solid var(--color-fcs-blue);">
+    <h2 class="text-xl font-semibold" style="color: var(--color-fcs-black);">{c.photosTitle}</h2>
+    <p class="mt-3 leading-relaxed" style="color: var(--color-fcs-muted);">{c.photosBody}</p>
+    <div class="mt-5 flex flex-wrap gap-3">
+      <a
+        href={links.facebook}
+        target="_blank"
+        rel="noopener"
+        class="inline-flex items-center gap-2 rounded-md px-4 py-2 text-sm font-semibold text-white transition-opacity hover:opacity-90"
+        style="background: #1877F2;"
+      >
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
+        {c.photosFacebookLabel}
+      </a>
+      <a
+        href={links.legacyEvents}
+        target="_blank"
+        rel="noopener"
+        class="inline-flex items-center gap-1.5 rounded-md px-4 py-2 text-sm font-semibold transition-colors"
+        style="background: var(--color-fcs-green-light); color: var(--color-fcs-green-dark); border: 1px solid var(--color-fcs-border);"
+      >
+        {c.photosLegacyLabel}
+        <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+      </a>
+    </div>
+  </div>
+
 </section>
