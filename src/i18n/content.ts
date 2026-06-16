@@ -9,8 +9,7 @@ export const links = {
     'https://drive.google.com/file/d/1LgAKCRMIiecG3fpMC2w6Hwx2zpWYXGd3/view',
   calendarEn:
     'https://drive.google.com/file/d/1jEHtmbAqxjldM-q1NdFuryYcHENRhDui/view',
-  // TODO: replace with shareable Google Drive link to the tuition PDF
-  tuitionPdf: 'https://fremontchineseschool.org/online-payment',
+  tuitionPdf: 'https://docs.google.com/document/d/1eMiXP6MsfTPzySyFSNG8VMmvKSI8NSzo2Vb3Mg72Gn8/view',
   facebook: 'https://facebook.com/fremontchineseschool',
 } as const;
 
