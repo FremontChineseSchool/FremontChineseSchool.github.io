@@ -38,6 +38,7 @@ export const ui = {
     logoAlt: 'Fremont Chinese School',
     skipToContent: 'Skip to content',
     enrollCta: 'Enroll Now',
+    replayIntro: 'Replay intro animation',
     nav: {
       home: 'Home',
       about: 'About',
@@ -66,6 +67,7 @@ export const ui = {
     logoAlt: '費利蒙中文學校',
     skipToContent: '跳至主要內容',
     enrollCta: '立即報名',
+    replayIntro: '重播開場動畫',
     nav: {
       home: '首頁',
       about: '關於本校',
