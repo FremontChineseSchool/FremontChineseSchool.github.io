@@ -1,0 +1,94 @@
+name: Calendar translation check
+
+# Once a day, check whether the school's Google Calendar has any events the
+# website can't fully localize yet (no Chinese name / type in the repo). If so,
+# open (or update) a tracking issue so someone can add them to extraEventInfo in
+# src/data/calendar.ts. Kept separate from the deploy workflow so it can't spam
+# (the deploy runs every 30 min; this runs once a day). The issue updates itself
+# and auto-closes once every event is mapped.
+
+on:
+  schedule:
+    - cron: "0 16 * * *" # 16:00 UTC ≈ 9am PT
+  workflow_dispatch: # allow manual runs for testing
+
+permissions:
+  contents: read
+  issues: write
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    env:
+      # IT team GitHub handles to @-mention on the tracking issue (for
+      # redundancy, since it@fremontchineseschool.org has no GitHub account).
+      # Edit this space-separated list to add/remove people.
+      IT_HANDLES: "liljonnystyle brycew03 mygittyhubby ahacareharmony"
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      # The build fetches the live calendar and writes calendar-unmapped.json
+      # (CI is set automatically by GitHub Actions).
+      - run: npm run build
+
+      - name: Open or update tracking issue
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          LABEL="calendar-translation"
+          COUNT=$(jq 'length' calendar-unmapped.json 2>/dev/null || echo 0)
+
+          gh label create "$LABEL" --color FBCA04 \
+            --description "Calendar events on the site missing a Chinese name/type" 2>/dev/null || true
+          EXISTING=$(gh issue list --label "$LABEL" --state open --json number --jq '.[0].number // empty')
+
+          # All mapped: close any open tracking issue and stop.
+          if [ "$COUNT" -eq 0 ]; then
+            echo "No unmapped calendar events. ✓"
+            if [ -n "$EXISTING" ]; then
+              gh issue close "$EXISTING" \
+                --comment "All calendar events now have a Chinese name + type. ✓ (automated)"
+            fi
+            exit 0
+          fi
+
+          # A stable key for the current set, used to decide whether to ping.
+          KEY=$(jq -r '[.[].text] | sort | join("|")' calendar-unmapped.json)
+          MENTIONS=$(for h in $IT_HANDLES; do printf '@%s ' "$h"; done)
+          {
+            echo "The school Google Calendar has event(s) the website can't fully localize yet — they appear with their English title and a best-guess color on both the English and Chinese pages."
+            echo
+            echo "**To fix:** add each to \`extraEventInfo\` in \`src/data/calendar.ts\` (English title → Chinese name + type), then commit. Example:"
+            echo '```ts'
+            echo "  'Spring Concert': { textZh: '春季音樂會', type: 'event' },"
+            echo '```'
+            echo
+            echo "### Events needing attention"
+            jq -r '.[] | "- **\(.text)** — first appears \(.date)"' calendar-unmapped.json
+            echo
+            echo "_Automated daily check. This issue updates itself and closes once every event is mapped._"
+            echo
+            echo "cc ${MENTIONS}"
+            echo "<!-- unmapped-key: ${KEY} -->"
+          } > issue-body.md
+
+          if [ -n "$EXISTING" ]; then
+            PREV=$(gh issue view "$EXISTING" --json body --jq '.body' \
+              | sed -n 's/.*<!-- unmapped-key: \(.*\) -->.*/\1/p')
+            gh issue edit "$EXISTING" --body-file issue-body.md
+            # Only comment (which notifies) when the set of events actually changed.
+            if [ "$PREV" != "$KEY" ]; then
+              gh issue comment "$EXISTING" --body "The list of calendar events needing a Chinese name/type has changed — see the issue body. ${MENTIONS}"
+            fi
+            echo "Updated issue #$EXISTING"
+          else
+            gh issue create --label "$LABEL" \
+              --title "Calendar events need a Chinese name + type" \
+              --body-file issue-body.md
+            echo "Opened a new tracking issue."
+          fi

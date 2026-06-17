@@ -26,110 +26,172 @@ const featureIcons = [
 <!-- Hero with rotating photo backdrop -->
 <HeroCarousel lang={lang}>
   <h1
-    class="max-w-3xl text-4xl font-bold text-white drop-shadow-sm sm:text-5xl"
+    class="max-w-3xl text-5xl font-extrabold text-white drop-shadow-sm sm:text-6xl lg:text-7xl"
+    style="font-family: var(--font-display-en); letter-spacing: -0.03em;"
   >
     {c.heroTitle}
   </h1>
-  <p class="mt-5 max-w-2xl text-lg text-white/95 drop-shadow-sm">
+  <p class="mt-5 max-w-2xl text-xl text-white/95 drop-shadow-sm">
     {c.heroSubtitle}
   </p>
   <div class="mt-8 flex flex-wrap gap-3">
     <a
       href={links.register}
-      class="rounded-full bg-white px-6 py-3 font-semibold text-fcs-blue-dark shadow-sm transition hover:-translate-y-0.5 hover:bg-fcs-ink hover:text-white"
-      >{c.ctaPrimary}</a
-    >
+      class="rounded-[6px] bg-fcs-orange px-6 py-3 font-semibold text-fcs-white transition-colors duration-150 hover:bg-[#C85A10]"
+    >{c.ctaPrimary}</a>
     <a
       href={localizedPath(lang, "programs")}
-      class="rounded-full border border-white px-6 py-3 font-semibold text-white transition hover:-translate-y-0.5 hover:bg-white/15"
-      >{c.ctaSecondary}</a
-    >
+      class="rounded-[6px] border border-white/70 px-6 py-3 font-semibold text-white transition-colors duration-150 hover:bg-white/10"
+    >{c.ctaSecondary}</a>
   </div>
 </HeroCarousel>
 
 <!-- Facts strip -->
-<section class="border-b border-gray-100 bg-white">
-  <div
-    class="mx-auto grid max-w-6xl grid-cols-2 gap-px px-4 py-10 sm:grid-cols-4"
-  >
-    {
-      c.facts.map((f, i) => (
-        <div
-          class="text-center"
-          data-reveal
-          style={`--reveal-delay: ${i * 90}ms`}
-        >
-          <div class="bg-gradient-to-br from-fcs-blue-dark to-fcs-ink bg-clip-text text-3xl font-bold text-transparent sm:text-4xl">
-            {f.value}
-          </div>
-          <div class="mt-1 text-sm tracking-wide text-gray-500 uppercase">
-            {f.label}
-          </div>
+<section style="background: var(--color-fcs-green-dark);">
+  <div class="mx-auto grid max-w-6xl grid-cols-2 divide-x divide-y divide-white/10 sm:grid-cols-4 sm:divide-y-0">
+    {c.facts.map((f, i) => (
+      <div
+        class="flex flex-col items-center justify-center px-6 py-10 text-center"
+        data-reveal
+        style={`--reveal-delay: ${i * 80}ms;`}
+      >
+        <div class="text-3xl font-extrabold tracking-tight text-white sm:text-4xl" style="letter-spacing: -0.02em;">
+          {f.value}
         </div>
-      ))
-    }
+        <div class="mt-1.5 text-[10px] font-semibold uppercase tracking-widest" style="color: rgba(255,255,255,0.6);">
+          {f.label}
+        </div>
+      </div>
+    ))}
   </div>
 </section>
 
-<!-- Why FCS — value props -->
-<section class="mx-auto max-w-6xl px-4 py-20">
-  <div class="max-w-2xl" data-reveal>
-    <h2 class="text-3xl font-bold sm:text-4xl">{c.featuresTitle}</h2>
-    <p class="mt-4 text-lg text-gray-600">{c.featuresSubtitle}</p>
-  </div>
-  <div class="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
-    {
-      c.features.map((f, i) => (
-        <div
-          class="rounded-2xl border border-gray-200 bg-white p-6 transition duration-300 hover:-translate-y-1 hover:border-fcs-blue hover:shadow-lg"
-          data-reveal
-          style={`--reveal-delay: ${i * 90}ms`}
-        >
-          <div class="flex h-11 w-11 items-center justify-center rounded-xl bg-fcs-blue/15 text-fcs-blue-dark">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="22"
-              height="22"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              stroke-width="1.75"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              aria-hidden="true"
-            >
-              <path d={featureIcons[i]} />
-            </svg>
+<!-- Why FCS — value props (odd section → fcs-white bg) -->
+<section style="background: #FFF8F0;">
+  <div class="mx-auto max-w-6xl px-4 py-28">
+    <div class="max-w-2xl" data-reveal>
+      <p class="eyebrow mb-3">{c.featuresEyebrow}</p>
+      <h2 class="text-4xl font-bold sm:text-5xl" style="letter-spacing: -0.03em; color: var(--color-fcs-black);">{c.featuresTitle}</h2>
+      <p class="mt-4 text-lg" style="color: var(--color-fcs-muted);">{c.featuresSubtitle}</p>
+    </div>
+    <div class="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+      {
+        c.features.map((f, i) => (
+          <div
+            class="rounded-[10px] p-4 transition-colors duration-150"
+            style={`background: var(--color-fcs-white); border: 1px solid var(--color-fcs-border); border-top: 5px solid var(--color-fcs-green); --reveal-delay: ${i * 90}ms;`}
+            data-reveal
+          >
+            <div class="flex h-11 w-11 items-center justify-center rounded-xl" style="background: var(--color-fcs-green-light); color: var(--color-fcs-green-dark);">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="22"
+                height="22"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="1.75"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                aria-hidden="true"
+              >
+                <path d={featureIcons[i]} />
+              </svg>
+            </div>
+            <h3 class="mt-5 text-lg font-semibold" style="color: var(--color-fcs-black);">{f.title}</h3>
+            <p class="mt-2 text-sm leading-relaxed" style="color: var(--color-fcs-muted);">{f.body}</p>
           </div>
-          <h3 class="mt-5 text-lg font-semibold text-fcs-ink">{f.title}</h3>
-          <p class="mt-2 text-sm leading-relaxed text-gray-600">{f.body}</p>
-        </div>
-      ))
-    }
+        ))
+      }
+    </div>
   </div>
 </section>
+
+<!-- Culture section -->
+<section style="background: #1A3D22;">
+  <div class="mx-auto max-w-6xl px-4 py-20 sm:py-24">
+    <!-- Header -->
+    <div class="max-w-2xl" data-reveal>
+      <p class="eyebrow mb-3" style="color: var(--color-fcs-gold);">{c.cultureEyebrow}</p>
+      <h2 class="text-4xl font-bold text-white sm:text-5xl" style="letter-spacing: -0.03em;">{c.cultureTitle}</h2>
+      <p class="mt-4 text-lg leading-relaxed" style="color: rgba(255,255,255,0.75);">{c.cultureSubtitle}</p>
+    </div>
+
+    <!-- 3 featured photos -->
+    <div class="mt-12 grid gap-4 sm:grid-cols-3" data-reveal>
+      {c.cultureHighlights.map((h) => (
+        <div class="overflow-hidden rounded-[12px]" style="aspect-ratio: 4/3;">
+          <img
+            src={h.photo}
+            alt={h.alt}
+            loading="lazy"
+            decoding="async"
+            class="h-full w-full object-cover transition-transform duration-700 hover:scale-105"
+          />
+        </div>
+      ))}
+    </div>
+
+    <!-- Label row -->
+    <div class="mt-4 grid gap-4 sm:grid-cols-3">
+      {c.cultureHighlights.map((h) => (
+        <p class="text-center text-sm font-semibold" style="color: var(--color-fcs-gold);">{h.label}</p>
+      ))}
+    </div>
+
+    <!-- Annual traditions grid -->
+    <div class="mt-14 border-t pt-12" style="border-color: rgba(255,255,255,0.12);">
+      <div class="flex flex-wrap items-end justify-between gap-4" data-reveal>
+        <h3 class="text-2xl font-bold text-white" style="letter-spacing: -0.02em;">{c.eventsTitle}</h3>
+        <a
+          href={localizedPath(lang, "events")}
+          class="inline-flex items-center gap-1 text-sm font-semibold hover:underline"
+          style="color: var(--color-fcs-gold);"
+        >
+          {c.eventsCta}
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14m-6-6 6 6-6 6"/></svg>
+        </a>
+      </div>
+      <div class="mt-6 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
+        {events.annual.map((e, i) => (
+          <div
+            class="rounded-[8px] px-4 py-3"
+            style="background: rgba(255,255,255,0.07); border: 1px solid rgba(255,255,255,0.12);"
+            data-reveal
+          >
+            <span class="text-sm font-medium text-white">{e.name}</span>
+          </div>
+        ))}
+      </div>
+    </div>
+  </div>
+</section>
+
 
 <!-- Get-started cards -->
-<section class="border-y border-gray-100 bg-gray-50">
-  <div class="mx-auto max-w-6xl px-4 py-20">
-    <h2 class="text-3xl font-bold sm:text-4xl" data-reveal>{c.cardsTitle}</h2>
+<section style="background: linear-gradient(to bottom, #F0F7F2, #FFF8F0);">
+  <div class="mx-auto max-w-6xl px-4 py-28">
+    <h2 class="text-4xl font-bold sm:text-5xl" style="letter-spacing: -0.03em; color: var(--color-fcs-black);" data-reveal>{c.cardsTitle}</h2>
     <div class="mt-10 grid gap-6 md:grid-cols-3">
       {
         c.cards.map((card, i) => (
           <a
             href={localizedPath(lang, card.route)}
-            class="group flex flex-col rounded-2xl border border-gray-200 bg-white p-7 transition duration-300 hover:-translate-y-1 hover:border-fcs-blue hover:shadow-lg"
+            class="group flex flex-col rounded-[10px] p-7 transition-colors duration-150"
+            style="background: var(--color-fcs-white); border: 1px solid var(--color-fcs-border);"
+            onmouseover="this.style.borderColor='#C8B89A'"
+            onmouseout="this.style.borderColor='var(--color-fcs-border)'"
             data-reveal
             style={`--reveal-delay: ${i * 90}ms`}
           >
-            <h3 class="text-xl font-semibold text-fcs-blue-dark">
+            <h3 class="text-xl font-semibold" style="color: var(--color-fcs-green-dark);">
               {card.title}
             </h3>
-            <p class="mt-2 flex-1 text-sm leading-relaxed text-gray-600">
+            <p class="mt-2 flex-1 text-sm leading-relaxed" style="color: var(--color-fcs-muted);">
               {card.body}
             </p>
-            <span class="mt-5 inline-flex items-center gap-1 text-sm font-semibold text-fcs-blue-dark">
-              {c.ctaSecondary}
+            <span class="mt-5 inline-flex items-center gap-1 text-sm font-semibold" style="color: var(--color-fcs-green);">
+              {card.linkLabel}
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 width="16"
@@ -153,89 +215,24 @@ const featureIcons = [
   </div>
 </section>
 
-<!-- Showcase band — scroll-scrubbed parallax photo -->
-<section class="relative isolate h-[60vh] overflow-hidden bg-fcs-blue-dark">
-  <img
-    src="/images/slider/slide-1.jpg"
-    alt={c.showcaseAlt}
-    loading="lazy"
-    decoding="async"
-    class="parallax-zoom absolute inset-0 -z-10 h-full w-full object-cover"
-  />
-  <div
-    class="absolute inset-0 -z-10 bg-gradient-to-t from-fcs-ink/70 via-fcs-ink/20 to-transparent"
-  >
-  </div>
-  <div
-    class="mx-auto flex h-full max-w-6xl items-end px-4 pb-12"
-    data-reveal
-  >
-    <p class="max-w-xl text-2xl font-semibold text-white drop-shadow sm:text-3xl">
-      {c.eventsLead}
-    </p>
-  </div>
-</section>
-
-<!-- Life at FCS — annual events -->
-<section class="mx-auto max-w-6xl px-4 py-20">
-  <div class="flex flex-wrap items-end justify-between gap-4" data-reveal>
-    <h2 class="text-3xl font-bold sm:text-4xl">{c.eventsTitle}</h2>
-    <a
-      href={localizedPath(lang, "events")}
-      class="inline-flex items-center gap-1 text-sm font-semibold text-fcs-blue-dark hover:underline"
-    >
-      {c.eventsCta}
-      <svg
-        xmlns="http://www.w3.org/2000/svg"
-        width="16"
-        height="16"
-        viewBox="0 0 24 24"
-        fill="none"
-        stroke="currentColor"
-        stroke-width="2"
-        stroke-linecap="round"
-        stroke-linejoin="round"
-        aria-hidden="true"
-      >
-        <path d="M5 12h14m-6-6 6 6-6 6"></path>
-      </svg>
-    </a>
-  </div>
-  <div class="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-    {
-      events.annual.map((name, i) => (
-        <div
-          class="flex items-center gap-3 rounded-xl border border-gray-200 bg-white px-5 py-4 transition duration-300 hover:-translate-y-1 hover:border-fcs-blue hover:shadow-md"
-          data-reveal
-          style={`--reveal-delay: ${(i % 3) * 90}ms`}
-        >
-          <span class="h-2.5 w-2.5 shrink-0 rounded-full bg-fcs-blue" />
-          <span class="font-medium text-fcs-ink">{name}</span>
-        </div>
-      ))
-    }
-  </div>
-</section>
-
 <!-- Closing CTA band -->
-<section class="bg-gradient-to-br from-fcs-blue-dark to-fcs-ink">
+<section style="background: linear-gradient(135deg, #C85A10 0%, #E06820 50%, #D4750A 100%); flex-grow: 1;">
   <div
-    class="mx-auto max-w-4xl px-4 py-20 text-center text-white"
+    class="mx-auto max-w-4xl px-4 py-28 text-center"
     data-reveal
   >
-    <h2 class="text-3xl font-bold sm:text-4xl">{c.ctaTitle}</h2>
+    <h2 class="text-4xl font-bold text-white sm:text-5xl" style="letter-spacing: -0.03em;">{c.ctaTitle}</h2>
     <p class="mx-auto mt-4 max-w-2xl text-lg text-white/90">{c.ctaBody}</p>
     <div class="mt-8 flex flex-wrap justify-center gap-3">
       <a
         href={links.register}
-        class="rounded-full bg-white px-7 py-3 font-semibold text-fcs-blue-dark shadow-sm transition hover:-translate-y-0.5 hover:bg-fcs-blue hover:text-white"
-        >{c.ctaPrimary}</a
-      >
+        class="rounded-[6px] bg-fcs-white px-7 py-3 font-semibold transition-colors duration-150 hover:bg-white"
+        style="color: var(--color-fcs-orange);"
+      >{c.ctaPrimary}</a>
       <a
         href={localizedPath(lang, "enroll")}
-        class="rounded-full border border-white/70 px-7 py-3 font-semibold text-white transition hover:-translate-y-0.5 hover:bg-white/15"
-        >{c.ctaSecondary}</a
-      >
+        class="rounded-[6px] border border-white/70 px-7 py-3 font-semibold text-white transition-colors duration-150 hover:bg-white/10"
+      >{c.ctaSecondary}</a>
     </div>
   </div>
 </section>

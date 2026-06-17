@@ -4,11 +4,11 @@ export const defaultLang: Lang = 'en';
 
 // Navigation: one entry per top-level page. `key` maps into the route table.
 export const navOrder = [
-  'about',
   'programs',
   'enroll',
-  'calendar',
   'events',
+  'about',
+  'calendar',
   'donate',
   'contact',
 ] as const;
@@ -22,8 +22,11 @@ export const routes: Record<string, string> = {
   payment: 'payment',
   calendar: 'calendar',
   events: 'events',
+  'academic-contest': 'academic-contest',
   donate: 'donate',
   contact: 'contact',
+  'ac-resources': 'ac-resources',
+  'staff-resources': 'staff-resources',
 };
 
 export const ui = {
@@ -49,6 +52,11 @@ export const ui = {
       rights: 'All rights reserved.',
       nonprofit: 'A 501(c) non-profit organization.',
       langLabel: 'Language',
+      links: 'Links',
+      resources: 'Resources',
+      connect: 'Connect',
+      acResources: 'AC Resources',
+      staffResources: 'Staff Resources',
     },
   },
   zh: {
@@ -72,6 +80,11 @@ export const ui = {
       rights: '版權所有。',
       nonprofit: '本校為 501(c) 非營利組織。',
       langLabel: '語言',
+      links: '連結',
+      resources: '資源',
+      connect: '社群',
+      acResources: '學分班資源',
+      staffResources: '教職員資源',
     },
   },
 } as const;

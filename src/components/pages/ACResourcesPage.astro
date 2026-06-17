@@ -1,0 +1,89 @@
+---
+import type { Lang } from "../../i18n/ui";
+
+interface Props {
+  lang: Lang;
+}
+const { lang } = Astro.props;
+
+const isZh = lang === 'zh';
+---
+
+<section style="background: #FFF8F0;" class="mx-auto max-w-3xl px-4 py-14">
+
+  <p class="eyebrow mb-3">{isZh ? '學分班' : 'AC Program'}</p>
+  <h1 class="text-3xl font-semibold sm:text-4xl" style="letter-spacing: -0.02em; color: var(--color-fcs-black);">
+    {isZh ? '學分班資源' : 'AC Resources'}
+  </h1>
+  <p class="mt-2 text-lg" style="color: var(--color-fcs-muted);">
+    {isZh ? '學分班學生與家長適用的表格與文件。' : 'Forms and documents for AC students and families.'}
+  </p>
+
+  <!-- Policies & Info -->
+  <div class="mt-10 rounded-[10px] p-6" style="background: var(--color-fcs-white); border: 1px solid var(--color-fcs-border); border-top: 5px solid var(--color-fcs-blue);">
+    <h2 class="text-lg font-semibold" style="color: var(--color-fcs-black);">
+      {isZh ? '政策與規章' : 'Policies & Rules'}
+    </h2>
+    <ul class="mt-4 space-y-3">
+      <li>
+        <a href="https://drive.google.com/file/d/1EKDsFuUj3pV8eXTBhEE4cSHGpC1M_sPF/view?usp=sharing" target="_blank" rel="noopener"
+          class="inline-flex items-center gap-2 text-sm font-semibold hover:underline" style="color: var(--color-fcs-green);">
+          <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+          {isZh ? '學分班規章 Accredited Curriculum Policies' : 'Accredited Curriculum Policies 學分班規章'}
+        </a>
+      </li>
+      <li>
+        <a href="https://drive.google.com/file/d/1SCvSBBkuaJwL8-lUPC7ESPRzVa5f6WRT/view?usp=sharing" target="_blank" rel="noopener"
+          class="inline-flex items-center gap-2 text-sm font-semibold hover:underline" style="color: var(--color-fcs-green);">
+          <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+          {isZh ? '學分班介紹與規則 AC Course Introduction and Rules' : 'AC Course Introduction and Rules 學分班介紹與規則'}
+        </a>
+      </li>
+      <li>
+        <a href="https://drive.google.com/file/d/1EaO-BDp1zb_ZSlQWkXE4sJryU-fCxhs3/view?usp=sharing" target="_blank" rel="noopener"
+          class="inline-flex items-center gap-2 text-sm font-semibold hover:underline" style="color: var(--color-fcs-green);">
+          <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+          {isZh ? '學分班教科書列表 AC Class Textbook List (2021–2022)' : 'AC Class Textbook List 學分班教科書列表 (2021–2022)'}
+        </a>
+      </li>
+    </ul>
+  </div>
+
+  <!-- Forms -->
+  <div class="mt-6 rounded-[10px] p-6" style="background: var(--color-fcs-white); border: 1px solid var(--color-fcs-border); border-top: 5px solid var(--color-fcs-green);">
+    <h2 class="text-lg font-semibold" style="color: var(--color-fcs-black);">
+      {isZh ? '申請表格' : 'Forms'}
+    </h2>
+    <ul class="mt-4 space-y-3">
+      <li>
+        <a href="https://forms.gle/TntoF21REwrnnkfj9" target="_blank" rel="noopener"
+          class="inline-flex items-center gap-2 text-sm font-semibold hover:underline" style="color: var(--color-fcs-green);">
+          <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+          {isZh ? '學分申請表 Application for AC/AP Student Credit Transfer Election' : 'Application for AC/AP Student Credit Transfer Election 學分申請表'}
+        </a>
+      </li>
+      <li>
+        <a href="https://drive.google.com/file/d/1xbyIlzgvoZFpABZNK03L2-6sK2XSKXCI/view?usp=sharing" target="_blank" rel="noopener"
+          class="inline-flex items-center gap-2 text-sm font-semibold hover:underline" style="color: var(--color-fcs-green);">
+          <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+          {isZh ? '學分班私假單 Personal Absence Request/Notice Form' : 'Personal Absence Request/Notice Form 學分班私假單'}
+        </a>
+      </li>
+      <li>
+        <a href="https://drive.google.com/file/d/11KBdtFJ8iQYHGd4d8K4GWIMlQ2ceX2G0/view?usp=sharing" target="_blank" rel="noopener"
+          class="inline-flex items-center gap-2 text-sm font-semibold hover:underline" style="color: var(--color-fcs-green);">
+          <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+          {isZh ? '學分班公假單 Official Excuse Application Form' : 'Official Excuse Application Form 學分班公假單'}
+        </a>
+      </li>
+    </ul>
+  </div>
+
+  <p class="mt-6 text-sm" style="color: var(--color-fcs-muted);">
+    {isZh
+      ? '如有疑問，請聯絡教務處：'
+      : 'Questions? Contact the academic office: '}
+    <a href="mailto:principal@fremontchineseschool.org" class="font-semibold hover:underline" style="color: var(--color-fcs-green);">principal@fremontchineseschool.org</a>
+  </p>
+
+</section>

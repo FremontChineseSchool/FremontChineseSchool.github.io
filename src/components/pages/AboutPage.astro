@@ -7,30 +7,173 @@ interface Props {
 }
 const { lang } = Astro.props;
 const c = content[lang].about;
-const regulationsUrl = "https://bit.ly/2yxYRLB";
+const regulationsUrl = "/FCS_Bylaws_2020.pdf";
 ---
 
-<section class="mx-auto max-w-3xl px-4 py-14">
-  <h1 class="text-3xl font-bold sm:text-4xl">{c.title}</h1>
+<section style="background: #FFF8F0;" class="mx-auto max-w-3xl px-4 py-14">
+  <p class="eyebrow mb-3">{c.eyebrow}</p>
+  <h1 class="text-3xl font-semibold sm:text-4xl" style="letter-spacing: -0.02em; color: var(--color-fcs-black);">{c.title}</h1>
 
-  <div class="mt-8 space-y-10">
+  <!-- Location callout -->
+  <div class="mt-6 flex gap-4 rounded-[10px] p-5" style="background: var(--color-fcs-white); border: 1px solid var(--color-fcs-border);">
+    <span style="flex-shrink:0; margin-top:2px; color: var(--color-fcs-green);">
+      <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+    </span>
+    <div>
+      <h2 class="font-semibold" style="color: var(--color-fcs-black);">{c.locationHeading}</h2>
+      <p class="mt-1 text-sm leading-relaxed" style="color: var(--color-fcs-muted);">{c.locationBody}</p>
+      <p class="mt-1 text-sm font-medium" style="color: var(--color-fcs-green-dark);">{c.locationDetail}</p>
+    </div>
+  </div>
+
+  <!-- Content sections -->
+  <div class="mt-10 space-y-10">
     {
-      c.sections.map((s) => (
-        <div>
-          <h2 class="text-xl font-semibold text-fcs-blue-dark">{s.heading}</h2>
-          {s.body.map((p) => (
-            <p class="mt-3 leading-relaxed text-gray-700">{p}</p>
-          ))}
-        </div>
+      c.sections.map((s, i) => (
+        i === 0 ? (
+          /* First section — two-column with photo */
+          <div class="grid gap-8 lg:grid-cols-2 lg:gap-12 lg:items-start">
+            <div>
+              <h2 class="text-xl font-semibold" style="color: var(--color-fcs-green-dark);">{s.heading}</h2>
+              {s.body.map((p) => (
+                <p class="mt-3 leading-relaxed" style="color: var(--color-fcs-muted);">{p}</p>
+              ))}
+            </div>
+            <div class="overflow-hidden rounded-[10px] lg:sticky lg:top-24">
+              <img
+                src="/images/slider/slide-3.jpg"
+                alt="FCS students and families at a school event"
+                loading="lazy"
+                decoding="async"
+                class="h-full w-full object-cover"
+                style="aspect-ratio: 4/3;"
+              />
+            </div>
+          </div>
+        ) : (
+          <div>
+            <h2 class="text-xl font-semibold" style="color: var(--color-fcs-green-dark);">{s.heading}</h2>
+            {s.body.map((p) => (
+              <p class="mt-3 leading-relaxed" style="color: var(--color-fcs-muted);">{p}</p>
+            ))}
+          </div>
+        )
       ))
     }
   </div>
 
+  <!-- Org chart -->
+  <div class="mt-12">
+    <h2 class="text-xl font-semibold" style="color: var(--color-fcs-green-dark);">
+      {lang === 'zh' ? '費利蒙中文學校組織圖' : 'Organization Chart'}
+    </h2>
+    <div class="mt-6 overflow-x-auto rounded-[10px] p-6" style="background: var(--color-fcs-white); border: 1px solid var(--color-fcs-border);">
+      <!-- Row 1: Parent Assembly -->
+      <div class="flex justify-start">
+        <div class="rounded-[6px] px-5 py-2.5 text-center text-sm font-semibold text-white" style="background: #4472C4; min-width: 140px;">
+          <div class="text-base">家長大會</div>
+          <div class="text-xs font-normal opacity-90">Parent Assembly</div>
+        </div>
+      </div>
+      <!-- connector -->
+      <div class="ml-[69px] h-5 w-px" style="background: #94A3B8;"></div>
+      <!-- Row 2: School Board -->
+      <div class="flex justify-start">
+        <div class="rounded-[6px] px-5 py-2.5 text-center text-sm font-semibold text-white" style="background: #7B4B44; min-width: 140px;">
+          <div>校務委員</div>
+          <div class="text-xs font-normal opacity-90">School Board</div>
+        </div>
+      </div>
+      <!-- connector -->
+      <div class="ml-[69px] h-5 w-px" style="background: #94A3B8;"></div>
+      <!-- Row 3: Staff + Principal branch -->
+      <div class="flex items-start gap-0">
+        <div class="flex flex-col items-center">
+          <div class="rounded-[6px] px-4 py-2 text-center text-sm font-semibold text-white" style="background: #70AD47; min-width: 120px;">
+            <div>幹事會</div>
+            <div class="text-xs font-normal opacity-90">Staff</div>
+          </div>
+          <div class="h-5 w-px" style="background: #94A3B8;"></div>
+          <!-- Principal -->
+          <div class="rounded-[6px] px-4 py-2 text-center text-sm font-semibold" style="background: var(--color-fcs-white); border: 1.5px solid #94A3B8; min-width: 120px; color: var(--color-fcs-black);">
+            <div>校長</div>
+            <div class="text-xs" style="color: var(--color-fcs-muted);">Principal</div>
+          </div>
+        </div>
+        <!-- Right branch from Principal -->
+        <div class="mt-[88px] flex flex-col gap-0">
+          <div class="flex items-start">
+            <div class="mt-[11px] h-px w-6" style="background: #94A3B8;"></div>
+            <div class="flex flex-col gap-2">
+              <!-- Vice Principal + AC -->
+              <div class="flex items-center gap-2">
+                <div class="rounded-[6px] px-3 py-1.5 text-center text-xs font-semibold" style="background: var(--color-fcs-white); border: 1.5px solid #94A3B8; color: var(--color-fcs-black);">
+                  <div>副校長</div>
+                  <div style="color: var(--color-fcs-muted);">Vice Principal</div>
+                </div>
+                <div class="h-px w-4" style="background: #94A3B8;"></div>
+                <div class="rounded-[6px] px-3 py-1.5 text-center text-xs font-semibold" style="background: var(--color-fcs-white); border: 1.5px solid #94A3B8; color: var(--color-fcs-black);">
+                  <div>學分班</div>
+                  <div style="color: var(--color-fcs-muted);">Accredited Curriculum</div>
+                </div>
+              </div>
+              <!-- Departments grid -->
+              <div class="ml-0 grid grid-cols-2 gap-1.5 sm:grid-cols-3">
+                {[
+                  ['秘書','Secretary'],
+                  ['公關','Public Relations'],
+                  ['教務','Academic'],
+                  ['人事','Human Resources'],
+                  ['註冊','Registration'],
+                  ['資訊','IT'],
+                  ['財務','Finance'],
+                  ['活動','Activity'],
+                  ['出版','Publication'],
+                  ['訓育','Safety'],
+                ].map(([zh, en]) => (
+                  <div class="rounded-[4px] px-2 py-1.5 text-center text-xs font-medium text-white" style="background: #70AD47;">
+                    <div>{zh}</div>
+                    <div class="opacity-85">{en}</div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Bylaws -->
   <a
     href={regulationsUrl}
     target="_blank"
     rel="noopener"
-    class="mt-10 inline-block rounded-full border border-fcs-blue-dark px-5 py-2 text-sm font-semibold text-fcs-blue-dark transition hover:bg-fcs-blue hover:text-white"
-    >{c.regulationsLabel}</a
-  >
+    class="mt-10 inline-block rounded-[6px] px-5 py-2 text-sm font-semibold transition-colors duration-150"
+    style="border: 1.5px solid var(--color-fcs-green); color: var(--color-fcs-green);"
+  >{c.regulationsLabel}</a>
+
+  <!-- CTA card -->
+  <div class="mt-12 rounded-[12px] p-8" style="background: var(--color-fcs-green-light); border: 1px solid var(--color-fcs-border);">
+    <h2 class="text-xl font-semibold" style="color: var(--color-fcs-black);">
+      {lang === 'zh' ? '準備好了解更多嗎？' : 'Ready to learn more?'}
+    </h2>
+    <p class="mt-2 text-sm leading-relaxed" style="color: var(--color-fcs-muted);">
+      {lang === 'zh'
+        ? '了解費利蒙中文學校提供的課程，或立即為 2026–27 學年辦理報名。'
+        : 'See what classes FCS offers or enroll your child for the 2026–27 school year.'}
+    </p>
+    <div class="mt-5 flex flex-wrap gap-3">
+      <a
+        href={lang === 'zh' ? '/zh/programs' : '/programs'}
+        class="inline-block rounded-[6px] px-5 py-2.5 text-sm font-semibold text-white transition-colors duration-150 hover:opacity-90"
+        style="background: var(--color-fcs-green);"
+      >{lang === 'zh' ? '瀏覽課程' : 'View Programs'}</a>
+      <a
+        href={lang === 'zh' ? '/zh/enroll' : '/enroll'}
+        class="inline-block rounded-[6px] px-5 py-2.5 text-sm font-semibold transition-colors duration-150"
+        style="border: 1.5px solid var(--color-fcs-green); color: var(--color-fcs-green); background: white;"
+      >{lang === 'zh' ? '立即報名' : 'Enroll Now'}</a>
+    </div>
+  </div>
 </section>
