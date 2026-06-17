@@ -1,0 +1,160 @@
+---
+import type { Lang } from "../../i18n/ui";
+
+interface Props {
+  lang: Lang;
+}
+const { lang } = Astro.props;
+
+const isZh = lang === 'zh';
+---
+
+<section style="background: #FFF8F0;" class="mx-auto max-w-3xl px-4 py-14">
+
+  <p class="eyebrow mb-3">{isZh ? '教職員' : 'Staff'}</p>
+  <h1 class="text-3xl font-semibold sm:text-4xl" style="letter-spacing: -0.02em; color: var(--color-fcs-black);">
+    {isZh ? '教職員資源' : 'Staff Resources'}
+  </h1>
+  <p class="mt-2 text-lg" style="color: var(--color-fcs-muted);">
+    {isZh ? '教師、助教及志工適用的表格與資訊。' : 'Forms and information for teachers, TAs, and volunteers.'}
+  </p>
+
+  <!-- Teaching Resources -->
+  <div class="mt-10 rounded-[10px] p-6" style="background: var(--color-fcs-white); border: 1px solid var(--color-fcs-border); border-top: 5px solid var(--color-fcs-green);">
+    <h2 class="text-lg font-semibold" style="color: var(--color-fcs-black);">
+      {isZh ? '教學資源' : 'Teaching Resources'}
+    </h2>
+    <ul class="mt-4 space-y-3">
+      <li>
+        <a href="https://docs.google.com/document/d/1khtKkQgCtFLeQLCyj9gKatjpTd9ERg6B/edit?usp=drive_link" target="_blank" rel="noopener"
+          class="inline-flex items-center gap-2 text-sm font-semibold hover:underline" style="color: var(--color-fcs-green);">
+          <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+          {isZh ? '學生成績單空白範本 Report Card Template' : 'Report Card Template 學生成績單空白範本'}
+        </a>
+      </li>
+      <li>
+        <a href="https://docs.google.com/spreadsheets/d/1hwGurvEEaAr7RTONBvnbIknTXJbJEG9I/edit?usp=sharing" target="_blank" rel="noopener"
+          class="inline-flex items-center gap-2 text-sm font-semibold hover:underline" style="color: var(--color-fcs-green);">
+          <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+          {isZh ? '教學進度表空白表格 Syllabus Template' : 'Syllabus Template 教學進度表空白表格'}
+        </a>
+      </li>
+      <li>
+        <a href="https://docs.google.com/forms/d/e/1FAIpQLSfoSMm8SV_btTE5dWX9aqFjPF7nsQ_cSpwRdImVOkk2kNMhFQ/viewform" target="_blank" rel="noopener"
+          class="inline-flex items-center gap-2 text-sm font-semibold hover:underline" style="color: var(--color-fcs-green);">
+          <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+          {isZh ? '上傳教學進度表 Upload Syllabus' : 'Upload Syllabus 上傳教學進度表'}
+        </a>
+      </li>
+      <li>
+        <a href="http://tinyurl.com/yxr5qhmx" target="_blank" rel="noopener"
+          class="inline-flex items-center gap-2 text-sm font-semibold hover:underline" style="color: var(--color-fcs-green);">
+          <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+          {isZh ? '教室使用規定 Weekly Classroom Use Checklist' : 'Weekly Classroom Use Checklist 教室使用規定'}
+        </a>
+      </li>
+      <li>
+        <a href="https://drive.google.com/file/d/1EK2NigtmtJQ6fWFD2TP-Mlz7Jla1tEqT/view?usp=drive_link" target="_blank" rel="noopener"
+          class="inline-flex items-center gap-2 text-sm font-semibold hover:underline" style="color: var(--color-fcs-green);">
+          <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+          {isZh ? '課程、教室、教師資訊 Teacher / Class Schedule & Map' : 'Teacher / Class Schedule & Map 課程、教室、教師資訊'}
+        </a>
+      </li>
+      <li>
+        <a href="https://docs.google.com/spreadsheets/d/1cAvKgnQZaMWdjQWUEewANlii85zWEA6aEmWfe5b81DI/edit?usp=sharing" target="_blank" rel="noopener"
+          class="inline-flex items-center gap-2 text-sm font-semibold hover:underline" style="color: var(--color-fcs-green);">
+          <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+          {isZh ? '教師電郵名單 Teacher Email List' : 'Teacher Email List 教師電郵名單'}
+        </a>
+      </li>
+    </ul>
+  </div>
+
+  <!-- HR / Payroll Forms -->
+  <div class="mt-6 rounded-[10px] p-6" style="background: var(--color-fcs-white); border: 1px solid var(--color-fcs-border); border-top: 5px solid var(--color-fcs-blue);">
+    <h2 class="text-lg font-semibold" style="color: var(--color-fcs-black);">
+      {isZh ? '人事與薪資表格' : 'HR & Payroll Forms'}
+    </h2>
+    <ul class="mt-4 space-y-3">
+      <li>
+        <a href="https://drive.google.com/file/d/1igH-VZulgqDI87wojfErPmxijUN9tjbF/view?usp=sharing" target="_blank" rel="noopener"
+          class="inline-flex items-center gap-2 text-sm font-semibold hover:underline" style="color: var(--color-fcs-green);">
+          <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+          {isZh ? '教師申請書 Employment Application for Teachers' : 'Employment Application for Teachers 教師申請書'}
+        </a>
+      </li>
+      <li>
+        <a href="https://docs.google.com/document/d/1XrtmeWmYfT8pHBx56GYPwjFwil5yIGOt/edit?usp=sharing" target="_blank" rel="noopener"
+          class="inline-flex items-center gap-2 text-sm font-semibold hover:underline" style="color: var(--color-fcs-green);">
+          <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+          {isZh ? '代課教師鐘點費申請表 Time Card for Substitute Teacher' : 'Time Card for Substitute Teacher 代課教師鐘點費申請表'}
+        </a>
+      </li>
+      <li>
+        <a href="https://drive.google.com/file/d/1w088s6a2rco3Qs2kavcHNMN9fdtn1M-o/view?usp=share_link" target="_blank" rel="noopener"
+          class="inline-flex items-center gap-2 text-sm font-semibold hover:underline" style="color: var(--color-fcs-green);">
+          <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+          {isZh ? '費用申請表 Expense Report (PDF)' : 'Expense Report 費用申請表 (PDF)'}
+        </a>
+      </li>
+      <li>
+        <a href="https://drive.google.com/file/d/1w0UaoE4GYercfaiiGjGH7a4LSUt-yyVz/view?usp=sharing" target="_blank" rel="noopener"
+          class="inline-flex items-center gap-2 text-sm font-semibold hover:underline" style="color: var(--color-fcs-green);">
+          <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+          {isZh ? '教師請假單 Teacher Absence Request Form' : 'Teacher Absence Request Form 教師請假單'}
+        </a>
+      </li>
+      <li>
+        <a href="https://drive.google.com/file/d/1EIJK6si77XXU1ur75GHwTWb6ff_eLC89/view?usp=sharing" target="_blank" rel="noopener"
+          class="inline-flex items-center gap-2 text-sm font-semibold hover:underline" style="color: var(--color-fcs-green);">
+          <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+          {isZh ? '薪資直接轉帳申請表 Salary Direct Deposit Authorization Form' : 'Salary Direct Deposit Authorization Form 薪資直接轉帳申請表'}
+        </a>
+      </li>
+    </ul>
+    <div class="mt-5 border-t pt-4" style="border-color: var(--color-fcs-border);">
+      <p class="text-xs font-semibold uppercase tracking-wide" style="color: var(--color-fcs-muted);">{isZh ? '稅務表格' : 'Tax Forms'}</p>
+      <ul class="mt-2 space-y-2">
+        <li><a href="https://www.irs.gov/pub/irs-pdf/fw4.pdf" target="_blank" rel="noopener" class="text-sm font-semibold hover:underline" style="color: var(--color-fcs-green);">IRS W-4</a></li>
+        <li><a href="https://www.edd.ca.gov/pdf_pub_ctr/de4.pdf" target="_blank" rel="noopener" class="text-sm font-semibold hover:underline" style="color: var(--color-fcs-green);">CA DE-4</a></li>
+        <li><a href="https://www.irs.gov/pub/irs-pdf/fw9.pdf" target="_blank" rel="noopener" class="text-sm font-semibold hover:underline" style="color: var(--color-fcs-green);">IRS W-9</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- Volunteer / TA Hours -->
+  <div class="mt-6 rounded-[10px] p-6" style="background: var(--color-fcs-white); border: 1px solid var(--color-fcs-border); border-top: 5px solid var(--color-fcs-gold);">
+    <h2 class="text-lg font-semibold" style="color: var(--color-fcs-black);">
+      {isZh ? '志工與助教服務時數' : 'Volunteer & TA Service Hours'}
+    </h2>
+    <ul class="mt-4 space-y-3">
+      <li>
+        <a href="https://drive.google.com/file/d/11j0Q06ZuNSZnTkk_WhCdDlMAuU6AXGkY/view?usp=drive_link" target="_blank" rel="noopener"
+          class="inline-flex items-center gap-2 text-sm font-semibold hover:underline" style="color: var(--color-fcs-green);">
+          <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+          {isZh ? '現場助教服務時數記錄表 Onsite TA Hours Log (PDF)' : 'Onsite TA Service Hours Log 現場助教 (PDF)'}
+        </a>
+      </li>
+      <li>
+        <a href="https://drive.google.com/file/d/1QESsEKfsKrL4kzeh4Xrd0bMAzt-iTgLN/view?usp=drive_link" target="_blank" rel="noopener"
+          class="inline-flex items-center gap-2 text-sm font-semibold hover:underline" style="color: var(--color-fcs-green);">
+          <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+          {isZh ? '線上家教服務時數記錄表 Online Tutor Hours Log (PDF)' : 'Online Tutor Service Hours Log 線上家教 (PDF)'}
+        </a>
+      </li>
+      <li>
+        <a href="https://drive.google.com/file/d/1873-X2_EqnTDiK_48v9kRFEA4G3wK5nR/view?usp=drive_link" target="_blank" rel="noopener"
+          class="inline-flex items-center gap-2 text-sm font-semibold hover:underline" style="color: var(--color-fcs-green);">
+          <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+          {isZh ? '活動/辦公室志工時數記錄表 Event or Office Support Hours Log (PDF)' : 'Event / Office Support Hours Log (PDF)'}
+        </a>
+      </li>
+    </ul>
+  </div>
+
+  <p class="mt-6 text-sm" style="color: var(--color-fcs-muted);">
+    {isZh ? '如有疑問，請聯絡教務處：' : 'Questions? Contact the office: '}
+    <a href="mailto:principal@fremontchineseschool.org" class="font-semibold hover:underline" style="color: var(--color-fcs-green);">principal@fremontchineseschool.org</a>
+  </p>
+
+</section>

@@ -7,7 +7,7 @@ interface Props {
 }
 const { lang } = Astro.props;
 const c = content[lang].about;
-const regulationsUrl = "https://bit.ly/2yxYRLB";
+const regulationsUrl = "/FCS_Bylaws_2020.pdf";
 ---
 
 <section style="background: #FFF8F0;" class="mx-auto max-w-3xl px-4 py-14">
@@ -62,6 +62,89 @@ const regulationsUrl = "https://bit.ly/2yxYRLB";
     }
   </div>
 
+  <!-- Org chart -->
+  <div class="mt-12">
+    <h2 class="text-xl font-semibold" style="color: var(--color-fcs-green-dark);">
+      {lang === 'zh' ? '費利蒙中文學校組織圖' : 'Organization Chart'}
+    </h2>
+    <div class="mt-6 overflow-x-auto rounded-[10px] p-6" style="background: var(--color-fcs-white); border: 1px solid var(--color-fcs-border);">
+      <!-- Row 1: Parent Assembly -->
+      <div class="flex justify-start">
+        <div class="rounded-[6px] px-5 py-2.5 text-center text-sm font-semibold text-white" style="background: #4472C4; min-width: 140px;">
+          <div class="text-base">家長大會</div>
+          <div class="text-xs font-normal opacity-90">Parent Assembly</div>
+        </div>
+      </div>
+      <!-- connector -->
+      <div class="ml-[69px] h-5 w-px" style="background: #94A3B8;"></div>
+      <!-- Row 2: School Board -->
+      <div class="flex justify-start">
+        <div class="rounded-[6px] px-5 py-2.5 text-center text-sm font-semibold text-white" style="background: #7B4B44; min-width: 140px;">
+          <div>校務委員</div>
+          <div class="text-xs font-normal opacity-90">School Board</div>
+        </div>
+      </div>
+      <!-- connector -->
+      <div class="ml-[69px] h-5 w-px" style="background: #94A3B8;"></div>
+      <!-- Row 3: Staff + Principal branch -->
+      <div class="flex items-start gap-0">
+        <div class="flex flex-col items-center">
+          <div class="rounded-[6px] px-4 py-2 text-center text-sm font-semibold text-white" style="background: #70AD47; min-width: 120px;">
+            <div>幹事會</div>
+            <div class="text-xs font-normal opacity-90">Staff</div>
+          </div>
+          <div class="h-5 w-px" style="background: #94A3B8;"></div>
+          <!-- Principal -->
+          <div class="rounded-[6px] px-4 py-2 text-center text-sm font-semibold" style="background: var(--color-fcs-white); border: 1.5px solid #94A3B8; min-width: 120px; color: var(--color-fcs-black);">
+            <div>校長</div>
+            <div class="text-xs" style="color: var(--color-fcs-muted);">Principal</div>
+          </div>
+        </div>
+        <!-- Right branch from Principal -->
+        <div class="mt-[88px] flex flex-col gap-0">
+          <div class="flex items-start">
+            <div class="mt-[11px] h-px w-6" style="background: #94A3B8;"></div>
+            <div class="flex flex-col gap-2">
+              <!-- Vice Principal + AC -->
+              <div class="flex items-center gap-2">
+                <div class="rounded-[6px] px-3 py-1.5 text-center text-xs font-semibold" style="background: var(--color-fcs-white); border: 1.5px solid #94A3B8; color: var(--color-fcs-black);">
+                  <div>副校長</div>
+                  <div style="color: var(--color-fcs-muted);">Vice Principal</div>
+                </div>
+                <div class="h-px w-4" style="background: #94A3B8;"></div>
+                <div class="rounded-[6px] px-3 py-1.5 text-center text-xs font-semibold" style="background: var(--color-fcs-white); border: 1.5px solid #94A3B8; color: var(--color-fcs-black);">
+                  <div>學分班</div>
+                  <div style="color: var(--color-fcs-muted);">Accredited Curriculum</div>
+                </div>
+              </div>
+              <!-- Departments grid -->
+              <div class="ml-0 grid grid-cols-2 gap-1.5 sm:grid-cols-3">
+                {[
+                  ['秘書','Secretary'],
+                  ['公關','Public Relations'],
+                  ['教務','Academic'],
+                  ['人事','Human Resources'],
+                  ['註冊','Registration'],
+                  ['資訊','IT'],
+                  ['財務','Finance'],
+                  ['活動','Activity'],
+                  ['出版','Publication'],
+                  ['訓育','Safety'],
+                ].map(([zh, en]) => (
+                  <div class="rounded-[4px] px-2 py-1.5 text-center text-xs font-medium text-white" style="background: #70AD47;">
+                    <div>{zh}</div>
+                    <div class="opacity-85">{en}</div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Bylaws -->
   <a
     href={regulationsUrl}
     target="_blank"

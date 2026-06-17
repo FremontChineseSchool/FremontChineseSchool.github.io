@@ -25,6 +25,8 @@ export const routes: Record<string, string> = {
   'academic-contest': 'academic-contest',
   donate: 'donate',
   contact: 'contact',
+  'ac-resources': 'ac-resources',
+  'staff-resources': 'staff-resources',
 };
 
 export const ui = {
