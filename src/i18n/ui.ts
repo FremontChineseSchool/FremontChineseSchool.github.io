@@ -27,6 +27,7 @@ export const routes: Record<string, string> = {
   contact: 'contact',
   'ac-resources': 'ac-resources',
   'staff-resources': 'staff-resources',
+  news: 'news',
 };
 
 export const ui = {

@@ -55,6 +55,14 @@ const year = 2026;
       >{lang === 'zh' ? '資源' : 'Resources'}</p>
       <ul class="space-y-2">
         <li>
+          <a href={lang === 'zh' ? '/zh/news' : '/news'}
+            class="transition-colors duration-150"
+            style="color: rgba(255,248,240,0.65);"
+            onmouseover="this.style.color='rgba(255,248,240,1)'"
+            onmouseout="this.style.color='rgba(255,248,240,0.65)'"
+          >{lang === 'zh' ? '最新消息' : 'News & Updates'}</a>
+        </li>
+        <li>
           <a href={lang === 'zh' ? '/zh/ac-resources' : '/ac-resources'}
             class="transition-colors duration-150"
             style="color: rgba(255,248,240,0.65);"

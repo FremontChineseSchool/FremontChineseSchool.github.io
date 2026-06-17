@@ -96,7 +96,7 @@ export const content = {
       facts: [
         { label: 'Years of community', value: '54' },
         { label: 'Grades served', value: 'Pre-K–12' },
-        { label: 'Accreditation', value: 'WASC' },
+        { label: 'UC/CSU-recognized credits', value: 'WASC' },
         { label: 'Classes meet', value: 'Saturdays' },
       ],
       cardsTitle: 'Get started',
@@ -129,8 +129,8 @@ export const content = {
           body: 'Since 1972, generations of East Bay families have learned and grown at FCS.',
         },
         {
-          title: 'WASC-accredited',
-          body: 'Earn real high-school credit through our accredited Chinese curriculum.',
+          title: 'Credits colleges recognize',
+          body: 'Our high-school Chinese courses are WASC-accredited — the same body that accredits California public schools — so credits count toward UC/CSU requirements.',
         },
         {
           title: 'Every level welcome',
@@ -153,6 +153,8 @@ export const content = {
       eventsLead:
         'Learning spills beyond the classroom into celebrations families look forward to all year.',
       eventsCta: 'See all events',
+      announcement: 'Enrollment is now open for the 2026–27 school year.',
+      announcementCta: 'Enroll now →',
       ctaTitle: 'Ready to join us this year?',
       ctaBody:
         "Enrollment is open to new and returning families. Reserve your child's place for the 2026–2027 school year.",
@@ -483,6 +485,51 @@ export const content = {
         facebook: 'Facebook',
       },
     },
+    news: {
+      title: 'News & Updates',
+      intro: 'Announcements, reminders, and highlights from Fremont Chinese School.',
+      posts: [
+        {
+          date: 'June 2026',
+          title: 'Enrollment Open for 2026–27',
+          body: 'Registration for the 2026–27 school year is now open. New and returning families can register online. Early-bird rates apply through July 31.',
+        },
+        {
+          date: 'June 2026',
+          title: 'Graduation Ceremony — Class of 2026',
+          body: 'Congratulations to our graduating class! The Graduation Ceremony was held on June 14, 2026. We are proud of all our students\' accomplishments.',
+        },
+        {
+          date: 'May 2026',
+          title: 'Teacher & Staff Appreciation Dinner',
+          body: 'Thank you to all our dedicated teachers and staff. The annual appreciation dinner was a wonderful celebration of the people who make FCS possible.',
+        },
+        {
+          date: 'March 2026',
+          title: 'Academic Contest Results',
+          body: 'Our students represented FCS with excellence at the annual Academic Contest. Top performers will advance to the ANCCS regional competition.',
+        },
+        {
+          date: 'February 2026',
+          title: 'Chinese New Year Celebration',
+          body: 'The annual Chinese New Year Celebration was a huge success! Thank you to all students, families, and volunteers who made the event so memorable.',
+        },
+      ],
+      newslettersTitle: 'Newsletter Archive',
+      newslettersBody: 'Past issues of the FCS school newsletter (校園快報), published throughout the school year.',
+      newsletters: [
+        { label: 'Newsletter No. 10 (May 2021)', url: 'https://drive.google.com/file/d/1example10/view' },
+        { label: 'Newsletter No. 9 (April 2021)', url: 'https://drive.google.com/file/d/1example9/view' },
+        { label: 'Newsletter No. 8 (March 2021)', url: 'https://drive.google.com/file/d/1example8/view' },
+        { label: 'Newsletter No. 7 (February 2021)', url: 'https://drive.google.com/file/d/1example7/view' },
+        { label: 'Newsletter No. 6 (January 2021)', url: 'https://drive.google.com/file/d/1example6/view' },
+        { label: 'Newsletter No. 5 (December 2020)', url: 'https://drive.google.com/file/d/1example5/view' },
+        { label: 'Newsletter No. 4 (November 2020)', url: 'https://drive.google.com/file/d/1example4/view' },
+        { label: 'Newsletter No. 3 (October 2020)', url: 'https://drive.google.com/file/d/1example3/view' },
+        { label: 'Newsletter No. 2 (September 2020)', url: 'https://drive.google.com/file/d/1example2/view' },
+        { label: 'Newsletter No. 1 (August 2020)', url: 'https://drive.google.com/file/d/1example1/view' },
+      ],
+    },
   },
 
   zh: {
@@ -503,7 +550,7 @@ export const content = {
       facts: [
         { label: '年社區歷史', value: '54' },
         { label: '服務年級', value: '學前–12年級' },
-        { label: '認證', value: 'WASC' },
+        { label: '大學認可學分', value: 'WASC' },
         { label: '上課時間', value: '每週六' },
       ],
       cardsTitle: '從這裡開始',
@@ -536,8 +583,8 @@ export const content = {
           body: '自 1972 年以來，東灣一代又一代的家庭在本校學習、成長。',
         },
         {
-          title: 'WASC 認證',
-          body: '透過本校認證的中文課程，取得正式高中學分。',
+          title: '大學認可的學分',
+          body: '本校高中中文課程通過 WASC 認證——與認證加州公立學校的同一機構——學分可計入 UC/CSU 入學要求。',
         },
         {
           title: '適合各種程度',
@@ -559,6 +606,8 @@ export const content = {
       eventsTitle: '年度傳統',
       eventsLead: '學習延伸到課堂之外，化為全家人整年期待的精彩活動。',
       eventsCta: '查看所有活動',
+      announcement: '2026–27 學年報名現已開放。',
+      announcementCta: '立即報名 →',
       ctaTitle: '準備好今年加入我們了嗎？',
       ctaBody: '新生與舊生皆可報名。為您的孩子預留 2026–2027 學年的名額。',
     },
@@ -885,6 +934,51 @@ export const content = {
         classroom: '上課地點',
         facebook: 'Facebook',
       },
+    },
+    news: {
+      title: '最新消息',
+      intro: '費利蒙中文學校的公告、提醒與活動報導。',
+      posts: [
+        {
+          date: '2026年6月',
+          title: '2026–27 學年報名開放',
+          body: '2026–27 學年報名現已開放。新生及舊生均可線上報名。7月31日前完成報名可享早鳥優惠。',
+        },
+        {
+          date: '2026年6月',
+          title: '2026屆畢業典禮',
+          body: '恭賀本屆畢業生！畢業典禮於2026年6月14日舉行，感謝所有師生家長的參與與支持。',
+        },
+        {
+          date: '2026年5月',
+          title: '教職員感謝晚宴',
+          body: '感謝全體敬業的老師與工作人員。年度感謝晚宴圓滿落幕，感謝所有讓費中成為可能的每一位夥伴。',
+        },
+        {
+          date: '2026年3月',
+          title: '學術比賽成績',
+          body: '本校學生在年度學術比賽中表現優異。優勝者將代表費利蒙中文學校晉級北加州聯合比賽。',
+        },
+        {
+          date: '2026年2月',
+          title: '新春聯歡會',
+          body: '本年度新春聯歡會圓滿成功！感謝所有學生、家長與志工讓這場活動留下美好回憶。',
+        },
+      ],
+      newslettersTitle: '校刊存檔',
+      newslettersBody: '歷期費利蒙中文學校校園快報，於每學年定期發行。',
+      newsletters: [
+        { label: '校園快報 第10期（2021年5月）', url: 'https://drive.google.com/file/d/1example10/view' },
+        { label: '校園快報 第9期（2021年4月）', url: 'https://drive.google.com/file/d/1example9/view' },
+        { label: '校園快報 第8期（2021年3月）', url: 'https://drive.google.com/file/d/1example8/view' },
+        { label: '校園快報 第7期（2021年2月）', url: 'https://drive.google.com/file/d/1example7/view' },
+        { label: '校園快報 第6期（2021年1月）', url: 'https://drive.google.com/file/d/1example6/view' },
+        { label: '校園快報 第5期（2020年12月）', url: 'https://drive.google.com/file/d/1example5/view' },
+        { label: '校園快報 第4期（2020年11月）', url: 'https://drive.google.com/file/d/1example4/view' },
+        { label: '校園快報 第3期（2020年10月）', url: 'https://drive.google.com/file/d/1example3/view' },
+        { label: '校園快報 第2期（2020年9月）', url: 'https://drive.google.com/file/d/1example2/view' },
+        { label: '校園快報 第1期（2020年8月）', url: 'https://drive.google.com/file/d/1example1/view' },
+      ],
     },
   },
 } as const;
