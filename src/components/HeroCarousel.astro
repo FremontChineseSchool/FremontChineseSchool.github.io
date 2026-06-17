@@ -48,12 +48,27 @@ const slides = [1, 2, 3, 4, 5, 6].map((n, i) => ({
     <slot />
   </div>
 
-  <!-- Dot navigation -->
+  <!-- Dot navigation + pause button -->
   <div
-    class="absolute inset-x-0 bottom-4 z-10 flex justify-center gap-2"
-    role="tablist"
-    aria-label="Slides"
+    class="absolute inset-x-0 bottom-4 z-10 flex items-center justify-center gap-3"
   >
+    <!-- Pause/play toggle -->
+    <button
+      type="button"
+      data-carousel-pause
+      aria-label="Pause slideshow"
+      class="flex h-7 w-7 items-center justify-center rounded-full border border-white/60 bg-black/30 text-white transition hover:bg-black/50"
+    >
+      <!-- Pause icon (shown when playing) -->
+      <svg data-icon-pause xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><rect x="6" y="4" width="4" height="16"/><rect x="14" y="4" width="4" height="16"/></svg>
+      <!-- Play icon (shown when paused, hidden initially) -->
+      <svg data-icon-play xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" style="display:none"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+    </button>
+    <div
+      role="tablist"
+      aria-label="Slides"
+      class="flex gap-2"
+    >
     {
       slides.map((s, i) => (
         <button
@@ -65,9 +80,11 @@ const slides = [1, 2, 3, 4, 5, 6].map((n, i) => ({
             "h-2.5 w-2.5 rounded-full border border-white/80 transition",
             i === 0 ? "bg-white" : "bg-white/30 hover:bg-white/60",
           ]}
+          style="padding: 8px; background-clip: content-box; box-sizing: content-box;"
         />
       ))
     }
+    </div>
   </div>
 </section>
 
@@ -111,8 +128,29 @@ const slides = [1, 2, 3, 4, 5, 6].map((n, i) => ({
         start();
       }),
     );
-    root.addEventListener("mouseenter", stop);
-    root.addEventListener("mouseleave", start);
+
+    const pauseBtn = root.querySelector<HTMLButtonElement>("[data-carousel-pause]");
+    const iconPause = pauseBtn?.querySelector<SVGElement>("[data-icon-pause]");
+    const iconPlay  = pauseBtn?.querySelector<SVGElement>("[data-icon-play]");
+    let paused = false;
+
+    pauseBtn?.addEventListener("click", () => {
+      paused = !paused;
+      if (paused) {
+        stop();
+        pauseBtn.setAttribute("aria-label", "Play slideshow");
+        if (iconPause) iconPause.style.display = "none";
+        if (iconPlay)  iconPlay.style.display  = "";
+      } else {
+        start();
+        pauseBtn.setAttribute("aria-label", "Pause slideshow");
+        if (iconPause) iconPause.style.display = "";
+        if (iconPlay)  iconPlay.style.display  = "none";
+      }
+    });
+
+    root.addEventListener("mouseenter", () => { if (!paused) stop(); });
+    root.addEventListener("mouseleave", () => { if (!paused) start(); });
 
     start();
   });

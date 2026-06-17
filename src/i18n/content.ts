@@ -94,10 +94,10 @@ export const content = {
       ctaPrimary: 'Enroll Now',
       ctaSecondary: 'Explore Programs',
       facts: [
-        { label: 'Founded', value: '1972' },
+        { label: 'Years of community', value: '54' },
+        { label: 'Grades served', value: 'Pre-K–12' },
         { label: 'Accreditation', value: 'WASC' },
-        { label: 'When', value: 'Saturdays' },
-        { label: 'Where', value: 'Fremont, CA' },
+        { label: 'Classes meet', value: 'Saturdays' },
       ],
       cardsTitle: 'Get started',
       cards: [
@@ -142,7 +142,14 @@ export const content = {
         },
       ],
       showcaseAlt: 'FCS students celebrating together at a school event',
-      eventsTitle: 'Life at FCS',
+      cultureTitle: 'More than Mandarin',
+      cultureSubtitle: 'Culture is our curriculum too. From New Year celebrations to yo-yo showcases, FCS traditions connect students to their heritage — and to each other.',
+      cultureHighlights: [
+        { photo: '/images/events/chinese-new-year.jpg', alt: 'Students performing at Chinese New Year Celebration', label: 'Chinese New Year' },
+        { photo: '/images/events/food-festival.jpg', alt: 'Families enjoying the Food Festival', label: 'Food Festival' },
+        { photo: '/images/events/yoyo.jpg', alt: 'Student performing at Chinese Yo-Yo Showcase', label: 'Yo-Yo Showcase' },
+      ],
+      eventsTitle: 'Annual traditions',
       eventsLead:
         'Learning spills beyond the classroom into celebrations families look forward to all year.',
       eventsCta: 'See all events',
@@ -328,9 +335,9 @@ export const content = {
         },
       ],
       refundContact: 'Questions? Email finance@fremontchineseschool.org',
-      volunteerTitle: 'Volunteer hours',
+      volunteerTitle: 'FCS is a community-run school',
       volunteerBody:
-        'Each enrolled family is required to contribute 3 volunteer hours per semester. Volunteer opportunities include helping at school events, serving as a classroom aide, and supporting administrative tasks. Hours are tracked by the school office.',
+        'What makes FCS special is our families. Every enrolled family contributes 3 volunteer hours per semester — helping at events, supporting classrooms, or assisting with admin. It\'s a small commitment that keeps tuition affordable and builds the community that makes FCS a great place for kids.',
       resourcesTitle: 'All Registration Documents',
       resources: [
         { label: 'FUSD grade placement chart', link: 'gradeChart' },
@@ -376,10 +383,6 @@ export const content = {
       annualTitle: 'Annual events',
       annual: [
         {
-          name: 'Open House',
-          body: 'Prospective and current families visit classrooms, meet teachers, and learn about FCS programs before the new school year begins.',
-        },
-        {
           name: 'Chinese New Year Celebration (新春聯歡會)',
           body: 'Our biggest celebration of the year — students perform lion dances, musical numbers, skits, and cultural presentations for the whole community.',
         },
@@ -393,7 +396,7 @@ export const content = {
           route: 'academic-contest',
         },
         {
-          name: 'ANCCS Competitions',
+          name: 'ANCCS Competitions (北加州中文學校聯合會競賽)',
           body: 'FCS students participate in the Association of Northern California Chinese Schools competitions, including Analects interpretation, parent-child storytelling, and multimedia categories.',
         },
         {
@@ -401,19 +404,15 @@ export const content = {
           body: 'Students from the Chinese yo-yo elective demonstrate their skills throughout the year at school events and community performances.',
         },
         {
-          name: 'Double Ten Day (雙十節)',
-          body: 'FCS observes the Republic of China National Day with a ceremony honoring Chinese cultural heritage.',
-        },
-        {
           name: 'Confucius Memorial Ceremony (祭孔典禮)',
           body: "A traditional ceremony commemorating Confucius's contributions to education and culture, observed at the start of the school year.",
         },
         {
-          name: 'Teacher & Staff Appreciation Dinner',
+          name: 'Teacher & Staff Appreciation Dinner (教職員感謝晚宴)',
           body: 'An annual dinner to recognize and celebrate the dedication of FCS teachers, staff, and volunteers.',
         },
         {
-          name: 'Graduation Ceremony',
+          name: 'Graduation Ceremony (畢業典禮)',
           body: 'Students completing the program are celebrated with a formal graduation ceremony at the end of the school year.',
         },
       ],
@@ -502,10 +501,10 @@ export const content = {
       ctaPrimary: '立即報名',
       ctaSecondary: '瀏覽課程',
       facts: [
-        { label: '創校', value: '1972' },
+        { label: '年社區歷史', value: '54' },
+        { label: '服務年級', value: '學前–12年級' },
         { label: '認證', value: 'WASC' },
         { label: '上課時間', value: '每週六' },
-        { label: '地點', value: '加州費利蒙' },
       ],
       cardsTitle: '從這裡開始',
       cards: [
@@ -550,7 +549,14 @@ export const content = {
         },
       ],
       showcaseAlt: '本校學生於校園活動中歡聚同樂',
-      eventsTitle: '校園生活',
+      cultureTitle: '不只是語言課',
+      cultureSubtitle: '文化也是我們的課程。從舞獅表演到學術競賽，費利蒙中文學校的傳統活動讓學生與中華文化相連，也讓彼此更緊密。',
+      cultureHighlights: [
+        { photo: '/images/events/chinese-new-year.jpg', alt: '學生在新春聯歡會上表演', label: '新春聯歡會' },
+        { photo: '/images/events/food-festival.jpg', alt: '家長和學生參加小吃義賣', label: '小吃義賣' },
+        { photo: '/images/events/yoyo.jpg', alt: '學生參加扯鈴成果展', label: '扯鈴成果展' },
+      ],
+      eventsTitle: '年度傳統',
       eventsLead: '學習延伸到課堂之外，化為全家人整年期待的精彩活動。',
       eventsCta: '查看所有活動',
       ctaTitle: '準備好今年加入我們了嗎？',
@@ -733,9 +739,9 @@ export const content = {
         },
       ],
       refundContact: '如有疑問，請來信 finance@fremontchineseschool.org',
-      volunteerTitle: '義工時數',
+      volunteerTitle: '費利蒙中文學校由社區共同經營',
       volunteerBody:
-        '每位在學學生的家庭每學期須完成 3 小時義工服務。義工機會包括協助學校活動、擔任教室助理及支援行政事務，時數由學校辦公室統計記錄。',
+        '讓費利蒙中文學校與眾不同的，正是我們的家長們。每位在學學生的家庭每學期貢獻 3 小時義工服務——協助活動、支援課堂或協助行政工作。這份小小的承諾讓學費保持親民，也凝聚了讓孩子們茁壯成長的社區力量。',
       resourcesTitle: '所有報名文件',
       resources: [
         { label: '學區年級對照表', link: 'gradeChart' },
@@ -780,19 +786,15 @@ export const content = {
       annualTitle: '年度活動',
       annual: [
         {
-          name: '開放參觀日（Open House）',
-          body: '新舊家庭參觀各班教室、認識教師並了解本校課程，為新學年做好準備。',
-        },
-        {
-          name: '新春聯歡會',
+          name: '新春聯歡會 Chinese New Year Celebration',
           body: '本校年度最盛大活動——學生帶來舞獅、音樂演出、短劇及文化表演，與全體師生家長共迎農曆新年。',
         },
         {
-          name: '小吃義賣',
+          name: '小吃義賣 Food Festival',
           body: '家長自製中式點心、料理與甜點與大家共享，是凝聚社區情誼、同時為學校籌款的溫馨傳統。',
         },
         {
-          name: '學術比賽',
+          name: '學術比賽 Academic Contest',
           body: '學生在中文閱讀、寫作與口語各組別中一展所學，得獎同學將於新春聯歡會上接受表揚。',
           route: 'academic-contest',
         },
@@ -801,23 +803,19 @@ export const content = {
           body: '本校學生參加北加州中文學校聯合會（ANCCS）舉辦的論語朗誦、親子說故事及多媒體等各項比賽。',
         },
         {
-          name: '扯鈴成果展',
+          name: '扯鈴成果展 Chinese Yo-Yo Showcase',
           body: '扯鈴選修課的學生全年於校內活動及社區演出中展示精湛技藝。',
         },
         {
-          name: '雙十節',
-          body: '本校以典禮慶祝中華民國國慶日，傳承中華文化精神。',
-        },
-        {
-          name: '祭孔典禮',
+          name: '祭孔典禮 Confucius Memorial Ceremony',
           body: '於學年初舉行傳統典禮，紀念孔子對教育與文化的偉大貢獻。',
         },
         {
-          name: '教職員感謝晚宴',
+          name: '教職員感謝晚宴 Teacher & Staff Appreciation Dinner',
           body: '每年舉辦晚宴，表彰並感謝全體教師、工作人員與義工的辛勤付出。',
         },
         {
-          name: '畢業典禮',
+          name: '畢業典禮 Graduation Ceremony',
           body: '學年末為完成課程的學生舉辦正式畢業典禮，隆重慶祝學習成果。',
         },
       ],

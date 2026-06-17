@@ -29,6 +29,13 @@
   --font-body:       'Inter', sans-serif;
 }
 
+/* Global focus-visible ring — ensures keyboard users always see where they are */
+*:focus-visible {
+  outline: 2px solid var(--color-fcs-gold);
+  outline-offset: 2px;
+  border-radius: 2px;
+}
+
 html {
   scroll-behavior: smooth;
   /* Sticky header offset for in-page anchor jumps */

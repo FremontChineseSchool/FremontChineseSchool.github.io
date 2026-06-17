@@ -152,4 +152,28 @@ const regulationsUrl = "/FCS_Bylaws_2020.pdf";
     class="mt-10 inline-block rounded-[6px] px-5 py-2 text-sm font-semibold transition-colors duration-150"
     style="border: 1.5px solid var(--color-fcs-green); color: var(--color-fcs-green);"
   >{c.regulationsLabel}</a>
+
+  <!-- CTA card -->
+  <div class="mt-12 rounded-[12px] p-8" style="background: var(--color-fcs-green-light); border: 1px solid var(--color-fcs-border);">
+    <h2 class="text-xl font-semibold" style="color: var(--color-fcs-black);">
+      {lang === 'zh' ? '準備好了解更多嗎？' : 'Ready to learn more?'}
+    </h2>
+    <p class="mt-2 text-sm leading-relaxed" style="color: var(--color-fcs-muted);">
+      {lang === 'zh'
+        ? '了解費利蒙中文學校提供的課程，或立即為 2026–27 學年辦理報名。'
+        : 'See what classes FCS offers or enroll your child for the 2026–27 school year.'}
+    </p>
+    <div class="mt-5 flex flex-wrap gap-3">
+      <a
+        href={lang === 'zh' ? '/zh/programs' : '/programs'}
+        class="inline-block rounded-[6px] px-5 py-2.5 text-sm font-semibold text-white transition-colors duration-150 hover:opacity-90"
+        style="background: var(--color-fcs-green);"
+      >{lang === 'zh' ? '瀏覽課程' : 'View Programs'}</a>
+      <a
+        href={lang === 'zh' ? '/zh/enroll' : '/enroll'}
+        class="inline-block rounded-[6px] px-5 py-2.5 text-sm font-semibold transition-colors duration-150"
+        style="border: 1.5px solid var(--color-fcs-green); color: var(--color-fcs-green); background: white;"
+      >{lang === 'zh' ? '立即報名' : 'Enroll Now'}</a>
+    </div>
+  </div>
 </section>

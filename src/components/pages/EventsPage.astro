@@ -22,20 +22,16 @@ const c = content[lang].events;
 
   <!-- Annual events -->
   {(() => {
-    // Placeholder photos using existing slider images — swap in real photos@ URLs when ready.
-    // Order matches c.annual array: Open House, CNY, Food Festival, AC, ANCCS, Yo-Yo, Double Ten, Confucius, Appreciation, Graduation
+    // Order matches c.annual array
     const eventPhotos = [
-      null, // Open House — photo coming
-      'https://drive.google.com/uc?export=view&id=1G1ylCBL4lhO7sqoUdKuWzX848aGLQAA6', // Chinese New Year
-      'https://drive.google.com/uc?export=view&id=184YTSjW3qGv6dKlcshn67xn04wzn5eGM',  // Food Festival
-      'https://drive.google.com/uc?export=view&id=11hWxbkJ0aEq5aLjgo8TNT5zSh3L37t8K',  // Academic Contest
-      'https://drive.google.com/uc?export=view&id=1G3u93EYKVTNwkUDdwWens-KDtAqIWeMP',  // ANCCS
-      'https://drive.google.com/uc?export=view&id=1F6dLnWTWHvLi36vmdIUOgAcxfOODhg2U',  // Yo-Yo
-      'https://drive.google.com/uc?export=view&id=1r6Te8IjVRgLI2e12I7d_zxYz5AF0N8Ai',  // Halloween
-      null, // Double Ten — placeholder
-      'https://drive.google.com/uc?export=view&id=1XSQxl8H2MoxhPh-3hs-E2LoM32ock0sS',  // Confucius Day
-      null, // Teacher Appreciation — photo coming
-      null, // Graduation — photo coming
+      '/images/events/chinese-new-year.jpg',
+      '/images/events/food-festival.jpg',
+      '/images/events/academic-contest.jpg',
+      '/images/events/anccs.jpg',
+      '/images/events/yoyo.jpg',
+      '/images/events/confucius-day.jpg',
+      '/images/events/teacher-appreciation.jpg',
+      '/images/events/graduation.jpg',
     ];
     return (
       <div>
@@ -50,7 +46,7 @@ const c = content[lang].events;
               <div class={eventPhotos[i] ? "flex flex-col sm:flex-row" : ""}>
                 {/* Photo */}
                 {eventPhotos[i] ? (
-                  <div class="relative h-44 shrink-0 overflow-hidden sm:h-auto sm:w-48">
+                  <div class="h-44 shrink-0 overflow-hidden sm:h-auto sm:w-48">
                     <img
                       src={eventPhotos[i]}
                       alt={e.name}
@@ -58,11 +54,6 @@ const c = content[lang].events;
                       decoding="async"
                       class="h-full w-full object-cover"
                     />
-                    <div class="absolute inset-0 flex items-end">
-                      <span class="m-2 rounded px-1.5 py-0.5 text-[10px] font-medium text-white/80" style="background: rgba(0,0,0,0.35);">
-                        Placeholder photo
-                      </span>
-                    </div>
                   </div>
                 ) : (
                   <div class="flex h-32 shrink-0 items-center justify-center sm:h-auto sm:w-48" style="background: var(--color-fcs-green-light);">
@@ -81,6 +72,7 @@ const c = content[lang].events;
                       href={localizedPath(lang, e.route)}
                       class="mt-2 inline-block text-sm font-semibold hover:underline"
                       style="color: var(--color-fcs-green);"
+                      aria-label={lang === 'en' ? `Learn more about ${e.name}` : `了解更多關於${e.name}`}
                     >
                       {lang === 'en' ? 'Learn more' : '了解更多'} →
                     </a>
@@ -114,6 +106,7 @@ const c = content[lang].events;
       >
         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
         {c.photosFacebookLabel}
+        <span class="sr-only">(opens in new tab)</span>
       </a>
       <a
         href={links.legacyEvents}
@@ -123,7 +116,8 @@ const c = content[lang].events;
         style="background: var(--color-fcs-green-light); color: var(--color-fcs-green-dark); border: 1px solid var(--color-fcs-border);"
       >
         {c.photosLegacyLabel}
-        <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+        <span class="sr-only">(opens in new tab)</span>
       </a>
     </div>
   </div>

@@ -107,14 +107,14 @@ const orgSchema = {
          Example: <script async defer data-website-id="XXXX" src="https://your-umami.app/script.js"></script>
     -->
   </head>
-  <body class="flex min-h-screen flex-col" style="background: var(--color-fcs-black);">
+  <body class="flex min-h-screen flex-col" style="background: var(--color-fcs-white);">
     <a
       href="#main"
       class="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-50 focus:rounded focus:bg-white focus:px-4 focus:py-2 focus:shadow"
       >{t.skipToContent}</a
     >
     <Header lang={lang} />
-    <main id="main" class="flex-1">
+    <main id="main" class="flex-1 flex flex-col">
       <slot />
     </main>
     <Footer lang={lang} />

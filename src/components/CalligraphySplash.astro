@@ -182,7 +182,7 @@ const paintAspect = paint.reduce((a, c) => a + c.w / c.h, 0);
 
     // Timing knobs:
     const BLOOM_FACTOR = 2.2; // ink keeps blooming this × longer than the sweep
-    const START_NEXT = 0.35;  // next stroke begins at this fraction of the current sweep (overlap)
+    const START_NEXT = 0.45;  // next stroke begins at this fraction of the current sweep (overlap)
 
     const wipes = [...paintEl.querySelectorAll<SVGPathElement>("[data-wipe]")];
     wipes.forEach((p) => {
@@ -203,7 +203,7 @@ const paintAspect = paint.reduce((a, c) => a + c.w / c.h, 0);
       for (const p of wipes) {
         if (skipped) return;
         const L = (p as any)._L as number, full = (p as any)._full, core = (p as any)._core;
-        const strokeDur = Math.min(1500, Math.max(600, L / 0.55)); // deliberate sweep
+        const strokeDur = Math.min(900, Math.max(350, L / 0.9)); // faster sweep
         p.style.visibility = "visible";
         // brush sweeps the centerline; ink blooms out from it (slower), clipped to territory
         sweeps.push(p.animate([{ strokeDashoffset: L }, { strokeDashoffset: 0 }],
@@ -215,7 +215,7 @@ const paintAspect = paint.reduce((a, c) => a + c.w / c.h, 0);
       }
       if (skipped) return;
       await Promise.all(sweeps.map((a) => a.finished.catch(() => {})));
-      await delay(450); // brief settle, not a full bloom wait
+      await delay(200); // brief settle, not a full bloom wait
       assemble();
     };
     const finishNow = () => {
@@ -255,7 +255,7 @@ const paintAspect = paint.reduce((a, c) => a + c.w / c.h, 0);
         restEl.style.transform = "none";
       }));
 
-      setTimeout(handoff, 1500);
+      setTimeout(handoff, 900);
     }
 
     function handoff() {

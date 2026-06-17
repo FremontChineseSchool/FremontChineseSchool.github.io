@@ -4,11 +4,11 @@ export const defaultLang: Lang = 'en';
 
 // Navigation: one entry per top-level page. `key` maps into the route table.
 export const navOrder = [
-  'about',
   'programs',
   'enroll',
-  'calendar',
   'events',
+  'about',
+  'calendar',
   'donate',
   'contact',
 ] as const;

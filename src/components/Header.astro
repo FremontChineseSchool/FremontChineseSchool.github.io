@@ -49,7 +49,7 @@ const navItems = navOrder.map((key) => {
               "text-xs font-semibold uppercase tracking-widest",
               item.active
                 ? "text-fcs-white underline underline-offset-4"
-                : "text-white/80 hover:text-fcs-white",
+                : "text-white hover:text-fcs-white",
             ]}
           >
             {item.label}
@@ -62,7 +62,7 @@ const navItems = navOrder.map((key) => {
     <div class="flex items-center gap-3">
       <a
         href={links.register}
-        class="hidden rounded-[6px] bg-fcs-orange px-4 py-2 text-[11px] font-semibold text-fcs-white transition-colors duration-150 hover:bg-[#C85A10] sm:inline-block"
+        class="hidden rounded-[6px] px-4 py-2 text-[11px] font-semibold text-fcs-white transition-colors duration-150 sm:inline-block" style="background: #B85010;" onmouseover="this.style.background='#9A3F08'" onmouseout="this.style.background='#B85010'"
       >{t.enrollCta}</a>
       <LangSwitch lang={lang} />
 
@@ -81,6 +81,7 @@ const navItems = navOrder.map((key) => {
             stroke="currentColor"
             stroke-width="2"
             stroke-linecap="round"
+            aria-hidden="true"
           >
             <line x1="3" y1="6" x2="21" y2="6"></line>
             <line x1="3" y1="12" x2="21" y2="12"></line>
@@ -100,7 +101,7 @@ const navItems = navOrder.map((key) => {
                   "block px-4 py-2 text-[11px] font-medium transition-colors hover:bg-white/10",
                   item.active
                     ? "text-fcs-white font-semibold"
-                    : "text-white/80",
+                    : "text-white",
                 ]}
               >
                 {item.label}
