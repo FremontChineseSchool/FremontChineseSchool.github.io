@@ -63,17 +63,26 @@ blue `#8FBDDF` (`--color-fcs-blue`); the logo is `public/images/logo.png`.
 
 ## Homepage calligraphy intro (`CalligraphySplash`)
 
-The homepage opens with a one-shot splash that brush-paints the school name:
-`費利蒙` is revealed **stroke-by-stroke** in Yuji Boku brush calligraphy with an
-**ink-bloom** (ink spreads outward from each brush path), then `中文學校` fly in to
-complete `費利蒙中文學校`, and the whole name shrinks into the header logo as the page
-emerges.
+A one-shot splash brush-paints the school name on the **first page of each tab
+session** (any page, not just Home): `費利蒙` is revealed **stroke-by-stroke** in Yuji
+Boku brush calligraphy with an **ink-bloom** (ink spreads outward from each brush
+path), then `中文學校` fly in to complete `費利蒙中文學校`, and the whole name shrinks
+into the header logo as the page emerges.
 
 - **`src/components/CalligraphySplash.astro`** — the whole effect (markup + SVG
-  filters + animation). Mounted in both `src/pages/index.astro` and
-  `src/pages/zh/index.astro`. It is progressively enhanced: the overlay is
-  `display:none` until an inline script activates it, so it's skipped entirely
-  under `prefers-reduced-motion` and without JS, and never blocks content.
+  filters + animation). Mounted once in **`src/layouts/BaseLayout.astro`**, so it is
+  present on every page. It is progressively enhanced: the overlay is `display:none`
+  until an inline script activates it, so it's skipped entirely under
+  `prefers-reduced-motion` and without JS, and never blocks content.
+- **Plays once per session, then on demand.** The inline script auto-plays only on the
+  session's first page (a `fcs-splash-seen` `sessionStorage` flag), so navigating
+  between pages — including landing elsewhere then going to Home — never replays it. On
+  revisits the overlay stays in the DOM but inactive (`display:none`), so it can be
+  replayed. A small **↻ replay button beside the header logo** (`#splash-replay` in
+  `Header.astro`, labelled via `ui.replayIntro`) retriggers it: the module script
+  restores the splash's pristine markup and re-runs `run()`. The button is hidden for
+  no-JS and reduced-motion users. On finish the overlay deactivates (it is no longer
+  `splash.remove()`d) so it stays available to replay.
 - It runs off **two committed data files** (and nothing else at runtime):
   - **`src/data/glyphs.json`** — crisp glyph **outline** paths (+ `w`/`h`) for all 7
     characters, extracted from the font. This is the visible ink.
