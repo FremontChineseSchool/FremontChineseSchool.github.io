@@ -1,5 +1,17 @@
-// 2026-2027 school year calendar data.
-// Update this file each year — CalendarPage.astro reads it directly.
+// School calendar seed data.
+//
+// The live calendar is now maintained by the school in Google Calendar
+// (calendar@fremontchineseschool.org). At build time, calendar-feed.ts fetches
+// that public feed and renders the table from it. This file plays two roles:
+//
+//   1. Enrichment: the Google feed only carries an English title + date, so we
+//      map each English title -> { Chinese name, type } using the events below
+//      (plus `extraEventInfo` for titles not present here).
+//   2. Fallback: if the Google feed is unreachable at build time, the site
+//      renders these entries instead of shipping an empty calendar.
+//
+// So you normally edit the calendar in Google, NOT here. Touch this file only to
+// add a Chinese name / type for a brand-new event title (see `extraEventInfo`).
 
 export type EventType = 'milestone' | 'no-school' | 'event' | 'ac' | 'exam' | 'admin';
 
@@ -16,6 +28,14 @@ export interface CalendarEntry {
   noSchool?: boolean;
   events: CalendarEvent[];
 }
+
+// Chinese name + type for event titles that are NOT in the seed entries below
+// (e.g. a new event the school adds in Google Calendar). Key = exact English
+// title as typed in Google Calendar. Without an entry here, a new event still
+// shows up — with its English title and a keyword-guessed type/color.
+export const extraEventInfo: Record<string, { textZh: string; type: EventType }> = {
+  // 'New Event Title': { textZh: '中文名稱', type: 'event' },
+};
 
 export const calendarEntries: CalendarEntry[] = [
   // ── Semester 1 ──────────────────────────────────────────────────────────────

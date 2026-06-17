@@ -4,6 +4,13 @@ on:
   push:
     branches: [main]
   workflow_dispatch:
+  # Rebuild on a schedule so edits to the school's Google Calendar appear on the
+  # site without a code push (the build fetches the live feed). GitHub cron is
+  # best-effort UTC and often runs a few minutes late; every 30 min is plenty for
+  # a calendar. Dial the interval here (e.g. '0 * * * *' hourly). Note: scheduled
+  # runs only fire from the default branch.
+  schedule:
+    - cron: "*/30 * * * *"
 
 permissions:
   contents: read

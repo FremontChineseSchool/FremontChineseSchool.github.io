@@ -48,12 +48,12 @@ const featureIcons = [
 
 <!-- Facts strip -->
 <section style="background: var(--color-fcs-green-dark);">
-  <div class="mx-auto grid max-w-6xl grid-cols-2 divide-x divide-y sm:grid-cols-4 sm:divide-y-0" style="divide-color: rgba(255,255,255,0.12);">
+  <div class="mx-auto grid max-w-6xl grid-cols-2 divide-x divide-y divide-white/10 sm:grid-cols-4 sm:divide-y-0">
     {c.facts.map((f, i) => (
       <div
         class="flex flex-col items-center justify-center px-6 py-10 text-center"
         data-reveal
-        style={`--reveal-delay: ${i * 80}ms;${i > 0 ? ' border-left: 1px solid rgba(255,255,255,0.12);' : ''}`}
+        style={`--reveal-delay: ${i * 80}ms;`}
       >
         <div class="text-3xl font-extrabold tracking-tight text-white sm:text-4xl" style="letter-spacing: -0.02em;">
           {f.value}
@@ -70,7 +70,7 @@ const featureIcons = [
 <section style="background: #FFF8F0;">
   <div class="mx-auto max-w-6xl px-4 py-28">
     <div class="max-w-2xl" data-reveal>
-      <p class="eyebrow mb-3">Why FCS</p>
+      <p class="eyebrow mb-3">{c.featuresEyebrow}</p>
       <h2 class="text-4xl font-bold sm:text-5xl" style="letter-spacing: -0.03em; color: var(--color-fcs-black);">{c.featuresTitle}</h2>
       <p class="mt-4 text-lg" style="color: var(--color-fcs-muted);">{c.featuresSubtitle}</p>
     </div>
@@ -79,9 +79,8 @@ const featureIcons = [
         c.features.map((f, i) => (
           <div
             class="rounded-[10px] p-4 transition-colors duration-150"
-            style={`background: var(--color-fcs-white); border: 1px solid var(--color-fcs-border); border-top: 5px solid var(--color-fcs-green);`}
+            style={`background: var(--color-fcs-white); border: 1px solid var(--color-fcs-border); border-top: 5px solid var(--color-fcs-green); --reveal-delay: ${i * 90}ms;`}
             data-reveal
-            style={`--reveal-delay: ${i * 90}ms`}
           >
             <div class="flex h-11 w-11 items-center justify-center rounded-xl" style="background: var(--color-fcs-green-light); color: var(--color-fcs-green-dark);">
               <svg
@@ -113,7 +112,7 @@ const featureIcons = [
   <div class="mx-auto max-w-6xl px-4 py-20 sm:py-24">
     <!-- Header -->
     <div class="max-w-2xl" data-reveal>
-      <p class="eyebrow mb-3" style="color: var(--color-fcs-gold);">{lang === 'en' ? 'Life at FCS' : '校園生活'}</p>
+      <p class="eyebrow mb-3" style="color: var(--color-fcs-gold);">{c.cultureEyebrow}</p>
       <h2 class="text-4xl font-bold text-white sm:text-5xl" style="letter-spacing: -0.03em;">{c.cultureTitle}</h2>
       <p class="mt-4 text-lg leading-relaxed" style="color: rgba(255,255,255,0.75);">{c.cultureSubtitle}</p>
     </div>

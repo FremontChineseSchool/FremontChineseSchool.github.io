@@ -15,7 +15,7 @@ export const links = {
   calendarEn:
     'https://drive.google.com/file/d/1jEHtmbAqxjldM-q1NdFuryYcHENRhDui/view',
   tuitionPdf: 'https://docs.google.com/document/d/1eMiXP6MsfTPzySyFSNG8VMmvKSI8NSzo2Vb3Mg72Gn8/view',
-  irsDetermination: 'https://tinyurl.com/ybyr44ku',
+  irsDetermination: 'https://drive.google.com/file/d/1BBgfNR6QzLA2d1-Ej8ezyW56Pf96eosf/view',
   legacyEvents: 'https://fremontchineseschool.org/events',
   facebook: 'https://facebook.com/fremontchineseschool',
 } as const;
@@ -77,6 +77,10 @@ export const descriptions: Record<'en' | 'zh', Record<string, string>> = {
   },
 };
 
+// FCS was founded in 1972. Derive "years of community" at build time so the
+// homepage fact never goes stale (the site rebuilds on every deploy).
+const yearsOfCommunity = String(new Date().getFullYear() - 1972);
+
 export const content = {
   en: {
     home: {
@@ -91,10 +95,12 @@ export const content = {
         'Students performing on stage',
         'Lunar New Year awards ceremony',
       ],
+      pauseSlideshow: 'Pause slideshow',
+      playSlideshow: 'Play slideshow',
       ctaPrimary: 'Enroll Now',
       ctaSecondary: 'Explore Programs',
       facts: [
-        { label: 'Years of community', value: '54' },
+        { label: 'Years of community', value: yearsOfCommunity },
         { label: 'Grades served', value: 'Pre-K–12' },
         { label: 'Accreditation', value: 'WASC' },
         { label: 'Classes meet', value: 'Saturdays' },
@@ -120,6 +126,7 @@ export const content = {
           linkLabel: 'View Calendar',
         },
       ],
+      featuresEyebrow: 'Why FCS',
       featuresTitle: 'Why families choose FCS',
       featuresSubtitle:
         'A warm, community-centered place to learn Mandarin and grow up connected to Chinese culture.',
@@ -142,6 +149,7 @@ export const content = {
         },
       ],
       showcaseAlt: 'FCS students celebrating together at a school event',
+      cultureEyebrow: 'Life at FCS',
       cultureTitle: 'More than Mandarin',
       cultureSubtitle: 'Culture is our curriculum too. From New Year celebrations to yo-yo showcases, FCS traditions connect students to their heritage — and to each other.',
       cultureHighlights: [
@@ -159,6 +167,7 @@ export const content = {
     },
     about: {
       title: 'About FCS',
+      eyebrow: 'About',
       locationHeading: 'Where we meet',
       locationBody: 'Classes are held every Saturday at Irvington High School in Fremont. The school year generally runs from September through June, following the local public school calendar.',
       locationDetail: 'Irvington High School · 41800 Blacow Rd, Fremont, CA 94538',
@@ -201,6 +210,7 @@ export const content = {
     },
     programs: {
       title: 'Programs',
+      eyebrow: 'Programs',
       intro:
         'We offer Chinese language classes for all levels, plus electives and a WASC-accredited credit track for high-school students.',
       sections: [
@@ -246,6 +256,7 @@ export const content = {
     },
     enroll: {
       title: 'Enroll',
+      eyebrow: 'Enroll',
       intro:
         'New and returning families register each year. The steps below walk you through registration, payment, and any placement testing.',
       newFamilyNote: 'New family? The registration guidelines and refund policy are covered on this page. Start with the steps below.',
@@ -312,7 +323,7 @@ export const content = {
         },
         {
           q: 'What electives are available?',
-          a: 'Current offerings include Chinese painting, Chinese yo-yo, coding, and basketball. See the full elective list for details and scheduling.',
+          a: 'Offerings include Chinese painting, calligraphy, abacus, Chinese yo-yo, sewing, crafts, basketball, Python coding, yoga, and online Chinese typing. New classes are added each year — see the full elective list for details and scheduling.',
         },
       ],
       refundTitle: 'Withdrawal & Refund Policy',
@@ -350,6 +361,7 @@ export const content = {
     },
     payment: {
       title: 'Online Payment',
+      eyebrow: 'Payment',
       intro:
         'Pay tuition and school fees right here. Browse the items below, add what you need to your cart, and check out securely — all on this page.',
       loading: 'Loading the payment store…',
@@ -357,6 +369,7 @@ export const content = {
     },
     calendar: {
       title: 'School Calendar',
+      eyebrow: 'Calendar',
       yearLabel: '2026–2027 School Year',
       updated: 'Updated May 4, 2026',
       downloadZh: '下載中文版行事曆 (Chinese)',
@@ -366,7 +379,14 @@ export const content = {
       sem1Dates: 'Aug 15, 2026 – Dec 19, 2026',
       sem2Dates: 'Jan 9, 2027 – May 22, 2027',
       weekLabel: 'Wk',
+      dateLabel: 'Date',
+      remarksLabel: 'Remarks',
       noSchoolLabel: 'No school',
+      subscribeTitle: 'Add to your calendar',
+      subscribeBody:
+        'Subscribe to get FCS events automatically on your phone — works with Google Calendar, Apple Calendar, and Outlook.',
+      subscribeGoogle: 'Add to Google Calendar',
+      subscribeIcs: 'Apple / Outlook (.ics)',
       legend: {
         milestone: 'Key dates',
         noSchool: 'No school',
@@ -425,6 +445,7 @@ export const content = {
     },
     academicContest: {
       title: 'Academic Contest',
+      eyebrow: 'Events',
       intro:
         'FCS holds an annual Academic Contest open to all enrolled students. Top performers advance to the ANCCS regional competition representing Fremont Chinese School.',
       aboutTitle: 'About the contest',
@@ -458,6 +479,7 @@ export const content = {
     },
     donate: {
       title: 'Support FCS',
+      eyebrow: 'Donate',
       body: [
         'FCS is a non-profit 501(c) organization. Your donation is tax-deductible and helps us offer more classes to families in our community who want to learn Mandarin Chinese in a fun, welcoming way.',
         'Many employers match charitable gifts — please check whether your company can double your contribution.',
@@ -473,6 +495,7 @@ export const content = {
     },
     contact: {
       title: 'Contact Us',
+      eyebrow: 'Contact',
       labels: {
         principal: 'Principal',
         office: 'School Office',
@@ -498,10 +521,12 @@ export const content = {
         '學生舞台表演',
         '新春頒獎典禮',
       ],
+      pauseSlideshow: '暫停輪播',
+      playSlideshow: '播放輪播',
       ctaPrimary: '立即報名',
       ctaSecondary: '瀏覽課程',
       facts: [
-        { label: '年社區歷史', value: '54' },
+        { label: '年社區歷史', value: yearsOfCommunity },
         { label: '服務年級', value: '學前–12年級' },
         { label: '認證', value: 'WASC' },
         { label: '上課時間', value: '每週六' },
@@ -527,6 +552,7 @@ export const content = {
           linkLabel: '查看行事曆',
         },
       ],
+      featuresEyebrow: '選擇本校',
       featuresTitle: '家庭選擇本校的理由',
       featuresSubtitle:
         '在溫馨、以社區為本的環境中學習中文，伴隨孩子親近中華文化、共同成長。',
@@ -549,6 +575,7 @@ export const content = {
         },
       ],
       showcaseAlt: '本校學生於校園活動中歡聚同樂',
+      cultureEyebrow: '校園生活',
       cultureTitle: '不只是語言課',
       cultureSubtitle: '文化也是我們的課程。從舞獅表演到學術競賽，費利蒙中文學校的傳統活動讓學生與中華文化相連，也讓彼此更緊密。',
       cultureHighlights: [
@@ -564,6 +591,7 @@ export const content = {
     },
     about: {
       title: '關於本校',
+      eyebrow: '關於',
       locationHeading: '上課地點',
       locationBody: '本校每週六於費利蒙爾文頓高中（Irvington High School）上課，學年通常自九月起至翌年六月，與當地公立學校行事曆一致。',
       locationDetail: 'Irvington High School · 41800 Blacow Rd, Fremont, CA 94538',
@@ -606,6 +634,7 @@ export const content = {
     },
     programs: {
       title: '課程',
+      eyebrow: '課程',
       intro:
         '本校提供各程度的中文課程，並設有才藝選修課程，以及通過 WASC 認證、可供高中生修習的學分課程。',
       sections: [
@@ -650,6 +679,7 @@ export const content = {
     },
     enroll: {
       title: '報名註冊',
+      eyebrow: '報名',
       intro:
         '新生與舊生每年皆須完成報名。以下步驟將引導您完成報名、繳費及分班流程。',
       newFamilyNote: '初次報名？報名規章與退費政策說明均已收錄於本頁，請先閱讀以下各步驟。',
@@ -716,7 +746,7 @@ export const content = {
         },
         {
           q: '有哪些才藝選修課程？',
-          a: '目前提供國畫、扯鈴、程式設計及籃球等課程。詳情請查看完整選修課程列表。',
+          a: '目前提供西畫、國畫書法、珠心算、扯鈴、縫紉、美勞、籃球、Python 程式設計、瑜珈及線上中文打字等課程，每年持續增設新課。詳情請查看完整選修課程列表。',
         },
       ],
       refundTitle: '退費與退課政策',
@@ -753,6 +783,7 @@ export const content = {
     },
     payment: {
       title: '線上付款',
+      eyebrow: '付款',
       intro:
         '直接在此頁繳交學費與各項學校費用。瀏覽下方項目，將所需項目加入購物車，並於本頁安全結帳。',
       loading: '正在載入付款商店…',
@@ -760,6 +791,7 @@ export const content = {
     },
     calendar: {
       title: '學校行事曆',
+      eyebrow: '行事曆',
       yearLabel: '2026–2027 學年',
       updated: '更新於 2026 年 5 月 4 日',
       downloadZh: '下載中文版行事曆',
@@ -769,7 +801,14 @@ export const content = {
       sem1Dates: '2026 年 8 月 15 日 – 12 月 19 日',
       sem2Dates: '2027 年 1 月 9 日 – 5 月 22 日',
       weekLabel: '週',
+      dateLabel: '日期',
+      remarksLabel: '備註',
       noSchoolLabel: '不上課',
+      subscribeTitle: '加入您的行事曆',
+      subscribeBody:
+        '訂閱後即可在手機上自動取得本校活動——支援 Google 日曆、Apple 行事曆與 Outlook。',
+      subscribeGoogle: '加入 Google 日曆',
+      subscribeIcs: 'Apple／Outlook（.ics）',
       legend: {
         milestone: '重要日期',
         noSchool: '不上課',
@@ -828,6 +867,7 @@ export const content = {
     },
     academicContest: {
       title: '學術比賽',
+      eyebrow: '活動',
       intro:
         '費利蒙中文學校每年舉辦學術比賽，全體在學學生均可報名參加。表現優秀者將代表本校晉級 ANCCS 北加州中文學校聯合會地區競賽。',
       aboutTitle: '比賽簡介',
@@ -861,6 +901,7 @@ export const content = {
     },
     donate: {
       title: '支持本校',
+      eyebrow: '捐款',
       body: [
         '費利蒙中文學校為 501(c) 非營利組織。您的捐款可享稅務抵減，並協助本校為社區中有意以輕鬆愉快方式學習中文的家庭開辦更多課程。',
         '許多公司提供慈善捐款配對方案，歡迎您查詢服務的公司是否能讓您的捐款加倍。',
@@ -876,6 +917,7 @@ export const content = {
     },
     contact: {
       title: '聯絡我們',
+      eyebrow: '聯絡',
       labels: {
         principal: '校長',
         office: '學校辦公室',
