@@ -14,108 +14,254 @@ const c = content[lang].enroll;
   <h1 class="text-3xl font-semibold sm:text-4xl" style="letter-spacing: -0.02em; color: var(--color-fcs-black);">{c.title}</h1>
   <p class="mt-4 text-lg" style="color: var(--color-fcs-muted);">{c.intro}</p>
 
-  <!-- New family pre-flight note -->
-  <div class="mt-6 flex items-start gap-3 rounded-[10px] px-4 py-3" style="background: #EFF6FF; border: 1px solid #BFDBFE;">
-    <span style="color: #2563EB; flex-shrink:0; margin-top:2px;">
-      <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
-    </span>
-    <p class="text-sm" style="color: #1e40af;">
-      {c.newFamilyNote}
-    </p>
+  <!-- Audience switcher -->
+  <div class="mt-8 grid gap-4 sm:grid-cols-2">
+    <!-- New family -->
+    <a
+      href="#new-family"
+      class="group flex flex-col gap-2 rounded-[10px] p-5 transition-colors"
+      style="background: var(--color-fcs-white); border: 2px solid var(--color-fcs-green); text-decoration: none;"
+    >
+      <div class="flex items-center gap-2">
+        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color: var(--color-fcs-green); flex-shrink:0;" aria-hidden="true"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><line x1="19" y1="8" x2="19" y2="14"/><line x1="22" y1="11" x2="16" y2="11"/></svg>
+        <span class="font-semibold" style="color: var(--color-fcs-green-dark);">{lang === 'en' ? 'New family' : '新生家庭'}</span>
+      </div>
+      <p class="text-sm" style="color: var(--color-fcs-muted);">{lang === 'en' ? "First time at FCS? Start here — we'll walk you through choosing a class and registering." : '第一次就讀 FCS？從這裡開始，我們將帶您選課並完成報名。'}</p>
+      <span class="mt-1 text-sm font-semibold" style="color: var(--color-fcs-green);">{lang === 'en' ? 'See steps →' : '查看步驟 →'}</span>
+    </a>
+
+    <!-- Returning family -->
+    <a
+      href="#returning-family"
+      class="group flex flex-col gap-2 rounded-[10px] p-5 transition-colors"
+      style="background: var(--color-fcs-white); border: 2px solid var(--color-fcs-border); text-decoration: none;"
+    >
+      <div class="flex items-center gap-2">
+        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color: var(--color-fcs-muted); flex-shrink:0;" aria-hidden="true"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+        <span class="font-semibold" style="color: var(--color-fcs-black);">{lang === 'en' ? 'Returning family' : '返校家庭'}</span>
+      </div>
+      <p class="text-sm" style="color: var(--color-fcs-muted);">{lang === 'en' ? 'Already have an FCS student ID? Check your email for your personalized registration link.' : '已有 FCS 學號？請查看電子郵件中的個人化報名連結。'}</p>
+      <span class="mt-1 text-sm font-semibold" style="color: var(--color-fcs-muted);">{lang === 'en' ? 'See details →' : '查看詳情 →'}</span>
+    </a>
   </div>
 
-  <!-- Steps -->
-  <h2 class="mt-10 text-xl font-semibold" style="color: var(--color-fcs-black);">{c.stepsTitle}</h2>
-  <ol class="mt-6 space-y-6">
-    {
-      c.steps.map((step, i) => (
-        <li class="flex gap-4">
-          <span class="flex h-9 w-9 flex-none items-center justify-center rounded-full font-bold text-white" style="background: var(--color-fcs-green);">
-            {i + 1}
+  <!-- Key Dates — shown to both audiences -->
+  <div class="mt-10">
+    <h2 class="text-xl font-semibold" style="color: var(--color-fcs-black);">{c.keyDatesTitle}</h2>
+    <div class="mt-4 space-y-3">
+      {c.keyDates.map((d) => (
+        <div class="flex gap-4 rounded-[10px] px-4 py-3" style="background: #FFFBEB; border: 1px solid #FDE68A;">
+          <span style="color: #D97706; flex-shrink:0; margin-top:2px;">
+            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
           </span>
           <div>
-            <h3 class="text-lg font-semibold" style="color: var(--color-fcs-black);">{step.heading}</h3>
-            <p class="mt-1" style="color: var(--color-fcs-muted);">{step.body}</p>
-            {"route" in step && step.route ? (
-              <a
-                href={localizedPath(lang, step.route)}
-                class="mt-2 inline-block font-semibold hover:underline"
-                style="color: var(--color-fcs-green);"
-              >
-                {step.linkLabel} →
-              </a>
-            ) : "link" in step && step.link ? (
-              <a
-                href={links[step.link as keyof typeof links]}
-                target="_blank"
-                rel="noopener"
-                class="mt-2 inline-block font-semibold hover:underline"
-                style="color: var(--color-fcs-green);"
-              >
-                {step.linkLabel} →
-              </a>
-            ) : null}
+            <p class="text-sm font-semibold" style="color: #92400E;">{d.label}: <span style="color: #B45309;">{d.date}</span></p>
+            <p class="mt-0.5 text-xs" style="color: #92400E;">{d.note}</p>
           </div>
-        </li>
-      ))
-    }
-  </ol>
-
-  <!-- Returning student callout -->
-  <div class="mt-6 rounded-[10px] px-4 py-3 text-sm" style="background: var(--color-fcs-green-light); border: 1px solid var(--color-fcs-border); color: var(--color-fcs-muted);">
-    {c.returningNote}{" "}
-    <a href={links.addDropTransfer} target="_blank" rel="noopener" class="font-semibold hover:underline" style="color: var(--color-fcs-green);">{c.returningLinkLabel} →</a>
-  </div>
-
-  <!-- Volunteer hours — surfaced early so families know before committing -->
-  <div class="mt-8 flex gap-4 rounded-[10px] p-5" style="background: var(--color-fcs-green-light); border: 1px solid var(--color-fcs-border); border-left: 4px solid var(--color-fcs-green);">
-    <span style="flex-shrink:0; margin-top:2px; color: var(--color-fcs-green);">
-      <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
-    </span>
-    <div>
-      <h2 class="font-semibold" style="color: var(--color-fcs-black);">{c.volunteerTitle}</h2>
-      <p class="mt-1 text-sm leading-relaxed" style="color: var(--color-fcs-muted);">{c.volunteerBody}</p>
+        </div>
+      ))}
     </div>
   </div>
 
-  <!-- Key Dates -->
-  <h2 class="mt-12 text-xl font-semibold" style="color: var(--color-fcs-black);">{c.keyDatesTitle}</h2>
-  <div class="mt-4 space-y-3">
-    {c.keyDates.map((d) => (
-      <div class="flex gap-4 rounded-[10px] px-4 py-3" style="background: #FFFBEB; border: 1px solid #FDE68A;">
-        <span style="color: #D97706; flex-shrink:0; margin-top:2px;">
-          <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
-        </span>
-        <div>
-          <p class="text-sm font-semibold" style="color: #92400E;">{d.label}: <span style="color: #B45309;">{d.date}</span></p>
-          <p class="mt-0.5 text-xs" style="color: #92400E;">{d.note}</p>
-        </div>
+  <!-- ─── NEW FAMILY ─── -->
+  <div id="new-family" class="mt-14 scroll-mt-24">
+    <div class="flex items-center gap-3 border-b pb-4" style="border-color: var(--color-fcs-border);">
+      <div class="flex h-8 w-8 items-center justify-center rounded-full" style="background: var(--color-fcs-green-light);">
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color: var(--color-fcs-green);" aria-hidden="true"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><line x1="19" y1="8" x2="19" y2="14"/><line x1="22" y1="11" x2="16" y2="11"/></svg>
       </div>
-    ))}
+      <h2 class="text-xl font-semibold" style="color: var(--color-fcs-black);">{lang === 'en' ? 'New family guide' : '新生家庭指南'}</h2>
+    </div>
+
+    <!-- Step 1: Find the right class -->
+    <div class="mt-8">
+      <h3 class="flex items-center gap-3 text-lg font-semibold" style="color: var(--color-fcs-black);">
+        <span class="flex h-8 w-8 flex-none items-center justify-center rounded-full font-bold text-white text-sm" style="background: var(--color-fcs-green);">1</span>
+        {lang === 'en' ? 'Find the right class for your child' : '為孩子選擇合適的課程'}
+      </h3>
+      <div class="ml-11 mt-3">
+        <p class="text-sm leading-relaxed" style="color: var(--color-fcs-muted);">
+          {lang === 'en'
+            ? 'FCS classes are organized by language ability, not school grade. Use the questions below to find the right starting point.'
+            : 'FCS 課程依語言能力分班，而非學校年級。請參考以下問題找到適合的起點。'}
+        </p>
+
+        <!-- Decision helper -->
+        <div class="mt-4 space-y-3">
+          <details class="rounded-[8px] overflow-hidden" style="border: 1px solid var(--color-fcs-border);">
+            <summary class="flex cursor-pointer items-center justify-between gap-4 px-4 py-3 text-sm font-semibold select-none" style="background: var(--color-fcs-white); color: var(--color-fcs-black);">
+              {lang === 'en' ? 'My child has never studied Chinese' : '孩子從未學過中文'}
+              <svg class="flex-shrink-0 transition-transform" style="color: var(--color-fcs-green);" xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+            </summary>
+            <div class="px-4 py-3 text-sm leading-relaxed" style="background: #F0F7F2; color: var(--color-fcs-muted); border-top: 1px solid var(--color-fcs-border);">
+              {lang === 'en'
+                ? 'Start in the Bilingual track. The Bilingual program (CK–C8) is designed for beginners and heritage learners easing into Mandarin — all instruction is in both English and Chinese. Download the grade chart to find the right level by your child\'s school grade.'
+                : '從雙語班開始。雙語課程（CK–C8）專為初學者及海外華裔學生設計，以中英雙語授課。請下載年級對照表，依孩子的學校年級找到適合的班級。'}
+            </div>
+          </details>
+
+          <details class="rounded-[8px] overflow-hidden" style="border: 1px solid var(--color-fcs-border);">
+            <summary class="flex cursor-pointer items-center justify-between gap-4 px-4 py-3 text-sm font-semibold select-none" style="background: var(--color-fcs-white); color: var(--color-fcs-black);">
+              {lang === 'en' ? 'My child speaks some Mandarin at home' : '孩子在家說一些普通話'}
+              <svg class="flex-shrink-0 transition-transform" style="color: var(--color-fcs-green);" xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+            </summary>
+            <div class="px-4 py-3 text-sm leading-relaxed" style="background: #F0F7F2; color: var(--color-fcs-muted); border-top: 1px solid var(--color-fcs-border);">
+              {lang === 'en'
+                ? 'The full-Chinese (CSL) track may be a better fit — classes are conducted entirely in Mandarin. Use the grade chart to find the right level, or contact us and we can help place your child.'
+                : '全中文（CSL）班可能更適合孩子——課程完全以普通話進行。請下載年級對照表，或聯絡我們協助安排班級。'}
+            </div>
+          </details>
+
+          <details class="rounded-[8px] overflow-hidden" style="border: 1px solid var(--color-fcs-border);">
+            <summary class="flex cursor-pointer items-center justify-between gap-4 px-4 py-3 text-sm font-semibold select-none" style="background: var(--color-fcs-white); color: var(--color-fcs-black);">
+              {lang === 'en' ? 'My child is in high school and wants college credit' : '孩子是高中生，希望取得大學學分'}
+              <svg class="flex-shrink-0 transition-transform" style="color: var(--color-fcs-green);" xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+            </summary>
+            <div class="px-4 py-3 text-sm leading-relaxed" style="background: #F0F7F2; color: var(--color-fcs-muted); border-top: 1px solid var(--color-fcs-border);">
+              {lang === 'en'
+                ? 'The Accredited Curriculum (AC) track is WASC-accredited — credits are recognized toward UC/CSU requirements. New students take a placement test; watch for the announcement each spring.'
+                : '學分班（AC）已通過 WASC 認證，學分可計入 UC/CSU 入學要求。新生須參加分班測驗，請留意每年春季的測驗公告。'}
+            </div>
+          </details>
+        </div>
+
+        <a href={links.gradeChart} target="_blank" rel="noopener" class="mt-4 inline-flex items-center gap-1.5 text-sm font-semibold" style="color: var(--color-fcs-green);">
+          {c.placementLinkLabel}
+          <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+        </a>
+      </div>
+    </div>
+
+    <!-- Step 2: Browse electives -->
+    <div class="mt-8">
+      <h3 class="flex items-center gap-3 text-lg font-semibold" style="color: var(--color-fcs-black);">
+        <span class="flex h-8 w-8 flex-none items-center justify-center rounded-full font-bold text-white text-sm" style="background: var(--color-fcs-green);">2</span>
+        {c.electivesTitle}
+      </h3>
+      <div class="ml-11 mt-3">
+        <p class="text-sm leading-relaxed" style="color: var(--color-fcs-muted);">{c.electivesBody}</p>
+        <a href={localizedPath(lang, 'electives')} class="mt-3 inline-flex items-center gap-1.5 text-sm font-semibold" style="color: var(--color-fcs-green);">
+          {c.electivesLinkLabel}
+          <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14m-6-6 6 6-6 6"/></svg>
+        </a>
+      </div>
+    </div>
+
+    <!-- Step 3: What to have ready -->
+    <div class="mt-8">
+      <h3 class="flex items-center gap-3 text-lg font-semibold" style="color: var(--color-fcs-black);">
+        <span class="flex h-8 w-8 flex-none items-center justify-center rounded-full font-bold text-white text-sm" style="background: var(--color-fcs-green);">3</span>
+        {lang === 'en' ? 'What to have ready before you fill in the form' : '填寫表格前請準備好以下資料'}
+      </h3>
+      <ul class="ml-11 mt-3 space-y-1.5">
+        {[
+          lang === 'en' ? "Your child's current school grade" : '孩子目前的學校年級',
+          lang === 'en' ? 'Which track you\'ve chosen (Bilingual, CSL full-Chinese, or AC)' : '您選擇的課程類型（雙語、全中文 CSL 或學分班 AC）',
+          lang === 'en' ? 'Which electives interest you (optional, can be added later)' : '感興趣的選修課（可選，之後可補填）',
+          lang === 'en' ? 'Payment method — check or PayPal (PayPal adds a 5% fee)' : '付款方式——支票或 PayPal（PayPal 收取 5% 手續費）',
+        ].map((item) => (
+          <li class="flex items-start gap-2 text-sm" style="color: var(--color-fcs-muted);">
+            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="color: var(--color-fcs-green); flex-shrink:0; margin-top:3px;" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>
+            {item}
+          </li>
+        ))}
+      </ul>
+    </div>
+
+    <!-- Step 4: Register + pay -->
+    <div class="mt-8">
+      <h3 class="flex items-center gap-3 text-lg font-semibold" style="color: var(--color-fcs-black);">
+        <span class="flex h-8 w-8 flex-none items-center justify-center rounded-full font-bold text-white text-sm" style="background: var(--color-fcs-green);">4</span>
+        {lang === 'en' ? 'Submit the form and pay' : '提交表格並付款'}
+      </h3>
+      <div class="ml-11 mt-3 flex flex-wrap gap-3">
+        <a
+          href={links.register}
+          target="_blank"
+          rel="noopener"
+          class="inline-block rounded-[6px] px-5 py-2.5 text-sm font-semibold text-white transition-opacity hover:opacity-90"
+          style="background: var(--color-fcs-orange);"
+        >
+          {lang === 'en' ? 'Open registration form →' : '開啟報名表 →'}
+        </a>
+        <a
+          href={localizedPath(lang, 'payment')}
+          class="inline-block rounded-[6px] px-5 py-2.5 text-sm font-semibold transition-colors"
+          style="background: var(--color-fcs-white); border: 1px solid var(--color-fcs-border); color: var(--color-fcs-green);"
+        >
+          {lang === 'en' ? 'Go to online payment →' : '前往線上付款 →'}
+        </a>
+      </div>
+      <p class="ml-11 mt-2 text-xs" style="color: var(--color-fcs-muted);">
+        {lang === 'en' ? 'Register and pay by May 16, 2026 for the Early Bird rate.' : '請於 2026 年 5 月 16 日前完成報名及付款，享早鳥優惠。'}
+      </p>
+
+      <!-- PayPal Order # callout -->
+      <div class="ml-11 mt-4 flex gap-3 rounded-[8px] px-4 py-3" style="background: #FEF3C7; border: 1px solid #FCD34D;">
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color: #D97706; flex-shrink:0; margin-top:2px;" aria-hidden="true"><path d="M10.29 3.86 1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+        <p class="text-sm" style="color: #92400E;">
+          {lang === 'en'
+            ? 'If you pay online via PayPal: after checkout you will receive a PayPal confirmation email with an Order #. Copy that Order # and paste it into the registration form — your registration is not complete until both steps are done.'
+            : '若您透過 PayPal 線上付款：完成付款後，您將收到含有訂單編號的 PayPal 確認信。請將該訂單編號填入報名表中——兩個步驟均完成後，報名才算完成。'}
+        </p>
+      </div>
+    </div>
+
+    <!-- Volunteer hours -->
+    <div class="ml-11 mt-8 flex gap-4 rounded-[10px] p-5" style="background: var(--color-fcs-green-light); border: 1px solid var(--color-fcs-border); border-left: 4px solid var(--color-fcs-green);">
+      <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0; margin-top:2px; color: var(--color-fcs-green);" aria-hidden="true"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+      <div>
+        <p class="font-semibold" style="color: var(--color-fcs-black);">{c.volunteerTitle}</p>
+        <p class="mt-1 text-sm leading-relaxed" style="color: var(--color-fcs-muted);">{c.volunteerBody}</p>
+      </div>
+    </div>
   </div>
 
-  <!-- Grade placement -->
-  <div class="mt-12 rounded-[10px] p-6" style="background: var(--color-fcs-white); border: 1px solid var(--color-fcs-border); border-top: 5px solid var(--color-fcs-green);">
-    <h2 class="text-xl font-semibold" style="color: var(--color-fcs-green-dark);">{c.placementTitle}</h2>
-    <p class="mt-3 leading-relaxed" style="color: var(--color-fcs-muted);">{c.placementBody}</p>
-    <a href={links.gradeChart} target="_blank" rel="noopener" class="mt-4 inline-flex items-center gap-1.5 text-sm font-semibold" style="color: var(--color-fcs-green);">
-      {c.placementLinkLabel}
-      <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
-    </a>
-  </div>
+  <!-- ─── RETURNING FAMILY ─── -->
+  <div id="returning-family" class="mt-14 scroll-mt-24">
+    <div class="flex items-center gap-3 border-b pb-4" style="border-color: var(--color-fcs-border);">
+      <div class="flex h-8 w-8 items-center justify-center rounded-full" style="background: #F3F4F6;">
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color: var(--color-fcs-muted);" aria-hidden="true"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+      </div>
+      <h2 class="text-xl font-semibold" style="color: var(--color-fcs-black);">{lang === 'en' ? 'Returning family' : '返校家庭'}</h2>
+    </div>
 
-  <!-- Electives -->
-  <div class="mt-6 rounded-[10px] p-6" style="background: var(--color-fcs-white); border: 1px solid var(--color-fcs-border); border-top: 5px solid var(--color-fcs-green);">
-    <h2 class="text-xl font-semibold" style="color: var(--color-fcs-green-dark);">{c.electivesTitle}</h2>
-    <p class="mt-3 leading-relaxed" style="color: var(--color-fcs-muted);">{c.electivesBody}</p>
-    <a href={links.electiveList} target="_blank" rel="noopener" class="mt-4 inline-flex items-center gap-1.5 text-sm font-semibold" style="color: var(--color-fcs-green);">
-      {c.electivesLinkLabel}
-      <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
-    </a>
+    <div class="mt-6 rounded-[10px] p-5" style="background: var(--color-fcs-white); border: 1px solid var(--color-fcs-border); border-left: 4px solid var(--color-fcs-blue);">
+      <p class="font-semibold" style="color: var(--color-fcs-black);">
+        {lang === 'en' ? 'Check your email for your personalized registration link' : '請查看電子郵件中的個人化報名連結'}
+      </p>
+      <p class="mt-2 text-sm leading-relaxed" style="color: var(--color-fcs-muted);">
+        {lang === 'en'
+          ? 'Each spring, FCS emails returning families a registration link pre-filled with your student ID. Follow that link to complete the form and then pay online. Registration is not complete until both the form and payment are submitted.'
+          : '每年春季，FCS 會寄送個人化報名連結至家長電子郵件，連結中已預填學號。請點擊連結完成報名表，並完成線上付款。報名表及付款均完成後，報名才算完成。'}
+      </p>
+      <div class="mt-4 flex flex-wrap gap-3">
+        <a
+          href={localizedPath(lang, 'payment')}
+          class="inline-block rounded-[6px] px-4 py-2 text-sm font-semibold text-white transition-opacity hover:opacity-90"
+          style="background: var(--color-fcs-green);"
+        >
+          {lang === 'en' ? 'Go to online payment →' : '前往線上付款 →'}
+        </a>
+      </div>
+    </div>
+
+    <div class="mt-4 rounded-[10px] px-4 py-3 text-sm" style="background: #FFFBEB; border: 1px solid #FDE68A; color: #92400E;">
+      {lang === 'en'
+        ? "Didn't receive the email by late April? Check your spam folder, then email "
+        : '四月底前未收到電子郵件？請先檢查垃圾郵件，再寄信至 '}
+      <a href="mailto:registration@fremontchineseschool.org" class="font-semibold hover:underline" style="color: #B45309;">registration@fremontchineseschool.org</a>
+      {lang === 'en' ? ' with your child\'s name and FCS student ID.' : '，並附上孩子的姓名及 FCS 學號。'}
+    </div>
+
+    <!-- Add/drop/transfer -->
+    <div class="mt-6 rounded-[10px] px-4 py-3 text-sm" style="background: var(--color-fcs-green-light); border: 1px solid var(--color-fcs-border); color: var(--color-fcs-muted);">
+      {c.returningNote}{" "}
+      <a href={links.addDropTransfer} target="_blank" rel="noopener" class="font-semibold hover:underline" style="color: var(--color-fcs-green);">{c.returningLinkLabel} →</a>
+    </div>
   </div>
 
   <!-- FAQ -->
-  <h2 class="mt-12 text-xl font-semibold" style="color: var(--color-fcs-black);">{c.faqTitle}</h2>
+  <h2 class="mt-14 text-xl font-semibold" style="color: var(--color-fcs-black);">{c.faqTitle}</h2>
   <div class="mt-4 divide-y" style="border: 1px solid var(--color-fcs-border); border-radius: 10px; overflow: hidden;">
     {c.faq.map((item) => (
       <details class="group">
@@ -140,30 +286,32 @@ const c = content[lang].enroll;
             ? 'background: #DCFCE7; border: 1px solid #86EFAC;'
             : 'background: var(--color-fcs-white); border: 1px solid var(--color-fcs-border);'}
         >
-          <span class="text-sm font-semibold" style={tier.highlight ? 'color: #166534;' : `color: var(--color-fcs-black);`}>{tier.period}</span>
-          <span class="text-sm" style={tier.highlight ? 'color: #166534;' : `color: var(--color-fcs-muted);`}>{tier.rule}</span>
+          <span class="text-sm font-semibold" style={tier.highlight ? 'color: #166534;' : 'color: var(--color-fcs-black);'}>{tier.period}</span>
+          <span class="text-sm" style={tier.highlight ? 'color: #166534;' : 'color: var(--color-fcs-muted);'}>{tier.rule}</span>
         </div>
       ))}
     </div>
     <p class="mt-3 text-xs" style="color: var(--color-fcs-muted);">{c.refundContact}</p>
   </div>
 
-
   <!-- Resources grid -->
   <h2 class="mt-12 text-xl font-semibold" style="color: var(--color-fcs-black);">{c.resourcesTitle}</h2>
   <div class="mt-4 grid gap-3 sm:grid-cols-2">
-    {c.resources.map((r) => (
-      <a
-        href={links[r.link as keyof typeof links]}
-        target="_blank"
-        rel="noopener"
-        class="flex items-center gap-3 rounded-[10px] px-4 py-3 text-sm font-semibold transition-colors hover:underline"
-        style="background: var(--color-fcs-white); border: 1px solid var(--color-fcs-border); color: var(--color-fcs-green);"
-      >
-        <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0;"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
-        {r.label}
-      </a>
-    ))}
+    {c.resources.map((r) => {
+      const isInternal = 'internal' in r && r.internal;
+      const href = isInternal ? localizedPath(lang, r.link) : links[r.link as keyof typeof links];
+      return (
+        <a
+          href={href}
+          {...(!isInternal ? { target: '_blank', rel: 'noopener' } : {})}
+          class="flex items-center gap-3 rounded-[10px] px-4 py-3 text-sm font-semibold transition-colors hover:underline"
+          style="background: var(--color-fcs-white); border: 1px solid var(--color-fcs-border); color: var(--color-fcs-green);"
+        >
+          <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0;"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+          {r.label}
+        </a>
+      );
+    })}
   </div>
 
   <!-- Calendar note -->

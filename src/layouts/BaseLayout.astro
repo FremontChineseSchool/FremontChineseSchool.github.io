@@ -2,8 +2,8 @@
 import "../styles/global.css";
 import Header from "../components/Header.astro";
 import Footer from "../components/Footer.astro";
-import { ui, routes, type Lang } from "../i18n/ui";
-import { descriptions, contactInfo } from "../i18n/content";
+import { ui, routes, localizedPath, type Lang } from "../i18n/ui";
+import { descriptions, contactInfo, content } from "../i18n/content";
 
 interface Props {
   lang: Lang;
@@ -113,6 +113,16 @@ const orgSchema = {
       class="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-50 focus:rounded focus:bg-white focus:px-4 focus:py-2 focus:shadow"
       >{t.skipToContent}</a
     >
+    {content[lang].home.announcement && (
+      <div class="flex flex-wrap items-center justify-center gap-x-4 gap-y-1 px-4 py-2.5 text-sm font-medium" style="background: var(--color-fcs-gold); color: #1A0F00;">
+        <span>📣 {content[lang].home.announcement}</span>
+        <a
+          href={localizedPath(lang, 'enroll')}
+          class="rounded-full px-3 py-0.5 text-xs font-semibold transition-opacity hover:opacity-80"
+          style="background: #1A3D22; color: white;"
+        >{content[lang].home.announcementCta}</a>
+      </div>
+    )}
     <Header lang={lang} />
     <main id="main" class="flex-1 flex flex-col">
       <slot />

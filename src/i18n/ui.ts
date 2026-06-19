@@ -28,6 +28,7 @@ export const routes: Record<string, string> = {
   'ac-resources': 'ac-resources',
   'staff-resources': 'staff-resources',
   news: 'news',
+  electives: 'electives',
 };
 
 export const ui = {
