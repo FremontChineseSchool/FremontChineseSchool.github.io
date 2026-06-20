@@ -51,6 +51,15 @@ const t = c.tuition;
                   </p>
                 </div>
               )}
+              {i === 2 && (
+                <a
+                  href={localizedPath(lang, 'electives')}
+                  class="mt-4 inline-flex items-center gap-1.5 text-sm font-semibold hover:underline"
+                  style="color: var(--color-fcs-green);"
+                >
+                  {lang === 'zh' ? '查看完整選修課程列表 →' : 'View full elective list →'}
+                </a>
+              )}
             </div>
           </div>
         ))}
