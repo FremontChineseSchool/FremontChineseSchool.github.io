@@ -124,11 +124,11 @@ const orgSchema = {
         pins itself exactly as before. */}
     <div class="sticky top-0 z-50 sm:contents">
       {content[lang].home.announcement && (
-        <div class="flex flex-wrap items-center justify-center gap-x-4 gap-y-1 px-4 py-2.5 text-sm font-medium" style="background: var(--color-fcs-green-dark); color: #EFE9DB;">
-          <span>📣 {content[lang].home.announcement}</span>
+        <div class="flex items-center justify-center gap-x-3 px-4 py-2 text-xs font-medium" style="background: var(--color-fcs-green-dark); color: #EFE9DB;">
+          <span class="min-w-0 truncate">{content[lang].home.announcement}</span>
           <a
             href={localizedPath(lang, 'enroll')}
-            class="btn-primary btn-shimmer rounded-full px-3.5 py-1 text-xs font-semibold transition-colors"
+            class="btn-primary btn-shimmer shrink-0 rounded-full px-3 py-0.5 text-xs font-semibold transition-colors"
           >{content[lang].home.announcementCta}</a>
         </div>
       )}
