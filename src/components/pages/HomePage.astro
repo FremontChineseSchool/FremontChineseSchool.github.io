@@ -37,7 +37,7 @@ const featureIcons = [
   <div class="mt-8 flex flex-wrap gap-3">
     <a
       href={localizedPath(lang, 'enroll')}
-      class="rounded-[6px] bg-fcs-orange px-6 py-3 font-semibold text-fcs-white transition-colors duration-150 hover:bg-[#C85A10]"
+      class="btn-primary btn-shimmer rounded-[6px] px-6 py-3 font-semibold transition-colors duration-150"
     >{c.ctaPrimary}</a>
     <a
       href={localizedPath(lang, "programs")}
@@ -58,7 +58,7 @@ const featureIcons = [
         <div class="text-3xl font-extrabold tracking-tight text-white sm:text-4xl" style="letter-spacing: -0.02em;">
           {f.value}
         </div>
-        <div class="mt-1.5 text-[10px] font-semibold uppercase tracking-widest" style="color: rgba(255,255,255,0.6);">
+        <div class="mt-1.5 text-[10px] font-semibold uppercase tracking-widest" style="color: var(--color-fcs-gold);">
           {f.label}
         </div>
       </div>
@@ -67,7 +67,7 @@ const featureIcons = [
 </section>
 
 <!-- Why FCS — value props (odd section → fcs-white bg) -->
-<section style="background: #FFF8F0;">
+<section style="background: var(--color-fcs-white);">
   <div class="mx-auto max-w-6xl px-4 py-28">
     <div class="max-w-2xl" data-reveal>
       <p class="eyebrow mb-3">Why FCS</p>
@@ -109,7 +109,7 @@ const featureIcons = [
 </section>
 
 <!-- Culture section -->
-<section style="background: #1A3D22;">
+<section style="background: #123524;">
   <div class="mx-auto max-w-6xl px-4 py-20 sm:py-24">
     <!-- Header -->
     <div class="max-w-2xl" data-reveal>
@@ -166,7 +166,7 @@ const featureIcons = [
 
 
 <!-- Get-started cards -->
-<section style="background: linear-gradient(to bottom, #F0F7F2, #FFF8F0);">
+<section style="background: linear-gradient(to bottom, var(--color-fcs-green-light), var(--color-fcs-white));">
   <div class="mx-auto max-w-6xl px-4 py-28">
     <h2 class="text-4xl font-bold sm:text-5xl" style="letter-spacing: -0.03em; color: var(--color-fcs-black);" data-reveal>{c.cardsTitle}</h2>
     <div class="mt-10 grid gap-6 md:grid-cols-3">
@@ -213,7 +213,7 @@ const featureIcons = [
 </section>
 
 <!-- Closing CTA band -->
-<section style="background: linear-gradient(135deg, #1F1D19 0%, #134B38 60%, #1A6E52 100%); flex-grow: 1;">
+<section style="background: linear-gradient(135deg, #221F1A 0%, #16412E 55%, #21704F 100%); flex-grow: 1;">
   <div
     class="mx-auto max-w-4xl px-4 py-28 text-center"
     data-reveal
@@ -223,8 +223,7 @@ const featureIcons = [
     <div class="mt-8 flex flex-wrap justify-center gap-3">
       <a
         href={localizedPath(lang, 'enroll')}
-        class="rounded-[6px] bg-fcs-white px-7 py-3 font-semibold transition-colors duration-150 hover:bg-white"
-        style="color: var(--color-fcs-green);"
+        class="btn-on-dark btn-shimmer rounded-[6px] px-7 py-3 font-semibold transition-colors duration-150"
       >{c.ctaPrimary}</a>
       <a
         href={localizedPath(lang, "enroll")}

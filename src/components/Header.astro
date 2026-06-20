@@ -62,7 +62,7 @@ const navItems = navOrder.map((key) => {
     <div class="flex items-center gap-3">
       <a
         href={localizedPath(lang, 'enroll')}
-        class="hidden rounded-[6px] px-4 py-2 text-[11px] font-semibold text-fcs-white transition-colors duration-150 sm:inline-block" style="background: #3DA17C;" onmouseover="this.style.background='#2D8A67'" onmouseout="this.style.background='#3DA17C'"
+        class="btn-primary hidden rounded-[6px] px-4 py-2 text-[11px] font-semibold transition-colors duration-150 sm:inline-block"
       >{t.enrollCta}</a>
       <LangSwitch lang={lang} />
 
@@ -110,7 +110,8 @@ const navItems = navOrder.map((key) => {
           }
           <a
             href={localizedPath(lang, 'enroll')}
-            class="mt-1 block border-t border-white/10 px-4 py-2 text-[11px] font-semibold text-fcs-orange"
+            class="mt-1 block border-t border-white/10 px-4 py-2 text-[11px] font-semibold"
+            style="color: var(--color-fcs-gold);"
           >{t.enrollCta}</a>
         </nav>
       </details>

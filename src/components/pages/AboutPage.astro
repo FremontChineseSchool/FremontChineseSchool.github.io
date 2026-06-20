@@ -10,7 +10,7 @@ const c = content[lang].about;
 const regulationsUrl = "/FCS_Bylaws_2020.pdf";
 ---
 
-<section style="background: #FFF8F0;" class="mx-auto max-w-3xl px-4 py-14">
+<section style="background: var(--color-fcs-white);" class="mx-auto max-w-3xl px-4 py-14">
   <p class="eyebrow mb-3">About</p>
   <h1 class="text-3xl font-semibold sm:text-4xl" style="letter-spacing: -0.02em; color: var(--color-fcs-black);">{c.title}</h1>
 
@@ -70,32 +70,32 @@ const regulationsUrl = "/FCS_Bylaws_2020.pdf";
     <div class="mt-6 overflow-x-auto rounded-[10px] p-6" style="background: var(--color-fcs-white); border: 1px solid var(--color-fcs-border);">
       <!-- Row 1: Parent Assembly -->
       <div class="flex justify-start">
-        <div class="rounded-[6px] px-5 py-2.5 text-center text-sm font-semibold text-white" style="background: #4472C4; min-width: 140px;">
+        <div class="rounded-[6px] px-5 py-2.5 text-center text-sm font-semibold text-white" style="background: var(--color-fcs-green-dark); min-width: 140px;">
           <div class="text-base">家長大會</div>
           <div class="text-xs font-normal opacity-90">Parent Assembly</div>
         </div>
       </div>
       <!-- connector -->
-      <div class="ml-[69px] h-5 w-px" style="background: #94A3B8;"></div>
+      <div class="ml-[69px] h-5 w-px" style="background: var(--color-fcs-border);"></div>
       <!-- Row 2: School Board -->
       <div class="flex justify-start">
-        <div class="rounded-[6px] px-5 py-2.5 text-center text-sm font-semibold text-white" style="background: #7B4B44; min-width: 140px;">
+        <div class="rounded-[6px] px-5 py-2.5 text-center text-sm font-semibold text-white" style="background: var(--color-fcs-green); min-width: 140px;">
           <div>校務委員</div>
           <div class="text-xs font-normal opacity-90">School Board</div>
         </div>
       </div>
       <!-- connector -->
-      <div class="ml-[69px] h-5 w-px" style="background: #94A3B8;"></div>
+      <div class="ml-[69px] h-5 w-px" style="background: var(--color-fcs-border);"></div>
       <!-- Row 3: Staff + Principal branch -->
       <div class="flex items-start gap-0">
         <div class="flex flex-col items-center">
-          <div class="rounded-[6px] px-4 py-2 text-center text-sm font-semibold text-white" style="background: #70AD47; min-width: 120px;">
+          <div class="rounded-[6px] px-4 py-2 text-center text-sm font-semibold text-white" style="background: var(--color-fcs-green); min-width: 120px;">
             <div>幹事會</div>
             <div class="text-xs font-normal opacity-90">Staff</div>
           </div>
-          <div class="h-5 w-px" style="background: #94A3B8;"></div>
+          <div class="h-5 w-px" style="background: var(--color-fcs-border);"></div>
           <!-- Principal -->
-          <div class="rounded-[6px] px-4 py-2 text-center text-sm font-semibold" style="background: var(--color-fcs-white); border: 1.5px solid #94A3B8; min-width: 120px; color: var(--color-fcs-black);">
+          <div class="rounded-[6px] px-4 py-2 text-center text-sm font-semibold" style="background: var(--color-fcs-white); border: 1.5px solid var(--color-fcs-border); min-width: 120px; color: var(--color-fcs-black);">
             <div>校長</div>
             <div class="text-xs" style="color: var(--color-fcs-muted);">Principal</div>
           </div>
@@ -103,16 +103,16 @@ const regulationsUrl = "/FCS_Bylaws_2020.pdf";
         <!-- Right branch from Principal -->
         <div class="mt-[88px] flex flex-col gap-0">
           <div class="flex items-start">
-            <div class="mt-[11px] h-px w-6" style="background: #94A3B8;"></div>
+            <div class="mt-[11px] h-px w-6" style="background: var(--color-fcs-border);"></div>
             <div class="flex flex-col gap-2">
               <!-- Vice Principal + AC -->
               <div class="flex items-center gap-2">
-                <div class="rounded-[6px] px-3 py-1.5 text-center text-xs font-semibold" style="background: var(--color-fcs-white); border: 1.5px solid #94A3B8; color: var(--color-fcs-black);">
+                <div class="rounded-[6px] px-3 py-1.5 text-center text-xs font-semibold" style="background: var(--color-fcs-white); border: 1.5px solid var(--color-fcs-border); color: var(--color-fcs-black);">
                   <div>副校長</div>
                   <div style="color: var(--color-fcs-muted);">Vice Principal</div>
                 </div>
-                <div class="h-px w-4" style="background: #94A3B8;"></div>
-                <div class="rounded-[6px] px-3 py-1.5 text-center text-xs font-semibold" style="background: var(--color-fcs-white); border: 1.5px solid #94A3B8; color: var(--color-fcs-black);">
+                <div class="h-px w-4" style="background: var(--color-fcs-border);"></div>
+                <div class="rounded-[6px] px-3 py-1.5 text-center text-xs font-semibold" style="background: var(--color-fcs-white); border: 1.5px solid var(--color-fcs-border); color: var(--color-fcs-black);">
                   <div>學分班</div>
                   <div style="color: var(--color-fcs-muted);">Accredited Curriculum</div>
                 </div>
@@ -131,7 +131,7 @@ const regulationsUrl = "/FCS_Bylaws_2020.pdf";
                   ['出版','Publication'],
                   ['訓育','Safety'],
                 ].map(([zh, en]) => (
-                  <div class="rounded-[4px] px-2 py-1.5 text-center text-xs font-medium text-white" style="background: #70AD47;">
+                  <div class="rounded-[4px] px-2 py-1.5 text-center text-xs font-medium text-white" style="background: var(--color-fcs-green);">
                     <div>{zh}</div>
                     <div class="opacity-85">{en}</div>
                   </div>

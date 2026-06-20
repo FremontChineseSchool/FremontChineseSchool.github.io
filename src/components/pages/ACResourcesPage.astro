@@ -9,7 +9,7 @@ const { lang } = Astro.props;
 const isZh = lang === 'zh';
 ---
 
-<section style="background: #FFF8F0;" class="mx-auto max-w-3xl px-4 py-14">
+<section style="background: var(--color-fcs-white);" class="mx-auto max-w-3xl px-4 py-14">
 
   <p class="eyebrow mb-3">AC Program</p>
   <h1 class="text-3xl font-semibold sm:text-4xl" style="letter-spacing: -0.02em; color: var(--color-fcs-black);">
@@ -20,7 +20,7 @@ const isZh = lang === 'zh';
   </p>
 
   <!-- Policies & Info -->
-  <div class="mt-10 rounded-[10px] p-6" style="background: var(--color-fcs-white); border: 1px solid var(--color-fcs-border); border-top: 5px solid var(--color-fcs-blue);">
+  <div class="mt-10 rounded-[10px] p-6" style="background: var(--color-fcs-white); border: 1px solid var(--color-fcs-border); border-top: 5px solid var(--color-fcs-green);">
     <h2 class="text-lg font-semibold" style="color: var(--color-fcs-black);">
       {isZh ? '政策與規章' : 'Policies & Rules'}
     </h2>

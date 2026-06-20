@@ -9,7 +9,7 @@ const { lang } = Astro.props;
 const c = content[lang].enroll;
 ---
 
-<section style="background: #FFF8F0;" class="mx-auto max-w-3xl px-4 py-14">
+<section style="background: var(--color-fcs-white);" class="mx-auto max-w-3xl px-4 py-14">
   <p class="eyebrow mb-3">{lang === 'en' ? 'Enroll' : '報名'}</p>
   <h1 class="text-3xl font-semibold sm:text-4xl" style="letter-spacing: -0.02em; color: var(--color-fcs-black);">{c.title}</h1>
   <p class="mt-4 text-lg" style="color: var(--color-fcs-muted);">{c.intro}</p>
@@ -50,13 +50,13 @@ const c = content[lang].enroll;
     <h2 class="text-xl font-semibold" style="color: var(--color-fcs-black);">{c.keyDatesTitle}</h2>
     <div class="mt-4 space-y-3">
       {c.keyDates.map((d) => (
-        <div class="flex gap-4 rounded-[10px] px-4 py-3" style="background: #FFFBEB; border: 1px solid #FDE68A;">
-          <span style="color: #D97706; flex-shrink:0; margin-top:2px;">
+        <div class="flex gap-4 rounded-[10px] px-4 py-3" style="background: var(--color-fcs-orange-light); border: 1px solid var(--color-fcs-gold);">
+          <span style="color: var(--color-fcs-gold-ink); flex-shrink:0; margin-top:2px;">
             <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
           </span>
           <div>
-            <p class="text-sm font-semibold" style="color: #92400E;">{d.label}: <span style="color: #B45309;">{d.date}</span></p>
-            <p class="mt-0.5 text-xs" style="color: #92400E;">{d.note}</p>
+            <p class="text-sm font-semibold" style="color: var(--color-fcs-black);">{d.label}: <span style="color: var(--color-fcs-gold-ink);">{d.date}</span></p>
+            <p class="mt-0.5 text-xs" style="color: var(--color-fcs-black);">{d.note}</p>
           </div>
         </div>
       ))}
@@ -92,7 +92,7 @@ const c = content[lang].enroll;
               {lang === 'en' ? 'My child has never studied Chinese' : '孩子從未學過中文'}
               <svg class="flex-shrink-0 transition-transform" style="color: var(--color-fcs-green);" xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
             </summary>
-            <div class="px-4 py-3 text-sm leading-relaxed" style="background: #F0F7F2; color: var(--color-fcs-muted); border-top: 1px solid var(--color-fcs-border);">
+            <div class="px-4 py-3 text-sm leading-relaxed" style="background: var(--color-fcs-green-light); color: var(--color-fcs-muted); border-top: 1px solid var(--color-fcs-border);">
               {lang === 'en'
                 ? 'Start in the Bilingual track. The Bilingual program (CK–C8) is designed for beginners and heritage learners easing into Mandarin — all instruction is in both English and Chinese. Download the grade chart to find the right level by your child\'s school grade.'
                 : '從雙語班開始。雙語課程（CK–C8）專為初學者及海外華裔學生設計，以中英雙語授課。請下載年級對照表，依孩子的學校年級找到適合的班級。'}
@@ -104,7 +104,7 @@ const c = content[lang].enroll;
               {lang === 'en' ? 'My child speaks some Mandarin at home' : '孩子在家說一些普通話'}
               <svg class="flex-shrink-0 transition-transform" style="color: var(--color-fcs-green);" xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
             </summary>
-            <div class="px-4 py-3 text-sm leading-relaxed" style="background: #F0F7F2; color: var(--color-fcs-muted); border-top: 1px solid var(--color-fcs-border);">
+            <div class="px-4 py-3 text-sm leading-relaxed" style="background: var(--color-fcs-green-light); color: var(--color-fcs-muted); border-top: 1px solid var(--color-fcs-border);">
               {lang === 'en'
                 ? 'The full-Chinese (CSL) track may be a better fit — classes are conducted entirely in Mandarin. Use the grade chart to find the right level, or contact us and we can help place your child.'
                 : '全中文（CSL）班可能更適合孩子——課程完全以普通話進行。請下載年級對照表，或聯絡我們協助安排班級。'}
@@ -116,7 +116,7 @@ const c = content[lang].enroll;
               {lang === 'en' ? 'My child is in high school and wants college credit' : '孩子是高中生，希望取得大學學分'}
               <svg class="flex-shrink-0 transition-transform" style="color: var(--color-fcs-green);" xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
             </summary>
-            <div class="px-4 py-3 text-sm leading-relaxed" style="background: #F0F7F2; color: var(--color-fcs-muted); border-top: 1px solid var(--color-fcs-border);">
+            <div class="px-4 py-3 text-sm leading-relaxed" style="background: var(--color-fcs-green-light); color: var(--color-fcs-muted); border-top: 1px solid var(--color-fcs-border);">
               {lang === 'en'
                 ? 'The Accredited Curriculum (AC) track is WASC-accredited — credits are recognized toward UC/CSU requirements. New students take a placement test; watch for the announcement each spring.'
                 : '學分班（AC）已通過 WASC 認證，學分可計入 UC/CSU 入學要求。新生須參加分班測驗，請留意每年春季的測驗公告。'}
@@ -178,8 +178,7 @@ const c = content[lang].enroll;
           href={links.register}
           target="_blank"
           rel="noopener"
-          class="inline-block rounded-[6px] px-5 py-2.5 text-sm font-semibold text-white transition-opacity hover:opacity-90"
-          style="background: var(--color-fcs-orange);"
+          class="btn-primary inline-block rounded-[6px] px-5 py-2.5 text-sm font-semibold transition-colors"
         >
           {lang === 'en' ? 'Open registration form →' : '開啟報名表 →'}
         </a>
@@ -196,9 +195,9 @@ const c = content[lang].enroll;
       </p>
 
       <!-- PayPal Order # callout -->
-      <div class="ml-11 mt-4 flex gap-3 rounded-[8px] px-4 py-3" style="background: #FEF3C7; border: 1px solid #FCD34D;">
-        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color: #D97706; flex-shrink:0; margin-top:2px;" aria-hidden="true"><path d="M10.29 3.86 1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
-        <p class="text-sm" style="color: #92400E;">
+      <div class="ml-11 mt-4 flex gap-3 rounded-[8px] px-4 py-3" style="background: var(--color-fcs-orange-light); border: 1px solid var(--color-fcs-gold);">
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color: var(--color-fcs-gold-ink); flex-shrink:0; margin-top:2px;" aria-hidden="true"><path d="M10.29 3.86 1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+        <p class="text-sm" style="color: var(--color-fcs-black);">
           {lang === 'en'
             ? 'If you pay online via PayPal: after checkout you will receive a PayPal confirmation email with an Order #. Copy that Order # and paste it into the registration form — your registration is not complete until both steps are done.'
             : '若您透過 PayPal 線上付款：完成付款後，您將收到含有訂單編號的 PayPal 確認信。請將該訂單編號填入報名表中——兩個步驟均完成後，報名才算完成。'}
@@ -225,7 +224,7 @@ const c = content[lang].enroll;
       <h2 class="text-xl font-semibold" style="color: var(--color-fcs-black);">{lang === 'en' ? 'Returning family' : '返校家庭'}</h2>
     </div>
 
-    <div class="mt-6 rounded-[10px] p-5" style="background: var(--color-fcs-white); border: 1px solid var(--color-fcs-border); border-left: 4px solid var(--color-fcs-blue);">
+    <div class="mt-6 rounded-[10px] p-5" style="background: var(--color-fcs-white); border: 1px solid var(--color-fcs-border); border-left: 4px solid var(--color-fcs-green);">
       <p class="font-semibold" style="color: var(--color-fcs-black);">
         {lang === 'en' ? 'Check your email for your personalized registration link' : '請查看電子郵件中的個人化報名連結'}
       </p>
@@ -245,11 +244,11 @@ const c = content[lang].enroll;
       </div>
     </div>
 
-    <div class="mt-4 rounded-[10px] px-4 py-3 text-sm" style="background: #FFFBEB; border: 1px solid #FDE68A; color: #92400E;">
+    <div class="mt-4 rounded-[10px] px-4 py-3 text-sm" style="background: var(--color-fcs-orange-light); border: 1px solid var(--color-fcs-gold); color: var(--color-fcs-black);">
       {lang === 'en'
         ? "Didn't receive the email by late April? Check your spam folder, then email "
         : '四月底前未收到電子郵件？請先檢查垃圾郵件，再寄信至 '}
-      <a href="mailto:registration@fremontchineseschool.org" class="font-semibold hover:underline" style="color: #B45309;">registration@fremontchineseschool.org</a>
+      <a href="mailto:registration@fremontchineseschool.org" class="font-semibold hover:underline" style="color: var(--color-fcs-gold-ink);">registration@fremontchineseschool.org</a>
       {lang === 'en' ? ' with your child\'s name and FCS student ID.' : '，並附上孩子的姓名及 FCS 學號。'}
     </div>
 
