@@ -173,12 +173,9 @@ const featureIcons = [
         c.cards.map((card, i) => (
           <a
             href={localizedPath(lang, card.route)}
-            class="group flex flex-col rounded-[10px] p-7 transition-colors duration-150"
-            style="background: var(--color-fcs-white); border: 1px solid var(--color-fcs-border);"
-            onmouseover="this.style.borderColor='#C8B89A'"
-            onmouseout="this.style.borderColor='var(--color-fcs-border)'"
+            class="gs-card group flex flex-col rounded-[10px] p-7 transition-colors duration-150"
+            style={`background: var(--color-fcs-white); --reveal-delay: ${i * 90}ms;`}
             data-reveal
-            style={`--reveal-delay: ${i * 90}ms`}
           >
             <h3 class="text-xl font-semibold" style="color: var(--color-fcs-green-dark);">
               {card.title}
