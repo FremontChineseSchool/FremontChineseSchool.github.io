@@ -166,6 +166,8 @@ export const content = {
       ctaTitle: 'Ready to join us this year?',
       ctaBody:
         "Enrollment is open to new and returning families. Reserve your child's place for the 2026–2027 school year.",
+      faqTeaser: 'Have questions?',
+      faqTeaserLink: 'See our FAQ →',
     },
     about: {
       title: 'About FCS',
@@ -310,6 +312,8 @@ export const content = {
         {
           q: 'What is the tuition?',
           a: 'See the Programs page for a full tuition summary by track. The complete tuition schedule is also available as a PDF download.',
+          linkLabel: 'View Programs page',
+          linkRoute: 'programs' as const,
         },
         {
           q: 'How do I get a refund?',
@@ -318,6 +322,8 @@ export const content = {
         {
           q: 'How do I add, drop, or transfer a class after registering?',
           a: 'Submit the class change request form. Changes are subject to availability.',
+          linkLabel: 'Open class change request form',
+          linkHref: 'addDropTransfer' as const,
         },
         {
           q: 'How do I update my contact information?',
@@ -326,10 +332,8 @@ export const content = {
         {
           q: 'What electives are available?',
           a: 'Offerings include Chinese painting, calligraphy, abacus, Chinese yo-yo, sewing, crafts, basketball, Python coding, yoga, and online Chinese typing. New classes are added each year — see the full elective list for details and scheduling.',
-        },
-        {
-          q: 'I paid online via PayPal — do I need to do anything else?',
-          a: 'Yes. After PayPal checkout you will receive a confirmation email with an Order #. You must copy that Order # and enter it into the registration form. Your enrollment is not complete until both the form and the payment are submitted.',
+          linkLabel: 'View full elective list',
+          linkRoute: 'electives' as const,
         },
         {
           q: 'I paid online via PayPal — do I need to do anything else?',
@@ -892,6 +896,8 @@ export const content = {
       announcementCta: '立即報名 →',
       ctaTitle: '準備好今年加入我們了嗎？',
       ctaBody: '新生與舊生皆可報名。為您的孩子預留 2026–2027 學年的名額。',
+      faqTeaser: '有問題嗎？',
+      faqTeaserLink: '查看常見問題 →',
     },
     about: {
       title: '關於本校',
@@ -1035,6 +1041,8 @@ export const content = {
         {
           q: '學費是多少？',
           a: '請至「課程」頁面查看各班別學費摘要，或下載完整學費方案 PDF。',
+          linkLabel: '前往課程頁面',
+          linkRoute: 'programs' as const,
         },
         {
           q: '如何申請退費？',
@@ -1043,6 +1051,8 @@ export const content = {
         {
           q: '報名後如何加課、退課或換課？',
           a: '請填寫課程異動申請表，名額異動視班級餘額而定。',
+          linkLabel: '開啟課程異動申請表',
+          linkHref: 'addDropTransfer' as const,
         },
         {
           q: '如何更新聯絡資料？',
@@ -1051,10 +1061,8 @@ export const content = {
         {
           q: '有哪些才藝選修課程？',
           a: '目前提供西畫、國畫書法、珠心算、扯鈴、縫紉、美勞、籃球、Python 程式設計、瑜珈及線上中文打字等課程，每年持續增設新課。詳情請查看完整選修課程列表。',
-        },
-        {
-          q: '我已透過 PayPal 完成付款，還需要其他步驟嗎？',
-          a: '是的。PayPal 付款完成後，您將收到含有訂單編號的確認信。請將該訂單編號填入報名表中。報名表與付款均完成後，報名程序才算正式完成。',
+          linkLabel: '查看完整選修課程列表',
+          linkRoute: 'electives' as const,
         },
         {
           q: '我已透過 PayPal 完成付款，還需要其他步驟嗎？',

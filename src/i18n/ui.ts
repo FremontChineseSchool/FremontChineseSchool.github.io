@@ -6,9 +6,9 @@ export const defaultLang: Lang = 'en';
 export const navOrder = [
   'programs',
   'enroll',
-  'events',
   'about',
   'calendar',
+  'events',
   'donate',
   'contact',
 ] as const;
