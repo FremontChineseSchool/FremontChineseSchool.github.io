@@ -182,7 +182,7 @@ export const content = {
         {
           heading: 'Curriculum',
           body: [
-            'Language classes run from Pre-K through 12th grade in Traditional Chinese. Kindergarten uses the Zhuyin (ㄅㄆㄇㄈ) phonics system; Grades 1–8 follow the Children\'s Chinese Reader series supplemented by FCS-authored exercise books. The bilingual CSL track is designed for heritage learners and beginners.',
+            'Language classes run from Pre-K through 8th grade in Traditional Chinese. Kindergarten uses the Zhuyin (ㄅㄆㄇㄈ) phonics system; Grades 1–8 follow the Children\'s Chinese Reader series supplemented by FCS-authored exercise books. The bilingual CSL track is designed for heritage learners and beginners.',
             'The Accredited Curriculum (AC) track for Grades 9–12 uses Integrated Chinese (Levels 2–4) and AP Chinese materials from National Normal University in Taiwan. AC credits fulfill foreign language requirements at area high schools, and FCS students have consistently placed in top rankings at ANCCS and NCACLS academic competitions.',
           ],
         },
@@ -209,12 +209,12 @@ export const content = {
         {
           heading: 'Chinese Language',
           // TODO(verify): confirm exact grade range and track names with the school office.
-          body: 'Weekend classes run from pre-K through 12th grade, all taught in Traditional Chinese. Choose the full-Chinese track for students from Mandarin-speaking families, or the bilingual track designed for beginners and heritage learners easing into the language. Students build reading, writing, listening, and speaking skills following established Mandarin curricula.',
+          body: 'Weekend classes run from Pre-K through 8th grade, all taught in Traditional Chinese. Choose the full-Chinese track for students from Mandarin-speaking families, or the bilingual track designed for beginners and heritage learners easing into the language. Students build reading, writing, listening, and speaking skills following established Mandarin curricula.',
           schedule: 'Pre-K – 3rd grade: 11:10 am – 1:00 pm · 4th – 8th grade: 9:00 am – 10:50 am',
         },
         {
           heading: 'Accredited Curriculum (AC / 學分班)',
-          body: 'Our WASC-accredited high-school Chinese course lets eligible students earn high-school credit. A placement test determines the appropriate level — see the Enroll page for placement details.',
+          body: 'Our WASC-accredited high-school Chinese course lets eligible students earn high-school credit. A placement test determines the appropriate level.',
           schedule: '8:50 am – 12:50 pm',
         },
         {
@@ -885,7 +885,7 @@ export const content = {
         {
           heading: '課程制度',
           body: [
-            '語文課程以正體中文授課，涵蓋學前班至十二年級。幼稚園採注音符號（ㄅㄆㄇㄈ）教學；一至八年級使用《兒童中文》系列教材，輔以本校自編練習冊。雙語 CSL 班專為華裔子弟及初學者設計，循序漸進導入中文學習。',
+            '語文課程以正體中文授課，涵蓋學前班至八年級。幼稚園採注音符號（ㄅㄆㄇㄈ）教學；一至八年級使用《兒童中文》系列教材，輔以本校自編練習冊。雙語 CSL 班專為華裔子弟及初學者設計，循序漸進導入中文學習。',
             '學分班（AC）課程供九至十二年級學生修習，使用《中文聽說讀寫》（Integrated Chinese）及台灣國立師範大學出版之 AP 中文教材，所修學分可抵充本地高中外語必修學分。本校學生於 ANCCS 及 NCACLS 學術比賽中屢獲佳績。',
           ],
         },
@@ -912,12 +912,12 @@ export const content = {
         {
           heading: '中文課程',
           // TODO(verify): confirm exact grade range and track names with the school office.
-          body: '週末班級涵蓋學前班（Pre-K）至十二年級，全程以正體（繁體）中文授課。可選擇適合來自華語家庭學生的全中文班，或專為初學者與華裔子弟設計、循序漸進的雙語班。學生依循成熟的中文教材，培養聽、說、讀、寫的能力。',
+          body: '週末班級涵蓋學前班（Pre-K）至八年級，全程以正體（繁體）中文授課。可選擇適合來自華語家庭學生的全中文班，或專為初學者與華裔子弟設計、循序漸進的雙語班。學生依循成熟的中文教材，培養聽、說、讀、寫的能力。',
           schedule: '學前班至三年級：11:10 am – 1:00 pm · 四至八年級：9:00 am – 10:50 am',
         },
         {
           heading: '學分班（Accredited Curriculum / AC）',
-          body: '本校通過 WASC 認證的高中中文課程，讓符合資格的學生取得高中學分。新生須參加分班考試以決定適合的程度，分班詳情請見「報名註冊」頁面。',
+          body: '本校通過 WASC 認證的高中中文課程，讓符合資格的學生取得高中學分。新生須參加分班考試以決定適合的程度。',
           schedule: '8:50 am – 12:50 pm',
         },
         {
