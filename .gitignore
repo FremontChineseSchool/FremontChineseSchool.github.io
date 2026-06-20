@@ -20,3 +20,6 @@ __pycache__/
 # Developer tooling for the calligraphy splash (not shipped)
 scripts/
 tools/
+
+# Build-time report: calendar events missing a Chinese name/type
+calendar-unmapped.json

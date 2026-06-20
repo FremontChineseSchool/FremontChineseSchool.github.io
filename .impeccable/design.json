@@ -1,0 +1,119 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-06-16T00:00:00Z",
+  "title": "Design System: Fremont Chinese School",
+  "extensions": {
+    "colorMeta": {
+      "fcs-green": { "role": "primary", "displayName": "Forest Green", "canonical": "#3A7D44", "tonalRamp": ["#0E1F12", "#163019", "#1A3D22", "#244F2C", "#2D6235", "#3A7D44", "#7FB389", "#F0F7F2"] },
+      "fcs-orange": { "role": "secondary", "displayName": "Harvest Orange", "canonical": "#E06820", "tonalRamp": ["#3A1A08", "#5C2A0D", "#7A3200", "#A4480F", "#C85A10", "#E06820", "#F0A86E", "#FEF0E6"] },
+      "fcs-gold": { "role": "tertiary", "displayName": "Harvest Gold", "canonical": "#D4980A", "tonalRamp": ["#3A2A02", "#5A4203", "#7A5500", "#A87707", "#D4980A", "#E6B844", "#F1D488", "#FEF3DC"] },
+      "fcs-black": { "role": "neutral", "displayName": "Warm Black", "canonical": "#1C1208", "tonalRamp": ["#0D0A04", "#1C1208", "#332617", "#54452F", "#7A6A58", "#A89882", "#D8CBB8", "#FFF8F0"] },
+      "fcs-white": { "role": "neutral", "displayName": "Cream", "canonical": "#FFF8F0", "tonalRamp": ["#1C1208", "#54452F", "#7A6A58", "#A89882", "#C8B89A", "#E8DDD0", "#FBF3E8", "#FFF8F0"] }
+    },
+    "typographyMeta": {
+      "display-en": { "displayName": "Display (EN)", "purpose": "Hero h1 in Inter 800; the loudest voice." },
+      "display-zh": { "displayName": "Display (ZH)", "purpose": "Chinese display headings in Noto Serif TC 700." },
+      "headline": { "displayName": "Headline", "purpose": "Section h2 in Inter 700; use text-wrap: balance." },
+      "title": { "displayName": "Title", "purpose": "Card / feature h3 headings." },
+      "body": { "displayName": "Body", "purpose": "Paragraph copy, Inter 15px/1.7, Warm Black; cap 65-75ch." },
+      "eyebrow": { "displayName": "Eyebrow", "purpose": "Deliberate gold section kicker; uppercase, 0.18em. Use sparingly." }
+    },
+    "shadows": [
+      { "name": "resting", "value": "0 1px 2px rgba(28,18,8,0.05)", "purpose": "Recommended barely-there warm shadow on cards (not yet built)." },
+      { "name": "hover-lift", "value": "0 10px 24px rgba(28,18,8,0.10)", "purpose": "Recommended soft warm hover shadow with translateY(-2px)." },
+      { "name": "header-condensed", "value": "0 4px 12px rgba(28,18,8,0.10)", "purpose": "Sticky header once scrolled; pairs with backdrop-blur (built)." }
+    ],
+    "motion": [
+      { "name": "ease-out-quint", "value": "cubic-bezier(0.16, 1, 0.3, 1)", "purpose": "Scroll-reveal fade + rise; the signature easing." },
+      { "name": "transition-fast", "value": "0.15s", "purpose": "Default duration for color/border hover transitions." }
+    ],
+    "breakpoints": [
+      { "name": "sm", "value": "640px" },
+      { "name": "md", "value": "768px" },
+      { "name": "lg", "value": "1024px" }
+    ]
+  },
+  "components": [
+    {
+      "name": "Primary Button",
+      "kind": "button",
+      "refersTo": "button-primary",
+      "description": "Harvest-orange action button on light/photo bands; deepens on hover. The single most important action.",
+      "html": "<a class=\"ds-btn-primary\" href=\"#\">Enroll Now</a>",
+      "css": ".ds-btn-primary { display: inline-block; background: #E06820; color: #FFF8F0; font-family: Inter, sans-serif; font-weight: 600; padding: 12px 24px; border-radius: 6px; text-decoration: none; transition: background 0.15s; } .ds-btn-primary:hover { background: #C85A10; } .ds-btn-primary:focus-visible { outline: 2px solid #D4980A; outline-offset: 2px; }"
+    },
+    {
+      "name": "Outline Button",
+      "kind": "button",
+      "refersTo": "button-outline",
+      "description": "Secondary CTA on photo/dark bands; white border and label.",
+      "html": "<a class=\"ds-btn-outline\" href=\"#\">Explore Programs</a>",
+      "css": ".ds-btn-outline { display: inline-block; background: transparent; color: #ffffff; font-family: Inter, sans-serif; font-weight: 600; padding: 12px 24px; border: 1px solid rgba(255,255,255,0.7); border-radius: 6px; text-decoration: none; transition: background 0.15s; } .ds-btn-outline:hover { background: rgba(255,255,255,0.1); } .ds-btn-outline:focus-visible { outline: 2px solid #D4980A; outline-offset: 2px; }"
+    },
+    {
+      "name": "Feature Card",
+      "kind": "card",
+      "refersTo": "card",
+      "description": "Flat cream card with 1px warm border and the one deliberate 5px green top-rule.",
+      "html": "<div class=\"ds-card\"><div class=\"ds-card-icon\"><svg width=\"22\" height=\"22\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.75\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"m9 12 2 2 4-4\"/><circle cx=\"12\" cy=\"12\" r=\"9\"/></svg></div><h3 class=\"ds-card-title\">WASC-Accredited</h3><p class=\"ds-card-body\">A credentialed high-school credit track, recognized since 1972.</p></div>",
+      "css": ".ds-card { background: #FFF8F0; border: 1px solid #E8DDD0; border-top: 5px solid #3A7D44; border-radius: 10px; padding: 16px; transition: border-color 0.15s; } .ds-card-icon { display: flex; align-items: center; justify-content: center; width: 44px; height: 44px; border-radius: 12px; background: #F0F7F2; color: #2D6235; } .ds-card-title { margin: 20px 0 0; font-family: Inter, sans-serif; font-size: 1.125rem; font-weight: 600; color: #1C1208; } .ds-card-body { margin: 8px 0 0; font-family: Inter, sans-serif; font-size: 0.875rem; line-height: 1.6; color: #7A6A58; }"
+    },
+    {
+      "name": "Header Nav Link",
+      "kind": "nav",
+      "refersTo": "nav-link",
+      "description": "Uppercase tracked white nav link on the forest-green header; active is cream + underline.",
+      "html": "<nav class=\"ds-nav\"><a class=\"ds-nav-link ds-nav-link--active\" href=\"#\">Home</a><a class=\"ds-nav-link\" href=\"#\">Programs</a><a class=\"ds-nav-link\" href=\"#\">About</a></nav>",
+      "css": ".ds-nav { display: inline-flex; gap: 4px; background: #3A7D44; padding: 12px 16px; border-radius: 6px; } .ds-nav-link { color: #ffffff; font-family: Inter, sans-serif; font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.1em; padding: 8px 12px; text-decoration: none; transition: color 0.15s; } .ds-nav-link:hover { color: #FFF8F0; } .ds-nav-link--active { color: #FFF8F0; text-decoration: underline; text-underline-offset: 4px; } .ds-nav-link:focus-visible { outline: 2px solid #D4980A; outline-offset: 2px; }"
+    },
+    {
+      "name": "Eyebrow Label",
+      "kind": "custom",
+      "refersTo": "eyebrow",
+      "description": "Deliberate gold section kicker; uppercase, wide-tracked. Use sparingly, not above every section.",
+      "html": "<p class=\"ds-eyebrow\">Why Families Choose FCS</p>",
+      "css": ".ds-eyebrow { font-family: Inter, sans-serif; font-size: 10px; font-weight: 600; letter-spacing: 0.18em; text-transform: uppercase; color: #D4980A; margin: 0; }"
+    }
+  ],
+  "narrative": {
+    "northStar": "The Modern Heritage House",
+    "overview": "A fifty-year institution tastefully renovated: old, proud bones with current, composed surfaces. Warm and rooted — forest green and harvest gold over warm cream, harvest-orange reserved for action. Traditional Chinese is set in Noto Serif TC (literary serif, heritage and gravity); English and UI run in Inter (modern, clean). Mood is warm but editorial: large extrabold tightly-tracked headings, sections separated by tonal background bands, sharp 6-12px corners, flat bordered surfaces.",
+    "keyCharacteristics": [
+      "Earthy, rooted palette: forest green + harvest gold + warm cream, orange as the action color.",
+      "Bilingual type as identity: Noto Serif TC (中文) paired with Inter (EN + UI).",
+      "Editorial headings: extrabold, large (up to ~4.5rem), tightly tracked (-0.03em).",
+      "Sharp, structured geometry: 6-12px radii, flat bordered surfaces, tonal section bands.",
+      "A gold eyebrow + pill badges as the deliberate accent system.",
+      "Global gold focus-visible ring; reveals and parallax degrade under reduced-motion."
+    ],
+    "rules": [
+      { "name": "The Orange-Is-Action Rule", "body": "Harvest orange means take this action. Never decorative, never a background wash outside the CTA band.", "section": "colors" },
+      { "name": "The Warm-Black Rule", "body": "All dark text and surfaces use Warm Black (#1C1208), never pure black. Pure black is cold and breaks the warmth.", "section": "colors" },
+      { "name": "The Muted-Is-Secondary Rule", "body": "Warm Muted (#7A6A58) is secondary text only and sits near the AA floor on cream — primary body uses Warm Black. Verify ≥4.5:1.", "section": "colors" },
+      { "name": "The Two-Script Rule", "body": "Chinese is always Noto Serif TC; English/UI is always Inter. The script is the cue for the face.", "section": "typography" },
+      { "name": "The Eyebrow-Restraint Rule", "body": "The gold eyebrow is a deliberate accent, not a per-section reflex. Currently overused — prune to sections that earn it.", "section": "typography" },
+      { "name": "The Warm-Shadow Rule", "body": "If shadows are added, tint with Warm Black (rgba(28,18,8,…)), diffuse and low-opacity. Crisp or neutral-black shadows are forbidden.", "section": "elevation" }
+    ],
+    "dos": [
+      "Do treat orange as action only — rare, purposeful, never decorative.",
+      "Do set Chinese in Noto Serif TC and English/UI in Inter, always.",
+      "Do use Warm Black (#1C1208) for primary body copy; reserve Warm Muted for secondary text.",
+      "Do verify orange-on-white/cream and muted-on-cream hit AA (4.5:1 small, 3:1 large) before shipping.",
+      "Do separate sections with tonal background bands (cream → mint → deep green → orange) for rhythm.",
+      "Do test every heading and CTA in both EN (Inter) and 中文 (Noto Serif TC) at every breakpoint.",
+      "Do keep the gold eyebrow deliberate — only where a section earns a kicker.",
+      "Do give every animation a prefers-reduced-motion fallback to static, visible content."
+    ],
+    "donts": [
+      "Don't rebuild the dated, cluttered Joomla feel — no dense text walls or busy chrome.",
+      "Don't drift toward cold corporate / SaaS clichés: gradient hero-metric templates, soulless grids.",
+      "Don't go childish or cartoonish — no over-bright primaries, clip-art, or daycare energy.",
+      "Don't go stuffy / institutional — the serif-Chinese + warm palette must stay inviting, not dry.",
+      "Don't stamp the gold eyebrow above every section — that's AI scaffolding, not voice.",
+      "Don't add colored side/edge stripes to cards beyond the one deliberate green top-rule.",
+      "Don't use pure black (#000) for text or shadows — Warm Black only.",
+      "Don't use pills for buttons — geometry is sharp and structured (6px).",
+      "Don't set orange as a background wash outside the CTA band, or its action meaning erodes."
+    ]
+  }
+}

@@ -54,10 +54,9 @@ body {
   @apply antialiased;
 }
 
-/* Chinese text always uses Noto Serif TC */
-[lang="zh"],
-.zh,
-.font-zh {
+/* Chinese text always uses Noto Serif TC.
+   `|=` matches the `zh-Hant` lang attribute set in BaseLayout (and any zh-* subtag). */
+[lang|="zh"] {
   font-family: var(--font-display-zh);
 }
 

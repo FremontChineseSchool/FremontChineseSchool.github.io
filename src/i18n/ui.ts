@@ -40,6 +40,7 @@ export const ui = {
     logoAlt: 'Fremont Chinese School',
     skipToContent: 'Skip to content',
     enrollCta: 'Enroll Now',
+    replayIntro: 'Replay intro animation',
     nav: {
       home: 'Home',
       about: 'About',
@@ -54,6 +55,11 @@ export const ui = {
       rights: 'All rights reserved.',
       nonprofit: 'A 501(c) non-profit organization.',
       langLabel: 'Language',
+      links: 'Links',
+      resources: 'Resources',
+      connect: 'Connect',
+      acResources: 'AC Resources',
+      staffResources: 'Staff Resources',
     },
   },
   zh: {
@@ -63,6 +69,7 @@ export const ui = {
     logoAlt: '費利蒙中文學校',
     skipToContent: '跳至主要內容',
     enrollCta: '立即報名',
+    replayIntro: '重播開場動畫',
     nav: {
       home: '首頁',
       about: '關於本校',
@@ -77,6 +84,11 @@ export const ui = {
       rights: '版權所有。',
       nonprofit: '本校為 501(c) 非營利組織。',
       langLabel: '語言',
+      links: '連結',
+      resources: '資源',
+      connect: '社群',
+      acResources: '學分班資源',
+      staffResources: '教職員資源',
     },
   },
 } as const;

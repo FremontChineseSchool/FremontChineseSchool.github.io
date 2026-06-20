@@ -123,14 +123,15 @@ const paintAspect = paint.reduce((a, c) => a + c.w / c.h, 0);
     var el = document.getElementById("calligraphy-splash");
     if (!el) return;
     var reduce = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    // Play once per tab session: skip on revisits (navigating away and back, or
-    // returning to the tab) without re-running. Cleared when the tab closes, so
-    // a fresh visit replays it.
+    // Respect reduced-motion: no auto-play and no replay button (removed below).
+    if (reduce) { el.remove(); return; }
+    // Auto-play once per tab session. The splash now lives in every page's layout,
+    // so the "seen" flag is set on whichever page is entered first — and revisits
+    // (including navigating to Home afterward) skip it. On those revisits the
+    // overlay stays in the DOM but inactive, so the header button can replay it.
     var seen = false;
     try { seen = sessionStorage.getItem("fcs-splash-seen") === "1"; } catch (e) {}
-    if (reduce || seen) {
-      el.remove();
-    } else {
+    if (!seen) {
       try { sessionStorage.setItem("fcs-splash-seen", "1"); } catch (e) {}
       el.classList.add("is-active");
     }
@@ -160,15 +161,44 @@ const paintAspect = paint.reduce((a, c) => a + c.w / c.h, 0);
 
 <script>
   const splash = document.getElementById("calligraphy-splash");
-  const nameEl = document.getElementById("splash-name");
-  const paintEl = document.getElementById("seg-paint");
-  const restEl = document.getElementById("seg-rest");
+  // Skipped under reduced-motion (the inline script removes the overlay). Otherwise
+  // the overlay stays in the DOM — auto-playing on the session's first page, and
+  // available for replay via the header button on every page.
+  if (splash) {
+    // Snapshot the pristine markup before any animation mutates it, so a replay
+    // can reset every stroke/transform by restoring this HTML.
+    const pristine = splash.innerHTML;
+    let playing = false;
 
-  if (splash && splash.classList.contains("is-active") && nameEl && paintEl && restEl) {
-    run(splash, nameEl, paintEl, restEl);
+    const start = () => {
+      const nameEl = splash.querySelector<HTMLElement>("#splash-name");
+      const paintEl = splash.querySelector<HTMLElement>("#seg-paint");
+      const restEl = splash.querySelector<HTMLElement>("#seg-rest");
+      if (!nameEl || !paintEl || !restEl) return;
+      playing = true;
+      run(splash, nameEl, paintEl, restEl, () => { playing = false; });
+    };
+
+    const replay = () => {
+      if (playing) return;
+      splash.innerHTML = pristine;        // reset all stroke/transform inline state
+      splash.classList.add("is-active");
+      start();
+    };
+
+    // Reveal and wire the header replay button (kept hidden for no-JS users).
+    const btn = document.getElementById("splash-replay");
+    if (btn) {
+      btn.style.display = "inline-flex";
+      btn.addEventListener("click", replay);
+    }
+
+    // Auto-play on the session's first page (the inline script set .is-active).
+    if (splash.classList.contains("is-active")) start();
   }
 
-  function run(splash: HTMLElement, nameEl: HTMLElement, paintEl: HTMLElement, restEl: HTMLElement) {
+  function run(splash: HTMLElement, nameEl: HTMLElement, paintEl: HTMLElement, restEl: HTMLElement, done: () => void) {
+    splash.style.cursor = "pointer"; // reset (assemble() sets it to default on finish)
     const aspect = parseFloat(nameEl.dataset.aspect || "6") || 6;            // full 7-char name
     const paintAspect = parseFloat(nameEl.dataset.paintAspect || "2.3") || 2.3; // painted trio
     // Size glyphs so the full assembled name fits ~92% wide / 34% tall...
@@ -275,7 +305,13 @@ const paintAspect = paint.reduce((a, c) => a + c.w / c.h, 0);
       }
       nameEl.style.opacity = "0";
       if (paper) paper.style.opacity = "0";
-      window.setTimeout(() => { splash.remove(); document.documentElement.classList.add("splash-done"); }, 1000);
+      window.setTimeout(() => {
+        // Deactivate rather than remove, so the overlay (display:none when
+        // inactive) no longer blocks the page but can still be replayed.
+        splash.classList.remove("is-active");
+        document.documentElement.classList.add("splash-done");
+        done();
+      }, 1000);
     }
   }
 </script>
