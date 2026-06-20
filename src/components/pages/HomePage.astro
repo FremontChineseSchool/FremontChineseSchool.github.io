@@ -36,7 +36,7 @@ const featureIcons = [
   </p>
   <div class="mt-8 flex flex-wrap gap-3">
     <a
-      href={links.register}
+      href={localizedPath(lang, 'enroll')}
       class="rounded-[6px] bg-fcs-orange px-6 py-3 font-semibold text-fcs-white transition-colors duration-150 hover:bg-[#C85A10]"
     >{c.ctaPrimary}</a>
     <a
@@ -226,7 +226,7 @@ const featureIcons = [
     <p class="mx-auto mt-4 max-w-2xl text-lg text-white/90">{c.ctaBody}</p>
     <div class="mt-8 flex flex-wrap justify-center gap-3">
       <a
-        href={links.register}
+        href={localizedPath(lang, 'enroll')}
         class="rounded-[6px] bg-fcs-white px-7 py-3 font-semibold transition-colors duration-150 hover:bg-white"
         style="color: var(--color-fcs-green);"
       >{c.ctaPrimary}</a>
