@@ -10,20 +10,22 @@
   --font-sans: "Helvetica Neue", "PingFang TC", "Microsoft JhengHei",
     "Noto Sans TC", system-ui, sans-serif;
 
-  /* Brand colors — Ink & Jade palette (jade-only, no orange/gold) */
-  --color-fcs-green:        #1A6E52;   /* Jade */
-  --color-fcs-green-dark:   #134B38;   /* Jade dark */
-  --color-fcs-green-light:  #E6F3EE;   /* Jade tint for surfaces */
-  --color-fcs-orange:       #3DA17C;   /* Jade bright — replaces orange for CTAs/accents */
-  --color-fcs-orange-deep:  #2D8A67;   /* Jade mid — hover/active */
-  --color-fcs-orange-light: #DDF0EA;   /* Jade bright tint */
-  --color-fcs-gold:         #3DA17C;   /* Jade bright — replaces gold */
-  --color-fcs-gold-ink:     #0E5038;   /* Deep jade — text on light surfaces (AA) */
-  --color-fcs-black:        #1F1D19;   /* Ink */
-  --color-fcs-white:        #EFE9DB;   /* Paper */
-  --color-fcs-surface:      #FAF6EC;   /* Lighter surface */
+  /* Brand colors — Jade & Gold palette (jade greens + gold accents) */
+  --color-fcs-green:        #1A6E52;   /* Jade — primary */
+  --color-fcs-green-dark:   #134B38;   /* Jade dark — bands, deep fills */
+  --color-fcs-green-light:  #E6F3EE;   /* Jade tint — icon tiles, soft bands */
+  /* Gold — accent that pops on green; confident as a FILL (with ink text) */
+  --color-fcs-orange:       #D8A832;   /* Gold — action/CTA fill + accent (legacy token name) */
+  --color-fcs-orange-deep:  #B07F1E;   /* Gold deep — hover/active */
+  --color-fcs-orange-light: #F6ECCF;   /* Gold tint — soft wash / callouts */
+  --color-fcs-gold:         #D8A832;   /* Gold — CTA buttons, focus ring, NEW badge */
+  --color-fcs-gold-ink:     #0E5038;   /* Deep jade — eyebrow/accent TEXT on light surfaces (AA 7.8:1) */
+  --color-fcs-mint:         #6FC9A0;   /* Light mint — accent TEXT on dark green bands (AA 5.0:1) */
+  --color-fcs-black:        #221F1A;   /* Ink */
+  --color-fcs-white:        #ECE6D6;   /* Paper */
+  --color-fcs-surface:      #F7F3E9;   /* Lighter surface */
   --color-fcs-border:       #D9D0C0;   /* Paper border */
-  --color-fcs-muted:        #5A5249;   /* Ink soft */
+  --color-fcs-muted:        #57534A;   /* Ink soft */
 
   /* Typography */
   --font-display-zh: 'Noto Serif TC', serif;
@@ -78,7 +80,7 @@ body {
 .btn-on-dark {
   position: relative;
   overflow: hidden;
-  background: linear-gradient(135deg, #E6BC4E 0%, #D8A832 50%, #C28F22 100%);
+  background: linear-gradient(135deg, #E6BC4E 0%, var(--color-fcs-gold) 50%, #C28F22 100%);
   color: var(--color-fcs-black);
   border: none;
   transition: filter 0.15s;
