@@ -3,8 +3,8 @@ import "../styles/global.css";
 import Header from "../components/Header.astro";
 import Footer from "../components/Footer.astro";
 import CalligraphySplash from "../components/CalligraphySplash.astro";
-import { ui, routes, type Lang } from "../i18n/ui";
-import { descriptions, contactInfo } from "../i18n/content";
+import { ui, routes, localizedPath, type Lang } from "../i18n/ui";
+import { descriptions, contactInfo, content } from "../i18n/content";
 
 interface Props {
   lang: Lang;
@@ -73,6 +73,11 @@ const orgSchema = {
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <!-- Fonts: preconnect warms the connection; stylesheet discovered in <head> (not via render-blocking CSS @import). display=swap avoids FOIT. -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@400;700&family=Inter:wght@400;500;600;700&display=swap" />
     <link rel="icon" type="image/png" href="/favicon.png" />
     <link rel="icon" sizes="any" href="/favicon.ico" />
     <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
@@ -114,6 +119,15 @@ const orgSchema = {
       class="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-50 focus:rounded focus:bg-white focus:px-4 focus:py-2 focus:shadow"
       >{t.skipToContent}</a
     >
+    {content[lang].home.announcement && (
+      <div class="flex flex-wrap items-center justify-center gap-x-4 gap-y-1 px-4 py-2.5 text-sm font-medium" style="background: var(--color-fcs-green-dark); color: #EFE9DB;">
+        <span>📣 {content[lang].home.announcement}</span>
+        <a
+          href={localizedPath(lang, 'enroll')}
+          class="btn-primary btn-shimmer rounded-full px-3.5 py-1 text-xs font-semibold transition-colors"
+        >{content[lang].home.announcementCta}</a>
+      </div>
+    )}
     <Header lang={lang} />
     <main id="main" class="flex-1 flex flex-col">
       <slot />

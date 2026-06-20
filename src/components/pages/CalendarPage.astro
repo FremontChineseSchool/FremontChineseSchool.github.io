@@ -27,18 +27,17 @@ const rows = Array.from({ length: maxRows }, (_, i) => ({
 
 const eventColor: Record<EventType, string> = {
   milestone:  'color: var(--color-fcs-black); font-weight: 700;',
-  'no-school': 'color: #B91C1C;',
-  event:       'color: #166534;',
-  ac:          'color: #1D4ED8;',
-  exam:        'color: #92400E; font-weight: 600;',
-  admin:       'color: #6B7280;',
+  'no-school': 'color: #B23A2C;',
+  event:       'color: var(--color-fcs-green);',
+  ac:          'color: #6B3A56;',
+  exam:        'color: var(--color-fcs-gold-ink); font-weight: 600;',
+  admin:       'color: var(--color-fcs-muted);',
 };
 ---
 
-<section style="background: #FFF8F0;" class="px-4 py-14">
+<section style="background: var(--color-fcs-white);" class="px-4 py-14">
   <div class="mx-auto max-w-5xl">
     <!-- Header -->
-    <p class="eyebrow mb-3">Calendar</p>
     <div class="flex flex-wrap items-baseline justify-between gap-3">
       <div>
         <h1 class="text-3xl font-semibold sm:text-4xl" style="letter-spacing: -0.02em; color: var(--color-fcs-black);">{c.title}</h1>
@@ -50,11 +49,11 @@ const eventColor: Record<EventType, string> = {
     <!-- Legend -->
     <div class="mt-4 flex flex-wrap items-center gap-x-4 gap-y-1 text-xs" style="color: var(--color-fcs-muted);" aria-label="Color legend">
       <span style="color: var(--color-fcs-black); font-weight: 700;"><span aria-hidden="true">● </span>{c.legend.milestone}</span>
-      <span style="color: #B91C1C;"><span aria-hidden="true">● </span>{c.legend.noSchool}</span>
-      <span style="color: #166534;"><span aria-hidden="true">● </span>{c.legend.event}</span>
-      <span style="color: #1D4ED8;"><span aria-hidden="true">● </span>{c.legend.ac}</span>
-      <span style="color: #92400E; font-weight: 600;"><span aria-hidden="true">● </span>{c.legend.exam}</span>
-      <span style="color: #6B7280;"><span aria-hidden="true">● </span>{c.legend.admin}</span>
+      <span style="color: #B23A2C;"><span aria-hidden="true">● </span>{c.legend.noSchool}</span>
+      <span style="color: var(--color-fcs-green);"><span aria-hidden="true">● </span>{c.legend.event}</span>
+      <span style="color: #6B3A56;"><span aria-hidden="true">● </span>{c.legend.ac}</span>
+      <span style="color: var(--color-fcs-gold-ink); font-weight: 600;"><span aria-hidden="true">● </span>{c.legend.exam}</span>
+      <span style="color: var(--color-fcs-muted);"><span aria-hidden="true">● </span>{c.legend.admin}</span>
     </div>
 
     <!-- Two-column table -->
@@ -93,14 +92,14 @@ const eventColor: Record<EventType, string> = {
           {rows.map(({ left, right }, idx) => {
             const leftNo  = left?.noSchool  ?? false;
             const rightNo = right?.noSchool ?? false;
-            const rowBg = idx % 2 === 0 ? 'var(--color-fcs-white)' : '#F0F4F0';
+            const rowBg = idx % 2 === 0 ? 'var(--color-fcs-white)' : 'var(--color-fcs-surface)';
             return (
               <tr style={`background: ${rowBg};`}>
                 {/* ── Left cell ── */}
                 <td class="px-3 py-2.5 text-center text-sm" style="color: var(--color-fcs-muted); white-space: nowrap;">
                   {left?.week ?? ''}
                 </td>
-                <td class="px-3 py-2.5 text-sm font-medium" style={`white-space: nowrap; ${leftNo ? 'color:#B91C1C;' : 'color: var(--color-fcs-black);'}`}>
+                <td class="px-3 py-2.5 text-sm font-medium" style={`white-space: nowrap; ${leftNo ? 'color:#B23A2C;' : 'color: var(--color-fcs-black);'}`}>
                   {left ? formatDate(left.date) : ''}
                 </td>
                 <td class="px-3 py-2.5 text-sm leading-snug">
@@ -115,7 +114,7 @@ const eventColor: Record<EventType, string> = {
                 <td class="px-3 py-2.5 text-center text-sm" style="color: var(--color-fcs-muted); white-space: nowrap; border-left: 2px solid var(--color-fcs-border);">
                   {right?.week ?? ''}
                 </td>
-                <td class="px-3 py-2.5 text-sm font-medium" style={`white-space: nowrap; ${rightNo ? 'color:#B91C1C;' : 'color: var(--color-fcs-black);'}`}>
+                <td class="px-3 py-2.5 text-sm font-medium" style={`white-space: nowrap; ${rightNo ? 'color:#B23A2C;' : 'color: var(--color-fcs-black);'}`}>
                   {right ? formatDate(right.date) : ''}
                 </td>
                 <td class="px-3 py-2.5 text-sm leading-snug">

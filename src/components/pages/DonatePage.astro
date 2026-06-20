@@ -9,8 +9,7 @@ const { lang } = Astro.props;
 const c = content[lang].donate;
 ---
 
-<section style="background: #FFF8F0;" class="mx-auto max-w-3xl px-4 py-14">
-  <p class="eyebrow mb-3">{c.eyebrow}</p>
+<section style="background: var(--color-fcs-white);" class="mx-auto max-w-3xl px-4 py-14">
   <h1 class="text-3xl font-semibold sm:text-4xl" style="letter-spacing: -0.02em; color: var(--color-fcs-black);">{c.title}</h1>
 
   <div class="mt-6 space-y-4">
@@ -35,7 +34,7 @@ const c = content[lang].donate;
     </a>
   </div>
 
-  <div class="mt-6 rounded-[10px] p-6" style="background: var(--color-fcs-white); border: 1px solid var(--color-fcs-border); border-top: 5px solid var(--color-fcs-gold);">
+  <div class="mt-6 rounded-[10px] p-6" style="background: var(--color-fcs-white); border: 1px solid var(--color-fcs-border);">
     <h2 class="text-xl font-semibold" style="color: var(--color-fcs-green-dark);">
       {c.sponsorHeading}
     </h2>

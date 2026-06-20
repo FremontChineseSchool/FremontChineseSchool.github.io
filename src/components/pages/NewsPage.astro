@@ -1,0 +1,62 @@
+---
+import { content } from "../../i18n/content";
+import type { Lang } from "../../i18n/ui";
+
+interface Props {
+  lang: Lang;
+}
+const { lang } = Astro.props;
+const c = content[lang].news;
+---
+
+<section style="background: var(--color-fcs-white);" class="mx-auto max-w-3xl px-4 py-14">
+  <h1 class="text-3xl font-semibold sm:text-4xl" style="letter-spacing: -0.02em; color: var(--color-fcs-black);">{c.title}</h1>
+  <p class="mt-4 text-lg" style="color: var(--color-fcs-muted);">{c.intro}</p>
+
+  <!-- Posts -->
+  <!-- To add a post: add an entry to content[lang].news.posts in src/i18n/content.ts
+       Optional image: add image: '/images/news/your-file.jpg' and drop the file in public/images/news/ -->
+  <div class="mt-10 space-y-6">
+    {c.posts.map((post) => (
+      <article class="overflow-hidden rounded-[10px]" style="background: var(--color-fcs-white); border: 1px solid var(--color-fcs-border);">
+        {'image' in post && post.image && (
+          <img
+            src={post.image as string}
+            alt=""
+            loading="lazy"
+            decoding="async"
+            class="w-full object-cover"
+            style="max-height: 320px;"
+          />
+        )}
+        <div class="p-6">
+          <p class="text-xs font-semibold uppercase tracking-widest" style="color: var(--color-fcs-muted);">{post.date}</p>
+          <h2 class="mt-1 text-lg font-semibold" style="color: var(--color-fcs-black);">{post.title}</h2>
+          <p class="mt-2 text-sm leading-relaxed" style="color: var(--color-fcs-muted);">{post.body}</p>
+        </div>
+      </article>
+    ))}
+  </div>
+
+  <!-- Newsletter archive -->
+  <div class="mt-14">
+    <h2 class="text-xl font-semibold" style="color: var(--color-fcs-black);">{c.newslettersTitle}</h2>
+    <p class="mt-2 text-sm" style="color: var(--color-fcs-muted);">{c.newslettersBody}</p>
+    <ul class="mt-5 space-y-2">
+      {c.newsletters.map((n) => (
+        <li>
+          <a
+            href={n.url}
+            target="_blank"
+            rel="noopener"
+            class="inline-flex items-center gap-2 text-sm font-medium hover:underline"
+            style="color: var(--color-fcs-green);"
+          >
+            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+            {n.label}
+          </a>
+        </li>
+      ))}
+    </ul>
+  </div>
+</section>

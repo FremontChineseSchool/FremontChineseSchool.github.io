@@ -8,38 +8,29 @@ interface Props {
 const { lang } = Astro.props;
 const t = ui[lang];
 const year = 2026;
+
+const bodyText = "color: rgba(236,230,214,0.72);";
+const headStyle = "color: var(--color-fcs-gold);";
 ---
 
-<footer style="background: linear-gradient(to bottom, #1C1208, #0D0A04);">
+<footer style="background: linear-gradient(to bottom, #221F1A, #15120E);">
   <div
     class="mx-auto grid max-w-6xl gap-8 px-8 py-12 sm:grid-cols-2 lg:grid-cols-4"
   >
     <div>
-      <p
-        class="text-[10px] font-semibold uppercase tracking-[0.14em]"
-        style="color: #D4980A;"
-      >{t.siteName}</p>
-      <p class="mt-3 text-sm" style="color: rgba(255,248,240,0.65);">{t.tagline}</p>
-      <p class="mt-4 text-sm" style="color: rgba(255,248,240,0.65);">{contactInfo.classroom}</p>
-      <p class="text-sm" style="color: rgba(255,248,240,0.65);">{contactInfo.voicemail}</p>
+      <p class="text-[10px] font-semibold uppercase tracking-[0.14em]" style={headStyle}>{t.siteName}</p>
+      <p class="mt-3 text-sm" style={bodyText}>{t.tagline}</p>
+      <p class="mt-4 text-sm" style={bodyText}>{contactInfo.classroom}</p>
+      <p class="text-sm" style={bodyText}>{contactInfo.voicemail}</p>
     </div>
 
     <nav aria-label="Footer" class="text-sm">
-      <p
-        class="mb-3 text-[10px] font-semibold uppercase tracking-[0.14em]"
-        style="color: #D4980A;"
-      >{t.footer.links}</p>
+      <p class="mb-3 text-[10px] font-semibold uppercase tracking-[0.14em]" style={headStyle}>{t.footer.links}</p>
       <ul class="space-y-2">
         {
           navOrder.map((key) => (
             <li>
-              <a
-                class="transition-colors duration-150"
-                style="color: rgba(255,248,240,0.65);"
-                onmouseover="this.style.color='rgba(255,248,240,1)'"
-                onmouseout="this.style.color='rgba(255,248,240,0.65)'"
-                href={localizedPath(lang, key)}
-              >
+              <a class="footer-link transition-colors duration-150" href={localizedPath(lang, key)}>
                 {t.nav[key]}
               </a>
             </li>
@@ -49,53 +40,40 @@ const year = 2026;
     </nav>
 
     <div class="text-sm">
-      <p
-        class="mb-3 text-[10px] font-semibold uppercase tracking-[0.14em]"
-        style="color: #D4980A;"
-      >{t.footer.resources}</p>
+      <p class="mb-3 text-[10px] font-semibold uppercase tracking-[0.14em]" style={headStyle}>{t.footer.resources}</p>
       <ul class="space-y-2">
         <li>
-          <a href={localizedPath(lang, 'ac-resources')}
-            class="transition-colors duration-150"
-            style="color: rgba(255,248,240,0.65);"
-            onmouseover="this.style.color='rgba(255,248,240,1)'"
-            onmouseout="this.style.color='rgba(255,248,240,0.65)'"
+          <a href={lang === 'zh' ? '/zh/news' : '/news'} class="footer-link transition-colors duration-150"
+          >{lang === 'zh' ? '最新消息' : 'News & Updates'}</a>
+        </li>
+        <li>
+          <a href={localizedPath(lang, 'ac-resources')} class="footer-link transition-colors duration-150"
           >{t.footer.acResources}</a>
         </li>
         <li>
-          <a href={localizedPath(lang, 'staff-resources')}
-            class="transition-colors duration-150"
-            style="color: rgba(255,248,240,0.65);"
-            onmouseover="this.style.color='rgba(255,248,240,1)'"
-            onmouseout="this.style.color='rgba(255,248,240,0.65)'"
+          <a href={localizedPath(lang, 'staff-resources')} class="footer-link transition-colors duration-150"
           >{t.footer.staffResources}</a>
         </li>
       </ul>
     </div>
 
     <div class="text-sm">
-      <p
-        class="mb-3 text-[10px] font-semibold uppercase tracking-[0.14em]"
-        style="color: #D4980A;"
-      >{t.footer.connect}</p>
+      <p class="mb-3 text-[10px] font-semibold uppercase tracking-[0.14em]" style={headStyle}>{t.footer.connect}</p>
       <a
-        class="inline-flex items-center gap-2 transition-colors duration-150"
-        style="color: rgba(255,248,240,0.65);"
-        onmouseover="this.style.color='rgba(255,248,240,1)'"
-        onmouseout="this.style.color='rgba(255,248,240,0.65)'"
+        class="footer-link inline-flex items-center gap-2 transition-colors duration-150"
         href={links.facebook}
         rel="noopener"
         target="_blank"
       >
         Facebook
       </a>
-      <p class="mt-4" style="color: rgba(255,248,240,0.65);">{t.footer.nonprofit}</p>
+      <p class="mt-4" style={bodyText}>{t.footer.nonprofit}</p>
     </div>
   </div>
 
   <div
     class="border-t py-4 text-center text-xs"
-    style="border-color: rgba(255,248,240,0.1); color: rgba(255,248,240,0.35);"
+    style="border-color: rgba(236,230,214,0.12); color: rgba(236,230,214,0.55);"
   >
     © {year} {t.siteName}. {t.footer.rights}
   </div>
