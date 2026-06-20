@@ -10,16 +10,17 @@
   --font-sans: "Helvetica Neue", "PingFang TC", "Microsoft JhengHei",
     "Noto Sans TC", system-ui, sans-serif;
 
-  /* Brand colors — Celadon & Gold palette */
-  --color-fcs-green:        #21704F;   /* Emerald-jade — primary (richer/poppier than celadon) */
-  --color-fcs-green-dark:   #16412E;   /* Deep emerald — bands, deep fills */
-  --color-fcs-green-light:  #DCEFE4;   /* Mint tint — icon tiles, soft bands */
+  /* Brand colors — Jade & Gold palette (jade greens + gold accents) */
+  --color-fcs-green:        #1A6E52;   /* Jade — primary */
+  --color-fcs-green-dark:   #134B38;   /* Jade dark — bands, deep fills */
+  --color-fcs-green-light:  #E6F3EE;   /* Jade tint — icon tiles, soft bands */
   /* Gold — accent that pops on green; confident as a FILL (with ink text) */
   --color-fcs-orange:       #D8A832;   /* Gold — action/CTA fill + accent (legacy token name) */
   --color-fcs-orange-deep:  #B07F1E;   /* Gold deep — hover/active */
   --color-fcs-orange-light: #F6ECCF;   /* Gold tint — soft wash / callouts */
-  --color-fcs-gold:         #D8A832;   /* Bright gold — fills + TEXT on dark green (AA 5.1:1) */
-  --color-fcs-gold-ink:     #7E5A05;   /* Deep gold — gold TEXT on LIGHT surfaces (AA 5.0:1) */
+  --color-fcs-gold:         #D8A832;   /* Gold — CTA buttons, focus ring, NEW badge */
+  --color-fcs-gold-ink:     #0E5038;   /* Deep jade — eyebrow/accent TEXT on light surfaces (AA 7.8:1) */
+  --color-fcs-mint:         #6FC9A0;   /* Light mint — accent TEXT on dark green bands (AA 5.0:1) */
   --color-fcs-black:        #221F1A;   /* Ink */
   --color-fcs-white:        #ECE6D6;   /* Paper */
   --color-fcs-surface:      #F7F3E9;   /* Lighter surface */

@@ -1,17 +1,18 @@
 ---
 name: Fremont Chinese School
-description: Warm, rooted, editorial identity site for a 50-year WASC-accredited weekend Chinese school — Celadon & Gold on paper
+description: Warm, rooted, editorial identity site for a 50-year WASC-accredited weekend Chinese school — Jade & Gold on paper
 colors:
-  # NOTE: the CSS tokens still use the legacy `--color-fcs-orange*` NAMES, but
-  # those now hold the GOLD action color (the orange scheme was retired). Listed
-  # here by their true role; the alias is noted in parentheses.
-  fcs-green: "#21704F"        # Celadon / emerald-jade — primary
-  fcs-green-dark: "#16412E"   # Deep emerald — bands, deep fills
-  fcs-green-light: "#DCEFE4"  # Mint tint — icon tiles, badges, soft bands
-  fcs-gold: "#D8A832"         # Bright gold — CTA fills + text on dark green (also --color-fcs-orange)
+  # NOTE: a few CSS tokens keep legacy NAMES that now hold different roles:
+  #   --color-fcs-orange*  -> gold (CTA)        --color-fcs-gold-ink -> deep jade (accent text on light)
+  # Listed here by their true role; the token alias is noted in parentheses.
+  fcs-green: "#1A6E52"        # Jade — primary (header, links, structure)
+  fcs-green-dark: "#134B38"   # Jade dark — bands, deep fills
+  fcs-green-light: "#E6F3EE"  # Jade tint — icon tiles, badges, soft bands
+  fcs-gold: "#D8A832"         # Gold — CTA button fills, focus ring, NEW badge (alias --color-fcs-orange)
   fcs-gold-deep: "#B07F1E"    # Gold hover/active (--color-fcs-orange-deep)
-  fcs-gold-ink: "#7E5A05"     # Deep gold — gold TEXT on light surfaces (eyebrows, prices)
   fcs-gold-tint: "#F6ECCF"    # Soft gold wash — callouts (--color-fcs-orange-light)
+  fcs-mint: "#6FC9A0"         # Light mint — accent TEXT on DARK green bands (AA 5:1) (--color-fcs-mint)
+  fcs-jade-ink: "#0E5038"     # Deep jade — accent TEXT on LIGHT surfaces (AA 7.8:1) (token: --color-fcs-gold-ink)
   fcs-black: "#221F1A"        # Ink
   fcs-white: "#ECE6D6"        # Paper — body background + card surface
   fcs-surface: "#F7F3E9"      # Lighter surface — raised cards, table zebra
@@ -19,8 +20,8 @@ colors:
   fcs-muted: "#57534A"        # Ink-soft — secondary text
 gradients:
   gold-fill: "linear-gradient(135deg, #E6BC4E 0%, #D8A832 50%, #C28F22 100%)"  # button metal
-  culture-band: "#123524"
-  closing-cta: "linear-gradient(135deg, #221F1A 0%, #16412E 55%, #21704F 100%)"
+  culture-band: "#0F2E22"
+  closing-cta: "linear-gradient(135deg, #221F1A 0%, #134B38 55%, #1A6E52 100%)"
 typography:
   display-en:
     fontFamily: "Inter, sans-serif"
@@ -58,7 +59,7 @@ typography:
     fontWeight: 600
     lineHeight: 1.4
     letterSpacing: "0.18em"
-    color: "{colors.fcs-gold-ink}"   # deep gold on light; bright gold on dark bands
+    color: "{colors.fcs-jade-ink}"   # deep jade on light; light mint on dark bands
 rounded:
   xs: "6px"
   sm: "8px"
@@ -97,11 +98,11 @@ components:
 
 # Design System: Fremont Chinese School
 
-> **Palette: Celadon & Gold on paper.** This system replaced the original
-> forest-green + harvest-orange scheme (and a short-lived jade-only experiment).
-> The CSS tokens keep the legacy `--color-fcs-orange*` names for compatibility,
-> but those values now hold the **gold** action color. The machine-readable
-> sidecar is `.impeccable/design.json`.
+> **Palette: Jade & Gold on paper.** Evolved from a celadon experiment to a
+> jade green, keeping gold as the CTA color. The accent *text* is green (deep
+> jade on light, light mint on dark) — gold is reserved for buttons/focus.
+> Some CSS tokens keep legacy names: `--color-fcs-orange*` hold the gold, and
+> `--color-fcs-gold-ink` holds deep jade. Machine sidecar: `.impeccable/design.json`.
 
 ## 1. Overview
 
@@ -109,16 +110,16 @@ components:
 
 A fifty-year institution that has been tastefully renovated. The bones are old and proud —
 a WASC-accredited school running since 1972 — but the surfaces are current, composed, and
-confident. The palette is **celadon green and gold over a warm paper field**: an emerald-jade
-green carries the structure, gold is the one warm accent that asks for action, and the body is
-a warm paper that reads as ink-on-paper rather than a generic near-white. Traditional Chinese
-is set in **Noto Serif TC**, a literary serif that signals heritage and gravity; English and
-all UI runs in **Inter**, which keeps the structure modern and clean. The two together are the
-whole idea: heritage and modernity in one composed room.
+confident. The palette is **jade green and gold over a warm paper field**: a jade green carries
+the structure, gold is the one warm voice that asks for action (CTAs), and the body is a warm
+paper that reads as ink-on-paper rather than a generic near-white. Traditional Chinese is set in
+**Noto Serif TC**, a literary serif that signals heritage and gravity; English and all UI runs in
+**Inter**, which keeps the structure modern and clean. The two together are the whole idea:
+heritage and modernity in one composed room.
 
 The mood is **warm but editorial**. Headings are large, extrabold, and tightly tracked
 (-0.03em); sections are generously spaced and separated by tonal background bands (paper → mint
-→ deep emerald → emerald) rather than by chrome. Corners are sharp and structured (6–12px, never
+→ deep jade → jade) rather than by chrome. Corners are sharp and structured (6–12px, never
 pills); surfaces are flat and bordered, not shadowed. Gold is the one place the system raises its
 voice — a metallic CTA fill with a quiet sheen. The result reads as a confident, contemporary
 institution — not a tech product, not a daycare, not a bureaucracy.
@@ -126,42 +127,44 @@ institution — not a tech product, not a daycare, not a bureaucracy.
 This system explicitly rejects the four things PRODUCT.md names: the **dated, cluttered Joomla**
 site it replaces; **cold corporate / SaaS** clichés (gradient-soaked hero-metric templates,
 soulless grids); anything **childish or cartoonish** (over-bright primaries, clip-art); and
-**stuffy, institutional** dryness. The emerald + gold + paper carries warmth and credibility; the
+**stuffy, institutional** dryness. The jade + gold + paper carries warmth and credibility; the
 serif-Chinese type carries the heritage; Inter keeps it from ever feeling old.
 
 **Key Characteristics:**
-- Earthy, rooted palette: emerald-jade green + gold over warm paper. Gold is the action color.
+- Earthy, rooted palette: jade green + gold over warm paper. Gold is the CTA; green accents do the labelling.
 - Bilingual type as identity: Noto Serif TC (中文, literary serif) paired with Inter (EN + all UI).
 - Editorial headings: extrabold, large (up to ~4.5rem), tightly tracked (-0.03em).
 - Sharp, structured geometry: 6–12px radii, flat bordered surfaces, tonal section bands.
-- Gold-fill CTAs with a specular sheen; deep-gold eyebrows; pill badges as the accent system.
+- Gold-fill CTAs with a specular sheen; jade/mint accent text; pill badges as the badge system.
 - Global gold focus-visible ring; all motion (sheen, reveals, parallax, splash) degrades under reduced-motion.
 
 ## 2. Colors
 
-A warm, earthy field: emerald-jade greens over warm paper, with gold as the single accent and
-action color. This is a committed, identity-driven palette — the warmth is the brand, not a
-default tint.
+A warm, earthy field: jade greens over warm paper, with gold as the CTA color and green (deep
+jade / light mint) as the accent-text color. This is a committed, identity-driven palette — the
+warmth is the brand, not a default tint.
 
 ### Primary — Greens
-- **Celadon / Emerald-Jade** (`#21704F`): The core brand color. Sticky header, primary links,
-  card link-labels, the feature-card top-rule, section accents. Richer and poppier than a greyed
-  celadon, but dark enough to pass AA as small link text on paper.
-- **Deep Emerald** (`#16412E`): The deeper green for the facts strip, deep bands, and where green
+- **Jade** (`#1A6E52`): The core brand color. Sticky header, primary links, card link-labels,
+  the feature-card top-rule, section accents. Dark enough to pass AA as small link text on paper.
+- **Jade Dark** (`#134B38`): The deeper green for the facts strip, deep bands, and where green
   fills must hold contrast against white text.
-- **Mint Tint** (`#DCEFE4`): The lightest green — icon tiles, green badges, soft mint→paper gradient.
-- **Culture band** (`#123524`): A near-black emerald used full-bleed behind the culture section.
+- **Jade Tint** (`#E6F3EE`): The lightest green — icon tiles, green badges, soft mint→paper gradient.
+- **Culture band** (`#0F2E22`): A near-black jade used full-bleed behind the culture section.
 
-### Accent / Action — Gold
-- **Bright Gold** (`#D8A832`): The action + accent color. It does two jobs:
-  1. **CTA fills** — buttons are a metallic gold gradient (`#E6BC4E → #D8A832 → #C28F22`) with
-     **ink text** (gold is light; white-on-gold fails AA). See Components → Buttons.
-  2. **Text on dark green** — eyebrows, facts labels, culture-section labels, "see all" links.
-     Bright gold is only legible as small text on the *dark* green / culture bands (≥5:1 there).
-- **Gold Deep** (`#B07F1E`): Hover/active state for gold fills.
-- **Deep Gold / Gold-Ink** (`#7E5A05`): Gold **text on light** surfaces (the `.eyebrow` default,
-  electives prices). Bright gold is too light to be AA at 10px on paper; deep gold is 5:1.
+### CTA — Gold
+Gold is the **action** color, used for interactive emphasis only — never as accent label text.
+- **Gold** (`#D8A832`): CTA **button fills** (metallic gradient `#E6BC4E → #D8A832 → #C28F22`
+  with **ink text** — gold is light, so white-on-gold fails AA), the global **focus ring**, and
+  the "NEW" badge. Deepens to **Gold Deep** (`#B07F1E`) on hover.
 - **Gold Tint** (`#F6ECCF`): Soft wash for callouts (`--color-fcs-orange-light`).
+
+### Accent text — Green (two shades, by surface)
+Accent labels are green, never gold. The shade depends on the surface luminance:
+- **Deep Jade** (`#0E5038`, token `--color-fcs-gold-ink`): accent text on **light** surfaces —
+  the `.eyebrow`, electives prices, enroll key-dates, warning icons (AA 7.8:1 on paper).
+- **Light Mint** (`#6FC9A0`, `--color-fcs-mint`): accent text on **dark** green bands — facts-strip
+  labels, culture kickers/labels/links, footer section headers, mobile Enroll (AA 5:1 on jade-dark).
 
 ### Neutral
 - **Ink** (`#221F1A`): Body text, the footer base, and ink-on-gold button text. A warm near-black,
@@ -173,12 +176,13 @@ default tint.
 - **Ink-Soft** (`#57534A`): Secondary / supporting copy. Passes AA on paper (6.1:1) as body.
 
 ### Named Rules
-**The Gold-Is-Action Rule.** Gold means "take this action" (CTA fills) or marks a priority accent
-(eyebrows, key labels). Gold *may* be a solid fill — but a gold fill is always paired with **ink
-text**, never white.
+**The Gold-Is-CTA Rule.** Gold = interactive action (button fills, focus ring, "NEW"). It is not
+used as accent label text. A gold fill is always paired with **ink text**, never white.
 
-**The Gold-Text-Legibility Rule.** Bright gold (`#D8A832`) as *text* only on dark green / culture
-bands. On light surfaces, gold text uses Deep Gold (`#7E5A05`). Never put bright gold text on paper.
+**The Green-Accent-Text Rule.** Accent/label text is green: **deep jade `#0E5038`** on light
+surfaces, **light mint `#6FC9A0`** on dark green bands. Do *not* use a mid/bright jade (e.g.
+`#3DA17C`) as small text on a dark green band — it fails AA (3.15:1). The accent must be light
+enough (mint) on dark, dark enough (deep jade) on light.
 
 **The Paper-Is-The-Field Rule.** Paper (`#ECE6D6`) is the ground; greens and ink are the figure.
 Color carries through accents, bands, and imagery — not by tinting the body warmer.
@@ -186,7 +190,7 @@ Color carries through accents, bands, and imagery — not by tinting the body wa
 **The Warm-Black Rule.** All dark text/surfaces use Ink (`#221F1A`), never pure `#000`.
 
 **The No-Stray-Blue Rule.** Blue is not in the palette. The only blues allowed are external brand
-marks (Facebook `#1877F2`, Google Calendar `#4285F4`). Everything else is celadon/gold/ink.
+marks (Facebook `#1877F2`, Google Calendar `#4285F4`). Everything else is jade/gold/ink.
 
 ## 3. Typography
 
@@ -205,9 +209,9 @@ calm, readable long-form.
 - **Display (EN)** (Inter 800, clamp 3→4.5rem, line-height ~1.05, -0.03em): Hero `h1`, white over the photo hero.
 - **Display (ZH)** (Noto Serif TC 700, same scale): The Chinese counterpart of any display heading.
 - **Headline** (Inter 700, clamp 2.25→3rem, -0.03em): Section `h2`s. Use `text-wrap: balance`.
-- **Title** (Inter 600, 1.25rem): Card / feature `h3`s (green-dark or ink).
+- **Title** (Inter 600, 1.25rem): Card / feature `h3`s (jade-dark or ink).
 - **Body** (Inter 400, 15px, line-height 1.7): Paragraph copy in Ink; cap measure 65–75ch.
-- **Eyebrow** (Inter 600, 10px, +0.18em, UPPERCASE): Deep gold on light, bright gold on dark bands.
+- **Eyebrow** (Inter 600, 10px, +0.18em, UPPERCASE): Deep jade on light, light mint on dark bands.
 - **Nav** (Inter 600, 11–12px, uppercase, wide tracking): Header and footer navigation.
 
 ### Named Rules
@@ -215,7 +219,7 @@ calm, readable long-form.
 *is* the cue for which face to use.
 
 **The Eyebrow-Restraint Rule** *(enforced).* The eyebrow is a deliberate kicker, not a per-section
-reflex. It appears on **exactly two** places: the homepage features and culture section headers.
+reflex. It appears in **exactly two** places: the homepage features and culture section headers.
 Interior pages do **not** carry a header eyebrow — the `<h1>` and nav already orient the reader.
 Do not reintroduce a kicker above every page heading; that's AI scaffolding, not voice.
 
@@ -255,34 +259,39 @@ diffuse, and low-opacity. Crisp or neutral-black shadows are forbidden.
   the dark culture band.
 - **Border:** 1px Warm Border (`#D9D0C0`); `.gs-card` deepens to ~`#C8B89A` on hover (CSS `:hover`,
   never inline JS).
-- **Feature-card top-rule** *(deliberate marker, enforced).* A 5px Celadon top border marks a
+- **Feature-card top-rule** *(deliberate marker, enforced).* A 5px Jade top border marks a
   **feature card** — used **only** on the homepage value-prop cards and the Programs offering cards.
   It is NOT card grammar: resource lists, callouts, info boxes, and class grids get a plain 1px
   border. Never propagate colored side/edge stripes (see Don'ts).
 - **Internal Padding:** 16–28px.
 
 ### Eyebrow & Badges
-- **Eyebrow:** `.eyebrow` — 10px, 600, +0.18em, uppercase. Deep gold (`#7E5A05`) on light; the dark-
-  band call sites override to bright gold (`#D8A832`).
+- **Eyebrow:** `.eyebrow` — 10px, 600, +0.18em, uppercase. Deep jade (`#0E5038`) on light; the dark-
+  band call sites override to light mint (`#6FC9A0`).
 - **Badges:** pill (`100px`) tints — `badge-green` `#D6EDD9`/`#1E4D25`, `badge-gold` `#FEF3DC`/
   `#7A5500`, `badge-dark` ink/paper (tokenized). Inline tints (electives "NEW" = gold fill + ink;
-  green status badges = mint tint + green-dark). Small (10px), for status/category tags.
+  green status badges = jade tint + jade-dark). Small (10px), for status/category tags.
 
 ### Navigation
-- **Header:** Sticky on Celadon (`#21704F`), fixed 72px; white inverted logo; condenses with shadow
+- **Header:** Sticky on Jade (`#1A6E52`), fixed 72px; white inverted logo; condenses with shadow
   + backdrop-blur on scroll. The Enroll CTA is a gold `.btn-primary`.
+  Order: Programs · Enroll · About · Calendar · Events · Donate · Contact.
 - **Links:** 11–12px Inter 600, uppercase, wide tracking, white; active link cream + underline
   (offset 4px) + `aria-current="page"`.
-- **Mobile:** Native `<details>` disclosure; the Enroll item is bright-gold text on the dark menu.
-- **Announcement banner:** Deep-emerald strip with a gold `.btn-shimmer` Enroll pill.
-- **Footer:** Ink gradient (`#221F1A → #15120E`); gold uppercase section headers; paper-toned links
-  (`.footer-link`, ~0.72 → 1.0 on hover via CSS).
+- **Mobile:** Native `<details>` disclosure; the Enroll item is light-mint text on the dark menu.
+- **Announcement banner:** Deep-jade strip with a gold `.btn-shimmer` Enroll pill.
+- **Footer:** Ink gradient (`#221F1A → #15120E`); light-mint uppercase section headers; paper-toned
+  links (`.footer-link`, ~0.72 → 1.0 on hover via CSS).
 
 ### Calendar — event-category colors
 Five distinguishable, AA-on-paper categories (color is paired with a legend + text label, never the
-sole channel): **no-school** warm red `#B23A2C`, **exam** deep gold `#7E5A05` (bold), **event**
-celadon `#21704F`, **ac** aubergine `#6B3A56`, **admin** ink-soft `#57534A`; **milestone** ink bold.
+sole channel): **no-school** warm red `#B23A2C`, **exam** ochre `#7E5A05` (bold), **event** jade
+`#1A6E52`, **ac** aubergine `#6B3A56`, **admin** ink-soft `#57534A`; **milestone** ink bold.
 Zebra rows alternate paper / surface.
+
+### Analytics
+Umami (`cloud.umami.is`), `defer`-loaded in `<head>`; privacy-friendly, cookieless. The
+`data-website-id` is public by design.
 
 ### Inputs / Fields
 - No first-party form fields yet (enroll/payment live on external systems). When added: surface
@@ -296,20 +305,20 @@ Zebra rows alternate paper / surface.
 ## 6. Do's and Don'ts
 
 ### Do:
-- **Do** treat gold as action/accent — gold fills are welcome, always with **ink text** (Gold-Is-Action).
-- **Do** use bright gold text only on dark green; deep gold (`#7E5A05`) for gold text on light.
+- **Do** use gold for CTAs only — button fills (always **ink text**), focus ring, "NEW" (Gold-Is-CTA).
+- **Do** make accent text green: deep jade (`#0E5038`) on light, light mint (`#6FC9A0`) on dark.
 - **Do** set Chinese in Noto Serif TC and English/UI in Inter, always (Two-Script Rule).
 - **Do** use Ink (`#221F1A`) for primary body copy; Ink-Soft for secondary.
 - **Do** keep paper as the field; carry warmth through accents, bands, and imagery (Paper-Is-The-Field).
-- **Do** reserve the 5px celadon top-rule for feature cards (homepage values + Programs offerings).
+- **Do** reserve the 5px jade top-rule for feature cards (homepage values + Programs offerings).
 - **Do** keep the eyebrow to the two homepage section kickers only.
 - **Do** test every heading and CTA in **both** EN (Inter) and 中文 (Noto Serif TC) at every breakpoint.
 - **Do** give every animation a `prefers-reduced-motion` fallback to static, visible content.
-- **Do** verify any gold/green text hits AA (4.5:1 small, 3:1 large) before shipping.
+- **Do** verify any accent/green text hits AA (4.5:1 small, 3:1 large) before shipping.
 
 ### Don't:
 - **Don't** put **white text on a gold fill** — gold is light; use ink (white-on-gold fails AA).
-- **Don't** put **bright gold text on paper** — it fails AA; use deep gold.
+- **Don't** use **gold as accent label text**, or a **bright/mid jade as small text on dark green** — both fail AA.
 - **Don't** add **colored side/edge stripes** (`border-left/right > 1px`) to any card/callout — absolute ban.
 - **Don't** stamp an **eyebrow above every section/page** — it's AI scaffolding (two homepage kickers only).
 - **Don't** propagate the top-rule beyond feature cards — it's a marker, not card grammar.
