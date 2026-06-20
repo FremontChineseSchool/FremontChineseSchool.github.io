@@ -19,7 +19,7 @@ const c = content[lang].news;
        Optional image: add image: '/images/news/your-file.jpg' and drop the file in public/images/news/ -->
   <div class="mt-10 space-y-6">
     {c.posts.map((post) => (
-      <article class="overflow-hidden rounded-[10px]" style="background: var(--color-fcs-white); border: 1px solid var(--color-fcs-border); border-left: 4px solid var(--color-fcs-green);">
+      <article class="overflow-hidden rounded-[10px]" style="background: var(--color-fcs-white); border: 1px solid var(--color-fcs-border);">
         {'image' in post && post.image && (
           <img
             src={post.image as string}

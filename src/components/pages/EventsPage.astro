@@ -64,7 +64,7 @@ const c = content[lang].events;
                   </div>
                 )}
                 {/* Text */}
-                <div class="flex-1 p-5" style="border-left: 4px solid var(--color-fcs-green);">
+                <div class="flex-1 p-5">
                   <h3 class="font-semibold" style="color: var(--color-fcs-green-dark);">{e.name}</h3>
                   <p class="mt-1 text-sm leading-relaxed" style="color: var(--color-fcs-muted);">{e.body}</p>
                   {"route" in e && e.route && (
@@ -93,7 +93,7 @@ const c = content[lang].events;
   </p>
 
   <!-- Past photos & videos -->
-  <div class="mt-12 rounded-[10px] p-6" style="background: var(--color-fcs-white); border: 1px solid var(--color-fcs-border); border-top: 5px solid var(--color-fcs-green);">
+  <div class="mt-12 rounded-[10px] p-6" style="background: var(--color-fcs-white); border: 1px solid var(--color-fcs-border);">
     <h2 class="text-xl font-semibold" style="color: var(--color-fcs-black);">{c.photosTitle}</h2>
     <p class="mt-3 leading-relaxed" style="color: var(--color-fcs-muted);">{c.photosBody}</p>
     <div class="mt-5 flex flex-wrap gap-3">
