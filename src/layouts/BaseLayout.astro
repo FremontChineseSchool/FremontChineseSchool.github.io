@@ -119,16 +119,23 @@ const orgSchema = {
       class="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-50 focus:rounded focus:bg-white focus:px-4 focus:py-2 focus:shadow"
       >{t.skipToContent}</a
     >
-    {content[lang].home.announcement && (
-      <div class="flex flex-wrap items-center justify-center gap-x-4 gap-y-1 px-4 py-2.5 text-sm font-medium" style="background: var(--color-fcs-green-dark); color: #EFE9DB;">
-        <span>📣 {content[lang].home.announcement}</span>
-        <a
-          href={localizedPath(lang, 'enroll')}
-          class="btn-primary btn-shimmer rounded-full px-3.5 py-1 text-xs font-semibold transition-colors"
-        >{content[lang].home.announcementCta}</a>
-      </div>
-    )}
-    <Header lang={lang} />
+    {/* On mobile (<sm) the header has no room for the Enroll button, so we pin
+        the announcement banner + header together as one sticky unit — keeping an
+        Enroll CTA visible at any scroll. At sm+ this wrapper becomes
+        `display:contents` (no box), so the banner scrolls away and the header
+        pins itself exactly as before. */}
+    <div class="sticky top-0 z-50 sm:contents">
+      {content[lang].home.announcement && (
+        <div class="flex flex-wrap items-center justify-center gap-x-4 gap-y-1 px-4 py-2.5 text-sm font-medium" style="background: var(--color-fcs-green-dark); color: #EFE9DB;">
+          <span>📣 {content[lang].home.announcement}</span>
+          <a
+            href={localizedPath(lang, 'enroll')}
+            class="btn-primary btn-shimmer rounded-full px-3.5 py-1 text-xs font-semibold transition-colors"
+          >{content[lang].home.announcementCta}</a>
+        </div>
+      )}
+      <Header lang={lang} />
+    </div>
     <main id="main" class="flex-1 flex flex-col">
       <slot />
     </main>
