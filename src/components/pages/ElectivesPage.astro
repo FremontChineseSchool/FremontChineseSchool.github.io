@@ -9,13 +9,12 @@ const { lang } = Astro.props;
 const c = content[lang].electives;
 ---
 
-<section style="background: #FFF8F0;" class="mx-auto max-w-3xl px-4 py-14">
-  <p class="eyebrow mb-3">{lang === 'en' ? 'Programs' : '課程'}</p>
+<section style="background: var(--color-fcs-white);" class="mx-auto max-w-3xl px-4 py-14">
   <h1 class="text-3xl font-semibold sm:text-4xl" style="letter-spacing: -0.02em; color: var(--color-fcs-black);">{c.title}</h1>
   <p class="mt-4 text-lg leading-relaxed" style="color: var(--color-fcs-muted);">{c.intro}</p>
 
   <!-- Material fee note -->
-  <p class="mt-5 rounded-[10px] p-4 text-sm" style="background: var(--color-fcs-yellow-light, #fffbeb); color: var(--color-fcs-muted); border: 1px solid var(--color-fcs-border);">
+  <p class="mt-5 rounded-[10px] p-4 text-sm" style="background: var(--color-fcs-orange-light); color: var(--color-fcs-muted); border: 1px solid var(--color-fcs-border);">
     <strong style="color: var(--color-fcs-black);">{lang === 'en' ? 'Material fees:' : '教材費說明：'}</strong>{' '}{c.materialFeeNote}
   </p>
 
@@ -38,21 +37,21 @@ const c = content[lang].electives;
             <div class="rounded-[10px] p-5 flex flex-col gap-2" style="background: var(--color-fcs-white); border: 1px solid var(--color-fcs-border); border-top: 4px solid var(--color-fcs-green);">
               <div class="flex items-start justify-between gap-2">
                 <div>
-                  <span class="inline-block rounded px-1.5 py-0.5 text-xs font-mono font-semibold mb-1" style="background: #E8F0E8; color: var(--color-fcs-green);">{cls.code}</span>
+                  <span class="inline-block rounded px-1.5 py-0.5 text-xs font-mono font-semibold mb-1" style="background: var(--color-fcs-green-light); color: var(--color-fcs-green);">{cls.code}</span>
                   <h3 class="font-semibold text-sm leading-snug" style="color: var(--color-fcs-green-dark);">{cls.name}</h3>
                 </div>
                 <div class="flex gap-1 flex-wrap justify-end shrink-0">
                   {cls.isNew && (
-                    <span class="rounded-full px-2 py-0.5 text-xs font-bold" style="background: var(--color-fcs-orange); color: #fff;">{lang === 'en' ? 'NEW' : '新課'}</span>
+                    <span class="rounded-full px-2 py-0.5 text-xs font-bold" style="background: var(--color-fcs-gold); color: var(--color-fcs-black);">{lang === 'en' ? 'NEW' : '新課'}</span>
                   )}
                   {cls.adultsWelcome && (
-                    <span class="rounded-full px-2 py-0.5 text-xs font-semibold" style="background: var(--color-fcs-blue-light, #e0f0ff); color: var(--color-fcs-blue, #3b82f6);">{lang === 'en' ? 'Adults ✓' : '成人歡迎'}</span>
+                    <span class="rounded-full px-2 py-0.5 text-xs font-semibold" style="background: var(--color-fcs-green-light); color: var(--color-fcs-green);">{lang === 'en' ? 'Adults ✓' : '成人歡迎'}</span>
                   )}
                 </div>
               </div>
               <p class="text-sm leading-relaxed" style="color: var(--color-fcs-muted);">{cls.description}</p>
               {cls.materialFee && (
-                <p class="text-xs font-semibold mt-auto" style="color: var(--color-fcs-orange);">
+                <p class="text-xs font-semibold mt-auto" style="color: var(--color-fcs-gold-ink);">
                   {lang === 'en' ? 'Material fee: ' : '教材費：'}{cls.materialFee}
                   {cls.materialsNote && <span class="font-normal" style="color: var(--color-fcs-muted);"> — {cls.materialsNote}</span>}
                 </p>
@@ -76,27 +75,27 @@ const c = content[lang].electives;
     {c.onlineSlots.map((slot) => (
       <div>
         <div class="flex items-center gap-2 border-b pb-2 mb-4" style="border-color: var(--color-fcs-border);">
-          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color: var(--color-fcs-blue, #3b82f6); flex-shrink:0;" aria-hidden="true">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color: var(--color-fcs-green); flex-shrink:0;" aria-hidden="true">
             <circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/>
           </svg>
-          <span class="text-sm font-semibold tracking-wide uppercase" style="color: var(--color-fcs-blue, #3b82f6);">{slot.time}</span>
+          <span class="text-sm font-semibold tracking-wide uppercase" style="color: var(--color-fcs-green);">{slot.time}</span>
         </div>
 
         <div class="grid gap-4 sm:grid-cols-2">
           {slot.classes.map((cls) => (
-            <div class="rounded-[10px] p-5 flex flex-col gap-2" style="background: var(--color-fcs-white); border: 1px solid var(--color-fcs-border); border-top: 4px solid var(--color-fcs-blue, #3b82f6);">
+            <div class="rounded-[10px] p-5 flex flex-col gap-2" style="background: var(--color-fcs-white); border: 1px solid var(--color-fcs-border); border-top: 4px solid var(--color-fcs-green);">
               <div class="flex items-start justify-between gap-2">
                 <div>
-                  <span class="inline-block rounded px-1.5 py-0.5 text-xs font-mono font-semibold mb-1" style="background: #E0F0FF; color: var(--color-fcs-blue, #3b82f6);">{cls.code}</span>
+                  <span class="inline-block rounded px-1.5 py-0.5 text-xs font-mono font-semibold mb-1" style="background: var(--color-fcs-green-light); color: var(--color-fcs-green);">{cls.code}</span>
                   <h3 class="font-semibold text-sm leading-snug" style="color: var(--color-fcs-black);">{cls.name}</h3>
                 </div>
                 {cls.isNew && (
-                  <span class="rounded-full px-2 py-0.5 text-xs font-bold shrink-0" style="background: var(--color-fcs-orange); color: #fff;">{lang === 'en' ? 'NEW' : '新課'}</span>
+                  <span class="rounded-full px-2 py-0.5 text-xs font-bold shrink-0" style="background: var(--color-fcs-gold); color: var(--color-fcs-black);">{lang === 'en' ? 'NEW' : '新課'}</span>
                 )}
               </div>
               <p class="text-sm leading-relaxed" style="color: var(--color-fcs-muted);">{cls.description}</p>
               {cls.materialFee && (
-                <p class="text-xs font-semibold mt-auto" style="color: var(--color-fcs-orange);">
+                <p class="text-xs font-semibold mt-auto" style="color: var(--color-fcs-gold-ink);">
                   {lang === 'en' ? 'Material fee: ' : '教材費：'}{cls.materialFee}
                   {cls.materialsNote && <span class="font-normal" style="color: var(--color-fcs-muted);"> — {cls.materialsNote}</span>}
                 </p>
@@ -118,8 +117,7 @@ const c = content[lang].electives;
   <div class="mt-12 flex flex-wrap gap-3">
     <a
       href={localizedPath(lang, 'enroll')}
-      class="inline-block rounded-[6px] px-5 py-2.5 text-sm font-semibold text-white transition-opacity hover:opacity-90"
-      style="background: var(--color-fcs-orange);"
+      class="btn-primary inline-block rounded-[6px] px-5 py-2.5 text-sm font-semibold transition-colors"
     >
       {lang === 'en' ? 'Enroll now →' : '立即報名 →'}
     </a>

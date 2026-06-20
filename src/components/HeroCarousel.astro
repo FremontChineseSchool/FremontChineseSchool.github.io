@@ -7,6 +7,7 @@ interface Props {
 }
 const { lang } = Astro.props;
 const alts = content[lang].home.heroSlidesAlt;
+const { pauseSlideshow, playSlideshow } = content[lang].home;
 
 // The 6 photos from the legacy site's Nivo slider (public/images/slider/).
 const slides = [1, 2, 3, 4, 5, 6].map((n, i) => ({
@@ -16,7 +17,7 @@ const slides = [1, 2, 3, 4, 5, 6].map((n, i) => ({
 ---
 
 <section
-  class="hero-carousel relative isolate overflow-hidden bg-fcs-blue-dark"
+  class="hero-carousel relative isolate overflow-hidden bg-fcs-green-dark"
   data-interval="3500"
 >
   <!-- Rotating photos -->
@@ -56,8 +57,10 @@ const slides = [1, 2, 3, 4, 5, 6].map((n, i) => ({
     <button
       type="button"
       data-carousel-pause
-      aria-label="Pause slideshow"
-      class="flex h-7 w-7 items-center justify-center rounded-full border border-white/60 bg-black/30 text-white transition hover:bg-black/50"
+      aria-label={pauseSlideshow}
+      data-label-pause={pauseSlideshow}
+      data-label-play={playSlideshow}
+      class="flex h-9 w-9 items-center justify-center rounded-full border border-white/60 bg-black/30 text-white transition hover:bg-black/50"
     >
       <!-- Pause icon (shown when playing) -->
       <svg data-icon-pause xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><rect x="6" y="4" width="4" height="16"/><rect x="14" y="4" width="4" height="16"/></svg>
@@ -138,12 +141,12 @@ const slides = [1, 2, 3, 4, 5, 6].map((n, i) => ({
       paused = !paused;
       if (paused) {
         stop();
-        pauseBtn.setAttribute("aria-label", "Play slideshow");
+        pauseBtn.setAttribute("aria-label", pauseBtn.dataset.labelPlay ?? "Play slideshow");
         if (iconPause) iconPause.style.display = "none";
         if (iconPlay)  iconPlay.style.display  = "";
       } else {
         start();
-        pauseBtn.setAttribute("aria-label", "Pause slideshow");
+        pauseBtn.setAttribute("aria-label", pauseBtn.dataset.labelPause ?? "Pause slideshow");
         if (iconPause) iconPause.style.display = "";
         if (iconPlay)  iconPlay.style.display  = "none";
       }

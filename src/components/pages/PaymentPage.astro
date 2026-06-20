@@ -15,15 +15,14 @@ const STORE_ID = "25817941";
 const ecwidLang = lang === "zh" ? "zh" : "en";
 ---
 
-<section style="background: #FFF8F0;" class="mx-auto max-w-5xl px-4 py-14">
-  <p class="eyebrow mb-3">Payment</p>
+<section style="background: var(--color-fcs-white);" class="mx-auto max-w-5xl px-4 py-14">
   <h1 class="text-3xl font-semibold sm:text-4xl" style="letter-spacing: -0.02em; color: var(--color-fcs-black);">{c.title}</h1>
   <p class="mt-4 max-w-2xl text-lg" style="color: var(--color-fcs-muted);">{c.intro}</p>
 
   <!-- Payment method callout -->
-  <div class="mt-6 flex gap-3 rounded-[10px] p-4" style="background: #FFFBEB; border: 1px solid #FDE68A;">
-    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color: #D97706; flex-shrink:0; margin-top:2px;" aria-hidden="true"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
-    <p class="text-sm" style="color: #92400E;">{c.checkNote}</p>
+  <div class="mt-6 flex gap-3 rounded-[10px] p-4" style="background: var(--color-fcs-orange-light); border: 1px solid var(--color-fcs-gold);">
+    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color: var(--color-fcs-gold-ink); flex-shrink:0; margin-top:2px;" aria-hidden="true"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+    <p class="text-sm" style="color: var(--color-fcs-black);">{c.checkNote}</p>
   </div>
 
   <!-- Ecwid storefront mounts here -->

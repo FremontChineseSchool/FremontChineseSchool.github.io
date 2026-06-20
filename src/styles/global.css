@@ -1,5 +1,4 @@
 @import "tailwindcss";
-@import url('https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@400;700&family=Inter:wght@400;500;600;700&display=swap');
 
 @theme {
   /* Legacy blue tokens — kept for CalligraphySplash and any remaining references */
@@ -16,8 +15,10 @@
   --color-fcs-green-dark:   #134B38;   /* Jade dark */
   --color-fcs-green-light:  #E6F3EE;   /* Jade tint for surfaces */
   --color-fcs-orange:       #3DA17C;   /* Jade bright — replaces orange for CTAs/accents */
+  --color-fcs-orange-deep:  #2D8A67;   /* Jade mid — hover/active */
   --color-fcs-orange-light: #DDF0EA;   /* Jade bright tint */
-  --color-fcs-gold:         #3DA17C;   /* Jade bright — replaces gold for eyebrows/focus */
+  --color-fcs-gold:         #3DA17C;   /* Jade bright — replaces gold */
+  --color-fcs-gold-ink:     #0E5038;   /* Deep jade — text on light surfaces (AA) */
   --color-fcs-black:        #1F1D19;   /* Ink */
   --color-fcs-white:        #EFE9DB;   /* Paper */
   --color-fcs-surface:      #FAF6EC;   /* Lighter surface */
@@ -51,20 +52,71 @@ body {
   @apply antialiased;
 }
 
-/* Chinese text always uses Noto Serif TC */
-[lang="zh"],
-.zh,
-.font-zh {
+/* Chinese text always uses Noto Serif TC.
+   `|=` matches the `zh-Hant` lang attribute set in BaseLayout (and any zh-* subtag). */
+[lang|="zh"] {
   font-family: var(--font-display-zh);
 }
 
-/* Eyebrow labels */
+/* Eyebrow labels — deep gold on light surfaces (bright gold is too light to be
+   AA at 10px on paper). On dark green bands the call site overrides to the
+   bright --color-fcs-gold. */
 .eyebrow {
   font-size: 10px;
   font-weight: 600;
   letter-spacing: 0.18em;
   text-transform: uppercase;
-  color: var(--color-fcs-gold);
+  color: var(--color-fcs-gold-ink);
+}
+
+/* ---- Gold-fill button system ----
+   Green carries the surfaces; gold is the confident CTA fill. The fill is a
+   metallic gradient (light→deep gold) for a static sheen; a specular highlight
+   sweeps across on hover, and the marquee CTAs (.btn-shimmer) shimmer passively.
+   Ink text stays AA (>=5.7:1) across every gradient stop. */
+.btn-primary,
+.btn-on-dark {
+  position: relative;
+  overflow: hidden;
+  background: linear-gradient(135deg, #E6BC4E 0%, var(--color-fcs-gold) 50%, #C28F22 100%);
+  color: var(--color-fcs-black);
+  border: none;
+  transition: filter 0.15s;
+}
+.btn-primary:hover,
+.btn-on-dark:hover { filter: brightness(0.94); }
+
+/* Specular sheen — a diagonal highlight parked off the left edge.
+   Two independent layers so behaviour is identical on every button:
+     ::after  = hover sweep (all gold buttons, fires immediately)
+     ::before = passive shimmer loop (only .btn-shimmer marquee CTAs) */
+.btn-primary::before, .btn-on-dark::before,
+.btn-primary::after,  .btn-on-dark::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  width: 55%;
+  background: linear-gradient(100deg, transparent 0%, rgba(255,255,255,0.6) 50%, transparent 100%);
+  transform: translateX(-200%) skewX(-18deg);
+  pointer-events: none;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  /* Immediate, identical hover sweep for every gold button. Transition lives in
+     the :hover rule so leaving hover snaps back off-screen (no reverse sweep). */
+  .btn-primary:hover::after,
+  .btn-on-dark:hover::after {
+    transition: transform 0.7s ease;
+    transform: translateX(320%) skewX(-18deg);
+  }
+  /* Passive shimmer loop — marquee CTAs only, on the separate ::before layer. */
+  .btn-shimmer::before { animation: btn-sheen 5s ease-in-out infinite; }
+}
+
+@keyframes btn-sheen {
+  0%, 8%   { transform: translateX(-200%) skewX(-18deg); }
+  26%      { transform: translateX(320%)  skewX(-18deg); }
+  100%     { transform: translateX(320%)  skewX(-18deg); }
 }
 
 /* Badges */
@@ -78,7 +130,15 @@ body {
 .badge-green  { background: #D6EDD9; color: #1E4D25; }
 .badge-orange { background: #FEF0E6; color: #7A3200; }
 .badge-gold   { background: #FEF3DC; color: #7A5500; }
-.badge-dark   { background: #1C1208; color: #FFF8F0; }
+.badge-dark   { background: var(--color-fcs-black); color: var(--color-fcs-white); }
+
+/* Footer links: dim paper text that brightens on hover (CSS state, not inline JS). */
+.footer-link { color: rgba(236, 230, 214, 0.72); transition: color 0.15s; }
+.footer-link:hover { color: rgb(236, 230, 214); }
+
+/* Get-started cards: warm hairline that deepens on hover (CSS state, not inline JS). */
+.gs-card { border: 1px solid var(--color-fcs-border); transition: border-color 0.15s; }
+.gs-card:hover { border-color: #C8B89A; }
 
 /* ---------------------------------------------------------------------------
    Scroll-reveal: elements tagged [data-reveal] fade + rise + settle into view.

@@ -37,7 +37,7 @@ const featureIcons = [
   <div class="mt-8 flex flex-wrap gap-3">
     <a
       href={localizedPath(lang, 'enroll')}
-      class="rounded-[6px] bg-fcs-orange px-6 py-3 font-semibold text-fcs-white transition-colors duration-150 hover:bg-[#C85A10]"
+      class="btn-primary btn-shimmer rounded-[6px] px-6 py-3 font-semibold transition-colors duration-150"
     >{c.ctaPrimary}</a>
     <a
       href={localizedPath(lang, "programs")}
@@ -48,17 +48,17 @@ const featureIcons = [
 
 <!-- Facts strip -->
 <section style="background: var(--color-fcs-green-dark);">
-  <div class="mx-auto grid max-w-6xl grid-cols-2 divide-x divide-y sm:grid-cols-4 sm:divide-y-0" style="divide-color: rgba(255,255,255,0.12);">
+  <div class="mx-auto grid max-w-6xl grid-cols-2 divide-x divide-y divide-white/10 sm:grid-cols-4 sm:divide-y-0">
     {c.facts.map((f, i) => (
       <div
         class="flex flex-col items-center justify-center px-6 py-10 text-center"
         data-reveal
-        style={`--reveal-delay: ${i * 80}ms;${i > 0 ? ' border-left: 1px solid rgba(255,255,255,0.12);' : ''}`}
+        style={`--reveal-delay: ${i * 80}ms;`}
       >
         <div class="text-3xl font-extrabold tracking-tight text-white sm:text-4xl" style="letter-spacing: -0.02em;">
           {f.value}
         </div>
-        <div class="mt-1.5 text-[10px] font-semibold uppercase tracking-widest" style="color: rgba(255,255,255,0.6);">
+        <div class="mt-1.5 text-[10px] font-semibold uppercase tracking-widest" style="color: var(--color-fcs-gold);">
           {f.label}
         </div>
       </div>
@@ -67,10 +67,10 @@ const featureIcons = [
 </section>
 
 <!-- Why FCS — value props (odd section → fcs-white bg) -->
-<section style="background: #FFF8F0;">
+<section style="background: var(--color-fcs-white);">
   <div class="mx-auto max-w-6xl px-4 py-28">
     <div class="max-w-2xl" data-reveal>
-      <p class="eyebrow mb-3">Why FCS</p>
+      <p class="eyebrow mb-3">{c.featuresEyebrow}</p>
       <h2 class="text-4xl font-bold sm:text-5xl" style="letter-spacing: -0.03em; color: var(--color-fcs-black);">{c.featuresTitle}</h2>
       <p class="mt-4 text-lg" style="color: var(--color-fcs-muted);">{c.featuresSubtitle}</p>
     </div>
@@ -79,9 +79,8 @@ const featureIcons = [
         c.features.map((f, i) => (
           <div
             class="rounded-[10px] p-4 transition-colors duration-150"
-            style={`background: var(--color-fcs-white); border: 1px solid var(--color-fcs-border); border-top: 5px solid var(--color-fcs-green);`}
+            style={`background: var(--color-fcs-white); border: 1px solid var(--color-fcs-border); border-top: 5px solid var(--color-fcs-green); --reveal-delay: ${i * 90}ms;`}
             data-reveal
-            style={`--reveal-delay: ${i * 90}ms`}
           >
             <div class="flex h-11 w-11 items-center justify-center rounded-xl" style="background: var(--color-fcs-green-light); color: var(--color-fcs-green-dark);">
               <svg
@@ -109,11 +108,11 @@ const featureIcons = [
 </section>
 
 <!-- Culture section -->
-<section style="background: #1A3D22;">
+<section style="background: #123524;">
   <div class="mx-auto max-w-6xl px-4 py-20 sm:py-24">
     <!-- Header -->
     <div class="max-w-2xl" data-reveal>
-      <p class="eyebrow mb-3" style="color: var(--color-fcs-gold);">{lang === 'en' ? 'Life at FCS' : '校園生活'}</p>
+      <p class="eyebrow mb-3" style="color: var(--color-fcs-gold);">{c.cultureEyebrow}</p>
       <h2 class="text-4xl font-bold text-white sm:text-5xl" style="letter-spacing: -0.03em;">{c.cultureTitle}</h2>
       <p class="mt-4 text-lg leading-relaxed" style="color: rgba(255,255,255,0.75);">{c.cultureSubtitle}</p>
     </div>
@@ -166,7 +165,7 @@ const featureIcons = [
 
 
 <!-- Get-started cards -->
-<section style="background: linear-gradient(to bottom, #F0F7F2, #FFF8F0);">
+<section style="background: linear-gradient(to bottom, var(--color-fcs-green-light), var(--color-fcs-white));">
   <div class="mx-auto max-w-6xl px-4 py-28">
     <h2 class="text-4xl font-bold sm:text-5xl" style="letter-spacing: -0.03em; color: var(--color-fcs-black);" data-reveal>{c.cardsTitle}</h2>
     <div class="mt-10 grid gap-6 md:grid-cols-3">
@@ -174,12 +173,9 @@ const featureIcons = [
         c.cards.map((card, i) => (
           <a
             href={localizedPath(lang, card.route)}
-            class="group flex flex-col rounded-[10px] p-7 transition-colors duration-150"
-            style="background: var(--color-fcs-white); border: 1px solid var(--color-fcs-border);"
-            onmouseover="this.style.borderColor='#C8B89A'"
-            onmouseout="this.style.borderColor='var(--color-fcs-border)'"
+            class="gs-card group flex flex-col rounded-[10px] p-7 transition-colors duration-150"
+            style={`background: var(--color-fcs-white); --reveal-delay: ${i * 90}ms;`}
             data-reveal
-            style={`--reveal-delay: ${i * 90}ms`}
           >
             <h3 class="text-xl font-semibold" style="color: var(--color-fcs-green-dark);">
               {card.title}
@@ -223,8 +219,7 @@ const featureIcons = [
     <div class="mt-8 flex flex-wrap justify-center gap-3">
       <a
         href={localizedPath(lang, 'enroll')}
-        class="rounded-[6px] bg-fcs-white px-7 py-3 font-semibold transition-colors duration-150 hover:bg-white"
-        style="color: var(--color-fcs-green);"
+        class="btn-on-dark btn-shimmer rounded-[6px] px-7 py-3 font-semibold transition-colors duration-150"
       >{c.ctaPrimary}</a>
       <a
         href={localizedPath(lang, "enroll")}

@@ -24,18 +24,47 @@ const navItems = navOrder.map((key) => {
   <div
     class="mx-auto flex h-full max-w-6xl items-center justify-between px-8"
   >
-    <!-- Logo -->
-    <a href={localizedPath(lang, "home")} class="flex shrink-0 items-center gap-3">
-      <img
-        src="/images/logo.png"
-        alt={t.logoAlt}
-        class="h-11 w-auto"
-        style="filter: brightness(0) invert(1);"
-        width="500"
-        height="108"
-      />
-      <span class="sr-only">{t.siteName}</span>
-    </a>
+    <!-- Logo + replay-intro button, grouped so the button sits beside the logo -->
+    <div class="flex shrink-0 items-center gap-1">
+      <a href={localizedPath(lang, "home")} class="flex items-center gap-3">
+        <img
+          src="/images/logo.png"
+          alt={t.logoAlt}
+          class="h-11 w-auto"
+          style="filter: brightness(0) invert(1);"
+          width="500"
+          height="108"
+        />
+        <span class="sr-only">{t.siteName}</span>
+      </a>
+
+      <!-- Replay the calligraphy intro. Hidden by default; the splash script
+           reveals it only when JS is available and motion is not reduced. -->
+      <button
+        id="splash-replay"
+        type="button"
+        aria-label={t.replayIntro}
+        title={t.replayIntro}
+        style="display:none"
+        class="shrink-0 items-center justify-center rounded-full p-1.5 text-white/70 transition-colors hover:bg-white/15 hover:text-fcs-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white/70"
+      >
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        width="18"
+        height="18"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        aria-hidden="true"
+      >
+        <polyline points="23 4 23 10 17 10"></polyline>
+        <path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10"></path>
+      </svg>
+      </button>
+    </div>
 
     <!-- Desktop nav — centered -->
     <nav aria-label="Primary" class="hidden items-center gap-1 lg:flex">
@@ -62,7 +91,7 @@ const navItems = navOrder.map((key) => {
     <div class="flex items-center gap-3">
       <a
         href={localizedPath(lang, 'enroll')}
-        class="hidden rounded-[6px] px-4 py-2 text-[11px] font-semibold text-fcs-white transition-colors duration-150 sm:inline-block" style="background: #3DA17C;" onmouseover="this.style.background='#2D8A67'" onmouseout="this.style.background='#3DA17C'"
+        class="btn-primary hidden rounded-[6px] px-4 py-2 text-[11px] font-semibold transition-colors duration-150 sm:inline-block"
       >{t.enrollCta}</a>
       <LangSwitch lang={lang} />
 
@@ -110,7 +139,8 @@ const navItems = navOrder.map((key) => {
           }
           <a
             href={localizedPath(lang, 'enroll')}
-            class="mt-1 block border-t border-white/10 px-4 py-2 text-[11px] font-semibold text-fcs-orange"
+            class="mt-1 block border-t border-white/10 px-4 py-2 text-[11px] font-semibold"
+            style="color: var(--color-fcs-gold);"
           >{t.enrollCta}</a>
         </nav>
       </details>

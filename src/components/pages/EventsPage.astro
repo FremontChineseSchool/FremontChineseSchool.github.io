@@ -18,7 +18,7 @@ const c = content[lang].events;
   <p class="mt-4 max-w-2xl text-lg text-white/95 drop-shadow-sm">{c.intro}</p>
 </HeroCarousel>
 
-<section style="background: #FFF8F0;" class="mx-auto max-w-3xl px-4 py-14">
+<section style="background: var(--color-fcs-white);" class="mx-auto max-w-3xl px-4 py-14">
 
   <!-- Annual events -->
   {(() => {
@@ -59,12 +59,12 @@ const c = content[lang].events;
                   <div class="flex h-32 shrink-0 items-center justify-center sm:h-auto sm:w-48" style="background: var(--color-fcs-green-light);">
                     <div class="text-center">
                       <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="mx-auto" style="color: var(--color-fcs-green);"><path d="M14.5 4h-5L7 7H4a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2h-3l-2.5-3z"/><circle cx="12" cy="13" r="3"/></svg>
-                      <p class="mt-1 text-xs" style="color: var(--color-fcs-green);">Photo coming soon</p>
+                      <p class="mt-1 text-xs" style="color: var(--color-fcs-green);">{lang === 'en' ? 'Photo coming soon' : '照片即將上線'}</p>
                     </div>
                   </div>
                 )}
                 {/* Text */}
-                <div class="flex-1 p-5" style="border-left: 4px solid var(--color-fcs-green);">
+                <div class="flex-1 p-5">
                   <h3 class="font-semibold" style="color: var(--color-fcs-green-dark);">{e.name}</h3>
                   <p class="mt-1 text-sm leading-relaxed" style="color: var(--color-fcs-muted);">{e.body}</p>
                   {"route" in e && e.route && (
@@ -93,7 +93,7 @@ const c = content[lang].events;
   </p>
 
   <!-- Past photos & videos -->
-  <div class="mt-12 rounded-[10px] p-6" style="background: var(--color-fcs-white); border: 1px solid var(--color-fcs-border); border-top: 5px solid var(--color-fcs-blue);">
+  <div class="mt-12 rounded-[10px] p-6" style="background: var(--color-fcs-white); border: 1px solid var(--color-fcs-border);">
     <h2 class="text-xl font-semibold" style="color: var(--color-fcs-black);">{c.photosTitle}</h2>
     <p class="mt-3 leading-relaxed" style="color: var(--color-fcs-muted);">{c.photosBody}</p>
     <div class="mt-5 flex flex-wrap gap-3">

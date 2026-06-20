@@ -10,8 +10,7 @@ const c = content[lang].programs;
 const t = c.tuition;
 ---
 
-<section style="background: #FFF8F0;" class="mx-auto max-w-3xl px-4 py-14">
-  <p class="eyebrow mb-3">Programs</p>
+<section style="background: var(--color-fcs-white);" class="mx-auto max-w-3xl px-4 py-14">
   <h1 class="text-3xl font-semibold sm:text-4xl" style="letter-spacing: -0.02em; color: var(--color-fcs-black);">{c.title}</h1>
   <p class="mt-4 text-lg" style="color: var(--color-fcs-muted);">{c.intro}</p>
 
@@ -42,9 +41,9 @@ const t = c.tuition;
               )}
               <p class="mt-3 leading-relaxed" style="color: var(--color-fcs-muted);">{s.body}</p>
               {i === 1 && (
-                <div class="mt-4 inline-flex items-center gap-3 rounded-[8px] px-4 py-2" style="background: #EFF6FF; border: 1px solid #BFDBFE;">
+                <div class="mt-4 inline-flex items-center gap-3 rounded-[8px] px-4 py-2" style="background: var(--color-fcs-orange-light); border: 1px solid var(--color-fcs-gold);">
                   <img src="/images/wasc-logo.png" alt="WASC Accredited" class="h-8 w-auto" />
-                  <p class="text-xs leading-snug" style="color: #1e40af;">
+                  <p class="text-xs leading-snug" style="color: var(--color-fcs-black);">
                     {lang === 'zh'
                       ? '通過 WASC 認證，學分可計入 UC/CSU 入學要求。'
                       : 'WASC-accredited. Credits recognized toward UC/CSU requirements.'}
@@ -77,16 +76,16 @@ const t = c.tuition;
   })()}
 
   <!-- Volunteer Tutoring -->
-  <div class="mt-6 rounded-[10px] p-6" style="background: var(--color-fcs-white); border: 1px solid var(--color-fcs-border); border-top: 5px solid var(--color-fcs-blue);">
+  <div class="mt-6 rounded-[10px] p-6" style="background: var(--color-fcs-white); border: 1px solid var(--color-fcs-border);">
     <div class="flex flex-wrap items-center gap-3">
       <h2 class="text-xl font-semibold" style="color: var(--color-fcs-black);">{c.tutoringTitle}</h2>
-      <span class="rounded-full px-3 py-1 text-xs font-semibold" style="background: #DCFCE7; color: #166534;">{c.tutoringBadge}</span>
+      <span class="rounded-full px-3 py-1 text-xs font-semibold" style="background: var(--color-fcs-green-light); color: var(--color-fcs-green-dark);">{c.tutoringBadge}</span>
     </div>
     <p class="mt-3 leading-relaxed" style="color: var(--color-fcs-muted);">{c.tutoringBody}</p>
   </div>
 
   <!-- Tuition summary -->
-  <div class="mt-12 rounded-[10px] p-6 sm:p-8" style="background: var(--color-fcs-white); border: 1px solid var(--color-fcs-border); border-top: 5px solid var(--color-fcs-gold);">
+  <div class="mt-12 rounded-[10px] p-6 sm:p-8" style="background: var(--color-fcs-white); border: 1px solid var(--color-fcs-border);">
     <h2 class="text-xl font-semibold" style="color: var(--color-fcs-green-dark);">{t.title}</h2>
 
     <!-- Fee table -->
@@ -161,8 +160,7 @@ const t = c.tuition;
       </a>
       <a
         href={localizedPath(lang, 'enroll')}
-        class="inline-block rounded-md px-5 py-2.5 text-sm font-semibold text-white transition-opacity hover:opacity-90"
-        style="background: var(--color-fcs-orange);"
+        class="btn-primary inline-block rounded-md px-5 py-2.5 text-sm font-semibold transition-colors"
       >
         {t.enrollCta}
       </a>
