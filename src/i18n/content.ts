@@ -166,6 +166,8 @@ export const content = {
       ctaTitle: 'Ready to join us this year?',
       ctaBody:
         "Enrollment is open to new and returning families. Reserve your child's place for the 2026–2027 school year.",
+      faqTeaser: 'Have questions?',
+      faqTeaserLink: 'See our FAQ →',
     },
     about: {
       title: 'About FCS',
@@ -191,7 +193,7 @@ export const content = {
         {
           heading: 'Curriculum',
           body: [
-            'Language classes run from Pre-K through 12th grade in Traditional Chinese. Kindergarten uses the Zhuyin (ㄅㄆㄇㄈ) phonics system; Grades 1–8 follow the Children\'s Chinese Reader series supplemented by FCS-authored exercise books. The bilingual CSL track is designed for heritage learners and beginners.',
+            'Language classes run from Pre-K through 8th grade in Traditional Chinese. Kindergarten uses the Zhuyin (ㄅㄆㄇㄈ) phonics system; Grades 1–8 follow the Children\'s Chinese Reader series supplemented by FCS-authored exercise books. The bilingual CSL track is designed for heritage learners and beginners.',
             'The Accredited Curriculum (AC) track for Grades 9–12 uses Integrated Chinese (Levels 2–4) and AP Chinese materials from National Normal University in Taiwan. AC credits fulfill foreign language requirements at area high schools, and FCS students have consistently placed in top rankings at ANCCS and NCACLS academic competitions.',
           ],
         },
@@ -219,12 +221,12 @@ export const content = {
         {
           heading: 'Chinese Language',
           // TODO(verify): confirm exact grade range and track names with the school office.
-          body: 'Weekend classes run from pre-K through 12th grade, all taught in Traditional Chinese. Choose the full-Chinese track for students from Mandarin-speaking families, or the bilingual track designed for beginners and heritage learners easing into the language. Students build reading, writing, listening, and speaking skills following established Mandarin curricula.',
+          body: 'Weekend classes run from Pre-K through 8th grade, all taught in Traditional Chinese. Choose the full-Chinese track for students from Mandarin-speaking families, or the bilingual track designed for beginners and heritage learners easing into the language. Students build reading, writing, listening, and speaking skills following established Mandarin curricula.',
           schedule: 'Pre-K – 3rd grade: 11:10 am – 1:00 pm · 4th – 8th grade: 9:00 am – 10:50 am',
         },
         {
           heading: 'Accredited Curriculum (AC / 學分班)',
-          body: 'Our WASC-accredited high-school Chinese course lets eligible students earn high-school credit. A placement test determines the appropriate level — see the Enroll page for placement details.',
+          body: 'Our WASC-accredited high-school Chinese course lets eligible students earn high-school credit. A placement test determines the appropriate level.',
           schedule: '8:50 am – 12:50 pm',
         },
         {
@@ -310,6 +312,8 @@ export const content = {
         {
           q: 'What is the tuition?',
           a: 'See the Programs page for a full tuition summary by track. The complete tuition schedule is also available as a PDF download.',
+          linkLabel: 'View Programs page',
+          linkRoute: 'programs' as const,
         },
         {
           q: 'How do I get a refund?',
@@ -318,6 +322,8 @@ export const content = {
         {
           q: 'How do I add, drop, or transfer a class after registering?',
           a: 'Submit the class change request form. Changes are subject to availability.',
+          linkLabel: 'Open class change request form',
+          linkHref: 'addDropTransfer' as const,
         },
         {
           q: 'How do I update my contact information?',
@@ -326,6 +332,8 @@ export const content = {
         {
           q: 'What electives are available?',
           a: 'Offerings include Chinese painting, calligraphy, abacus, Chinese yo-yo, sewing, crafts, basketball, Python coding, yoga, and online Chinese typing. New classes are added each year — see the full elective list for details and scheduling.',
+          linkLabel: 'View full elective list',
+          linkRoute: 'electives' as const,
         },
         {
           q: 'I paid online via PayPal — do I need to do anything else?',
@@ -888,6 +896,8 @@ export const content = {
       announcementCta: '立即報名 →',
       ctaTitle: '準備好今年加入我們了嗎？',
       ctaBody: '新生與舊生皆可報名。為您的孩子預留 2026–2027 學年的名額。',
+      faqTeaser: '有問題嗎？',
+      faqTeaserLink: '查看常見問題 →',
     },
     about: {
       title: '關於本校',
@@ -913,7 +923,7 @@ export const content = {
         {
           heading: '課程制度',
           body: [
-            '語文課程以正體中文授課，涵蓋學前班至十二年級。幼稚園採注音符號（ㄅㄆㄇㄈ）教學；一至八年級使用《兒童中文》系列教材，輔以本校自編練習冊。雙語 CSL 班專為華裔子弟及初學者設計，循序漸進導入中文學習。',
+            '語文課程以正體中文授課，涵蓋學前班至八年級。幼稚園採注音符號（ㄅㄆㄇㄈ）教學；一至八年級使用《兒童中文》系列教材，輔以本校自編練習冊。雙語 CSL 班專為華裔子弟及初學者設計，循序漸進導入中文學習。',
             '學分班（AC）課程供九至十二年級學生修習，使用《中文聽說讀寫》（Integrated Chinese）及台灣國立師範大學出版之 AP 中文教材，所修學分可抵充本地高中外語必修學分。本校學生於 ANCCS 及 NCACLS 學術比賽中屢獲佳績。',
           ],
         },
@@ -941,12 +951,12 @@ export const content = {
         {
           heading: '中文課程',
           // TODO(verify): confirm exact grade range and track names with the school office.
-          body: '週末班級涵蓋學前班（Pre-K）至十二年級，全程以正體（繁體）中文授課。可選擇適合來自華語家庭學生的全中文班，或專為初學者與華裔子弟設計、循序漸進的雙語班。學生依循成熟的中文教材，培養聽、說、讀、寫的能力。',
+          body: '週末班級涵蓋學前班（Pre-K）至八年級，全程以正體（繁體）中文授課。可選擇適合來自華語家庭學生的全中文班，或專為初學者與華裔子弟設計、循序漸進的雙語班。學生依循成熟的中文教材，培養聽、說、讀、寫的能力。',
           schedule: '學前班至三年級：11:10 am – 1:00 pm · 四至八年級：9:00 am – 10:50 am',
         },
         {
           heading: '學分班（Accredited Curriculum / AC）',
-          body: '本校通過 WASC 認證的高中中文課程，讓符合資格的學生取得高中學分。新生須參加分班考試以決定適合的程度，分班詳情請見「報名註冊」頁面。',
+          body: '本校通過 WASC 認證的高中中文課程，讓符合資格的學生取得高中學分。新生須參加分班考試以決定適合的程度。',
           schedule: '8:50 am – 12:50 pm',
         },
         {
@@ -1031,6 +1041,8 @@ export const content = {
         {
           q: '學費是多少？',
           a: '請至「課程」頁面查看各班別學費摘要，或下載完整學費方案 PDF。',
+          linkLabel: '前往課程頁面',
+          linkRoute: 'programs' as const,
         },
         {
           q: '如何申請退費？',
@@ -1039,6 +1051,8 @@ export const content = {
         {
           q: '報名後如何加課、退課或換課？',
           a: '請填寫課程異動申請表，名額異動視班級餘額而定。',
+          linkLabel: '開啟課程異動申請表',
+          linkHref: 'addDropTransfer' as const,
         },
         {
           q: '如何更新聯絡資料？',
@@ -1047,6 +1061,8 @@ export const content = {
         {
           q: '有哪些才藝選修課程？',
           a: '目前提供西畫、國畫書法、珠心算、扯鈴、縫紉、美勞、籃球、Python 程式設計、瑜珈及線上中文打字等課程，每年持續增設新課。詳情請查看完整選修課程列表。',
+          linkLabel: '查看完整選修課程列表',
+          linkRoute: 'electives' as const,
         },
         {
           q: '我已透過 PayPal 完成付款，還需要其他步驟嗎？',

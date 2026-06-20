@@ -144,7 +144,7 @@ const paintAspect = paint.reduce((a, c) => a + c.w / c.h, 0);
   .splash__defs { position:absolute; width:0; height:0; overflow:hidden; }
 
   .splash__paper { position:absolute; inset:0; transition:opacity 0.9s ease;
-    background:radial-gradient(ellipse at center,#fbf8f1 0%,#f4eee1 55%,#e9deca 100%); }
+    background:radial-gradient(ellipse at center,#FAF6EC 0%,#EFE9DB 55%,#E3D9C8 100%); }
   .splash__paper::after { content:""; position:absolute; inset:0; opacity:0.05; mix-blend-mode:multiply;
     background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E"); }
 
@@ -155,7 +155,7 @@ const paintAspect = paint.reduce((a, c) => a + c.w / c.h, 0);
 
   .glyph { height:var(--glyph,96px); }
   .glyph-svg { height:100%; width:auto; display:block; overflow:visible; filter:url(#fcs-ink); }
-  .ink { fill:#211b14; }
+  .ink { fill:#1F1D19; }
   .wipe { fill:none; stroke:#fff; stroke-linecap:round; stroke-linejoin:round; stroke-dasharray:99999; stroke-dashoffset:99999; }
 </style>
 
@@ -211,8 +211,8 @@ const paintAspect = paint.reduce((a, c) => a + c.w / c.h, 0);
     paintEl.style.transform = `scale(${scaleP})`;
 
     // Timing knobs:
-    const BLOOM_FACTOR = 2.2; // ink keeps blooming this × longer than the sweep
-    const START_NEXT = 0.45;  // next stroke begins at this fraction of the current sweep (overlap)
+    const BLOOM_FACTOR = 1.6; // ink keeps blooming this × longer than the sweep
+    const START_NEXT = 0.62;  // next stroke begins at this fraction of the current sweep (overlap)
 
     const wipes = [...paintEl.querySelectorAll<SVGPathElement>("[data-wipe]")];
     wipes.forEach((p) => {
@@ -233,7 +233,7 @@ const paintAspect = paint.reduce((a, c) => a + c.w / c.h, 0);
       for (const p of wipes) {
         if (skipped) return;
         const L = (p as any)._L as number, full = (p as any)._full, core = (p as any)._core;
-        const strokeDur = Math.min(900, Math.max(350, L / 0.9)); // faster sweep
+        const strokeDur = Math.min(650, Math.max(220, L / 1.4)); // faster sweep
         p.style.visibility = "visible";
         // brush sweeps the centerline; ink blooms out from it (slower), clipped to territory
         sweeps.push(p.animate([{ strokeDashoffset: L }, { strokeDashoffset: 0 }],
@@ -245,7 +245,7 @@ const paintAspect = paint.reduce((a, c) => a + c.w / c.h, 0);
       }
       if (skipped) return;
       await Promise.all(sweeps.map((a) => a.finished.catch(() => {})));
-      await delay(200); // brief settle, not a full bloom wait
+      await delay(80); // brief settle, not a full bloom wait
       assemble();
     };
     const finishNow = () => {
@@ -258,7 +258,7 @@ const paintAspect = paint.reduce((a, c) => a + c.w / c.h, 0);
     const onSkip = () => finishNow();
     splash.addEventListener("click", onSkip);
     window.addEventListener("keydown", onSkip);
-    setTimeout(paint, 250);
+    setTimeout(paint, 100);
 
     function assemble() {
       if (assembled) return;
