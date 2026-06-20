@@ -11,17 +11,18 @@
   --font-sans: "Helvetica Neue", "PingFang TC", "Microsoft JhengHei",
     "Noto Sans TC", system-ui, sans-serif;
 
-  /* Brand colors */
-  --color-fcs-green:        #3A7D44;
-  --color-fcs-green-dark:   #2D6235;
-  --color-fcs-green-light:  #F0F7F2;
-  --color-fcs-orange:       #E06820;
-  --color-fcs-orange-light: #FEF0E6;
-  --color-fcs-gold:         #D4980A;
-  --color-fcs-black:        #1C1208;
-  --color-fcs-white:        #FFF8F0;
-  --color-fcs-border:       #E8DDD0;
-  --color-fcs-muted:        #7A6A58;
+  /* Brand colors — Ink & Jade palette (jade-only, no orange/gold) */
+  --color-fcs-green:        #1A6E52;   /* Jade */
+  --color-fcs-green-dark:   #134B38;   /* Jade dark */
+  --color-fcs-green-light:  #E6F3EE;   /* Jade tint for surfaces */
+  --color-fcs-orange:       #3DA17C;   /* Jade bright — replaces orange for CTAs/accents */
+  --color-fcs-orange-light: #DDF0EA;   /* Jade bright tint */
+  --color-fcs-gold:         #3DA17C;   /* Jade bright — replaces gold for eyebrows/focus */
+  --color-fcs-black:        #1F1D19;   /* Ink */
+  --color-fcs-white:        #EFE9DB;   /* Paper */
+  --color-fcs-surface:      #FAF6EC;   /* Lighter surface */
+  --color-fcs-border:       #D9D0C0;   /* Paper border */
+  --color-fcs-muted:        #5A5249;   /* Ink soft */
 
   /* Typography */
   --font-display-zh: 'Noto Serif TC', serif;
