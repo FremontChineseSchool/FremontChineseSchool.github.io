@@ -44,11 +44,19 @@ html {
   scroll-behavior: smooth;
   /* Sticky header offset for in-page anchor jumps */
   scroll-padding-top: 5rem;
+  /* Reading-size control: the root font-size is the single scale lever. All
+     body text is rem-based (Tailwind text-* + body below), so changing this
+     percentage proportionally zooms the whole site. 100% = the browser default
+     (typically 16px). A pre-paint script in BaseLayout sets a saved choice as
+     an inline style on <html>; TextSize.astro lets visitors pick a tier. The
+     `--fcs-text-scale` fallback keeps the default when no choice is stored. */
+  font-size: var(--fcs-text-scale, 100%);
 }
 
 body {
   font-family: var(--font-body);
-  font-size: 15px;
+  /* 1rem (was 15px): a larger, scalable baseline — see html font-size above. */
+  font-size: 1rem;
   line-height: 1.7;
   color: var(--color-fcs-black);
   @apply antialiased;
@@ -64,7 +72,7 @@ body {
    AA at 10px on paper). On dark green bands the call site overrides to the
    bright --color-fcs-gold. */
 .eyebrow {
-  font-size: 10px;
+  font-size: 0.6875rem; /* ~11px at 100%; rem so it scales with the reading-size control */
   font-weight: 600;
   letter-spacing: 0.18em;
   text-transform: uppercase;
@@ -125,7 +133,7 @@ body {
 .badge {
   padding: 3px 10px;
   border-radius: 100px;
-  font-size: 10px;
+  font-size: 0.6875rem; /* ~11px at 100%; rem so it scales with the reading-size control */
   font-weight: 600;
   display: inline-block;
 }

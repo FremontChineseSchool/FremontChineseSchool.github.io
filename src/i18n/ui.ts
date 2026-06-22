@@ -41,6 +41,12 @@ export const ui = {
     skipToContent: 'Skip to content',
     enrollCta: 'Enroll Now',
     replayIntro: 'Replay intro animation',
+    textSize: {
+      label: 'Text size',
+      standard: 'Standard text size',
+      large: 'Large text size',
+      larger: 'Largest text size',
+    },
     nav: {
       home: 'Home',
       about: 'About',
@@ -70,6 +76,12 @@ export const ui = {
     skipToContent: '跳至主要內容',
     enrollCta: '立即報名',
     replayIntro: '重播開場動畫',
+    textSize: {
+      label: '字級',
+      standard: '標準字級',
+      large: '大字版',
+      larger: '特大字版',
+    },
     nav: {
       home: '首頁',
       about: '關於本校',

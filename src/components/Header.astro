@@ -2,6 +2,7 @@
 import { ui, navOrder, localizedPath, type Lang } from "../i18n/ui";
 import { links } from "../i18n/content";
 import LangSwitch from "./LangSwitch.astro";
+import TextSize from "./TextSize.astro";
 
 interface Props {
   lang: Lang;
@@ -30,7 +31,7 @@ const navItems = navOrder.map((key) => {
         <img
           src="/images/logo.png"
           alt={t.logoAlt}
-          class="h-11 w-auto"
+          class="h-[44px] w-auto"
           style="filter: brightness(0) invert(1);"
           width="500"
           height="108"
@@ -66,16 +67,22 @@ const navItems = navOrder.map((key) => {
       </button>
     </div>
 
-    <!-- Desktop nav — centered -->
-    <nav aria-label="Primary" class="hidden items-center gap-1 lg:flex">
+    <!-- Desktop nav — centered. Appears at xl (1280): below that the nav + Enroll
+         CTA + text-size control + language switch no longer fit on one line, so
+         the hamburger menu is used instead (see lg→xl on the toggle below). -->
+    <nav aria-label="Primary" class="hidden items-center gap-[2px] xl:flex">
       {
+        // Header chrome uses fixed px (not rem) so it stays put when the
+        // reading-size control scales the page — the control is meant to
+        // enlarge page CONTENT, not the navigation, and a scaling nav would
+        // overflow the bar.
         navItems.map((item) => (
           <a
             href={item.href}
             aria-current={item.active ? "page" : undefined}
             class:list={[
-              "px-3 py-2 transition-colors duration-150",
-              "text-xs font-semibold uppercase tracking-widest",
+              "whitespace-nowrap px-[10px] py-2 transition-colors duration-150",
+              "text-[12px] font-semibold uppercase tracking-widest",
               item.active
                 ? "text-fcs-white underline underline-offset-4"
                 : "text-white hover:text-fcs-white",
@@ -91,12 +98,13 @@ const navItems = navOrder.map((key) => {
     <div class="flex items-center gap-3">
       <a
         href={localizedPath(lang, 'enroll')}
-        class="btn-primary hidden rounded-[6px] px-4 py-2 text-[11px] font-semibold transition-colors duration-150 sm:inline-block"
+        class="btn-primary hidden whitespace-nowrap rounded-[6px] px-[16px] py-[8px] text-[11px] font-semibold transition-colors duration-150 sm:inline-block"
       >{t.enrollCta}</a>
+      <TextSize lang={lang} />
       <LangSwitch lang={lang} />
 
-      <!-- Mobile menu toggle -->
-      <details class="relative lg:hidden">
+      <!-- Mobile menu toggle (shown below xl, where the full nav won't fit) -->
+      <details class="relative xl:hidden">
         <summary
           class="flex cursor-pointer list-none items-center rounded p-2 text-fcs-white hover:bg-white/20"
           aria-label="Menu"
