@@ -74,6 +74,19 @@ const orgSchema = {
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
 
+    <!-- Reading-size: apply a saved text-size choice before first paint so the
+         page never flashes at the default size first. Sets the root font-size
+         (a percentage); all body text is rem-based, so this zooms the whole
+         site. TextSize.astro (in the header) writes the `fcs-text-scale` key. -->
+    <script is:inline>
+      (function () {
+        try {
+          var s = localStorage.getItem("fcs-text-scale");
+          if (s) document.documentElement.style.fontSize = s + "%";
+        } catch (e) {}
+      })();
+    </script>
+
     <!-- Fonts: preconnect warms the connection; stylesheet discovered in <head> (not via render-blocking CSS @import). display=swap avoids FOIT. -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />

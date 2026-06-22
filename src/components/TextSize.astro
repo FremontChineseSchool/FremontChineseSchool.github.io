@@ -1,0 +1,107 @@
+---
+import { ui, type Lang } from "../i18n/ui";
+
+interface Props {
+  lang: Lang;
+}
+const { lang } = Astro.props;
+const t = ui[lang].textSize;
+
+// Reading-size tiers. The `scale` is applied as the root font-size percentage
+// (see html { font-size } in global.css); because all body text is rem-based,
+// this proportionally zooms the whole site. Kept in sync with the pre-paint
+// script in BaseLayout via the shared localStorage key `fcs-text-scale`.
+const tiers = [
+  { scale: 100, label: t.standard, glyph: "A" },
+  { scale: 115, label: t.large, glyph: "A" },
+  { scale: 130, label: t.larger, glyph: "A" },
+];
+// Glyph sizes (px) so the three A's visibly step up — fixed px on purpose: the
+// control is chrome and must not scale itself, or pressing A⁺⁺ would grow it.
+const glyphPx = [12, 15, 19];
+---
+
+<!-- Hidden by default: the control is useless without JS (the buttons only act
+     via the click handler below), so no-JS users never see it. The script
+     reveals it — and only at the sm+ breakpoint, to avoid crowding the narrow
+     mobile header. -->
+<div
+  id="text-size"
+  role="group"
+  aria-label={t.label}
+  style="display:none"
+  class="items-end gap-[2px] rounded-full border border-white/40 px-[6px] py-[4px]"
+>
+  {
+    tiers.map((tier, i) => (
+      <button
+        type="button"
+        data-scale={tier.scale}
+        aria-label={tier.label}
+        aria-pressed="false"
+        class="flex h-[28px] w-[28px] items-center justify-center rounded-full font-semibold leading-none text-white/75 transition-colors hover:bg-white/15 hover:text-fcs-white aria-pressed:bg-white aria-pressed:text-fcs-green"
+        style={`font-size:${glyphPx[i]}px`}
+      >
+        {tier.glyph}
+      </button>
+    ))
+  }
+</div>
+
+<script>
+  // Reading-size control. Sets the root font-size (percentage) — all body text
+  // is rem-based, so this zooms the whole site — and remembers the choice in
+  // localStorage so it persists across pages and visits. A matching pre-paint
+  // script in BaseLayout applies the saved value before first paint (no flash);
+  // this script only handles clicks and reflecting the active tier.
+  const KEY = "fcs-text-scale";
+  const group = document.getElementById("text-size");
+  if (group) {
+    const buttons = Array.from(
+      group.querySelectorAll<HTMLButtonElement>("button[data-scale]"),
+    );
+
+    const stored = (() => {
+      try {
+        return localStorage.getItem(KEY);
+      } catch {
+        return null;
+      }
+    })();
+    // No stored value means the default tier (100). Reflect that as active.
+    const current = stored ?? "100";
+
+    const reflect = (scale: string) => {
+      for (const b of buttons) {
+        b.setAttribute(
+          "aria-pressed",
+          b.dataset.scale === scale ? "true" : "false",
+        );
+      }
+    };
+    reflect(current);
+
+    for (const btn of buttons) {
+      btn.addEventListener("click", () => {
+        const scale = btn.dataset.scale!;
+        document.documentElement.style.fontSize = scale + "%";
+        try {
+          localStorage.setItem(KEY, scale);
+        } catch {
+          /* private mode / storage disabled — still applies for this page */
+        }
+        reflect(scale);
+      });
+    }
+
+    // Reveal now that wiring succeeded — but only at sm+ (the narrow mobile
+    // header has no room). Re-evaluate on resize so it appears/disappears as
+    // the viewport crosses the breakpoint.
+    const wide = window.matchMedia("(min-width: 640px)");
+    const sync = () => {
+      group.style.display = wide.matches ? "flex" : "none";
+    };
+    sync();
+    wide.addEventListener("change", sync);
+  }
+</script>
