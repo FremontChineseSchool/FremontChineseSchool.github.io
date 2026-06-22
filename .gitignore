@@ -23,3 +23,6 @@ tools/
 
 # Build-time report: calendar events missing a Chinese name/type
 calendar-unmapped.json
+
+# Local palette/design exploration renders (not shipped)
+palette-previews/
