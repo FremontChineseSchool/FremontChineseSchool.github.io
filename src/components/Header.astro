@@ -28,10 +28,23 @@ const navItems = navOrder.map((key) => {
     <!-- Logo + replay-intro button, grouped so the button sits beside the logo -->
     <div class="flex shrink-0 items-center gap-1">
       <a href={localizedPath(lang, "home")} class="flex items-center gap-3">
+        <!-- Condensed FS monogram on small screens, full lockup at sm+. The
+             monogram (reused from the favicon) is ~40px vs the 204px wordmark,
+             freeing room for the always-visible reading-size control in the
+             narrow mobile header. Both recolored white via brightness/invert.
+             Decorative (alt=""): the sr-only span names the link. -->
+        <img
+          src="/favicon.png"
+          alt=""
+          class="h-[40px] w-[40px] sm:hidden"
+          style="filter: brightness(0) invert(1);"
+          width="256"
+          height="256"
+        />
         <img
           src="/images/logo.png"
-          alt={t.logoAlt}
-          class="h-[44px] w-auto"
+          alt=""
+          class="hidden h-[44px] w-auto sm:block"
           style="filter: brightness(0) invert(1);"
           width="500"
           height="108"
