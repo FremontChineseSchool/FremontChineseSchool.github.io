@@ -23,8 +23,8 @@ const glyphPx = [12, 15, 19];
 
 <!-- Hidden by default: the control is useless without JS (the buttons only act
      via the click handler below), so no-JS users never see it. The script
-     reveals it — and only at the sm+ breakpoint, to avoid crowding the narrow
-     mobile header. -->
+     reveals it at every width — the mobile header makes room by condensing the
+     logo to the FS monogram (see Header.astro). -->
 <div
   id="text-size"
   role="group"
@@ -94,14 +94,9 @@ const glyphPx = [12, 15, 19];
       });
     }
 
-    // Reveal now that wiring succeeded — but only at sm+ (the narrow mobile
-    // header has no room). Re-evaluate on resize so it appears/disappears as
-    // the viewport crosses the breakpoint.
-    const wide = window.matchMedia("(min-width: 640px)");
-    const sync = () => {
-      group.style.display = wide.matches ? "flex" : "none";
-    };
-    sync();
-    wide.addEventListener("change", sync);
+    // Reveal now that wiring succeeded. Shown at every width: on small screens
+    // the header swaps to a condensed logo (see Header.astro) so the control
+    // fits even in the narrow mobile bar.
+    group.style.display = "flex";
   }
 </script>
