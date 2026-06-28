@@ -166,7 +166,7 @@ const featureIcons = [
 
 <!-- Get-started cards -->
 <section style="background: linear-gradient(to bottom, var(--color-fcs-green-light), var(--color-fcs-white));">
-  <div class="mx-auto max-w-6xl px-4 py-28">
+  <div class="mx-auto max-w-6xl px-4 py-16 sm:py-24">
     <h2 class="text-4xl font-bold sm:text-5xl" style="letter-spacing: -0.03em; color: var(--color-fcs-black);" data-reveal>{c.cardsTitle}</h2>
     <div class="mt-10 grid gap-6 md:grid-cols-3">
       {
@@ -209,28 +209,34 @@ const featureIcons = [
 </section>
 
 <!-- News teaser -->
-<section style="background: var(--color-fcs-surface); border-top: 1px solid var(--color-fcs-border);">
+<section style="background: var(--color-fcs-surface);">
+
   <div class="mx-auto max-w-6xl px-4 py-20">
     <div class="flex items-end justify-between gap-4" data-reveal>
-      <h2 class="text-3xl font-bold sm:text-4xl" style="letter-spacing: -0.02em; color: var(--color-fcs-black);">{c.newsTeaserTitle}</h2>
+      <div>
+        <p class="eyebrow mb-3">{lang === 'en' ? 'News & Updates' : '最新消息'}</p>
+        <h2 class="text-4xl font-bold sm:text-5xl" style="letter-spacing: -0.03em; color: var(--color-fcs-black);">{c.newsTeaserTitle}</h2>
+      </div>
       <a
         href={localizedPath(lang, 'news')}
         class="shrink-0 text-sm font-semibold hover:underline"
         style="color: var(--color-fcs-green);"
       >{c.newsTeaserCta}</a>
     </div>
-    <div class="mt-8 grid gap-4 sm:grid-cols-3">
+    <div class="mt-8 divide-y" style="border-top: 1px solid var(--color-fcs-border); border-bottom: 1px solid var(--color-fcs-border);">
       {content[lang].news.posts.slice(0, 3).map((post, i) => (
         <a
           href={localizedPath(lang, 'news')}
-          class="group flex flex-col rounded-[10px] p-5 transition-colors duration-150"
+          class="group flex items-baseline gap-6 py-5 transition-colors duration-150 sm:gap-10"
           data-reveal
-          style={`--reveal-delay: ${i * 80}ms; background: var(--color-fcs-white); border: 1px solid var(--color-fcs-border);`}
+          style={`--reveal-delay: ${i * 80}ms;`}
         >
-          <p class="text-[11px] font-semibold uppercase tracking-widest" style="color: var(--color-fcs-muted);">{post.date}</p>
-          <h3 class="mt-1.5 font-semibold leading-snug" style="color: var(--color-fcs-black);">{post.title}</h3>
-          <p class="mt-2 flex-1 text-sm leading-relaxed line-clamp-3" style="color: var(--color-fcs-muted);">{post.body}</p>
-          <span class="mt-4 text-sm font-semibold" style="color: var(--color-fcs-green);">{lang === 'en' ? 'Read more →' : '閱讀更多 →'}</span>
+          <p class="w-24 shrink-0 text-[11px] font-semibold uppercase tracking-widest sm:w-32" style="color: var(--color-fcs-muted);">{post.date}</p>
+          <div class="min-w-0 flex-1">
+            <h3 class="font-semibold leading-snug" style="color: var(--color-fcs-black);">{post.title}</h3>
+            <p class="mt-1 text-sm leading-relaxed line-clamp-2" style="color: var(--color-fcs-muted);">{post.body}</p>
+          </div>
+          <span class="hidden shrink-0 text-sm font-semibold sm:block" style="color: var(--color-fcs-green);">{lang === 'en' ? 'Read more →' : '閱讀更多 →'}</span>
         </a>
       ))}
     </div>
