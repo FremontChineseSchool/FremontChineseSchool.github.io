@@ -214,9 +214,7 @@ const featureIcons = [
     <div class="flex items-end justify-between gap-4" data-reveal>
       <h2 class="text-3xl font-bold sm:text-4xl" style="letter-spacing: -0.02em; color: var(--color-fcs-black);">{c.newsTeaserTitle}</h2>
       <a
-        href={links.legacyNews}
-        target="_blank"
-        rel="noopener"
+        href={localizedPath(lang, 'news')}
         class="shrink-0 text-sm font-semibold hover:underline"
         style="color: var(--color-fcs-green);"
       >{c.newsTeaserCta}</a>
@@ -224,9 +222,7 @@ const featureIcons = [
     <div class="mt-8 grid gap-4 sm:grid-cols-3">
       {content[lang].news.posts.slice(0, 3).map((post, i) => (
         <a
-          href={links.legacyNews}
-          target="_blank"
-          rel="noopener"
+          href={localizedPath(lang, 'news')}
           class="group flex flex-col rounded-[10px] p-5 transition-colors duration-150"
           data-reveal
           style={`--reveal-delay: ${i * 80}ms; background: var(--color-fcs-white); border: 1px solid var(--color-fcs-border);`}

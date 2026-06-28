@@ -788,7 +788,8 @@ export const content = {
         {
           date: 'June 2026',
           title: 'Enrollment Open for 2026–27',
-          body: 'Registration for the 2026–27 school year is now open. New and returning families can register online. Early-bird rates apply through July 31.',
+          body: 'Registration for the 2026–27 school year is now open. New and returning families can register online. Early Bird rates apply through May 16, 2026.',
+          image: '/images/news/enrollment-2026-27.png',
         },
         {
           date: 'June 2026',
@@ -802,8 +803,9 @@ export const content = {
         },
         {
           date: 'March 2026',
-          title: 'Academic Contest Results',
-          body: 'Our students represented FCS with excellence at the annual Academic Contest. Top performers will advance to the ANCCS regional competition.',
+          title: 'Academic Contest Results — ANCCS 2025–26',
+          body: 'Our students represented FCS with excellence at the ANCCS 2025–26 academic competition. Congratulations to all award winners!',
+          image: '/images/news/anccs-2025-26.jpg',
         },
         {
           date: 'February 2026',
@@ -1524,7 +1526,8 @@ export const content = {
         {
           date: '2026年6月',
           title: '2026–27 學年報名開放',
-          body: '2026–27 學年報名現已開放。新生及舊生均可線上報名。7月31日前完成報名可享早鳥優惠。',
+          body: '2026–27 學年報名現已開放。新生及舊生均可線上報名。早鳥優惠截止日期為 2026 年 5 月 16 日。',
+          image: '/images/news/enrollment-2026-27.png',
         },
         {
           date: '2026年6月',
@@ -1538,8 +1541,9 @@ export const content = {
         },
         {
           date: '2026年3月',
-          title: '學術比賽成績',
-          body: '本校學生在年度學術比賽中表現優異。優勝者將代表費利蒙中文學校晉級北加州聯合比賽。',
+          title: 'ANCCS 2025–26 學術比賽成績',
+          body: '本校學生在 ANCCS 2025–26 學術比賽中表現優異，恭賀所有得獎同學！',
+          image: '/images/news/anccs-2025-26.jpg',
         },
         {
           date: '2026年2月',
