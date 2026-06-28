@@ -29,7 +29,6 @@ export const links = {
 // Contact details — values shared across locales; labels are translated below.
 export const contactInfo = {
   principal: 'Principal@fremontchineseschool.org',
-  office: 'contact@fremontchineseschool.org',
   registration: 'Registration@fremontchineseschool.org',
   voicemail: '(510) 468-9905',
   mailing: 'PO Box 1309, Fremont, CA 94538',
@@ -773,7 +772,6 @@ export const content = {
       eyebrow: 'Contact',
       labels: {
         principal: 'Principal',
-        office: 'School Office',
         registration: 'Registration',
         voicemail: 'Voicemail',
         mailing: 'Mailing Address',
@@ -1511,7 +1509,6 @@ export const content = {
       eyebrow: '聯絡',
       labels: {
         principal: '校長',
-        office: '學校辦公室',
         registration: '報名註冊',
         voicemail: '語音信箱',
         mailing: '通訊地址',
