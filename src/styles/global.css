@@ -19,7 +19,7 @@
   --color-fcs-orange-deep:  #B07F1E;   /* Gold deep — hover/active */
   --color-fcs-orange-light: #F6ECCF;   /* Gold tint — soft wash / callouts */
   --color-fcs-gold:         #D8A832;   /* Gold — CTA buttons, focus ring, NEW badge */
-  --color-fcs-gold-ink:     #0E5038;   /* Deep jade — eyebrow/accent TEXT on light surfaces (AA 7.8:1) */
+  --color-fcs-deep-jade:    #0E5038;   /* Deep jade — eyebrow/accent TEXT on light surfaces (AA 7.8:1) */
   --color-fcs-mint:         #6FC9A0;   /* Light mint — accent TEXT on dark green bands (AA 5.0:1) */
   --color-fcs-black:        #221F1A;   /* Ink */
   --color-fcs-white:        #ECE6D6;   /* Paper */
@@ -76,7 +76,7 @@ body {
   font-weight: 600;
   letter-spacing: 0.18em;
   text-transform: uppercase;
-  color: var(--color-fcs-gold-ink);
+  color: var(--color-fcs-deep-jade);
 }
 
 /* ---- Gold-fill button system ----

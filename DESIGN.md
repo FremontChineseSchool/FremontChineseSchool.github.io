@@ -2,9 +2,9 @@
 name: Fremont Chinese School
 description: Warm, rooted, editorial identity site for a 50-year WASC-accredited weekend Chinese school — Jade & Gold on paper
 colors:
-  # NOTE: a few CSS tokens keep legacy NAMES that now hold different roles:
-  #   --color-fcs-orange*  -> gold (CTA)        --color-fcs-gold-ink -> deep jade (accent text on light)
-  # Listed here by their true role; the token alias is noted in parentheses.
+  # NOTE: the --color-fcs-orange* CSS tokens keep a legacy NAME that now holds a
+  # different role: --color-fcs-orange* -> gold (CTA). Listed here by their true
+  # role; the token alias is noted in parentheses.
   fcs-green: "#1A6E52"        # Jade — primary (header, links, structure)
   fcs-green-dark: "#134B38"   # Jade dark — bands, deep fills
   fcs-green-light: "#E6F3EE"  # Jade tint — icon tiles, badges, soft bands
@@ -12,7 +12,7 @@ colors:
   fcs-gold-deep: "#B07F1E"    # Gold hover/active (--color-fcs-orange-deep)
   fcs-gold-tint: "#F6ECCF"    # Soft gold wash — callouts (--color-fcs-orange-light)
   fcs-mint: "#6FC9A0"         # Light mint — accent TEXT on DARK green bands (AA 5:1) (--color-fcs-mint)
-  fcs-jade-ink: "#0E5038"     # Deep jade — accent TEXT on LIGHT surfaces (AA 7.8:1) (token: --color-fcs-gold-ink)
+  fcs-jade-ink: "#0E5038"     # Deep jade — accent TEXT on LIGHT surfaces (AA 7.8:1) (token: --color-fcs-deep-jade)
   fcs-black: "#221F1A"        # Ink
   fcs-white: "#ECE6D6"        # Paper — body background + card surface
   fcs-surface: "#F7F3E9"      # Lighter surface — raised cards, table zebra
@@ -101,8 +101,9 @@ components:
 > **Palette: Jade & Gold on paper.** Evolved from a celadon experiment to a
 > jade green, keeping gold as the CTA color. The accent *text* is green (deep
 > jade on light, light mint on dark) — gold is reserved for buttons/focus.
-> Some CSS tokens keep legacy names: `--color-fcs-orange*` hold the gold, and
-> `--color-fcs-gold-ink` holds deep jade. Machine sidecar: `.impeccable/design.json`.
+> Some CSS tokens keep legacy names: `--color-fcs-orange*` hold the gold (the
+> deep-jade accent text lives in the accurately-named `--color-fcs-deep-jade`).
+> Machine sidecar: `.impeccable/design.json`.
 
 ## 1. Overview
 
@@ -161,7 +162,7 @@ Gold is the **action** color, used for interactive emphasis only — never as ac
 
 ### Accent text — Green (two shades, by surface)
 Accent labels are green, never gold. The shade depends on the surface luminance:
-- **Deep Jade** (`#0E5038`, token `--color-fcs-gold-ink`): accent text on **light** surfaces —
+- **Deep Jade** (`#0E5038`, token `--color-fcs-deep-jade`): accent text on **light** surfaces —
   the `.eyebrow`, electives prices, enroll key-dates, warning icons (AA 7.8:1 on paper).
 - **Light Mint** (`#6FC9A0`, `--color-fcs-mint`): accent text on **dark** green bands — facts-strip
   labels, culture kickers/labels/links, footer section headers, mobile Enroll (AA 5:1 on jade-dark).
