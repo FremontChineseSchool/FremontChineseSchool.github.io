@@ -22,6 +22,7 @@ export const links = {
   acAbsenceForm: 'https://drive.google.com/file/d/1xbyIlzgvoZFpABZNK03L2-6sK2XSKXCI/view',
   acExcuseForm: 'https://drive.google.com/file/d/11KBdtFJ8iQYHGd4d8K4GWIMlQ2ceX2G0/view',
   legacyEvents: 'https://fremontchineseschool.org/events',
+  legacyNews: 'https://fremontchineseschool.org/index.php',
   facebook: 'https://facebook.com/fremontchineseschool',
 } as const;
 
