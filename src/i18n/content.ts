@@ -9,6 +9,7 @@ export const links = {
   registrationGuide: 'https://docs.google.com/document/d/1Xk7q5gsK8CrA9PoW9EQoqs3RVP_wltkYIZ_H4TXJn8Q/view',
   gradeChart: 'https://drive.google.com/file/d/1qLV_WTqvwzNGEyjS5eoVIbe9pC3aOq5T/view',
   electiveList: 'https://docs.google.com/document/d/1WDBeqIcvrPU3i4yFUAt5mSVNFKYoWNjRWQ1Uy-wNBTs/view',
+  electiveIntros: 'https://docs.google.com/folderview?id=0B7NAXqzsebY0ZFhKNlloWmJwN3M&resourcekey=0-n5ocoQpPIMrKzkAxyU88ug',
   payment: 'https://fremontchineseschool.org/online-payment',
   calendarZh:
     'https://drive.google.com/file/d/1LgAKCRMIiecG3fpMC2w6Hwx2zpWYXGd3/view',
@@ -16,6 +17,10 @@ export const links = {
     'https://drive.google.com/file/d/1jEHtmbAqxjldM-q1NdFuryYcHENRhDui/view',
   tuitionPdf: 'https://docs.google.com/document/d/1eMiXP6MsfTPzySyFSNG8VMmvKSI8NSzo2Vb3Mg72Gn8/view',
   irsDetermination: 'https://drive.google.com/file/d/1BBgfNR6QzLA2d1-Ej8ezyW56Pf96eosf/view',
+  acCreditTransfer: 'https://forms.gle/TntoF21REwrnnkfj9',
+  acPolicies: 'https://drive.google.com/file/d/1EKDsFuUj3pV8eXTBhEE4cSHGpC1M_sPF/view',
+  acAbsenceForm: 'https://drive.google.com/file/d/1xbyIlzgvoZFpABZNK03L2-6sK2XSKXCI/view',
+  acExcuseForm: 'https://drive.google.com/file/d/11KBdtFJ8iQYHGd4d8K4GWIMlQ2ceX2G0/view',
   legacyEvents: 'https://fremontchineseschool.org/events',
   facebook: 'https://facebook.com/fremontchineseschool',
 } as const;
@@ -166,6 +171,8 @@ export const content = {
       ctaTitle: 'Ready to join us this year?',
       ctaBody:
         "Enrollment is open to new and returning families. Reserve your child's place for the 2026–2027 school year.",
+      newsTeaserTitle: 'Latest News',
+      newsTeaserCta: 'See all news →',
       faqTeaser: 'Have questions?',
       faqTeaserLink: 'See our FAQ →',
     },
@@ -221,13 +228,19 @@ export const content = {
         {
           heading: 'Chinese Language',
           // TODO(verify): confirm exact grade range and track names with the school office.
-          body: 'Weekend classes run from Pre-K through 8th grade, all taught in Traditional Chinese. Choose the full-Chinese track for students from Mandarin-speaking families, or the bilingual track designed for beginners and heritage learners easing into the language. Students build reading, writing, listening, and speaking skills following established Mandarin curricula.',
+          body: 'Weekend classes run from Pre-K through 8th grade, all taught in Traditional Chinese. Choose the full-Chinese track for students from Mandarin-speaking families where the child and household speak Mandarin, or the bilingual track (C1–C8) designed for beginners and heritage learners easing into the language. Students build reading, writing, listening, and speaking skills following established Mandarin curricula.',
           schedule: 'Pre-K – 3rd grade: 11:10 am – 1:00 pm · 4th – 8th grade: 9:00 am – 10:50 am',
         },
         {
           heading: 'Accredited Curriculum (AC / 學分班)',
-          body: 'Our WASC-accredited high-school Chinese course lets eligible students earn high-school credit. A placement test determines the appropriate level.',
+          body: 'Our WASC-accredited high-school Chinese course lets eligible students earn high-school credit toward UC/CSU and area high-school requirements. Uses Integrated Chinese (Levels 1–4) and AP Chinese materials. A placement test determines the appropriate level for new students.',
           schedule: '8:50 am – 12:50 pm',
+          links: [
+            { label: 'AC Credit Transfer Application', href: 'acCreditTransfer' as const },
+            { label: 'AC Policies & Rules', href: 'acPolicies' as const },
+            { label: 'Personal Absence Request Form', href: 'acAbsenceForm' as const },
+            { label: 'Official Excuse Application Form', href: 'acExcuseForm' as const },
+          ],
         },
         {
           heading: 'Electives',
@@ -245,8 +258,8 @@ export const content = {
         earlyBirdNote:
           'Register and pay by May 16, 2026 to receive the Early Bird rate.',
         rows: [
-          { track: 'CSL language class only (K–8)', earlyBird: 'from $780', regular: 'from $880' },
-          { track: 'CSL + electives (K–8)', earlyBird: 'from $1,310', regular: 'from $1,510' },
+          { track: 'CSL language class only (Pre-K–8)', earlyBird: 'from $780', regular: 'from $880' },
+          { track: 'CSL + electives (Pre-K–8)', earlyBird: 'from $1,310', regular: 'from $1,510' },
           { track: 'AC accredited track (8–12)', earlyBird: 'from $1,300', regular: 'from $1,670' },
           { track: 'Electives only (K–12, adult)', earlyBird: 'from $630', regular: 'from $720' },
         ],
@@ -291,7 +304,7 @@ export const content = {
         {
           label: 'Early Bird deadline',
           date: 'May 16, 2026',
-          note: 'Register and pay by this date to save $100–$150.',
+          note: 'Register and pay by this date to save $100–$370.',
         },
         {
           label: 'Last day for full refund',
@@ -307,6 +320,7 @@ export const content = {
       electivesBody:
         'Enrich your child\'s experience with electives including Chinese painting, calligraphy, abacus, Chinese yo-yo, sewing, crafts, basketball, Python coding, yoga, and online Chinese typing. New classes are added each year — see the full list before registering.',
       electivesLinkLabel: 'View full elective list',
+      electivesIntroLabel: 'View elective class introductions (PDF)',
       faqTitle: 'Frequently Asked Questions',
       faq: [
         {
@@ -896,6 +910,8 @@ export const content = {
       announcementCta: '立即報名 →',
       ctaTitle: '準備好今年加入我們了嗎？',
       ctaBody: '新生與舊生皆可報名。為您的孩子預留 2026–2027 學年的名額。',
+      newsTeaserTitle: '最新消息',
+      newsTeaserCta: '查看所有消息 →',
       faqTeaser: '有問題嗎？',
       faqTeaserLink: '查看常見問題 →',
     },
@@ -951,13 +967,19 @@ export const content = {
         {
           heading: '中文課程',
           // TODO(verify): confirm exact grade range and track names with the school office.
-          body: '週末班級涵蓋學前班（Pre-K）至八年級，全程以正體（繁體）中文授課。可選擇適合來自華語家庭學生的全中文班，或專為初學者與華裔子弟設計、循序漸進的雙語班。學生依循成熟的中文教材，培養聽、說、讀、寫的能力。',
+          body: '週末班級涵蓋學前班（Pre-K）至八年級，全程以正體（繁體）中文授課。可選擇適合來自華語家庭、孩子及家庭主要使用普通話的全中文班，或專為初學者與華裔子弟設計、循序漸進的雙語班（C1–C8）。學生依循成熟的中文教材，培養聽、說、讀、寫的能力。',
           schedule: '學前班至三年級：11:10 am – 1:00 pm · 四至八年級：9:00 am – 10:50 am',
         },
         {
           heading: '學分班（Accredited Curriculum / AC）',
-          body: '本校通過 WASC 認證的高中中文課程，讓符合資格的學生取得高中學分。新生須參加分班考試以決定適合的程度。',
+          body: '本校通過 WASC 認證的高中中文課程，讓符合資格的學生取得可抵充 UC/CSU 及當地高中外語必修的學分。使用《中文聽說讀寫》（Integrated Chinese，Level 1–4）及 AP 中文教材。新生須參加分班考試以決定適合的程度。',
           schedule: '8:50 am – 12:50 pm',
+          links: [
+            { label: '學分申請表', href: 'acCreditTransfer' as const },
+            { label: '學分班規章', href: 'acPolicies' as const },
+            { label: '私假申請單', href: 'acAbsenceForm' as const },
+            { label: '公假申請單', href: 'acExcuseForm' as const },
+          ],
         },
         {
           heading: '才藝選修',
@@ -974,8 +996,8 @@ export const content = {
         regularLabel: '一般費用',
         earlyBirdNote: '於 2026 年 5 月 16 日前完成報名並繳費，即可享早鳥優惠。',
         rows: [
-          { track: '中文課程（僅語文班，K–8）', earlyBird: '起 $780', regular: '起 $880' },
-          { track: '中文課程＋才藝選修（K–8）', earlyBird: '起 $1,310', regular: '起 $1,510' },
+          { track: '中文課程（僅語文班，Pre-K–8）', earlyBird: '起 $780', regular: '起 $880' },
+          { track: '中文課程＋才藝選修（Pre-K–8）', earlyBird: '起 $1,310', regular: '起 $1,510' },
           { track: '學分班（8–12 年級）', earlyBird: '起 $1,300', regular: '起 $1,670' },
           { track: '僅才藝選修（K–12，成人）', earlyBird: '起 $630', regular: '起 $720' },
         ],
@@ -1020,7 +1042,7 @@ export const content = {
         {
           label: '早鳥優惠截止',
           date: '2026 年 5 月 16 日',
-          note: '於此日期前完成報名並繳費，可省 $100–$150。',
+          note: '於此日期前完成報名並繳費，可省 $100–$370。',
         },
         {
           label: '全額退費截止',
@@ -1036,6 +1058,7 @@ export const content = {
       electivesBody:
         '才藝選修課程豐富多元，包含西畫、國畫書法、珠心算、扯鈴、縫紉、美勞、籃球、Python 程式設計、瑜珈及線上中文打字等，每年持續增設新課。報名時一併選擇，完整課程列表請見下方連結。',
       electivesLinkLabel: '查看完整選修課程列表',
+      electivesIntroLabel: '查看選修班簡介（PDF）',
       faqTitle: '常見問題',
       faq: [
         {

@@ -142,6 +142,10 @@ const c = content[lang].enroll;
           {c.electivesLinkLabel}
           <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14m-6-6 6 6-6 6"/></svg>
         </a>
+        <a href={links.electiveIntros} target="_blank" rel="noopener" class="mt-2 inline-flex items-center gap-1.5 text-sm font-medium" style="color: var(--color-fcs-green);">
+          <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+          {c.electivesIntroLabel}
+        </a>
       </div>
     </div>
 
@@ -189,7 +193,7 @@ const c = content[lang].enroll;
           {lang === 'en' ? 'Go to online payment →' : '前往線上付款 →'}
         </a>
       </div>
-      <p class="ml-11 mt-2 text-xs" style="color: var(--color-fcs-muted);">
+      <p class="ml-11 mt-2 text-sm font-semibold" style="color: var(--color-fcs-gold-ink);">
         {lang === 'en' ? 'Register and pay by May 16, 2026 for the Early Bird rate.' : '請於 2026 年 5 月 16 日前完成報名及付款，享早鳥優惠。'}
       </p>
 
@@ -229,7 +233,7 @@ const c = content[lang].enroll;
       </p>
       <p class="mt-2 text-sm leading-relaxed" style="color: var(--color-fcs-muted);">
         {lang === 'en'
-          ? 'Each spring, FCS emails returning families a registration link pre-filled with your student ID. Follow that link to complete the form and then pay online. Registration is not complete until both the form and payment are submitted.'
+          ? 'Each spring, FCS emails returning families a registration link pre-filled with your student ID. Follow that link to complete the form and then pay online. Your enrollment is not complete until both steps are done.'
           : '每年春季，FCS 會寄送個人化報名連結至家長電子郵件，連結中已預填學號。請點擊連結完成報名表，並完成線上付款。報名表及付款均完成後，報名才算完成。'}
       </p>
       <div class="mt-4 flex flex-wrap gap-3">
