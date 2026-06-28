@@ -1,31 +1,40 @@
 {
   "schemaVersion": 2,
-  "generatedAt": "2026-06-16T00:00:00Z",
+  "generatedAt": "2026-06-27T00:00:00Z",
   "title": "Design System: Fremont Chinese School",
   "extensions": {
     "colorMeta": {
-      "fcs-green": { "role": "primary", "displayName": "Forest Green", "canonical": "#3A7D44", "tonalRamp": ["#0E1F12", "#163019", "#1A3D22", "#244F2C", "#2D6235", "#3A7D44", "#7FB389", "#F0F7F2"] },
-      "fcs-orange": { "role": "secondary", "displayName": "Harvest Orange", "canonical": "#E06820", "tonalRamp": ["#3A1A08", "#5C2A0D", "#7A3200", "#A4480F", "#C85A10", "#E06820", "#F0A86E", "#FEF0E6"] },
-      "fcs-gold": { "role": "tertiary", "displayName": "Harvest Gold", "canonical": "#D4980A", "tonalRamp": ["#3A2A02", "#5A4203", "#7A5500", "#A87707", "#D4980A", "#E6B844", "#F1D488", "#FEF3DC"] },
-      "fcs-black": { "role": "neutral", "displayName": "Warm Black", "canonical": "#1C1208", "tonalRamp": ["#0D0A04", "#1C1208", "#332617", "#54452F", "#7A6A58", "#A89882", "#D8CBB8", "#FFF8F0"] },
-      "fcs-white": { "role": "neutral", "displayName": "Cream", "canonical": "#FFF8F0", "tonalRamp": ["#1C1208", "#54452F", "#7A6A58", "#A89882", "#C8B89A", "#E8DDD0", "#FBF3E8", "#FFF8F0"] }
+      "fcs-green":       { "role": "primary",   "displayName": "Jade",       "canonical": "#1A6E52", "tonalRamp": ["#08130E", "#0E2E22", "#134B38", "#1A6E52", "#2E8C6B", "#52B08F", "#A5DBC7", "#E6F3EE"] },
+      "fcs-green-dark":  { "role": "primary",   "displayName": "Jade Dark",  "canonical": "#134B38", "tonalRamp": ["#06120D", "#0A2419", "#0F2E22", "#134B38", "#1A6E52", "#3A9070", "#8FCBB2", "#E6F3EE"] },
+      "fcs-green-light": { "role": "primary",   "displayName": "Jade Tint",  "canonical": "#E6F3EE", "tonalRamp": ["#0E2E22", "#134B38", "#1A6E52", "#3A9070", "#6FC9A0", "#A5DBC7", "#CDEADD", "#E6F3EE"] },
+      "fcs-gold":        { "role": "secondary", "displayName": "Gold",       "canonical": "#D8A832", "tonalRamp": ["#3A2A05", "#5A4108", "#7A5500", "#A87707", "#C28F22", "#D8A832", "#E6BC4E", "#FBF1D6"] },
+      "fcs-gold-deep":   { "role": "secondary", "displayName": "Gold Deep",  "canonical": "#B07F1E", "tonalRamp": ["#3A2A05", "#5A4108", "#7A5500", "#B07F1E", "#C28F22", "#D8A832", "#E6BC4E", "#FBF1D6"] },
+      "fcs-gold-tint":   { "role": "secondary", "displayName": "Gold Tint",  "canonical": "#F6ECCF", "tonalRamp": ["#5A4108", "#7A5500", "#A87707", "#C28F22", "#E6BC4E", "#F1D488", "#F6ECCF", "#FEF3DC"] },
+      "fcs-mint":        { "role": "tertiary",  "displayName": "Light Mint", "canonical": "#6FC9A0", "tonalRamp": ["#0E3527", "#15503B", "#1E6E52", "#2E8C6B", "#4FAE86", "#6FC9A0", "#A7E0C6", "#E6F7EF"] },
+      "fcs-jade-ink":    { "role": "tertiary",  "displayName": "Deep Jade",  "canonical": "#0E5038", "tonalRamp": ["#04130D", "#082619", "#0B3A28", "#0E5038", "#1A6E52", "#3A9070", "#8FCBB2", "#E6F3EE"] },
+      "fcs-black":       { "role": "neutral",   "displayName": "Ink",        "canonical": "#221F1A", "tonalRamp": ["#0E0C09", "#221F1A", "#39342C", "#57534A", "#7E776B", "#A89F90", "#D2C9B8", "#F2EDE2"] },
+      "fcs-white":       { "role": "neutral",   "displayName": "Paper",      "canonical": "#ECE6D6", "tonalRamp": ["#221F1A", "#57534A", "#7E776B", "#A89F90", "#C8BFAD", "#D9D0C0", "#ECE6D6", "#F7F3E9"] },
+      "fcs-surface":     { "role": "neutral",   "displayName": "Surface",    "canonical": "#F7F3E9", "tonalRamp": ["#221F1A", "#57534A", "#7E776B", "#A89F90", "#C8BFAD", "#D9D0C0", "#F7F3E9", "#FCFAF3"] },
+      "fcs-border":      { "role": "neutral",   "displayName": "Warm Border","canonical": "#D9D0C0", "tonalRamp": ["#221F1A", "#57534A", "#7E776B", "#A89F90", "#C8B89A", "#D9D0C0", "#E8DDD0", "#F7F3E9"] },
+      "fcs-muted":       { "role": "neutral",   "displayName": "Ink-Soft",   "canonical": "#57534A", "tonalRamp": ["#0E0C09", "#221F1A", "#39342C", "#57534A", "#7E776B", "#A89F90", "#D2C9B8", "#F2EDE2"] }
     },
     "typographyMeta": {
-      "display-en": { "displayName": "Display (EN)", "purpose": "Hero h1 in Inter 800; the loudest voice." },
-      "display-zh": { "displayName": "Display (ZH)", "purpose": "Chinese display headings in Noto Serif TC 700." },
-      "headline": { "displayName": "Headline", "purpose": "Section h2 in Inter 700; use text-wrap: balance." },
-      "title": { "displayName": "Title", "purpose": "Card / feature h3 headings." },
-      "body": { "displayName": "Body", "purpose": "Paragraph copy, Inter 15px/1.7, Warm Black; cap 65-75ch." },
-      "eyebrow": { "displayName": "Eyebrow", "purpose": "Deliberate gold section kicker; uppercase, 0.18em. Use sparingly." }
+      "display-en": { "displayName": "Display (EN)", "purpose": "Hero h1 in Inter 800, white over the photo hero; the loudest voice." },
+      "display-zh": { "displayName": "Display (ZH)", "purpose": "Chinese display headings in Noto Serif TC 700 — the literary-serif counterpart of any display heading." },
+      "headline":   { "displayName": "Headline", "purpose": "Section h2 in Inter 700; use text-wrap: balance." },
+      "title":      { "displayName": "Title", "purpose": "Card / feature h3 headings in Inter 600, jade-dark or ink." },
+      "body":       { "displayName": "Body", "purpose": "Paragraph copy, Inter 1rem/1.7, Ink; cap measure 65-75ch. rem-based so the reading-size control scales it." },
+      "eyebrow":    { "displayName": "Eyebrow", "purpose": "Deliberate section kicker; uppercase, 0.18em. Deep jade on light, light mint on dark bands. Two homepage kickers only." }
     },
     "shadows": [
-      { "name": "resting", "value": "0 1px 2px rgba(28,18,8,0.05)", "purpose": "Recommended barely-there warm shadow on cards (not yet built)." },
-      { "name": "hover-lift", "value": "0 10px 24px rgba(28,18,8,0.10)", "purpose": "Recommended soft warm hover shadow with translateY(-2px)." },
-      { "name": "header-condensed", "value": "0 4px 12px rgba(28,18,8,0.10)", "purpose": "Sticky header once scrolled; pairs with backdrop-blur (built)." }
+      { "name": "header-condensed", "value": "0 4px 12px rgba(34,31,26,0.10)", "purpose": "Sticky header once scrolled; pairs with backdrop-blur (built — Tailwind shadow-md)." },
+      { "name": "resting", "value": "0 1px 2px rgba(34,31,26,0.05)", "purpose": "Recommended barely-there warm shadow on cards (flat as built; gentle layering is the target)." },
+      { "name": "hover-lift", "value": "0 10px 24px rgba(34,31,26,0.10)", "purpose": "Recommended soft warm hover shadow with translateY(-2px). Ink-tinted, never neutral black." }
     ],
     "motion": [
-      { "name": "ease-out-quint", "value": "cubic-bezier(0.16, 1, 0.3, 1)", "purpose": "Scroll-reveal fade + rise; the signature easing." },
-      { "name": "transition-fast", "value": "0.15s", "purpose": "Default duration for color/border hover transitions." }
+      { "name": "ease-out-quint", "value": "cubic-bezier(0.16, 1, 0.3, 1)", "purpose": "Scroll-reveal fade + rise + settle ([data-reveal]); the signature easing." },
+      { "name": "transition-fast", "value": "0.15s", "purpose": "Default duration for color/border/filter hover transitions." },
+      { "name": "btn-sheen", "value": "translateX(-200%) skewX(-18deg) -> translateX(320%); 5s ease-in-out", "purpose": "Specular highlight: 0.7s hover sweep on every gold button (::after); 5s passive shimmer loop on marquee Enroll CTAs only (.btn-shimmer ::before). Gated behind prefers-reduced-motion: no-preference." }
     ],
     "breakpoints": [
       { "name": "sm", "value": "640px" },
@@ -38,82 +47,96 @@
       "name": "Primary Button",
       "kind": "button",
       "refersTo": "button-primary",
-      "description": "Harvest-orange action button on light/photo bands; deepens on hover. The single most important action.",
+      "description": "The CTA. A metallic gold-gradient fill with ink text (never white — white-on-gold fails AA); a specular sheen sweeps across on hover. Works on light surfaces and dark green bands alike.",
       "html": "<a class=\"ds-btn-primary\" href=\"#\">Enroll Now</a>",
-      "css": ".ds-btn-primary { display: inline-block; background: #E06820; color: #FFF8F0; font-family: Inter, sans-serif; font-weight: 600; padding: 12px 24px; border-radius: 6px; text-decoration: none; transition: background 0.15s; } .ds-btn-primary:hover { background: #C85A10; } .ds-btn-primary:focus-visible { outline: 2px solid #D4980A; outline-offset: 2px; }"
+      "css": ".ds-btn-primary { position: relative; overflow: hidden; display: inline-block; background: linear-gradient(135deg, #E6BC4E 0%, #D8A832 50%, #C28F22 100%); color: #221F1A; font-family: Inter, sans-serif; font-weight: 600; padding: 12px 24px; border: none; border-radius: 6px; text-decoration: none; transition: filter 0.15s; } .ds-btn-primary::after { content: \"\"; position: absolute; inset: 0; width: 55%; background: linear-gradient(100deg, transparent 0%, rgba(255,255,255,0.6) 50%, transparent 100%); transform: translateX(-200%) skewX(-18deg); pointer-events: none; } .ds-btn-primary:hover { filter: brightness(0.94); } .ds-btn-primary:hover::after { transition: transform 0.7s ease; transform: translateX(320%) skewX(-18deg); } .ds-btn-primary:focus-visible { outline: 2px solid #D8A832; outline-offset: 2px; }"
     },
     {
       "name": "Outline Button",
       "kind": "button",
       "refersTo": "button-outline",
-      "description": "Secondary CTA on photo/dark bands; white border and label.",
+      "description": "Secondary CTA on photo / dark green bands only; white border and label.",
       "html": "<a class=\"ds-btn-outline\" href=\"#\">Explore Programs</a>",
-      "css": ".ds-btn-outline { display: inline-block; background: transparent; color: #ffffff; font-family: Inter, sans-serif; font-weight: 600; padding: 12px 24px; border: 1px solid rgba(255,255,255,0.7); border-radius: 6px; text-decoration: none; transition: background 0.15s; } .ds-btn-outline:hover { background: rgba(255,255,255,0.1); } .ds-btn-outline:focus-visible { outline: 2px solid #D4980A; outline-offset: 2px; }"
+      "css": ".ds-btn-outline { display: inline-block; background: transparent; color: #ffffff; font-family: Inter, sans-serif; font-weight: 600; padding: 12px 24px; border: 1px solid rgba(255,255,255,0.7); border-radius: 6px; text-decoration: none; transition: background 0.15s; } .ds-btn-outline:hover { background: rgba(255,255,255,0.1); } .ds-btn-outline:focus-visible { outline: 2px solid #D8A832; outline-offset: 2px; }"
     },
     {
       "name": "Feature Card",
       "kind": "card",
       "refersTo": "card",
-      "description": "Flat cream card with 1px warm border and the one deliberate 5px green top-rule.",
+      "description": "Flat paper card with a 1px warm border and the one deliberate 5px jade top-rule. The top-rule marks a feature card (homepage value-props + Programs offerings) only — never propagated as card grammar.",
       "html": "<div class=\"ds-card\"><div class=\"ds-card-icon\"><svg width=\"22\" height=\"22\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.75\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"m9 12 2 2 4-4\"/><circle cx=\"12\" cy=\"12\" r=\"9\"/></svg></div><h3 class=\"ds-card-title\">WASC-Accredited</h3><p class=\"ds-card-body\">A credentialed high-school credit track, recognized since 1972.</p></div>",
-      "css": ".ds-card { background: #FFF8F0; border: 1px solid #E8DDD0; border-top: 5px solid #3A7D44; border-radius: 10px; padding: 16px; transition: border-color 0.15s; } .ds-card-icon { display: flex; align-items: center; justify-content: center; width: 44px; height: 44px; border-radius: 12px; background: #F0F7F2; color: #2D6235; } .ds-card-title { margin: 20px 0 0; font-family: Inter, sans-serif; font-size: 1.125rem; font-weight: 600; color: #1C1208; } .ds-card-body { margin: 8px 0 0; font-family: Inter, sans-serif; font-size: 0.875rem; line-height: 1.6; color: #7A6A58; }"
+      "css": ".ds-card { background: #ECE6D6; border: 1px solid #D9D0C0; border-top: 5px solid #1A6E52; border-radius: 10px; padding: 28px; transition: border-color 0.15s; } .ds-card:hover { border-color: #C8B89A; } .ds-card-icon { display: flex; align-items: center; justify-content: center; width: 44px; height: 44px; border-radius: 12px; background: #E6F3EE; color: #134B38; } .ds-card-title { margin: 20px 0 0; font-family: Inter, sans-serif; font-size: 1.25rem; font-weight: 600; color: #134B38; } .ds-card-body { margin: 8px 0 0; font-family: Inter, sans-serif; font-size: 0.9375rem; line-height: 1.7; color: #57534A; }"
     },
     {
       "name": "Header Nav Link",
       "kind": "nav",
       "refersTo": "nav-link",
-      "description": "Uppercase tracked white nav link on the forest-green header; active is cream + underline.",
-      "html": "<nav class=\"ds-nav\"><a class=\"ds-nav-link ds-nav-link--active\" href=\"#\">Home</a><a class=\"ds-nav-link\" href=\"#\">Programs</a><a class=\"ds-nav-link\" href=\"#\">About</a></nav>",
-      "css": ".ds-nav { display: inline-flex; gap: 4px; background: #3A7D44; padding: 12px 16px; border-radius: 6px; } .ds-nav-link { color: #ffffff; font-family: Inter, sans-serif; font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.1em; padding: 8px 12px; text-decoration: none; transition: color 0.15s; } .ds-nav-link:hover { color: #FFF8F0; } .ds-nav-link--active { color: #FFF8F0; text-decoration: underline; text-underline-offset: 4px; } .ds-nav-link:focus-visible { outline: 2px solid #D4980A; outline-offset: 2px; }"
+      "description": "Uppercase tracked white nav link on the sticky jade header; active link is cream + underline with aria-current.",
+      "html": "<nav class=\"ds-nav\"><a class=\"ds-nav-link ds-nav-link--active\" href=\"#\" aria-current=\"page\">Programs</a><a class=\"ds-nav-link\" href=\"#\">Enroll</a><a class=\"ds-nav-link\" href=\"#\">About</a></nav>",
+      "css": ".ds-nav { display: inline-flex; gap: 4px; background: #1A6E52; padding: 12px 16px; border-radius: 6px; } .ds-nav-link { color: #ffffff; font-family: Inter, sans-serif; font-size: 12px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.1em; padding: 8px 12px; text-decoration: none; transition: color 0.15s; } .ds-nav-link:hover { color: #ECE6D6; } .ds-nav-link--active { color: #ECE6D6; text-decoration: underline; text-underline-offset: 4px; } .ds-nav-link:focus-visible { outline: 2px solid #D8A832; outline-offset: 2px; }"
     },
     {
       "name": "Eyebrow Label",
       "kind": "custom",
       "refersTo": "eyebrow",
-      "description": "Deliberate gold section kicker; uppercase, wide-tracked. Use sparingly, not above every section.",
+      "description": "Deliberate section kicker; uppercase, wide-tracked. Deep jade on light surfaces (dark-band call sites override to light mint). Two homepage kickers only — never above every section.",
       "html": "<p class=\"ds-eyebrow\">Why Families Choose FCS</p>",
-      "css": ".ds-eyebrow { font-family: Inter, sans-serif; font-size: 10px; font-weight: 600; letter-spacing: 0.18em; text-transform: uppercase; color: #D4980A; margin: 0; }"
+      "css": ".ds-eyebrow { font-family: Inter, sans-serif; font-size: 0.6875rem; font-weight: 600; letter-spacing: 0.18em; text-transform: uppercase; color: #0E5038; margin: 0; }"
+    },
+    {
+      "name": "Badge",
+      "kind": "chip",
+      "refersTo": "badge-green",
+      "description": "Pill status/category tag. Green tint for status, gold tint for category, ink for dark. Small (10-11px). The 'NEW' electives badge is a gold fill with ink text.",
+      "html": "<span class=\"ds-badge ds-badge-green\">Open</span> <span class=\"ds-badge ds-badge-gold\">New</span>",
+      "css": ".ds-badge { display: inline-block; padding: 3px 10px; border-radius: 100px; font-family: Inter, sans-serif; font-size: 11px; font-weight: 600; } .ds-badge-green { background: #D6EDD9; color: #1E4D25; } .ds-badge-gold { background: #FEF3DC; color: #7A5500; }"
     }
   ],
   "narrative": {
     "northStar": "The Modern Heritage House",
-    "overview": "A fifty-year institution tastefully renovated: old, proud bones with current, composed surfaces. Warm and rooted — forest green and harvest gold over warm cream, harvest-orange reserved for action. Traditional Chinese is set in Noto Serif TC (literary serif, heritage and gravity); English and UI run in Inter (modern, clean). Mood is warm but editorial: large extrabold tightly-tracked headings, sections separated by tonal background bands, sharp 6-12px corners, flat bordered surfaces.",
+    "overview": "A fifty-year institution that has been tastefully renovated. The bones are old and proud — a WASC-accredited school running since 1972 — but the surfaces are current, composed, and confident. The palette is jade green and gold over a warm paper field: a jade green carries the structure, gold is the one warm voice that asks for action (CTAs), and the body is a warm paper that reads as ink-on-paper rather than a generic near-white. Traditional Chinese is set in Noto Serif TC, a literary serif that signals heritage and gravity; English and all UI runs in Inter, which keeps the structure modern and clean. The two together are the whole idea: heritage and modernity in one composed room. The mood is warm but editorial. Headings are large, extrabold, and tightly tracked (-0.03em); sections are generously spaced and separated by tonal background bands (paper -> mint -> deep jade -> jade) rather than by chrome. Corners are sharp and structured (6-12px, never pills); surfaces are flat and bordered, not shadowed. Gold is the one place the system raises its voice — a metallic CTA fill with a quiet sheen. This system explicitly rejects the dated, cluttered Joomla site it replaces; cold corporate / SaaS clichés; anything childish or cartoonish; and stuffy, institutional dryness.",
     "keyCharacteristics": [
-      "Earthy, rooted palette: forest green + harvest gold + warm cream, orange as the action color.",
-      "Bilingual type as identity: Noto Serif TC (中文) paired with Inter (EN + UI).",
+      "Earthy, rooted palette: jade green + gold over warm paper. Gold is the CTA; green accents do the labelling.",
+      "Bilingual type as identity: Noto Serif TC (中文, literary serif) paired with Inter (EN + all UI).",
       "Editorial headings: extrabold, large (up to ~4.5rem), tightly tracked (-0.03em).",
       "Sharp, structured geometry: 6-12px radii, flat bordered surfaces, tonal section bands.",
-      "A gold eyebrow + pill badges as the deliberate accent system.",
-      "Global gold focus-visible ring; reveals and parallax degrade under reduced-motion."
+      "Gold-fill CTAs with a specular sheen; jade/mint accent text; pill badges as the badge system.",
+      "Global gold focus-visible ring; all motion (sheen, reveals, parallax, splash) degrades under reduced-motion."
     ],
     "rules": [
-      { "name": "The Orange-Is-Action Rule", "body": "Harvest orange means take this action. Never decorative, never a background wash outside the CTA band.", "section": "colors" },
-      { "name": "The Warm-Black Rule", "body": "All dark text and surfaces use Warm Black (#1C1208), never pure black. Pure black is cold and breaks the warmth.", "section": "colors" },
-      { "name": "The Muted-Is-Secondary Rule", "body": "Warm Muted (#7A6A58) is secondary text only and sits near the AA floor on cream — primary body uses Warm Black. Verify ≥4.5:1.", "section": "colors" },
-      { "name": "The Two-Script Rule", "body": "Chinese is always Noto Serif TC; English/UI is always Inter. The script is the cue for the face.", "section": "typography" },
-      { "name": "The Eyebrow-Restraint Rule", "body": "The gold eyebrow is a deliberate accent, not a per-section reflex. Currently overused — prune to sections that earn it.", "section": "typography" },
-      { "name": "The Warm-Shadow Rule", "body": "If shadows are added, tint with Warm Black (rgba(28,18,8,…)), diffuse and low-opacity. Crisp or neutral-black shadows are forbidden.", "section": "elevation" }
+      { "name": "The Gold-Is-CTA Rule", "body": "Gold = interactive action (button fills, focus ring, 'NEW'). It is not used as accent label text. A gold fill is always paired with ink text, never white.", "section": "colors" },
+      { "name": "The Green-Accent-Text Rule", "body": "Accent/label text is green: deep jade #0E5038 on light surfaces, light mint #6FC9A0 on dark green bands. Do not use a mid/bright jade as small text on a dark green band — it fails AA. The accent must be light enough (mint) on dark, dark enough (deep jade) on light.", "section": "colors" },
+      { "name": "The Paper-Is-The-Field Rule", "body": "Paper (#ECE6D6) is the ground; greens and ink are the figure. Color carries through accents, bands, and imagery — not by tinting the body warmer.", "section": "colors" },
+      { "name": "The Warm-Black Rule", "body": "All dark text/surfaces use Ink (#221F1A), never pure #000.", "section": "colors" },
+      { "name": "The No-Stray-Blue Rule", "body": "Blue is not in the palette. The only blues allowed are external brand marks (Facebook #1877F2, Google Calendar #4285F4). Everything else is jade/gold/ink.", "section": "colors" },
+      { "name": "The Two-Script Rule", "body": "Chinese is always Noto Serif TC; English/UI is always Inter. The script is the cue for which face to use.", "section": "typography" },
+      { "name": "The Eyebrow-Restraint Rule", "body": "The eyebrow is a deliberate kicker, not a per-section reflex. It appears in exactly two places: the homepage features and culture section headers. Interior pages do not carry a header eyebrow. Do not reintroduce a kicker above every page heading; that's AI scaffolding, not voice.", "section": "typography" },
+      { "name": "The Flat-By-Default Rule", "body": "Surfaces are flat at rest — paper or tonal bands, structure from 1px warm borders and background-color changes. The only shadow in play is the sticky header's shadow-md once scrolled. Card hover changes border color, not elevation.", "section": "elevation" },
+      { "name": "The Warm-Shadow Rule", "body": "If shadows are added, they are tinted with Ink (rgba(34,31,26,…)), diffuse, and low-opacity. Crisp or neutral-black shadows are forbidden.", "section": "elevation" },
+      { "name": "The Feature-Card-Top-Rule Rule", "body": "A 5px jade top border marks a feature card — homepage value-props and Programs offering cards only. It is NOT card grammar: resource lists, callouts, info boxes, and class grids get a plain 1px border.", "section": "elevation" }
     ],
     "dos": [
-      "Do treat orange as action only — rare, purposeful, never decorative.",
-      "Do set Chinese in Noto Serif TC and English/UI in Inter, always.",
-      "Do use Warm Black (#1C1208) for primary body copy; reserve Warm Muted for secondary text.",
-      "Do verify orange-on-white/cream and muted-on-cream hit AA (4.5:1 small, 3:1 large) before shipping.",
-      "Do separate sections with tonal background bands (cream → mint → deep green → orange) for rhythm.",
+      "Do use gold for CTAs only — button fills (always ink text), focus ring, 'NEW' (Gold-Is-CTA).",
+      "Do make accent text green: deep jade (#0E5038) on light, light mint (#6FC9A0) on dark.",
+      "Do set Chinese in Noto Serif TC and English/UI in Inter, always (Two-Script Rule).",
+      "Do use Ink (#221F1A) for primary body copy; Ink-Soft for secondary.",
+      "Do keep paper as the field; carry warmth through accents, bands, and imagery (Paper-Is-The-Field).",
+      "Do reserve the 5px jade top-rule for feature cards (homepage values + Programs offerings).",
+      "Do keep the eyebrow to the two homepage section kickers only.",
       "Do test every heading and CTA in both EN (Inter) and 中文 (Noto Serif TC) at every breakpoint.",
-      "Do keep the gold eyebrow deliberate — only where a section earns a kicker.",
-      "Do give every animation a prefers-reduced-motion fallback to static, visible content."
+      "Do give every animation a prefers-reduced-motion fallback to static, visible content.",
+      "Do verify any accent/green text hits AA (4.5:1 small, 3:1 large) before shipping."
     ],
     "donts": [
-      "Don't rebuild the dated, cluttered Joomla feel — no dense text walls or busy chrome.",
-      "Don't drift toward cold corporate / SaaS clichés: gradient hero-metric templates, soulless grids.",
-      "Don't go childish or cartoonish — no over-bright primaries, clip-art, or daycare energy.",
-      "Don't go stuffy / institutional — the serif-Chinese + warm palette must stay inviting, not dry.",
-      "Don't stamp the gold eyebrow above every section — that's AI scaffolding, not voice.",
-      "Don't add colored side/edge stripes to cards beyond the one deliberate green top-rule.",
-      "Don't use pure black (#000) for text or shadows — Warm Black only.",
-      "Don't use pills for buttons — geometry is sharp and structured (6px).",
-      "Don't set orange as a background wash outside the CTA band, or its action meaning erodes."
+      "Don't put white text on a gold fill — gold is light; use ink (white-on-gold fails AA).",
+      "Don't use gold as accent label text, or a bright/mid jade as small text on dark green — both fail AA.",
+      "Don't add colored side/edge stripes (border-left/right > 1px) to any card/callout — absolute ban.",
+      "Don't stamp an eyebrow above every section/page — it's AI scaffolding (two homepage kickers only).",
+      "Don't propagate the top-rule beyond feature cards — it's a marker, not card grammar.",
+      "Don't reintroduce blue (except the Facebook / Google-Calendar external brand marks).",
+      "Don't use pure black (#000) for text or shadows — Ink only (Warm-Black Rule).",
+      "Don't use pills for buttons — geometry is sharp (6px).",
+      "Don't rebuild the Joomla clutter, drift to SaaS clichés, go childish, or go stuffy."
     ]
   }
 }
