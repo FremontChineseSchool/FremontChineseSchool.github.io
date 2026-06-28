@@ -228,7 +228,6 @@ export const content = {
       sections: [
         {
           heading: 'Chinese Language',
-          // TODO(verify): confirm exact grade range and track names with the school office.
           body: 'Weekend classes run from Pre-K through 8th grade, all taught in Traditional Chinese. Choose the full-Chinese track for students from Mandarin-speaking families where the child and household speak Mandarin, or the bilingual track (C1–C8) designed for beginners and heritage learners easing into the language. Students build reading, writing, listening, and speaking skills following established Mandarin curricula.',
           schedule: 'Pre-K – 3rd grade: 11:10 am – 1:00 pm · 4th – 8th grade: 9:00 am – 10:50 am',
         },
@@ -967,7 +966,6 @@ export const content = {
       sections: [
         {
           heading: '中文課程',
-          // TODO(verify): confirm exact grade range and track names with the school office.
           body: '週末班級涵蓋學前班（Pre-K）至八年級，全程以正體（繁體）中文授課。可選擇適合來自華語家庭、孩子及家庭主要使用普通話的全中文班，或專為初學者與華裔子弟設計、循序漸進的雙語班（C1–C8）。學生依循成熟的中文教材，培養聽、說、讀、寫的能力。',
           schedule: '學前班至三年級：11:10 am – 1:00 pm · 四至八年級：9:00 am – 10:50 am',
         },
