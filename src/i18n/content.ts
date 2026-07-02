@@ -10,7 +10,6 @@ export const links = {
   gradeChart: 'https://drive.google.com/file/d/1qLV_WTqvwzNGEyjS5eoVIbe9pC3aOq5T/view',
   electiveList: 'https://docs.google.com/document/d/1WDBeqIcvrPU3i4yFUAt5mSVNFKYoWNjRWQ1Uy-wNBTs/view',
   electiveIntros: 'https://docs.google.com/folderview?id=0B7NAXqzsebY0ZFhKNlloWmJwN3M&resourcekey=0-n5ocoQpPIMrKzkAxyU88ug',
-  payment: 'https://fremontchineseschool.org/online-payment',
   calendarZh:
     'https://drive.google.com/file/d/1LgAKCRMIiecG3fpMC2w6Hwx2zpWYXGd3/view',
   calendarEn:
