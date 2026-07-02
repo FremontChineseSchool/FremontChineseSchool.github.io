@@ -811,6 +811,8 @@ export const content = {
           body: 'The annual Chinese New Year Celebration was a huge success! Thank you to all students, families, and volunteers who made the event so memorable.',
         },
       ],
+      archiveLabel: 'News Archive (2013–2026)',
+      archiveNote: 'Looking for older announcements?',
       newslettersTitle: 'Newsletter Archive',
       newslettersBody: 'Past issues of the FCS school newsletter (校園快報), published throughout the school year.',
       newsletters: [
@@ -1548,6 +1550,8 @@ export const content = {
           body: '本年度新春聯歡會圓滿成功！感謝所有學生、家長與志工讓這場活動留下美好回憶。',
         },
       ],
+      archiveLabel: '歷史公告存檔（2013–2026）',
+      archiveNote: '查看更早的公告？',
       newslettersTitle: '校刊存檔',
       newslettersBody: '歷期費利蒙中文學校校園快報，於每學年定期發行。',
       newsletters: [
