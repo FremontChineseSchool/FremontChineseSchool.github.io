@@ -38,6 +38,11 @@ const c = content[lang].news;
     ))}
   </div>
 
+  <!-- Historical archive link -->
+  <p class="mt-10 text-sm" style="color: var(--color-fcs-muted);">
+    {c.archiveNote} <a href="/news-archive" class="underline font-medium" style="color: var(--color-fcs-blue);">{c.archiveLabel}</a>
+  </p>
+
   <!-- Newsletter archive -->
   <div class="mt-14">
     <h2 class="text-xl font-semibold" style="color: var(--color-fcs-black);">{c.newslettersTitle}</h2>
