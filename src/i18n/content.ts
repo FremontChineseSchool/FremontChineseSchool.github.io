@@ -637,7 +637,18 @@ export const content = {
       intro:
         'Pay tuition and school fees right here. Browse the items below, add what you need to your cart, and check out securely — all on this page.',
       loading: 'Loading the payment store…',
-      checkNote: 'Prefer to avoid the processing fee? Pay by check made out to "Fremont Chinese School" and drop it off at the school office (Room 24) on any class day. Online payment via PayPal incurs a non-refundable 5% surcharge.',
+      // Registration notes, carried in-house from the store so they show in
+      // both languages (the embedded storefront is English-only).
+      notes: [
+        'Early Bird: complete registration AND submit payment by May 16, 2026 to qualify for the Early Bird discount.',
+        'CSL = Chinese as a Second Language.',
+        'AC = Accredited Curriculum.',
+        'The new-student registration fee applies to new students and to students who withdrew or did not enroll during the 2026–2027 school year.',
+      ],
+      howToPayTitle: 'How to pay',
+      payByCheck: 'By check — make it payable to "Fremont Chinese School" and drop it off at the school office (Room 24) on any class day.',
+      payOnline: 'Online — scroll down to add item(s) to your cart and check out. PayPal payments add a non-refundable 5% surcharge.',
+      payReceipt: 'After paying, you will receive a receipt email from PayPal. Enter the PayPal Order # in the registration form to complete your enrollment.',
       note: 'Payments are processed securely through our school store. If you are unsure which item to pay, check your registration confirmation or contact the school office.',
     },
     calendar: {
@@ -1374,7 +1385,17 @@ export const content = {
       intro:
         '直接在此頁繳交學費與各項學校費用。瀏覽下方項目，將所需項目加入購物車，並於本頁安全結帳。',
       loading: '正在載入付款商店…',
-      checkNote: '想避免手續費？請開立抬頭為「Fremont Chinese School」的支票，並於上課日親自交至辦公室。透過 PayPal 線上付款將收取 5% 手續費。',
+      // 報名須知，由商店移至站內以提供中英雙語（內嵌商店僅有英文）。
+      notes: [
+        '早鳥優惠：請於 2026 年 5 月 16 日前完成報名並繳交付款，方可享有早鳥折扣。',
+        'CSL＝中文為第二語言（Chinese as a Second Language）。',
+        'AC＝認證課程（Accredited Curriculum）。',
+        '新生報名費適用於新生，以及在 2026–2027 學年退學或未報名的學生。',
+      ],
+      howToPayTitle: '付款方式',
+      payByCheck: '支票付款——請開立抬頭為「Fremont Chinese School」的支票，並於上課日親自交至學校辦公室（24 號教室）。',
+      payOnline: '線上付款——請往下捲動，將項目加入購物車並結帳。透過 PayPal 付款將收取不可退還的 5% 手續費。',
+      payReceipt: '付款後，您將收到 PayPal 寄送的收據電子郵件。請將 PayPal 訂單編號（Order #）填入報名表，以完成報名。',
       note: '款項皆透過本校商店安全處理。若不確定應繳交哪一項目，請查看您的報名確認資訊，或聯絡學校辦公室。',
     },
     calendar: {
