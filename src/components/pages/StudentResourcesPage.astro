@@ -1,0 +1,190 @@
+---
+import type { Lang } from "../../i18n/ui";
+import { localizedPath } from "../../i18n/ui";
+
+interface Props {
+  lang: Lang;
+}
+const { lang } = Astro.props;
+
+const isZh = lang === 'zh';
+---
+
+<section style="background: var(--color-fcs-white);" class="mx-auto max-w-3xl px-4 py-14">
+
+  <h1 class="text-3xl font-semibold sm:text-4xl" style="letter-spacing: -0.02em; color: var(--color-fcs-black);">
+    {isZh ? '學生資源' : 'Student Resources'}
+  </h1>
+  <p class="mt-2 text-lg" style="color: var(--color-fcs-muted);">
+    {isZh ? '提供在校學生與家長使用的資訊與連結。' : 'Information and links for current students and families.'}
+  </p>
+
+  <!-- Class Schedule & Classroom Map -->
+  <div class="mt-10 rounded-[10px] p-6" style="background: var(--color-fcs-white); border: 1px solid var(--color-fcs-border);">
+    <h2 class="text-lg font-semibold" style="color: var(--color-fcs-black);">
+      {isZh ? '班級/教師/教室對照表' : 'Class Schedule & Classroom Map'}
+    </h2>
+    <p class="mt-2 text-sm" style="color: var(--color-fcs-muted);">
+      {isZh ? '查詢您孩子班級所在的教室、任課教師與上課時間。' : "Find your child's classroom, teacher, and class time."}
+    </p>
+
+    <!-- Class Schedule (ready) -->
+    <div class="mt-5">
+      <p class="text-sm font-semibold" style="color: var(--color-fcs-black);">
+        {isZh ? '2026-2027 班級/教師/教室對照表' : '2026-2027 Class Schedule'}
+      </p>
+      <button type="button" id="schedule-preview-trigger"
+        class="mt-3 block w-full cursor-zoom-in overflow-hidden rounded-lg border p-0 text-left"
+        style="border-color: var(--color-fcs-border);"
+        aria-haspopup="dialog">
+        <img
+          src="/images/resources/class-schedule-2026-27-thumb.png"
+          alt={isZh ? '2026-2027 班級/教師/教室對照表預覽圖' : 'Preview of the 2026-2027 class schedule and classroom assignments'}
+          class="block h-auto w-full"
+          loading="lazy"
+        />
+      </button>
+      <div class="mt-2 flex flex-wrap items-center gap-x-4 gap-y-1">
+        <span class="text-xs" style="color: var(--color-fcs-muted);">
+          {isZh ? '點擊圖片放大檢視' : 'Click the image to enlarge'}
+        </span>
+        <a href="/FCS_2026-2027_Class_Schedule.pdf" target="_blank" rel="noopener"
+          class="inline-flex items-center gap-1.5 text-xs font-semibold hover:underline" style="color: var(--color-fcs-green);">
+          <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+          {isZh ? '開啟／下載 PDF' : 'Open / Download PDF'}
+        </a>
+      </div>
+    </div>
+
+    <!-- Classroom Map (ready) -->
+    <div class="mt-5 border-t pt-4" style="border-color: var(--color-fcs-border);">
+      <p class="text-sm font-semibold" style="color: var(--color-fcs-black);">
+        {isZh ? '2026-2027 教室使用圖' : '2026-2027 Classroom Map'}
+      </p>
+      <button type="button" id="map-preview-trigger"
+        class="mt-3 block w-full cursor-zoom-in overflow-hidden rounded-lg border p-0 text-left"
+        style="border-color: var(--color-fcs-border);"
+        aria-haspopup="dialog">
+        <img
+          src="/images/resources/classroom-map-2026-27-thumb.jpg"
+          alt={isZh ? '2026-2027 教室使用圖預覽圖' : 'Preview of the 2026-2027 classroom use map'}
+          class="block h-auto w-full"
+          loading="lazy"
+        />
+      </button>
+      <div class="mt-2 flex flex-wrap items-center gap-x-4 gap-y-1">
+        <span class="text-xs" style="color: var(--color-fcs-muted);">
+          {isZh ? '點擊圖片放大檢視' : 'Click the image to enlarge'}
+        </span>
+        <a href="/images/resources/classroom-map-2026-27-full.jpg" target="_blank" rel="noopener"
+          class="inline-flex items-center gap-1.5 text-xs font-semibold hover:underline" style="color: var(--color-fcs-green);">
+          <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+          {isZh ? '開啟／下載圖片' : 'Open / Download image'}
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <dialog id="schedule-preview-dialog" class="fcs-preview-dialog" aria-label={isZh ? '班級/教師/教室對照表放大檢視' : 'Class schedule enlarged preview'}>
+    <div class="relative">
+      <button type="button" id="schedule-preview-close"
+        class="absolute right-2 top-2 flex h-8 w-8 items-center justify-center rounded-full text-lg font-semibold"
+        style="background: var(--color-fcs-white); color: var(--color-fcs-black);"
+        aria-label={isZh ? '關閉' : 'Close'}>
+        &times;
+      </button>
+      <img
+        src="/images/resources/class-schedule-2026-27-full.png"
+        alt={isZh ? '2026-2027 班級/教師/教室對照表' : '2026-2027 class schedule and classroom assignments'}
+      />
+    </div>
+  </dialog>
+
+  <dialog id="map-preview-dialog" class="fcs-preview-dialog" aria-label={isZh ? '教室使用圖放大檢視' : 'Classroom map enlarged preview'}>
+    <div class="relative">
+      <button type="button" id="map-preview-close"
+        class="absolute right-2 top-2 flex h-8 w-8 items-center justify-center rounded-full text-lg font-semibold"
+        style="background: var(--color-fcs-white); color: var(--color-fcs-black);"
+        aria-label={isZh ? '關閉' : 'Close'}>
+        &times;
+      </button>
+      <img
+        src="/images/resources/classroom-map-2026-27-full.jpg"
+        alt={isZh ? '2026-2027 教室使用圖' : '2026-2027 classroom use map'}
+      />
+    </div>
+  </dialog>
+
+  <style>
+    .fcs-preview-dialog {
+      max-width: 92vw;
+      max-height: 92vh;
+      padding: 0;
+      border: none;
+      border-radius: 12px;
+      background: transparent;
+    }
+    .fcs-preview-dialog::backdrop {
+      background: rgba(0, 0, 0, 0.65);
+    }
+    .fcs-preview-dialog img {
+      display: block;
+      max-width: 100%;
+      max-height: 92vh;
+      border-radius: 12px;
+    }
+  </style>
+
+  <script>
+    // Wires each (trigger, dialog, close) preview pair sharing a name prefix,
+    // e.g. schedule-preview-trigger / schedule-preview-dialog / schedule-preview-close.
+    const previewNames = ['schedule', 'map'];
+    for (const name of previewNames) {
+      const dialog = document.getElementById(`${name}-preview-dialog`) as HTMLDialogElement | null;
+      const trigger = document.getElementById(`${name}-preview-trigger`);
+      const closeBtn = document.getElementById(`${name}-preview-close`);
+
+      trigger?.addEventListener('click', () => dialog?.showModal());
+      closeBtn?.addEventListener('click', () => dialog?.close());
+      dialog?.addEventListener('click', (event) => {
+        if (event.target === dialog) dialog.close();
+      });
+    }
+  </script>
+
+  <!-- Quick Links -->
+  <div class="mt-6 rounded-[10px] p-6" style="background: var(--color-fcs-white); border: 1px solid var(--color-fcs-border);">
+    <h2 class="text-lg font-semibold" style="color: var(--color-fcs-black);">
+      {isZh ? '常用連結' : 'Quick Links'}
+    </h2>
+    <ul class="mt-4 space-y-3">
+      <li>
+        <a href={localizedPath(lang, 'calendar')}
+          class="inline-flex items-center gap-2 text-sm font-semibold hover:underline" style="color: var(--color-fcs-green);">
+          <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+          {isZh ? '學校行事曆 School Calendar' : 'School Calendar 學校行事曆'}
+        </a>
+      </li>
+      <li>
+        <a href={localizedPath(lang, 'payment')}
+          class="inline-flex items-center gap-2 text-sm font-semibold hover:underline" style="color: var(--color-fcs-green);">
+          <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="1" y="4" width="22" height="16" rx="2"/><line x1="1" y1="10" x2="23" y2="10"/></svg>
+          {isZh ? '學費與繳費 Tuition & Payment' : 'Tuition & Payment 學費與繳費'}
+        </a>
+      </li>
+      <li>
+        <a href={localizedPath(lang, 'ac-resources')}
+          class="inline-flex items-center gap-2 text-sm font-semibold hover:underline" style="color: var(--color-fcs-green);">
+          <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>
+          {isZh ? '學分班資源 AC Resources' : 'AC Resources 學分班資源'}
+        </a>
+      </li>
+    </ul>
+  </div>
+
+  <p class="mt-6 text-sm" style="color: var(--color-fcs-muted);">
+    {isZh ? '如有疑問，請聯絡教務處：' : 'Questions? Contact the office: '}
+    <a href="mailto:principal@fremontchineseschool.org" class="font-semibold hover:underline" style="color: var(--color-fcs-green);">principal@fremontchineseschool.org</a>
+  </p>
+
+</section>

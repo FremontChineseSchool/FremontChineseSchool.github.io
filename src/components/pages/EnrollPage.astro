@@ -13,6 +13,24 @@ const c = content[lang].enroll;
   <h1 class="text-3xl font-semibold sm:text-4xl" style="letter-spacing: -0.02em; color: var(--color-fcs-black);">{c.title}</h1>
   <p class="mt-4 text-lg" style="color: var(--color-fcs-muted);">{c.intro}</p>
 
+  <!-- Top-of-page registration shortcut: for parents who already know what they
+       need and don't want to scroll through the new-family guide to find it. -->
+  <div class="mt-6 flex flex-wrap items-center gap-4 rounded-[10px] p-5" style="background: var(--color-fcs-green-light); border: 1px solid var(--color-fcs-border);">
+    <a
+      href={links.register}
+      target="_blank"
+      rel="noopener"
+      class="btn-primary inline-block shrink-0 rounded-[6px] px-6 py-3 text-base font-semibold transition-colors"
+    >
+      {lang === 'en' ? 'Open registration form →' : '開啟報名表 →'}
+    </a>
+    <p class="text-sm" style="color: var(--color-fcs-muted);">
+      {lang === 'en'
+        ? "Ready to register? Jump straight to the form. New to FCS? See the step-by-step guide below first."
+        : '已準備好報名了嗎？可直接開啟報名表。若是第一次在 FCS 報名，建議先參考下方步驟指南。'}
+    </p>
+  </div>
+
   <!-- Audience switcher -->
   <div class="mt-8 grid gap-4 sm:grid-cols-2">
     <!-- New family -->

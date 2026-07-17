@@ -136,13 +136,17 @@ const orgSchema = {
         `display:contents` (no box), so the banner scrolls away and the header
         pins itself exactly as before. */}
     <div class="sticky top-0 z-50 sm:contents">
-      {content[lang].home.announcement && (
-        <div class="flex items-center justify-center gap-x-3 px-4 py-2 text-xs font-medium" style="background: var(--color-fcs-green-dark); color: #EFE9DB;">
-          <span class="min-w-0 truncate">{content[lang].home.announcement}</span>
-          <a
-            href={localizedPath(lang, 'enroll')}
-            class="btn-primary btn-shimmer shrink-0 rounded-full px-3 py-0.5 text-xs font-semibold transition-colors"
-          >{content[lang].home.announcementCta}</a>
+      {content[lang].home.announcements.length > 0 && (
+        <div id="fcs-announcement" class="px-4 py-2 text-xs font-medium" style="background: var(--color-fcs-green-dark); color: #EFE9DB;">
+          {content[lang].home.announcements.map((a, i) => (
+            <div class="fcs-announcement-item flex items-center justify-center gap-x-3" style={i === 0 ? undefined : 'display:none;'}>
+              <span class="min-w-0 truncate">{a.text}</span>
+              <a
+                href={localizedPath(lang, a.href)}
+                class="btn-primary btn-shimmer shrink-0 rounded-full px-3 py-0.5 text-xs font-semibold transition-colors"
+              >{a.cta}</a>
+            </div>
+          ))}
         </div>
       )}
       <Header lang={lang} />
@@ -154,6 +158,21 @@ const orgSchema = {
     <CalligraphySplash />
   </body>
 </html>
+
+<script>
+  // Alternate between announcement banner messages (if there's more than one)
+  // every few seconds. A plain display swap — no animation to gate behind
+  // prefers-reduced-motion.
+  const announcementItems = document.querySelectorAll<HTMLElement>(".fcs-announcement-item");
+  if (announcementItems.length > 1) {
+    let activeIndex = 0;
+    setInterval(() => {
+      announcementItems[activeIndex].style.display = "none";
+      activeIndex = (activeIndex + 1) % announcementItems.length;
+      announcementItems[activeIndex].style.display = "flex";
+    }, 6000);
+  }
+</script>
 
 <script>
   // Reveal [data-reveal] elements as they scroll into view. Under reduced-motion

@@ -5,10 +5,10 @@ export const defaultLang: Lang = 'en';
 // Navigation: one entry per top-level page. `key` maps into the route table.
 export const navOrder = [
   'programs',
-  'enroll',
-  'about',
+  'student-resources',
   'calendar',
   'events',
+  'about',
   'donate',
   'contact',
 ] as const;
@@ -27,6 +27,7 @@ export const routes: Record<string, string> = {
   contact: 'contact',
   'ac-resources': 'ac-resources',
   'staff-resources': 'staff-resources',
+  'student-resources': 'student-resources',
   news: 'news',
   electives: 'electives',
 };
@@ -53,6 +54,7 @@ export const ui = {
       programs: 'Programs',
       enroll: 'Enroll',
       calendar: 'Calendar',
+      'student-resources': 'Student Resources',
       events: 'Events',
       donate: 'Donate',
       contact: 'Contact',
@@ -88,6 +90,7 @@ export const ui = {
       programs: '課程',
       enroll: '報名註冊',
       calendar: '行事曆',
+      'student-resources': '學生資源',
       events: '活動',
       donate: '捐款',
       contact: '聯絡我們',

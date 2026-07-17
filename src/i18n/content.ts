@@ -165,8 +165,10 @@ export const content = {
       eventsLead:
         'Learning spills beyond the classroom into celebrations families look forward to all year.',
       eventsCta: 'See all events',
-      announcement: 'Enrollment is now open for the 2026–27 school year.',
-      announcementCta: 'Enroll now →',
+      announcements: [
+        { text: 'Enrollment is now open for the 2026–27 school year.', cta: 'Enroll now →', href: 'enroll' as const },
+        { text: 'Classroom assignments are now available.', cta: 'View schedule →', href: 'student-resources' as const },
+      ],
       ctaTitle: 'Ready to join us this year?',
       ctaBody:
         "Enrollment is open to new and returning families. Reserve your child's place for the 2026–2027 school year.",
@@ -918,8 +920,10 @@ export const content = {
       eventsTitle: '年度傳統',
       eventsLead: '學習延伸到課堂之外，化為全家人整年期待的精彩活動。',
       eventsCta: '查看所有活動',
-      announcement: '2026–27 學年報名現已開放。',
-      announcementCta: '立即報名 →',
+      announcements: [
+        { text: '2026–27 學年報名現已開放。', cta: '立即報名 →', href: 'enroll' as const },
+        { text: '2026-2027 班級教室資訊已公布。', cta: '查看課表 →', href: 'student-resources' as const },
+      ],
       ctaTitle: '準備好今年加入我們了嗎？',
       ctaBody: '新生與舊生皆可報名。為您的孩子預留 2026–2027 學年的名額。',
       newsTeaserTitle: '最新消息',
