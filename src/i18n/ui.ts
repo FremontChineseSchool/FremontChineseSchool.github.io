@@ -68,6 +68,7 @@ export const ui = {
       connect: 'Connect',
       acResources: 'AC Resources',
       staffResources: 'Staff Resources',
+      taResources: 'TA Resources',
     },
   },
   zh: {
@@ -104,6 +105,7 @@ export const ui = {
       connect: '社群',
       acResources: '學分班資源',
       staffResources: '教職員資源',
+      taResources: '助教資源',
     },
   },
 } as const;

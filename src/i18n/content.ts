@@ -11,15 +11,16 @@ export const links = {
   electiveList: 'https://docs.google.com/document/d/1WDBeqIcvrPU3i4yFUAt5mSVNFKYoWNjRWQ1Uy-wNBTs/view',
   electiveIntros: 'https://docs.google.com/folderview?id=0B7NAXqzsebY0ZFhKNlloWmJwN3M&resourcekey=0-n5ocoQpPIMrKzkAxyU88ug',
   calendarZh:
-    'https://drive.google.com/file/d/1LgAKCRMIiecG3fpMC2w6Hwx2zpWYXGd3/view',
+    'https://drive.google.com/file/d/1kUl_nhpdAC0WLE0r6smb2fSjDUzRmSdX/view',
   calendarEn:
-    'https://drive.google.com/file/d/1jEHtmbAqxjldM-q1NdFuryYcHENRhDui/view',
+    'https://drive.google.com/file/d/1mHm8B4-LnNZkqqOY8qMvG7OReWaconzM/view',
   tuitionPdf: 'https://docs.google.com/document/d/1eMiXP6MsfTPzySyFSNG8VMmvKSI8NSzo2Vb3Mg72Gn8/view',
   irsDetermination: 'https://drive.google.com/file/d/1BBgfNR6QzLA2d1-Ej8ezyW56Pf96eosf/view',
   acCreditTransfer: 'https://forms.gle/TntoF21REwrnnkfj9',
   acPolicies: 'https://drive.google.com/file/d/1EKDsFuUj3pV8eXTBhEE4cSHGpC1M_sPF/view',
   acAbsenceForm: 'https://drive.google.com/file/d/1xbyIlzgvoZFpABZNK03L2-6sK2XSKXCI/view',
   acExcuseForm: 'https://drive.google.com/file/d/11KBdtFJ8iQYHGd4d8K4GWIMlQ2ceX2G0/view',
+  tutorApplication: 'https://forms.gle/Aerk6mbhpEPfJEep9',
   legacyEvents: 'https://fremontchineseschool.org/events',
   legacyNews: 'https://fremontchineseschool.org/index.php',
   facebook: 'https://facebook.com/fremontchineseschool',
@@ -251,6 +252,7 @@ export const content = {
       tutoringBadge: 'Free — enrolled students only',
       tutoringBody:
         'Enrolled FCS students have access to free one-on-one online tutoring provided by our volunteer tutors. Sessions are coordinated via email during the school year. Once enrolled, watch for an email with sign-up details — you\'ll need your FCS registration ID to reserve a spot.',
+      tutoringApplyLabel: 'Apply to be a volunteer tutor',
       tuition: {
         title: 'Tuition & Fees',
         earlyBirdLabel: 'Early Bird',
@@ -1017,6 +1019,7 @@ export const content = {
       tutoringBadge: '免費 — 僅限在學學生',
       tutoringBody:
         '本校在學學生可免費享有由義工提供的一對一線上輔導課程。課程於學年間透過電子郵件統籌安排。完成報名後，請留意本校寄出的課程通知信，預約時需提供您的本校學生編號。',
+      tutoringApplyLabel: '申請成為義工導師',
       tuition: {
         title: '學費與費用',
         earlyBirdLabel: '早鳥優惠',
