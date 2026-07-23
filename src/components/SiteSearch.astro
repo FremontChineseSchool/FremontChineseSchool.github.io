@@ -1,0 +1,188 @@
+---
+// Site search, powered by Pagefind (https://pagefind.app). Pagefind indexes the
+// built HTML as a postbuild step (see `postbuild` in package.json), emitting
+// static assets to `dist/pagefind/`. Those assets don't exist under `astro dev`
+// or a plain `astro build` without the postbuild step — only `npm run build`
+// (which runs postbuild automatically) followed by `npm run preview` serves a
+// working index. The UI below loads its JS/CSS lazily on first open and shows a
+// friendly fallback message if the index isn't there.
+//
+// Pagefind auto-scopes results to the current page's language via `<html lang>`
+// (set in BaseLayout.astro), so English and Chinese pages search independently
+// without extra config.
+import type { Lang } from "../i18n/ui";
+
+interface Props {
+  lang: Lang;
+}
+const { lang } = Astro.props;
+const isZh = lang === "zh";
+---
+
+<button
+  id="search-trigger"
+  type="button"
+  aria-label={isZh ? "搜尋網站" : "Search the site"}
+  title={isZh ? "搜尋網站" : "Search the site"}
+  class="shrink-0 flex items-center justify-center rounded-full p-2 text-white/85 transition-colors hover:bg-white/15 hover:text-fcs-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white/70"
+>
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    width="19"
+    height="19"
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    stroke-width="2"
+    stroke-linecap="round"
+    stroke-linejoin="round"
+    aria-hidden="true"
+  >
+    <circle cx="11" cy="11" r="8"></circle>
+    <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+  </svg>
+</button>
+
+<dialog id="search-dialog" class="fcs-search-dialog" aria-label={isZh ? "搜尋" : "Search"}>
+  <div class="fcs-search-dialog__inner">
+    <button
+      type="button"
+      id="search-close"
+      class="fcs-search-dialog__close"
+      aria-label={isZh ? "關閉" : "Close"}
+    >&times;</button>
+    <div id="search"></div>
+  </div>
+</dialog>
+
+<style>
+  .fcs-search-dialog {
+    margin: 6vh auto auto;
+    width: min(92vw, 640px);
+    max-height: 88vh;
+    padding: 0;
+    border: none;
+    border-radius: 12px;
+    background: var(--color-fcs-white);
+  }
+  .fcs-search-dialog::backdrop {
+    background: rgba(0, 0, 0, 0.5);
+  }
+  .fcs-search-dialog__inner {
+    position: relative;
+    padding: 20px;
+    max-height: 88vh;
+    overflow-y: auto;
+  }
+  .fcs-search-dialog__close {
+    position: absolute;
+    right: 12px;
+    top: 12px;
+    display: flex;
+    height: 32px;
+    width: 32px;
+    align-items: center;
+    justify-content: center;
+    border-radius: 999px;
+    font-size: 18px;
+    font-weight: 600;
+    background: var(--color-fcs-surface);
+    color: var(--color-fcs-black);
+  }
+  .fcs-search-fallback {
+    padding: 24px 4px;
+    font-size: 14px;
+    color: var(--color-fcs-muted);
+  }
+
+  /* Pagefind UI theme — mapped to FCS brand tokens */
+  #search {
+    --pagefind-ui-primary: var(--color-fcs-green);
+    --pagefind-ui-text: var(--color-fcs-black);
+    --pagefind-ui-background: var(--color-fcs-white);
+    --pagefind-ui-border: var(--color-fcs-border);
+    --pagefind-ui-tag: var(--color-fcs-green-light);
+    --pagefind-ui-border-radius: 8px;
+    --pagefind-ui-image-border-radius: 8px;
+    --pagefind-ui-font: inherit;
+    margin-top: 8px;
+  }
+</style>
+
+<script define:vars={{ isZh }}>
+  const trigger = document.getElementById("search-trigger");
+  const dialog = document.getElementById("search-dialog");
+  const closeBtn = document.getElementById("search-close");
+  const mount = document.getElementById("search");
+
+  let initTried = false;
+
+  function loadAssets() {
+    return new Promise((resolve, reject) => {
+      const link = document.createElement("link");
+      link.rel = "stylesheet";
+      link.href = "/pagefind/pagefind-ui.css";
+      document.head.appendChild(link);
+
+      const script = document.createElement("script");
+      script.src = "/pagefind/pagefind-ui.js";
+      script.onload = resolve;
+      script.onerror = reject;
+      document.body.appendChild(script);
+    });
+  }
+
+  function focusInput() {
+    requestAnimationFrame(() => {
+      mount?.querySelector("input")?.focus();
+    });
+  }
+
+  trigger?.addEventListener("click", async () => {
+    dialog?.showModal();
+    if (initTried) {
+      focusInput();
+      return;
+    }
+    initTried = true;
+    try {
+      await loadAssets();
+      // eslint-disable-next-line no-undef -- global provided by pagefind-ui.js
+      new PagefindUI({
+        element: "#search",
+        showSubResults: true,
+        showImages: false,
+        resetStyles: false,
+        translations: isZh
+          ? {
+              placeholder: "搜尋網站…",
+              clear_search: "清除",
+              load_more: "載入更多結果",
+              search_label: "搜尋網站",
+              filters_label: "篩選",
+              zero_results: "找不到「[SEARCH_TERM]」的相關結果",
+              many_results: "找到 [COUNT] 筆「[SEARCH_TERM]」的相關結果",
+              one_result: "找到 1 筆「[SEARCH_TERM]」的相關結果",
+              searching: "搜尋中…",
+            }
+          : undefined,
+      });
+      focusInput();
+    } catch (e) {
+      if (mount) {
+        mount.innerHTML = "";
+        const p = document.createElement("p");
+        p.className = "fcs-search-fallback";
+        p.textContent = isZh
+          ? "搜尋功能僅在正式部署的網站上可用（本機開發環境尚未建立索引）。"
+          : "Search is only available on the deployed site — the index isn't built in local dev.";
+        mount.appendChild(p);
+      }
+    }
+  });
+
+  closeBtn?.addEventListener("click", () => dialog?.close());
+  dialog?.addEventListener("click", (event) => {
+    if (event.target === dialog) dialog.close();
+  });
+</script>

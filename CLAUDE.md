@@ -61,57 +61,27 @@ Brand tokens live in `src/styles/global.css` under Tailwind's `@theme` (Tailwind
 CSS-based config — there is no `tailwind.config.js`). The banner color is the FCS logo
 blue `#8FBDDF` (`--color-fcs-blue`); the logo is `public/images/logo.png`.
 
-## Homepage calligraphy intro (`CalligraphySplash`)
+## Site search (Pagefind)
 
-A one-shot splash brush-paints the school name on the **first page of each tab
-session** (any page, not just Home): `費利蒙` is revealed **stroke-by-stroke** in Yuji
-Boku brush calligraphy with an **ink-bloom** (ink spreads outward from each brush
-path), then `中文學校` fly in to complete `費利蒙中文學校`, and the whole name shrinks
-into the header logo as the page emerges.
+`src/components/SiteSearch.astro` adds a search icon in the header (wired in
+`Header.astro`) that opens a modal backed by [Pagefind](https://pagefind.app). Pagefind
+indexes the **built HTML**, not the source content — the `postbuild` script in
+`package.json` runs `pagefind --site dist` right after `astro build`, writing static
+index + UI assets to `dist/pagefind/` (gitignored, regenerated on every build).
 
-- **`src/components/CalligraphySplash.astro`** — the whole effect (markup + SVG
-  filters + animation). Mounted once in **`src/layouts/BaseLayout.astro`**, so it is
-  present on every page. It is progressively enhanced: the overlay is `display:none`
-  until an inline script activates it, so it's skipped entirely under
-  `prefers-reduced-motion` and without JS, and never blocks content.
-- **Plays once per session, then on demand.** The inline script auto-plays only on the
-  session's first page (a `fcs-splash-seen` `sessionStorage` flag), so navigating
-  between pages — including landing elsewhere then going to Home — never replays it. On
-  revisits the overlay stays in the DOM but inactive (`display:none`), so it can be
-  replayed. A small **↻ replay button beside the header logo** (`#splash-replay` in
-  `Header.astro`, labelled via `ui.replayIntro`) retriggers it: the module script
-  restores the splash's pristine markup and re-runs `run()`. The button is hidden for
-  no-JS and reduced-motion users. On finish the overlay deactivates (it is no longer
-  `splash.remove()`d) so it stays available to replay.
-- It runs off **two committed data files** (and nothing else at runtime):
-  - **`src/data/glyphs.json`** — crisp glyph **outline** paths (+ `w`/`h`) for all 7
-    characters, extracted from the font. This is the visible ink.
-  - **`src/data/strokes.json`** — per stroke, a hand-aligned **centerline** plus a
-    non-overlapping **territory** boundary. The reveal sweeps a blurred bloom along
-    the centerline, **clipped to the territory** — so ink blooms from the brush path
-    and stops at the boundary (no cross-bleed between strokes).
-- **`const ANIMATED`** in the component lists which characters paint stroke-by-stroke
-  (currently `["費","利","蒙"]`); the rest fly in as finished outlines. Tuning knobs
-  live at the top of the client script: `START_NEXT` (stroke overlap / total length),
-  `BLOOM_FACTOR` (bloom slowness), the `strokeDur` formula (sweep speed), and the
-  `#bloom` / `#fcs-ink` SVG filters.
-
-**Authoring/regeneration tooling is NOT committed** (it's gitignored under `scripts/`
-and `tools/`, kept locally):
-
-- `scripts/build_glyph_data.py` extracts the outlines from the SIL OFL font
-  **Yuji Boku** (`yujiboku`, re-downloaded on demand) → writes the lean
-  `src/data/glyphs.json` for the site and a full `tools/glyphs.js` for the editor.
-- `tools/stroke-aligner.html` is a bespoke in-browser editor: align each stroke's
-  centerline, then apply + refine non-overlapping territories; **export → `src/data/strokes.json`**.
-  (`scripts/build_territories.py` computes the initial territories from the centerlines.)
-- `scripts/validate_strokes.py` renders a per-stroke contact sheet to check
-  order/direction/coverage.
-
-So: to re-tune strokes, open the aligner and re-export; to add 費利蒙-style painting
-to more characters, align them and add to `ANIMATED`. The font is **Yuji Boku**
-(SIL OFL, free for commercial use); only the 7 glyph outlines are embedded, not
-the font itself.
+- Only `<main data-pagefind-body>` in `BaseLayout.astro` is indexed, so header/nav/footer
+  chrome doesn't pollute every result.
+- Pagefind auto-scopes results to the current page's language via `<html lang>`
+  (set in `BaseLayout.astro`), so English and Chinese searches never cross-contaminate —
+  no extra config needed.
+- **The index only exists after a real build.** `npm run dev` (Astro dev server) has no
+  `dist/pagefind/`, so the search modal shows a friendly fallback message instead of
+  results. To actually test search locally: `npm run build` (runs postbuild
+  automatically) then `npm run preview` — or use the `fcs-preview` launch config.
+- Pagefind UI is themed via CSS custom properties (`--pagefind-ui-*`) scoped to `#search`
+  in `SiteSearch.astro`, mapped to the site's brand tokens. Bilingual UI strings (search
+  placeholder, result counts, etc.) are passed via the `translations` option when `lang`
+  is `zh`.
 
 ## Deployment
 
