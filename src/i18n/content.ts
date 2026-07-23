@@ -24,6 +24,7 @@ export const links = {
   legacyEvents: 'https://fremontchineseschool.org/events',
   legacyNews: 'https://fremontchineseschool.org/index.php',
   facebook: 'https://facebook.com/fremontchineseschool',
+  instagram: 'https://www.instagram.com/fremontchineseschool/',
 } as const;
 
 // Contact details — values shared across locales; labels are translated below.
@@ -726,8 +727,9 @@ export const content = {
       ],
       photosTitle: 'Past photos & videos',
       photosBody:
-        'Photos and videos from recent events are shared on our Facebook page. For archives going back to 2012, visit the event history on our legacy site.',
+        'Photos and videos from recent events are shared on our Facebook and Instagram pages. For archives going back to 2012, visit the event history on our legacy site.',
       photosFacebookLabel: 'Visit us on Facebook',
+      photosInstagramLabel: 'Visit us on Instagram',
       photosLegacyLabel: 'Legacy event archive',
       calendarNote: 'Check the school calendar for this year\'s event dates.',
     },
@@ -791,6 +793,7 @@ export const content = {
         mailing: 'Mailing Address',
         classroom: 'Classroom Location',
         facebook: 'Facebook',
+        instagram: 'Instagram',
       },
     },
     news: {
@@ -1490,8 +1493,9 @@ export const content = {
       ],
       photosTitle: '活動照片與影片',
       photosBody:
-        '近期活動的照片與影片將分享於本校 Facebook 專頁；如需查閱 2012 年起的歷史紀錄，請參閱舊版網站活動存檔。',
+        '近期活動的照片與影片將分享於本校 Facebook 與 Instagram 專頁；如需查閱 2012 年起的歷史紀錄，請參閱舊版網站活動存檔。',
       photosFacebookLabel: '前往 Facebook 專頁',
+      photosInstagramLabel: '前往 Instagram 專頁',
       photosLegacyLabel: '歷史活動存檔',
       calendarNote: '請查閱學校行事曆以了解本學年各活動日期。',
     },
@@ -1555,6 +1559,7 @@ export const content = {
         mailing: '通訊地址',
         classroom: '上課地點',
         facebook: 'Facebook',
+        instagram: 'Instagram',
       },
     },
     news: {
