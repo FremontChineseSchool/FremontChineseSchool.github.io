@@ -57,6 +57,12 @@ const isZh = lang === "zh";
 
 <style>
   .fcs-search-dialog {
+    /* This site never offers a dark theme — pin native form controls (inputs,
+       scrollbars) to light rendering. Without this, iOS Safari in system Dark
+       Mode renders the (unstyled-for-color) search input with its own dark
+       native appearance — dark background, light text — even though every
+       surrounding element here is explicitly styled light. */
+    color-scheme: light;
     position: relative;
     margin: 6vh auto auto;
     width: min(92vw, 640px);
@@ -108,6 +114,14 @@ const isZh = lang === "zh";
     --pagefind-ui-image-border-radius: 8px;
     --pagefind-ui-font: inherit;
     margin-top: 8px;
+  }
+  /* Pagefind's own CSS never sets a text color on the search input itself, so
+     it otherwise falls back to the browser's native (dark-mode-aware) field
+     color. Pin it explicitly. */
+  #search input[type="text"],
+  #search input[type="search"] {
+    color: var(--color-fcs-black) !important;
+    background-color: var(--color-fcs-white) !important;
   }
 </style>
 
