@@ -1,7 +1,7 @@
 @import "tailwindcss";
 
 @theme {
-  /* Legacy blue tokens — kept for CalligraphySplash and any remaining references */
+  /* Legacy blue tokens — kept for news-archive links and any remaining references */
   --color-fcs-blue:      #8fbddf;
   --color-fcs-blue-dark: #5a93bd;
   --color-fcs-ink:       #1f2a37; /* legacy body text — superseded by fcs-black below */

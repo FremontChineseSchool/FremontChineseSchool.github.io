@@ -3,6 +3,7 @@ import { ui, navOrder, localizedPath, type Lang } from "../i18n/ui";
 import { links } from "../i18n/content";
 import LangSwitch from "./LangSwitch.astro";
 import TextSize from "./TextSize.astro";
+import SiteSearch from "./SiteSearch.astro";
 
 interface Props {
   lang: Lang;
@@ -25,7 +26,6 @@ const navItems = navOrder.map((key) => {
   <div
     class="mx-auto flex h-full max-w-6xl items-center justify-between px-8"
   >
-    <!-- Logo + replay-intro button, grouped so the button sits beside the logo -->
     <div class="flex shrink-0 items-center gap-1">
       <a href={localizedPath(lang, "home")} class="flex items-center gap-3">
         <!-- Condensed FS monogram on small screens, full lockup at sm+. The
@@ -51,33 +51,6 @@ const navItems = navOrder.map((key) => {
         />
         <span class="sr-only">{t.siteName}</span>
       </a>
-
-      <!-- Replay the calligraphy intro. Hidden by default; the splash script
-           reveals it only when JS is available and motion is not reduced. -->
-      <button
-        id="splash-replay"
-        type="button"
-        aria-label={t.replayIntro}
-        title={t.replayIntro}
-        style="display:none"
-        class="shrink-0 items-center justify-center rounded-full p-1.5 text-white/70 transition-colors hover:bg-white/15 hover:text-fcs-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white/70"
-      >
-      <svg
-        xmlns="http://www.w3.org/2000/svg"
-        width="18"
-        height="18"
-        viewBox="0 0 24 24"
-        fill="none"
-        stroke="currentColor"
-        stroke-width="2"
-        stroke-linecap="round"
-        stroke-linejoin="round"
-        aria-hidden="true"
-      >
-        <polyline points="23 4 23 10 17 10"></polyline>
-        <path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10"></path>
-      </svg>
-      </button>
     </div>
 
     <!-- Desktop nav — centered. Appears at xl (1280): below that the nav + Enroll
@@ -113,6 +86,7 @@ const navItems = navOrder.map((key) => {
         href={localizedPath(lang, 'enroll')}
         class="btn-primary hidden whitespace-nowrap rounded-[6px] px-[16px] py-[8px] text-[11px] font-semibold transition-colors duration-150 sm:inline-block"
       >{t.enrollCta}</a>
+      <SiteSearch lang={lang} />
       <TextSize lang={lang} />
       <LangSwitch lang={lang} />
 

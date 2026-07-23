@@ -41,7 +41,6 @@ export const ui = {
     logoAlt: 'Fremont Chinese School',
     skipToContent: 'Skip to content',
     enrollCta: 'Enroll Now',
-    replayIntro: 'Replay intro animation',
     textSize: {
       label: 'Text size',
       standard: 'Standard text size',
@@ -78,7 +77,6 @@ export const ui = {
     logoAlt: '費利蒙中文學校',
     skipToContent: '跳至主要內容',
     enrollCta: '立即報名',
-    replayIntro: '重播開場動畫',
     textSize: {
       label: '字級',
       standard: '標準字級',
