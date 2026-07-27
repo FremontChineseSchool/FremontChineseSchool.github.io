@@ -437,10 +437,10 @@ export const content = {
             },
             {
               code: 'AB2',
-              name: 'Abacus 2 — Intermediate (珠心算二)',
+              name: 'Abacus 2 — Bridge (珠心算二)',
               materialFee: '$70',
               materialsNote: 'Includes workbook, handouts, quizzes, and abacus',
-              description: 'Intermediate abacus and mental math training.',
+              description: 'Bridge-level abacus and mental math training.',
               notes: 'Email teacher before registering to confirm level: melissa@fremontchineseschool.org',
               adultsWelcome: false,
               isNew: false,
@@ -492,10 +492,10 @@ export const content = {
           classes: [
             {
               code: 'AB3',
-              name: 'Abacus 3 — Advanced (珠心算三)',
+              name: 'Abacus 3 — Intermediate (珠心算三)',
               materialFee: '$70',
               materialsNote: 'Includes workbook, handouts, quizzes, and abacus',
-              description: 'Advanced abacus and mental math training.',
+              description: 'Intermediate abacus and mental math training.',
               notes: 'Email teacher before registering: melissa@fremontchineseschool.org',
               adultsWelcome: false,
               isNew: false,
@@ -512,7 +512,7 @@ export const content = {
             },
             {
               code: 'H3',
-              name: 'Sewing (基楚縫紉班)',
+              name: 'Sewing (縫紉課)',
               materialFee: '$100',
               materialsNote: 'Collected by teacher directly',
               description: 'Basic sewing skills — hand sewing, machine sewing, and serger use. Suitable for older children and adults.',
@@ -552,7 +552,7 @@ export const content = {
             },
             {
               code: 'LSC',
-              name: 'Language Support Club (語言支援社)',
+              name: 'Language Support Club',
               materialFee: null,
               materialsNote: null,
               description: 'Free Chinese-language support for students at all levels, taught by Ms. Shieh.',
@@ -567,7 +567,7 @@ export const content = {
           classes: [
             {
               code: 'CP1',
-              name: 'Chinese Painting & Calligraphy (國畫書法班)',
+              name: 'Chinese Painting & Calligraphy (國畫書法)',
               materialFee: 'Bring own materials',
               materialsNote: null,
               description: 'Traditional Chinese brush painting and calligraphy, taught step-by-step in both English and Chinese.',
@@ -1194,10 +1194,10 @@ export const content = {
             },
             {
               code: 'AB2',
-              name: '珠心算二（中級）',
+              name: '珠心算二（銜接）',
               materialFee: '$70',
               materialsNote: '含作業簿、講義、測驗卷及算盤',
-              description: '中級珠算與心算訓練。',
+              description: '銜接級珠算與心算訓練。',
               notes: '報名前請 email 老師確認程度：melissa@fremontchineseschool.org',
               adultsWelcome: false,
               isNew: false,
@@ -1249,10 +1249,10 @@ export const content = {
           classes: [
             {
               code: 'AB3',
-              name: '珠心算三（高級）',
+              name: '珠心算三（中級）',
               materialFee: '$70',
               materialsNote: '含作業簿、講義、測驗卷及算盤',
-              description: '高級珠算與心算訓練。',
+              description: '中級珠算與心算訓練。',
               notes: '報名前請 email 老師確認程度：melissa@fremontchineseschool.org',
               adultsWelcome: false,
               isNew: false,
@@ -1269,7 +1269,7 @@ export const content = {
             },
             {
               code: 'H3',
-              name: '基楚縫紉班',
+              name: '縫紉課',
               materialFee: '$100',
               materialsNote: '由老師直接收取',
               description: '基礎縫紉課程，涵蓋手縫、機器縫紉及布邊機使用。適合大人和大小孩。',
@@ -1309,7 +1309,7 @@ export const content = {
             },
             {
               code: 'LSC',
-              name: '語言支援社',
+              name: 'Language Support Club',
               materialFee: null,
               materialsNote: null,
               description: '謝宜靜老師提供各程度中文學習免費輔導。',
@@ -1324,7 +1324,7 @@ export const content = {
           classes: [
             {
               code: 'CP1',
-              name: '國畫書法班',
+              name: '國畫書法',
               materialFee: '請自備材料',
               materialsNote: null,
               description: '中英雙語教授基本國畫書法技能，當場逐步演示作畫過程。',
