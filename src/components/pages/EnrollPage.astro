@@ -312,21 +312,75 @@ const c = content[lang].enroll;
   <div class="mt-10 rounded-[10px] p-6" style="background: var(--color-fcs-white); border: 1px solid var(--color-fcs-border);">
     <h2 class="text-xl font-semibold" style="color: var(--color-fcs-black);">{c.refundTitle}</h2>
     <p class="mt-2 text-sm" style="color: var(--color-fcs-muted);">{c.refundPaymentNote}</p>
-    <div class="mt-4 space-y-2">
+    <div id="refund-tiers" class="mt-4 space-y-2">
       {c.refundTiers.map((tier) => (
         <div
-          class="flex flex-col gap-0.5 rounded-[6px] px-4 py-3 sm:flex-row sm:items-center sm:justify-between"
-          style={tier.highlight
-            ? 'background: #DCFCE7; border: 1px solid #86EFAC;'
-            : 'background: var(--color-fcs-white); border: 1px solid var(--color-fcs-border);'}
+          class="refund-tier flex flex-col gap-0.5 rounded-[6px] px-4 py-3 sm:flex-row sm:items-center sm:justify-between"
+          data-refund-tier
+          data-starts-at={tier.startsAt ?? ''}
         >
-          <span class="text-sm font-semibold" style={tier.highlight ? 'color: #166534;' : 'color: var(--color-fcs-black);'}>{tier.period}</span>
-          <span class="text-sm" style={tier.highlight ? 'color: #166534;' : 'color: var(--color-fcs-muted);'}>{tier.rule}</span>
+          <span class="refund-tier-period text-sm font-semibold">{tier.period}</span>
+          <span class="refund-tier-rule text-sm">{tier.rule}</span>
         </div>
       ))}
     </div>
     <p class="mt-3 text-xs" style="color: var(--color-fcs-muted);">{c.refundContact}</p>
   </div>
+
+  <style>
+    .refund-tier {
+      background: var(--color-fcs-white);
+      border: 1px solid var(--color-fcs-border);
+    }
+    .refund-tier .refund-tier-period {
+      color: var(--color-fcs-black);
+    }
+    .refund-tier .refund-tier-rule {
+      color: var(--color-fcs-muted);
+    }
+    .refund-tier[data-state="current"] {
+      background: #DCFCE7;
+      border: 1px solid #86EFAC;
+    }
+    .refund-tier[data-state="current"] .refund-tier-period,
+    .refund-tier[data-state="current"] .refund-tier-rule {
+      color: #166534;
+    }
+    .refund-tier[data-state="past"] {
+      background: var(--color-fcs-surface);
+      border: 1px solid var(--color-fcs-border);
+      opacity: 0.6;
+    }
+    .refund-tier[data-state="past"] .refund-tier-period,
+    .refund-tier[data-state="past"] .refund-tier-rule {
+      color: var(--color-fcs-muted);
+      text-decoration: line-through;
+    }
+  </style>
+
+  <script>
+    function updateRefundTiers() {
+      const tiers = document.querySelectorAll<HTMLElement>('#refund-tiers [data-refund-tier]');
+      if (!tiers.length) return;
+
+      const today = new Date();
+      today.setHours(0, 0, 0, 0);
+
+      let currentIndex = 0;
+      tiers.forEach((el, i) => {
+        const startsAt = el.dataset.startsAt;
+        if (!startsAt) return;
+        const start = new Date(`${startsAt}T00:00:00`);
+        if (today >= start) currentIndex = i;
+      });
+
+      tiers.forEach((el, i) => {
+        el.dataset.state = i < currentIndex ? 'past' : i === currentIndex ? 'current' : 'upcoming';
+      });
+    }
+
+    updateRefundTiers();
+  </script>
 
   <!-- Resources grid -->
   <h2 class="mt-12 text-xl font-semibold" style="color: var(--color-fcs-black);">{c.resourcesTitle}</h2>
