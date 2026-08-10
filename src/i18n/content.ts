@@ -363,17 +363,16 @@ export const content = {
         {
           period: 'Before May 17, 2026',
           rule: 'Full refund — no processing fee',
-          highlight: true,
         },
         {
           period: 'May 17 – August 22, 2026',
           rule: '30% processing fee deducted from refund',
-          highlight: false,
+          startsAt: '2026-05-17',
         },
         {
           period: 'After August 22, 2026',
           rule: 'No refund',
-          highlight: false,
+          startsAt: '2026-08-23',
         },
       ],
       refundContact: 'Questions? Email finance@fremontchineseschool.org',
@@ -1121,17 +1120,16 @@ export const content = {
         {
           period: '2026 年 5 月 17 日前',
           rule: '全額退費，免收手續費',
-          highlight: true,
         },
         {
           period: '2026 年 5 月 17 日至 8 月 22 日',
           rule: '退費扣除 30% 手續費',
-          highlight: false,
+          startsAt: '2026-05-17',
         },
         {
           period: '2026 年 8 月 22 日後',
           rule: '不予退費',
-          highlight: false,
+          startsAt: '2026-08-23',
         },
       ],
       refundContact: '如有疑問，請來信 finance@fremontchineseschool.org',
