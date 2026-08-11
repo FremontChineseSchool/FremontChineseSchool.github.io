@@ -1,12 +1,13 @@
 ---
-import { content } from "../../i18n/content";
-import type { Lang } from "../../i18n/ui";
+import { content, links } from "../../i18n/content";
+import { localizedPath, type Lang } from "../../i18n/ui";
 
 interface Props {
   lang: Lang;
 }
 const { lang } = Astro.props;
 const c = content[lang].payment;
+const t = c.tuition;
 
 // Ecwid store the school already uses (id lifted from the legacy site's embed).
 // The storefront widget renders the live catalog, prices, add-to-cart, an
@@ -19,16 +20,6 @@ const ecwidLang = lang === "zh" ? "zh" : "en";
   <h1 class="text-3xl font-semibold sm:text-4xl" style="letter-spacing: -0.02em; color: var(--color-fcs-black);">{c.title}</h1>
   <p class="mt-4 max-w-2xl text-lg" style="color: var(--color-fcs-muted);">{c.intro}</p>
 
-  <!-- Registration notes (carried in-house from the store for bilingual display) -->
-  <ol class="mt-6 max-w-2xl space-y-2 text-sm" style="color: var(--color-fcs-black);">
-    {c.notes.map((n, i) => (
-      <li class="flex gap-2">
-        <span class="font-semibold" style="color: var(--color-fcs-deep-jade); flex-shrink:0;">{i + 1}.</span>
-        <span>{n}</span>
-      </li>
-    ))}
-  </ol>
-
   <!-- How to pay callout -->
   <div class="mt-6 flex gap-3 rounded-[10px] p-4" style="background: var(--color-fcs-orange-light); border: 1px solid var(--color-fcs-gold);">
     <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color: var(--color-fcs-deep-jade); flex-shrink:0; margin-top:2px;" aria-hidden="true"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
@@ -40,6 +31,113 @@ const ecwidLang = lang === "zh" ? "zh" : "en";
       </ul>
       <p class="mt-2">{c.payReceipt}</p>
     </div>
+  </div>
+
+  <!-- Tuition summary -->
+  <div id="tuition" class="mt-10 rounded-[10px] p-6 sm:p-8" style="background: var(--color-fcs-white); border: 1px solid var(--color-fcs-border);">
+    <h2 class="text-xl font-semibold" style="color: var(--color-fcs-green-dark);">{t.title}</h2>
+
+    <!-- Early Bird deadline note — swapped for the "ended" copy once it passes -->
+    <p
+      id="tuition-early-bird-note"
+      class="mt-2 text-sm"
+      style="color: var(--color-fcs-muted);"
+      data-ends-at={t.earlyBirdEndsAt}
+      data-active-note={t.earlyBirdNote}
+      data-ended-note={t.earlyBirdEndedNote}
+    >{t.earlyBirdNote}</p>
+
+    <!-- Fee table -->
+    <div id="tuition-table" class="mt-5 overflow-x-auto">
+      <table class="w-full text-sm" style="table-layout: fixed; min-width: 380px;">
+        <colgroup>
+          <col style="width: 50%;" />
+          <col style="width: 25%;" />
+          <col style="width: 25%;" />
+        </colgroup>
+        <thead>
+          <tr style="border-bottom: 2px solid var(--color-fcs-border);">
+            <th class="pb-2 text-left font-semibold" style="color: var(--color-fcs-black);">{t.programLabel}</th>
+            <th class="tuition-eb pb-2 text-right font-semibold" style="color: var(--color-fcs-black);">{t.earlyBirdLabel}</th>
+            <th class="pb-2 text-right font-semibold" style="color: var(--color-fcs-black);">{t.regularLabel}</th>
+          </tr>
+        </thead>
+        {t.groups.map((group) => (
+          <tbody>
+            <tr>
+              <th
+                colspan="3"
+                class="pt-4 pb-1 text-left text-xs font-semibold uppercase tracking-wide"
+                style="color: var(--color-fcs-green-dark);"
+              >{group.heading}</th>
+            </tr>
+            {group.rows.map((row) => (
+              <tr style="border-bottom: 1px solid var(--color-fcs-border);">
+                <td class="py-2.5 pr-3 text-xs leading-snug sm:text-sm" style="color: var(--color-fcs-muted);">{row.plan}</td>
+                <td class="tuition-eb py-2.5 text-right text-xs font-semibold tabular-nums sm:text-sm" style="color: var(--color-fcs-black);">{row.earlyBird}</td>
+                <td class="py-2.5 text-right text-xs font-semibold tabular-nums sm:text-sm" style="color: var(--color-fcs-black);">{row.regular}</td>
+              </tr>
+            ))}
+          </tbody>
+        ))}
+      </table>
+    </div>
+
+    <!-- Footnotes -->
+    <ul class="mt-4 space-y-1">
+      {t.notes.map((note) => (
+        <li class="text-xs" style="color: var(--color-fcs-muted);">* {note}</li>
+      ))}
+    </ul>
+
+    <!-- PDF link + Enroll CTA -->
+    <div class="mt-5 flex flex-wrap items-center gap-4">
+      <a
+        href={links.tuitionPdf}
+        target="_blank"
+        rel="noopener noreferrer"
+        class="inline-flex items-center gap-1.5 text-sm font-semibold"
+        style="color: var(--color-fcs-green);"
+      >
+        {t.pdfLabel}
+        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+      </a>
+      <a
+        href={localizedPath(lang, 'enroll')}
+        class="btn-primary inline-block rounded-md px-5 py-2.5 text-sm font-semibold transition-colors"
+      >
+        {t.enrollCta}
+      </a>
+    </div>
+
+    <style>
+      /* Once the Early Bird deadline has passed, that column stays visible for
+         reference but reads as inactive. */
+      #tuition-table[data-early-bird="ended"] .tuition-eb {
+        color: var(--color-fcs-muted);
+        font-weight: 500;
+        text-decoration: line-through;
+      }
+    </style>
+
+    <script>
+      function updateEarlyBirdState() {
+        const table = document.getElementById('tuition-table');
+        const note = document.getElementById('tuition-early-bird-note');
+        const endsAt = note?.dataset.endsAt;
+        if (!table || !note || !endsAt) return;
+
+        const today = new Date();
+        today.setHours(0, 0, 0, 0);
+        const ended = today >= new Date(`${endsAt}T00:00:00`);
+
+        table.dataset.earlyBird = ended ? 'ended' : 'active';
+        const copy = ended ? note.dataset.endedNote : note.dataset.activeNote;
+        if (copy) note.textContent = copy;
+      }
+
+      updateEarlyBirdState();
+    </script>
   </div>
 
   <!-- Ecwid storefront mounts here -->
