@@ -1,0 +1,419 @@
+---
+/**
+ * CalligraphySplash — homepage intro that brush-paints the school name.
+ *
+ * The visible ink is the crisp Yuji Boku outline of each character
+ * (src/data/glyphs.json). Painted characters are revealed stroke-by-stroke:
+ * each stroke has a hand-aligned centerline and a non-overlapping territory
+ * (src/data/strokes.json, made with the offline tools/stroke-aligner.html).
+ * The bloom — a blurred wipe swept along the centerline, widening over time —
+ * is clipped to that territory, so ink blooms outward from the brush path and
+ * stops at the boundary (no cross-bleed between strokes).
+ *
+ * ANIMATED lists which characters are painted; the rest fly in as outlines.
+ *
+ * Click / tap / any key fast-forwards, advertised by a "Click/Tap to skip" hint
+ * shown from the first frame. Skipped entirely under reduced-motion and without
+ * JS (the overlay is display:none until the inline script runs).
+ */
+import glyphs from "../data/glyphs.json";
+import strokes from "../data/strokes.json";
+import { ui, type Lang } from "../i18n/ui";
+
+interface Props {
+  lang: Lang;
+}
+const { lang } = Astro.props;
+const t = ui[lang];
+
+const ANIMATED = ["費", "利", "蒙"]; // characters painted stroke-by-stroke
+
+type Pt = number[];
+type Stroke = { pts: Pt[]; boundary?: Pt[] };
+const lineD = (pts: Pt[]) => "M" + pts.map((p) => `${p[0]},${p[1]}`).join("L");
+const polyStr = (pts: Pt[]) => pts.map((p) => `${p[0]},${p[1]}`).join(" ");
+
+/** Distance from a point to a polyline (the centerline). */
+function distToLine(pt: Pt, line: Pt[]): number {
+  if (line.length === 1) return Math.hypot(pt[0] - line[0][0], pt[1] - line[0][1]);
+  let m = Infinity;
+  for (let i = 0; i < line.length - 1; i++) {
+    const a = line[i], b = line[i + 1];
+    const dx = b[0] - a[0], dy = b[1] - a[1];
+    const L2 = dx * dx + dy * dy || 1;
+    const t = Math.max(0, Math.min(1, ((pt[0] - a[0]) * dx + (pt[1] - a[1]) * dy) / L2));
+    m = Math.min(m, Math.hypot(pt[0] - (a[0] + t * dx), pt[1] - (a[1] + t * dy)));
+  }
+  return m;
+}
+/** Bloom reach: wide enough (with margin) to fill the stroke's territory when
+    clipped to its boundary, so the ink blooms out to — and stops at — the edge. */
+function bloomWidth(st: Stroke): number {
+  if (!st.boundary || !st.boundary.length) return 80;
+  let mx = 0;
+  for (const bp of st.boundary) mx = Math.max(mx, distToLine(bp, st.pts));
+  return Math.max(24, mx * 2 * 1.3);
+}
+
+const chars = glyphs.chars.map((c) => ({
+  ...c,
+  animated: ANIMATED.includes(c.char),
+  strokes: ((strokes.chars as Record<string, Stroke[]>)[c.char] ?? []),
+}));
+const paint = chars.filter((c) => c.animated);
+const rest = chars.filter((c) => !c.animated);
+const sumAspect = chars.reduce((a, c) => a + c.w / c.h, 0);
+const paintAspect = paint.reduce((a, c) => a + c.w / c.h, 0);
+---
+
+<div id="calligraphy-splash" class="splash" role="presentation" aria-hidden="true">
+  <svg class="splash__defs" aria-hidden="true" focusable="false">
+    <defs>
+      {/* Soft bloom for the reveal mask — ink fades/bleeds in along the brush. */}
+      <filter id="bloom" x="-40%" y="-40%" width="180%" height="180%">
+        <feGaussianBlur stdDev="7"></feGaussianBlur>
+      </filter>
+      {/* Wet-ink edge texture on the glyph fill. */}
+      <filter id="fcs-ink" x="-25%" y="-25%" width="150%" height="150%" color-interpolation-filters="sRGB">
+        <feTurbulence type="fractalNoise" baseFrequency="0.022 0.026" numOctaves="2" seed="7" result="noise"></feTurbulence>
+        <feDisplacementMap in="SourceGraphic" in2="noise" scale="2.2" xChannelSelector="R" yChannelSelector="G" result="rough"></feDisplacementMap>
+        <feGaussianBlur in="rough" stdDev="1.6" result="bleed"></feGaussianBlur>
+        <feComponentTransfer in="bleed" result="halo"><feFuncA type="linear" slope="0.5"></feFuncA></feComponentTransfer>
+        <feMerge><feMergeNode in="halo"></feMergeNode><feMergeNode in="rough"></feMergeNode></feMerge>
+      </filter>
+    </defs>
+  </svg>
+
+  <div class="splash__paper"></div>
+
+  <div class="splash__name" id="splash-name" data-aspect={sumAspect.toFixed(3)} data-paint-aspect={paintAspect.toFixed(3)}>
+    <div class="seg seg--paint" id="seg-paint">
+      {
+        paint.map((c) => (
+          <div class="glyph" style={`--ar:${(c.w / c.h).toFixed(3)}`}>
+            <svg class="glyph-svg" viewBox={`0 0 ${c.w} ${c.h}`} data-char={c.char}>
+              <defs>
+                {c.strokes.map((st, si) => (
+                  <clipPath id={`bc-${c.char}-${si}`}><polygon points={polyStr(st.boundary ?? [])} /></clipPath>
+                ))}
+                <mask id={`rev-${c.char}`} maskUnits="userSpaceOnUse" x="-80" y="-80" width={c.w + 160} height={c.h + 160}>
+                  <g filter="url(#bloom)">
+                    {c.strokes.map((st, si) => (
+                      <g clip-path={`url(#bc-${c.char}-${si})`}>
+                        <path class="wipe" d={lineD(st.pts)} stroke-width={bloomWidth(st)} data-wipe />
+                      </g>
+                    ))}
+                  </g>
+                </mask>
+              </defs>
+              <path class="ink" d={c.d} mask={`url(#rev-${c.char})`} />
+            </svg>
+          </div>
+        ))
+      }
+    </div>
+    <div class="seg seg--rest" id="seg-rest">
+      {
+        rest.map((c) => (
+          <div class="glyph" style={`--ar:${(c.w / c.h).toFixed(3)}`}>
+            <svg class="glyph-svg" viewBox={`0 0 ${c.w} ${c.h}`}>
+              <path class="ink" d={c.d} />
+            </svg>
+          </div>
+        ))
+      }
+    </div>
+  </div>
+
+  <!-- Skip affordance. Both wordings ship; CSS picks by pointer capability so
+       there is no JS device-sniffing and no flash of the wrong verb. Present from
+       the first frame — quiet, but never something you have to wait to find. -->
+  <p class="splash__skip" style={`--skip-tracking:${lang === "zh" ? "0.08em" : "0.16em"}`}>
+    <span class="splash__skip-click">{t.skipIntro.click}</span>
+    <span class="splash__skip-tap">{t.skipIntro.tap}</span>
+  </p>
+</div>
+
+<script is:inline>
+  (function () {
+    var el = document.getElementById("calligraphy-splash");
+    if (!el) return;
+    var reduce = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    // Respect reduced-motion: no auto-play and no replay button (removed below).
+    if (reduce) { el.remove(); return; }
+
+    // Auto-play at most once every 7 days per browser.
+    //
+    // This deliberately uses localStorage, not sessionStorage. sessionStorage is
+    // scoped per *tab*, so every arrival from Google, Facebook, Instagram, a
+    // bookmark, or a freshly opened tab started an empty store and replayed the
+    // intro — which is why the animation was pulled the first time round.
+    // localStorage persists across tabs and visits, so "seen" means seen.
+    var KEY = "fcs-splash-seen";
+    var WINDOW_MS = 7 * 24 * 60 * 60 * 1000;
+    var now = Date.now();
+
+    // Prefer localStorage; fall back to sessionStorage where it is unavailable
+    // (storage disabled, some private-browsing modes) so the worst case is once
+    // per tab rather than once per page view. With no usable storage at all we
+    // cannot remember anything, so skip the auto-play entirely and leave the
+    // header replay button as the only way in — better a missed flourish than an
+    // animation that fires on every single navigation.
+    var store = null;
+    try {
+      localStorage.setItem(KEY + "~probe", "1");
+      localStorage.removeItem(KEY + "~probe");
+      store = localStorage;
+    } catch (e) {
+      try {
+        sessionStorage.setItem(KEY + "~probe", "1");
+        sessionStorage.removeItem(KEY + "~probe");
+        store = sessionStorage;
+      } catch (e2) {}
+    }
+    if (!store) return;
+
+    var last = 0;
+    try { last = parseInt(store.getItem(KEY) || "0", 10) || 0; } catch (e) {}
+    // Play when never seen, when the window has lapsed, or when the stamp sits in
+    // the future (clock moved backwards) — never suppress the intro forever.
+    if (last && last <= now && now - last < WINDOW_MS) return;
+    try { store.setItem(KEY, String(now)); } catch (e) {}
+
+    el.classList.add("is-active");
+
+    // The overlay is opaque and covers the viewport, but the animation itself is
+    // driven by the bundled module script below. Activate here so there is no
+    // flash of page content first, then watchdog it: if that script never takes
+    // ownership (bundle failed to load, no Element.animate), tear the overlay
+    // down instead of trapping the visitor behind a frozen splash.
+    window.setTimeout(function () {
+      if (el.dataset.playing) return;
+      el.classList.remove("is-active");
+      document.documentElement.classList.add("splash-done");
+    }, 4000);
+  })();
+</script>
+
+<style>
+  .splash { display:none; position:fixed; inset:0; z-index:100; align-items:center; justify-content:center; overflow:hidden; cursor:pointer; }
+  .splash.is-active { display:flex; }
+  .splash__defs { position:absolute; width:0; height:0; overflow:hidden; }
+
+  .splash__paper { position:absolute; inset:0; transition:opacity 0.9s ease;
+    background:radial-gradient(ellipse at center,#FAF6EC 0%,#EFE9DB 55%,#E3D9C8 100%); }
+  .splash__paper::after { content:""; position:absolute; inset:0; opacity:0.05; mix-blend-mode:multiply;
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E"); }
+
+  .splash__name { position:relative; display:flex; align-items:flex-end; gap:calc(var(--glyph,96px)*0.08); will-change:transform,opacity; }
+  .seg { display:flex; align-items:flex-end; gap:calc(var(--glyph,96px)*0.08); }
+  .seg--paint { transform:scale(1.75); transform-origin:center bottom; }
+  .seg--rest { display:none; }
+
+  /* Skip hint — bottom-centred, ink on paper, deliberately quiet. Visible from
+     the very first frame: the inline gate adds .is-active before first paint, so
+     this resolves to its lit opacity with no transition to play in. .is-finishing
+     (set the moment the splash is skipped or completes) fades it back out. */
+  .splash__skip { position:absolute; left:50%; transform:translateX(-50%); margin:0;
+    bottom:calc(2rem + env(safe-area-inset-bottom, 0px));
+    color:#1F1D19; opacity:0; transition:opacity 0.45s ease; pointer-events:none;
+    font-size:0.75rem; font-weight:500; letter-spacing:var(--skip-tracking,0.16em);
+    text-transform:uppercase; white-space:nowrap; }
+  .splash.is-active .splash__skip { opacity:0.5; }
+  .splash.is-active.is-finishing .splash__skip { opacity:0; }
+  /* letter-spacing also adds a trailing gap after the last character, which
+     would bias this shrink-to-fit box and push the text off-centre. Cancel it on
+     the span so the parent measures the glyphs alone. */
+  .splash__skip > span { margin-right:calc(-1 * var(--skip-tracking,0.16em)); }
+
+  /* Mouse/trackpad → "Click to skip"; touch/pen → "Tap to skip". Touch is the
+     default so pointer-less UAs and older browsers get the safer wording. */
+  .splash__skip-click { display:none; }
+  @media (hover: hover) and (pointer: fine) {
+    .splash__skip-click { display:inline; }
+    .splash__skip-tap { display:none; }
+  }
+
+  .glyph { height:var(--glyph,96px); }
+  .glyph-svg { height:100%; width:auto; display:block; overflow:visible; filter:url(#fcs-ink); }
+  .ink { fill:#1F1D19; }
+  .wipe { fill:none; stroke:#fff; stroke-linecap:round; stroke-linejoin:round; stroke-dasharray:99999; stroke-dashoffset:99999; }
+</style>
+
+<script>
+  const splash = document.getElementById("calligraphy-splash");
+  // Skipped under reduced-motion (the inline script removes the overlay). Otherwise
+  // the overlay stays in the DOM — auto-playing on the first page of a 7-day
+  // window, and available for replay via the header button on every page.
+  if (splash) {
+    // Snapshot the pristine markup before any animation mutates it, so a replay
+    // can reset every stroke/transform by restoring this HTML.
+    const pristine = splash.innerHTML;
+    let playing = false;
+
+    // Drop the overlay without animating. Used when the animation cannot run, so
+    // an activated splash never becomes a full-screen dead end.
+    const bail = () => {
+      delete splash.dataset.playing;
+      playing = false;
+      splash.classList.remove("is-active");
+      document.documentElement.classList.add("splash-done");
+    };
+
+    const start = () => {
+      const nameEl = splash.querySelector<HTMLElement>("#splash-name");
+      const paintEl = splash.querySelector<HTMLElement>("#seg-paint");
+      const restEl = splash.querySelector<HTMLElement>("#seg-rest");
+      if (!nameEl || !paintEl || !restEl) { bail(); return; }
+      playing = true;
+      // Claim ownership so the inline watchdog stands down.
+      splash.dataset.playing = "1";
+      try {
+        run(splash, nameEl, paintEl, restEl, () => {
+          playing = false;
+          delete splash.dataset.playing;
+        });
+      } catch (e) {
+        bail();
+      }
+    };
+
+    const replay = () => {
+      if (playing) return;
+      splash.innerHTML = pristine;        // reset all stroke/transform inline state
+      splash.classList.remove("is-finishing"); // bring the skip hint back
+      splash.classList.add("is-active");
+      start();
+    };
+
+    // Reveal and wire the header replay button (kept hidden for no-JS users).
+    // Wired regardless of auto-play, so a suppressed intro is still reachable.
+    const btn = document.getElementById("splash-replay");
+    if (btn) {
+      btn.style.display = "inline-flex";
+      btn.addEventListener("click", replay);
+    }
+
+    // Auto-play when the inline gate opened it (set .is-active).
+    if (splash.classList.contains("is-active")) start();
+  }
+
+  function run(splash: HTMLElement, nameEl: HTMLElement, paintEl: HTMLElement, restEl: HTMLElement, done: () => void) {
+    splash.style.cursor = "pointer"; // reset (assemble() sets it to default on finish)
+    const aspect = parseFloat(nameEl.dataset.aspect || "6") || 6;            // full 7-char name
+    const paintAspect = parseFloat(nameEl.dataset.paintAspect || "2.3") || 2.3; // painted trio
+    // Size glyphs so the full assembled name fits ~92% wide / 34% tall...
+    const H = Math.min((window.innerWidth * 0.92) / aspect, window.innerHeight * 0.34);
+    // ...then scale the painted trio up to ~80% of the screen width while it paints.
+    let scaleP = (window.innerWidth * 0.8) / (H * paintAspect);
+    scaleP = Math.max(1, Math.min(scaleP, (window.innerHeight * 0.72) / H));
+    splash.style.setProperty("--glyph", `${H}px`);
+    paintEl.style.transformOrigin = "center bottom";
+    paintEl.style.transform = `scale(${scaleP})`;
+
+    // Timing knobs:
+    const BLOOM_FACTOR = 1.6; // ink keeps blooming this × longer than the sweep
+    const START_NEXT = 0.62;  // next stroke begins at this fraction of the current sweep (overlap)
+
+    const wipes = [...paintEl.querySelectorAll<SVGPathElement>("[data-wipe]")];
+    wipes.forEach((p) => {
+      const L = p.getTotalLength() || 1;
+      const full = parseFloat(p.getAttribute("stroke-width") || "40");
+      (p as any)._L = L; (p as any)._full = full; (p as any)._core = Math.max(6, full * 0.22);
+      p.style.strokeDasharray = `${L}`;
+      p.style.strokeDashoffset = `${L}`;     // sweep starts hidden
+      p.style.strokeWidth = `${(p as any)._core}`; // bloom starts as a thin core
+      p.style.visibility = "hidden";         // nothing renders before its turn (no stray spots)
+    });
+
+    let skipped = false, assembled = false;
+    const sweeps: Animation[] = [], blooms: Animation[] = [];
+    const delay = (ms: number) => new Promise((r) => setTimeout(r, ms));
+
+    const paint = async () => {
+      for (const p of wipes) {
+        if (skipped) return;
+        const L = (p as any)._L as number, full = (p as any)._full, core = (p as any)._core;
+        const strokeDur = Math.min(650, Math.max(220, L / 1.4)); // faster sweep
+        p.style.visibility = "visible";
+        // brush sweeps the centerline; ink blooms out from it (slower), clipped to territory
+        sweeps.push(p.animate([{ strokeDashoffset: L }, { strokeDashoffset: 0 }],
+          { duration: strokeDur, easing: "cubic-bezier(0.3,0.2,0.3,1)", fill: "forwards" }));
+        blooms.push(p.animate([{ strokeWidth: core }, { strokeWidth: full }],
+          { duration: strokeDur * BLOOM_FACTOR, easing: "ease-out", fill: "forwards" }));
+        // overlap: start the next stroke before this one finishes — slow strokes, shorter total
+        await delay(strokeDur * START_NEXT);
+      }
+      if (skipped) return;
+      await Promise.all(sweeps.map((a) => a.finished.catch(() => {})));
+      await delay(80); // brief settle, not a full bloom wait
+      assemble();
+    };
+    const finishNow = () => {
+      if (skipped || assembled) return;
+      skipped = true;
+      [...sweeps, ...blooms].forEach((a) => a.cancel());
+      wipes.forEach((p) => { p.style.visibility = "visible"; p.style.strokeDashoffset = "0"; p.style.strokeWidth = `${(p as any)._full}`; });
+      assemble();
+    };
+    const onSkip = () => finishNow();
+    splash.addEventListener("click", onSkip);
+    window.addEventListener("keydown", onSkip);
+    setTimeout(paint, 100);
+
+    function assemble() {
+      if (assembled) return;
+      assembled = true;
+      splash.classList.add("is-finishing"); // fades the skip hint out
+      splash.removeEventListener("click", onSkip);
+      window.removeEventListener("keydown", onSkip);
+      splash.style.cursor = "default";
+
+      const first = paintEl.getBoundingClientRect();
+      restEl.style.display = "flex";
+      paintEl.style.transform = "none";
+      const last = paintEl.getBoundingClientRect();
+      const dx = first.left - last.left, dy = first.top - last.top, scale = first.width / last.width;
+      paintEl.style.transformOrigin = "top left";
+      paintEl.style.transform = `translate(${dx}px, ${dy}px) scale(${scale})`;
+      restEl.style.opacity = "0";
+      restEl.style.transform = `translateX(${H * 0.5}px)`;
+
+      requestAnimationFrame(() => requestAnimationFrame(() => {
+        paintEl.style.transition = "transform 0.75s cubic-bezier(0.16,1,0.3,1)";
+        restEl.style.transition = "opacity 0.6s ease 0.15s, transform 0.7s cubic-bezier(0.16,1,0.3,1) 0.15s";
+        paintEl.style.transform = "none";
+        restEl.style.opacity = "1";
+        restEl.style.transform = "none";
+      }));
+
+      setTimeout(handoff, 900);
+    }
+
+    function handoff() {
+      const logo = document.querySelector<HTMLImageElement>("#site-header img");
+      const paper = splash.querySelector<HTMLElement>(".splash__paper");
+      const name = nameEl.getBoundingClientRect();
+      if (logo) {
+        const target = logo.getBoundingClientRect();
+        const scale = Math.min(1, target.height / name.height);
+        const tx = target.left + target.width / 2 - (name.left + name.width / 2);
+        const ty = target.top + target.height / 2 - (name.top + name.height / 2);
+        nameEl.style.transformOrigin = "center center";
+        nameEl.style.transition = "transform 0.95s cubic-bezier(0.7,0,0.3,1), opacity 0.5s ease 0.5s";
+        nameEl.style.transform = `translate(${tx}px, ${ty}px) scale(${scale})`;
+      } else {
+        nameEl.style.transition = "opacity 0.6s ease";
+      }
+      nameEl.style.opacity = "0";
+      if (paper) paper.style.opacity = "0";
+      window.setTimeout(() => {
+        // Deactivate rather than remove, so the overlay (display:none when
+        // inactive) no longer blocks the page but can still be replayed.
+        splash.classList.remove("is-active");
+        document.documentElement.classList.add("splash-done");
+        done();
+      }, 1000);
+    }
+  }
+</script>
