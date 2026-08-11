@@ -37,10 +37,10 @@ of it.
 ### `site` host invariant (important)
 
 `site` in `astro.config.mjs` MUST match the host actually being served, because every
-canonical / hreflang / OG URL and the sitemap are built from it. Today that is
-`https://fremontchineseschool.github.io`. Pointing it at `fremontchineseschool.org`
-before the domain is cut over would aim canonicals at the **legacy Joomla site** still
-living there. Only flip it as part of the cutover (see One-time tasks below).
+canonical / hreflang / OG URL and the sitemap are built from it. The custom domain is now
+cut over, so that value is `https://fremontchineseschool.org` — the apex, which is where
+both `www.` and the `…github.io` host 301 to. Naming a host that redirects (either of
+those two) would make every canonical a redirect hop, so keep this on the apex.
 
 ## Rule: adding or changing a page must not regress SEO
 

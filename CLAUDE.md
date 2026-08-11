@@ -88,8 +88,11 @@ index + UI assets to `dist/pagefind/` (gitignored, regenerated on every build).
 `.github/workflows/deploy.yml` builds and deploys `dist/` to GitHub Pages on every push
 to `main`. The repo is `FremontChineseSchool.github.io` (an org Pages repo), so it serves
 at the root — `astro.config.mjs` sets `site` with no `base` path. **Pages source must be
-set to "GitHub Actions"** in repo Settings → Pages for the deploy to succeed. A custom
-domain (`fremontchineseschool.org`) is not yet wired up (would need a `CNAME` + DNS).
+set to "GitHub Actions"** in repo Settings → Pages for the deploy to succeed. The custom
+domain `fremontchineseschool.org` is live and is the canonical host: `www.` and the
+`…github.io` host both 301 to the apex, and `site` names the apex accordingly. The domain
+itself is configured in repo Settings → Pages (there is a vestigial `CNAME` at the repo
+root, which is *not* part of the build output).
 
 ## old_website/ — reference only
 
