@@ -31,7 +31,6 @@ export const links = {
 export const contactInfo = {
   principal: 'Principal@fremontchineseschool.org',
   registration: 'Registration@fremontchineseschool.org',
-  voicemail: '(510) 468-9905',
   mailing: 'PO Box 1309, Fremont, CA 94538',
   classroom: '41800 Blacow Road, Fremont, CA 94538',
   principalName: 'Angela Ha',
@@ -778,7 +777,6 @@ export const content = {
       labels: {
         principal: 'Principal',
         registration: 'Registration',
-        voicemail: 'Voicemail',
         mailing: 'Mailing Address',
         classroom: 'Classroom Location',
         facebook: 'Facebook',
@@ -1533,7 +1531,6 @@ export const content = {
       labels: {
         principal: '校長',
         registration: '報名註冊',
-        voicemail: '語音信箱',
         mailing: '通訊地址',
         classroom: '上課地點',
         facebook: 'Facebook',
