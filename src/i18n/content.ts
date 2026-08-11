@@ -686,7 +686,7 @@ export const content = {
           },
         ],
         notes: [
-          'New student registration fee: +$50, for students who did not enroll in the 2025–2026 school year.',
+          'New student registration fee: +$50, for students who did not enroll in (or who dropped during) the 2025–2026 school year.',
           'Each elective added to a CSL or AC class is $530 (Early Bird) / $630 (Regular). A standalone elective is $630 (Early Bird) / $720 (Regular).',
         ],
         pdfLabel: 'Download full tuition schedule (PDF)',
@@ -1458,7 +1458,7 @@ export const content = {
           },
         ],
         notes: [
-          '新生報名費：另加 $50，適用於 2025–2026 學年未在本校就讀的學生。',
+          '新生報名費：另加 $50，適用於 2025–2026 學年未在本校就讀（或中途退學）的學生。',
           '搭配中文課或學分班加選才藝課，每門 $530（早鳥）／$630（一般）；單獨報名才藝課每門 $630（早鳥）／$720（一般）。',
         ],
         pdfLabel: '下載完整學費說明（PDF）',
