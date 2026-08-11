@@ -93,17 +93,22 @@ keyword-rich `homeTitle`, not "Home". Site-wide there is `dist/robots.txt` and
    Rich Results Test — https://search.google.com/test/rich-results — whenever the org
    details change.
 7. **Deployment-host consistency (always-true invariant — Critical if violated).**
-   These three must all agree; if any disagree, the served domain and the
-   canonical/OG/sitemap URLs point at different places:
-   - `site` in `astro.config.mjs` equals the host actually being served.
-   - `public/CNAME` is consistent with `site` — present and matching the apex domain
-     when `site` is the custom domain; absent when `site` is the `…github.io` host.
+   These must all agree; if any disagree, the served domain and the canonical/OG/sitemap
+   URLs point at different places:
+   - `site` in `astro.config.mjs` equals the host actually being served, and is not a
+     host that redirects. Both `www.fremontchineseschool.org` and the `…github.io` host
+     301 to the apex, so naming either would make every canonical a redirect hop.
    - the `Sitemap:` host in `public/robots.txt` matches `site`.
+   - **if** a `CNAME` reaches the build output (`public/CNAME` → `dist/CNAME`), it names
+     the same host as `site`. Absence is not a finding: this repo's custom domain is
+     configured in repo Settings → Pages, so nothing in `dist/` needs to declare it.
+     There is a `CNAME` at the *repo root*, which is vestigial — it is outside `public/`,
+     so the build never copies it and it plays no part in serving. Treat a root `CNAME`
+     that disagrees with `site` as Low (stale documentation), not Critical.
    This is a *consistency* check (does the repo agree with itself / with reality?), not
-   an assertion of a specific value — so it never false-flags the pre-cutover state.
-   What it does **not** cover: whether to cut over, DNS propagation, or Search Console
-   setup. Those are external (the skill can't observe them) or decision-dependent, so
-   they live in the cutover issue, not here — see below.
+   an assertion of a specific value.
+   What it does **not** cover: DNS, or Search Console setup. Those are external — the
+   skill can't observe them — so they live in the cutover issue, not here; see below.
 8. Report findings by severity (Critical / High / Medium / Low) with `file:line` and a
    concrete fix — mirror the structure of the original audit.
 
@@ -111,18 +116,22 @@ keyword-rich `homeTitle`, not "Home". Site-wide there is `dist/robots.txt` and
 
 The custom-domain cutover work is tracked in the GitHub issue
 **"SEO: complete cutover to fremontchineseschool.org custom domain"** — the canonical
-checklist. Some of it could be phrased as a check but still doesn't belong here. The
-test for whether something is an audit step vs. issue work is **not** "one-time vs.
-repeatable" (almost any task can be reworded as a check). It is:
+checklist. The repo-side work is done (`site`, `robots.txt`, and the docs all name the
+apex); what remains there is external, chiefly Search Console verification of the apex
+property and sitemap submission. Some of it could be phrased as a check but still doesn't
+belong here. The test for whether something is an audit step vs. issue work is **not**
+"one-time vs. repeatable" (almost any task can be reworded as a check). It is:
 
 - **Observable?** Can this audit see the answer from the repo + `dist/`? Search Console
-  verification and DNS propagation live in external systems the skill can't query, so a
-  "check" for them could never self-clear — it'd be a permanent nag, not a finding.
+  verification and DNS live in external systems the skill can't query, so a "check" for
+  them could never self-clear — it'd be a permanent nag, not a finding.
 - **Decision-independent?** Is there one always-true answer, or does "correct" depend on
-  a project decision the skill can't see? "A CNAME *must exist*" fails this — pre-cutover,
-  having none is the intended state, so it would false-flag every run. (The CNAME
-  *consistency* check in step 7 is fine precisely because it's decision-independent:
-  it only requires `CNAME` and `site` to agree, whichever era we're in.)
+  a project decision the skill can't see? "A `CNAME` *must exist*" fails this: whether the
+  custom domain is declared by a file in the artifact or set in repo Settings → Pages is a
+  deployment choice, and this repo made the latter one — so requiring the file would
+  false-flag every run. (The `CNAME` *consistency* check in step 7 is fine precisely
+  because it's decision-independent: it only constrains a `CNAME` that actually ships,
+  and says nothing about whether one must.)
 
 So: internal-consistency invariants the audit can observe → steps above. External
 milestones, or assertions whose correctness depends on an unmade decision → the issue.
