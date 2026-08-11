@@ -14,7 +14,8 @@ export const links = {
     'https://drive.google.com/file/d/1kUl_nhpdAC0WLE0r6smb2fSjDUzRmSdX/view',
   calendarEn:
     'https://drive.google.com/file/d/1mHm8B4-LnNZkqqOY8qMvG7OReWaconzM/view',
-  tuitionPdf: 'https://docs.google.com/document/d/1eMiXP6MsfTPzySyFSNG8VMmvKSI8NSzo2Vb3Mg72Gn8/view',
+  // Hosted in public/ — the school's own export of the tuition payment schedule.
+  tuitionPdf: '/FCS_2026-2027_Tuition_Payment_Schedule.pdf',
   irsDetermination: 'https://drive.google.com/file/d/1BBgfNR6QzLA2d1-Ej8ezyW56Pf96eosf/view',
   acCreditTransfer: 'https://forms.gle/TntoF21REwrnnkfj9',
   acPolicies: 'https://drive.google.com/file/d/1EKDsFuUj3pV8eXTBhEE4cSHGpC1M_sPF/view',
@@ -254,25 +255,6 @@ export const content = {
       tutoringBody:
         'Enrolled FCS students have access to free one-on-one online tutoring provided by our volunteer tutors. Sessions are coordinated via email during the school year. Once enrolled, watch for an email with sign-up details — you\'ll need your FCS registration ID to reserve a spot.',
       tutoringApplyLabel: 'Apply to be a volunteer tutor',
-      tuition: {
-        title: 'Tuition & Fees',
-        earlyBirdLabel: 'Early Bird',
-        regularLabel: 'Regular',
-        earlyBirdNote:
-          'Register and pay by May 16, 2026 to receive the Early Bird rate.',
-        rows: [
-          { track: 'CSL language class only (Pre-K–8)', earlyBird: 'from $780', regular: 'from $880' },
-          { track: 'CSL + electives (Pre-K–8)', earlyBird: 'from $1,310', regular: 'from $1,510' },
-          { track: 'AC accredited track (8–12)', earlyBird: 'from $1,300', regular: 'from $1,670' },
-          { track: 'Electives only (K–12, adult)', earlyBird: 'from $630', regular: 'from $720' },
-        ],
-        notes: [
-          'New student registration fee: +$50.',
-          'Online payment via PayPal has a non-refundable 5% surcharge.',
-        ],
-        pdfLabel: 'Download full tuition schedule (PDF)',
-        enrollCta: 'Enroll Now',
-      },
     },
     enroll: {
       title: 'Enroll',
@@ -291,7 +273,7 @@ export const content = {
         },
         {
           heading: 'Pay tuition & fees',
-          body: 'Register and pay by May 16, 2026 for the Early Bird rate. See Programs for full tuition details. Online payment via PayPal has a 5% surcharge.',
+          body: 'Register and pay by May 16, 2026 for the Early Bird rate. The full tuition table is on the payment page. Online payment via PayPal has a 5% surcharge.',
           linkLabel: 'Go to online payment',
           route: 'payment',
         },
@@ -328,9 +310,9 @@ export const content = {
       faq: [
         {
           q: 'What is the tuition?',
-          a: 'See the Programs page for a full tuition summary by track. The complete tuition schedule is also available as a PDF download.',
-          linkLabel: 'View Programs page',
-          linkRoute: 'programs' as const,
+          a: 'The payment page has the full tuition table for every track, at both Early Bird and regular rates. The complete tuition schedule is also available as a PDF download.',
+          linkLabel: 'View tuition & payment page',
+          linkRoute: 'payment' as const,
         },
         {
           q: 'How do I get a refund?',
@@ -631,19 +613,55 @@ export const content = {
       intro:
         'Pay tuition and school fees right here. Browse the items below, add what you need to your cart, and check out securely — all on this page.',
       loading: 'Loading the payment store…',
-      // Registration notes, carried in-house from the store so they show in
-      // both languages (the embedded storefront is English-only).
-      notes: [
-        'Early Bird: complete registration AND submit payment by May 16, 2026 to qualify for the Early Bird discount.',
-        'CSL = Chinese as a Second Language.',
-        'AC = Accredited Curriculum.',
-        'The new-student registration fee applies to new students and to students who withdrew or did not enroll during the 2026–2027 school year.',
-      ],
       howToPayTitle: 'How to pay',
       payByCheck: 'By check — make it payable to "Fremont Chinese School" and drop it off at the school office (Room 229) on any class day.',
       payOnline: 'Online — scroll down to add item(s) to your cart and check out. PayPal payments add a non-refundable 5% surcharge.',
       payReceipt: 'After paying, you will receive a receipt email from PayPal. Enter the PayPal Order # in the registration form to complete your enrollment.',
       note: 'Payments are processed securely through our school store. If you are unsure which item to pay, check your registration confirmation or contact the school office.',
+      tuition: {
+        title: 'Tuition & Fees',
+        programLabel: 'Program',
+        earlyBirdLabel: 'Early Bird',
+        regularLabel: 'Regular',
+        // Date the Early Bird rate stops applying (used to grey out that column
+        // once it has passed — see PaymentPage.astro).
+        earlyBirdEndsAt: '2026-05-17',
+        earlyBirdNote:
+          'Complete registration AND submit payment by May 16, 2026 to qualify for the Early Bird rate. After that date, regular pricing applies.',
+        earlyBirdEndedNote: 'The Early Bird rate ended May 16, 2026. Regular pricing applies.',
+        groups: [
+          {
+            heading: 'CSL — Chinese as a Second Language (Pre-K–8th)',
+            rows: [
+              { plan: 'CSL only', earlyBird: '$780', regular: '$880' },
+              { plan: 'CSL + 1 elective', earlyBird: '$1,310', regular: '$1,510' },
+              { plan: 'CSL + 2 electives', earlyBird: '$1,840', regular: '$2,140' },
+            ],
+          },
+          {
+            heading: 'AC — Accredited Curriculum (8th–12th)',
+            rows: [
+              { plan: 'AC only', earlyBird: '$1,300', regular: '$1,670' },
+              { plan: 'AC + 1 elective', earlyBird: '$1,830', regular: '$2,300' },
+            ],
+          },
+          {
+            heading: 'Electives only (Pre-K–12th, adult)',
+            rows: [
+              { plan: '1 elective', earlyBird: '$630', regular: '$720' },
+              { plan: '2 electives', earlyBird: '$1,260', regular: '$1,440' },
+              { plan: '3 electives', earlyBird: '$1,890', regular: '$2,160' },
+              { plan: '4 electives', earlyBird: '$2,520', regular: '$2,880' },
+            ],
+          },
+        ],
+        notes: [
+          'New student registration fee: +$50, for students who did not enroll in the 2025–2026 school year.',
+          'Each elective added to a CSL or AC class is $530 (Early Bird) / $630 (Regular). A standalone elective is $630 (Early Bird) / $720 (Regular).',
+        ],
+        pdfLabel: 'Download full tuition schedule (PDF)',
+        enrollCta: 'Enroll Now',
+      },
     },
     calendar: {
       title: 'School Calendar',
@@ -1012,24 +1030,6 @@ export const content = {
       tutoringBody:
         '本校在學學生可免費享有由義工提供的一對一線上輔導課程。課程於學年間透過電子郵件統籌安排。完成報名後，請留意本校寄出的課程通知信，預約時需提供您的本校學生編號。',
       tutoringApplyLabel: '申請成為義工導師',
-      tuition: {
-        title: '學費與費用',
-        earlyBirdLabel: '早鳥優惠',
-        regularLabel: '一般費用',
-        earlyBirdNote: '於 2026 年 5 月 16 日前完成報名並繳費，即可享早鳥優惠。',
-        rows: [
-          { track: '中文課程（僅語文班，Pre-K–8）', earlyBird: '起 $780', regular: '起 $880' },
-          { track: '中文課程＋才藝選修（Pre-K–8）', earlyBird: '起 $1,310', regular: '起 $1,510' },
-          { track: '學分班（8–12 年級）', earlyBird: '起 $1,300', regular: '起 $1,670' },
-          { track: '僅才藝選修（K–12，成人）', earlyBird: '起 $630', regular: '起 $720' },
-        ],
-        notes: [
-          '新生報名費：另加 $50。',
-          '透過 PayPal 線上付款將加收不可退還之 5% 手續費。',
-        ],
-        pdfLabel: '下載完整學費說明（PDF）',
-        enrollCta: '立即報名',
-      },
     },
     enroll: {
       title: '報名註冊',
@@ -1048,7 +1048,7 @@ export const content = {
         },
         {
           heading: '繳交學費與費用',
-          body: '於 2026 年 5 月 16 日前完成繳費，可享早鳥優惠。詳細學費請見「課程」頁面。透過 PayPal 線上付款將加收 5% 手續費。',
+          body: '於 2026 年 5 月 16 日前完成繳費，可享早鳥優惠。完整學費表請見「線上繳費」頁面。透過 PayPal 線上付款將加收 5% 手續費。',
           linkLabel: '前往線上付款',
           route: 'payment',
         },
@@ -1085,9 +1085,9 @@ export const content = {
       faq: [
         {
           q: '學費是多少？',
-          a: '請至「課程」頁面查看各班別學費摘要，或下載完整學費方案 PDF。',
-          linkLabel: '前往課程頁面',
-          linkRoute: 'programs' as const,
+          a: '「線上繳費」頁面備有各班別完整學費表，含早鳥與一般兩種價格，亦可下載完整學費方案 PDF。',
+          linkLabel: '前往學費與繳費頁面',
+          linkRoute: 'payment' as const,
         },
         {
           q: '如何申請退費？',
@@ -1387,18 +1387,53 @@ export const content = {
       intro:
         '直接在此頁繳交學費與各項學校費用。瀏覽下方項目，將所需項目加入購物車，並於本頁安全結帳。',
       loading: '正在載入付款商店…',
-      // 報名須知，由商店移至站內以提供中英雙語（內嵌商店僅有英文）。
-      notes: [
-        '早鳥優惠：請於 2026 年 5 月 16 日前完成報名並繳交付款，方可享有早鳥折扣。',
-        'CSL＝中文為第二語言（Chinese as a Second Language）。',
-        'AC＝認證課程（Accredited Curriculum）。',
-        '新生報名費適用於新生，以及在 2026–2027 學年退學或未報名的學生。',
-      ],
       howToPayTitle: '付款方式',
       payByCheck: '支票付款——請開立抬頭為「Fremont Chinese School」的支票，並於上課日親自交至學校辦公室（229 號教室）。',
       payOnline: '線上付款——請往下捲動，將項目加入購物車並結帳。透過 PayPal 付款將收取不可退還的 5% 手續費。',
       payReceipt: '付款後，您將收到 PayPal 寄送的收據電子郵件。請將 PayPal 訂單編號（Order #）填入報名表，以完成報名。',
       note: '款項皆透過本校商店安全處理。若不確定應繳交哪一項目，請查看您的報名確認資訊，或聯絡學校辦公室。',
+      tuition: {
+        title: '學費與費用',
+        programLabel: '課程',
+        earlyBirdLabel: '早鳥優惠',
+        regularLabel: '一般費用',
+        earlyBirdEndsAt: '2026-05-17',
+        earlyBirdNote:
+          '須於 2026 年 5 月 16 日前同時完成報名與繳費，方可享早鳥優惠；逾期則適用一般費用。',
+        earlyBirdEndedNote: '早鳥優惠已於 2026 年 5 月 16 日截止，現適用一般費用。',
+        groups: [
+          {
+            heading: 'CSL 中文課程（Pre-K–8 年級）',
+            rows: [
+              { plan: '僅中文課', earlyBird: '$780', regular: '$880' },
+              { plan: '中文課＋1 門才藝選修', earlyBird: '$1,310', regular: '$1,510' },
+              { plan: '中文課＋2 門才藝選修', earlyBird: '$1,840', regular: '$2,140' },
+            ],
+          },
+          {
+            heading: 'AC 學分班（8–12 年級）',
+            rows: [
+              { plan: '僅學分班', earlyBird: '$1,300', regular: '$1,670' },
+              { plan: '學分班＋1 門才藝選修', earlyBird: '$1,830', regular: '$2,300' },
+            ],
+          },
+          {
+            heading: '僅才藝選修（Pre-K–12 年級、成人）',
+            rows: [
+              { plan: '1 門才藝選修', earlyBird: '$630', regular: '$720' },
+              { plan: '2 門才藝選修', earlyBird: '$1,260', regular: '$1,440' },
+              { plan: '3 門才藝選修', earlyBird: '$1,890', regular: '$2,160' },
+              { plan: '4 門才藝選修', earlyBird: '$2,520', regular: '$2,880' },
+            ],
+          },
+        ],
+        notes: [
+          '新生報名費：另加 $50，適用於 2025–2026 學年未在本校就讀的學生。',
+          '搭配中文課或學分班加選才藝課，每門 $530（早鳥）／$630（一般）；單獨報名才藝課每門 $630（早鳥）／$720（一般）。',
+        ],
+        pdfLabel: '下載完整學費說明（PDF）',
+        enrollCta: '立即報名',
+      },
     },
     calendar: {
       title: '學校行事曆',

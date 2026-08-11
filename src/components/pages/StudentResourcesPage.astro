@@ -1,4 +1,5 @@
 ---
+import { content } from "../../i18n/content";
 import type { Lang } from "../../i18n/ui";
 import { localizedPath } from "../../i18n/ui";
 
@@ -8,6 +9,41 @@ interface Props {
 const { lang } = Astro.props;
 
 const isZh = lang === 'zh';
+
+// The tuition PDF leads with Early Bird pricing (page 1) and follows with
+// regular pricing (page 2). Show whichever one is actually in effect: resolved
+// at build time here, re-checked client-side in case a deploy goes stale.
+const earlyBirdEndsAt = content[lang].payment.tuition.earlyBirdEndsAt;
+const earlyBirdEnded = new Date() >= new Date(`${earlyBirdEndsAt}T00:00:00`);
+const tuitionThumbPage = earlyBirdEnded ? 2 : 1;
+
+const tuitionThumbAlt = {
+  early: isZh
+    ? '2026-2027 學費繳費說明預覽圖（早鳥優惠價格）'
+    : 'Preview of the 2026-2027 tuition payment schedule, Early Bird pricing',
+  regular: isZh
+    ? '2026-2027 學費繳費說明預覽圖（一般價格）'
+    : 'Preview of the 2026-2027 tuition payment schedule, regular pricing',
+};
+const tuitionThumbHint = {
+  early: isZh
+    ? '顯示早鳥優惠價格 · 點擊圖片放大檢視全部三頁'
+    : 'Showing Early Bird pricing · click to enlarge all three pages',
+  regular: isZh
+    ? '顯示一般價格 · 點擊圖片放大檢視全部三頁'
+    : 'Showing regular pricing · click to enlarge all three pages',
+};
+
+// Textbook list by level (links go to each publisher / order sheet).
+const textbooks = [
+  { level: isZh ? '學前班 (Pre-K)' : 'Pre-K', book: '生活華語 (Living Chinese)', url: 'http://www.creativeschools.org/LivingMan.htm' },
+  { level: isZh ? 'K 幼兒班' : 'Kindergarten', book: '新編華語注音符號 (Huayu Zhuyin)', url: 'https://www.huayuworld.org/eBookstore' },
+  { level: isZh ? '1–8 年級' : 'Grades 1–8', book: '美洲華語 (Merica Chinese)', url: 'http://www.mzchinese.net/ChineseTraditional/index_Traditional.html' },
+  { level: isZh ? '雙語班 CK–C5' : 'Bilingual CK–C5', book: '學華語向前走', url: 'https://docs.google.com/document/d/1UJcYy6HbuWPjaMzavCv5Su3PQW3cXkYJ8NseDN1hlf4/view' },
+  { level: isZh ? '雙語班 C6–C8' : 'Bilingual C6–C8', book: 'Integrated Chinese (聽說讀寫)', url: 'https://docs.google.com/document/d/1JuJUWvFRn10QVhtjNfDjNpFcLKKc2hO_5k9Mm7tTyag/view' },
+  { level: isZh ? 'Level 1–4' : 'Level 1–4', book: 'Integrated Chinese (聽說讀寫)', url: 'https://docs.google.com/document/d/1JuJUWvFRn10QVhtjNfDjNpFcLKKc2hO_5k9Mm7tTyag/view' },
+  { level: isZh ? 'AP 學分班' : 'AP Class', book: '超越 (Beyond)', url: 'https://docs.google.com/document/d/1JuJUWvFRn10QVhtjNfDjNpFcLKKc2hO_5k9Mm7tTyag/view' },
+];
 ---
 
 <section style="background: var(--color-fcs-white);" class="mx-auto max-w-3xl px-4 py-14">
@@ -19,16 +55,15 @@ const isZh = lang === 'zh';
     {isZh ? '提供在校學生與家長使用的資訊與連結。' : 'Information and links for current students and families.'}
   </p>
 
-  <!-- Class Schedule & Classroom Map -->
-  <div class="mt-10 rounded-[10px] p-6" style="background: var(--color-fcs-white); border: 1px solid var(--color-fcs-border);">
+  <!-- Class Schedule -->
+  <div id="schedule" class="mt-10 rounded-[10px] p-6" style="background: var(--color-fcs-white); border: 1px solid var(--color-fcs-border);">
     <h2 class="text-lg font-semibold" style="color: var(--color-fcs-black);">
-      {isZh ? '班級/教師/教室對照表' : 'Class Schedule & Classroom Map'}
+      {isZh ? '班級/教師/教室對照表' : 'Class Schedule'}
     </h2>
     <p class="mt-2 text-sm" style="color: var(--color-fcs-muted);">
       {isZh ? '查詢您孩子班級所在的教室、任課教師與上課時間。' : "Find your child's classroom, teacher, and class time."}
     </p>
 
-    <!-- Class Schedule (ready) -->
     <div class="mt-5">
       <p class="text-sm font-semibold" style="color: var(--color-fcs-black);">
         {isZh ? '2026-2027 班級/教師/教室對照表' : '2026-2027 Class Schedule'}
@@ -55,9 +90,18 @@ const isZh = lang === 'zh';
         </a>
       </div>
     </div>
+  </div>
 
-    <!-- Classroom Map (ready) -->
-    <div class="mt-5 border-t pt-4" style="border-color: var(--color-fcs-border);">
+  <!-- Classroom Map -->
+  <div id="classroom-map" class="mt-6 rounded-[10px] p-6" style="background: var(--color-fcs-white); border: 1px solid var(--color-fcs-border);">
+    <h2 class="text-lg font-semibold" style="color: var(--color-fcs-black);">
+      {isZh ? '教室使用圖' : 'Classroom Map'}
+    </h2>
+    <p class="mt-2 text-sm" style="color: var(--color-fcs-muted);">
+      {isZh ? '查看 Irvington 高中校園內各教室與停車位置。' : 'See where each classroom and parking area is on the Irvington High School campus.'}
+    </p>
+
+    <div class="mt-5">
       <p class="text-sm font-semibold" style="color: var(--color-fcs-black);">
         {isZh ? '2026-2027 教室使用圖' : '2026-2027 Classroom Map'}
       </p>
@@ -82,6 +126,76 @@ const isZh = lang === 'zh';
           {isZh ? '開啟／下載圖片' : 'Open / Download image'}
         </a>
       </div>
+    </div>
+  </div>
+
+  <!-- Tuition Payment Schedule -->
+  <div class="mt-6 rounded-[10px] p-6" style="background: var(--color-fcs-white); border: 1px solid var(--color-fcs-border);">
+    <h2 class="text-lg font-semibold" style="color: var(--color-fcs-black);">
+      {isZh ? '學費繳費說明' : 'Tuition Payment Schedule'}
+    </h2>
+    <p class="mt-2 text-sm" style="color: var(--color-fcs-muted);">
+      {isZh
+        ? '2026-2027 學年各班別學費（早鳥與一般價格）、繳費方式與支票填寫範例。'
+        : '2026-2027 tuition for every track (Early Bird and Regular), how to pay, and a sample check.'}
+    </p>
+
+    <div class="mt-5">
+      <p class="text-sm font-semibold" style="color: var(--color-fcs-black);">
+        {isZh ? '2026-2027 學費繳費說明' : '2026-2027 Tuition Payment Schedule'}
+      </p>
+      <button type="button" id="tuition-preview-trigger"
+        class="mt-3 block w-full cursor-zoom-in overflow-hidden rounded-lg border p-0 text-left"
+        style="border-color: var(--color-fcs-border);"
+        aria-haspopup="dialog">
+        <img
+          id="tuition-thumb"
+          src={`/images/resources/tuition-schedule-2026-27-thumb${tuitionThumbPage}.png`}
+          alt={earlyBirdEnded ? tuitionThumbAlt.regular : tuitionThumbAlt.early}
+          class="block h-auto w-full"
+          loading="lazy"
+          data-page={String(tuitionThumbPage)}
+          data-ends-at={earlyBirdEndsAt}
+          data-alt-early={tuitionThumbAlt.early}
+          data-alt-regular={tuitionThumbAlt.regular}
+        />
+      </button>
+      <div class="mt-2 flex flex-wrap items-center gap-x-4 gap-y-1">
+        <span
+          id="tuition-thumb-hint"
+          class="text-xs"
+          style="color: var(--color-fcs-muted);"
+          data-hint-early={tuitionThumbHint.early}
+          data-hint-regular={tuitionThumbHint.regular}
+        >{earlyBirdEnded ? tuitionThumbHint.regular : tuitionThumbHint.early}</span>
+        <a href="/FCS_2026-2027_Tuition_Payment_Schedule.pdf" target="_blank" rel="noopener"
+          class="inline-flex items-center gap-1.5 text-xs font-semibold hover:underline" style="color: var(--color-fcs-green);">
+          <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+          {isZh ? '開啟／下載 PDF' : 'Open / Download PDF'}
+        </a>
+      </div>
+      <a href={localizedPath(lang, 'payment') + '#tuition'}
+        class="mt-3 inline-flex items-center gap-1.5 text-xs font-semibold hover:underline" style="color: var(--color-fcs-green);">
+        {isZh ? '在網頁上查看學費表格 →' : 'View the tuition table on the site →'}
+      </a>
+    </div>
+  </div>
+
+  <!-- Textbooks -->
+  <div id="textbook" class="mt-6 rounded-[10px] p-6" style="background: var(--color-fcs-white); border: 1px solid var(--color-fcs-border);">
+    <h2 class="text-lg font-semibold" style="color: var(--color-fcs-black);">
+      {isZh ? '使用教材' : 'Textbooks'}
+    </h2>
+    <p class="mt-2 text-sm" style="color: var(--color-fcs-muted);">
+      {isZh ? '各年級與班別所使用的教材，點擊書名前往出版社或訂購說明。' : 'The textbook used at each level — follow a title for the publisher or order sheet.'}
+    </p>
+    <div class="mt-4 space-y-2">
+      {textbooks.map((r) => (
+        <div class="flex flex-wrap gap-2 text-sm">
+          <span class="font-medium" style="color: var(--color-fcs-black); min-width: 140px;">{r.level}</span>
+          <a href={r.url} target="_blank" rel="noopener" class="hover:underline" style="color: var(--color-fcs-green);">{r.book}</a>
+        </div>
+      ))}
     </div>
   </div>
 
@@ -115,6 +229,28 @@ const isZh = lang === 'zh';
     </div>
   </dialog>
 
+  <dialog id="tuition-preview-dialog" class="fcs-preview-dialog fcs-preview-dialog--pages" aria-label={isZh ? '學費繳費說明放大檢視' : 'Tuition payment schedule enlarged preview'}>
+    <div class="relative">
+      <div class="fcs-preview-closebar">
+        <button type="button" id="tuition-preview-close"
+          class="flex h-8 w-8 items-center justify-center rounded-full text-lg font-semibold shadow"
+          style="background: var(--color-fcs-white); color: var(--color-fcs-black);"
+          aria-label={isZh ? '關閉' : 'Close'}>
+          &times;
+        </button>
+      </div>
+      {[1, 2, 3].map((page) => (
+        <img
+          src={`/images/resources/tuition-schedule-2026-27-p${page}.png`}
+          alt={isZh
+            ? `2026-2027 學費繳費說明第 ${page} 頁`
+            : `2026-2027 tuition payment schedule, page ${page} of 3`}
+          loading="lazy"
+        />
+      ))}
+    </div>
+  </dialog>
+
   <style>
     .fcs-preview-dialog {
       max-width: 92vw;
@@ -133,12 +269,44 @@ const isZh = lang === 'zh';
       max-height: 92vh;
       border-radius: 12px;
     }
+    /* Multi-page documents: each page is scaled to fit the screen, and the
+       dialog scrolls from one page to the next. 84vh leaves the top of the
+       following page peeking so it's clear there's more than one. */
+    .fcs-preview-dialog--pages {
+      /* Fixed width so the close button always lands in the same corner,
+         rather than tracking the intrinsic size of the page images. */
+      width: 92vw;
+      overflow-y: auto;
+      overscroll-behavior: contain;
+    }
+    .fcs-preview-dialog--pages img {
+      width: auto;
+      max-width: 92vw;
+      max-height: 84vh;
+      margin-inline: auto;
+    }
+    .fcs-preview-dialog--pages img + img {
+      margin-top: 12px;
+    }
+    /* Zero-height sticky bar keeps the close button pinned while pages scroll. */
+    .fcs-preview-closebar {
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      display: flex;
+      height: 0;
+      justify-content: flex-end;
+      padding-right: 8px;
+    }
+    .fcs-preview-closebar button {
+      margin-top: 8px;
+    }
   </style>
 
   <script>
     // Wires each (trigger, dialog, close) preview pair sharing a name prefix,
     // e.g. schedule-preview-trigger / schedule-preview-dialog / schedule-preview-close.
-    const previewNames = ['schedule', 'map'];
+    const previewNames = ['schedule', 'map', 'tuition'];
     for (const name of previewNames) {
       const dialog = document.getElementById(`${name}-preview-dialog`) as HTMLDialogElement | null;
       const trigger = document.getElementById(`${name}-preview-trigger`);
@@ -150,6 +318,31 @@ const isZh = lang === 'zh';
         if (event.target === dialog) dialog.close();
       });
     }
+
+    // The tuition thumbnail is baked at build time to whichever pricing page is
+    // in effect; re-check here so a deploy that predates the Early Bird
+    // deadline still flips over to the regular-price page on the day.
+    function updateTuitionThumb() {
+      const thumb = document.getElementById('tuition-thumb') as HTMLImageElement | null;
+      const hint = document.getElementById('tuition-thumb-hint');
+      const endsAt = thumb?.dataset.endsAt;
+      if (!thumb || !endsAt) return;
+
+      const today = new Date();
+      today.setHours(0, 0, 0, 0);
+      const ended = today >= new Date(`${endsAt}T00:00:00`);
+      const page = ended ? '2' : '1';
+      if (thumb.dataset.page === page) return;
+
+      thumb.dataset.page = page;
+      thumb.src = `/images/resources/tuition-schedule-2026-27-thumb${page}.png`;
+      const alt = ended ? thumb.dataset.altRegular : thumb.dataset.altEarly;
+      if (alt) thumb.alt = alt;
+      const hintCopy = ended ? hint?.dataset.hintRegular : hint?.dataset.hintEarly;
+      if (hint && hintCopy) hint.textContent = hintCopy;
+    }
+
+    updateTuitionThumb();
   </script>
 
   <!-- Quick Links -->
