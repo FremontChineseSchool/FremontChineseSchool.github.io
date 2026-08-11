@@ -29,6 +29,11 @@ export const routes: Record<string, string> = {
   'staff-resources': 'staff-resources',
   'student-resources': 'student-resources',
   news: 'news',
+  // EN-only (see src/pages/news-archive.astro — no /zh counterpart). It must
+  // still be listed here: BaseLayout resolves a page's route key from its path
+  // and falls back to `home` when it finds no match, which would make the
+  // archive inherit the homepage's title and description.
+  'news-archive': 'news-archive',
   electives: 'electives',
 };
 

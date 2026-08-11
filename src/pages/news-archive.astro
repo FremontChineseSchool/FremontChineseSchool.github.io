@@ -2,7 +2,15 @@
 import BaseLayout from "../layouts/BaseLayout.astro";
 ---
 
-<BaseLayout lang="en" title="News Archive (2013–2026) — Fremont Chinese School">
+<BaseLayout
+  lang="en"
+  {/* BaseLayout appends "· Fremont Chinese School", so this is the bare page
+      name — matching every other route. (It read "News Archive (2013–2026) —
+      Fremont Chinese School" while the route key was unresolved and the title
+      was being discarded, which hid the doubling.) */}
+  title="News Archive (2013–2026)"
+  singleLocale
+>
   <div class="max-w-3xl mx-auto px-4 py-10">
     <a href="/news" class="text-sm mb-6 inline-block" style="color: var(--color-fcs-blue);">&#8592; Back to News</a>
     <h1 class="text-3xl font-bold mb-2" style="color: var(--color-fcs-black);">News Archive</h1>

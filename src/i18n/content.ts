@@ -62,6 +62,20 @@ export const descriptions: Record<'en' | 'zh', Record<string, string>> = {
       'Support Fremont Chinese School with a tax-deductible gift to our 501(c) non-profit and help bring Mandarin classes to more East Bay families.',
     contact:
       'Contact Fremont Chinese School — principal, school office, registration, mailing address, classroom location in Fremont, CA, and Facebook.',
+    news:
+      'News and updates from Fremont Chinese School — enrollment announcements, graduation, placement tests, contests, and reminders for FCS families.',
+    'news-archive':
+      'Archived Fremont Chinese School announcements from 2013 to 2026, preserved from the school\'s previous website for reference by FCS families.',
+    electives:
+      'Saturday elective classes at Fremont Chinese School — Chinese and Western painting, yo-yo, dance, chess, and more, open to PK–8th grade students.',
+    'academic-contest':
+      'The annual Fremont Chinese School Academic Contest — Mandarin speech, recitation, writing, and more, with top students advancing to ANCCS regionals.',
+    'student-resources':
+      'Student resources for Fremont Chinese School families — the class and teacher schedule, classroom map, and textbook list for every level.',
+    'ac-resources':
+      'Accredited Curriculum resources for Fremont Chinese School — AC policies, course rules, forms, and documents for AC students and their families.',
+    'staff-resources':
+      'Staff resources for Fremont Chinese School teachers, TAs, and volunteers — report card templates, teaching materials, forms, and applications.',
   },
   zh: {
     home: '費利蒙中文學校（FCS）自 1972 年起於加州費利蒙教授中文語文與文化，是通過 WASC 認證的非營利週末學校。',
@@ -81,6 +95,22 @@ export const descriptions: Record<'en' | 'zh', Record<string, string>> = {
       '以可抵稅的捐款支持費利蒙中文學校 501(c) 非營利組織，協助更多東灣家庭學習中文。',
     contact:
       '聯絡費利蒙中文學校——校長、學校辦公室、報名註冊、通訊地址、加州費利蒙上課地點與 Facebook。',
+    news:
+      '費利蒙中文學校最新消息——報名公告、畢業典禮、分班考試、學術比賽與各項提醒。',
+    // EN-only page; kept here so the shape matches `en` and the lookup never
+    // falls through to the tagline if a /zh route is ever added.
+    'news-archive':
+      '費利蒙中文學校 2013 至 2026 年的歷史公告彙整，自本校舊網站保存，供家長查閱參考。',
+    electives:
+      '費利蒙中文學校每週六的選修課程——國畫、西畫、扯鈴、舞蹈、棋藝等，開放學前班至八年級學生報名。',
+    'academic-contest':
+      '費利蒙中文學校年度學術比賽——國語演講、朗讀、作文等項目，優勝者可代表本校參加 ANCCS 區賽。',
+    'student-resources':
+      '費利蒙中文學校學生資源——班級教師教室對照表、教室使用圖，以及各程度使用教材一覽。',
+    'ac-resources':
+      '費利蒙中文學校學分班資源——學分班規章、課程規則、表格與文件，供學分班學生與家長使用。',
+    'staff-resources':
+      '費利蒙中文學校教職員資源——成績單範本、教學資源、各項表格與申請，供教師、助教及志工使用。',
   },
 };
 

@@ -10,9 +10,17 @@ interface Props {
   lang: Lang;
   title: string;
   description?: string;
+  /**
+   * Set on pages that exist in ONE locale only (no counterpart in the other
+   * tree). Suppresses the hreflang alternates and `og:locale:alternate`, which
+   * would otherwise advertise a URL that 404s — an alternate pointing at a
+   * non-200 page is discarded and can invalidate the whole cluster. The
+   * canonical stays self-referencing either way.
+   */
+  singleLocale?: boolean;
 }
 
-const { lang, title, description } = Astro.props;
+const { lang, title, description, singleLocale = false } = Astro.props;
 const t = ui[lang];
 
 // --- SEO ----------------------------------------------------------------
@@ -98,10 +106,15 @@ const orgSchema = {
     <meta name="description" content={metaDescription} />
     <link rel="canonical" href={canonicalURL} />
 
-    <!-- Locale alternates -->
-    <link rel="alternate" hreflang="en" href={enURL} />
-    <link rel="alternate" hreflang="zh-Hant" href={zhURL} />
-    <link rel="alternate" hreflang="x-default" href={enURL} />
+    <!-- Locale alternates. Omitted for single-locale pages, whose counterpart
+         URL does not exist (see the `singleLocale` prop). -->
+    {!singleLocale && (
+      <>
+        <link rel="alternate" hreflang="en" href={enURL} />
+        <link rel="alternate" hreflang="zh-Hant" href={zhURL} />
+        <link rel="alternate" hreflang="x-default" href={enURL} />
+      </>
+    )}
 
     <!-- Open Graph -->
     <meta property="og:type" content="website" />
@@ -111,7 +124,7 @@ const orgSchema = {
     <meta property="og:url" content={canonicalURL} />
     <meta property="og:image" content={ogImage} />
     <meta property="og:locale" content={ogLocale} />
-    <meta property="og:locale:alternate" content={ogLocaleAlt} />
+    {!singleLocale && <meta property="og:locale:alternate" content={ogLocaleAlt} />}
 
     <!-- Twitter -->
     <meta name="twitter:card" content="summary_large_image" />
