@@ -76,6 +76,8 @@ export const descriptions: Record<'en' | 'zh', Record<string, string>> = {
       'Accredited Curriculum resources for Fremont Chinese School — AC policies, course rules, forms, and documents for AC students and their families.',
     'staff-resources':
       'Staff resources for Fremont Chinese School teachers, TAs, and volunteers — report card templates, teaching materials, forms, and applications.',
+    teachers:
+      'Meet the teachers of Fremont Chinese School — the faculty behind our Pre-K–8 language classes, WASC-accredited credit track, and Saturday electives.',
   },
   zh: {
     home: '費利蒙中文學校（FCS）自 1972 年起於加州費利蒙教授中文語文與文化，是通過 WASC 認證的非營利週末學校。',
@@ -111,6 +113,8 @@ export const descriptions: Record<'en' | 'zh', Record<string, string>> = {
       '費利蒙中文學校學分班資源——學分班規章、課程規則、表格與文件，供學分班學生與家長使用。',
     'staff-resources':
       '費利蒙中文學校教職員資源——成績單範本、教學資源、各項表格與申請，供教師、助教及志工使用。',
+    teachers:
+      '認識費利蒙中文學校的師資團隊——學前班至八年級中文課程、WASC 認證學分班，以及週六才藝選修課的任課教師。',
   },
 };
 
@@ -400,6 +404,19 @@ export const content = {
       ],
       calendarNote:
         'Check the school calendar for the first day of class and important dates.',
+    },
+    // Page-level copy only. The roster itself — names, classes, bios — lives in
+    // src/data/teachers.ts, where both locales sit together per teacher.
+    teachers: {
+      title: 'Our Teachers',
+      intro:
+        'FCS is taught by teachers drawn from decades of classroom experience in Taiwan, in Bay Area schools, and at the university level. Below is the faculty for the 2026–2027 school year.',
+      note: 'Teacher photos and the remaining introductions are still being collected, and this page will be updated as they arrive.',
+      jumpLabel: 'Jump to',
+      teachesLabel: 'Teaches',
+      bioPending: 'Introduction coming soon.',
+      scheduleNote:
+        'Classroom assignments and class times are listed on the class schedule.',
     },
     electives: {
       title: 'Elective Classes',
@@ -1174,6 +1191,16 @@ export const content = {
         { label: '課程異動申請表', link: 'addDropTransfer' },
       ],
       calendarNote: '開學日與重要日期請參閱學校行事曆。',
+    },
+    teachers: {
+      title: '師資團隊',
+      intro:
+        '費利蒙中文學校的師資，來自台灣國小、灣區學校及大學等各領域數十年的教學經驗。以下為 2026–2027 學年的任課教師。',
+      note: '教師照片與其餘教師介紹仍在彙整中，本頁將於資料齊備後陸續更新。',
+      jumpLabel: '快速前往',
+      teachesLabel: '任教班級',
+      bioPending: '教師介紹即將更新。',
+      scheduleNote: '各班教室與上課時間請參閱班級對照表。',
     },
     electives: {
       title: '才藝選修課程',
