@@ -24,6 +24,10 @@ export default defineConfig({
     // Emits /sitemap-index.xml + /sitemap-0.xml, annotating each page with
     // hreflang alternates linking the en and zh trees.
     sitemap({
+      // The `-diff` review pages are near-duplicates of the live pages they
+      // propose to replace, so they stay out of the sitemap (and carry a
+      // noindex via BaseLayout). Drop this filter when those routes go away.
+      filter: (page) => !/-diff\/?$/.test(new URL(page).pathname),
       i18n: {
         defaultLocale: 'en',
         locales: { en: 'en', zh: 'zh-Hant' },
