@@ -35,6 +35,7 @@ export const routes: Record<string, string> = {
   // archive inherit the homepage's title and description.
   'news-archive': 'news-archive',
   electives: 'electives',
+  teachers: 'teachers',
 };
 
 export const ui = {
