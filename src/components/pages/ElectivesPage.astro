@@ -12,6 +12,10 @@ const c = content[lang].electives;
 <section style="background: var(--color-fcs-white);" class="mx-auto max-w-3xl px-4 py-14">
   <h1 class="text-3xl font-semibold sm:text-4xl" style="letter-spacing: -0.02em; color: var(--color-fcs-black);">{c.title}</h1>
   <p class="mt-4 text-lg leading-relaxed" style="color: var(--color-fcs-muted);">{c.intro}</p>
+  <a href={localizedPath(lang, 'teachers')}
+    class="mt-3 inline-flex items-center gap-1.5 text-sm font-semibold hover:underline" style="color: var(--color-fcs-green);">
+    {lang === 'zh' ? '認識任教這些課程的老師 →' : 'Meet the teachers who lead these classes →'}
+  </a>
 
   <!-- Material fee note -->
   <p class="mt-5 rounded-[10px] p-4 text-sm" style="background: var(--color-fcs-orange-light); color: var(--color-fcs-muted); border: 1px solid var(--color-fcs-border);">
