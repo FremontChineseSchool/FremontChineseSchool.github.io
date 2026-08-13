@@ -24,6 +24,17 @@ const secondaryName = (t: { nameZh: string; nameEn: string }) =>
 
 const courseNotesLabel = isZh ? "本學年課程重點" : "What this year covers";
 const emailLabelFor = (name: string) => (isZh ? `寄信給${name}` : `Email ${name}`);
+
+// Split an address at the @ so the template can offer a <wbr> there. Long
+// addresses have to wrap on a narrow phone; left to itself the browser breaks
+// mid-word at whatever point happens to overflow, which lands differently on
+// every card. A zero-width break opportunity after the @ is a normal soft-wrap
+// opportunity, so the line breaker always prefers it — and `overflow-wrap`
+// stays as a fallback for the rare case where the domain alone will not fit.
+const emailParts = (email: string): [string, string] => {
+  const at = email.indexOf("@");
+  return at === -1 ? [email, ""] : [email.slice(0, at + 1), email.slice(at + 1)];
+};
 ---
 
 <section style="background: var(--color-fcs-white);" class="mx-auto max-w-3xl px-4 py-14">
@@ -148,12 +159,12 @@ const emailLabelFor = (name: string) => (isZh ? `寄信給${name}` : `Email ${na
 
                 <a
                   href={`mailto:${t.email}`}
-                  class="mt-4 inline-flex min-w-0 items-center gap-1.5 text-sm font-medium hover:underline"
-                  style="color: var(--color-fcs-green); overflow-wrap: anywhere;"
+                  class="mt-4 inline-flex min-w-0 items-start gap-1.5 text-sm font-medium hover:underline"
+                  style="color: var(--color-fcs-green);"
                   aria-label={emailLabelFor(displayName(t))}
                 >
-                  <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
-                  {t.email}
+                  <svg class="mt-[3px] shrink-0" xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+                  <span class="min-w-0" style="overflow-wrap: anywhere;">{emailParts(t.email)[0]}<wbr />{emailParts(t.email)[1]}</span>
                 </a>
               </div>
             </div>
