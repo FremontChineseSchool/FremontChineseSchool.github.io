@@ -71,12 +71,19 @@ export const electiveOverrides: Record<string, ElectiveOverride> = {
     en: {
       description:
         "The bridge from the physical abacus to mental math — the external tool gradually becomes an internal way of thinking. Repeated practice builds both speed and a settled, focused attention.",
+      notes: "Email the teacher before registering to confirm level: achen@fremontchineseschool.org",
     },
     zh: {
       description:
         "從實體算盤進入心算的銜接階段，原本外在的工具開始轉化為內在的思考能力；在反覆練習之中，也培養出一種安定而專注的精神。",
+      notes: "報名前請 email 老師確認程度：achen@fremontchineseschool.org",
     },
     review: [
+      {
+        level: "correction",
+        en: "Placement contact changed from melissa@ to achen@. The 2026–2027 class schedule (updated 7/27/2026) lists 陳萬宗 Mr. Chen as the teacher for AB1, AB2, and AB3 in room 216, and no Melissa appears on it or anywhere in the 25-teacher roster. The melissa@ address came from the older June elective PDF. Confirm before publishing, in case Melissa is an administrator who still handles abacus placement.",
+        zh: "分班聯絡人由 melissa@ 改為 achen@。2026–2027 班級對照表（2026/7/27 更新）列出 AB1、AB2、AB3 皆由陳萬宗老師於 216 教室任教，表中及 25 位教師名單中皆無 Melissa。melissa@ 出自較早的六月選修課 PDF。發布前請再確認，以免 Melissa 實為仍負責珠心算分班的行政人員。",
+      },
       {
         level: "decision",
         en: "Mr. Chen wrote 腦中運算 (“calculating in the head”). Changed to 心算, the standard term, which also echoes the 珠心算 in the class name — but it is our word choice, not his.",
@@ -90,17 +97,24 @@ export const electiveOverrides: Record<string, ElectiveOverride> = {
       name: "Abacus 3 — Advanced (珠心算三)",
       description:
         "The advanced stage of abacus learning, for students with a solid foundation and fluent technique. The goal is no longer simply being able to calculate, but speed, accuracy, and consistency together — until the skill becomes an intuitive response.",
+      notes: "Email the teacher before registering: achen@fremontchineseschool.org",
     },
     zh: {
       name: "珠心算三（高級）",
       description:
         "算盤學習的高級階段，專為已具備穩固基礎與熟練技巧的學員設計。核心不再只是「會算」，而是進一步追求速度、準確度與穩定性的統一，透過高度重複與精準訓練，將算盤能力內化為直覺反應。",
+      notes: "報名前請 email 老師確認程度：achen@fremontchineseschool.org",
     },
     review: [
       {
         level: "correction",
-        en: "This renames the class, not just its description: “Intermediate” becomes “Advanced” (中級 → 高級), matching how Mr. Chen describes it. Check anywhere the old name appears outside the website — registration forms, the tuition schedule, printed handouts.",
-        zh: "此項更動的是課程名稱，而非僅是說明文字：「中級」改為「高級」，與陳老師的描述一致。請一併確認網站以外使用舊名稱之處，例如報名表、學費說明與紙本講義。",
+        en: "CONFLICT. This renames the class from “Intermediate” to “Advanced” (中級 → 高級) to match Mr. Chen's own description — but the school's 2026–2027 class schedule (updated 7/27/2026, published on this site as a PDF and as an image on /student-resources) still calls it “Abacus 3 Intermediate level”. Renaming here without reissuing that schedule leaves the two disagreeing. Either confirm the rename and update the schedule, or keep “Intermediate” and let the description carry the nuance.",
+        zh: "衝突項目。此處將課名由「中級」改為「高級」，以符合陳老師本人的描述；但學校 2026–2027 班級對照表（2026/7/27 更新，並以 PDF 及圖片形式發布於本站 /student-resources）仍標示為「珠心算三（Abacus 3 Intermediate level）」。若僅更改網頁而未重新發布對照表，兩者將不一致。建議或是確認改名並同步更新對照表，或是維持「中級」而由說明文字表達程度。",
+      },
+      {
+        level: "correction",
+        en: "Placement contact changed from melissa@ to achen@, on the same evidence as AB2.",
+        zh: "分班聯絡人由 melissa@ 改為 achen@，理由同 AB2。",
       },
     ],
   },
@@ -203,8 +217,8 @@ export const electiveOverrides: Record<string, ElectiveOverride> = {
 export const electivesReviewNotes: ReviewNote[] = [
   {
     level: "question",
-    en: "Unresolved: AB2 and AB3 tell families to email melissa@ to confirm placement, but the teacher document lists Mr. Aaron Chen (achen@) as the abacus teacher. Left untouched because we cannot tell which is current.",
-    zh: "待確認：AB2 與 AB3 請家長寄信至 melissa@ 確認程度，但教師介紹表列出的珠心算老師為陳萬宗老師（achen@）。因無法判斷何者為現況，此處未作更動。",
+    en: "The melissa@ / achen@ question is resolved on the AB2 and AB3 cards below: the 7/27/2026 class schedule settles it in favour of Mr. Chen. The same schedule contradicts the AB3 rename, which is flagged there too.",
+    zh: "melissa@ 與 achen@ 的疑問已於下方 AB2、AB3 卡片處理：2026/7/27 的班級對照表可確認應為陳萬宗老師。同一份對照表與 AB3 改名一事相衝突，亦已在該處標示。",
   },
   {
     level: "decision",
