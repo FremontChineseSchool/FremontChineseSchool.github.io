@@ -1,7 +1,7 @@
 ---
 import { content } from "../../i18n/content";
 import { type Lang } from "../../i18n/ui";
-import { teachersByGroup, groupLabels, classLabel } from "../../data/teachers";
+import { teachersByGroup, groupLabels, classLabel, defaultPhotoFocus } from "../../data/teachers";
 import { teacherCourseNotes } from "../../data/proposed-changes";
 import ReviewNote from "../ReviewNote.astro";
 
@@ -39,12 +39,6 @@ const addedBadge = isZh ? "新增" : "Added";
   <h1 class="text-3xl font-semibold sm:text-4xl" style="letter-spacing: -0.02em; color: var(--color-fcs-black);">{c.title}</h1>
   <p class="mt-4 text-lg leading-relaxed" style="color: var(--color-fcs-muted);">{c.intro}</p>
 
-  <!-- Work-in-progress note: several introductions and all photos are still
-       outstanding, and saying so is better than looking half-finished. -->
-  <p class="mt-5 rounded-[10px] p-4 text-sm" style="background: var(--color-fcs-orange-light); color: var(--color-fcs-muted); border: 1px solid var(--color-fcs-border);">
-    {c.note}
-  </p>
-
   <!-- Section jump links — 25 cards is a long scroll, and families arrive
        looking for one specific teacher. -->
   <nav class="mt-8 flex flex-wrap items-center gap-2" aria-label={c.jumpLabel}>
@@ -80,15 +74,29 @@ const addedBadge = isZh ? "新增" : "Added";
             style={`background: var(--color-fcs-white); border: 1px solid ${proposed ? 'var(--color-fcs-gold)' : 'var(--color-fcs-border)'};`}
           >
             <div class="flex items-start gap-4">
-              <!-- Monogram placeholder. aria-hidden: it repeats the name that
-                   follows it, so a screen reader gains nothing from it. -->
-              <div
-                class="flex h-12 w-12 shrink-0 items-center justify-center rounded-full text-lg font-semibold sm:h-14 sm:w-14 sm:text-xl"
-                style="background: var(--color-fcs-green-light); color: var(--color-fcs-green); border: 1px solid var(--color-fcs-border);"
-                aria-hidden="true"
-              >
-                {monogram(t.nameZh)}
-              </div>
+              {/* The photos are not a consistent set (see teachers.ts), so they
+                  are shown object-fit: cover inside a circle — cropped, never
+                  stretched — with a per-photo object-position where the default
+                  framing cuts badly. alt is empty on purpose: the name sits
+                  immediately beside it, so a description would just repeat it. */}
+              {t.photo ? (
+                <img
+                  src={t.photo}
+                  alt=""
+                  loading="lazy"
+                  decoding="async"
+                  class="h-16 w-16 shrink-0 rounded-full object-cover sm:h-20 sm:w-20"
+                  style={`object-position: ${t.photoFocus ?? defaultPhotoFocus}; border: 1px solid var(--color-fcs-border); background: var(--color-fcs-green-light);`}
+                />
+              ) : (
+                <div
+                  class="flex h-16 w-16 shrink-0 items-center justify-center rounded-full text-xl font-semibold sm:h-20 sm:w-20 sm:text-2xl"
+                  style="background: var(--color-fcs-green-light); color: var(--color-fcs-green); border: 1px solid var(--color-fcs-border);"
+                  aria-hidden="true"
+                >
+                  {monogram(t.nameZh)}
+                </div>
+              )}
 
               <div class="min-w-0 flex-1">
                 <div class="flex items-start justify-between gap-2">

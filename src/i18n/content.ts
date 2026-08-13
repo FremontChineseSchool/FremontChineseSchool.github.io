@@ -416,7 +416,6 @@ export const content = {
       title: 'Our Teachers',
       intro:
         'FCS is taught by teachers drawn from decades of classroom experience in Taiwan, in Bay Area schools, and at the university level. Below is the faculty for the 2026–2027 school year.',
-      note: 'Teacher photos and the remaining introductions are still being collected, and this page will be updated as they arrive.',
       jumpLabel: 'Jump to',
       teachesLabel: 'Teaches',
       bioPending: 'Introduction coming soon.',
@@ -1200,7 +1199,6 @@ export const content = {
       title: '師資團隊',
       intro:
         '費利蒙中文學校的師資，來自台灣國小、灣區學校及大學等各領域數十年的教學經驗。以下為 2026–2027 學年的任課教師。',
-      note: '教師照片與其餘教師介紹仍在彙整中，本頁將於資料齊備後陸續更新。',
       jumpLabel: '快速前往',
       teachesLabel: '任教班級',
       bioPending: '教師介紹即將更新。',
