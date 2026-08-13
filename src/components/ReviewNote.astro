@@ -1,0 +1,57 @@
+---
+// A single review annotation on a `-diff` page. Used both for cross-cutting
+// notes at the top of a page and for per-item notes attached to one change.
+//
+// Review-only: nothing on the live site renders this. It disappears along with
+// the `-diff` routes when the proposal is either shipped or dropped.
+import type { ReviewLevel } from "../data/proposed-changes";
+import type { Lang } from "../i18n/ui";
+
+interface Props {
+  lang: Lang;
+  level: ReviewLevel;
+  text: string;
+}
+const { lang, level, text } = Astro.props;
+
+const levelMeta: Record<ReviewLevel, { en: string; zh: string; bg: string; border: string; fg: string }> = {
+  // Something the current site states incorrectly, or a rename with reach
+  // beyond the page. Highest-attention.
+  correction: {
+    en: "Needs a decision",
+    zh: "需要確認",
+    bg: "var(--color-fcs-orange-light)",
+    border: "var(--color-fcs-gold)",
+    fg: "var(--color-fcs-black)",
+  },
+  // A call that could reasonably have gone the other way.
+  decision: {
+    en: "Judgment call",
+    zh: "編輯判斷",
+    bg: "var(--color-fcs-green-light)",
+    border: "var(--color-fcs-green)",
+    fg: "var(--color-fcs-green-dark)",
+  },
+  // An open question we could not resolve ourselves.
+  question: {
+    en: "For information",
+    zh: "補充說明",
+    bg: "var(--color-fcs-surface)",
+    border: "var(--color-fcs-border)",
+    fg: "var(--color-fcs-muted)",
+  },
+};
+
+const m = levelMeta[level];
+---
+
+<div
+  class="rounded-[8px] px-3 py-2.5 text-sm"
+  style={`background: ${m.bg}; border-left: 3px solid ${m.border};`}
+>
+  <span
+    class="mr-2 inline-block text-xs font-bold uppercase tracking-wide"
+    style={`color: ${m.fg};`}
+  >{m[lang]}</span>
+  <span style="color: var(--color-fcs-muted);">{text}</span>
+</div>

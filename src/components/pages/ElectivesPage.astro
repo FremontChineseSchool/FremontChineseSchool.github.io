@@ -1,12 +1,77 @@
 ---
 import { content, links } from "../../i18n/content";
 import { localizedPath, type Lang } from "../../i18n/ui";
+import { electiveOverrides, type ReviewNote as ReviewNoteType } from "../../data/proposed-changes";
+import ReviewNote from "../ReviewNote.astro";
 
 interface Props {
   lang: Lang;
+  /**
+   * "current" (default) renders the live page. "proposed" overlays the staged
+   * changes from proposed-changes.ts and annotates what differs — used only by
+   * /electives-diff, and removable along with that route.
+   */
+  variant?: "current" | "proposed";
 }
-const { lang } = Astro.props;
+const { lang, variant = "current" } = Astro.props;
 const c = content[lang].electives;
+const isProposed = variant === "proposed";
+
+type ElectiveClass = (typeof c.slots)[number]["classes"][number];
+
+type Resolved = {
+  name: string;
+  description: string;
+  notes: string | null;
+  /** Only the fields that actually differ, holding the CURRENT (live) value. */
+  before: { name?: string; description?: string; notes?: string | null };
+  changed: boolean;
+  review: ReviewNoteType[];
+};
+
+// The live content is the "before" — the overlay carries only the new value —
+// so a diff needs no second copy of the old text maintained anywhere.
+function resolve(cls: ElectiveClass): Resolved {
+  const base = {
+    name: cls.name,
+    description: cls.description,
+    notes: (cls.notes ?? null) as string | null,
+  };
+  const ov = isProposed ? electiveOverrides[cls.code] : undefined;
+  if (!ov) return { ...base, before: {}, changed: false, review: [] };
+
+  const next = ov[lang];
+  const before: Resolved["before"] = {};
+  const merged = { ...base };
+
+  if (next.name !== undefined && next.name !== base.name) {
+    before.name = base.name;
+    merged.name = next.name;
+  }
+  if (next.description !== undefined && next.description !== base.description) {
+    before.description = base.description;
+    merged.description = next.description;
+  }
+  if (next.notes !== undefined && (next.notes ?? null) !== base.notes) {
+    before.notes = base.notes;
+    merged.notes = next.notes ?? null;
+  }
+
+  return {
+    ...merged,
+    before,
+    changed: Object.keys(before).length > 0,
+    review: ov.review ?? [],
+  };
+}
+
+const beforeLabel = lang === "zh" ? "目前線上版本" : "Currently live";
+const changedBadge = lang === "zh" ? "已修改" : "Changed";
+const fieldLabels = {
+  name: lang === "zh" ? "課程名稱" : "Class name",
+  description: lang === "zh" ? "說明" : "Description",
+  notes: lang === "zh" ? "備註" : "Notes",
+};
 ---
 
 <section style="background: var(--color-fcs-white);" class="mx-auto max-w-3xl px-4 py-14">
@@ -33,14 +98,22 @@ const c = content[lang].electives;
 
         <!-- Class cards for this slot -->
         <div class="grid gap-4 sm:grid-cols-2">
-          {slot.classes.map((cls) => (
-            <div class="rounded-[10px] p-5 flex flex-col gap-2" style="background: var(--color-fcs-white); border: 1px solid var(--color-fcs-border);">
+          {slot.classes.map((cls) => {
+            const r = resolve(cls);
+            return (
+            <div
+              class="rounded-[10px] p-5 flex flex-col gap-2"
+              style={`background: var(--color-fcs-white); border: 1px solid ${r.changed ? 'var(--color-fcs-gold)' : 'var(--color-fcs-border)'};`}
+            >
               <div class="flex items-start justify-between gap-2">
                 <div>
                   <span class="inline-block rounded px-1.5 py-0.5 text-xs font-mono font-semibold mb-1" style="background: var(--color-fcs-green-light); color: var(--color-fcs-green);">{cls.code}</span>
-                  <h3 class="font-semibold text-sm leading-snug" style="color: var(--color-fcs-green-dark);">{cls.name}</h3>
+                  <h3 class="font-semibold text-sm leading-snug" style="color: var(--color-fcs-green-dark);">{r.name}</h3>
                 </div>
                 <div class="flex gap-1 flex-wrap justify-end shrink-0">
+                  {r.changed && (
+                    <span class="rounded-full px-2 py-0.5 text-xs font-bold" style="background: var(--color-fcs-gold); color: var(--color-fcs-black);">{changedBadge}</span>
+                  )}
                   {cls.isNew && (
                     <span class="rounded-full px-2 py-0.5 text-xs font-bold" style="background: var(--color-fcs-gold); color: var(--color-fcs-black);">{lang === 'en' ? 'NEW' : '新課'}</span>
                   )}
@@ -49,7 +122,7 @@ const c = content[lang].electives;
                   )}
                 </div>
               </div>
-              <p class="text-sm leading-relaxed" style="color: var(--color-fcs-muted);">{cls.description}</p>
+              <p class="text-sm leading-relaxed" style="color: var(--color-fcs-muted);">{r.description}</p>
               {cls.materialFee && (
                 <p class="text-xs font-semibold mt-auto" style="color: var(--color-fcs-deep-jade);">
                   {lang === 'en' ? 'Material fee: ' : '教材費：'}{cls.materialFee}
@@ -59,11 +132,29 @@ const c = content[lang].electives;
               {!cls.materialFee && cls.materialsNote && (
                 <p class="text-xs mt-auto" style="color: var(--color-fcs-muted);">{cls.materialsNote}</p>
               )}
-              {cls.notes && (
-                <p class="text-xs italic" style="color: var(--color-fcs-muted);">{cls.notes}</p>
+              {r.notes && (
+                <p class="text-xs italic" style="color: var(--color-fcs-muted);">{r.notes}</p>
+              )}
+
+              {r.changed && (
+                <div class="mt-2 space-y-2 border-t pt-3" style="border-color: var(--color-fcs-border);">
+                  <p class="text-xs font-bold uppercase tracking-wide" style="color: var(--color-fcs-muted);">{beforeLabel}</p>
+                  {(["name", "description", "notes"] as const).map((field) =>
+                    field in r.before ? (
+                      <p class="text-xs leading-relaxed" style="color: var(--color-fcs-muted);">
+                        <span class="font-semibold">{fieldLabels[field]}:</span>{' '}
+                        <span style="text-decoration: line-through; text-decoration-color: var(--color-fcs-gold);">
+                          {r.before[field] ?? (lang === 'zh' ? '（無）' : '(none)')}
+                        </span>
+                      </p>
+                    ) : null,
+                  )}
+                  {r.review.map((n) => <ReviewNote lang={lang} level={n.level} text={n[lang]} />)}
+                </div>
               )}
             </div>
-          ))}
+            );
+          })}
         </div>
       </div>
     ))}
@@ -82,18 +173,28 @@ const c = content[lang].electives;
         </div>
 
         <div class="grid gap-4 sm:grid-cols-2">
-          {slot.classes.map((cls) => (
-            <div class="rounded-[10px] p-5 flex flex-col gap-2" style="background: var(--color-fcs-white); border: 1px solid var(--color-fcs-border);">
+          {slot.classes.map((cls) => {
+            const r = resolve(cls);
+            return (
+            <div
+              class="rounded-[10px] p-5 flex flex-col gap-2"
+              style={`background: var(--color-fcs-white); border: 1px solid ${r.changed ? 'var(--color-fcs-gold)' : 'var(--color-fcs-border)'};`}
+            >
               <div class="flex items-start justify-between gap-2">
                 <div>
                   <span class="inline-block rounded px-1.5 py-0.5 text-xs font-mono font-semibold mb-1" style="background: var(--color-fcs-green-light); color: var(--color-fcs-green);">{cls.code}</span>
-                  <h3 class="font-semibold text-sm leading-snug" style="color: var(--color-fcs-black);">{cls.name}</h3>
+                  <h3 class="font-semibold text-sm leading-snug" style="color: var(--color-fcs-black);">{r.name}</h3>
                 </div>
-                {cls.isNew && (
-                  <span class="rounded-full px-2 py-0.5 text-xs font-bold shrink-0" style="background: var(--color-fcs-gold); color: var(--color-fcs-black);">{lang === 'en' ? 'NEW' : '新課'}</span>
-                )}
+                <div class="flex gap-1 flex-wrap justify-end shrink-0">
+                  {r.changed && (
+                    <span class="rounded-full px-2 py-0.5 text-xs font-bold" style="background: var(--color-fcs-gold); color: var(--color-fcs-black);">{changedBadge}</span>
+                  )}
+                  {cls.isNew && (
+                    <span class="rounded-full px-2 py-0.5 text-xs font-bold" style="background: var(--color-fcs-gold); color: var(--color-fcs-black);">{lang === 'en' ? 'NEW' : '新課'}</span>
+                  )}
+                </div>
               </div>
-              <p class="text-sm leading-relaxed" style="color: var(--color-fcs-muted);">{cls.description}</p>
+              <p class="text-sm leading-relaxed" style="color: var(--color-fcs-muted);">{r.description}</p>
               {cls.materialFee && (
                 <p class="text-xs font-semibold mt-auto" style="color: var(--color-fcs-deep-jade);">
                   {lang === 'en' ? 'Material fee: ' : '教材費：'}{cls.materialFee}
@@ -103,11 +204,29 @@ const c = content[lang].electives;
               {!cls.materialFee && cls.materialsNote && (
                 <p class="text-xs mt-auto" style="color: var(--color-fcs-muted);">{cls.materialsNote}</p>
               )}
-              {cls.notes && (
-                <p class="text-xs italic" style="color: var(--color-fcs-muted);">{cls.notes}</p>
+              {r.notes && (
+                <p class="text-xs italic" style="color: var(--color-fcs-muted);">{r.notes}</p>
+              )}
+
+              {r.changed && (
+                <div class="mt-2 space-y-2 border-t pt-3" style="border-color: var(--color-fcs-border);">
+                  <p class="text-xs font-bold uppercase tracking-wide" style="color: var(--color-fcs-muted);">{beforeLabel}</p>
+                  {(["name", "description", "notes"] as const).map((field) =>
+                    field in r.before ? (
+                      <p class="text-xs leading-relaxed" style="color: var(--color-fcs-muted);">
+                        <span class="font-semibold">{fieldLabels[field]}:</span>{' '}
+                        <span style="text-decoration: line-through; text-decoration-color: var(--color-fcs-gold);">
+                          {r.before[field] ?? (lang === 'zh' ? '（無）' : '(none)')}
+                        </span>
+                      </p>
+                    ) : null,
+                  )}
+                  {r.review.map((n) => <ReviewNote lang={lang} level={n.level} text={n[lang]} />)}
+                </div>
               )}
             </div>
-          ))}
+            );
+          })}
         </div>
       </div>
     ))}

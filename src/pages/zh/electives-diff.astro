@@ -1,0 +1,20 @@
+---
+// Review-only preview — see the English counterpart for context.
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import ElectivesPage from "../../components/pages/ElectivesPage.astro";
+import ReviewBanner from "../../components/ReviewBanner.astro";
+import { content } from "../../i18n/content";
+import { electiveOverrides, electivesReviewNotes } from "../../data/proposed-changes";
+const lang = "zh" as const;
+const changeCount = Object.keys(electiveOverrides).length;
+---
+
+<BaseLayout lang={lang} title={`${content[lang].electives.title}（修訂版）`} noindex>
+  <ReviewBanner
+    lang={lang}
+    liveRouteKey="electives"
+    notes={electivesReviewNotes}
+    changeCount={changeCount}
+  />
+  <ElectivesPage lang={lang} variant="proposed" />
+</BaseLayout>

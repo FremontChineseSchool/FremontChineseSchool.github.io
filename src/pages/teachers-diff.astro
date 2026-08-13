@@ -1,0 +1,22 @@
+---
+// Review-only preview of the proposed per-class course notes. The live
+// /teachers page is unchanged. Delete this file (and its /zh counterpart) when
+// the proposal is shipped or dropped — see src/data/proposed-changes.ts.
+import BaseLayout from "../layouts/BaseLayout.astro";
+import TeachersPage from "../components/pages/TeachersPage.astro";
+import ReviewBanner from "../components/ReviewBanner.astro";
+import { content } from "../i18n/content";
+import { teacherCourseNotes, teachersReviewNotes } from "../data/proposed-changes";
+const lang = "en" as const;
+const changeCount = Object.keys(teacherCourseNotes).length;
+---
+
+<BaseLayout lang={lang} title={`${content[lang].teachers.title} — proposed`} noindex>
+  <ReviewBanner
+    lang={lang}
+    liveRouteKey="teachers"
+    notes={teachersReviewNotes}
+    changeCount={changeCount}
+  />
+  <TeachersPage lang={lang} variant="proposed" />
+</BaseLayout>
