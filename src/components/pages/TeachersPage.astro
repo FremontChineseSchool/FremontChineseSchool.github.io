@@ -2,22 +2,13 @@
 import { content } from "../../i18n/content";
 import { type Lang } from "../../i18n/ui";
 import { teachersByGroup, groupLabels, classLabel, defaultPhotoFocus } from "../../data/teachers";
-import { teacherCourseNotes } from "../../data/proposed-changes";
-import ReviewNote from "../ReviewNote.astro";
 
 interface Props {
   lang: Lang;
-  /**
-   * "current" (default) renders the live page. "proposed" adds the staged
-   * per-class course notes from proposed-changes.ts and annotates them — used
-   * only by /teachers-diff, and removable along with that route.
-   */
-  variant?: "current" | "proposed";
 }
-const { lang, variant = "current" } = Astro.props;
+const { lang } = Astro.props;
 const c = content[lang].teachers;
 const isZh = lang === "zh";
-const isProposed = variant === "proposed";
 
 // Monogram stand-in until a consistent photo set exists. The Chinese surname
 // (one character, or two for the handful of compound surnames we might see) is
@@ -32,7 +23,7 @@ const secondaryName = (t: { nameZh: string; nameEn: string }) =>
   isZh ? t.nameEn : `${t.nameZh} 老師`;
 
 const courseNotesLabel = isZh ? "本學年課程重點" : "What this year covers";
-const addedBadge = isZh ? "新增" : "Added";
+const emailLabelFor = (name: string) => (isZh ? `寄信給${name}` : `Email ${name}`);
 ---
 
 <section style="background: var(--color-fcs-white);" class="mx-auto max-w-3xl px-4 py-14">
@@ -65,13 +56,11 @@ const addedBadge = isZh ? "新增" : "Added";
       </h2>
 
       <div class="mt-6 space-y-4">
-        {members.map((t) => {
-          const proposed = isProposed ? teacherCourseNotes[t.id] : undefined;
-          return (
+        {members.map((t) => (
           <article
             id={t.id}
             class="scroll-mt-24 rounded-[10px] p-5 sm:p-6"
-            style={`background: var(--color-fcs-white); border: 1px solid ${proposed ? 'var(--color-fcs-gold)' : 'var(--color-fcs-border)'};`}
+            style="background: var(--color-fcs-white); border: 1px solid var(--color-fcs-border);"
           >
             <div class="flex items-start gap-4">
               {/* The photos are not a consistent set (see teachers.ts), so they
@@ -99,17 +88,10 @@ const addedBadge = isZh ? "新增" : "Added";
               )}
 
               <div class="min-w-0 flex-1">
-                <div class="flex items-start justify-between gap-2">
-                  <div>
-                    <h3 class="text-lg font-semibold leading-tight" style="color: var(--color-fcs-green-dark);">
-                      {displayName(t)}
-                    </h3>
-                    <p class="mt-0.5 text-sm" style="color: var(--color-fcs-muted);">{secondaryName(t)}</p>
-                  </div>
-                  {proposed && (
-                    <span class="shrink-0 rounded-full px-2 py-0.5 text-xs font-bold" style="background: var(--color-fcs-gold); color: var(--color-fcs-black);">{addedBadge}</span>
-                  )}
-                </div>
+                <h3 class="text-lg font-semibold leading-tight" style="color: var(--color-fcs-green-dark);">
+                  {displayName(t)}
+                </h3>
+                <p class="mt-0.5 text-sm" style="color: var(--color-fcs-muted);">{secondaryName(t)}</p>
 
                 <!-- Class codes only. Rooms and times live on the class
                      schedule (student-resources), which stays the one place
@@ -141,41 +123,42 @@ const addedBadge = isZh ? "新增" : "Added";
                   <p class="mt-4 text-sm italic" style="color: var(--color-fcs-muted);">{c.bioPending}</p>
                 )}
 
-                {proposed && (
-                  <>
-                    <!-- Collapsed by default: only 10 of 23 classes have notes,
-                         and a closed disclosure keeps the roster scannable. -->
-                    <details class="fcs-course-notes mt-4 rounded-[8px]" style="background: var(--color-fcs-surface); border: 1px solid var(--color-fcs-border);">
-                      <summary class="cursor-pointer list-none px-4 py-2.5 text-sm font-semibold" style="color: var(--color-fcs-green);">
-                        <span class="fcs-course-notes__marker" aria-hidden="true">▸</span>
-                        {courseNotesLabel}
-                      </summary>
-                      <div class="space-y-4 px-4 pb-4 pt-1">
-                        {proposed.notes.map((n) => (
-                          <div>
-                            <p class="text-xs font-semibold" style="color: var(--color-fcs-deep-jade);">
-                              <span class="font-mono">{n.code}</span> · {classLabel(n.code, lang)}
-                            </p>
-                            <p class="mt-1 text-sm leading-relaxed" style="color: var(--color-fcs-muted);">{n[lang]}</p>
-                          </div>
-                        ))}
-                      </div>
-                    </details>
-
-                    <!-- Review notes sit OUTSIDE the disclosure on purpose: a
-                         reviewer must not have to expand anything to see them. -->
-                    {proposed.review && (
-                      <div class="mt-3 space-y-2">
-                        {proposed.review.map((n) => <ReviewNote lang={lang} level={n.level} text={n[lang]} />)}
-                      </div>
-                    )}
-                  </>
+                <!-- Collapsed by default: only 10 of the 23 language and AC
+                     classes have notes, and a closed disclosure keeps the
+                     roster scannable while making the gaps unremarkable.
+                     Native <details> needs no JS and is keyboard-accessible. -->
+                {t.courseNotes && (
+                  <details class="fcs-course-notes mt-4 rounded-[8px]" style="background: var(--color-fcs-surface); border: 1px solid var(--color-fcs-border);">
+                    <summary class="cursor-pointer list-none px-4 py-2.5 text-sm font-semibold" style="color: var(--color-fcs-green);">
+                      <span class="fcs-course-notes__marker" aria-hidden="true">▸</span>
+                      {courseNotesLabel}
+                    </summary>
+                    <div class="space-y-4 px-4 pb-4 pt-1">
+                      {t.courseNotes.map((n) => (
+                        <div>
+                          <p class="text-xs font-semibold" style="color: var(--color-fcs-deep-jade);">
+                            <span class="font-mono">{n.code}</span> · {classLabel(n.code, lang)}
+                          </p>
+                          <p class="mt-1 text-sm leading-relaxed" style="color: var(--color-fcs-muted);">{n[lang]}</p>
+                        </div>
+                      ))}
+                    </div>
+                  </details>
                 )}
+
+                <a
+                  href={`mailto:${t.email}`}
+                  class="mt-4 inline-flex items-center gap-1.5 text-sm font-medium hover:underline"
+                  style="color: var(--color-fcs-green);"
+                  aria-label={emailLabelFor(displayName(t))}
+                >
+                  <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+                  {t.email}
+                </a>
               </div>
             </div>
           </article>
-          );
-        })}
+        ))}
       </div>
     </div>
   ))}

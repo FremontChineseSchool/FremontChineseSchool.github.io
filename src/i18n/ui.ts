@@ -36,12 +36,6 @@ export const routes: Record<string, string> = {
   'news-archive': 'news-archive',
   electives: 'electives',
   teachers: 'teachers',
-  // Review-only previews of proposed copy changes. Listed here so BaseLayout
-  // can resolve a per-page meta description instead of falling back to the
-  // homepage's. Both are noindex and excluded from the sitemap; they go away
-  // when the proposal is shipped or dropped.
-  'electives-diff': 'electives-diff',
-  'teachers-diff': 'teachers-diff',
 };
 
 export const ui = {

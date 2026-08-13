@@ -18,16 +18,9 @@ interface Props {
    * canonical stays self-referencing either way.
    */
   singleLocale?: boolean;
-  /**
-   * Keep the page out of search results. Set on the `-diff` review pages, which
-   * are near-duplicates of the live pages they propose to replace — indexing
-   * both would split them as duplicate content. These pages are also filtered
-   * out of the sitemap in astro.config.mjs.
-   */
-  noindex?: boolean;
 }
 
-const { lang, title, description, singleLocale = false, noindex = false } = Astro.props;
+const { lang, title, description, singleLocale = false } = Astro.props;
 const t = ui[lang];
 
 // --- SEO ----------------------------------------------------------------
@@ -110,7 +103,6 @@ const orgSchema = {
     <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
     <title>{fullTitle}</title>
     <meta name="description" content={metaDescription} />
-    {noindex && <meta name="robots" content="noindex, nofollow" />}
     <link rel="canonical" href={canonicalURL} />
 
     <!-- Locale alternates. Omitted for single-locale pages, whose counterpart
@@ -171,10 +163,7 @@ const orgSchema = {
       )}
       <Header lang={lang} />
     </div>
-    {/* Pagefind only indexes pages carrying data-pagefind-body, so dropping the
-        attribute keeps noindex pages out of site search entirely — otherwise a
-        family searching "abacus" could land on a review preview. */}
-    <main id="main" class="flex-1 flex flex-col" data-pagefind-body={noindex ? undefined : ""}>
+    <main id="main" class="flex-1 flex flex-col" data-pagefind-body>
       <slot />
     </main>
     <Footer lang={lang} />
