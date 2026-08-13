@@ -24,7 +24,7 @@ const navItems = navOrder.map((key) => {
   style="height:72px;"
 >
   <div
-    class="mx-auto flex h-full max-w-6xl items-center justify-between px-8"
+    class="mx-auto flex h-full max-w-6xl items-center justify-between px-[16px] sm:px-[32px]"
   >
     <!-- Logo + replay-intro button, grouped so the button sits beside the logo -->
     <div class="flex shrink-0 items-center gap-1">
@@ -109,7 +109,7 @@ const navItems = navOrder.map((key) => {
     </nav>
 
     <!-- Right side: Enroll + lang switch + mobile toggle -->
-    <div class="flex items-center gap-3">
+    <div class="flex items-center gap-[8px] sm:gap-[12px]">
       <a
         href={localizedPath(lang, 'enroll')}
         class="btn-primary hidden whitespace-nowrap rounded-[6px] px-[16px] py-[8px] text-[11px] font-semibold transition-colors duration-150 sm:inline-block"

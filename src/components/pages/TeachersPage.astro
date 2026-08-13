@@ -148,8 +148,8 @@ const emailLabelFor = (name: string) => (isZh ? `寄信給${name}` : `Email ${na
 
                 <a
                   href={`mailto:${t.email}`}
-                  class="mt-4 inline-flex items-center gap-1.5 text-sm font-medium hover:underline"
-                  style="color: var(--color-fcs-green);"
+                  class="mt-4 inline-flex min-w-0 items-center gap-1.5 text-sm font-medium hover:underline"
+                  style="color: var(--color-fcs-green); overflow-wrap: anywhere;"
                   aria-label={emailLabelFor(displayName(t))}
                 >
                   <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
