@@ -676,11 +676,11 @@ export const content = {
         earlyBirdEndedNote: 'The Early Bird rate ended May 16, 2026. Regular pricing applies.',
         groups: [
           {
-            heading: 'CSL — Chinese as a Second Language (Pre-K–8th)',
+            heading: 'Chinese Class (Pre-K–8th)',
             rows: [
-              { plan: 'CSL only', earlyBird: '$780', regular: '$880' },
-              { plan: 'CSL + 1 elective', earlyBird: '$1,310', regular: '$1,510' },
-              { plan: 'CSL + 2 electives', earlyBird: '$1,840', regular: '$2,140' },
+              { plan: 'Chinese only', earlyBird: '$780', regular: '$880' },
+              { plan: 'Chinese + 1 elective', earlyBird: '$1,310', regular: '$1,510' },
+              { plan: 'Chinese + 2 electives', earlyBird: '$1,840', regular: '$2,140' },
             ],
           },
           {
@@ -701,8 +701,9 @@ export const content = {
           },
         ],
         notes: [
+          'Chinese Class covers both the Traditional and Bilingual tracks — the tuition is the same for either.',
           'New student registration fee: +$50, for students who did not enroll in (or who dropped during) the 2025–2026 school year.',
-          'Each elective added to a CSL or AC class is $530 (Early Bird) / $630 (Regular). A standalone elective is $630 (Early Bird) / $720 (Regular).',
+          'Each elective added to a Chinese or AC class is $530 (Early Bird) / $630 (Regular). A standalone elective is $630 (Early Bird) / $720 (Regular).',
         ],
         pdfLabel: 'Download full tuition schedule (PDF)',
         enrollCta: 'Enroll Now',
@@ -1456,7 +1457,7 @@ export const content = {
         earlyBirdEndedNote: '早鳥優惠已於 2026 年 5 月 16 日截止，現適用一般費用。',
         groups: [
           {
-            heading: 'CSL 中文課程（Pre-K–8 年級）',
+            heading: '中文課程（Pre-K–8 年級）',
             rows: [
               { plan: '僅中文課', earlyBird: '$780', regular: '$880' },
               { plan: '中文課＋1 門才藝選修', earlyBird: '$1,310', regular: '$1,510' },
@@ -1481,6 +1482,7 @@ export const content = {
           },
         ],
         notes: [
+          '中文課程涵蓋傳統中文班與雙語班，兩者學費相同。',
           '新生報名費：另加 $50，適用於 2025–2026 學年未在本校就讀（或中途退學）的學生。',
           '搭配中文課或學分班加選才藝課，每門 $530（早鳥）／$630（一般）；單獨報名才藝課每門 $630（早鳥）／$720（一般）。',
         ],
