@@ -21,14 +21,19 @@
 // `bio`; see src/data/proposed-changes.ts for the per-class notes still under
 // review.
 //
-// PHOTOS. Every teacher now has one, and they are published as supplied. They
-// are NOT a consistent set: resolutions run from 268x386 to 1130x1279,
-// backgrounds range from studio white to a Honolulu skyline, several are webcam
-// stills, one has a video-call filter on it, and two are full-body shots rather
-// than headshots. They are displayed with object-fit: cover inside a circle, so
-// nothing is stretched — but a proper photo session would replace all 25. Where
-// the default framing cuts badly (a face off-centre, a full-body pose),
-// `photoFocus` sets object-position for that one image.
+// PHOTOS. Every teacher now has one. They are NOT a consistent set: resolutions
+// run from 268x386 to 1130x1279, backgrounds range from studio white to a
+// Honolulu skyline, several are webcam stills, one has a video-call filter on
+// it, and two are full-body shots rather than headshots. They are displayed
+// with object-fit: cover inside a circle, so nothing is stretched — but a
+// proper photo session would replace all 25. Where the default framing cuts
+// badly (a face off-centre, a full-body pose), `photoFocus` sets
+// object-position for that one image.
+//
+// The only edit made to the supplied files: five had a white margin baked into
+// the image (吳秀華, 呂慧慈, 謝明暐, 沈燦, 張樂濱), which showed as a pale wedge
+// inside the circle. Those were trimmed to their content bounding box —
+// removing padding only, nothing of the subject.
 
 import { content } from "../i18n/content";
 import type { Lang } from "../i18n/ui";
