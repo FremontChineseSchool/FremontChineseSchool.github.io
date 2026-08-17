@@ -379,7 +379,11 @@ export const teachers: Teacher[] = [
         en: "Step-by-step practice in listening, speaking, reading, and writing. The first hour covers the textbook; the second puts it to use through games, crafts, and interactive activities. Learning happens through play, and children build both ability and confidence in a relaxed bilingual environment.",
         zh: "透過聽、說、讀、寫的循序練習，讓孩子一步一步學好中文。第一小時學習課本內容，第二小時則透過遊戲、勞作與互動活動，在輕鬆有趣的環境中練習所學，讓孩子邊玩邊學，逐步建立中文能力與自信。",
       },
-    
+      {
+        code: "LSC",
+        en: "A free, student-led conversation club Ms. Shieh advises. High-school students with strong Chinese run the group through games, activities, talent shows, and crafts, so members get to speak Chinese for fun rather than for a grade — the practice that builds confidence and keeps motivation up.",
+        zh: "謝老師擔任中文會話社團的指導老師。這是一個免費的社團，以學生帶學生的方式進行，由中文程度良好的高中生透過遊戲、活動、才藝表演與勞作帶領大家練習中文口說，讓學生在輕鬆愉快的氣氛中開口說中文，建立自信與學習動力。",
+      },
     ],
   },
   {

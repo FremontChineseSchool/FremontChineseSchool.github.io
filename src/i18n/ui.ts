@@ -78,6 +78,8 @@ export const ui = {
       acResources: 'AC Resources',
       staffResources: 'Staff Resources',
       taResources: 'TA Resources',
+      teachers: 'Our Teachers',
+      electives: 'Elective Classes',
     },
   },
   zh: {
@@ -116,6 +118,8 @@ export const ui = {
       acResources: '學分班資源',
       staffResources: '教職員資源',
       taResources: '助教資源',
+      teachers: '認識師資',
+      electives: '才藝選修課程',
     },
   },
 } as const;

@@ -11,6 +11,13 @@ const year = 2026;
 
 const bodyText = "color: rgba(236,230,214,0.72);";
 const headStyle = "color: var(--color-fcs-mint);";
+
+// Footer-only nav entries, appended after `navOrder` in the Links column.
+// Kept out of `navOrder` because that also drives the header, which stays a
+// compact seven items; the footer can afford to be a fuller sitemap. Both
+// pages are otherwise reachable only contextually (from Programs, Enroll,
+// Student Resources, and About).
+const footerOnlyLinks = ["electives", "teachers"] as const;
 ---
 
 <footer style="background: linear-gradient(to bottom, #221F1A, #15120E);">
@@ -31,6 +38,15 @@ const headStyle = "color: var(--color-fcs-mint);";
             <li>
               <a class="footer-link transition-colors duration-150" href={localizedPath(lang, key)}>
                 {t.nav[key]}
+              </a>
+            </li>
+          ))
+        }
+        {
+          footerOnlyLinks.map((key) => (
+            <li>
+              <a class="footer-link transition-colors duration-150" href={localizedPath(lang, key)}>
+                {t.footer[key]}
               </a>
             </li>
           ))
