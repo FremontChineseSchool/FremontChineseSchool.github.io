@@ -26,3 +26,8 @@ calendar-unmapped.json
 
 # Local palette/design exploration renders (not shipped)
 palette-previews/
+
+# Weekly eNews email hand-off files, rendered by the fcs-weekly-newsletter
+# skill for pasting into the parent-email send. The web version of each issue
+# IS source (src/data/newsletters.ts); these are throwaway artifacts.
+enews-email-*.html

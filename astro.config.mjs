@@ -2,6 +2,13 @@
 import { defineConfig } from 'astro/config';
 import tailwindcss from '@tailwindcss/vite';
 import sitemap from '@astrojs/sitemap';
+import { issues } from './src/data/newsletters.ts';
+
+// Draft eNews issues are built (so their permalink can be shared for review)
+// but must not be advertised. Collect their URL fragments to filter out below.
+const draftPaths = issues
+  .filter((i) => i.draft)
+  .flatMap((i) => [`/enews/${i.date}/`, `/zh/enews/${i.date}/`]);
 
 // FCS site. Hosted on GitHub Pages at the org root domain, so no `base` path.
 // `site` drives canonical URLs and the generated sitemap, so it must match the
@@ -28,6 +35,10 @@ export default defineConfig({
         defaultLocale: 'en',
         locales: { en: 'en', zh: 'zh-Hant' },
       },
+      // Drop draft issues. They also carry <meta robots="noindex">; this stops
+      // us actively submitting them in the first place.
+      filter: (page) =>
+        !draftPaths.some((p) => new URL(page).pathname === p),
     }),
   ],
   vite: {

@@ -18,9 +18,23 @@ interface Props {
    * canonical stays self-referencing either way.
    */
   singleLocale?: boolean;
+  /**
+   * Keep the page out of search results. Used by draft eNews issues, which are
+   * deliberately reachable by link (so staff can review the real page) but must
+   * not be indexed or listed. Pairs with the sitemap filter in
+   * astro.config.mjs — that removes the URL, this covers anyone who finds it
+   * some other way.
+   */
+  noindex?: boolean;
 }
 
-const { lang, title, description, singleLocale = false } = Astro.props;
+const {
+  lang,
+  title,
+  description,
+  singleLocale = false,
+  noindex = false,
+} = Astro.props;
 const t = ui[lang];
 
 // --- SEO ----------------------------------------------------------------
@@ -32,8 +46,18 @@ const site = Astro.site!; // set in astro.config.mjs
 const bareSlug = Astro.url.pathname
   .replace(/^\/+|\/+$/g, "")
   .replace(/^zh\/?/, "");
-const routeKey = Object.keys(routes).find((k) => routes[k] === bareSlug) ?? "home";
-const isHome = routeKey === "home";
+// `isHome` comes from the PATH, not from the route-key lookup. Deriving it from
+// the lookup meant any path that matched no slug fell back to `home` and then
+// rendered with the homepage's <title> — which every nested page (/enews/<date>/)
+// would have done.
+const isHome = bareSlug === "";
+// Exact slug first; then the first path segment, so a nested page inherits its
+// section's meta description rather than the homepage's. Issue pages pass an
+// explicit `description`, which wins over both.
+const routeKey =
+  Object.keys(routes).find((k) => routes[k] === bareSlug) ??
+  Object.keys(routes).find((k) => routes[k] === bareSlug.split("/")[0]) ??
+  "home";
 
 const fullTitle = isHome ? t.homeTitle : `${title} · ${t.siteName}`;
 const ogTitle = isHome ? t.homeTitle : title;
@@ -104,6 +128,7 @@ const orgSchema = {
     <title>{fullTitle}</title>
     <meta name="description" content={metaDescription} />
     <link rel="canonical" href={canonicalURL} />
+    {noindex && <meta name="robots" content="noindex, nofollow" />}
 
     <!-- Locale alternates. Omitted for single-locale pages, whose counterpart
          URL does not exist (see the `singleLocale` prop). -->

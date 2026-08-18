@@ -1,17 +1,39 @@
 ---
 import { content } from "../../i18n/content";
-import type { Lang } from "../../i18n/ui";
+import { localizedPath, type Lang } from "../../i18n/ui";
+import { hasIssues } from "../../data/newsletters";
 
 interface Props {
   lang: Lang;
 }
 const { lang } = Astro.props;
 const c = content[lang].news;
+const e = content[lang].enews;
 ---
 
 <section style="background: var(--color-fcs-white);" class="mx-auto max-w-3xl px-4 py-14">
   <h1 class="text-3xl font-semibold sm:text-4xl" style="letter-spacing: -0.02em; color: var(--color-fcs-black);">{c.title}</h1>
   <p class="mt-4 text-lg" style="color: var(--color-fcs-muted);">{c.intro}</p>
+
+  <!-- Weekly eNews pointer. The eNews is a separate, dated bulletin (see
+       src/data/newsletters.ts) — this page stays the standing announcement
+       list. Hidden until the first issue is published, since the routes don't
+       exist before then. -->
+  {hasIssues && (
+    <div
+      class="mt-8 rounded-[10px] p-5"
+      style="background: var(--color-fcs-green-light); border: 1px solid var(--color-fcs-border);"
+    >
+      <h2 class="text-lg font-semibold" style="color: var(--color-fcs-deep-jade);">{e.fromNewsTitle}</h2>
+      <p class="mt-2 text-sm leading-relaxed" style="color: var(--color-fcs-black);">{e.fromNewsBody}</p>
+      <p class="mt-4">
+        <a
+          href={localizedPath(lang, 'enews')}
+          class="btn-primary inline-block rounded-full px-5 py-2 text-sm font-semibold"
+        >{e.fromNewsCta}</a>
+      </p>
+    </div>
+  )}
 
   <!-- Posts -->
   <!-- To add a post: add an entry to content[lang].news.posts in src/i18n/content.ts

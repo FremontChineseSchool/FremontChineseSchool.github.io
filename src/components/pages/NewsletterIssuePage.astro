@@ -1,0 +1,212 @@
+---
+// Renders ONE eNews issue. Used by both /enews/ (the latest issue) and
+// /enews/<YYYY-MM-DD>/ (permalinks) in both locales.
+//
+// Section markup lives here and only here — the weekly skill adds DATA to
+// src/data/newsletters.ts and never writes markup, which is what keeps every
+// issue looking the same. If a week needs a section shape that doesn't exist
+// yet, add a `kind` to IssueSection and a branch below rather than hand-rolling
+// HTML into the data.
+//
+// Every kind renders in the same order — title, image + caption, body, links,
+// cta — so the image and link blocks are shared rather than repeated per kind.
+import { content } from "../../i18n/content";
+import { localizedPath, type Lang } from "../../i18n/ui";
+import { issueNeighbours, type NewsletterIssue } from "../../data/newsletters";
+
+interface Props {
+  lang: Lang;
+  issue: NewsletterIssue;
+  /** True on /enews/ (the "this week" alias) rather than a dated permalink. */
+  isLatest?: boolean;
+}
+const { lang, issue, isLatest = false } = Astro.props;
+const c = content[lang].enews;
+const { newer, older } = issueNeighbours(issue.date);
+
+const archiveHref = localizedPath(lang, "enews-archive");
+const issueHref = (i: NewsletterIssue) =>
+  `${localizedPath(lang, "enews")}/${i.date}`;
+/** External links open in a new tab; in-site paths navigate normally. */
+const extAttrs = (href: string) =>
+  href.startsWith("http") ? { target: "_blank", rel: "noopener" } : {};
+---
+
+<section class="mx-auto max-w-3xl px-4 py-14" style="background: var(--color-fcs-white);">
+  {/* Draft banner. A draft is reachable by link so staff can review the real
+      page, so it has to say loudly that it is not live yet — otherwise a
+      reviewer assumes parents have already received it. */}
+  {issue.draft && (
+    <div
+      class="mb-8 rounded-[10px] p-4"
+      style="background: var(--color-fcs-orange-light); border: 1px solid var(--color-fcs-gold);"
+    >
+      <p class="text-sm font-semibold" style="color: var(--color-fcs-black);">{c.draftBadge}</p>
+      <p class="mt-1 text-sm leading-relaxed" style="color: var(--color-fcs-muted);">{c.draftNote}</p>
+    </div>
+  )}
+
+  <header>
+    <p class="eyebrow">{c.eyebrow}{isLatest ? ` · ${c.latestLabel}` : ""}</p>
+    <h1
+      class="mt-2 text-3xl font-semibold sm:text-4xl"
+      style="letter-spacing: -0.02em; color: var(--color-fcs-black);"
+    >
+      {issue.label[lang]}
+    </h1>
+    {/* On the alias, point readers at the stable URL for this issue — that's
+        the one worth bookmarking or forwarding, since /enews/ moves on. */}
+    {isLatest && (
+      <p class="mt-3 text-sm" style="color: var(--color-fcs-muted);">
+        <a href={issueHref(issue)} class="underline" style="color: var(--color-fcs-deep-jade);">
+          {c.permalink}
+        </a>
+      </p>
+    )}
+  </header>
+
+  <div class="mt-10 space-y-12">
+    {issue.sections.map((section) => (
+      <article>
+        <h2
+          class="border-b pb-2 text-xl font-semibold"
+          style="color: var(--color-fcs-deep-jade); border-color: var(--color-fcs-border);"
+        >
+          {section.title[lang]}
+        </h2>
+
+        {/* Image + caption. Flyers are portrait-ish graphics of wildly varying
+            size, so they are contained rather than cropped, on a surface tint
+            so a white-background flyer still reads as a distinct object. */}
+        {section.image && (
+          <figure class="mt-4">
+            <img
+              src={section.image}
+              alt={section.alt[lang]}
+              loading="lazy"
+              decoding="async"
+              class="w-full rounded-[10px] object-contain"
+              style="max-height: 900px; background: var(--color-fcs-surface); border: 1px solid var(--color-fcs-border);"
+            />
+            {section.caption && (
+              <figcaption class="mt-3 text-sm leading-relaxed" style="color: var(--color-fcs-muted);">
+                {section.caption[lang]}
+              </figcaption>
+            )}
+          </figure>
+        )}
+
+        {section.kind === "note" && (
+          <div class="mt-4 space-y-3">
+            {section.paragraphs.map((p) => (
+              <p class="leading-relaxed" style="color: var(--color-fcs-black);">{p[lang]}</p>
+            ))}
+            {section.signoff && (
+              <p class="pt-1 text-sm italic" style="color: var(--color-fcs-muted);">
+                {section.signoff[lang]}
+              </p>
+            )}
+          </div>
+        )}
+
+        {section.kind === "bullets" && (
+          <div class="mt-4">
+            {section.intro && (
+              <p class="mb-3 leading-relaxed" style="color: var(--color-fcs-black);">
+                {section.intro[lang]}
+              </p>
+            )}
+            <ul class="ml-5 list-disc space-y-2">
+              {section.items.map((item) => (
+                <li style="color: var(--color-fcs-black);">{item[lang]}</li>
+              ))}
+            </ul>
+          </div>
+        )}
+
+        {section.kind === "callout" && (
+          <div
+            class="mt-4 rounded-[10px] p-5"
+            style="background: var(--color-fcs-orange-light); border-left: 4px solid var(--color-fcs-gold);"
+          >
+            <div class="space-y-3">
+              {section.paragraphs.map((p) => (
+                <p class="leading-relaxed" style="color: var(--color-fcs-black);">{p[lang]}</p>
+              ))}
+            </div>
+            {section.cta && (
+              <p class="mt-4">
+                <a
+                  href={section.cta.href}
+                  class="btn-primary inline-block rounded-full px-5 py-2 text-sm font-semibold"
+                  {...extAttrs(section.cta.href)}
+                >
+                  {section.cta.label[lang]}
+                </a>
+              </p>
+            )}
+          </div>
+        )}
+
+        {section.kind === "sponsors" && (
+          <ul class="mt-5 flex flex-wrap items-center gap-6">
+            {section.logos.map((logo) => (
+              <li>
+                {logo.href ? (
+                  <a href={logo.href} target="_blank" rel="noopener">
+                    <img src={logo.image} alt={logo.name} loading="lazy" class="max-h-12 w-auto" />
+                  </a>
+                ) : (
+                  <img src={logo.image} alt={logo.name} loading="lazy" class="max-h-12 w-auto" />
+                )}
+              </li>
+            ))}
+          </ul>
+        )}
+
+        {section.links && section.links.length > 0 && (
+          <ul class="mt-4 flex flex-wrap gap-x-6 gap-y-2">
+            {section.links.map((l) => (
+              <li>
+                <a
+                  href={l.href}
+                  class="text-sm font-medium underline"
+                  style="color: var(--color-fcs-deep-jade);"
+                  {...extAttrs(l.href)}
+                >
+                  {l.label[lang]}
+                </a>
+              </li>
+            ))}
+          </ul>
+        )}
+      </article>
+    ))}
+  </div>
+
+  {!issue.draft && (
+  <nav
+    class="mt-14 flex flex-wrap items-center justify-between gap-4 border-t pt-6 text-sm"
+    style="border-color: var(--color-fcs-border);"
+    aria-label={c.archiveTitle}
+  >
+    {newer ? (
+      <a href={issueHref(newer)} class="font-medium underline" style="color: var(--color-fcs-deep-jade);">
+        ← {c.newer}
+      </a>
+    ) : (
+      <span></span>
+    )}
+    <a href={archiveHref} class="font-medium underline" style="color: var(--color-fcs-deep-jade);">
+      {c.archiveLink}
+    </a>
+    {older ? (
+      <a href={issueHref(older)} class="font-medium underline" style="color: var(--color-fcs-deep-jade);">
+        {c.older} →
+      </a>
+    ) : (
+      <span></span>
+    )}
+  </nav>
+  )}
+</section>
