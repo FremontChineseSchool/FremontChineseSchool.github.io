@@ -3,7 +3,9 @@
 // src/data/newsletters.ts, so it needs no maintenance of its own.
 import { content } from "../../i18n/content";
 import { localizedPath, type Lang } from "../../i18n/ui";
-import { sortedIssues } from "../../data/newsletters";
+// Published issues only — the unfiltered list includes drafts, which must
+// never appear in a listing readers can browse.
+import { publishedIssues } from "../../data/newsletters";
 
 interface Props {
   lang: Lang;
@@ -23,11 +25,11 @@ const issueHref = (date: string) => `${localizedPath(lang, "enews")}/${date}`;
   </h1>
   <p class="mt-4 text-lg" style="color: var(--color-fcs-muted);">{c.archiveIntro}</p>
 
-  {sortedIssues.length === 0 ? (
+  {publishedIssues.length === 0 ? (
     <p class="mt-10" style="color: var(--color-fcs-muted);">{c.emptyArchive}</p>
   ) : (
     <ul class="mt-10 divide-y" style="border-color: var(--color-fcs-border);">
-      {sortedIssues.map((issue, i) => (
+      {publishedIssues.map((issue, i) => (
         <li class="py-5">
           <a href={issueHref(issue.date)} class="group block">
             <p class="text-xs font-semibold uppercase tracking-widest" style="color: var(--color-fcs-muted);">
