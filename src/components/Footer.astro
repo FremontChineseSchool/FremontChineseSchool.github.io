@@ -1,6 +1,9 @@
 ---
 import { ui, navOrder, localizedPath, type Lang } from "../i18n/ui";
 import { links, contactInfo } from "../i18n/content";
+// Gates the eNews link: while no issues are published the /enews routes are not
+// emitted at all, so linking to them would 404.
+import { hasIssues } from "../data/newsletters";
 
 interface Props {
   lang: Lang;
@@ -61,6 +64,12 @@ const footerOnlyLinks = ["electives", "teachers"] as const;
           <a href={lang === 'zh' ? '/zh/news' : '/news'} class="footer-link transition-colors duration-150"
           >{lang === 'zh' ? '最新消息' : 'News & Updates'}</a>
         </li>
+        {hasIssues && (
+          <li>
+            <a href={localizedPath(lang, 'enews')} class="footer-link transition-colors duration-150"
+            >{t.footer.enews}</a>
+          </li>
+        )}
         <li>
           <a href={localizedPath(lang, 'ac-resources')} class="footer-link transition-colors duration-150"
           >{t.footer.acResources}</a>

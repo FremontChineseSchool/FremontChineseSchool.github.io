@@ -1,0 +1,50 @@
+---
+// /enews/archive/ — every issue, newest first. Generated from
+// src/data/newsletters.ts, so it needs no maintenance of its own.
+import { content } from "../../i18n/content";
+import { localizedPath, type Lang } from "../../i18n/ui";
+import { sortedIssues } from "../../data/newsletters";
+
+interface Props {
+  lang: Lang;
+}
+const { lang } = Astro.props;
+const c = content[lang].enews;
+const issueHref = (date: string) => `${localizedPath(lang, "enews")}/${date}`;
+---
+
+<section class="mx-auto max-w-3xl px-4 py-14" style="background: var(--color-fcs-white);">
+  <p class="eyebrow">{c.eyebrow}</p>
+  <h1
+    class="mt-2 text-3xl font-semibold sm:text-4xl"
+    style="letter-spacing: -0.02em; color: var(--color-fcs-black);"
+  >
+    {c.archiveTitle}
+  </h1>
+  <p class="mt-4 text-lg" style="color: var(--color-fcs-muted);">{c.archiveIntro}</p>
+
+  {sortedIssues.length === 0 ? (
+    <p class="mt-10" style="color: var(--color-fcs-muted);">{c.emptyArchive}</p>
+  ) : (
+    <ul class="mt-10 divide-y" style="border-color: var(--color-fcs-border);">
+      {sortedIssues.map((issue, i) => (
+        <li class="py-5">
+          <a href={issueHref(issue.date)} class="group block">
+            <p class="text-xs font-semibold uppercase tracking-widest" style="color: var(--color-fcs-muted);">
+              {i === 0 ? c.latestLabel : issue.date}
+            </p>
+            <h2
+              class="mt-1 text-lg font-semibold underline decoration-transparent transition group-hover:decoration-current"
+              style="color: var(--color-fcs-deep-jade);"
+            >
+              {issue.label[lang]}
+            </h2>
+            <p class="mt-1 text-sm leading-relaxed" style="color: var(--color-fcs-muted);">
+              {issue.summary[lang]}
+            </p>
+          </a>
+        </li>
+      ))}
+    </ul>
+  )}
+</section>

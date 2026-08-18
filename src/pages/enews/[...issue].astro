@@ -1,0 +1,65 @@
+---
+// Weekly eNews routes (English). One rest-param route covers all three shapes:
+//
+//   /enews/               → the latest issue  (params.issue === undefined)
+//   /enews/archive/       → every issue, newest first
+//   /enews/2026-08-21/    → that issue's permalink
+//
+// Generated from src/data/newsletters.ts, so publishing an issue never touches
+// this file. While there are no issues, getStaticPaths returns [] and none of
+// these URLs are emitted at all — better than shipping empty shells.
+//
+// The ZH twin is src/pages/zh/enews/[...issue].astro and must stay in step:
+// identical except `lang` and the import depth.
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import NewsletterIssuePage from "../../components/pages/NewsletterIssuePage.astro";
+import NewsletterArchivePage from "../../components/pages/NewsletterArchivePage.astro";
+import { content } from "../../i18n/content";
+import { sortedIssues, latestIssue, findIssue } from "../../data/newsletters";
+
+export function getStaticPaths() {
+  // Permalinks for EVERY issue, drafts included — that URL is how a draft gets
+  // reviewed. But /enews/ (the "latest" alias) and /enews/archive/ only exist
+  // once something is actually published, so a draft never becomes the issue a
+  // visitor lands on.
+  const permalinks = sortedIssues.map((i) => ({ params: { issue: i.date } }));
+  if (!latestIssue) return permalinks;
+  return [
+    { params: { issue: undefined } },
+    { params: { issue: "archive" } },
+    ...permalinks,
+  ];
+}
+
+const lang = "en";
+const c = content[lang].enews;
+
+const slug = Astro.params.issue;
+const isArchive = slug === "archive";
+const issue = isArchive ? undefined : slug ? findIssue(slug) : latestIssue;
+
+// getStaticPaths only ever emits slugs that resolve, so this means the data and
+// the routes disagree — fail the build rather than render a blank page.
+if (!isArchive && !issue) {
+  throw new Error(`[enews] No issue found for slug "${slug}"`);
+}
+
+const title = isArchive ? c.archiveTitle : `${c.eyebrow} — ${issue!.label[lang]}`;
+---
+
+{
+  isArchive ? (
+    <BaseLayout lang={lang} title={title}>
+      <NewsletterArchivePage lang={lang} />
+    </BaseLayout>
+  ) : (
+    <BaseLayout
+      lang={lang}
+      title={title}
+      description={issue!.summary[lang]}
+      noindex={issue!.draft}
+    >
+      <NewsletterIssuePage lang={lang} issue={issue!} isLatest={!slug} />
+    </BaseLayout>
+  )
+}

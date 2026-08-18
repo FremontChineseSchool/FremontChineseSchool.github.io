@@ -77,6 +77,15 @@ export const descriptions: Record<'en' | 'zh', Record<string, string>> = {
       'Staff resources for Fremont Chinese School teachers, TAs, and volunteers — report card templates, teaching materials, forms, and applications.',
     teachers:
       'Meet the teachers of Fremont Chinese School — the faculty behind our Pre-K–8 language classes, WASC-accredited credit track, and Saturday electives.',
+    // Per-ISSUE eNews pages don't appear here — each issue supplies its own
+    // description from `summary` in src/data/newsletters.ts. This entry covers
+    // /enews/ (the latest issue) only as a fallback; BaseLayout's first-segment
+    // lookup means a dated issue with no summary would land here rather than on
+    // the tagline.
+    enews:
+      'The weekly FCS eNews — the principal\'s note, upcoming dates, volunteer needs, and class news for Fremont Chinese School families.',
+    'enews-archive':
+      'Past issues of the weekly Fremont Chinese School eNews, with the principal\'s notes, calendar reminders, and class news from each week.',
   },
   zh: {
     home: '費利蒙中文學校（FCS）自 1972 年起於加州費利蒙教授中文語文與文化，是通過 WASC 認證的非營利週末學校。',
@@ -114,6 +123,10 @@ export const descriptions: Record<'en' | 'zh', Record<string, string>> = {
       '費利蒙中文學校教職員資源——成績單範本、教學資源、各項表格與申請，供教師、助教及志工使用。',
     teachers:
       '認識費利蒙中文學校的師資團隊——學前班至八年級中文課程、WASC 認證學分班，以及週六才藝選修課的任課教師。',
+    enews:
+      '費利蒙中文學校每週電子快報——校長的話、近期重要日期、志工需求與各班消息。',
+    'enews-archive':
+      '費利蒙中文學校每週電子快報歷期存檔，收錄各週校長的話、行事曆提醒與班級消息。',
   },
 };
 
@@ -923,6 +936,35 @@ export const content = {
         { label: 'Newsletter No. 1 (August 2020)', url: 'https://drive.google.com/file/d/1XyqnF7m8zw5cbLIi1ZG4zmDrTQPL1Gkl/view' },
       ],
     },
+
+    // Weekly eNews. Page chrome only — the issues themselves live in
+    // src/data/newsletters.ts (each issue carries both locales inline).
+    enews: {
+      eyebrow: 'FCS eNews',
+      // /enews/ shows the latest issue, so the <h1> is the issue's own date
+      // heading; this is the label above it.
+      latestLabel: 'This week',
+      archiveTitle: 'eNews Archive',
+      archiveIntro:
+        'Every issue of the weekly FCS eNews, newest first. Each one is the same bulletin that went out by email that week.',
+      archiveLink: 'Browse past issues',
+      backToLatest: 'Latest issue',
+      // Shown on /enews/ only. That URL always holds the newest issue, so
+      // anyone bookmarking or forwarding it wants the dated permalink instead.
+      permalink: 'Permanent link to this issue',
+      // Shown only on a draft issue (draft: true in src/data/newsletters.ts).
+      draftBadge: 'Draft — not yet sent',
+      draftNote:
+        'This issue has not been published or emailed yet. It is visible to anyone with the link, but is not listed on the site. Send corrections to the principal.',
+      newer: 'Newer issue',
+      older: 'Older issue',
+      emptyArchive: 'No issues have been published yet.',
+      // Shown on /news, pointing across to the weekly bulletin.
+      fromNewsTitle: 'Weekly eNews',
+      fromNewsBody:
+        'The school sends a short bulletin to families most weeks — the principal\'s note, upcoming dates, and volunteer needs. Read it on the web here.',
+      fromNewsCta: 'Read this week\'s eNews',
+    },
   },
 
   zh: {
@@ -1716,6 +1758,25 @@ export const content = {
         { label: '校園快報 第2期（2020年9月）', url: 'https://drive.google.com/file/d/1D6_Dx4eAVmZ4BrIvai0LC300Ael5K_MB/view' },
         { label: '校園快報 第1期（2020年8月）', url: 'https://drive.google.com/file/d/1XyqnF7m8zw5cbLIi1ZG4zmDrTQPL1Gkl/view' },
       ],
+    },
+
+    enews: {
+      eyebrow: '每週電子快報',
+      latestLabel: '本週',
+      archiveTitle: '電子快報存檔',
+      archiveIntro: '歷期費利蒙中文學校每週電子快報，由新至舊排列，內容與當週寄送給家長的電子郵件相同。',
+      archiveLink: '瀏覽歷期快報',
+      backToLatest: '最新一期',
+      permalink: '本期固定連結',
+      draftBadge: '草稿 — 尚未寄送',
+      draftNote:
+        '本期快報尚未正式發布或寄送。持有連結者皆可閱讀，但網站上不會列出。如需更正，請與校長聯繫。',
+      newer: '較新一期',
+      older: '較舊一期',
+      emptyArchive: '目前尚無已發布的快報。',
+      fromNewsTitle: '每週電子快報',
+      fromNewsBody: '本校多數週次會寄送簡短的電子快報給家長，內容包含校長的話、近期重要日期與志工需求。歡迎在此線上閱讀。',
+      fromNewsCta: '閱讀本週電子快報',
     },
   },
 } as const;

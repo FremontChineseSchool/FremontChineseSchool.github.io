@@ -36,6 +36,13 @@ export const routes: Record<string, string> = {
   'news-archive': 'news-archive',
   electives: 'electives',
   teachers: 'teachers',
+  // Weekly eNews. `enews` is the latest issue; individual issues live one level
+  // deeper at /enews/<YYYY-MM-DD>/ and are generated from
+  // src/data/newsletters.ts rather than listed here — BaseLayout resolves those
+  // by first path segment, so they inherit this key's description unless the
+  // issue page passes its own (it does, from the issue's `summary`).
+  enews: 'enews',
+  'enews-archive': 'enews/archive',
 };
 
 export const ui = {
@@ -80,6 +87,7 @@ export const ui = {
       taResources: 'TA Resources',
       teachers: 'Our Teachers',
       electives: 'Elective Classes',
+      enews: 'Weekly eNews',
     },
   },
   zh: {
@@ -120,6 +128,7 @@ export const ui = {
       taResources: '助教資源',
       teachers: '認識師資',
       electives: '才藝選修課程',
+      enews: '每週電子快報',
     },
   },
 } as const;
