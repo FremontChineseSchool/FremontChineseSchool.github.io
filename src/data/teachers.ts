@@ -68,7 +68,7 @@ export type Teacher = {
    * Per-class notes on what the year covers, written by the teacher. Kept
    * separate from `bio` — mixing the two is what made the source document's
    * entries uneven, since some teachers wrote a biography, some a syllabus,
-   * and some both under one heading. Coverage is partial (14 of the 23
+   * and some both under one heading. Coverage is partial (16 of the 23
    * language and AC classes), which is why the page collapses these.
    */
   courseNotes?: { code: string; en: string; zh: string }[];
@@ -310,19 +310,31 @@ export const teachers: Teacher[] = [
   {
     id: "peichen-yang",
     nameZh: "楊沛蓁",
-    nameEn: "Ms. Pei-Chen Yang",
+    nameEn: "Ms. Sophia Yang",
     email: "pyang@fremontchineseschool.org",
     group: "language",
     classes: ["C1", "C8"],
     photo: "/images/teachers/peichen-yang.jpg",
     tagline: {
-      en: "Bilingual teaching that makes learning natural and fun",
-      zh: "雙語中文教學，讓學習自然又有趣",
+      en: "Understand it, use it, say it out loud",
+      zh: "理解、應用與表達",
     },
     bio: {
-      en: "From introducing Chinese in first grade to developing language skills in eighth, Ms. Yang supports her students with patience, encouragement, and thoughtful bilingual instruction. Even for children new to Chinese, she creates a comfortable environment where they can speak with confidence, understand what they hear, and learn step by step — gradually developing a genuine love for the language.",
-      zh: "從一年級的中文啟蒙，到八年級的語文能力培養，楊老師用耐心與鼓勵陪伴孩子學習，讓孩子即使一開始不熟悉中文，也能在熟悉、安心的環境中敢開口、聽得懂、學得會，慢慢愛上中文。",
+      en: "Ms. Yang taught in Taiwan before joining FCS, with experience spanning Olympiad mathematics, elementary classrooms, and one-on-one tutoring — work that taught her to start from each child's individual needs and break hard ideas into clear, logical steps. In Chinese she emphasizes understanding, application, and expression: through games, real-life situations, conversation, reading, and writing, students build both skill and the confidence to speak up.",
+      zh: "楊老師曾於台灣從事教育工作，具有奧林匹克數學教學、國小課堂教學及一對一家教等多元經驗，讓她重視孩子的個別差異，善於將複雜的內容拆解成清楚、有邏輯且容易理解的步驟。在中文教學上，她強調「理解、應用與表達」，希望孩子不只是記住中文，更能看懂、會用並且敢於表達；透過遊戲、情境活動、口語互動、閱讀與寫作，讓學生在有系統的學習中建立中文能力與自信。",
     },
+    courseNotes: [
+      {
+        code: "C1",
+        en: "For beginning learners, the focus is on building foundational listening, speaking, tone, and communication skills. Students also learn how Chinese characters are formed — through components, strokes, and character structure — so they understand how to recognize and write a character rather than simply memorize it, developing early reading and writing ability.",
+        zh: "從中文零起點開始，建立孩子的中文聽說、聲調及基礎溝通能力；同時透過漢字部件、筆畫與字形結構的邏輯拆解，幫助孩子理解「中文字怎麼看、怎麼認、怎麼寫」，培養初步的閱讀與書寫能力。",
+      },
+      {
+        code: "C8",
+        en: "Building on students' existing Chinese, eighth grade strengthens reading, writing, and speaking. Through conversation, role-play, themed discussion, and presentations, students apply what the textbook teaches to real situations. They are also encouraged to see the value of Chinese in an increasingly global world — more than a school subject, it becomes a tool for future study, travel, careers, and cross-cultural connection.",
+        zh: "在既有中文基礎上，強化學生的閱讀、寫作與口語表達能力，並透過情境對話、角色扮演、主題討論及專題發表，將課本所學實際運用於生活。同時引導學生思考中文在全球化時代的實際價值，讓中文不只是課堂上的學科，而是未來在學習、旅行、工作及跨文化交流中，與世界建立連結的重要能力。",
+      },
+    ],
   },
   {
     id: "sabrina-wun",
