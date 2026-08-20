@@ -19,10 +19,23 @@ description: >-
 
 Two artifacts per issue, from one pass of gathered content:
 
-| | What | Where it goes |
+You write **one** thing: an entry in `src/data/newsletters.ts`. Both artifacts are
+generated from it, so they cannot drift.
+
+| | What | Where it lands |
 |---|---|---|
-| **Web** | Data, not markup — staged as a draft, then published | One object prepended to `issues` in `src/data/newsletters.ts` |
-| **Email** | Standalone HTML file, rendered **only after the web issue is live** | `enews-email-<YYYY-MM-DD>.html` at the repo root (gitignored) |
+| **Web page** | `/enews/<token>/` while a draft, `/enews/<date>/` once published — both locales | generated |
+| **Email** | `/enews-email/<slug>.html` — a preview page with the subject line and send steps, wrapping the real email in an iframe | generated |
+
+The email is **not** hand-filled any more. `src/lib/email.ts` renders it from the
+same issue data — table layout, inline styles, both languages stacked, skip-to-
+English anchors, absolute image URLs. Do not hand-write email HTML, and do not
+edit the generated files; fix the data or the renderer.
+
+Because `public/` deploys wholesale, every image URL in the email resolves as
+soon as the issue is pushed — **even while it is still a draft.** So the email is
+reviewed at the same time as the page, not after publication. Staff care about
+the email more: it is what parents see first.
 
 **Read `CLAUDE.md` first** for the bilingual content model. Then read
 `src/data/newsletters.ts` — its type definitions are the authoritative field
@@ -50,9 +63,9 @@ as the model instead: it reflects how the school actually writes.
   a shape that doesn't exist, add a `kind` to `IssueSection` and a matching
   branch in `NewsletterIssuePage.astro`.
 - **Do not republish mistakes from the source email.** See *Check the source*.
-- **Do not render the email before the issue is published.** Its images point at
-  the live site; built early, every one of them is broken. The steps are ordered
-  for this reason.
+- **Do not hand-write email HTML.** It is generated from the issue data by
+  `src/lib/email.ts`. If the email is wrong, the data or the renderer is wrong —
+  never patch the generated file.
 - **Do not skip the draft stage, and never remove the `draft` field yourself.**
   A new issue is always staged for review first; only the user decides when it
   goes live.
@@ -408,12 +421,17 @@ gh run watch    # waits for the deploy; if it reports no run yet, retry in a few
 Stage those paths explicitly rather than `git add -A` — the working tree may hold
 unrelated edits, and the issue should land as one clean commit.
 
-Then give the user the two links to circulate:
+Then give the user **three** links to circulate:
 
 ```
+https://fremontchineseschool.org/enews-email/<token>.html   ← the email, review this first
 https://fremontchineseschool.org/enews/<token>/
 https://fremontchineseschool.org/zh/enews/<token>/
 ```
+
+Lead with the email: it is what parents see first, and the web page is for people
+who click through or come back later. The email preview carries the subject line,
+the send steps, and any unresolved gaps; the draft page links to it too.
 
 Say that these are safe to share with staff, that no dated URL exists until the
 issue is published, and that parents will not see the issue on the site until
@@ -451,8 +469,7 @@ tokenized review URL to the clean dated one, so the review links start 404ing �
 intended, since a review link should not outlive the review. Tell the user, so
 nobody is confused by a dead link they shared earlier.
 
-Then confirm the images are live — this is the gate for Step 7, because the email
-points at these URLs:
+Then confirm the images are live on the published page:
 
 ```sh
 curl -s -o /dev/null -w '%{http_code}\n' \
@@ -460,69 +477,41 @@ curl -s -o /dev/null -w '%{http_code}\n' \
 ```
 
 Repeat until it returns `200`. If it still 404s after the run completes, stop and
-investigate — do not proceed to the email.
+investigate.
 
-## Step 7 — Render the email, then hand it over
+## Step 7 — Hand the email over
 
-**Only now.** The email is deliberately last: it references
-`https://fremontchineseschool.org/images/...`, so rendering it before the issue is
-live would produce a file whose images are all broken — which is what makes a
-paste test misleading and a premature send unrecoverable. Its "Read on the web"
-link also needs the published issue.
+Nothing to build: the email was generated in Step 5 and regenerated on every
+push. Publishing in Step 6 rebuilds it once more, which is what swaps its "Read
+on the web" link from the review URL to the published dated one — so **send the
+copy that exists after Step 6**, not one saved earlier.
 
-Read `assets/email-template.html` before writing anything — its header comment
-carries ten hard rules (no `<style>` block, table layout, inline styles only,
-ink-on-gold buttons, absolute image URLs, the accepted Outlook anchor-link gap).
-Follow them even when the markup looks like it wants cleaning up.
+Give the user the preview URL for the published slug:
 
-Fill in the **same content as the web issue, both languages stacked** in one
-file, and save it to the repo root as `enews-email-<YYYY-MM-DD>.html`
-(gitignored — a hand-off artifact, not site source).
-
-- Replace every `{{PLACEHOLDER}}` or delete its whole `<tr>`. Never ship a
-  literal `{{...}}` to parents.
-- The template ships one example of each section. Copy a `<tr>` per extra section
-  the week needs, keeping the same inline styles.
-- Give every bilingual section a `#<name>-en` id and a matching "skip to English"
-  link.
-- Delete the sponsor `<tr>` unless there's a sponsor update this week.
-- `{{ISSUE_URL}}` is `https://fremontchineseschool.org/enews/<YYYY-MM-DD>/`.
-- **Follow Us / social belongs here and only here** — the website footer already
-  carries those links on every page.
-
-Email keeps both languages in one stacked document with jump links — there is no
-per-recipient language toggle. Do not split it into two files and do not try to
-hide either language with CSS.
-
-Check it, then open it:
-
-```sh
-grep -c '{{' enews-email-<YYYY-MM-DD>.html    # must be 0
-open enews-email-<YYYY-MM-DD>.html
+```
+https://fremontchineseschool.org/enews-email/<YYYY-MM-DD>.html
 ```
 
-### Then tell the user, in these words
+That page carries the subject line and the send steps, so there is nothing to
+recite. In short: click inside the email, ⌘A, ⌘C, paste into Gmail, test to
+yourself first, then send to the parents list. The email sits in an iframe so
+⌘A selects only the email and not the instructions around it.
 
-The file is now open in the browser, with every image loading from the live site.
-To send it:
+If images don't survive the paste, the fallback is to drag the files from
+`public/images/news/` into the compose window — that attaches them, which always
+displays, including in clients that block remote images.
 
-1. **Click once inside the page**, then press **⌘A** (select all) and **⌘C** (copy).
-2. In Gmail, click **Compose**, then press **⌘V** (paste). The layout, colors, and
-   images should all come across.
-3. **Subject line:** `費利蒙中文學校 FCS eNews <M/D/YYYY>` — matching how previous
-   issues were sent.
-4. **Send a test to yourself first.** Open it on a phone as well as a computer,
-   and check the flyer images appear.
-5. If the test looks right, send it to the parents list.
+This skill drafts and publishes the web page and generates the email. It has no
+access to the school's mailing list — a human sends it.
 
-**If the images don't come through on paste:** paste the text as above, then drag
-the flyer files straight from `public/images/news/` into the Gmail compose window,
-dropping each one where it belongs. That attaches them to the message instead of
-linking them, which always displays — including in clients that block remote
-images.
+### If a section belongs to only one artifact
 
-This skill drafts and publishes the web page. It has no access to the school's
-mailing list — a human sends the email.
+Both artifacts render from the same sections, which is the point. For the rare
+exception, set `only: "email"` or `only: "web"` on the section.
+
+Evergreen email boilerplate is NOT that: the Follow Us block and the WASC line
+live in `src/lib/email.ts` because they never change issue to issue. Don't add
+them to the data.
 
 ## Known links (reuse, don't invent)
 
