@@ -166,9 +166,13 @@ export const issues: NewsletterIssue[] = [
     // 2026-08-14 00:28 PT ahead of the 8/15 first day of school.
     date: "2026-08-14",
     label: { en: "August 14, 2026", zh: "2026年8月14日" },
-    // Staged for staff review: the sponsor link, the flyer typo, the Chinese
-    // captions, and the student photos are all still open. Remove `draft` to
-    // publish.
+    // Staged for staff review. Resolved: the sponsor URL, and the student
+    // photos in the Language Support Club flyer (cleared to publish).
+    // Still open: the Classroom Use Policy graphic is a legacy flyer that has
+    // been wrong for years and is being regenerated — when the new one lands,
+    // both its image AND its caption need replacing, since the caption
+    // paraphrases the rules the old graphic lists. The Chinese flyer captions
+    // also want the principal's read. Remove `draft` to publish.
     draft: true,
     summary: {
       en: "Welcome to 2026–27. School starts Saturday, August 15 — with new classroom numbers, a changed drop-off route, and a campus map to check before you arrive.",
@@ -435,12 +439,12 @@ export const issues: NewsletterIssue[] = [
             href: "https://ivymax.com",
           },
           {
-            // href intentionally omitted: in the source email this logo linked
-            // to ichenartacademy.com, which is a different business. Left
-            // unlinked pending confirmation of the correct URL rather than
-            // republishing the mismatch.
+            // The source email linked this logo to ichenartacademy.com, a
+            // different business. Correct URL confirmed by the school
+            // 2026-08-20.
             name: "Fremont United Auto Service Inc. 聯合汽車修理中心",
             image: "/images/sponsors/fremont-united-auto.jpg",
+            href: "https://www.fremontunitedautoservice.com/",
           },
         ],
       },
