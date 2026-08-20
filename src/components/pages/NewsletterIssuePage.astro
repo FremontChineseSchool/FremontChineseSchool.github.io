@@ -12,7 +12,7 @@
 // cta — so the image and link blocks are shared rather than repeated per kind.
 import { content } from "../../i18n/content";
 import { localizedPath, type Lang } from "../../i18n/ui";
-import { issueNeighbours, type NewsletterIssue } from "../../data/newsletters";
+import { issueNeighbours, issueSlug, type NewsletterIssue } from "../../data/newsletters";
 
 interface Props {
   lang: Lang;
@@ -26,7 +26,7 @@ const { newer, older } = issueNeighbours(issue.date);
 
 const archiveHref = localizedPath(lang, "enews-archive");
 const issueHref = (i: NewsletterIssue) =>
-  `${localizedPath(lang, "enews")}/${i.date}`;
+  `${localizedPath(lang, "enews")}/${issueSlug(i)}`;
 /** External links open in a new tab; in-site paths navigate normally. */
 const extAttrs = (href: string) =>
   href.startsWith("http") ? { target: "_blank", rel: "noopener" } : {};

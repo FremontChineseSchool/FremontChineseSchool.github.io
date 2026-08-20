@@ -15,14 +15,16 @@ import BaseLayout from "../../layouts/BaseLayout.astro";
 import NewsletterIssuePage from "../../components/pages/NewsletterIssuePage.astro";
 import NewsletterArchivePage from "../../components/pages/NewsletterArchivePage.astro";
 import { content } from "../../i18n/content";
-import { sortedIssues, latestIssue, findIssue } from "../../data/newsletters";
+import { sortedIssues, latestIssue, findIssue, issueSlug } from "../../data/newsletters";
 
 export function getStaticPaths() {
   // Permalinks for EVERY issue, drafts included — that URL is how a draft gets
   // reviewed. But /enews/ (the "latest" alias) and /enews/archive/ only exist
   // once something is actually published, so a draft never becomes the issue a
   // visitor lands on.
-  const permalinks = sortedIssues.map((i) => ({ params: { issue: i.date } }));
+  const permalinks = sortedIssues.map((i) => ({
+    params: { issue: issueSlug(i) },
+  }));
   if (!latestIssue) return permalinks;
   return [
     { params: { issue: undefined } },
@@ -57,7 +59,7 @@ const title = isArchive ? c.archiveTitle : `${c.eyebrow} — ${issue!.label[lang
       lang={lang}
       title={title}
       description={issue!.summary[lang]}
-      noindex={issue!.draft}
+      noindex={!!issue!.draft}
     >
       <NewsletterIssuePage lang={lang} issue={issue!} isLatest={!slug} />
     </BaseLayout>

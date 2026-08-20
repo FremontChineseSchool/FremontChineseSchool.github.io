@@ -6,8 +6,11 @@
 // The type definitions at the top of src/data/newsletters.ts are authoritative.
 //
 // Note what this example does and doesn't do:
-//   - `draft: true` is present, because every new issue starts staged for
-//     review. It is removed in a separate, deliberate publish step.
+//   - `draft` holds a random review token, because every new issue starts
+//     staged for review. While it is a draft the token IS the URL
+//     (/enews/9f3a1c/) — no date, so the draft cannot be found by guessing one
+//     and the URL survives the send date changing. The whole field is deleted
+//     in a separate, deliberate publish step.
 //   - There is no "Follow Us" section. The site footer already carries the
 //     social links on every page, so that section is email-only.
 //   - There is no HTML anywhere. Sections are data;
@@ -21,7 +24,7 @@
 {
   date: "2026-09-10",
   label: { en: "September 10, 2026", zh: "2026年9月10日" },
-  draft: true,
+  draft: "9f3a1c",  // openssl rand -hex 3
   summary: {
     en: "Picture day is Saturday the 12th, the makeup class list is posted, and we still need help at morning check-in.",
     zh: "9月12日（週六）拍攝班級照、補課名單已公布，早晨報到仍需志工協助。",

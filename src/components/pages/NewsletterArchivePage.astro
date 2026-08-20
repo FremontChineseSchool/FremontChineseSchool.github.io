@@ -5,14 +5,14 @@ import { content } from "../../i18n/content";
 import { localizedPath, type Lang } from "../../i18n/ui";
 // Published issues only — the unfiltered list includes drafts, which must
 // never appear in a listing readers can browse.
-import { publishedIssues } from "../../data/newsletters";
+import { publishedIssues, issueSlug } from "../../data/newsletters";
 
 interface Props {
   lang: Lang;
 }
 const { lang } = Astro.props;
 const c = content[lang].enews;
-const issueHref = (date: string) => `${localizedPath(lang, "enews")}/${date}`;
+const issueHref = (slug: string) => `${localizedPath(lang, "enews")}/${slug}`;
 ---
 
 <section class="mx-auto max-w-3xl px-4 py-14" style="background: var(--color-fcs-white);">
@@ -31,7 +31,7 @@ const issueHref = (date: string) => `${localizedPath(lang, "enews")}/${date}`;
     <ul class="mt-10 divide-y" style="border-color: var(--color-fcs-border);">
       {publishedIssues.map((issue, i) => (
         <li class="py-5">
-          <a href={issueHref(issue.date)} class="group block">
+          <a href={issueHref(issueSlug(issue))} class="group block">
             <p class="text-xs font-semibold uppercase tracking-widest" style="color: var(--color-fcs-muted);">
               {i === 0 ? c.latestLabel : issue.date}
             </p>

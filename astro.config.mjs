@@ -2,13 +2,15 @@
 import { defineConfig } from 'astro/config';
 import tailwindcss from '@tailwindcss/vite';
 import sitemap from '@astrojs/sitemap';
-import { issues } from './src/data/newsletters.ts';
+import { issues, issueSlug } from './src/data/newsletters.ts';
 
-// Draft eNews issues are built (so their permalink can be shared for review)
-// but must not be advertised. Collect their URL fragments to filter out below.
+// Draft eNews issues are built (so their tokenized permalink can be shared for
+// review) but must not be advertised. Collect their URL paths to filter out
+// below. issueSlug carries the review token, so these must be derived from it
+// rather than from the date alone.
 const draftPaths = issues
   .filter((i) => i.draft)
-  .flatMap((i) => [`/enews/${i.date}/`, `/zh/enews/${i.date}/`]);
+  .flatMap((i) => [`/enews/${issueSlug(i)}/`, `/zh/enews/${issueSlug(i)}/`]);
 
 // FCS site. Hosted on GitHub Pages at the org root domain, so no `base` path.
 // `site` drives canonical URLs and the generated sitemap, so it must match the
