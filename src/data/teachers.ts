@@ -385,6 +385,14 @@ export const teachers: Teacher[] = [
     group: "language",
     classes: ["C4", "LSC"],
     photo: "/images/teachers/nicole-shieh.jpg",
+    tagline: {
+      en: "Learning Chinese happily, one confident step at a time",
+      zh: "開心學中文，一步一步建立自信",
+    },
+    bio: {
+      en: "Ms. Shieh brings nine years of Chinese teaching experience, and teaches with care, patience, and genuine attention to every student. She works through games, crafts, and interactive activities so that children learn Chinese comfortably in an environment they enjoy. Her hope for every student is a happy relationship with the language, and confidence built one step at a time.",
+      zh: "謝老師有九年的中文教學經驗，教學認真、有耐心，也非常關心每位學生，並以遊戲、勞作與互動活動等方式，讓學生在有趣的環境裡輕鬆學習中文。她希望每位學生都能開心學中文，並一步一步建立自信。",
+    },
     courseNotes: [
       {
         code: "C4",
