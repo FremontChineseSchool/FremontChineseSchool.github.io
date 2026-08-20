@@ -1,9 +1,10 @@
 // REFERENCE ONLY — this file is not imported by the site.
 //
 // A filled-in example of one entry in the `issues` array in
-// src/data/newsletters.ts, exercising every section kind. Copy the SHAPE, not
-// the content: every date, name, room number, and link below is invented.
-// The type definitions at the top of src/data/newsletters.ts are authoritative.
+// src/data/newsletters.ts, exercising every section kind and every block type.
+// Copy the SHAPE, not the content: every date, name, room number, and link
+// below is invented. The type definitions at the top of newsletters.ts are
+// authoritative.
 //
 // Note what this example does and doesn't do:
 //   - `draft` holds a random review token, because every new issue starts
@@ -11,33 +12,39 @@
 //     (/enews/9f3a1c/) — no date, so the draft cannot be found by guessing one
 //     and the URL survives the send date changing. The whole field is deleted
 //     in a separate, deliberate publish step.
+//   - Sections are DOCUMENTS, not paragraphs. A `prose` or `callout` section
+//     holds an ordered array of blocks — subheads, paragraphs, lists, images —
+//     so one section can carry a sub-heading, prose, a list, an image, another
+//     sub-heading, and more prose, the way the school actually writes.
+//   - Prose, list items, subheads, and captions take two inline constructs and
+//     no others: `[label](href)` and `**emphasis**`. A link that belongs
+//     mid-sentence stays mid-sentence; the section's `links` row is for
+//     downloads and supporting documents.
 //   - There is no "Follow Us" section. The site footer already carries the
 //     social links on every page, so that section is email-only.
-//   - There is no HTML anywhere. Sections are data;
-//     NewsletterIssuePage.astro owns the markup. If a week needs a shape that
-//     doesn't exist, add a `kind` to IssueSection rather than smuggling markup
-//     into a string.
-//   - Captions carry the flyer's facts as real text. Words baked into a graphic
-//     are invisible to screen readers, to site search, and to anyone whose mail
-//     client blocks images.
+//   - There is no HTML anywhere. If a week needs a shape none of these covers,
+//     add a kind or a block type — never smuggle markup into a string.
 
 {
   date: "2026-09-10",
   label: { en: "September 10, 2026", zh: "2026年9月10日" },
   draft: "9f3a1c",  // openssl rand -hex 3
   summary: {
-    en: "Picture day is Saturday the 12th, the makeup class list is posted, and we still need help at morning check-in.",
-    zh: "9月12日（週六）拍攝班級照、補課名單已公布，早晨報到仍需志工協助。",
+    en: "Picture day is Saturday the 12th, two classrooms have moved, and we still need help at morning check-in.",
+    zh: "9月12日（週六）拍攝班級照、兩間教室有異動，早晨報到仍需志工協助。",
   },
   sections: [
     {
-      // Prose. `signoff` renders in a lighter style beneath the paragraphs.
-      kind: "note",
+      // Narrative. `signoff` renders in a lighter style beneath the blocks.
+      kind: "prose",
       title: { en: "A Note from the Principal", zh: "校長的話" },
-      paragraphs: [
+      blocks: [
         {
-          en: "Three weeks in, and the classrooms are already full of noise in the best possible way. Thank you to everyone who has been arriving early.",
-          zh: "開學三週，教室裡已充滿孩子們的歡聲笑語。感謝每一位提早到校的家長與同學。",
+          block: "prose",
+          text: {
+            en: "Three weeks in, and the classrooms are already full of noise in the best possible way. More photos from last Saturday are here: [Week 3 Photo Album](https://photos.example.com/album).",
+            zh: "開學三週，教室裡已充滿孩子們的歡聲笑語。上週六的活動照片請見：[第三週照片集](https://photos.example.com/album)。",
+          },
         },
       ],
       signoff: {
@@ -46,68 +53,97 @@
       },
     },
     {
-      // A `note` can carry an image too — a map, a diagram, a photo. `alt` is
-      // required whenever `image` is set; omitting it is a build error.
-      kind: "note",
-      title: { en: "Picture Day — Saturday, September 12", zh: "班級照拍攝 — 9月12日（週六）" },
-      image: "/images/news/enews-2026-09-10-picture-day-map.jpg",
-      alt: {
-        en: "Map of the courtyard showing where each class lines up for its photo.",
-        zh: "中庭示意圖，標示各班拍照排隊位置。",
-      },
-      paragraphs: [
+      // A weekly update: sub-headings, prose, a list, and an image, in one
+      // section. This is the shape the school uses for "Week N School Update" —
+      // do NOT split it into several top-level sections.
+      kind: "prose",
+      title: { en: "Week 3 School Update", zh: "第三週學校近況" },
+      blocks: [
+        { block: "subhead", text: { en: "Classroom Changes", zh: "教室異動更新" } },
         {
-          en: "Classes line up in the courtyard by room number. Please have your child wear their FCS shirt if they have one.",
-          zh: "各班依教室號碼於中庭排隊。若已領取本校服裝，請讓孩子當天穿著。",
+          block: "prose",
+          text: {
+            en: "Two classes have moved. Affected teachers have been notified individually:",
+            zh: "有兩個班級的教室已調整，任課老師均已個別通知：",
+          },
+        },
+        {
+          block: "list",
+          items: [
+            { en: "**T2** moves from room 213 to room 214.", zh: "**T2 班**由 213 教室改至 214 教室。" },
+            { en: "**AB1** moves from room 216 to room 227.", zh: "**珠心算一**由 216 教室改至 227 教室。" },
+          ],
+        },
+        {
+          block: "image",
+          src: "/images/news/enews-2026-09-10-campus-map.jpg",
+          alt: {
+            en: "Campus map marking visitor parking, the drop-off route, and the moved classrooms.",
+            zh: "校園地圖，標示訪客停車場、接送路線與異動後的教室位置。",
+          },
+        },
+        { block: "subhead", text: { en: "Parking Reminder", zh: "停車溫馨提醒" } },
+        {
+          block: "prose",
+          text: {
+            en: "**Staff and teachers must display a parking placard**, and the school checks periodically. If you are dropping off or coming onto campus, please use the Visitor Parking lot.",
+            zh: "**教職員停車時需出示停車證**，校方會不定期查核。家長接送或需進入校園時，請停放於「家長／訪客停車場」。",
+          },
         },
       ],
       links: [
         {
-          label: { en: "Class, teacher & classroom list", zh: "班級、教師與教室一覽" },
-          href: "/student-resources",
+          label: { en: "2026–2027 Class Schedule (PDF)", zh: "2026–2027 學年度班級時間表（PDF）" },
+          href: "/FCS_2026-2027_Class_Schedule.pdf",
         },
       ],
     },
     {
-      // A list. `intro` sits above the bullets; `links` below them.
-      kind: "bullets",
-      title: { en: "School Calendar", zh: "學校行事曆" },
-      intro: { en: "Coming event(s):", zh: "近期活動：" },
-      items: [
-        { en: "9/12/2026 — Picture day", zh: "9/12/2026 — 班級照拍攝" },
-        { en: "9/19/2026 — No school, teacher in-service", zh: "9/19/2026 — 停課，教師研習" },
-      ],
-      links: [
+      // Several unrelated announcements in one section. `numbered: true`
+      // numbers the subheads automatically — never number them by hand, or
+      // inserting one means renumbering the rest.
+      kind: "prose",
+      title: { en: "General Announcements", zh: "其他公告" },
+      numbered: true,
+      blocks: [
+        { block: "subhead", text: { en: "Volunteer Service Award", zh: "學生志工服務獎" } },
         {
-          label: { en: "Download calendar (Chinese)", zh: "下載行事曆（中文版）" },
-          href: "https://drive.google.com/file/d/1kUl_nhpdAC0WLE0r6smb2fSjDUzRmSdX/view",
+          block: "prose",
+          text: {
+            en: "Applications are open. Deadline **October 1, 2026**. Details at [www.example.org](https://www.example.org).",
+            zh: "現已開始報名。申請截止日：**2026年10月1日**。詳情請見[官網](https://www.example.org)。",
+          },
         },
+        { block: "subhead", text: { en: "Fall Festival", zh: "秋季園遊會" } },
         {
-          label: { en: "Download calendar (English)", zh: "下載行事曆（英文版）" },
-          href: "https://drive.google.com/file/d/1mHm8B4-LnNZkqqOY8qMvG7OReWaconzM/view",
+          block: "prose",
+          text: {
+            en: "Saturday 10/17, 10 AM – 4 PM, free admission.",
+            zh: "10月17日（週六）上午10點至下午4點，免費入場。",
+          },
         },
       ],
     },
     {
-      // Highlighted block. `cta` is the one action being asked for; `links` are
-      // supporting documents. An image is optional here as well.
+      // Highlighted block: same block array, tinted box, plus one `cta` — the
+      // single action the section is asking for.
       kind: "callout",
       title: { en: "Join Our Volunteer Team", zh: "加入幹事團隊" },
-      image: "/images/news/enews-2026-09-10-volunteer-team.jpg",
-      alt: {
-        en: "Parent volunteers at the morning check-in table.",
-        zh: "家長義工於早晨報到處協助。",
-      },
-      paragraphs: [
+      blocks: [
         {
-          en: "We are short two people at morning check-in. It is a 30-minute shift and counts toward your family's volunteer hours.",
-          zh: "早晨報到處尚缺兩位人手，每班 30 分鐘，可計入家庭志工時數。",
+          block: "image",
+          src: "/images/news/enews-2026-09-10-volunteer-team.jpg",
+          alt: {
+            en: "Parent volunteers at the morning check-in table.",
+            zh: "家長義工於早晨報到處協助。",
+          },
         },
-      ],
-      links: [
         {
-          label: { en: "See open volunteer positions", zh: "查看義工職缺一覽" },
-          href: "https://example.com/replace-with-the-real-positions-list",
+          block: "prose",
+          text: {
+            en: "We are short two people at morning check-in. It is a 30-minute shift and counts toward your family's volunteer hours.",
+            zh: "早晨報到處尚缺兩位人手，每班 30 分鐘，可計入家庭志工時數。",
+          },
         },
       ],
       cta: {
@@ -116,7 +152,8 @@
       },
     },
     {
-      // A pre-made graphic — `image` and `alt` are required. `links` optional.
+      // A pre-made graphic — `image` and `alt` required, `caption` carries the
+      // facts baked into the picture. `links` optional.
       kind: "flyer",
       title: { en: "Class Highlight: Chinese Yoyo", zh: "課程精選：扯鈴" },
       image: "/images/news/enews-2026-09-10-yoyo.jpg",
@@ -129,16 +166,13 @@
         zh: "每週六上午 10:00–10:50，中庭上課。歡迎初學者，第一堂課無需自備器材。",
       },
       links: [
-        {
-          label: { en: "Elective class list", zh: "選修課程一覽" },
-          href: "/electives",
-        },
+        { label: { en: "Elective class list", zh: "選修課程一覽" }, href: "/electives" },
       ],
     },
     {
-      // Conditional — only on weeks with a sponsor update, never carried over.
-      // Logos live in public/images/sponsors/ (undated; reused across issues).
-      // Omit `href` when you are not certain of the correct destination.
+      // Recurring — the gold sponsors appear most weeks. Confirm the roster
+      // each issue rather than assuming it is unchanged, and omit a logo's
+      // `href` when the correct destination is not certain.
       kind: "sponsors",
       title: { en: "2026 Yearbook Gold Sponsors", zh: "2026 年刊金牌贊助商" },
       logos: [

@@ -12,7 +12,8 @@
 // cta — so the image and link blocks are shared rather than repeated per kind.
 import { content } from "../../i18n/content";
 import { localizedPath, type Lang } from "../../i18n/ui";
-import { issueNeighbours, issueSlug, type NewsletterIssue } from "../../data/newsletters";
+import { issueNeighbours, issueSlug, collectGaps, type NewsletterIssue, type Block } from "../../data/newsletters";
+import { renderInline } from "../../lib/inline";
 
 interface Props {
   lang: Lang;
@@ -24,12 +25,34 @@ const { lang, issue, isLatest = false } = Astro.props;
 const c = content[lang].enews;
 const { newer, older } = issueNeighbours(issue.date);
 
+/**
+ * Unresolved items, shown only on drafts — a published issue cannot carry any
+ * (the build refuses). Listed above everything else so a reviewer skimming the
+ * page cannot miss them.
+ */
+const gaps = issue.draft ? collectGaps(issue) : [];
+
 const archiveHref = localizedPath(lang, "enews-archive");
 const issueHref = (i: NewsletterIssue) =>
   `${localizedPath(lang, "enews")}/${issueSlug(i)}`;
 /** External links open in a new tab; in-site paths navigate normally. */
 const extAttrs = (href: string) =>
   href.startsWith("http") ? { target: "_blank", rel: "noopener" } : {};
+
+/**
+ * Sub-headings are numbered per section when `numbered` is set — that is how
+ * the school's "General Announcements" reads, as an ordered list of items.
+ * Counted here rather than in the data so inserting an item never means
+ * renumbering the rest by hand.
+ */
+function subheadNumbers(blocks: Block[]): Map<number, number> {
+  const map = new Map<number, number>();
+  let n = 0;
+  blocks.forEach((b, i) => {
+    if (b.block === "subhead") map.set(i, ++n);
+  });
+  return map;
+}
 ---
 
 <section class="mx-auto max-w-3xl px-4 py-14" style="background: var(--color-fcs-white);">
@@ -43,6 +66,23 @@ const extAttrs = (href: string) =>
     >
       <p class="text-sm font-semibold" style="color: var(--color-fcs-black);">{c.draftBadge}</p>
       <p class="mt-1 text-sm leading-relaxed" style="color: var(--color-fcs-muted);">{c.draftNote}</p>
+    </div>
+  )}
+
+  {gaps.length > 0 && (
+    <div
+      class="mb-8 rounded-[10px] p-5"
+      style="background: #FDECEA; border: 2px solid #B3261E;"
+    >
+      <p class="text-base font-bold" style="color: #7F1D1B;">
+        ⚠ {c.gapsTitle} ({gaps.length})
+      </p>
+      <ul class="mt-3 ml-5 list-disc space-y-1.5">
+        {gaps.map((g) => (
+          <li class="text-sm leading-relaxed" style="color: #7F1D1B;">{g}</li>
+        ))}
+      </ul>
+      <p class="mt-3 text-sm font-medium" style="color: #7F1D1B;">{c.gapsNote}</p>
     </div>
   )}
 
@@ -75,10 +115,11 @@ const extAttrs = (href: string) =>
           {section.title[lang]}
         </h2>
 
-        {/* Image + caption. Flyers are portrait-ish graphics of wildly varying
-            size, so they are contained rather than cropped, on a surface tint
-            so a white-background flyer still reads as a distinct object. */}
-        {section.image && (
+        {/* Flyers are portrait-ish graphics of wildly varying size, so they are
+            contained rather than cropped, on a surface tint so a
+            white-background flyer still reads as a distinct object. Mid-section
+            images use the `image` block instead (see below). */}
+        {section.kind === "flyer" && (
           <figure class="mt-4">
             <img
               src={section.image}
@@ -89,52 +130,82 @@ const extAttrs = (href: string) =>
               style="max-height: 900px; background: var(--color-fcs-surface); border: 1px solid var(--color-fcs-border);"
             />
             {section.caption && (
-              <figcaption class="mt-3 text-sm leading-relaxed" style="color: var(--color-fcs-muted);">
-                {section.caption[lang]}
-              </figcaption>
+              <figcaption
+                class="enews-prose mt-3 text-sm leading-relaxed"
+                style="color: var(--color-fcs-muted);"
+                set:html={renderInline(section.caption[lang], { draft: !!issue.draft })}
+              />
             )}
           </figure>
         )}
 
-        {section.kind === "note" && (
-          <div class="mt-4 space-y-3">
-            {section.paragraphs.map((p) => (
-              <p class="leading-relaxed" style="color: var(--color-fcs-black);">{p[lang]}</p>
-            ))}
-            {section.signoff && (
-              <p class="pt-1 text-sm italic" style="color: var(--color-fcs-muted);">
+        {(section.kind === "prose" || section.kind === "callout") && (
+          <div
+            class={section.kind === "callout" ? "enews-prose mt-4 rounded-[10px] p-5" : "enews-prose mt-4"}
+            style={section.kind === "callout"
+              ? "background: var(--color-fcs-orange-light); border-left: 4px solid var(--color-fcs-gold);"
+              : undefined}
+          >
+            {(() => { const nums = section.kind === "prose" && section.numbered ? subheadNumbers(section.blocks) : null; return section.blocks.map((b, i) => (
+              <>
+                {b.block === "subhead" && (
+                  <h3
+                    class="mt-6 text-base font-semibold first:mt-0"
+                    style="color: var(--color-fcs-black);"
+                    set:html={(nums ? `${nums.get(i)}. ` : "") + renderInline(b.text[lang], { draft: !!issue.draft })}
+                  />
+                )}
+                {b.block === "prose" && (
+                  <p
+                    class="mt-3 leading-relaxed first:mt-0"
+                    style="color: var(--color-fcs-black);"
+                    set:html={renderInline(b.text[lang], { draft: !!issue.draft })}
+                  />
+                )}
+                {b.block === "list" && (
+                  b.ordered ? (
+                    <ol class="mt-3 ml-5 list-decimal space-y-2">
+                      {b.items.map((item) => (
+                        <li style="color: var(--color-fcs-black);" set:html={renderInline(item[lang], { draft: !!issue.draft })} />
+                      ))}
+                    </ol>
+                  ) : (
+                    <ul class="mt-3 ml-5 list-disc space-y-2">
+                      {b.items.map((item) => (
+                        <li style="color: var(--color-fcs-black);" set:html={renderInline(item[lang], { draft: !!issue.draft })} />
+                      ))}
+                    </ul>
+                  )
+                )}
+                {b.block === "image" && (
+                  <figure class="mt-4 first:mt-0">
+                    <img
+                      src={b.src}
+                      alt={b.alt[lang]}
+                      loading="lazy"
+                      decoding="async"
+                      class="w-full rounded-[10px] object-contain"
+                      style="max-height: 900px; background: var(--color-fcs-surface); border: 1px solid var(--color-fcs-border);"
+                    />
+                    {b.caption && (
+                      <figcaption
+                        class="mt-3 text-sm leading-relaxed"
+                        style="color: var(--color-fcs-muted);"
+                        set:html={renderInline(b.caption[lang], { draft: !!issue.draft })}
+                      />
+                    )}
+                  </figure>
+                )}
+              </>
+            )); })()}
+
+            {section.kind === "prose" && section.signoff && (
+              <p class="mt-4 text-sm italic" style="color: var(--color-fcs-muted);">
                 {section.signoff[lang]}
               </p>
             )}
-          </div>
-        )}
 
-        {section.kind === "bullets" && (
-          <div class="mt-4">
-            {section.intro && (
-              <p class="mb-3 leading-relaxed" style="color: var(--color-fcs-black);">
-                {section.intro[lang]}
-              </p>
-            )}
-            <ul class="ml-5 list-disc space-y-2">
-              {section.items.map((item) => (
-                <li style="color: var(--color-fcs-black);">{item[lang]}</li>
-              ))}
-            </ul>
-          </div>
-        )}
-
-        {section.kind === "callout" && (
-          <div
-            class="mt-4 rounded-[10px] p-5"
-            style="background: var(--color-fcs-orange-light); border-left: 4px solid var(--color-fcs-gold);"
-          >
-            <div class="space-y-3">
-              {section.paragraphs.map((p) => (
-                <p class="leading-relaxed" style="color: var(--color-fcs-black);">{p[lang]}</p>
-              ))}
-            </div>
-            {section.cta && (
+            {section.kind === "callout" && section.cta && (
               <p class="mt-4">
                 <a
                   href={section.cta.href}
@@ -210,3 +281,41 @@ const extAttrs = (href: string) =>
   </nav>
   )}
 </section>
+
+<style is:global>
+  /* Links written inline in issue copy (see src/lib/inline.ts). Scoped to the
+     .enews-prose wrapper so this cannot leak into the rest of the site. The
+     rule has to be global because the markup arrives via set:html, which
+     Astro's scoped styles do not annotate. */
+  .enews-prose a {
+    color: var(--color-fcs-deep-jade);
+    text-decoration: underline;
+    font-weight: 500;
+  }
+  .enews-prose a:hover {
+    color: var(--color-fcs-green-dark);
+  }
+
+  /* A link whose target is still unknown (the TODO sentinel in
+     src/lib/inline.ts). Styled to be impossible to skim past, and it can only
+     ever appear on a draft — the build refuses to publish an issue with one. */
+  .enews-gap {
+    background: #FDECEA;
+    box-shadow: inset 0 -2px 0 #B3261E;
+    color: #7F1D1B;
+    font-weight: 600;
+    padding: 0 0.15em;
+  }
+  .enews-gap-tag {
+    background: #B3261E;
+    border-radius: 3px;
+    color: #fff;
+    font-size: 0.7em;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    margin-left: 0.4em;
+    padding: 0.1em 0.4em;
+    text-transform: uppercase;
+    white-space: nowrap;
+  }
+</style>

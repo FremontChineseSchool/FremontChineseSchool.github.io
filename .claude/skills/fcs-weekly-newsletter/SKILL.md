@@ -56,6 +56,10 @@ as the model instead: it reflects how the school actually writes.
 - **Do not skip the draft stage, and never remove the `draft` field yourself.**
   A new issue is always staged for review first; only the user decides when it
   goes live.
+- **Never guess a missing value, and never set `publishWithGaps` on your own
+  initiative.** Record the gap (below) and let the build stop the publish. A
+  plausible-looking wrong link is worse than a visible hole, because a wrong
+  link gets clicked.
 
 ## Step 0 — Start from current `main`
 
@@ -79,6 +83,51 @@ along with the flyer graphics as image files. Expect **no draft email to work
 from**: the issue is composed here first, and this repo is where it is written.
 The email is a rendering of it, produced last.
 
+**A screenshot hides link targets.** If the source is an image of a draft, you
+can see that text is a link but not where it points. Ask for every URL
+explicitly rather than guessing or dropping it — a plausible-looking wrong link
+is worse than asking.
+
+### Recording a gap
+
+When something is missing or unresolved, **record it in the data**. Saying it in
+conversation is not enough: it scrolls away, and the reviewer never sees it.
+
+For a link whose target you don't have, use the `TODO` sentinel **in place**, so
+the hole appears in the sentence it belongs to:
+
+```ts
+text: {
+  en: "More photos here: [First Day Photo Album](TODO: ask Angela for the URL).",
+  zh: "更多照片請見：[開學日照片集](TODO: ask Angela for the URL)。",
+}
+```
+
+For anything else — a flyer being redrawn, copy awaiting the principal's read —
+add a line to the issue's `gaps` array:
+
+```ts
+gaps: ["Classroom Use Policy flyer is being regenerated — swap image and caption when it lands."],
+```
+
+What that buys you, automatically:
+
+- The draft page opens with a **red "Needs attention" panel** listing every gap,
+  above the issue itself. `TODO` links are found by scanning the copy, so one
+  cannot be missed by forgetting to also list it. A link needed in both locales
+  counts once.
+- The `TODO` link renders as a loud inline marker instead of a broken link.
+- **The build refuses to publish the issue.** Removing `draft` while any gap is
+  open fails `npm run build` with the gaps listed. This is the enforcement — it
+  is not possible to quietly ship a hole.
+
+**The override.** `publishWithGaps: "<reason>"` publishes anyway. It exists for
+"send it now, we'll fix the link next week" — and it requires the user to say so
+explicitly. Do not reach for it to make a build pass. When the user does ask,
+put their actual reason in the string; on a published page the marker quietly
+degrades to plain text, so a parent reads a normal sentence rather than staff
+chrome.
+
 Ask for whichever of these apply. Not every section runs every week — **skip a
 section rather than writing filler**. A quiet week is legitimately one `note`.
 
@@ -93,8 +142,11 @@ section rather than writing filler**. A quiet week is legitimately one `note`.
   and similar. Ask for the image, don't compose prose to fill the space. Any
   number per week — a repeatable block, not a fixed set of named sections.
 - **Donation appeal** — evergreen; reuse the standard copy unless told otherwise.
-- **Sponsor logos** — conditional, *not* weekly. Only when the user provides a
-  sponsor update. Never carry it over by default.
+- **Sponsor logos** — **recurring.** The gold sponsors have appeared in every
+  issue so far, and at least one is a longtime supporter expected to keep
+  appearing. Carry the block forward, but **confirm the roster each week**
+  rather than assuming it is unchanged — and re-check each logo's link (see
+  *Check the source*).
 - **Follow Us / social** — **email only.** The site footer already carries the
   social links on every page, so it is not a web section.
 
@@ -129,6 +181,9 @@ anything that looks wrong rather than copying it onto the website:
   `href` (the logo still renders) and raise it rather than guessing.
 - **Typos baked into flyer graphics** — flag them so the graphic can be
   re-exported; never retouch the image.
+- **Stray markdown the source editor failed to render** — a literal
+  `**「家長/訪客停車場」**` has appeared mid-paragraph in a sent issue. Interpret
+  it as the emphasis it was meant to be; never copy the asterisks through.
 - **"See attached"** — email attachments have no meaning on a web page. Link the
   real file on the site instead (see *Prefer site assets*).
 
@@ -182,6 +237,35 @@ Match the school's voice:
 When reproducing an existing issue, keep the school's own wording. Fix only
 clear slips, and say what you changed.
 
+### Formatting is yours to apply, not the principal's to write
+
+**The principal does not write Markdown and should never be asked to.** She
+composes in a rich-text editor — clicking the bold button, using the hyperlink
+dialog. The `**emphasis**` and `[label](href)` syntax is an internal encoding
+for the data file. Converting her formatting into it is your job.
+
+**Always preserve what she formatted.** Where she bolded a phrase, emit
+`**…**`. Where she hyperlinked text, emit `[…](…)` with the same target. When
+you have the HTML or a `.eml`, this is mechanical — read `<strong>`/`<b>` and
+`<a href>` out of the markup rather than eyeballing it.
+
+**You may add structure she didn't mark up**, within limits. Her source is often
+plain prose, and the web version reads better with real structure:
+
+- Turn a run of "Label: explanation" sentences into a `list`, with the label
+  bolded — that is how the parking and drop-off notes are built.
+- Add a `subhead` where she has clearly changed topic inside one section.
+- Bold a date, room number, or deadline that the sentence hinges on.
+
+**But do not invent emphasis inside a sentence she left plain**, and never add,
+remove, or retarget a link. Bolding that varies week to week is the same
+inconsistency the data model exists to prevent, and over-bolding destroys
+emphasis. When in doubt, less formatting.
+
+**How she edits.** She does not open the data file. She reads the draft page and
+says what to change in plain language; you make the edit and push again (Step
+5). That is the whole review loop — she never sees the syntax.
+
 Write the Chinese yourself — never leave placeholders. Flag translation nuances
 for confirmation instead of guessing on names, dates, or amounts.
 
@@ -215,29 +299,65 @@ issue is a draft** — the review URL does not depend on it.
 
 | `kind` | Use for |
 |---|---|
-| `note` | Prose — the principal's note, first-day details. Optional `signoff`. |
-| `bullets` | Dates, deadlines, logistics. Optional `intro`. |
+| `prose` | Anything narrative — the principal's note, a weekly update, general announcements. Optional `signoff`, optional `numbered`. |
+| `callout` | Same content model, rendered in a tinted box with one `cta` — volunteer calls, the donation appeal. |
 | `flyer` | A pre-made graphic. `image` + `alt` required. |
-| `callout` | Highlighted block with an optional `cta` — volunteer, donation. |
-| `sponsors` | Logo row. Conditional. |
+| `sponsors` | Logo row. Recurring; confirm the roster each week. |
 
-Every kind also takes an optional `links` row, and every kind except `sponsors`
-takes an optional `image` + `alt` (+ `caption`) — a campus map above the
-first-day notes, a team photo above the volunteer call. Sections always render
-in the order: title, image + caption, body, links, cta.
+**Sections are documents, not paragraphs.** `prose` and `callout` hold an ordered
+`blocks` array, so one section can carry a sub-heading, prose, a list, an image,
+another sub-heading, and more prose — the way the school actually writes:
+
+| `block` | Fields |
+|---|---|
+| `subhead` | `text` — a bold sub-heading inside the section |
+| `prose` | `text` — one paragraph |
+| `list` | `items`, optional `ordered: true` |
+| `image` | `src`, `alt`, optional `caption` — a map, a schedule, a photo |
+
+Two rules that matter:
+
+- **Do not split a nested section into several top-level sections.** The
+  school's "Week N School Update" is one section with sub-headings under it.
+  Splitting it flattens the hierarchy and makes "where do I break this" a
+  judgement call that comes out differently every week.
+- **`numbered: true` numbers the subheads automatically.** That is how "General
+  Announcements" reads. Never number them by hand — inserting one would mean
+  renumbering the rest.
+
+Every kind also takes an optional `links` row for downloads and supporting
+documents. Sections render in the order: title, blocks, links, then cta.
+
+### Inline markup
+
+Prose, list items, subheads, and captions accept exactly two constructs:
+
+```
+[label](https://example.com)   ->  a link, inline in the sentence
+**emphasis**                   ->  bold
+```
+
+Nothing else — no headings, images, lists, or raw HTML in a string. Use them:
+the school writes links mid-sentence constantly ("詳情請上官網：[官網](…)",
+"Details at [www.anccs.org](…)"), and demoting every one of those to the `links`
+row changes how the sentence reads. Block-level content belongs in `blocks`.
+
+`mailto:` and site-absolute paths work too. Anything else — `javascript:`,
+`data:` — is left as literal text rather than silently dropped, so a mistake
+shows up in review.
 
 Required per issue: `date` (ISO, doubles as slug and sort key), `label` (display
 date, both locales), `summary` (one sentence, ~120–160 chars — it becomes the
 meta description **and** the archive blurb), and `sections` in running order.
 
-Two things that matter more than they look:
+Two things that matter more than they look, for flyers and `image` blocks alike:
 
-- **`alt` describes the flyer's PURPOSE**, not its title — the title is already
+- **`alt` describes the image's PURPOSE**, not its title — the title is already
   adjacent on the page.
-- **`caption` carries the flyer's key facts as real text** — times, room
-  numbers, join codes, prices. Text baked into a graphic is invisible to screen
-  readers, to site search, and to anyone whose mail client blocks images. This
-  is the single highest-value thing the web version adds over the email.
+- **`caption` carries the key facts as real text** — times, room numbers, join
+  codes, prices. Text baked into a graphic is invisible to screen readers, to
+  site search, and to anyone whose mail client blocks images. This is the single
+  highest-value thing the web version adds over the email.
 
 ## Step 4 — Check it locally
 
@@ -273,7 +393,8 @@ yet sent" at the top. Nobody stumbles onto it; only someone with the link sees i
 
 Also name anything still unresolved from *Check the source* — a sponsor link left
 off, a typo in a flyer graphic, Chinese the principal hasn't reviewed. Those are
-exactly what review is for.
+exactly what review is for, and anything recorded as a gap is already on the page
+in red, so point the reviewer at it rather than restating the whole list.
 
 On approval:
 
@@ -309,6 +430,10 @@ Only when the user says the issue is approved:
 
 1. **Delete the whole `draft` line** from the issue — delete it, don't blank the
    token.
+   - If the build then fails with `[enews] Refusing to publish`, an unresolved
+     gap remains. **Stop and report it** — restore the `draft` token and tell the
+     user what is missing. Do not delete the gap, and do not set
+     `publishWithGaps`, unless they explicitly say to publish anyway.
 2. `npm run build`, then confirm `/enews/` and `/enews/archive/` now exist and the
    draft banner is gone.
 3. Commit and push:

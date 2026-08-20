@@ -37,6 +37,8 @@
 // (sponsor logos) lives in public/images/sponsors/ instead, undated, because
 // the same file is reused across issues.
 
+import { GAP, isGapHref } from "../lib/inline";
+
 /** A string that must exist in both locales. Missing one is a type error. */
 export type Localized = { en: string; zh: string };
 
@@ -44,53 +46,70 @@ export type Localized = { en: string; zh: string };
 export type LocalizedLink = { label: Localized; href: string };
 
 /**
- * Image fields, available on most section kinds — a campus map above the
- * first-day notes, a team photo above the volunteer call, or the flyer that IS
- * the section. `alt` is mandatory whenever `image` is set: the union makes an
- * undescribed image a build error, the same way `Localized` makes a missing
- * translation one.
+ * One block inside a section. Sections are documents, not paragraphs: a single
+ * "Week 2 School Update" routinely carries a sub-heading, some prose, a list,
+ * an image, another sub-heading, and more prose. Blocks render in array order,
+ * so the array IS the running order.
+ *
+ * Prose, list items, sub-headings, and captions all accept the two inline
+ * constructs from src/lib/inline.ts — `[label](href)` and `**emphasis**` — so a
+ * link mid-sentence stays mid-sentence instead of being demoted to the link row.
  */
-type ImageFields =
-  | { image: string; alt: Localized; caption?: Localized }
-  | { image?: undefined; alt?: undefined; caption?: undefined };
+export type Block =
+  /** A bold sub-heading within a section. Numbered when the section says so. */
+  | { block: "subhead"; text: Localized }
+  /** One paragraph. */
+  | { block: "prose"; text: Localized }
+  /** A bullet or numbered list. */
+  | { block: "list"; items: Localized[]; ordered?: boolean }
+  /**
+   * An image mid-section — a campus map, a schedule table, a photo. `alt` is
+   * required; describe what the image is FOR, not what it is called.
+   */
+  | { block: "image"; src: string; alt: Localized; caption?: Localized };
 
 /**
  * Shared by every section. `links` renders as a row of underlined links below
- * the body — use it for downloads and supporting documents, and use a `cta`
- * (callout only) for the one action the section is actually asking for.
+ * the body — use it for downloads and supporting documents, and `cta` (callout
+ * only) for the one action the section is actually asking for. A link that
+ * belongs inside a sentence goes in the prose, not here.
  */
 type SectionBase = { title: Localized; links?: LocalizedLink[] };
 
 /**
- * One block of an issue. Sections render in array order, so the array IS the
- * running order of the page. Every kind is optional and repeatable — a quiet
- * week might be a single `note`; a busy one might carry four `flyer`s.
+ * One section of an issue. Sections render in array order.
  *
- * Every kind renders in the same order: title, image + caption, body, links,
- * then cta. If a week needs a shape none of these covers, add a kind here and
- * a branch in NewsletterIssuePage.astro — never smuggle markup into a string.
+ * `prose` and `callout` are the general-purpose kinds and differ only in
+ * presentation — callout gets a tinted box and a CTA button. `flyer` and
+ * `sponsors` stay separate because their shape is genuinely fixed and their
+ * presentation is worth defaulting rather than re-deciding weekly.
+ *
+ * If a week needs a shape none of these covers, add a kind here and a branch in
+ * NewsletterIssuePage.astro — never smuggle markup into a string.
  */
 export type IssueSection =
-  /** Prose. The principal's note, or any narrative block. */
-  | (SectionBase &
-      ImageFields & {
-        kind: "note";
-        /** One entry per paragraph. */
-        paragraphs: Localized[];
-        /** e.g. "Warmly, Angela Ha, Principal" — rendered in a lighter style. */
-        signoff?: Localized;
-      })
-  /** A list — dates, deadlines, logistics. */
-  | (SectionBase &
-      ImageFields & {
-        kind: "bullets";
-        intro?: Localized;
-        items: Localized[];
-      })
+  /**
+   * Narrative. The principal's note, a weekly update, general announcements.
+   * Set `numbered: true` to number the sub-headings — that is how the school's
+   * "General Announcements" section reads, as an ordered list of mini-items.
+   */
+  | (SectionBase & {
+      kind: "prose";
+      blocks: Block[];
+      numbered?: boolean;
+      /** e.g. "Warmly, Angela — Principal" — rendered in a lighter style. */
+      signoff?: Localized;
+    })
+  /** A highlighted block with an optional button — volunteer calls, donations. */
+  | (SectionBase & {
+      kind: "callout";
+      blocks: Block[];
+      cta?: LocalizedLink;
+    })
   /**
    * A pre-made flyer graphic (usually Canva). The same image is used in both
    * locales and in the email — only title, alt, and caption are translated.
-   * `image` and `alt` are required here, since the graphic IS the section.
+   * `image` and `alt` are required: the graphic IS the section.
    */
   | (SectionBase & {
       kind: "flyer";
@@ -102,20 +121,17 @@ export type IssueSection =
        */
       alt: Localized;
       /**
-       * Put the flyer's key facts here as real text — times, room numbers,
-       * join codes. Text baked into a graphic is invisible to screen readers,
-       * to site search, and to anyone who blocks images.
+       * The flyer's key facts as real text — times, room numbers, join codes.
+       * Text baked into a graphic is invisible to screen readers, to site
+       * search, and to anyone who blocks images.
        */
       caption?: Localized;
     })
-  /** A highlighted block with an optional button — volunteer calls, donations. */
-  | (SectionBase &
-      ImageFields & {
-        kind: "callout";
-        paragraphs: Localized[];
-        cta?: LocalizedLink;
-      })
-  /** Sponsor logos. Conditional — only on weeks with a sponsor update. */
+  /**
+   * Sponsor logos. Recurring — the school's gold sponsors appear most weeks —
+   * but confirm the roster each issue rather than assuming it is unchanged.
+   * Omit a logo's `href` when the correct destination is not certain.
+   */
   | (SectionBase & {
       kind: "sponsors";
       logos: { name: string; image: string; href?: string }[];
@@ -171,6 +187,29 @@ export type NewsletterIssue = {
    * That is intended: a review link should not outlive the review.
    */
   draft?: string;
+  /**
+   * Known unresolved items, in plain internal prose — "the classroom-use flyer
+   * is being regenerated", "Chinese captions need the principal's read". Listed
+   * loudly at the top of the draft page so a reviewer cannot miss them, and
+   * they BLOCK publication (see the check below).
+   *
+   * Not `Localized`, unlike everything else here: these are operational notes
+   * for whoever reviews the draft, never published copy — an issue carrying
+   * gaps cannot be published at all.
+   *
+   * A missing link URL does NOT belong here. Mark it in place with the `TODO`
+   * href sentinel (see src/lib/inline.ts) so the hole is visible in the
+   * sentence it belongs to; it is collected automatically.
+   */
+  gaps?: string[];
+  /**
+   * Escape hatch: publish DESPITE open gaps, stating why. A string, not a
+   * boolean, so the reason is recorded next to the decision.
+   *
+   * Requires an explicit instruction from the user. Never set this to clear a
+   * build failure on your own initiative — the failure is the feature.
+   */
+  publishWithGaps?: string;
   sections: IssueSection[];
 };
 
@@ -186,41 +225,54 @@ export const issues: NewsletterIssue[] = [
   {
     // First issue of the 2026-27 school year. Reproduced from the email sent
     // 2026-08-14 00:28 PT ahead of the 8/15 first day of school.
-    date: "2026-08-14",
-    label: { en: "August 14, 2026", zh: "2026年8月14日" },
-    // Published 2026-08-20, after the fact: the original went out by email on
-    // 2026-08-14 through the school's previous mail tool, so this entry is the
-    // web record of it rather than something the site announced first.
+    //
+    // Published 2026-08-20, after the fact: the original went out by email
+    // through the school's previous mail tool, so this entry is the web record
+    // of it rather than something the site announced first.
     //
     // PENDING: the Classroom Use Policy graphic is a legacy flyer that has been
-    // wrong for years and is being regenerated. When the replacement lands,
-    // swap both its image AND its caption — the caption paraphrases the rules
-    // the old graphic lists, so a rules change makes it wrong in a way the
-    // build cannot catch.
+    // wrong for years ("Irvington Hish School") and is being regenerated. When
+    // the replacement lands, swap both its image AND its caption — the caption
+    // paraphrases the rules the old graphic lists, so a rules change makes it
+    // wrong in a way the build cannot catch.
+    date: "2026-08-14",
+    label: { en: "August 14, 2026", zh: "2026年8月14日" },
     summary: {
       en: "Welcome to 2026–27. School starts Saturday, August 15 — with new classroom numbers, a changed drop-off route, and a campus map to check before you arrive.",
       zh: "2026–27 學年 8 月 15 日（週六）開學：教室編號有變動、接送與步行動線調整，請提前查看校園地圖與班級時間表。",
     },
     sections: [
       {
-        kind: "note",
+        kind: "prose",
         title: { en: "A Note from the Principal", zh: "校長的話" },
-        paragraphs: [
+        blocks: [
           {
-            en: "Dear FCS Families,",
-            zh: "親愛的費利蒙中文學校家長們：",
+            block: "prose",
+            text: {
+              en: "Dear FCS Families,",
+              zh: "親愛的費利蒙中文學校家長們：",
+            },
           },
           {
-            en: "Welcome to the 2026–2027 school year! I'm honored to step into the role of Principal at Fremont Chinese School, and I'm looking forward to getting to know our students, families, and staff in the weeks ahead.",
-            zh: "歡迎大家蒞臨 2026–2027 學年度！我很榮幸接任本校校長一職，期待在接下來的日子裡與各位學生、家長及教職員相識相知。",
+            block: "prose",
+            text: {
+              en: "Welcome to the 2026–2027 school year! I'm honored to step into the role of Principal at Fremont Chinese School, and I'm looking forward to getting to know our students, families, and staff in the weeks ahead.",
+              zh: "歡迎大家蒞臨 2026–2027 學年度！我很榮幸接任本校校長一職，期待在接下來的日子裡與各位學生、家長及教職員相識相知。",
+            },
           },
           {
-            en: "Before we dive into the school year, I want to give you an important heads-up about Saturday, August 15 — our first day of school. Because of the ongoing construction on campus, a few things will look different this year. Please read the sections below carefully, and please don't hesitate to email me directly at Principal@fremontchineseschool.org if you have any questions.",
-            zh: "在正式開學之前，我想先提醒大家一個重要事項：由於校園內持續進行的施工工程，今年的 8 月 15 日（星期六）開學日將會有些不同之處，懇請家長們仔細閱讀以下說明。若有任何疑問，歡迎隨時來信 Principal@fremontchineseschool.org 與我聯繫。",
+            block: "prose",
+            text: {
+              en: "Before we dive into the school year, I want to give you an important heads-up about **Saturday, August 15 — our first day of school**. Because of the ongoing construction on campus, a few things will look different this year. Please read the sections below carefully, and please don't hesitate to email me directly at [Principal@fremontchineseschool.org](mailto:Principal@fremontchineseschool.org) if you have any questions.",
+              zh: "在正式開學之前，我想先提醒大家一個重要事項：由於校園內持續進行的施工工程，今年的 **8 月 15 日（星期六）開學日**將會有些不同之處，懇請家長們仔細閱讀以下說明。若有任何疑問，歡迎隨時來信 [Principal@fremontchineseschool.org](mailto:Principal@fremontchineseschool.org) 與我聯繫。",
+            },
           },
           {
-            en: "Thank you for your patience as we navigate these changes together, and I can't wait to see everyone on Saturday! 🚀",
-            zh: "感謝大家在我們共同適應這些變化的過程中給予的耐心與體諒，期待星期六與大家見面！🚀",
+            block: "prose",
+            text: {
+              en: "Thank you for your patience as we navigate these changes together, and I can't wait to see everyone on Saturday! 🚀",
+              zh: "感謝大家在我們共同適應這些變化的過程中給予的耐心與體諒，期待星期六與大家見面！🚀",
+            },
           },
         ],
         signoff: {
@@ -229,28 +281,40 @@ export const issues: NewsletterIssue[] = [
         },
       },
       {
-        kind: "note",
+        kind: "prose",
         title: {
           en: "First Day of School — Saturday, August 15, 2026",
           zh: "開學首日資訊 — 2026年8月15日（週六）",
         },
-        image: "/images/news/enews-2026-08-14-campus-map.jpg",
-        alt: {
-          en: "Campus map marking visitor and staff parking, the blue drop-off route along Greenpark Drive, the green walking route, the new classrooms, and the wing closed for renovation.",
-          zh: "校園地圖，標示家長／訪客與教職員停車場、沿 Greenpark Drive 的藍色接送路線、綠色行走路線、新教室位置，以及施工期間停用的舊教室區。",
-        },
-        paragraphs: [
+        blocks: [
           {
-            en: "Class start times vary by class. Please check the 2026–2027 Class Schedule below to confirm your child's exact start time, teacher, and classroom.",
-            zh: "各班上課時間不同。請查閱下方的 2026–2027 學年度班級時間表，確認貴子女的上課時間、教師及教室。",
+            block: "image",
+            src: "/images/news/enews-2026-08-14-campus-map.jpg",
+            alt: {
+              en: "Campus map marking visitor and staff parking, the blue drop-off route along Greenpark Drive, the green walking route, the new classrooms, and the wing closed for renovation.",
+              zh: "校園地圖，標示家長／訪客與教職員停車場、沿 Greenpark Drive 的藍色接送路線、綠色行走路線、新教室位置，以及施工期間停用的舊教室區。",
+            },
           },
           {
-            en: "⚠️ Important: classroom numbers have changed. Because of the ongoing construction, several classes have been reassigned to new rooms this year. If you received a class/classroom assignment email earlier from our registration team, please note that it may reference the old room numbers. Before Saturday, please double-check your child's current classroom on the schedule, then locate that room on the campus map above.",
-            zh: "⚠️ 重要提醒：教室編號有變動。由於校園施工，今年多個班級的教室已重新分配。若您先前收到註冊組寄發的班級／教室通知信，請注意信中所列可能為「舊」教室編號。請於星期六前，先查閱時間表確認貴子女目前的教室編號，再依照上方校園地圖找到該教室位置。",
+            block: "prose",
+            text: {
+              en: "**Class start times vary by class.** Please check the 2026–2027 Class Schedule below to confirm your child's exact start time, teacher, and classroom.",
+              zh: "**各班上課時間不同。**請查閱下方的 2026–2027 學年度班級時間表，確認貴子女的上課時間、教師及教室。",
+            },
           },
           {
-            en: "Please plan to arrive a little earlier than usual. With new room locations and walking routes, we want to make sure every family has enough time to find their classroom comfortably before class starts.",
-            zh: "請提早到校。由於教室位置及步行路線有所變更，懇請家長們提早出發，以確保有充裕時間帶孩子找到教室。",
+            block: "prose",
+            text: {
+              en: "⚠️ **Important: classroom numbers have changed.** Because of the ongoing construction, several classes have been reassigned to new rooms this year. If you received a class/classroom assignment email earlier from our registration team, please note that it may reference the old room numbers. Before Saturday, please double-check your child's current classroom on the schedule, then locate that room on the campus map above.",
+              zh: "⚠️ **重要提醒：教室編號有變動。**由於校園施工，今年多個班級的教室已重新分配。若您先前收到註冊組寄發的班級／教室通知信，請注意信中所列可能為「舊」教室編號。請於星期六前，先查閱時間表確認貴子女目前的教室編號，再依照上方校園地圖找到該教室位置。",
+            },
+          },
+          {
+            block: "prose",
+            text: {
+              en: "**Please plan to arrive a little earlier than usual.** With new room locations and walking routes, we want to make sure every family has enough time to find their classroom comfortably before class starts.",
+              zh: "**請提早到校。**由於教室位置及步行路線有所變更，懇請家長們提早出發，以確保有充裕時間帶孩子找到教室。",
+            },
           },
         ],
         links: [
@@ -271,48 +335,61 @@ export const issues: NewsletterIssue[] = [
         ],
       },
       {
-        kind: "bullets",
+        kind: "prose",
         title: {
           en: "Parking, Drop-off & Walking Routes",
           zh: "停車、接送與步行路線",
         },
-        intro: {
-          en: "Parking areas and drop-off/pick-up locations have also changed. Please see the campus map above and the details below:",
-          zh: "停車區域及接送地點同樣有所調整，請參考上方校園地圖及以下說明：",
-        },
-        items: [
+        blocks: [
           {
-            en: "Parking: as in years past, parents and visitors must park in the Visitor Parking area. Staff Parking is reserved for teachers and staff displaying a valid placard.",
-            zh: "停車：與往年相同，家長／訪客請停放於「家長／訪客停車場」(Visitor Parking)。教師／員工停車場僅供持有停車證之教職員使用。",
+            block: "prose",
+            text: {
+              en: "Parking areas and drop-off/pick-up locations have also changed. Please see the campus map above and the details below:",
+              zh: "停車區域及接送地點同樣有所調整，請參考上方校園地圖及以下說明：",
+            },
           },
           {
-            en: "Drop-off: if you'd like to drop your child off closer to the classrooms, please follow the blue Drop Off Route shown on the map. For everyone's safety, please stay at or below the posted speed limit.",
-            zh: "接送：若您想將孩子送至較靠近教室的地點，請依照地圖上的藍色「接送路線」(Drop Off Route) 行駛。為了大家的安全，請務必遵守速限。",
-          },
-          {
-            en: "Walking in: if you're parking and walking your child in, please follow the green Walking Route shown on the map to reach the new classrooms.",
-            zh: "步行入校：若您計畫停車後陪同孩子步行到教室，請依照地圖上的綠色「行走路線」(Walking Route) 前往新教室。",
+            block: "list",
+            items: [
+              {
+                en: "**Parking:** as in years past, parents and visitors must park in the Visitor Parking area. Staff Parking is reserved for teachers and staff displaying a valid placard.",
+                zh: "**停車：**與往年相同，家長／訪客請停放於「家長／訪客停車場」(Visitor Parking)。教師／員工停車場僅供持有停車證之教職員使用。",
+              },
+              {
+                en: "**Drop-off:** if you'd like to drop your child off closer to the classrooms, please follow the blue Drop Off Route shown on the map. For everyone's safety, please stay at or below the posted speed limit.",
+                zh: "**接送：**若您想將孩子送至較靠近教室的地點，請依照地圖上的藍色「接送路線」(Drop Off Route) 行駛。為了大家的安全，請務必遵守速限。",
+              },
+              {
+                en: "**Walking in:** if you're parking and walking your child in, please follow the green Walking Route shown on the map to reach the new classrooms.",
+                zh: "**步行入校：**若您計畫停車後陪同孩子步行到教室，請依照地圖上的綠色「行走路線」(Walking Route) 前往新教室。",
+              },
+            ],
           },
         ],
       },
       {
-        kind: "bullets",
+        kind: "prose",
         title: {
           en: "School Calendar 2026–2027",
           zh: "學校行事曆 2026–2027",
         },
-        intro: {
-          en: "Coming event(s):",
-          zh: "近期活動：",
-        },
-        items: [
+        blocks: [
           {
-            en: "8/15/2026 — First day of the school year 🎉",
-            zh: "8/15/2026 — 開學首日，第一天上課 🎉",
+            block: "prose",
+            text: { en: "Coming event(s):", zh: "近期活動：" },
           },
           {
-            en: "9/05/2026 — No school, Labor Day long weekend",
-            zh: "9/05/2026 — 停課，勞動節長週末",
+            block: "list",
+            items: [
+              {
+                en: "**8/15/2026** — First day of the school year 🎉",
+                zh: "**8/15/2026** — 開學首日，第一天上課 🎉",
+              },
+              {
+                en: "**9/05/2026** — No school, Labor Day long weekend",
+                zh: "**9/05/2026** — 停課，勞動節長週末",
+              },
+            ],
           },
         ],
         links: [
@@ -329,19 +406,28 @@ export const issues: NewsletterIssue[] = [
       {
         kind: "callout",
         title: { en: "Join Our Volunteer Team", zh: "加入幹事團隊" },
-        image: "/images/news/enews-2026-08-14-volunteer-team.jpg",
-        alt: {
-          en: "FCS parent volunteers and staff standing together behind a Fremont Chinese School banner.",
-          zh: "費利蒙中文學校家長義工與教職員在校旗前合影。",
-        },
-        paragraphs: [
+        blocks: [
           {
-            en: "💪 Help build the FCS community — volunteer roles for the 2026–27 school year.",
-            zh: "💪 攜手打造費利蒙大家庭 — 2026–27 學年義工招募。",
+            block: "image",
+            src: "/images/news/enews-2026-08-14-volunteer-team.jpg",
+            alt: {
+              en: "FCS parent volunteers and staff standing together behind a Fremont Chinese School banner.",
+              zh: "費利蒙中文學校家長義工與教職員在校旗前合影。",
+            },
           },
           {
-            en: "We're excited that many new parents have already joined our volunteer team this year — thank you! We can always use more help. From event planning to photography, translation to administration, there's a role to fit your skills and schedule. Parents matched to a good-fit role are also exempt from traffic and crossing duty.",
-            zh: "我們很高興今年已有許多新家長加入幹事團隊，謝謝大家的付出！我們仍歡迎更多家長加入 — 從活動規劃、攝影、翻譯到行政，總能找到適合您的角色。找到合適崗位的家長，還可免除交通導護值勤。",
+            block: "prose",
+            text: {
+              en: "💪 **Help build the FCS community — volunteer roles for the 2026–27 school year.**",
+              zh: "💪 **攜手打造費利蒙大家庭 — 2026–27 學年義工招募。**",
+            },
+          },
+          {
+            block: "prose",
+            text: {
+              en: "We're excited that many new parents have already joined our volunteer team this year — thank you! We can always use more help. From event planning to photography, translation to administration, there's a role to fit your skills and schedule. Parents matched to a good-fit role are also exempt from traffic and crossing duty.",
+              zh: "我們很高興今年已有許多新家長加入幹事團隊，謝謝大家的付出！我們仍歡迎更多家長加入 — 從活動規劃、攝影、翻譯到行政，總能找到適合您的角色。找到合適崗位的家長，還可免除交通導護值勤。",
+            },
           },
         ],
         links: [
@@ -383,8 +469,8 @@ export const issues: NewsletterIssue[] = [
           zh: "免費「語文輔導社」宣傳單，內有學生於歷次活動中展示作品的照片。",
         },
         caption: {
-          en: "Free. Every Saturday, 11:10 AM – 12:00 PM, Room 222 — no club in week 1 (8/15). Join the Google Classroom with code fwdggvj5.",
-          zh: "免費。每週六上午 11:10–12:00，教室 222 — 第一週（8/15）不開課。Google Classroom 代碼：fwdggvj5。",
+          en: "Free. Every Saturday, 11:10 AM – 12:00 PM, Room 222 — no club in week 1 (8/15). Join the Google Classroom with code **fwdggvj5**.",
+          zh: "免費。每週六上午 11:10–12:00，教室 222 — 第一週（8/15）不開課。Google Classroom 代碼：**fwdggvj5**。",
         },
       },
       {
@@ -425,14 +511,20 @@ export const issues: NewsletterIssue[] = [
           en: "Donate & Double Your Contribution",
           zh: "捐款與雙倍貢獻",
         },
-        paragraphs: [
+        blocks: [
           {
-            en: "FCS is a non-profit 501(c) organization. Donations are tax-deductible (IRS tax ID: 94-2978949) and help Fremont Chinese School continue to operate, teach Chinese courses, and pass on Chinese culture.",
-            zh: "費利蒙中文學校是一家非營利性 501(c) 組織。您可以透過向費利蒙中文學校捐款來享受稅務抵減（IRS tax ID: 94-2978949）。您的捐款將幫助本校繼續運營、教授中文課程並傳承中華文化。",
+            block: "prose",
+            text: {
+              en: "FCS is a non-profit 501(c) organization. Donations are tax-deductible (IRS tax ID: **94-2978949**) and help Fremont Chinese School continue to operate, teach Chinese courses, and pass on Chinese culture.",
+              zh: "費利蒙中文學校是一家非營利性 501(c) 組織。您可以透過向費利蒙中文學校捐款來享受稅務抵減（IRS tax ID: **94-2978949**）。您的捐款將幫助本校繼續運營、教授中文課程並傳承中華文化。",
+            },
           },
           {
-            en: "Double your contribution: thank you for volunteering at school! Your employer may offer volunteer cash rewards — please consider donating those rewards to Fremont Chinese School.",
-            zh: "雙倍貢獻：感謝您在學校擔任義工！您的雇主也許提供義工獎勵金，歡迎將這筆獎勵金捐助給學校。",
+            block: "prose",
+            text: {
+              en: "**Double your contribution:** thank you for volunteering at school! Your employer may offer volunteer cash rewards — please consider donating those rewards to Fremont Chinese School.",
+              zh: "**雙倍貢獻：**感謝您在學校擔任義工！您的雇主也許提供義工獎勵金，歡迎將這筆獎勵金捐助給學校。",
+            },
           },
         ],
         links: [
@@ -464,7 +556,8 @@ export const issues: NewsletterIssue[] = [
           {
             // The source email linked this logo to ichenartacademy.com, a
             // different business. Correct URL confirmed by the school
-            // 2026-08-20.
+            // 2026-08-20. A longtime, very supportive sponsor — expect it to
+            // recur, but confirm the roster each issue.
             name: "Fremont United Auto Service Inc. 聯合汽車修理中心",
             image: "/images/sponsors/fremont-united-auto.jpg",
             href: "https://www.fremontunitedautoservice.com/",
@@ -508,6 +601,64 @@ export const hasIssues = publishedIssues.length > 0;
  */
 export function issueSlug(issue: NewsletterIssue): string {
   return issue.draft ?? issue.date;
+}
+
+/** Walk every string in a value, however deeply nested. */
+function* walkStrings(value: unknown): Generator<string> {
+  if (typeof value === "string") yield value;
+  else if (Array.isArray(value)) for (const v of value) yield* walkStrings(v);
+  else if (value && typeof value === "object")
+    for (const v of Object.values(value)) yield* walkStrings(v);
+}
+
+/**
+ * Everything unresolved about an issue: the notes in `gaps`, plus every link
+ * still carrying the `TODO` sentinel, found by scanning all copy so a marker
+ * cannot be missed because someone forgot to also list it.
+ */
+export function collectGaps(issue: NewsletterIssue): string[] {
+  const found = [...(issue.gaps ?? [])];
+
+  // One link needing a URL is ONE gap, even though it appears twice — once per
+  // locale. Group by the marker's note so the count matches the number of
+  // things a human has to go and find, and list both labels on the line.
+  const byNote = new Map<string, string[]>();
+  for (const text of walkStrings(issue.sections)) {
+    for (const m of text.matchAll(/\[([^\]]+)\]\(([^)]+)\)/g)) {
+      const [, label, href] = m;
+      if (!isGapHref(href)) continue;
+      const note = href.slice(GAP.length).replace(/^:\s*/, "");
+      const labels = byNote.get(note) ?? [];
+      if (!labels.includes(label)) labels.push(label);
+      byNote.set(note, labels);
+    }
+  }
+  for (const [note, labels] of byNote) {
+    const named = labels.map((l) => `"${l}"`).join(" / ");
+    found.push(`Missing link target for ${named}${note ? ` — ${note}` : ""}`);
+  }
+  return found;
+}
+
+// Publication gate. An issue with open gaps may exist as a DRAFT — that is the
+// point, so reviewers can see the holes on the real page — but must not be
+// published. Removing `draft` while gaps remain fails the build here rather
+// than quietly shipping "link missing" to parents.
+//
+// `publishWithGaps` overrides it, and requires a stated reason.
+for (const issue of issues) {
+  if (issue.draft || issue.publishWithGaps) continue;
+  const gaps = collectGaps(issue);
+  if (gaps.length > 0) {
+    throw new Error(
+      `[enews] Refusing to publish the ${issue.date} issue with ` +
+        `${gaps.length} unresolved gap(s):\n` +
+        gaps.map((g) => `  - ${g}`).join("\n") +
+        `\n\nResolve them, or keep the issue staged by restoring its \`draft\` ` +
+        `token. To publish anyway, set \`publishWithGaps\` on the issue to the ` +
+        `reason — but only when the user has explicitly asked for that.`,
+    );
+  }
 }
 
 /** Look up one issue by its URL slug. Finds drafts (by tokenized slug) too. */
