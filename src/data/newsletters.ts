@@ -135,20 +135,42 @@ export type NewsletterIssue = {
    */
   summary: Localized;
   /**
-   * Set `draft: true` to stage an issue for review WITHOUT announcing it.
+   * Present = this issue is a DRAFT, staged for review but not announced. The
+   * value is a random review token, and while the issue is a draft that token
+   * is the ENTIRE URL segment:
    *
-   * A draft is built at its own permalink — /enews/<date>/ and
-   * /zh/enews/<date>/ — so the URL can be shared with staff, and it renders on
-   * the real site rather than someone's laptop. But it is excluded from /enews/
-   * (which keeps showing the previous issue), from the archive, from the footer
-   * link, from the sitemap, and it carries a `noindex` so search engines skip
-   * it. The page itself shows a "draft" banner so no reviewer mistakes it for
-   * published.
+   *   draft: "9f3a1c"  ->  /enews/9f3a1c/
    *
-   * Delete the flag (don't set it to false) when the issue is approved, and
-   * push again. That is the moment it becomes the current issue.
+   * Two reasons it is not the date, or date + token:
+   *
+   *   1. A bare dated URL is trivially guessable. Once any issue is published
+   *      the pattern is public, and there are only seven plausible dates in a
+   *      week — a parent idly editing the URL bar should not be able to land on
+   *      an unfinished draft.
+   *   2. The send date is not known early in the week. Drafting starts before
+   *      anyone knows whether the issue goes out Thursday or Friday, so a date
+   *      in the URL would move mid-review and break links already circulated.
+   *
+   * Generate one per issue with:
+   *
+   *   openssl rand -hex 3
+   *
+   * It must be stored here rather than generated at build time, or every build
+   * would move the URL and break those same links. `date` may be edited freely
+   * while an issue is a draft — the review URL does not depend on it.
+   *
+   * A draft is built at that tokenized permalink in both locales, so it renders
+   * on the real site rather than someone's laptop. But it is excluded from
+   * /enews/ (which keeps showing the previous issue), from the archive, from
+   * the footer link, and from the sitemap, and it carries `noindex`. The page
+   * shows a "draft" banner so no reviewer mistakes it for published.
+   *
+   * Delete the field when the issue is approved and push again. The issue then
+   * moves from /enews/9f3a1c/ to its clean dated URL (/enews/2026-08-21/) and
+   * becomes the current issue — which also means the review URL starts 404ing.
+   * That is intended: a review link should not outlive the review.
    */
-  draft?: boolean;
+  draft?: string;
   sections: IssueSection[];
 };
 
@@ -476,9 +498,21 @@ export const latestIssue: NewsletterIssue | undefined = publishedIssues[0];
  */
 export const hasIssues = publishedIssues.length > 0;
 
-/** Look up one issue by its date slug. Finds drafts too. */
-export function findIssue(date: string): NewsletterIssue | undefined {
-  return sortedIssues.find((i) => i.date === date);
+/**
+ * The URL segment for an issue: the review token while it is a draft, the bare
+ * date once published. Single source of truth for issue URLs — routes, links,
+ * and the sitemap filter all derive from this.
+ *
+ * The two forms cannot collide: tokens are hex, dates are YYYY-MM-DD, and
+ * "archive" is neither.
+ */
+export function issueSlug(issue: NewsletterIssue): string {
+  return issue.draft ?? issue.date;
+}
+
+/** Look up one issue by its URL slug. Finds drafts (by tokenized slug) too. */
+export function findIssue(slug: string): NewsletterIssue | undefined {
+  return sortedIssues.find((i) => issueSlug(i) === slug);
 }
 
 /**

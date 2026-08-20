@@ -53,9 +53,9 @@ as the model instead: it reflects how the school actually writes.
 - **Do not render the email before the issue is published.** Its images point at
   the live site; built early, every one of them is broken. The steps are ordered
   for this reason.
-- **Do not skip the draft stage, and never remove `draft: true` yourself.** A new
-  issue is always staged for review first; only the user decides when it goes
-  live.
+- **Do not skip the draft stage, and never remove the `draft` field yourself.**
+  A new issue is always staged for review first; only the user decides when it
+  goes live.
 
 ## Step 0 — Start from current `main`
 
@@ -191,8 +191,27 @@ Names in the repo (`contactInfo` in `src/i18n/content.ts`): principal
 ## Step 3 — Add the web issue
 
 Prepend one object to `issues` in `src/data/newsletters.ts`. Newest first, and
-**always with `draft: true`** — every new issue starts staged for review.
+**always with a `draft` token** — every new issue starts staged for review.
 Publishing is a separate, deliberate step (Step 6).
+
+Generate the token fresh for each issue:
+
+```sh
+openssl rand -hex 3      # e.g. 9f3a1c
+```
+
+Then set `draft: "9f3a1c"`. While the issue is a draft that token is the whole
+URL segment — `/enews/9f3a1c/`, no date. Two reasons:
+
+- A bare dated URL is trivially guessable. Once any issue is published the
+  pattern is public, and there are only seven plausible dates in a week.
+- The send date is not known early in the week. Drafting starts before anyone
+  knows whether the issue goes out Thursday or Friday, so a date in the URL
+  would move mid-review and break links already circulated.
+
+Store the token in the data; never generate it at build time, or every build
+would move the URL for the same reason. **`date` can be edited freely while an
+issue is a draft** — the review URL does not depend on it.
 
 | `kind` | Use for |
 |---|---|
@@ -228,8 +247,8 @@ npm run build     # type-checks the data entry; fails loudly on a missing
 npm run preview   # note the port it prints — 4321 may already be in use
 ```
 
-Open `/enews/<date>/` and `/zh/enews/<date>/` — the permalinks, since a draft has
-no `/enews/` alias. Confirm:
+Open `/enews/<token>/` and `/zh/enews/<token>/` — the draft's review URLs, since
+a draft has no `/enews/` alias and no dated URL at all. Confirm:
 
 - Both languages read correctly and the 中文 / English toggle round-trips.
 - The draft banner appears at the top of both.
@@ -271,12 +290,14 @@ unrelated edits, and the issue should land as one clean commit.
 Then give the user the two links to circulate:
 
 ```
-https://fremontchineseschool.org/enews/<YYYY-MM-DD>/
-https://fremontchineseschool.org/zh/enews/<YYYY-MM-DD>/
+https://fremontchineseschool.org/enews/<token>/
+https://fremontchineseschool.org/zh/enews/<token>/
 ```
 
-Say that these are safe to share with staff, and that parents will not see the
-issue on the site until Step 6.
+Say that these are safe to share with staff, that no dated URL exists until the
+issue is published, and that parents will not see the issue on the site until
+Step 6. The links stay valid through every revision — including a change to the
+issue's send date.
 
 **Revisions loop here.** Edit the data, `npm run build`, push again, and the
 permalink updates in a minute or two. Stay in this step until the issue is
@@ -286,8 +307,8 @@ approved — there is no cost to pushing a draft repeatedly.
 
 Only when the user says the issue is approved:
 
-1. **Delete the `draft: true` line** from the issue — delete it, don't set it to
-   `false`.
+1. **Delete the whole `draft` line** from the issue — delete it, don't blank the
+   token.
 2. `npm run build`, then confirm `/enews/` and `/enews/archive/` now exist and the
    draft banner is gone.
 3. Commit and push:
@@ -300,7 +321,10 @@ gh run watch
 ```
 
 Deleting that one line is what makes it the current issue, adds it to the archive,
-and turns on the footer link and the `/news` card.
+and turns on the footer link and the `/news` card. The issue also moves from its
+tokenized review URL to the clean dated one, so the review links start 404ing —
+intended, since a review link should not outlive the review. Tell the user, so
+nobody is confused by a dead link they shared earlier.
 
 Then confirm the images are live — this is the gate for Step 7, because the email
 points at these URLs:
