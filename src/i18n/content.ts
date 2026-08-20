@@ -956,6 +956,10 @@ export const content = {
       draftBadge: 'Draft — not yet sent',
       draftNote:
         'This issue has not been published or emailed yet. It is visible to anyone with the link, but is not listed on the site. Send corrections to the principal.',
+      // Shown only when an issue has unresolved gaps. Deliberately blunt — a
+      // reviewer skimming must not mistake this for ordinary draft chrome.
+      gapsTitle: 'Needs attention before this can be sent',
+      gapsNote: 'This issue cannot be published while these are open.',
       newer: 'Newer issue',
       older: 'Older issue',
       emptyArchive: 'No issues have been published yet.',
@@ -1771,6 +1775,8 @@ export const content = {
       draftBadge: '草稿 — 尚未寄送',
       draftNote:
         '本期快報尚未正式發布或寄送。持有連結者皆可閱讀，但網站上不會列出。如需更正，請與校長聯繫。',
+      gapsTitle: '寄送前尚待處理',
+      gapsNote: '以下項目未解決前，本期無法發布。',
       newer: '較新一期',
       older: '較舊一期',
       emptyArchive: '目前尚無已發布的快報。',

@@ -37,6 +37,8 @@
 // (sponsor logos) lives in public/images/sponsors/ instead, undated, because
 // the same file is reused across issues.
 
+import { GAP, isGapHref } from "../lib/inline";
+
 /** A string that must exist in both locales. Missing one is a type error. */
 export type Localized = { en: string; zh: string };
 
@@ -185,6 +187,29 @@ export type NewsletterIssue = {
    * That is intended: a review link should not outlive the review.
    */
   draft?: string;
+  /**
+   * Known unresolved items, in plain internal prose — "the classroom-use flyer
+   * is being regenerated", "Chinese captions need the principal's read". Listed
+   * loudly at the top of the draft page so a reviewer cannot miss them, and
+   * they BLOCK publication (see the check below).
+   *
+   * Not `Localized`, unlike everything else here: these are operational notes
+   * for whoever reviews the draft, never published copy — an issue carrying
+   * gaps cannot be published at all.
+   *
+   * A missing link URL does NOT belong here. Mark it in place with the `TODO`
+   * href sentinel (see src/lib/inline.ts) so the hole is visible in the
+   * sentence it belongs to; it is collected automatically.
+   */
+  gaps?: string[];
+  /**
+   * Escape hatch: publish DESPITE open gaps, stating why. A string, not a
+   * boolean, so the reason is recorded next to the decision.
+   *
+   * Requires an explicit instruction from the user. Never set this to clear a
+   * build failure on your own initiative — the failure is the feature.
+   */
+  publishWithGaps?: string;
   sections: IssueSection[];
 };
 
@@ -576,6 +601,64 @@ export const hasIssues = publishedIssues.length > 0;
  */
 export function issueSlug(issue: NewsletterIssue): string {
   return issue.draft ?? issue.date;
+}
+
+/** Walk every string in a value, however deeply nested. */
+function* walkStrings(value: unknown): Generator<string> {
+  if (typeof value === "string") yield value;
+  else if (Array.isArray(value)) for (const v of value) yield* walkStrings(v);
+  else if (value && typeof value === "object")
+    for (const v of Object.values(value)) yield* walkStrings(v);
+}
+
+/**
+ * Everything unresolved about an issue: the notes in `gaps`, plus every link
+ * still carrying the `TODO` sentinel, found by scanning all copy so a marker
+ * cannot be missed because someone forgot to also list it.
+ */
+export function collectGaps(issue: NewsletterIssue): string[] {
+  const found = [...(issue.gaps ?? [])];
+
+  // One link needing a URL is ONE gap, even though it appears twice — once per
+  // locale. Group by the marker's note so the count matches the number of
+  // things a human has to go and find, and list both labels on the line.
+  const byNote = new Map<string, string[]>();
+  for (const text of walkStrings(issue.sections)) {
+    for (const m of text.matchAll(/\[([^\]]+)\]\(([^)]+)\)/g)) {
+      const [, label, href] = m;
+      if (!isGapHref(href)) continue;
+      const note = href.slice(GAP.length).replace(/^:\s*/, "");
+      const labels = byNote.get(note) ?? [];
+      if (!labels.includes(label)) labels.push(label);
+      byNote.set(note, labels);
+    }
+  }
+  for (const [note, labels] of byNote) {
+    const named = labels.map((l) => `"${l}"`).join(" / ");
+    found.push(`Missing link target for ${named}${note ? ` — ${note}` : ""}`);
+  }
+  return found;
+}
+
+// Publication gate. An issue with open gaps may exist as a DRAFT — that is the
+// point, so reviewers can see the holes on the real page — but must not be
+// published. Removing `draft` while gaps remain fails the build here rather
+// than quietly shipping "link missing" to parents.
+//
+// `publishWithGaps` overrides it, and requires a stated reason.
+for (const issue of issues) {
+  if (issue.draft || issue.publishWithGaps) continue;
+  const gaps = collectGaps(issue);
+  if (gaps.length > 0) {
+    throw new Error(
+      `[enews] Refusing to publish the ${issue.date} issue with ` +
+        `${gaps.length} unresolved gap(s):\n` +
+        gaps.map((g) => `  - ${g}`).join("\n") +
+        `\n\nResolve them, or keep the issue staged by restoring its \`draft\` ` +
+        `token. To publish anyway, set \`publishWithGaps\` on the issue to the ` +
+        `reason — but only when the user has explicitly asked for that.`,
+    );
+  }
 }
 
 /** Look up one issue by its URL slug. Finds drafts (by tokenized slug) too. */

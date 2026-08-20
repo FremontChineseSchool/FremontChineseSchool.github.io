@@ -12,7 +12,7 @@
 // cta — so the image and link blocks are shared rather than repeated per kind.
 import { content } from "../../i18n/content";
 import { localizedPath, type Lang } from "../../i18n/ui";
-import { issueNeighbours, issueSlug, type NewsletterIssue, type Block } from "../../data/newsletters";
+import { issueNeighbours, issueSlug, collectGaps, type NewsletterIssue, type Block } from "../../data/newsletters";
 import { renderInline } from "../../lib/inline";
 
 interface Props {
@@ -24,6 +24,13 @@ interface Props {
 const { lang, issue, isLatest = false } = Astro.props;
 const c = content[lang].enews;
 const { newer, older } = issueNeighbours(issue.date);
+
+/**
+ * Unresolved items, shown only on drafts — a published issue cannot carry any
+ * (the build refuses). Listed above everything else so a reviewer skimming the
+ * page cannot miss them.
+ */
+const gaps = issue.draft ? collectGaps(issue) : [];
 
 const archiveHref = localizedPath(lang, "enews-archive");
 const issueHref = (i: NewsletterIssue) =>
@@ -59,6 +66,23 @@ function subheadNumbers(blocks: Block[]): Map<number, number> {
     >
       <p class="text-sm font-semibold" style="color: var(--color-fcs-black);">{c.draftBadge}</p>
       <p class="mt-1 text-sm leading-relaxed" style="color: var(--color-fcs-muted);">{c.draftNote}</p>
+    </div>
+  )}
+
+  {gaps.length > 0 && (
+    <div
+      class="mb-8 rounded-[10px] p-5"
+      style="background: #FDECEA; border: 2px solid #B3261E;"
+    >
+      <p class="text-base font-bold" style="color: #7F1D1B;">
+        ⚠ {c.gapsTitle} ({gaps.length})
+      </p>
+      <ul class="mt-3 ml-5 list-disc space-y-1.5">
+        {gaps.map((g) => (
+          <li class="text-sm leading-relaxed" style="color: #7F1D1B;">{g}</li>
+        ))}
+      </ul>
+      <p class="mt-3 text-sm font-medium" style="color: #7F1D1B;">{c.gapsNote}</p>
     </div>
   )}
 
@@ -109,7 +133,7 @@ function subheadNumbers(blocks: Block[]): Map<number, number> {
               <figcaption
                 class="enews-prose mt-3 text-sm leading-relaxed"
                 style="color: var(--color-fcs-muted);"
-                set:html={renderInline(section.caption[lang])}
+                set:html={renderInline(section.caption[lang], { draft: !!issue.draft })}
               />
             )}
           </figure>
@@ -128,27 +152,27 @@ function subheadNumbers(blocks: Block[]): Map<number, number> {
                   <h3
                     class="mt-6 text-base font-semibold first:mt-0"
                     style="color: var(--color-fcs-black);"
-                    set:html={(nums ? `${nums.get(i)}. ` : "") + renderInline(b.text[lang])}
+                    set:html={(nums ? `${nums.get(i)}. ` : "") + renderInline(b.text[lang], { draft: !!issue.draft })}
                   />
                 )}
                 {b.block === "prose" && (
                   <p
                     class="mt-3 leading-relaxed first:mt-0"
                     style="color: var(--color-fcs-black);"
-                    set:html={renderInline(b.text[lang])}
+                    set:html={renderInline(b.text[lang], { draft: !!issue.draft })}
                   />
                 )}
                 {b.block === "list" && (
                   b.ordered ? (
                     <ol class="mt-3 ml-5 list-decimal space-y-2">
                       {b.items.map((item) => (
-                        <li style="color: var(--color-fcs-black);" set:html={renderInline(item[lang])} />
+                        <li style="color: var(--color-fcs-black);" set:html={renderInline(item[lang], { draft: !!issue.draft })} />
                       ))}
                     </ol>
                   ) : (
                     <ul class="mt-3 ml-5 list-disc space-y-2">
                       {b.items.map((item) => (
-                        <li style="color: var(--color-fcs-black);" set:html={renderInline(item[lang])} />
+                        <li style="color: var(--color-fcs-black);" set:html={renderInline(item[lang], { draft: !!issue.draft })} />
                       ))}
                     </ul>
                   )
@@ -167,7 +191,7 @@ function subheadNumbers(blocks: Block[]): Map<number, number> {
                       <figcaption
                         class="mt-3 text-sm leading-relaxed"
                         style="color: var(--color-fcs-muted);"
-                        set:html={renderInline(b.caption[lang])}
+                        set:html={renderInline(b.caption[lang], { draft: !!issue.draft })}
                       />
                     )}
                   </figure>
@@ -270,5 +294,28 @@ function subheadNumbers(blocks: Block[]): Map<number, number> {
   }
   .enews-prose a:hover {
     color: var(--color-fcs-green-dark);
+  }
+
+  /* A link whose target is still unknown (the TODO sentinel in
+     src/lib/inline.ts). Styled to be impossible to skim past, and it can only
+     ever appear on a draft — the build refuses to publish an issue with one. */
+  .enews-gap {
+    background: #FDECEA;
+    box-shadow: inset 0 -2px 0 #B3261E;
+    color: #7F1D1B;
+    font-weight: 600;
+    padding: 0 0.15em;
+  }
+  .enews-gap-tag {
+    background: #B3261E;
+    border-radius: 3px;
+    color: #fff;
+    font-size: 0.7em;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    margin-left: 0.4em;
+    padding: 0.1em 0.4em;
+    text-transform: uppercase;
+    white-space: nowrap;
   }
 </style>

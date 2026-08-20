@@ -25,6 +25,25 @@ function escapeHtml(s: string): string {
     .replace(/'/g, "&#39;");
 }
 
+/**
+ * Sentinel href for a link whose target is not known yet — most often because
+ * the source was a screenshot, which shows that text is a link but not where it
+ * points. Write `[First Day Photo Album](TODO)`, or `(TODO: ask Angela)` to
+ * carry a note. It renders as a loud marker rather than a broken link, is
+ * listed on the draft page, and BLOCKS publication (see collectGaps in
+ * src/data/newsletters.ts).
+ *
+ * The point is that a missing URL cannot be quietly forgotten: guessing one is
+ * worse than shipping an obvious hole, because a plausible wrong link gets
+ * clicked.
+ */
+export const GAP = "TODO";
+
+/** True when an href is the gap sentinel rather than a real target. */
+export function isGapHref(href: string): boolean {
+  return href === GAP || href.startsWith(GAP + ":");
+}
+
 /** In-site paths navigate normally; anything external opens in a new tab. */
 function anchorAttrs(href: string): string {
   const external = /^https?:\/\//i.test(href);
@@ -36,15 +55,31 @@ function anchorAttrs(href: string): string {
  * so escaping happens before any substitution — an authored `<script>` becomes
  * visible text, not markup.
  */
-export function renderInline(text: string): string {
+export function renderInline(
+  text: string,
+  opts: { draft?: boolean } = {},
+): string {
   let out = escapeHtml(text);
 
   // [label](href) — href is restricted to http(s), mailto, and site-absolute
   // paths. Anything else (javascript:, data:) is left as literal text rather
   // than silently dropped, so a mistake is visible in review.
   out = out.replace(
-    /\[([^\]]+)\]\(([^)\s]+)\)/g,
+    /\[([^\]]+)\]\(([^)]+)\)/g,
     (whole, label: string, href: string) => {
+      if (isGapHref(href)) {
+        // Loud on a draft, where the reviewer needs to see the hole. On a
+        // published page — only reachable via an explicit publishWithGaps
+        // override — it degrades to the plain label: a reader gets a sentence
+        // that reads normally instead of an internal marker aimed at staff.
+        if (!opts.draft) return label;
+        const note = href.slice(GAP.length).replace(/^:\s*/, "");
+        return (
+          `<span class="enews-gap">${label}` +
+          `<span class="enews-gap-tag">link missing${note ? ` — ${note}` : ""}</span>` +
+          `</span>`
+        );
+      }
       const safe = /^(https?:\/\/|mailto:|\/)/i.test(href);
       return safe ? `<a href="${href}"${anchorAttrs(href)}>${label}</a>` : whole;
     },

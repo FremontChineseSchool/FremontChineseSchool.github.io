@@ -56,6 +56,10 @@ as the model instead: it reflects how the school actually writes.
 - **Do not skip the draft stage, and never remove the `draft` field yourself.**
   A new issue is always staged for review first; only the user decides when it
   goes live.
+- **Never guess a missing value, and never set `publishWithGaps` on your own
+  initiative.** Record the gap (below) and let the build stop the publish. A
+  plausible-looking wrong link is worse than a visible hole, because a wrong
+  link gets clicked.
 
 ## Step 0 — Start from current `main`
 
@@ -83,6 +87,46 @@ The email is a rendering of it, produced last.
 can see that text is a link but not where it points. Ask for every URL
 explicitly rather than guessing or dropping it — a plausible-looking wrong link
 is worse than asking.
+
+### Recording a gap
+
+When something is missing or unresolved, **record it in the data**. Saying it in
+conversation is not enough: it scrolls away, and the reviewer never sees it.
+
+For a link whose target you don't have, use the `TODO` sentinel **in place**, so
+the hole appears in the sentence it belongs to:
+
+```ts
+text: {
+  en: "More photos here: [First Day Photo Album](TODO: ask Angela for the URL).",
+  zh: "更多照片請見：[開學日照片集](TODO: ask Angela for the URL)。",
+}
+```
+
+For anything else — a flyer being redrawn, copy awaiting the principal's read —
+add a line to the issue's `gaps` array:
+
+```ts
+gaps: ["Classroom Use Policy flyer is being regenerated — swap image and caption when it lands."],
+```
+
+What that buys you, automatically:
+
+- The draft page opens with a **red "Needs attention" panel** listing every gap,
+  above the issue itself. `TODO` links are found by scanning the copy, so one
+  cannot be missed by forgetting to also list it. A link needed in both locales
+  counts once.
+- The `TODO` link renders as a loud inline marker instead of a broken link.
+- **The build refuses to publish the issue.** Removing `draft` while any gap is
+  open fails `npm run build` with the gaps listed. This is the enforcement — it
+  is not possible to quietly ship a hole.
+
+**The override.** `publishWithGaps: "<reason>"` publishes anyway. It exists for
+"send it now, we'll fix the link next week" — and it requires the user to say so
+explicitly. Do not reach for it to make a build pass. When the user does ask,
+put their actual reason in the string; on a published page the marker quietly
+degrades to plain text, so a parent reads a normal sentence rather than staff
+chrome.
 
 Ask for whichever of these apply. Not every section runs every week — **skip a
 section rather than writing filler**. A quiet week is legitimately one `note`.
@@ -349,7 +393,8 @@ yet sent" at the top. Nobody stumbles onto it; only someone with the link sees i
 
 Also name anything still unresolved from *Check the source* — a sponsor link left
 off, a typo in a flyer graphic, Chinese the principal hasn't reviewed. Those are
-exactly what review is for.
+exactly what review is for, and anything recorded as a gap is already on the page
+in red, so point the reviewer at it rather than restating the whole list.
 
 On approval:
 
@@ -385,6 +430,10 @@ Only when the user says the issue is approved:
 
 1. **Delete the whole `draft` line** from the issue — delete it, don't blank the
    token.
+   - If the build then fails with `[enews] Refusing to publish`, an unresolved
+     gap remains. **Stop and report it** — restore the `draft` token and tell the
+     user what is missing. Do not delete the gap, and do not set
+     `publishWithGaps`, unless they explicitly say to publish anyway.
 2. `npm run build`, then confirm `/enews/` and `/enews/archive/` now exist and the
    draft banner is gone.
 3. Commit and push:
