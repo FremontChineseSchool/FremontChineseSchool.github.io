@@ -66,6 +66,15 @@ function subheadNumbers(blocks: Block[]): Map<number, number> {
     >
       <p class="text-sm font-semibold" style="color: var(--color-fcs-black);">{c.draftBadge}</p>
       <p class="mt-1 text-sm leading-relaxed" style="color: var(--color-fcs-muted);">{c.draftNote}</p>
+      {/* The email is what parents see first, so a reviewer needs it one click
+          away rather than having to be told the URL. */}
+      <p class="mt-3 text-sm">
+        <a
+          href={`/enews-email/${issueSlug(issue)}.html`}
+          class="font-medium underline"
+          style="color: var(--color-fcs-deep-jade);"
+        >{c.emailPreview} →</a>
+      </p>
     </div>
   )}
 

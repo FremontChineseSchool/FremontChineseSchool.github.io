@@ -74,7 +74,20 @@ export type Block =
  * only) for the one action the section is actually asking for. A link that
  * belongs inside a sentence goes in the prose, not here.
  */
-type SectionBase = { title: Localized; links?: LocalizedLink[] };
+type SectionBase = {
+  title: Localized;
+  links?: LocalizedLink[];
+  /**
+   * Restrict a section to one artifact. Both are rendered from this data, so
+   * they stay in step by default — this is the escape hatch for the rare
+   * section that genuinely belongs to only one.
+   *
+   * `"email"` — goes in the email, not on the page. `"web"` — the reverse.
+   * Evergreen email boilerplate (Follow Us, the WASC line) is NOT this: it
+   * lives in src/lib/email.ts because it never changes issue to issue.
+   */
+  only?: "web" | "email";
+};
 
 /**
  * One section of an issue. Sections render in array order.
