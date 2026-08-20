@@ -166,14 +166,15 @@ export const issues: NewsletterIssue[] = [
     // 2026-08-14 00:28 PT ahead of the 8/15 first day of school.
     date: "2026-08-14",
     label: { en: "August 14, 2026", zh: "2026年8月14日" },
-    // Staged for staff review. Resolved: the sponsor URL, and the student
-    // photos in the Language Support Club flyer (cleared to publish).
-    // Still open: the Classroom Use Policy graphic is a legacy flyer that has
-    // been wrong for years and is being regenerated — when the new one lands,
-    // both its image AND its caption need replacing, since the caption
-    // paraphrases the rules the old graphic lists. The Chinese flyer captions
-    // also want the principal's read. Remove `draft` to publish.
-    draft: true,
+    // Published 2026-08-20, after the fact: the original went out by email on
+    // 2026-08-14 through the school's previous mail tool, so this entry is the
+    // web record of it rather than something the site announced first.
+    //
+    // PENDING: the Classroom Use Policy graphic is a legacy flyer that has been
+    // wrong for years and is being regenerated. When the replacement lands,
+    // swap both its image AND its caption — the caption paraphrases the rules
+    // the old graphic lists, so a rules change makes it wrong in a way the
+    // build cannot catch.
     summary: {
       en: "Welcome to 2026–27. School starts Saturday, August 15 — with new classroom numbers, a changed drop-off route, and a campus map to check before you arrive.",
       zh: "2026–27 學年 8 月 15 日（週六）開學：教室編號有變動、接送與步行動線調整，請提前查看校園地圖與班級時間表。",
