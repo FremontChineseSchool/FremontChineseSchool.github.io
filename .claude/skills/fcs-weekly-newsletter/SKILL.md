@@ -93,8 +93,11 @@ section rather than writing filler**. A quiet week is legitimately one `note`.
   and similar. Ask for the image, don't compose prose to fill the space. Any
   number per week — a repeatable block, not a fixed set of named sections.
 - **Donation appeal** — evergreen; reuse the standard copy unless told otherwise.
-- **Sponsor logos** — conditional, *not* weekly. Only when the user provides a
-  sponsor update. Never carry it over by default.
+- **Sponsor logos** — **recurring.** The gold sponsors have appeared in every
+  issue so far, and at least one is a longtime supporter expected to keep
+  appearing. Carry the block forward, but **confirm the roster each week**
+  rather than assuming it is unchanged — and re-check each logo's link (see
+  *Check the source*).
 - **Follow Us / social** — **email only.** The site footer already carries the
   social links on every page, so it is not a web section.
 
@@ -129,6 +132,9 @@ anything that looks wrong rather than copying it onto the website:
   `href` (the logo still renders) and raise it rather than guessing.
 - **Typos baked into flyer graphics** — flag them so the graphic can be
   re-exported; never retouch the image.
+- **Stray markdown the source editor failed to render** — a literal
+  `**「家長/訪客停車場」**` has appeared mid-paragraph in a sent issue. Interpret
+  it as the emphasis it was meant to be; never copy the asterisks through.
 - **"See attached"** — email attachments have no meaning on a web page. Link the
   real file on the site instead (see *Prefer site assets*).
 
@@ -215,29 +221,65 @@ issue is a draft** — the review URL does not depend on it.
 
 | `kind` | Use for |
 |---|---|
-| `note` | Prose — the principal's note, first-day details. Optional `signoff`. |
-| `bullets` | Dates, deadlines, logistics. Optional `intro`. |
+| `prose` | Anything narrative — the principal's note, a weekly update, general announcements. Optional `signoff`, optional `numbered`. |
+| `callout` | Same content model, rendered in a tinted box with one `cta` — volunteer calls, the donation appeal. |
 | `flyer` | A pre-made graphic. `image` + `alt` required. |
-| `callout` | Highlighted block with an optional `cta` — volunteer, donation. |
-| `sponsors` | Logo row. Conditional. |
+| `sponsors` | Logo row. Recurring; confirm the roster each week. |
 
-Every kind also takes an optional `links` row, and every kind except `sponsors`
-takes an optional `image` + `alt` (+ `caption`) — a campus map above the
-first-day notes, a team photo above the volunteer call. Sections always render
-in the order: title, image + caption, body, links, cta.
+**Sections are documents, not paragraphs.** `prose` and `callout` hold an ordered
+`blocks` array, so one section can carry a sub-heading, prose, a list, an image,
+another sub-heading, and more prose — the way the school actually writes:
+
+| `block` | Fields |
+|---|---|
+| `subhead` | `text` — a bold sub-heading inside the section |
+| `prose` | `text` — one paragraph |
+| `list` | `items`, optional `ordered: true` |
+| `image` | `src`, `alt`, optional `caption` — a map, a schedule, a photo |
+
+Two rules that matter:
+
+- **Do not split a nested section into several top-level sections.** The
+  school's "Week N School Update" is one section with sub-headings under it.
+  Splitting it flattens the hierarchy and makes "where do I break this" a
+  judgement call that comes out differently every week.
+- **`numbered: true` numbers the subheads automatically.** That is how "General
+  Announcements" reads. Never number them by hand — inserting one would mean
+  renumbering the rest.
+
+Every kind also takes an optional `links` row for downloads and supporting
+documents. Sections render in the order: title, blocks, links, then cta.
+
+### Inline markup
+
+Prose, list items, subheads, and captions accept exactly two constructs:
+
+```
+[label](https://example.com)   ->  a link, inline in the sentence
+**emphasis**                   ->  bold
+```
+
+Nothing else — no headings, images, lists, or raw HTML in a string. Use them:
+the school writes links mid-sentence constantly ("詳情請上官網：[官網](…)",
+"Details at [www.anccs.org](…)"), and demoting every one of those to the `links`
+row changes how the sentence reads. Block-level content belongs in `blocks`.
+
+`mailto:` and site-absolute paths work too. Anything else — `javascript:`,
+`data:` — is left as literal text rather than silently dropped, so a mistake
+shows up in review.
 
 Required per issue: `date` (ISO, doubles as slug and sort key), `label` (display
 date, both locales), `summary` (one sentence, ~120–160 chars — it becomes the
 meta description **and** the archive blurb), and `sections` in running order.
 
-Two things that matter more than they look:
+Two things that matter more than they look, for flyers and `image` blocks alike:
 
-- **`alt` describes the flyer's PURPOSE**, not its title — the title is already
+- **`alt` describes the image's PURPOSE**, not its title — the title is already
   adjacent on the page.
-- **`caption` carries the flyer's key facts as real text** — times, room
-  numbers, join codes, prices. Text baked into a graphic is invisible to screen
-  readers, to site search, and to anyone whose mail client blocks images. This
-  is the single highest-value thing the web version adds over the email.
+- **`caption` carries the key facts as real text** — times, room numbers, join
+  codes, prices. Text baked into a graphic is invisible to screen readers, to
+  site search, and to anyone whose mail client blocks images. This is the single
+  highest-value thing the web version adds over the email.
 
 ## Step 4 — Check it locally
 
