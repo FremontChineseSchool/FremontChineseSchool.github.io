@@ -79,6 +79,11 @@ along with the flyer graphics as image files. Expect **no draft email to work
 from**: the issue is composed here first, and this repo is where it is written.
 The email is a rendering of it, produced last.
 
+**A screenshot hides link targets.** If the source is an image of a draft, you
+can see that text is a link but not where it points. Ask for every URL
+explicitly rather than guessing or dropping it — a plausible-looking wrong link
+is worse than asking.
+
 Ask for whichever of these apply. Not every section runs every week — **skip a
 section rather than writing filler**. A quiet week is legitimately one `note`.
 
@@ -187,6 +192,35 @@ Match the school's voice:
 
 When reproducing an existing issue, keep the school's own wording. Fix only
 clear slips, and say what you changed.
+
+### Formatting is yours to apply, not the principal's to write
+
+**The principal does not write Markdown and should never be asked to.** She
+composes in a rich-text editor — clicking the bold button, using the hyperlink
+dialog. The `**emphasis**` and `[label](href)` syntax is an internal encoding
+for the data file. Converting her formatting into it is your job.
+
+**Always preserve what she formatted.** Where she bolded a phrase, emit
+`**…**`. Where she hyperlinked text, emit `[…](…)` with the same target. When
+you have the HTML or a `.eml`, this is mechanical — read `<strong>`/`<b>` and
+`<a href>` out of the markup rather than eyeballing it.
+
+**You may add structure she didn't mark up**, within limits. Her source is often
+plain prose, and the web version reads better with real structure:
+
+- Turn a run of "Label: explanation" sentences into a `list`, with the label
+  bolded — that is how the parking and drop-off notes are built.
+- Add a `subhead` where she has clearly changed topic inside one section.
+- Bold a date, room number, or deadline that the sentence hinges on.
+
+**But do not invent emphasis inside a sentence she left plain**, and never add,
+remove, or retarget a link. Bolding that varies week to week is the same
+inconsistency the data model exists to prevent, and over-bolding destroys
+emphasis. When in doubt, less formatting.
+
+**How she edits.** She does not open the data file. She reads the draft page and
+says what to change in plain language; you make the edit and push again (Step
+5). That is the whole review loop — she never sees the syntax.
 
 Write the Chinese yourself — never leave placeholders. Flag translation nuances
 for confirmation instead of guessing on names, dates, or amounts.
