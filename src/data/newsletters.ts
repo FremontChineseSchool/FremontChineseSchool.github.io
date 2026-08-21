@@ -280,8 +280,8 @@ export const issues: NewsletterIssue[] = [
           {
             block: "prose",
             text: {
-              en: "I also want to let you know that a few classroom assignments have since been confirmed and updated. You'll find the full details in the **Week 2 School Update** section below; please be sure to check the updated classroom roster there to confirm whether your child's classroom has changed. Parking reminders are in that section too.",
-              zh: "另外也想提醒大家，開學後有幾間教室的安排已經確認更新，詳細內容會在下方「**第二週學校近況**」段落中說明，也請家長務必確認最新的教室名冊，確認孩子的教室是否有異動。停車相關提醒也在同一段落。",
+              en: "I also want to let you know that a few classroom assignments have since been confirmed and updated. You'll find the full details in the **Week 2 School Update** section below; please be sure to check the updated classroom roster there to confirm whether your child's classroom has changed.",
+              zh: "另外也想提醒大家，開學後有幾間教室的安排已經確認更新，詳細內容會在下方「**第二週學校近況**」段落中說明，也請家長務必至下方確認最新的教室名冊，確認孩子的教室是否有異動。",
             },
           },
           {
@@ -308,17 +308,20 @@ export const issues: NewsletterIssue[] = [
           {
             block: "prose",
             text: {
-              en: "Based on feedback we received after the start of school, and taking each class's size and space needs into account, we've updated the classroom assignments for the following classes. Affected teachers have been notified individually:",
-              zh: "根據開學後收集到的教室使用回饋，並考量各班學生人數與空間需求，我們調整了以下班級的教室安排（已個別通知任課老師）：",
+              en: "Based on feedback we received after the start of school, and taking each class's size and space needs into account, we've updated the classroom assignments for the following classes:",
+              zh: "根據開學後收集到的教室使用回饋，並考量各班學生人數與空間需求，我們調整了以下班級的教室安排：",
             },
           },
           {
-            // Stated as explicit from → to per teacher rather than the source
-            // email's "213 ⇄ 214: Ms. Chiu ⇄ Ms. Cheng" notation, which does
-            // not say which room anyone starts in. Two of the three lines read
-            // backwards against the schedule when taken as origin-first.
-            // Every room below is verified against both revisions of
-            // FCS_2026-2027_Class_Schedule.pdf — 7/27 (before) and 8/18 (after).
+            // DELIBERATELY DIFFERS FROM THE SENT EMAIL, on instruction.
+            //
+            // Her final email lists these as "Room 212 (was 225): Ms. Yin",
+            // which has the Yin/Lee pair backwards — she is contacting K1/T8
+            // and T3/T7 directly. Every other entry in her list is correct.
+            //
+            // Rooms below are verified against both revisions of
+            // FCS_2026-2027_Class_Schedule.pdf — 7/27 (before) and 8/18
+            // (after) — which agree that Yin ends in 225 and Lee in 212.
             block: "list",
             items: [
               {
@@ -358,8 +361,8 @@ export const issues: NewsletterIssue[] = [
           {
             block: "prose",
             text: {
-              en: "Please check the class schedule below to confirm whether your child's classroom has changed. The **205 ⇄ 221** swap (Ms. Lu, AC4) is still under discussion — we'll follow up once it's confirmed.",
-              zh: "麻煩家長參考下方的班級時間表，確認孩子班級的教室是否有異動。**205 ⇄ 221**（呂慧慈老師，AC4）的調整仍在討論中，確認後會再通知大家。",
+              en: "These are the only classes affected. Please refer to the updated classroom map below to confirm your child's new room.",
+              zh: "以上為本次有教室異動的班級。請家長參考下方最新教室位置圖，確認孩子班級的新教室位置。",
             },
           },
           {
