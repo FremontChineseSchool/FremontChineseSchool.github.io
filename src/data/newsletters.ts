@@ -313,19 +313,25 @@ export const issues: NewsletterIssue[] = [
             },
           },
           {
+            // Stated as explicit from → to per teacher rather than the source
+            // email's "213 ⇄ 214: Ms. Chiu ⇄ Ms. Cheng" notation, which does
+            // not say which room anyone starts in. Two of the three lines read
+            // backwards against the schedule when taken as origin-first.
+            // Every room below is verified against both revisions of
+            // FCS_2026-2027_Class_Schedule.pdf — 7/27 (before) and 8/18 (after).
             block: "list",
             items: [
               {
-                en: "**213 ⇄ 214:** Ms. Chiu (T1, T4) ⇄ Ms. Cheng (T2, T6)",
-                zh: "**213 ⇄ 214：**邱智欣老師（T1、T4）⇄ 鄭怡文老師（T2、T6）",
+                en: "**Ms. Chiu** (T1, T4) moves from **213** to **214**; **Ms. Cheng** (T2, T6) moves from **214** to **213**.",
+                zh: "**邱智欣老師**（T1、T4）由 **213** 教室改至 **214** 教室；**鄭怡文老師**（T2、T6）由 **214** 教室改至 **213** 教室。",
               },
               {
-                en: "**212 ⇄ 225:** Ms. Lee (T3, T7) ⇄ Ms. Yin (K1, T8)",
-                zh: "**212 ⇄ 225：**李淑萍老師（T3、T7）⇄ 尹清賢老師（K1、T8）",
+                en: "**Ms. Yin** (K1, T8) moves from **212** to **225**; **Ms. Lee** (T3, T7) moves from **225** to **212**.",
+                zh: "**尹清賢老師**（K1、T8）由 **212** 教室改至 **225** 教室；**李淑萍老師**（T3、T7）由 **225** 教室改至 **212** 教室。",
               },
               {
-                en: "**207 ⇄ 204:** Ms. Wu (AC3) ⇄ Ms. Chang (AC1)",
-                zh: "**207 ⇄ 204：**吳秀華老師（AC3）⇄ 張郁君老師（AC1）",
+                en: "**Ms. Wu** (AC3) moves from **204** to **207**; **Ms. Chang** (AC1) moves from **207** to **204**.",
+                zh: "**吳秀華老師**（AC3）由 **204** 教室改至 **207** 教室；**張郁君老師**（AC1）由 **207** 教室改至 **204** 教室。",
               },
             ],
           },
