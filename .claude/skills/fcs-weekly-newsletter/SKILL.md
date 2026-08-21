@@ -17,8 +17,6 @@ description: >-
 
 # FCS Weekly eNews
 
-Two artifacts per issue, from one pass of gathered content:
-
 You write **one** thing: an entry in `src/data/newsletters.ts`. Both artifacts are
 generated from it, so they cannot drift.
 
@@ -94,12 +92,16 @@ Content arrives **directly from the principal** — typed or pasted into the
 conversation, in a Google Doc, or as a rough list of what's happening this week —
 along with the flyer graphics as image files. Expect **no draft email to work
 from**: the issue is composed here first, and this repo is where it is written.
-The email is a rendering of it, produced last.
+The email is generated from it.
+
+(During the changeover, before the school moves onto this skill, an issue may
+instead be replicated from one she already drafted and sent elsewhere. That is a
+special case — see *Working from a previous issue* — not the normal input.)
 
 **A screenshot hides link targets.** If the source is an image of a draft, you
 can see that text is a link but not where it points. Ask for every URL
 explicitly rather than guessing or dropping it — a plausible-looking wrong link
-is worse than asking.
+is worse than asking. Record what you cannot resolve as a gap (below).
 
 ### Recording a gap
 
@@ -200,6 +202,19 @@ anything that looks wrong rather than copying it onto the website:
 - **"See attached"** — email attachments have no meaning on a web page. Link the
   real file on the site instead (see *Prefer site assets*).
 
+### Check whether an image is actually new
+
+**Hash it against what is already committed before adding a file.** A screenshot
+makes a reused photo look new — the volunteer team photo in the 8/21 issue looked
+like a different group and turned out byte-identical to the 8/14 one:
+
+```sh
+shasum -a 256 downloaded.jpg public/images/news/*.jpg
+```
+
+A match means reuse the committed path. That avoids a duplicate asset, and avoids
+recording a gap for something already in the repo.
+
 ### Flyer images
 
 Flyers arrive as URLs on the mail provider's CDN (`cloudhq-mkt3.net` for
@@ -222,9 +237,25 @@ of them on one page is a slow phone load. Convert to JPEG at ~1200px wide:
 sips -s format jpeg -s formatOptions 85 --resampleWidth 1200 in.png --out out.jpg
 ```
 
-That typically takes a flyer from ~1.5 MB to ~570 KB with no visible loss. Eyeball
-the result when the graphic contains small text — dense tables and maps have
-survived quality 85 fine, but check rather than assume.
+That typically takes a photo-ish flyer from ~1.5 MB to ~570 KB with no visible
+loss. Eyeball the result when the graphic contains small text — dense tables and
+maps have survived quality 85 fine, but check rather than assume.
+
+**JPEG is not always smaller.** A flat-colour graphic can compress better as
+PNG: the regenerated Classroom Use flyer was 197 KB as PNG and 246 KB as JPEG.
+Try both and keep the smaller file — `ls -S` sorts by size.
+
+### Link hygiene
+
+Two things worth normalising as you transcribe her links:
+
+- **Prefer `https`** and confirm it resolves. She often writes bare
+  `http://www.anccs.org`; both that and `www.kidsfunfest.org` serve fine over
+  https.
+- **Strip tracking suffixes.** Google Drive links arrive with `?usp=sharing` or
+  `?usp=drive_link`. They point at the same file without them.
+
+Never change where a link *goes* — only its scheme and its trailing cruft.
 
 ### Prefer site assets
 
