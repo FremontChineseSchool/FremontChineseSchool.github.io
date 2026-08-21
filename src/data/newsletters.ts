@@ -21,21 +21,17 @@
 // reliably 7 days apart. Nothing here assumes a weekly cadence; `date` is just
 // a unique sort key and slug.
 //
-// The email version of the same issue is a separate artifact: a standalone
-// email-safe HTML file the skill renders from
-// .claude/skills/fcs-weekly-newsletter/assets/email-template.html for pasting
-// into the parent-email send. It is intentionally NOT generated from this file
-// — email needs table layout and inline styles that have nothing to do with
-// the site's CSS. The skill fills both from the same gathered content in one
-// pass; if they ever drift, this file is the one that's canonical.
+// The email is generated from THIS file too, by src/lib/email.ts, and served
+// at /enews-email/<slug>.html. One edit updates both artifacts, so they cannot
+// drift. Never hand-write email HTML.
 //
 // Flyer images: commit them to public/images/news/ so the SITE hosts them.
-// That is what makes them usable in the email too — email clients need an
-// absolute, publicly reachable URL, and once an issue is deployed the flyer
-// lives at https://fremontchineseschool.org/images/news/<file>. Publish the
-// web page first, then send the email. Recurring, non-issue-specific art
-// (sponsor logos) lives in public/images/sponsors/ instead, undated, because
-// the same file is reused across issues.
+// That is what makes them usable in the email — mail clients need an absolute,
+// publicly reachable URL. Because public/ is copied wholesale at build time,
+// pushing an issue deploys its images even while it is still a DRAFT, which is
+// what lets the email be reviewed at the same time as the page. Recurring,
+// non-issue-specific art (sponsor logos) lives in public/images/sponsors/
+// instead, undated, because the same file is reused across issues.
 
 import { GAP, isGapHref } from "../lib/inline";
 
@@ -240,18 +236,18 @@ export const issues: NewsletterIssue[] = [
     // drafted in cloudHQ for the 8/22 class; she sends that version by email,
     // this is the web record.
     //
-    // Flyer images are reused from the 2026-08-14 entry — Power Sculpt,
-    // Language Support Club, Classroom Use Policy, Volunteer TA and the campus
-    // map are unchanged this week. Their filenames still carry the 08-14 date,
-    // which will read oddly once these recur for months; worth renaming to
-    // undated paths in a separate pass.
+    // Reconciled against Angela's final .eml (sent 2026-08-20 22:32 PT), which
+    // resolved all three gaps this issue was staged with: the photo album URL,
+    // the volunteer team photo (byte-identical to 8/14, so reused), and the
+    // regenerated Classroom Use flyer.
+    //
+    // Power Sculpt, Language Support Club, Volunteer TA and the campus map are
+    // reused unchanged from the 2026-08-14 entry. Their filenames still carry
+    // the 08-14 date, which will read oddly once they recur for months; worth
+    // renaming to undated paths in a separate pass.
     date: "2026-08-21",
     label: { en: "August 21, 2026", zh: "2026年8月21日" },
     draft: "019956",
-    gaps: [
-      "Volunteer team photo for this week is not in the repo yet — the 8/14 photo is a different group, so the volunteer section currently has no image. Add the file and an image block before publishing.",
-      "Classroom Use Policy flyer is still the legacy graphic reading \"Irvington Hish School\" — being regenerated. Swap both its image and its caption when the replacement lands.",
-    ],
     summary: {
       en: "Week 2: several classrooms have moved, staff parking now needs a placard, and the ANCCS Student Volunteer Service Award is open for applications.",
       zh: "第二週：多個班級教室有異動、教職員停車需出示停車證，北加州中文學校聯合會學生志工服務獎開始報名。",
@@ -268,8 +264,8 @@ export const issues: NewsletterIssue[] = [
           {
             block: "prose",
             text: {
-              en: "What an exciting first day of the new school year! It was wonderful to see familiar faces reunite and watch our new students settle into campus life — as principal, it truly warmed my heart, and thank you all for making the first day so memorable. You can check out more photos from the first day here: [First Day Photo Album](TODO: ask Angela for the album URL).",
-              zh: "新學期的第一天真是充滿活力又令人興奮！看到熟悉的面孔重聚，也看到新生逐漸熟悉校園環境，身為校長真心替大家感到開心，也謝謝大家一起讓開學日如此難忘。更多開學日的精彩花絮照片，歡迎點擊以下連結觀看：[開學日照片集](TODO: ask Angela for the album URL)。",
+              en: "What an exciting first day of the new school year! It was wonderful to see familiar faces reunite and watch our new students settle into campus life — as principal, it truly warmed my heart, and thank you all for making the first day so memorable. You can check out more photos from the first day here: [First Day Photo Album](https://photos.app.goo.gl/CR1UPZiwqSBcJbnn8).",
+              zh: "新學期的第一天真是充滿活力又令人興奮！看到熟悉的面孔重聚，也看到新生逐漸熟悉校園環境，身為校長真心替大家感到開心，也謝謝大家一起讓開學日如此難忘。更多開學日的精彩花絮照片，歡迎點擊以下連結觀看：[開學日照片集](https://photos.app.goo.gl/CR1UPZiwqSBcJbnn8)。",
             },
           },
           {
@@ -498,6 +494,16 @@ export const issues: NewsletterIssue[] = [
         title: { en: "Join Our Volunteer Team", zh: "加入幹事團隊" },
         blocks: [
           {
+            // Byte-identical to the photo in the 8/14 issue (verified by hash),
+            // so the committed file is reused rather than duplicated.
+            block: "image",
+            src: "/images/news/enews-2026-08-14-volunteer-team.jpg",
+            alt: {
+              en: "FCS parent volunteers and staff standing together behind a Fremont Chinese School banner.",
+              zh: "費利蒙中文學校家長義工與教職員在校旗前合影。",
+            },
+          },
+          {
             block: "prose",
             text: {
               en: "💪 **Help build the FCS community — volunteer roles for the 2026–27 school year.**",
@@ -552,7 +558,10 @@ export const issues: NewsletterIssue[] = [
       {
         kind: "flyer",
         title: { en: "Classroom Use Policy", zh: "教室使用規則" },
-        image: "/images/news/enews-2026-08-14-classroom-use-guidelines.jpg",
+        // Regenerated graphic, supplied 2026-08-20: the long-standing
+        // "Irvington Hish School" typo is fixed. Kept as PNG — a flat-colour
+        // graphic compresses smaller as PNG (197 KB) than as JPEG (246 KB).
+        image: "/images/news/enews-2026-08-21-classroom-use-guidelines.png",
         alt: {
           en: "Classroom use guidelines flyer listing nine rules for using Irvington High School classrooms.",
           zh: "教室使用規則宣傳單，列出使用 Irvington High School 教室的九項規定。",
