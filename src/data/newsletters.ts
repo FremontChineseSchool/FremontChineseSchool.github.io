@@ -236,7 +236,10 @@ export const issues: NewsletterIssue[] = [
     // drafted in cloudHQ for the 8/22 class; she sends that version by email,
     // this is the web record.
     //
-    // Reconciled against Angela's final .eml (sent 2026-08-20 22:32 PT), which
+    // Published 2026-08-21 to coincide with the email Angela sends that morning
+    // from cloudHQ — so /enews/ matches what parents receive.
+    //
+    // Reconciled against her final .eml (sent 2026-08-20 22:32 PT), which
     // resolved all three gaps this issue was staged with: the photo album URL,
     // the volunteer team photo (byte-identical to 8/14, so reused), and the
     // regenerated Classroom Use flyer.
@@ -247,7 +250,6 @@ export const issues: NewsletterIssue[] = [
     // renaming to undated paths in a separate pass.
     date: "2026-08-21",
     label: { en: "August 21, 2026", zh: "2026年8月21日" },
-    draft: "019956",
     summary: {
       en: "Week 2: several classrooms have moved, staff parking now needs a placard, and the ANCCS Student Volunteer Service Award is open for applications.",
       zh: "第二週：多個班級教室有異動、教職員停車需出示停車證，北加州中文學校聯合會學生志工服務獎開始報名。",

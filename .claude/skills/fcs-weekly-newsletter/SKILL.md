@@ -88,20 +88,20 @@ resolve that first** — do not draft on top of a dirty tree.
 
 ## Step 1 — Gather this week's inputs
 
-**Right now the principal still drafts each issue in cloudHQ and sends it
-herself.** The usual input is therefore her issue — ideally the `.eml`, sometimes
-a screenshot first and the `.eml` once it's final — and this repo produces the
-web record of it. That is the interim arrangement, not the end state: once she
-drives the skill directly, content will arrive as prose plus flyer files and the
-email will be generated here. Both paths use the same data entry.
+Content arrives **directly from the principal** — typed or pasted into the
+conversation, in a Google Doc, or as a rough list of what's happening this week —
+along with the flyer graphics as image files. Expect **no draft email to work
+from**: the issue is composed here first, and this repo is where it is written.
+The email is generated from it.
 
-**Ask for the `.eml`, and reconcile against it before publishing.** It is the
-only source that carries link targets and the actual image files.
+(During the changeover, before the school moves onto this skill, an issue may
+instead be replicated from one she already drafted and sent elsewhere. That is a
+special case — see *Working from a previous issue* — not the normal input.)
 
-**A screenshot hides link targets.** You can see that text is a link but not
-where it points. Ask for every URL explicitly rather than guessing or dropping
-it — a plausible-looking wrong link is worse than asking. Record what you cannot
-resolve as a gap (below); an `.eml` arriving later will usually close it.
+**A screenshot hides link targets.** If the source is an image of a draft, you
+can see that text is a link but not where it points. Ask for every URL
+explicitly rather than guessing or dropping it — a plausible-looking wrong link
+is worse than asking. Record what you cannot resolve as a gap (below).
 
 ### Recording a gap
 
