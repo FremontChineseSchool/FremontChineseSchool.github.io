@@ -215,6 +215,19 @@ shasum -a 256 downloaded.jpg public/images/news/*.jpg
 A match means reuse the committed path. That avoids a duplicate asset, and avoids
 recording a gap for something already in the repo.
 
+### When content is updated
+
+Expect revisions: a corrected paragraph, a replacement flyer, a rewritten
+section. **Diff the whole issue against the new version, not just the part you
+were asked about.** She cuts as well as adds, and a sentence kept from a
+superseded version is worse than one missed — the page presents itself as the
+record of what she sent, so anything extra there is something the school never
+said.
+
+Two follow-ons. Re-check any claim you made *about* her copy, since a problem
+you spotted in an earlier version may already be fixed. And be precise about
+which check you ran: "checked the part you flagged" is not "checked the issue".
+
 ### Flyer images
 
 Flyers arrive as URLs on the mail provider's CDN (`cloudhq-mkt3.net` for
