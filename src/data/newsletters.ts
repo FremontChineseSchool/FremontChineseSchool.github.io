@@ -364,6 +364,150 @@ export const issues: NewsletterIssue[] = [
           },
         ],
       },
+      {
+        kind: "callout",
+        title: { en: "Join Our Volunteer Team", zh: "加入幹事團隊" },
+        blocks: [
+          {
+            // Byte-identical to the photo in the 8/14 issue (verified by hash),
+            // so the committed file is reused rather than duplicated.
+            block: "image",
+            src: "/images/news/enews-2026-08-14-volunteer-team.jpg",
+            alt: {
+              en: "FCS parent volunteers and staff standing together behind a Fremont Chinese School banner.",
+              zh: "費利蒙中文學校家長義工與教職員在校旗前合影。",
+            },
+          },
+          {
+            block: "prose",
+            text: {
+              en: "💪 **Help build the FCS community — volunteer roles for the 2026–27 school year.**",
+              zh: "💪 **攜手打造費利蒙大家庭 — 2026–27 學年義工招募。**",
+            },
+          },
+          {
+            block: "prose",
+            text: {
+              en: "We're excited that many new parents have already joined our volunteer team this year — thank you! We can always use more help. From event planning to photography, translation to administration, there's a role to fit your skills and schedule. Parents matched to a good-fit role are also exempt from traffic and crossing duty. [See the open positions](https://drive.google.com/file/d/1500DSGZhrjpR4s9M4s8_OLxgXv7k5ePN/view).",
+              zh: "我們很高興今年已有許多新家長加入幹事團隊，謝謝大家的付出！我們仍歡迎更多家長加入 — 從活動規劃、攝影、翻譯到行政，總能找到適合您的角色。找到合適崗位的家長，還可免除交通導護值勤。[查看義工職缺一覽](https://drive.google.com/file/d/1500DSGZhrjpR4s9M4s8_OLxgXv7k5ePN/view)。",
+            },
+          },
+        ],
+        cta: {
+          label: {
+            en: "Volunteer sign-up 2026–27",
+            zh: "2026–27 學年義工報名表",
+          },
+          href: "https://forms.gle/MtdWWWUWagNWP1u8A",
+        },
+      },
+      {
+        kind: "flyer",
+        title: {
+          en: "Class Highlight: Power Sculpt",
+          zh: "課程精選：燃力舞塑",
+        },
+        image: "/images/news/enews-2026-08-14-power-sculpt.jpg",
+        alt: {
+          en: "Flyer for the adult Power Sculpt class, listing the warm-up, core training, and Latin line dance segments, with a QR code to register.",
+          zh: "成人「燃力舞塑」課程宣傳單，說明暖身、核心訓練與拉丁排舞三個段落，並附報名 QR code。",
+        },
+        caption: {
+          en: "Saturdays, 11:10 AM – 12:00 PM, Irvington High School dance room. 15 min warm-up and dumbbell conditioning, 15 min core training, 20 min Latin line dance.",
+          zh: "每週六上午 11:10–12:00，Irvington High School 舞蹈教室。15 分鐘暖身與啞鈴塑身、15 分鐘核心訓練、20 分鐘拉丁排舞。",
+        },
+      },
+      {
+        kind: "flyer",
+        title: { en: "Language Support Club", zh: "語文輔導社" },
+        image: "/images/news/enews-2026-08-14-language-support-club.jpg",
+        alt: {
+          en: "Flyer for the free Language Support Club, with photos of students at a past session holding their artwork.",
+          zh: "免費「語文輔導社」宣傳單，內有學生於歷次活動中展示作品的照片。",
+        },
+        caption: {
+          en: "Free. Every Saturday, 11:10 AM – 12:00 PM, Room 222. Join the Google Classroom with code **fwdggvj5**.",
+          zh: "免費。每週六上午 11:10–12:00，教室 222。Google Classroom 代碼：**fwdggvj5**。",
+        },
+      },
+      {
+        kind: "flyer",
+        title: { en: "Classroom Use Policy", zh: "教室使用規則" },
+        image: "/images/news/enews-2026-08-21-classroom-use-guidelines.png",
+        alt: {
+          en: "Classroom use guidelines flyer listing nine rules for using Irvington High School classrooms.",
+          zh: "教室使用規則宣傳單，列出使用 Irvington High School 教室的九項規定。",
+        },
+        caption: {
+          en: "We share Irvington High School's classrooms: no food, leave desks and floors clean, return desks to where you found them, and don't use the equipment, drawers, fridge, microwave, or anything on the teacher's desk.",
+          zh: "本校借用 Irvington High School 教室上課：請勿在教室內飲食，下課前清理桌面與地面、將桌椅歸回原位，並請勿使用教室內的設備、抽屜、冰箱、微波爐或講桌上的物品。",
+        },
+      },
+      {
+        kind: "flyer",
+        title: { en: "Volunteer TA Needed", zh: "誠徵國高中義工小老師" },
+        image: "/images/news/enews-2026-08-14-volunteer-ta.jpg",
+        alt: {
+          en: "Flyer recruiting high school student volunteer teaching assistants, with a QR code to register.",
+          zh: "招募高中生義工小老師的宣傳單，並附報名 QR code。",
+        },
+        caption: {
+          en: "Fremont Chinese School is looking for high school student volunteers to serve as Teaching Assistants — helping in the classroom, tutoring online, or supporting school events.",
+          zh: "費利蒙中文學校誠徵高中生擔任義工小老師！無論是到班協助教學、線上輔導，或是協助活動進行，都歡迎加入我們的行列，一起為學弟妹的中文學習盡一份心力。",
+        },
+        links: [
+          {
+            label: { en: "Sign up to be a TA", zh: "義工小老師報名" },
+            href: "https://docs.google.com/forms/d/e/1FAIpQLScN1hL35KbtGTcy_4Yq2KjQNrqra6G7rUf-TDfqcCGpRXOauA/viewform",
+          },
+        ],
+      },
+      {
+        kind: "callout",
+        title: {
+          en: "Donate & Double Your Contribution",
+          zh: "捐款與雙倍貢獻",
+        },
+        blocks: [
+          {
+            block: "prose",
+            text: {
+              en: "FCS is a non-profit 501(c) organization. Donations are tax-deductible (IRS tax ID: **94-2978949**) and help Fremont Chinese School continue to operate, teach Chinese courses, and pass on Chinese culture.",
+              zh: "費利蒙中文學校是一家非營利性 501(c) 組織。您可以透過向費利蒙中文學校捐款來享受稅務抵減（IRS tax ID: **94-2978949**）。您的捐款將幫助本校繼續運營、教授中文課程並傳承中華文化。",
+            },
+          },
+          {
+            block: "prose",
+            text: {
+              en: "**Double your contribution:** thank you for volunteering at school! Your employer may offer volunteer cash rewards — please consider donating those rewards to Fremont Chinese School. [Instructions and an example](https://docs.google.com/presentation/d/1Op2TlZ4wFSz7epqziWHmEauqEa5FnqRJ5yJofqQhpqs/edit).",
+              zh: "**雙倍貢獻：**感謝您在學校擔任義工！您的雇主也許提供義工獎勵金，歡迎將這筆獎勵金捐助給學校。[捐款方式說明與範例](https://docs.google.com/presentation/d/1Op2TlZ4wFSz7epqziWHmEauqEa5FnqRJ5yJofqQhpqs/edit)。",
+            },
+          },
+        ],
+        cta: {
+          label: { en: "Donate", zh: "前往捐款" },
+          href: "/donate",
+        },
+      },
+      {
+        kind: "sponsors",
+        title: {
+          en: "2026 Yearbook Gold Sponsors",
+          zh: "2026 年刊金牌贊助商",
+        },
+        logos: [
+          {
+            name: "IvyMAX 飛達教育",
+            image: "/images/sponsors/ivymax.jpg",
+            href: "https://ivymax.com",
+          },
+          {
+            name: "Fremont United Auto Service Inc. 聯合汽車修理中心",
+            image: "/images/sponsors/fremont-united-auto.jpg",
+            href: "https://www.fremontunitedautoservice.com/",
+          },
+        ],
+      },
     ],
   },
   {
