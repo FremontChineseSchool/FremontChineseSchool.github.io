@@ -264,7 +264,6 @@ export const issues: NewsletterIssue[] = [
     // near-duplicate files.
     date: "2026-08-28",
     label: { en: "August 28, 2026", zh: "2026年8月28日" },
-    draft: "ac6a5c",
     summary: {
       en: "Week 3: one classroom moves to Room 221, a parking reminder, our Chinese Yo-Yo team's festival debut, and the ANCCS Volunteer Service Award opens for applications.",
       zh: "第三週：C2、C5 班教室改至 221 教室、停車溫馨提醒、扯鈴隊校外演出花絮，以及北加州中文學校聯合會學生志工服務獎開始報名。",
