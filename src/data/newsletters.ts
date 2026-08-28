@@ -232,139 +232,139 @@ export type NewsletterIssue = {
  */
 export const issues: NewsletterIssue[] = [
   {
-        // Week 3 of the 2026-27 school year. Drafted directly in this repo from
-        // Angela's notes (first issue run through the updated skill end to end).
-        date: "2026-08-28",
-        label: { en: "August 28, 2026", zh: "2026年8月28日" },
-        draft: "def1ea",
-        gaps: [
-                " — need the photo album link (marked TODO in the copy), plus who performed and where/when it took place, to write it up with real detail instead of a generic mention.",
-          "The Class Schedule PDF and the classroom-schedule preview images on /student-resources still show C2 and C5 in room 218 — they need regenerating to show room 221 before this issue is confirmed accurate.",
-              ],
-        summary: {
-                en: "Week 3: campus life is settling into a rhythm, a few classroom and walking-path tweaks continue, and we highlight last weekend's Chinese yo-yo performance.",
-                zh: "第三週：校園生活逐漸步上軌道，教室與行走動線仍有微調，本期並精選上週末的扯鈴表演花絮。",
+    // Week 3 of the 2026-27 school year. Drafted directly in this repo from
+    // Angela's notes (first issue run through the updated skill end to end).
+    date: "2026-08-28",
+    label: { en: "August 28, 2026", zh: "2026年8月28日" },
+    draft: "def1ea",
+    gaps: [
+      "Chinese yo-yo (diabolo) performance highlight — need the photo album link (marked TODO in the copy), plus who performed and where/when it took place, to write it up with real detail instead of a generic mention.",
+      "The Class Schedule PDF and the classroom-schedule preview images on /student-resources still show C2 and C5 in room 218 — they need regenerating to show room 221 before this issue is confirmed accurate.",
+    ],
+    summary: {
+      en: "Week 3: campus life is settling into a rhythm, a few classroom and walking-path tweaks continue, and we highlight last weekend's Chinese yo-yo performance.",
+      zh: "第三週：校園生活逐漸步上軌道，教室與行走動線仍有微調，本期並精選上週末的扯鈴表演花絮。",
+    },
+    sections: [
+      {
+        kind: "prose",
+        title: { en: "A Note from the Principal", zh: "校長的話" },
+        blocks: [
+          {
+            block: "prose",
+            text: { en: "Dear FCS Families,", zh: "各位家長好：" },
+          },
+          {
+            block: "prose",
+            text: {
+              en: "It's wonderful to see our school year settling into a rhythm — that busy, cheerful hum on campus every Saturday is one of my favorite things. Thank you for your continued patience as a few details keep coming into focus: some classroom assignments are still in motion, and we'll keep you posted as these settle.",
+              zh: "很高興看到新學期逐漸步上軌道，每週六校園裡那股熱鬧又充滿活力的氣氛，一直是我最喜歡的時刻之一。也謝謝大家持續的耐心與體諒：目前仍有部分教室安排持續微調中，相關安排確定後會再與大家更新。",
+            },
+          },
+          {
+            block: "prose",
+            text: {
+              en: "I'm also delighted to share that more parents have stepped forward to join our staff this year — it's wonderful to see so many familiar and new faces pitching in around campus. Thank you for bringing such great energy to FCS!",
+              zh: "另外也很開心與大家分享，今年有更多家長加入我們的教職員行列！看到這麼多熟悉與新加入的面孔一起在校園裡忙碌付出，真的很感動，謝謝大家為費利蒙中文學校注入滿滿的活力！",
+            },
+          },
+          {
+            block: "prose",
+            text: {
+              en: "Thank you again for your continued support — here's to a great year ahead!",
+              zh: "再次感謝大家一路以來的支持，期待與大家共度精彩的新學期！",
+            },
+          },
+        ],
+        signoff: {
+          en: "Warmly, Angela — Principal, Fremont Chinese School",
+          zh: "謹上　夏芷筠　費利蒙中文學校校長",
         },
-        sections: [
+      },
+      {
+        kind: "prose",
+        title: { en: "Week 3 School Update", zh: "第三週學校近況" },
+        blocks: [
           {
-                    kind: "prose",
-                    title: { en: "A Note from the Principal", zh: "校長的話" },
-                    blocks: [
-                      {
-                                    block: "prose",
-                                    text: { en: "Dear FCS Families,", zh: "各位家長好：" },
-                      },
-                      {
-                                    block: "prose",
-                                    text: {
-                                                    en: "It's wonderful to see our school year settling into a rhythm — that busy, cheerful hum on campus every Saturday is one of my favorite things. Thank you for your continued patience as a few details keep coming into focus: some classroom assignments are still in motion, and we'll keep you posted as these settle.",
-                                                    zh: "很高興看到新學期逐漸步上軌道，每週六校園裡那股熱鬧又充滿活力的氣氛，一直是我最喜歡的時刻之一。也謝謝大家持續的耐心與體諒：目前仍有部分教室安排持續微調中，相關安排確定後會再與大家更新。",
-                                    },
-                      },
-                      {
-                                    block: "prose",
-                                    text: {
-                                                    en: "I'm also delighted to share that more parents have stepped forward to join our staff this year — it's wonderful to see so many familiar and new faces pitching in around campus. Thank you for bringing such great energy to FCS!",
-                                                    zh: "另外也很開心與大家分享，今年有更多家長加入我們的教職員行列！看到這麼多熟悉與新加入的面孔一起在校園裡忙碌付出，真的很感動，謝謝大家為費利蒙中文學校注入滿滿的活力！",
-                                    },
-                      },
-                      {
-                                    block: "prose",
-                                    text: {
-                                                    en: "Thank you again for your continued support — here's to a great year ahead!",
-                                                    zh: "再次感謝大家一路以來的支持，期待與大家共度精彩的新學期！",
-                                    },
-                      },
-                              ],
-                    signoff: {
-                                en: "Warmly, Angela — Principal, Fremont Chinese School",
-                                zh: "謹上　夏芷筠　費利蒙中文學校校長",
-                    },
+            block: "subhead",
+            text: { en: "Classroom Change", zh: "教室異動" },
           },
           {
-                    kind: "prose",
-                    title: { en: "Week 3 School Update", zh: "第三週學校近況" },
-                    blocks: [
-                      {
-                                    block: "subhead",
-                                    text: { en: "Classroom Change", zh: "教室異動" },
-                      },
-                      {
-                                    block: "prose",
-                                    text: {
-                                                    en: "One classroom change this week:",
-                                                    zh: "本週僅有一項教室異動：",
-                                    },
-                      },
-                      {
-                                    block: "list",
-                                    items: [
-                                      {
-                                                        en: "**C2** (Ms. Wun) and **C5** (Ms. Lau) move from room 218 to **room 221**.",
-                                                        zh: "**C2 班**（溫淑齡老師）與 **C5 班**（關秀鈴老師）由 218 教室改至 **221 教室**上課。",
-                                      },
-                                                  ],
-                      },
-                              ],
-                    links: [
-                      {
-                                    label: {
-                                                    en: "Classes, teachers & classrooms",
-                                                    zh: "班級、教師與教室一覽",
-                                    },
-                                    href: "/student-resources",
-                      },
-                              ],
+            block: "prose",
+            text: {
+              en: "One classroom change this week:",
+              zh: "本週僅有一項教室異動：",
+            },
           },
           {
-                    kind: "prose",
-                    title: {
-                                en: "Chinese Yo-Yo (Diabolo) Performance Highlight",
-                                zh: "扯鈴表演花絮",
-                    },
-                    blocks: [
-                      {
-                                    block: "prose",
-                                    text: {
-                                                    en: "Last weekend, our students dazzled everyone with a Chinese yo-yo (diabolo) performance — thank you to everyone who came out to watch and cheer them on! [More photos here](TODO: ask Angela for the photo album link).",
-                                                    zh: "上週末，本校學生的扯鈴表演精彩亮相，謝謝所有到場為孩子們加油打氣的家長與朋友！[更多照片請見這裡](TODO: ask Angela for the photo album link)。",
-                                    },
-                      },
-                              ],
+            block: "list",
+            items: [
+              {
+                en: "**C2** (Ms. Wun) and **C5** (Ms. Lau) move from room 218 to **room 221**.",
+                zh: "**C2 班**（溫淑齡老師）與 **C5 班**（關秀鈴老師）由 218 教室改至 **221 教室**上課。",
+              },
+            ],
+          },
+        ],
+        links: [
+          {
+            label: {
+              en: "Classes, teachers & classrooms",
+              zh: "班級、教師與教室一覽",
+            },
+            href: "/student-resources",
+          },
+        ],
+      },
+      {
+        kind: "prose",
+        title: {
+          en: "Chinese Yo-Yo (Diabolo) Performance Highlight",
+          zh: "扯鈴表演花絮",
+        },
+        blocks: [
+          {
+            block: "prose",
+            text: {
+              en: "Last weekend, our students dazzled everyone with a Chinese yo-yo (diabolo) performance — thank you to everyone who came out to watch and cheer them on! [More photos here](TODO: ask Angela for the photo album link).",
+              zh: "上週末，本校學生的扯鈴表演精彩亮相，謝謝所有到場為孩子們加油打氣的家長與朋友！[更多照片請見這裡](TODO: ask Angela for the photo album link)。",
+            },
+          },
+        ],
+      },
+      {
+        kind: "prose",
+        title: {
+          en: "School Calendar 2026–2027",
+          zh: "學校行事曆 2026–2027",
+        },
+        blocks: [
+          {
+            block: "prose",
+            text: { en: "Coming event(s):", zh: "近期活動：" },
           },
           {
-                    kind: "prose",
-                    title: {
-                                en: "School Calendar 2026–2027",
-                                zh: "學校行事曆 2026–2027",
-                    },
-                    blocks: [
-                      {
-                                    block: "prose",
-                                    text: { en: "Coming event(s):", zh: "近期活動：" },
-                      },
-                      {
-                                    block: "list",
-                                    items: [
-                                      {
-                                                        en: "**9/05/2026** — No school, Labor Day long weekend",
-                                                        zh: "**9/05/2026** — 停課，勞動節長週末",
-                                      },
-                                                  ],
-                      },
-                              ],
-                    links: [
-                      {
-                                    label: { en: "Download calendar (Chinese)", zh: "下載行事曆（中文版）" },
-                                    href: "https://drive.google.com/file/d/1kUl_nhpdAC0WLE0r6smb2fSjDUzRmSdX/view",
-                      },
-                      {
-                                    label: { en: "Download calendar (English)", zh: "下載行事曆（英文版）" },
-                                    href: "https://drive.google.com/file/d/1mHm8B4-LnNZkqqOY8qMvG7OReWaconzM/view",
-                      },
-                              ],
+            block: "list",
+            items: [
+              {
+                en: "**9/05/2026** — No school, Labor Day long weekend",
+                zh: "**9/05/2026** — 停課，勞動節長週末",
+              },
+            ],
           },
-              ],
+        ],
+        links: [
+          {
+            label: { en: "Download calendar (Chinese)", zh: "下載行事曆（中文版）" },
+            href: "https://drive.google.com/file/d/1kUl_nhpdAC0WLE0r6smb2fSjDUzRmSdX/view",
+          },
+          {
+            label: { en: "Download calendar (English)", zh: "下載行事曆（英文版）" },
+            href: "https://drive.google.com/file/d/1mHm8B4-LnNZkqqOY8qMvG7OReWaconzM/view",
+          },
+        ],
+      },
+    ],
   },
   {
     // Week 2 of the 2026-27 school year. Replicated from the issue Angela
