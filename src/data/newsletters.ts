@@ -238,7 +238,8 @@ export const issues: NewsletterIssue[] = [
         label: { en: "August 28, 2026", zh: "2026年8月28日" },
         draft: "def1ea",
         gaps: [
-                "Chinese yo-yo (diabolo) performance highlight — need the photo album link (marked TODO in the copy), plus who performed and where/when it took place, to write it up with real detail instead of a generic mention.",
+                " — need the photo album link (marked TODO in the copy), plus who performed and where/when it took place, to write it up with real detail instead of a generic mention.",
+          "The Class Schedule PDF and the classroom-schedule preview images on /student-resources still show C2 and C5 in room 218 — they need regenerating to show room 221 before this issue is confirmed accurate.",
               ],
         summary: {
                 en: "Week 3: campus life is settling into a rhythm, a few classroom and walking-path tweaks continue, and we highlight last weekend's Chinese yo-yo performance.",
@@ -279,6 +280,41 @@ export const issues: NewsletterIssue[] = [
                                 en: "Warmly, Angela — Principal, Fremont Chinese School",
                                 zh: "謹上　夏芷筠　費利蒙中文學校校長",
                     },
+          },
+          {
+                    kind: "prose",
+                    title: { en: "Week 3 School Update", zh: "第三週學校近況" },
+                    blocks: [
+                      {
+                                    block: "subhead",
+                                    text: { en: "Classroom Change", zh: "教室異動" },
+                      },
+                      {
+                                    block: "prose",
+                                    text: {
+                                                    en: "One classroom change this week:",
+                                                    zh: "本週僅有一項教室異動：",
+                                    },
+                      },
+                      {
+                                    block: "list",
+                                    items: [
+                                      {
+                                                        en: "**C2** (Ms. Wun) and **C5** (Ms. Lau) move from room 218 to **room 221**.",
+                                                        zh: "**C2 班**（溫淑齡老師）與 **C5 班**（關秀鈴老師）由 218 教室改至 **221 教室**上課。",
+                                      },
+                                                  ],
+                      },
+                              ],
+                    links: [
+                      {
+                                    label: {
+                                                    en: "Classes, teachers & classrooms",
+                                                    zh: "班級、教師與教室一覽",
+                                    },
+                                    href: "/student-resources",
+                      },
+                              ],
           },
           {
                     kind: "prose",
