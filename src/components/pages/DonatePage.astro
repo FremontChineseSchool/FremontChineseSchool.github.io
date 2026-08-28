@@ -16,6 +16,26 @@ const c = content[lang].donate;
     {c.body.map((p) => <p class="leading-relaxed" style="color: var(--color-fcs-muted);">{p}</p>)}
   </div>
 
+  <!-- Employer matching / volunteer rewards card -->
+  <div class="mt-6 rounded-[10px] p-6" style="background: var(--color-fcs-white); border: 1px solid var(--color-fcs-border);">
+    <h2 class="text-xl font-semibold" style="color: var(--color-fcs-green-dark);">
+      {c.employerHeading}
+    </h2>
+    <div class="mt-3 space-y-3">
+      {c.employerBody.map((p) => <p class="leading-relaxed" style="color: var(--color-fcs-muted);">{p}</p>)}
+    </div>
+    <a
+      href={links.employerGivingGuide}
+      target="_blank"
+      rel="noopener noreferrer"
+      class="mt-3 inline-flex items-center gap-1.5 font-semibold hover:underline"
+      style="color: var(--color-fcs-green);"
+    >
+      {c.employerGuideLabel}
+      <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+    </a>
+  </div>
+
   <!-- EIN / Tax info card -->
   <div class="mt-8 rounded-[10px] p-5" style="background: var(--color-fcs-white); border: 1px solid var(--color-fcs-border);">
     <h2 class="text-base font-semibold" style="color: var(--color-fcs-black);">{c.einHeading}</h2>
