@@ -17,6 +17,7 @@ export const links = {
   // Hosted in public/ — the school's own export of the tuition payment schedule.
   tuitionPdf: '/FCS_2026-2027_Tuition_Payment_Schedule.pdf',
   irsDetermination: 'https://drive.google.com/file/d/1BBgfNR6QzLA2d1-Ej8ezyW56Pf96eosf/view',
+  employerGivingGuide: 'https://docs.google.com/presentation/d/1Op2TlZ4wFSz7epqziWHmEauqEa5FnqRJ5yJofqQhpqs/edit?usp=sharing',
   acCreditTransfer: 'https://forms.gle/TntoF21REwrnnkfj9',
   acPolicies: 'https://drive.google.com/file/d/1EKDsFuUj3pV8eXTBhEE4cSHGpC1M_sPF/view',
   acAbsenceForm: 'https://drive.google.com/file/d/1xbyIlzgvoZFpABZNK03L2-6sK2XSKXCI/view',
@@ -852,8 +853,13 @@ export const content = {
       eyebrow: 'Donate',
       body: [
         'FCS is a non-profit 501(c) organization. Your donation is tax-deductible and helps us offer more classes to families in our community who want to learn Mandarin Chinese in a fun, welcoming way.',
-        'Many employers match charitable gifts — please check whether your company can double your contribution.',
       ],
+      employerHeading: 'Donate through your employer',
+      employerBody: [
+        'Many employers match charitable gifts, or offer "volunteer grants"/"dollars for doers" programs that turn your volunteer hours at FCS into a donation — both are easy ways to double your contribution at no extra cost to you.',
+        'Log into your company’s giving platform (often listed under "Charity" or "CSR" on your HR or internal hub page), search for "Fremont Chinese School" in Fremont, CA, and submit your matching gift or volunteer time.',
+      ],
+      employerGuideLabel: 'Step-by-step guide to donating volunteer grants',
       einHeading: 'Tax information',
       einLabel: 'EIN (Tax ID)',
       einNumber: '94-2978949',
@@ -1680,8 +1686,13 @@ export const content = {
       eyebrow: '捐款',
       body: [
         '費利蒙中文學校為 501(c) 非營利組織。您的捐款可享稅務抵減，並協助本校為社區中有意以輕鬆愉快方式學習中文的家庭開辦更多課程。',
-        '許多公司提供慈善捐款配對方案，歡迎您查詢服務的公司是否能讓您的捐款加倍。',
       ],
+      employerHeading: '透過公司捐款',
+      employerBody: [
+        '許多公司提供慈善捐款配對，或是「義工獎勵金」（volunteer grants / dollars for doers）方案，將您在本校的義工服務時數轉換為捐款——這兩種方式都能讓您在不多花一毛錢的情況下，讓捐款加倍。',
+        '請登入貴公司的捐款平台（通常在公司內部網頁或人資頁面中標示為 "Charity" 或 "CSR"），搜尋位於 Fremont, CA 的 "Fremont Chinese School"，即可申請捐款配對或提交義工時數。',
+      ],
+      employerGuideLabel: '義工獎勵捐款步驟說明',
       einHeading: '稅務資訊',
       einLabel: '納稅人識別號（EIN）',
       einNumber: '94-2978949',
