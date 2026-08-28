@@ -232,6 +232,378 @@ export type NewsletterIssue = {
  */
 export const issues: NewsletterIssue[] = [
   {
+    // Week 3 of the 2026-27 school year. Replicated from the .eml Angela
+    // actually sent via the legacy MailKing flow (2026-08-28 13:00 ET) — NOT
+    // built from her abandoned in-repo draft (see the `def1ea` entry below,
+    // kept as-is for in-person troubleshooting). The sent email has strictly
+    // more content than that draft: Parking Reminder, the ANCCS Volunteer
+    // Service Award, and Meet Our Teachers are all present here but were
+    // missing from `def1ea`.
+    //
+    // Both gaps `def1ea` was staged with are resolved as of this draft:
+    // - Yo-Yo photo: the sent email includes one (iPhone photo, EXIF/GPS
+    //   stripped before committing). Event details (Kids Fun Festival,
+    //   Cupertino Memorial Park Amphitheater, Global Traditions & Finale
+    //   segment) came from the email body text.
+    // - Class Schedule PDF / student-resources preview images: already
+    //   regenerated on disk (dated 8/24/2026, C2/C5 correctly in room 221)
+    //   before this draft was written — confirmed by reading the PDF and the
+    //   committed preview PNGs directly, not just trusting the claim.
+    //
+    // Classroom-change wording keeps the site's established teacher-name
+    // English spellings (Ms. Wun, Ms. Lau — matching the class schedule and
+    // teachers page) rather than the ad hoc pinyin romanization the sent
+    // email used ("Wen Shuling", "Guan Xiuling") for the same two teachers.
+    //
+    // Reused byte-identical (verified by hash) from earlier issues rather
+    // than re-added: the volunteer team photo and the Classroom Use flyer
+    // (both from 8/14 and 8/21 respectively). The campus map and the
+    // Volunteer TA flyer are the same graphics too — pixel-diffed near-zero
+    // against the committed files, differing only in this week's export
+    // compression — so those paths were reused as well instead of adding
+    // near-duplicate files.
+    date: "2026-08-28",
+    label: { en: "August 28, 2026", zh: "2026年8月28日" },
+    draft: "ac6a5c",
+    summary: {
+      en: "Week 3: one classroom moves to Room 221, a parking reminder, our Chinese Yo-Yo team's festival debut, and the ANCCS Volunteer Service Award opens for applications.",
+      zh: "第三週：C2、C5 班教室改至 221 教室、停車溫馨提醒、扯鈴隊校外演出花絮，以及北加州中文學校聯合會學生志工服務獎開始報名。",
+    },
+    sections: [
+      {
+        kind: "prose",
+        title: { en: "A Note from the Principal", zh: "校長的話" },
+        blocks: [
+          {
+            block: "prose",
+            text: { en: "Dear FCS Families,", zh: "各位家長好：" },
+          },
+          {
+            block: "prose",
+            text: {
+              en: "It's wonderful to see our school year settling into a rhythm — that busy, cheerful hum on campus every Saturday is one of my favorite things. Thank you for your continued patience as a few details keep coming into focus: some classroom assignments are still in motion, and we'll keep you posted as these settle.",
+              zh: "很高興看到新學期逐漸步上軌道，每週六校園裡那股熱鬧又充滿活力的氣氛，一直是我最喜歡的時刻之一。也謝謝大家持續的耐心與體諒：目前仍有部分教室安排持續微調中，相關安排確定後會再與大家更新。",
+            },
+          },
+          {
+            block: "prose",
+            text: {
+              en: "I'm also delighted to share that more parents have stepped forward to join our staff this year — it's wonderful to see so many familiar and new faces pitching in around campus. Thank you for bringing such great energy to FCS!",
+              zh: "另外也很開心與大家分享，今年有更多家長加入我們的教職員行列！看到這麼多熟悉與新加入的面孔一起在校園裡忙碌付出，真的很感動，謝謝大家為費利蒙中文學校注入滿滿的活力！",
+            },
+          },
+          {
+            block: "prose",
+            text: {
+              en: "Thank you again for your continued support — here's to a great year ahead!",
+              zh: "再次感謝大家一路以來的支持，期待與大家共度精彩的新學期！",
+            },
+          },
+        ],
+        signoff: {
+          en: "Warmly, Angela — Principal, Fremont Chinese School",
+          zh: "謹上　夏芷筠　費利蒙中文學校校長",
+        },
+      },
+      {
+        kind: "prose",
+        title: { en: "Week 3 School Update", zh: "第三週學校近況" },
+        blocks: [
+          {
+            block: "subhead",
+            text: { en: "Classroom Change", zh: "教室異動" },
+          },
+          {
+            block: "prose",
+            text: {
+              en: "One classroom change this week:",
+              zh: "本週僅有一項教室異動：",
+            },
+          },
+          {
+            block: "list",
+            items: [
+              {
+                en: "**C2** (Ms. Wun) and **C5** (Ms. Lau) move from room 218 to **room 221**.",
+                zh: "**C2 班**（溫淑齡老師）與 **C5 班**（關秀鈴老師）由 218 教室改至 **221 教室**上課。",
+              },
+            ],
+          },
+          {
+            block: "subhead",
+            text: { en: "Parking Reminder", zh: "停車溫馨提醒" },
+          },
+          {
+            block: "prose",
+            text: {
+              en: "Friendly reminder that staff and teachers will need to display a parking placard, and the school will check periodically — please help by avoiding the staff/teacher parking areas.",
+              zh: "也藉這個機會提醒大家：教職員停車需出示停車證，校方將不定期查核，請家長協助避免停放於教師/員工專用車格。",
+            },
+          },
+          {
+            block: "prose",
+            text: {
+              en: "If you're dropping off, picking up, or need to park to come onto campus, please use the Visitor Parking lot (on the Greenpark Dr side, per the campus map). Thanks for helping keep parking running smoothly!",
+              zh: "接送或需下車進入校園時，請將車輛停放於家長/訪客停車場（Greenpark Dr 側，如校園地圖所示）。謝謝大家的配合，讓校園停車動線更加順暢！",
+            },
+          },
+          {
+            block: "image",
+            src: "/images/news/enews-2026-08-14-campus-map.jpg",
+            alt: {
+              en: "Campus map marking visitor and staff parking, the blue drop-off route along Greenpark Drive, the green walking route, the new classrooms, and the wing closed for renovation.",
+              zh: "校園地圖，標示家長／訪客與教職員停車場、沿 Greenpark Drive 的藍色接送路線、綠色行走路線、新教室位置，以及施工期間停用的舊教室區。",
+            },
+          },
+        ],
+        links: [
+          {
+            label: {
+              en: "2026–2027 Class Schedule (PDF, updated 8/24)",
+              zh: "2026–2027 學年度班級時間表（PDF，8/24 更新）",
+            },
+            href: "/FCS_2026-2027_Class_Schedule.pdf",
+          },
+          {
+            label: {
+              en: "Classes, teachers & classrooms",
+              zh: "班級、教師與教室一覽",
+            },
+            href: "/student-resources",
+          },
+        ],
+      },
+      {
+        kind: "prose",
+        title: {
+          en: "School Calendar 2026–2027",
+          zh: "學校行事曆 2026–2027",
+        },
+        blocks: [
+          {
+            block: "prose",
+            text: { en: "Coming event(s):", zh: "近期活動：" },
+          },
+          {
+            block: "list",
+            items: [
+              {
+                en: "**9/05/2026** — No school, Labor Day long weekend",
+                zh: "**9/05/2026** — 停課，勞動節長週末",
+              },
+            ],
+          },
+        ],
+        links: [
+          {
+            label: { en: "Download calendar (Chinese)", zh: "下載行事曆（中文版）" },
+            href: "https://drive.google.com/file/d/1kUl_nhpdAC0WLE0r6smb2fSjDUzRmSdX/view",
+          },
+          {
+            label: { en: "Download calendar (English)", zh: "下載行事曆（英文版）" },
+            href: "https://drive.google.com/file/d/1mHm8B4-LnNZkqqOY8qMvG7OReWaconzM/view",
+          },
+        ],
+      },
+      {
+        kind: "prose",
+        title: { en: "General Announcements", zh: "其他公告" },
+        numbered: true,
+        blocks: [
+          {
+            block: "subhead",
+            text: {
+              en: "Chinese Yo-Yo (Diabolo) Team Performance Highlight",
+              zh: "扯鈴隊演出花絮",
+            },
+          },
+          {
+            block: "prose",
+            text: {
+              en: "Last Saturday, our Chinese Yo-Yo (Diabolo) team performed at the 2026 Kids Fun Festival at Cupertino Memorial Park Amphitheater, taking the stage during the afternoon's Global Traditions & Finale lineup. Our students did a fantastic job representing FCS, thank you to everyone who came out to cheer them on! Kids interested in giving it a try are still welcome to join us for a trial Yo-Yo class.",
+              zh: "上週六，本校扯鈴隊受邀於 Cupertino Memorial Park 圓形劇場舉行的「2026 Kids Fun Festival」演出，在下午壓軸的「Global Traditions & Finale」環節登場。孩子們的精彩演出為費利蒙中文學校爭光，謝謝所有到場為孩子們加油打氣的家長與朋友！也歡迎對扯鈴有興趣的小朋友隨時加入試上扯鈴課！",
+            },
+          },
+          {
+            block: "image",
+            src: "/images/news/enews-2026-08-28-yoyo-performance.jpg",
+            alt: {
+              en: "FCS students performing with diabolos on an outdoor festival stage.",
+              zh: "費利蒙中文學校學生在戶外節慶舞台上表演扯鈴。",
+            },
+            caption: {
+              en: "Saturday, August 22, 2026 — Kids Fun Festival, Cupertino Memorial Park Amphitheater, Global Traditions & Finale segment.",
+              zh: "2026年8月22日（週六）— Kids Fun Festival，Cupertino Memorial Park 圓形劇場，「Global Traditions & Finale」環節。",
+            },
+          },
+          {
+            block: "subhead",
+            text: { en: "Volunteer Service Award", zh: "學生志工服務獎" },
+          },
+          {
+            block: "prose",
+            text: {
+              en: "🔥 The Association of Northern California Chinese Schools (ANCCS) Student Volunteer Service Award is now open for applications. It recognises Chinese school students for their community service hours:",
+              zh: "🔥 北加州中文學校聯合會學生志工服務獎開始報名！本獎項表彰中文學校學生的社區服務時數：",
+            },
+          },
+          {
+            block: "list",
+            items: [
+              {
+                en: "**Teen** (ages 11–15): 🥉 Bronze 50–74 hrs ｜ 🥈 Silver 75–99 hrs ｜ 🥇 Gold 100+ hrs",
+                zh: "**Teen**（年齡 11–15 歲）：🥉 銅獎 50–74 小時 ｜ 🥈 銀獎 75–99 小時 ｜ 🥇 金獎 100 小時以上",
+              },
+              {
+                en: "**Young Adult** (16+): 🥉 Bronze 100–174 hrs ｜ 🥈 Silver 175–249 hrs ｜ 🥇 Gold 250+ hrs",
+                zh: "**Young Adult**（年齡 16 歲以上）：🥉 銅獎 100–174 小時 ｜ 🥈 銀獎 175–249 小時 ｜ 🥇 金獎 250 小時以上",
+              },
+            ],
+          },
+          {
+            block: "prose",
+            text: {
+              en: "Application deadline: **October 1, 2026**. Details at [www.anccs.org](https://www.anccs.org).",
+              zh: "申請截止日：**2026 年 10 月 1 日**。詳情請上官網：[www.anccs.org](https://www.anccs.org)。",
+            },
+          },
+        ],
+      },
+      {
+        kind: "prose",
+        title: { en: "Meet Our Teachers", zh: "認識我們的老師" },
+        blocks: [
+          {
+            block: "prose",
+            text: {
+              en: "Want to learn more about the teachers working with your child? Visit our [Teacher Bios page](/teachers) for background on each teacher, along with their contact info — so you can reach out directly with any questions.",
+              zh: "想更了解陪伴孩子學習的老師們嗎？歡迎造訪我們的[教師介紹頁面](/teachers)，除了每位老師的簡介與教學背景，也附上聯絡方式，讓您有任何問題都能直接與老師聯繫！",
+            },
+          },
+        ],
+      },
+      {
+        kind: "callout",
+        title: { en: "Join Our Volunteer Team", zh: "加入幹事團隊" },
+        blocks: [
+          {
+            // Byte-identical to the photo in the 8/14 issue (verified by
+            // hash), so the committed file is reused rather than duplicated.
+            block: "image",
+            src: "/images/news/enews-2026-08-14-volunteer-team.jpg",
+            alt: {
+              en: "FCS parent volunteers and staff standing together behind a Fremont Chinese School banner.",
+              zh: "費利蒙中文學校家長義工與教職員在校旗前合影。",
+            },
+          },
+          {
+            block: "prose",
+            text: {
+              en: "💪 **Help build the FCS community — volunteer roles for the 2026–27 school year.**",
+              zh: "💪 **攜手打造費利蒙大家庭 — 2026–27 學年義工招募。**",
+            },
+          },
+          {
+            block: "prose",
+            text: {
+              en: "We're excited that many new parents have already joined our volunteer team this year — thank you! We can always use more help. From event planning to photography, translation to administration, there's a role to fit your skills and schedule. Parents matched to a good-fit role are also exempt from traffic and crossing duty. [See the open positions](https://drive.google.com/file/d/1500DSGZhrjpR4s9M4s8_OLxgXv7k5ePN/view).",
+              zh: "我們很高興今年已有許多新家長加入幹事團隊，謝謝大家的付出！我們仍歡迎更多家長加入 — 從活動規劃、攝影、翻譯到行政，總能找到適合您的角色。找到合適崗位的家長，還可免除交通導護值勤。[查看義工職缺一覽](https://drive.google.com/file/d/1500DSGZhrjpR4s9M4s8_OLxgXv7k5ePN/view)。",
+            },
+          },
+        ],
+        cta: {
+          label: {
+            en: "Volunteer sign-up 2026–27",
+            zh: "2026–27 學年義工報名表",
+          },
+          href: "https://forms.gle/MtdWWWUWagNWP1u8A",
+        },
+      },
+      {
+        kind: "flyer",
+        title: { en: "Volunteer TA Needed", zh: "誠徵國高中義工小老師" },
+        // Pixel-diffed against this week's export: mean channel diff <1,
+        // consistent with recompression noise, not a redrawn flyer — reused.
+        image: "/images/news/enews-2026-08-14-volunteer-ta.jpg",
+        alt: {
+          en: "Flyer recruiting high school student volunteer teaching assistants, with a QR code to register.",
+          zh: "招募高中生義工小老師的宣傳單，並附報名 QR code。",
+        },
+        caption: {
+          en: "Fremont Chinese School is looking for high school student volunteers to serve as Teaching Assistants — helping in the classroom, tutoring online, or supporting school events.",
+          zh: "費利蒙中文學校誠徵高中生擔任義工小老師！無論是到班協助教學、線上輔導，或是協助活動進行，都歡迎加入我們的行列，一起為學弟妹的中文學習盡一份心力。",
+        },
+        links: [
+          {
+            label: { en: "Sign up to be a TA", zh: "義工小老師報名" },
+            href: "https://docs.google.com/forms/d/e/1FAIpQLScN1hL35KbtGTcy_4Yq2KjQNrqra6G7rUf-TDfqcCGpRXOauA/viewform",
+          },
+        ],
+      },
+      {
+        kind: "flyer",
+        title: { en: "Classroom Use Policy", zh: "教室使用規則" },
+        // Byte-identical to the 8/21 issue's regenerated graphic (verified by
+        // hash) — reused rather than duplicated.
+        image: "/images/news/enews-2026-08-21-classroom-use-guidelines.png",
+        alt: {
+          en: "Classroom use guidelines flyer listing nine rules for using Irvington High School classrooms.",
+          zh: "教室使用規則宣傳單，列出使用 Irvington High School 教室的九項規定。",
+        },
+        caption: {
+          en: "We share Irvington High School's classrooms: no food, leave desks and floors clean, return desks to where you found them, and don't use the equipment, drawers, fridge, microwave, or anything on the teacher's desk.",
+          zh: "本校借用 Irvington High School 教室上課：請勿在教室內飲食，下課前清理桌面與地面、將桌椅歸回原位，並請勿使用教室內的設備、抽屜、冰箱、微波爐或講桌上的物品。",
+        },
+      },
+      {
+        kind: "callout",
+        title: {
+          en: "Donate & Double Your Contribution",
+          zh: "捐款與雙倍貢獻",
+        },
+        blocks: [
+          {
+            block: "prose",
+            text: {
+              en: "FCS is a non-profit 501(c) organization. Donations are tax-deductible (IRS tax ID: **94-2978949**) and help Fremont Chinese School continue to operate, teach Chinese courses, and pass on Chinese culture.",
+              zh: "費利蒙中文學校是一家非營利性 501(c) 組織。您可以透過向費利蒙中文學校捐款來享受稅務抵減（IRS tax ID: **94-2978949**）。您的捐款將幫助本校繼續運營、教授中文課程並傳承中華文化。",
+            },
+          },
+          {
+            block: "prose",
+            text: {
+              en: "**Double your contribution:** thank you for volunteering at school! Your employer may offer volunteer cash rewards — please consider donating those rewards to Fremont Chinese School. [Instructions and an example](https://docs.google.com/presentation/d/1Op2TlZ4wFSz7epqziWHmEauqEa5FnqRJ5yJofqQhpqs/edit).",
+              zh: "**雙倍貢獻：**感謝您在學校擔任義工！您的雇主也許提供義工獎勵金，歡迎將這筆獎勵金捐助給學校。[捐款方式說明與範例](https://docs.google.com/presentation/d/1Op2TlZ4wFSz7epqziWHmEauqEa5FnqRJ5yJofqQhpqs/edit)。",
+            },
+          },
+        ],
+        cta: {
+          label: { en: "Donate", zh: "前往捐款" },
+          href: "/donate",
+        },
+      },
+      {
+        kind: "sponsors",
+        title: {
+          en: "2026 Yearbook Gold Sponsors",
+          zh: "2026 年刊金牌贊助商",
+        },
+        logos: [
+          {
+            name: "IvyMAX 飛達教育",
+            image: "/images/sponsors/ivymax.jpg",
+            href: "https://ivymax.com",
+          },
+          {
+            name: "Fremont United Auto Service Inc. 聯合汽車修理中心",
+            image: "/images/sponsors/fremont-united-auto.jpg",
+            href: "https://www.fremontunitedautoservice.com/",
+          },
+        ],
+      },
+    ],
+  },
+  {
     // Week 3 of the 2026-27 school year. Drafted directly in this repo from
     // Angela's notes (first issue run through the updated skill end to end).
     date: "2026-08-28",
