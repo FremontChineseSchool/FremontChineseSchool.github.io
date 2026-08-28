@@ -257,8 +257,8 @@ export const issues: NewsletterIssue[] = [
                       {
                                     block: "prose",
                                     text: {
-                                                    en: "It's wonderful to see our school year settling into a rhythm — that busy, cheerful hum on campus every Saturday is one of my favorite things. Thank you for your continued patience as a few details keep coming into focus: some classroom assignments are still in motion, and based on feedback from parents about safety, we're continuing to fine-tune the walking paths between the parking lot and classrooms. We'll keep you posted as these settle.",
-                                                    zh: "很高興看到新學期逐漸步上軌道，每週六校園裡那股熱鬧又充滿活力的氣氛，一直是我最喜歡的時刻之一。也謝謝大家持續的耐心與體諒：目前仍有部分教室安排持續微調中，同時我們也根據家長對安全方面的回饋，持續調整停車場到教室之間的行走動線。相關安排確定後會再與大家更新。",
+                                                    en: "It's wonderful to see our school year settling into a rhythm — that busy, cheerful hum on campus every Saturday is one of my favorite things. Thank you for your continued patience as a few details keep coming into focus: some classroom assignments are still in motion, and we'll keep you posted as these settle.",
+                                                    zh: "很高興看到新學期逐漸步上軌道，每週六校園裡那股熱鬧又充滿活力的氣氛，一直是我最喜歡的時刻之一。也謝謝大家持續的耐心與體諒：目前仍有部分教室安排持續微調中，相關安排確定後會再與大家更新。",
                                     },
                       },
                       {
