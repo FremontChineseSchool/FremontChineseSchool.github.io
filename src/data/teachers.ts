@@ -524,13 +524,20 @@ export const teachers: Teacher[] = [
     classes: ["AP"],
     photo: "/images/teachers/mingwei-shieh.jpg",
     tagline: {
-      en: "Preparing for the AP exam and beyond",
-      zh: "為 AP 考試與大學中文做準備",
+      en: "Preparing for the AP Chinese Exam and Advanced Chinese Study",
+      zh: "為 AP 考試與進階中文學習做好準備",
     },
     bio: {
-      en: "Ms. Shieh's AP Chinese class is for students preparing for the AP Chinese exam. It strengthens advanced proficiency, reading and writing skills, and test-taking strategy, building toward both the exam itself and college-level Chinese study afterwards.",
-      zh: "謝老師指導的 AP 中文課程適合準備 AP 中文考試的學生，強化高階中文能力、閱讀與寫作技巧及應試策略，為 AP 考試及未來大學階段的中文學習做好充分準備。",
+      en: "Ms. Shieh holds a master's degree in Teaching Chinese as a Foreign Language from National Taiwan Normal University and teaching credentials in both Taiwan and California. She currently teaches Chinese at Fremont Chinese School and City College of San Francisco. She hopes that AP Chinese students will not only be well prepared for the exam, but will also continue using Chinese after graduation, maintain their interest in the language and culture, and move forward to college and beyond with confidence and a broader global perspective.",
+      zh: "謝老師畢業於國立臺灣師範大學華語文教學研究所，並具臺灣中等學校國文教師資格及加州中文單科教師資格。目前除任教於費利蒙中文學校，也於 City College of San Francisco 教授中文。她期許 AP 班學生不僅能為考試做好準備，更能在畢業後持續使用中文，保持對語言與文化的興趣，並帶著自信與更開闊的國際視野走向大學與未來。",
     },
+    courseNotes: [
+      {
+        code: "AP",
+        en: "Ms. Shieh's AP Chinese course follows the latest College Board course and exam framework and develops integrated skills in listening, speaking, reading, and writing. Through themes such as Families and Communities, Language and Culture, Art and Creativity, Technology, Contemporary Life, and Global Issues, students work with authentic materials, cultural comparisons, research projects, and AP-style tasks. Students practice reading, listening, email response, story narration, Project Presentation, and Q&A while strengthening communication skills, cultural understanding, and critical thinking in preparation for the AP Chinese exam and future advanced Chinese study.",
+        zh: "謝老師的 AP 中文課程依據 College Board 最新課程與考試架構設計，透過家庭與社區、語言與文化、藝術與創意、科技、當代生活及全球議題，整合聽、說、讀、寫四項能力。課程結合真實語料、文化比較、專題研究及 AP 題型練習，包含閱讀、聽力、電子郵件回覆、故事敘述、Project Presentation 與 Q&A，幫助學生提升中文溝通、文化理解與思辨能力，熟悉 AP 考試並為未來進階中文學習做好準備。",
+      },
+    ],
   },
   {
     id: "maureen-li",
