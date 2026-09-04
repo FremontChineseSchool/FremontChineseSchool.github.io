@@ -233,10 +233,26 @@ export type NewsletterIssue = {
 export const issues: NewsletterIssue[] = [
   {
     // Replicated from the .eml Angela sent via MailKing (2026-09-04, 10:00
-    // PDT). No flyer graphics this issue — the only images in the sent HTML
-    // are the recurring section-divider bars and the two gold-sponsor logos
-    // already committed under public/images/sponsors/; nothing new to
-    // download to public/images/news/.
+    // PDT). Four images embedded in the sent HTML (verified by opening each
+    // one, not inferred from surrounding markup):
+    // - Taiwan-delegation group photo (Week 3 School Update) — new, committed
+    //   as enews-2026-09-04-taiwan-visitors.jpg (PNG source recompressed to
+    //   JPEG, no visible quality loss).
+    // - Classroom Use Guidelines flyer — byte-identical (verified by hash) to
+    //   the 8/21 issue's enews-2026-08-21-classroom-use-guidelines.png, reused
+    //   rather than duplicated.
+    // - SF Sun Yat-Sen Memorial Hall essay-contest flyer (General
+    //   Announcements) — new, committed as enews-2026-09-04-essay-contest.jpg
+    //   (kept the sent JPEG as-is; re-encoding at quality 85 came out larger).
+    //   No plain-text description existed for this one since it's graphic
+    //   only, so the caption is a full transcription/translation of the
+    //   flyer's rules — confirm the romanization of the contact's name
+    //   (楊昆山 → "Yang Kun-shan") and the facts against the source graphic.
+    // - Volunteer-team photo (Join Our Volunteer Team) — byte-identical
+    //   (verified by hash) to the 8/14 issue's
+    //   enews-2026-08-14-volunteer-team.jpg, reused.
+    // The two gold-sponsor logos are the recurring ones already committed
+    // under public/images/sponsors/.
     //
     // Two fixes made transcribing the copy:
     // - The Taiwan-visitor paragraph called Professor Cheng Zi-yu "herself" in
@@ -249,17 +265,16 @@ export const issues: NewsletterIssue[] = [
     //   how internal links are written elsewhere in this file.
     //
     // Evergreen sections (Meet Our Teachers, the Volunteer Service Award
-    // details, Join Our Volunteer Team, Donate & Double Your Contribution,
-    // the sponsor roster) are carried forward verbatim from the 2026-08-28
-    // issue rather than re-derived, since the sent copy for those matches word
-    // for word. No team photo in the volunteer section this week, unlike
-    // 8/28 — the sent email didn't include one.
+    // details, Join Our Volunteer Team copy, Donate & Double Your
+    // Contribution, the sponsor roster) are carried forward verbatim from the
+    // 2026-08-28 issue rather than re-derived, since the sent copy for those
+    // matches word for word.
     date: "2026-09-04",
     label: { en: "September 4, 2026", zh: "2026年9月4日" },
     draft: "70a243",
     summary: {
-      en: "Labor Day (9/5): no school. A visiting professor and 15 teacher-trainees from Taiwan sit in on classes, and the ANCCS Volunteer Service Award opens for applications.",
-      zh: "9/5（週六）勞動節停課一天。國立臺灣體育運動大學教授與15位師資培訓生蒞校交流，北加州中文學校聯合會學生志工服務獎同步開放申請。",
+      en: "Labor Day (9/5): no school. A visiting professor and 15 teacher-trainees from Taiwan sit in on classes, and both the Sun Yat-Sen Memorial essay contest and the ANCCS Volunteer Service Award open for applications.",
+      zh: "9/5（週六）勞動節停課一天。國立臺灣體育運動大學教授與15位師資培訓生蒞校交流，金山國父紀念館徵文比賽與北加州中文學校聯合會學生志工服務獎同步開放申請。",
     },
     sections: [
       {
@@ -296,6 +311,18 @@ export const issues: NewsletterIssue[] = [
             text: {
               en: "Last week, Fremont Chinese School was honored to welcome a special group of visitors! Professor Cheng Zi-yu from National Taiwan Sport University — a skilled diabolo performer in their own right — visited our Yo-Yo (Diabolo) class, delighting both teachers and students. They were joined by 15 teacher-trainees from universities across Taiwan, who sat in on our bilingual and credit classes to observe and exchange ideas. [See more photos here](https://photos.app.goo.gl/WiHGnaTysBoSGnqv5).",
               zh: "上週，費利蒙中文學校很榮幸地迎來一群特別的訪客！來自國立臺灣體育運動大學的鄭子翊教授親臨本校扯鈴班觀摩指導 — 鄭教授本身就是扯鈴高手，讓師生們驚喜連連。隨行的還有 15 位來自臺灣各大專院校的師資培訓生，一同走進雙語班與學分班進行交流觀摩。歡迎大家[點此欣賞更多照片](https://photos.app.goo.gl/WiHGnaTysBoSGnqv5)！",
+            },
+          },
+          {
+            block: "image",
+            src: "/images/news/enews-2026-09-04-taiwan-visitors.jpg",
+            alt: {
+              en: "FCS students, teachers, and the visiting Taiwan delegation posing together outdoors with a Fremont Chinese School banner and diabolos.",
+              zh: "費利蒙中文學校師生與來訪的臺灣師培團在校園戶外合影，手持校旗並展示扯鈴。",
+            },
+            caption: {
+              en: "FCS students and teachers with visiting Professor Cheng Zi-yu and 15 teacher-trainees from universities across Taiwan.",
+              zh: "費利蒙中文學校師生與來訪的鄭子翊教授及 15 位來自臺灣各大專院校的師資培訓生合影。",
             },
           },
         ],
@@ -345,6 +372,20 @@ export const issues: NewsletterIssue[] = [
         title: { en: "Classroom Use Policy", zh: "教室使用規則" },
         blocks: [
           {
+            // Byte-identical to the 8/21 issue's regenerated graphic
+            // (verified by hash) — reused rather than duplicated.
+            block: "image",
+            src: "/images/news/enews-2026-08-21-classroom-use-guidelines.png",
+            alt: {
+              en: "Classroom use guidelines flyer listing nine rules for using Irvington High School classrooms.",
+              zh: "教室使用規則宣傳單，列出使用 Irvington High School 教室的九項規定。",
+            },
+            caption: {
+              en: "We share Irvington High School's classrooms: no food, leave desks and floors clean, return desks to where you found them, and don't use the equipment, drawers, fridge, microwave, or anything on the teacher's desk.",
+              zh: "本校借用 Irvington High School 教室上課：請勿在教室內飲食，下課前清理桌面與地面、將桌椅歸回原位，並請勿使用教室內的設備、抽屜、冰箱、微波爐或講桌上的物品。",
+            },
+          },
+          {
             block: "subhead",
             text: {
               en: "Addendum: Before/After Photos",
@@ -370,7 +411,27 @@ export const issues: NewsletterIssue[] = [
       {
         kind: "prose",
         title: { en: "General Announcements", zh: "其他公告" },
+        numbered: true,
         blocks: [
+          {
+            block: "subhead",
+            text: {
+              en: "SF Sun Yat-Sen Memorial Hall Essay Contest",
+              zh: "金山國父紀念館徵文比賽",
+            },
+          },
+          {
+            block: "image",
+            src: "/images/news/enews-2026-09-04-essay-contest.jpg",
+            alt: {
+              en: "Flyer for the Dr. Sun Yat-Sen Memorial Hall of SF's essay contest for Chinese school students.",
+              zh: "金山國父紀念館徵文比賽宣傳單，徵求曾就讀中文學校的青少年學生投稿。",
+            },
+            caption: {
+              en: "Open to students ages 12–22 who have attended a Chinese school. Write 800–1200 characters in Chinese (handwritten or typed; no AI-generated writing) on one of two topics about Dr. Sun Yat-sen. Submit by email to sskidspreschool@yahoo.com by **October 15, 2026**; winners are announced October 25. Prizes: 1st $500, 2nd $300, 3rd $200, honorable mention $100 each. Winners must attend the awards ceremony on November 7, 2026 at 11am at the Memorial Hall (838 Stockton St, SF) and give brief remarks. Contact: (510) 449-7375 (Director Yang Kun-shan).",
+              zh: "曾就讀中文學校、年齡 12–22 歲的青少年學生皆可投稿。以中文書寫（手寫或打字，嚴禁使用 AI 寫作），字數 800 至 1200 字，就孫中山先生相關的兩個題目擇一發揮。請於 **2026 年 10 月 15 日**前 email 至 sskidspreschool@yahoo.com，10 月 25 日公佈得獎名單。獎金：第一名 $500、第二名 $300、第三名 $200，佳作若干名各 $100。得獎人須於 2026 年 11 月 7 日上午 11 點親自出席在金山國父紀念館（838 Stockton St, SF）舉辦的頒獎典禮並簡短致詞。聯絡電話：(510) 449-7375（楊昆山館長）。",
+            },
+          },
           {
             block: "subhead",
             text: { en: "Volunteer Service Award", zh: "學生志工服務獎" },
@@ -421,6 +482,16 @@ export const issues: NewsletterIssue[] = [
         kind: "callout",
         title: { en: "Join Our Volunteer Team", zh: "加入幹事團隊" },
         blocks: [
+          {
+            // Byte-identical to the photo in the 8/14 issue (verified by
+            // hash), so the committed file is reused rather than duplicated.
+            block: "image",
+            src: "/images/news/enews-2026-08-14-volunteer-team.jpg",
+            alt: {
+              en: "FCS parent volunteers and staff standing together behind a Fremont Chinese School banner.",
+              zh: "費利蒙中文學校家長義工與教職員在校旗前合影。",
+            },
+          },
           {
             block: "prose",
             text: {
