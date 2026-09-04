@@ -271,7 +271,6 @@ export const issues: NewsletterIssue[] = [
     // matches word for word.
     date: "2026-09-04",
     label: { en: "September 4, 2026", zh: "2026年9月4日" },
-    draft: "70a243",
     summary: {
       en: "Labor Day (9/5): no school. A visiting professor and 15 teacher-trainees from Taiwan sit in on classes, and both the Sun Yat-Sen Memorial essay contest and the ANCCS Volunteer Service Award open for applications.",
       zh: "9/5（週六）勞動節停課一天。國立臺灣體育運動大學教授與15位師資培訓生蒞校交流，金山國父紀念館徵文比賽與北加州中文學校聯合會學生志工服務獎同步開放申請。",
