@@ -256,8 +256,8 @@ export const issues: NewsletterIssue[] = [
     //
     // Two fixes made transcribing the copy:
     // - The Taiwan-visitor paragraph called Professor Cheng Zi-yu "herself" in
-    //   one sentence and "He" in the next. Reworded to "they/them" rather than
-    //   guess which was right.
+    //   one sentence and "He" in the next. Confirmed with the principal that
+    //   she is female, so both sentences now use "she/her".
     // - Stripped Google Drive tracking suffixes (`?usp=sharing` /
     //   `?usp=drive_link`) from the calendar, volunteer-positions, and
     //   double-your-contribution links, and used the site-relative `/teachers`
@@ -309,7 +309,7 @@ export const issues: NewsletterIssue[] = [
           {
             block: "prose",
             text: {
-              en: "Last week, Fremont Chinese School was honored to welcome a special group of visitors! Professor Cheng Zi-yu from National Taiwan Sport University — a skilled diabolo performer in their own right — visited our Yo-Yo (Diabolo) class, delighting both teachers and students. They were joined by 15 teacher-trainees from universities across Taiwan, who sat in on our bilingual and credit classes to observe and exchange ideas. [See more photos here](https://photos.app.goo.gl/WiHGnaTysBoSGnqv5).",
+              en: "Last week, Fremont Chinese School was honored to welcome a special group of visitors! Professor Cheng Zi-yu from National Taiwan Sport University — a skilled diabolo performer in her own right — visited our Yo-Yo (Diabolo) class, delighting both teachers and students. She was joined by 15 teacher-trainees from universities across Taiwan, who sat in on our bilingual and credit classes to observe and exchange ideas. [See more photos here](https://photos.app.goo.gl/WiHGnaTysBoSGnqv5).",
               zh: "上週，費利蒙中文學校很榮幸地迎來一群特別的訪客！來自國立臺灣體育運動大學的鄭子翊教授親臨本校扯鈴班觀摩指導 — 鄭教授本身就是扯鈴高手，讓師生們驚喜連連。隨行的還有 15 位來自臺灣各大專院校的師資培訓生，一同走進雙語班與學分班進行交流觀摩。歡迎大家[點此欣賞更多照片](https://photos.app.goo.gl/WiHGnaTysBoSGnqv5)！",
             },
           },
