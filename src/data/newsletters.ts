@@ -232,6 +232,267 @@ export type NewsletterIssue = {
  */
 export const issues: NewsletterIssue[] = [
   {
+    // Replicated from the .eml Angela sent via MailKing (2026-09-04, 10:00
+    // PDT). No flyer graphics this issue — the only images in the sent HTML
+    // are the recurring section-divider bars and the two gold-sponsor logos
+    // already committed under public/images/sponsors/; nothing new to
+    // download to public/images/news/.
+    //
+    // Two fixes made transcribing the copy:
+    // - The Taiwan-visitor paragraph called Professor Cheng Zi-yu "herself" in
+    //   one sentence and "He" in the next. Reworded to "they/them" rather than
+    //   guess which was right.
+    // - Stripped Google Drive tracking suffixes (`?usp=sharing` /
+    //   `?usp=drive_link`) from the calendar, volunteer-positions, and
+    //   double-your-contribution links, and used the site-relative `/teachers`
+    //   path instead of the absolute URL in the sent email — consistent with
+    //   how internal links are written elsewhere in this file.
+    //
+    // Evergreen sections (Meet Our Teachers, the Volunteer Service Award
+    // details, Join Our Volunteer Team, Donate & Double Your Contribution,
+    // the sponsor roster) are carried forward verbatim from the 2026-08-28
+    // issue rather than re-derived, since the sent copy for those matches word
+    // for word. No team photo in the volunteer section this week, unlike
+    // 8/28 — the sent email didn't include one.
+    date: "2026-09-04",
+    label: { en: "September 4, 2026", zh: "2026年9月4日" },
+    draft: "70a243",
+    summary: {
+      en: "Labor Day (9/5): no school. A visiting professor and 15 teacher-trainees from Taiwan sit in on classes, and the ANCCS Volunteer Service Award opens for applications.",
+      zh: "9/5（週六）勞動節停課一天。國立臺灣體育運動大學教授與15位師資培訓生蒞校交流，北加州中文學校聯合會學生志工服務獎同步開放申請。",
+    },
+    sections: [
+      {
+        kind: "prose",
+        title: { en: "A Note from the Principal", zh: "校長的話" },
+        blocks: [
+          {
+            block: "prose",
+            text: { en: "Dear FCS Families,", zh: "各位家長好：" },
+          },
+          {
+            block: "prose",
+            text: {
+              en: "Just a quick note to remind everyone that there is no school this Saturday, September 5th, for the Labor Day long weekend. Wishing you all a restful and enjoyable weekend with family! We'll see everyone back at school on Saturday, September 12th.",
+              zh: "提醒大家，本週六（9/5）適逢勞動節長週末，學校停課一天。祝大家有個輕鬆愉快的長週末，多陪伴家人、好好休息！我們將於 9/12（週六）恢復正常上課，屆時再與大家見面！",
+            },
+          },
+        ],
+        signoff: {
+          en: "Warmly, Angela — Principal, Fremont Chinese School",
+          zh: "謹上　夏芷筠　費利蒙中文學校校長",
+        },
+      },
+      {
+        kind: "prose",
+        title: { en: "Week 3 School Update", zh: "第三週學校近況" },
+        blocks: [
+          {
+            block: "subhead",
+            text: { en: "Visitors from Taiwan", zh: "台灣貴賓蒞校交流" },
+          },
+          {
+            block: "prose",
+            text: {
+              en: "Last week, Fremont Chinese School was honored to welcome a special group of visitors! Professor Cheng Zi-yu from National Taiwan Sport University — a skilled diabolo performer in their own right — visited our Yo-Yo (Diabolo) class, delighting both teachers and students. They were joined by 15 teacher-trainees from universities across Taiwan, who sat in on our bilingual and credit classes to observe and exchange ideas. [See more photos here](https://photos.app.goo.gl/WiHGnaTysBoSGnqv5).",
+              zh: "上週，費利蒙中文學校很榮幸地迎來一群特別的訪客！來自國立臺灣體育運動大學的鄭子翊教授親臨本校扯鈴班觀摩指導 — 鄭教授本身就是扯鈴高手，讓師生們驚喜連連。隨行的還有 15 位來自臺灣各大專院校的師資培訓生，一同走進雙語班與學分班進行交流觀摩。歡迎大家[點此欣賞更多照片](https://photos.app.goo.gl/WiHGnaTysBoSGnqv5)！",
+            },
+          },
+        ],
+      },
+      {
+        kind: "prose",
+        title: {
+          en: "School Calendar 2026–2027",
+          zh: "學校行事曆 2026–2027",
+        },
+        blocks: [
+          {
+            block: "prose",
+            text: { en: "Coming event(s):", zh: "近期活動：" },
+          },
+          {
+            block: "list",
+            items: [
+              {
+                en: "**9/05/2026** — No school, Labor Day long weekend",
+                zh: "**9/05/2026** — 停課，勞動節長週末",
+              },
+              {
+                en: "**9/12/2026** — Fire Drill",
+                zh: "**9/12/2026** — 消防演習",
+              },
+              {
+                en: "**9/26/2026** — Picture Day",
+                zh: "**9/26/2026** — 拍照日",
+              },
+            ],
+          },
+        ],
+        links: [
+          {
+            label: { en: "Download calendar (Chinese)", zh: "下載行事曆（中文版）" },
+            href: "https://drive.google.com/file/d/1kUl_nhpdAC0WLE0r6smb2fSjDUzRmSdX/view",
+          },
+          {
+            label: { en: "Download calendar (English)", zh: "下載行事曆（英文版）" },
+            href: "https://drive.google.com/file/d/1mHm8B4-LnNZkqqOY8qMvG7OReWaconzM/view",
+          },
+        ],
+      },
+      {
+        kind: "prose",
+        title: { en: "Classroom Use Policy", zh: "教室使用規則" },
+        blocks: [
+          {
+            block: "subhead",
+            text: {
+              en: "Addendum: Before/After Photos",
+              zh: "教室使用規則補充：上課前後照片留存",
+            },
+          },
+          {
+            block: "prose",
+            text: {
+              en: "Fremont Chinese School rents classroom space from Irvington High School, and maintaining a good relationship with them depends on leaving each room exactly as we found it.",
+              zh: "費利蒙中文學校承租 Irvington High School 的教室上課，維持良好的合作關係、確實將教室恢復原狀非常重要。",
+            },
+          },
+          {
+            block: "prose",
+            text: {
+              en: "We've set up a shared photo album for every classroom to help document room conditions before and after each class. If you're the room parent responsible for photos and haven't received your classroom's album link yet, please check with your child's teacher. Thank you for your help!",
+              zh: "我們已為每間教室建立共用相簿，方便記錄上課前後的教室狀況。班親會／愛心家長若尚未收到教室相簿連結，請向班導師詢問，並於上課前後協助拍照上傳。謝謝大家的配合！",
+            },
+          },
+        ],
+      },
+      {
+        kind: "prose",
+        title: { en: "General Announcements", zh: "其他公告" },
+        blocks: [
+          {
+            block: "subhead",
+            text: { en: "Volunteer Service Award", zh: "學生志工服務獎" },
+          },
+          {
+            block: "prose",
+            text: {
+              en: "🔥 The Association of Northern California Chinese Schools (ANCCS) Student Volunteer Service Award is now open for applications! This award recognizes Chinese school students for their community service hours, with Bronze, Silver, and Gold tiers for both Teens and Young Adults.",
+              zh: "🔥 北加州中文學校聯合會學生志工服務獎開始報名！本獎項表彰中文學校學生的社區服務時數，Teen 組與 Young Adult 組皆設有銅、銀、金三個獎項。",
+            },
+          },
+          {
+            block: "list",
+            items: [
+              {
+                en: "**Teen** (ages 11–15): 🥉 Bronze 50–74 hrs ｜ 🥈 Silver 75–99 hrs ｜ 🥇 Gold 100+ hrs",
+                zh: "**Teen**（年齡 11–15 歲）：🥉 銅獎 50–74 小時 ｜ 🥈 銀獎 75–99 小時 ｜ 🥇 金獎 100 小時以上",
+              },
+              {
+                en: "**Young Adult** (16+): 🥉 Bronze 100–174 hrs ｜ 🥈 Silver 175–249 hrs ｜ 🥇 Gold 250+ hrs",
+                zh: "**Young Adult**（年齡 16 歲以上）：🥉 銅獎 100–174 小時 ｜ 🥈 銀獎 175–249 小時 ｜ 🥇 金獎 250 小時以上",
+              },
+            ],
+          },
+          {
+            block: "prose",
+            text: {
+              en: "Application deadline: **October 1, 2026**. Details at [www.anccs.org](https://www.anccs.org).",
+              zh: "申請截止日：**2026 年 10 月 1 日**。詳情請上官網：[www.anccs.org](https://www.anccs.org)。",
+            },
+          },
+        ],
+      },
+      {
+        kind: "prose",
+        title: { en: "Meet Our Teachers", zh: "認識我們的老師" },
+        blocks: [
+          {
+            block: "prose",
+            text: {
+              en: "Want to learn more about the teachers working with your child? Visit our [Teacher Bios page](/teachers) for background on each teacher, along with their contact info — so you can reach out directly with any questions.",
+              zh: "想更了解陪伴孩子學習的老師們嗎？歡迎造訪我們的[教師介紹頁面](/teachers)，除了每位老師的簡介與教學背景，也附上聯絡方式，讓您有任何問題都能直接與老師聯繫！",
+            },
+          },
+        ],
+      },
+      {
+        kind: "callout",
+        title: { en: "Join Our Volunteer Team", zh: "加入幹事團隊" },
+        blocks: [
+          {
+            block: "prose",
+            text: {
+              en: "💪 **Help build the FCS community — volunteer roles for the 2026–27 school year.**",
+              zh: "💪 **攜手打造費利蒙大家庭 — 2026–27 學年義工招募。**",
+            },
+          },
+          {
+            block: "prose",
+            text: {
+              en: "We're excited that many new parents have already joined our volunteer team this year — thank you! We can always use more help. From event planning to photography, translation to administration, there's a role to fit your skills and schedule. Parents matched to a good-fit role are also exempt from traffic and crossing duty. [See the open positions](https://drive.google.com/file/d/1500DSGZhrjpR4s9M4s8_OLxgXv7k5ePN/view).",
+              zh: "我們很高興今年已有許多新家長加入幹事團隊，謝謝大家的付出！我們仍歡迎更多家長加入 — 從活動規劃、攝影、翻譯到行政，總能找到適合您的角色。找到合適崗位的家長，還可免除交通導護值勤。[查看義工職缺一覽](https://drive.google.com/file/d/1500DSGZhrjpR4s9M4s8_OLxgXv7k5ePN/view)。",
+            },
+          },
+        ],
+        cta: {
+          label: {
+            en: "Volunteer sign-up 2026–27",
+            zh: "2026–27 學年義工報名表",
+          },
+          href: "https://forms.gle/MtdWWWUWagNWP1u8A",
+        },
+      },
+      {
+        kind: "callout",
+        title: {
+          en: "Donate & Double Your Contribution",
+          zh: "捐款與雙倍貢獻",
+        },
+        blocks: [
+          {
+            block: "prose",
+            text: {
+              en: "FCS is a non-profit 501(c) organization. Donations are tax-deductible (IRS tax ID: **94-2978949**) and help Fremont Chinese School continue to operate, teach Chinese courses, and pass on Chinese culture.",
+              zh: "費利蒙中文學校是一家非營利性 501(c) 組織。您可以透過向費利蒙中文學校捐款來享受稅務抵減（IRS tax ID: **94-2978949**）。您的捐款將幫助本校繼續運營、教授中文課程並傳承中華文化。",
+            },
+          },
+          {
+            block: "prose",
+            text: {
+              en: "**Double your contribution:** thank you for volunteering at school! Your employer may offer volunteer cash rewards — please consider donating those rewards to Fremont Chinese School. [Instructions and an example](https://docs.google.com/presentation/d/1Op2TlZ4wFSz7epqziWHmEauqEa5FnqRJ5yJofqQhpqs/edit).",
+              zh: "**雙倍貢獻：**感謝您在學校擔任義工！您的雇主也許提供義工獎勵金，歡迎將這筆獎勵金捐助給學校。[捐款方式說明與範例](https://docs.google.com/presentation/d/1Op2TlZ4wFSz7epqziWHmEauqEa5FnqRJ5yJofqQhpqs/edit)。",
+            },
+          },
+        ],
+        cta: {
+          label: { en: "Donate", zh: "前往捐款" },
+          href: "/donate",
+        },
+      },
+      {
+        kind: "sponsors",
+        title: {
+          en: "2026 Yearbook Gold Sponsors",
+          zh: "2026 年刊金牌贊助商",
+        },
+        logos: [
+          {
+            name: "IvyMAX 飛達教育",
+            image: "/images/sponsors/ivymax.jpg",
+            href: "https://ivymax.com",
+          },
+          {
+            name: "Fremont United Auto Service Inc. 聯合汽車修理中心",
+            image: "/images/sponsors/fremont-united-auto.jpg",
+            href: "https://www.fremontunitedautoservice.com/",
+          },
+        ],
+      },
+    ],
+  },
+  {
     // Week 3 of the 2026-27 school year. Replicated from the .eml Angela
     // actually sent via the legacy MailKing flow (2026-08-28 13:00 ET) — NOT
     // built from her abandoned in-repo draft (see the `def1ea` entry below,
