@@ -304,7 +304,6 @@ export const issues: NewsletterIssue[] = [
     // roster.
     date: "2026-09-11",
     label: { en: "September 11, 2026", zh: "2026年9月11日" },
-    draft: "2a947f",
     summary: {
       en: "Two fire drills and a new construction-reroute walking route this Saturday (9/12); TOCFL/CCCC test registration and the Double Ten T-shirt design contest are now open.",
       zh: "本週六（9/12）將舉行兩場消防演習，並因施工啟用新的接送步行路線；華語文能力測驗（TOCFL/CCCC）與雙十國慶 T-shirt 設計大賽同步開放報名。",
