@@ -28,6 +28,7 @@ export const routes: Record<string, string> = {
   'ac-resources': 'ac-resources',
   'staff-resources': 'staff-resources',
   'student-resources': 'student-resources',
+  'fire-safety': 'fire-safety',
   news: 'news',
   // EN-only (see src/pages/news-archive.astro — no /zh counterpart). It must
   // still be listed here: BaseLayout resolves a page's route key from its path
@@ -88,6 +89,7 @@ export const ui = {
       teachers: 'Our Teachers',
       electives: 'Elective Classes',
       enews: 'Weekly eNews',
+      fireSafety: 'Fire Safety & Evacuation Plan',
     },
   },
   zh: {
@@ -129,6 +131,7 @@ export const ui = {
       teachers: '認識師資',
       electives: '才藝選修課程',
       enews: '每週電子快報',
+      fireSafety: '消防安全與疏散計畫',
     },
   },
 } as const;

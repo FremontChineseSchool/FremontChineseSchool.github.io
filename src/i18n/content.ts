@@ -27,6 +27,7 @@ export const links = {
   legacyNews: 'https://fremontchineseschool.org/index.php',
   facebook: 'https://facebook.com/fremontchineseschool',
   instagram: 'https://www.instagram.com/fremontchineseschool/',
+  fusdFirePreparedness: 'https://fremontunified.org/resources/safety/school-preparedness-fire/',
 } as const;
 
 // Contact details — values shared across locales; labels are translated below.
@@ -76,6 +77,8 @@ export const descriptions: Record<'en' | 'zh', Record<string, string>> = {
       'Accredited Curriculum resources for Fremont Chinese School — AC policies, course rules, forms, and documents for AC students and their families.',
     'staff-resources':
       'Staff resources for Fremont Chinese School teachers, TAs, and volunteers — report card templates, teaching materials, forms, and applications.',
+    'fire-safety':
+      'Fremont Chinese School\'s fire drill and evacuation plan — guidelines, standards for a successful drill, and FUSD fire safety resources.',
     teachers:
       'Meet the teachers of Fremont Chinese School — the faculty behind our Pre-K–8 language classes, WASC-accredited credit track, and Saturday electives.',
     // Per-ISSUE eNews pages don't appear here — each issue supplies its own
@@ -122,6 +125,8 @@ export const descriptions: Record<'en' | 'zh', Record<string, string>> = {
       '費利蒙中文學校學分班資源——學分班規章、課程規則、表格與文件，供學分班學生與家長使用。',
     'staff-resources':
       '費利蒙中文學校教職員資源——成績單範本、教學資源、各項表格與申請，供教師、助教及志工使用。',
+    'fire-safety':
+      '費利蒙中文學校消防演習與疏散計畫——疏散指引、成功演習標準，以及費利蒙聯合學區消防安全資源。',
     teachers:
       '認識費利蒙中文學校的師資團隊——學前班至八年級中文課程、WASC 認證學分班，以及週六才藝選修課的任課教師。',
     enews:
