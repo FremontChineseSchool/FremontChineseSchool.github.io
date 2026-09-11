@@ -1,0 +1,91 @@
+---
+import type { Lang } from "../../i18n/ui";
+import { links } from "../../i18n/content";
+
+interface Props {
+  lang: Lang;
+}
+const { lang } = Astro.props;
+
+const isZh = lang === 'zh';
+
+const guidelines = isZh
+  ? [
+      '每當火警響起時，所有學生、教師、義工和工作人員應立即有序撤離大樓。教師應確定並核實沒有學生留在教室和/或大樓內。',
+      '應提供所有教師和工作人員指定的疏散路線。如果指定的疏散路線被堵塞，教師應準備好選擇備用出口並引導班級前往這些出口。',
+      '疏散區域應遠離消防通道。',
+      '學生應與老師一起留在疏散區域。教師應攜帶名冊，在疏散區域進行一次點名，並準備好向管理人員和/或消防隊長/指定人員識別失蹤的學生。',
+    ]
+  : [
+      'Whenever the fire alarm is given, all students, teachers, and staff volunteers shall immediately leave the building in an orderly manner. Teachers shall ascertain and verify that no student remains in the classroom and/or building.',
+      'Designated evacuation routes shall be provided to all teachers and staff. In the event the designated evacuation route is blocked, teachers shall be prepared to select alternate evacuation areas and direct their classes to these areas.',
+      'Evacuation areas will be established away from fire lanes.',
+      'Students are to remain with their teacher in the evacuation area. Teachers shall take their roll books, take roll once in the evacuation area, and be prepared to identify missing students to administrators and/or fire marshals/designees.',
+    ];
+
+const standards = isZh
+  ? [
+      '所有教職員、學生和在學校的家長都可以聽到火警警報。',
+      '立即開始有序疏散，並在初始警報後 5 分鐘內完成，出口處的擁塞情況降到最低。',
+      '師生應有秩序與冷靜地到達指定的疏散區，並遠離消防車道。',
+      '教師在疏散區域點名一次。教師應立即使用紅色標語牌向校長/指定人員報告失蹤的學生。',
+      '警報解除後，學生和教職員返回各自的教室，教師應再次點名。教師應立即向辦公室報告失蹤的學生。',
+    ]
+  : [
+      'All staff, students, and parents can hear the Fire Alarm.',
+      'Orderly evacuation begins immediately and is completed within 5 minutes of the initial alarm, with minimal congestion at exit gates.',
+      'Teachers and students are staged and situated in an orderly and quiet fashion, away from fire lanes.',
+      'Teachers take roll once in the evacuation area. Teachers should use the Red placards to report missing students immediately to the Principal/designee.',
+      'Upon hearing the all-clear signal, students and staff should return to their appropriate classroom, and teachers shall take roll once more. Teachers should report missing students immediately to the office.',
+    ];
+---
+
+<section style="background: var(--color-fcs-white);" class="mx-auto max-w-3xl px-4 py-14">
+
+  <h1 class="text-3xl font-semibold sm:text-4xl" style="letter-spacing: -0.02em; color: var(--color-fcs-black);">
+    {isZh ? '消防安全與疏散計畫' : 'Fire Safety & Evacuation Plan'}
+  </h1>
+  <p class="mt-2 text-lg" style="color: var(--color-fcs-muted);">
+    {isZh
+      ? '學校每學年至少舉行兩次消防演習，由校長和安全小組共同執行。'
+      : 'The school holds at least two fire drills every school year, jointly conducted by the principal and the safety team.'}
+  </p>
+
+  <!-- Fire Evacuation Plan -->
+  <div class="mt-10 rounded-[10px] p-6" style="background: var(--color-fcs-white); border: 1px solid var(--color-fcs-border);">
+    <h2 class="text-lg font-semibold" style="color: var(--color-fcs-black);">
+      {isZh ? '火災疏散計劃 — 疏散指引' : 'Fire Evacuation Plan — Guidelines'}
+    </h2>
+    <ol class="mt-4 space-y-3 text-sm" style="color: var(--color-fcs-black); list-style-type: upper-alpha; padding-inline-start: 1.25rem;">
+      {guidelines.map((item) => <li class="pl-1">{item}</li>)}
+    </ol>
+  </div>
+
+  <!-- Standards for a Successful Fire Drill -->
+  <div class="mt-6 rounded-[10px] p-6" style="background: var(--color-fcs-white); border: 1px solid var(--color-fcs-border);">
+    <h2 class="text-lg font-semibold" style="color: var(--color-fcs-black);">
+      {isZh ? '成功的消防演習的標準' : 'Standards for a Successful Fire Drill'}
+    </h2>
+    <ol class="mt-4 space-y-3 text-sm" style="color: var(--color-fcs-black); list-style-type: upper-alpha; padding-inline-start: 1.25rem;">
+      {standards.map((item) => <li class="pl-1">{item}</li>)}
+    </ol>
+  </div>
+
+  <p class="mt-6 text-sm" style="color: var(--color-fcs-muted);">
+    {isZh ? '另請參閱費利蒙聯合學區（FUSD）的' : 'Please also refer to FUSD\'s '}
+    <a href={links.fusdFirePreparedness} target="_blank" rel="noopener"
+      class="font-semibold hover:underline" style="color: var(--color-fcs-green);">
+      {isZh ? '學校消防安全準備資源' : 'school fire safety preparedness resources'}
+    </a>{isZh ? '。' : '.'}
+  </p>
+
+  <p class="mt-2 text-xs" style="color: var(--color-fcs-muted);">
+    {isZh ? '更新日期：2026 年 9 月 10 日' : 'Last updated: September 10, 2026'}
+  </p>
+
+  <p class="mt-6 text-sm" style="color: var(--color-fcs-muted);">
+    {isZh ? '如有疑問，請聯絡教務處：' : 'Questions? Contact the office: '}
+    <a href="mailto:principal@fremontchineseschool.org" class="font-semibold hover:underline" style="color: var(--color-fcs-green);">principal@fremontchineseschool.org</a>
+  </p>
+
+</section>
