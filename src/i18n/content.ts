@@ -72,7 +72,7 @@ export const descriptions: Record<'en' | 'zh', Record<string, string>> = {
     'academic-contest':
       'The annual Fremont Chinese School Academic Contest — Mandarin speech, recitation, writing, and more, with top students advancing to ANCCS regionals.',
     'student-resources':
-      'Student resources for Fremont Chinese School families — the class and teacher schedule, classroom map, and textbook list for every level.',
+      'Student resources for Fremont Chinese School families — the class and teacher schedule, campus map, and textbook list for every level.',
     'ac-resources':
       'Accredited Curriculum resources for Fremont Chinese School — AC policies, course rules, forms, and documents for AC students and their families.',
     'staff-resources':
@@ -120,7 +120,7 @@ export const descriptions: Record<'en' | 'zh', Record<string, string>> = {
     'academic-contest':
       '費利蒙中文學校年度學術比賽——國語演講、朗讀、作文等項目，優勝者可代表本校參加 ANCCS 區賽。',
     'student-resources':
-      '費利蒙中文學校學生資源——班級教師教室對照表、教室使用圖，以及各程度使用教材一覽。',
+      '費利蒙中文學校學生資源——班級教師教室對照表、校園地圖，以及各程度使用教材一覽。',
     'ac-resources':
       '費利蒙中文學校學分班資源——學分班規章、課程規則、表格與文件，供學分班學生與家長使用。',
     'staff-resources':
