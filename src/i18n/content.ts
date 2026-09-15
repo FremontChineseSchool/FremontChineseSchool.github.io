@@ -714,8 +714,6 @@ export const content = {
             rows: [
               { plan: '1 elective', earlyBird: '$630', regular: '$720' },
               { plan: '2 electives', earlyBird: '$1,260', regular: '$1,440' },
-              { plan: '3 electives', earlyBird: '$1,890', regular: '$2,160' },
-              { plan: '4 electives', earlyBird: '$2,520', regular: '$2,880' },
             ],
           },
         ],
@@ -1548,8 +1546,6 @@ export const content = {
             rows: [
               { plan: '1 門才藝選修', earlyBird: '$630', regular: '$720' },
               { plan: '2 門才藝選修', earlyBird: '$1,260', regular: '$1,440' },
-              { plan: '3 門才藝選修', earlyBird: '$1,890', regular: '$2,160' },
-              { plan: '4 門才藝選修', earlyBird: '$2,520', regular: '$2,880' },
             ],
           },
         ],
