@@ -1,5 +1,4 @@
 ---
-import { content } from "../../i18n/content";
 import type { Lang } from "../../i18n/ui";
 import { localizedPath } from "../../i18n/ui";
 
@@ -10,29 +9,15 @@ const { lang } = Astro.props;
 
 const isZh = lang === 'zh';
 
-// The tuition PDF leads with Early Bird pricing (page 1) and follows with
-// regular pricing (page 2). Show whichever one is actually in effect: resolved
-// at build time here, re-checked client-side in case a deploy goes stale.
-const earlyBirdEndsAt = content[lang].payment.tuition.earlyBirdEndsAt;
-const earlyBirdEnded = new Date() >= new Date(`${earlyBirdEndsAt}T00:00:00`);
-const tuitionThumbPage = earlyBirdEnded ? 2 : 1;
-
-const tuitionThumbAlt = {
-  early: isZh
-    ? '2026-2027 學費繳費說明預覽圖（早鳥優惠價格）'
-    : 'Preview of the 2026-2027 tuition payment schedule, Early Bird pricing',
-  regular: isZh
-    ? '2026-2027 學費繳費說明預覽圖（一般價格）'
-    : 'Preview of the 2026-2027 tuition payment schedule, regular pricing',
-};
-const tuitionThumbHint = {
-  early: isZh
-    ? '顯示早鳥優惠價格 · 點擊圖片放大檢視全部三頁'
-    : 'Showing Early Bird pricing · click to enlarge all three pages',
-  regular: isZh
-    ? '顯示一般價格 · 點擊圖片放大檢視全部三頁'
-    : 'Showing regular pricing · click to enlarge all three pages',
-};
+// The tuition PDF now combines Early Bird and Regular pricing into one page,
+// followed by a page of check-writing instructions — no more date-based
+// page switching.
+const tuitionThumbAlt = isZh
+  ? '2026-2027 學費繳費說明預覽圖'
+  : 'Preview of the 2026-2027 tuition payment schedule';
+const tuitionThumbHint = isZh
+  ? '點擊圖片放大檢視全部兩頁'
+  : 'Click to enlarge · 2 pages';
 
 // Textbook list by level (links go to each publisher / order sheet).
 const textbooks = [
@@ -160,25 +145,14 @@ const textbooks = [
         style="border-color: var(--color-fcs-border);"
         aria-haspopup="dialog">
         <img
-          id="tuition-thumb"
-          src={`/images/resources/tuition-schedule-2026-27-thumb${tuitionThumbPage}.png`}
-          alt={earlyBirdEnded ? tuitionThumbAlt.regular : tuitionThumbAlt.early}
+          src="/images/resources/tuition-schedule-2026-27-thumb.png"
+          alt={tuitionThumbAlt}
           class="block h-auto w-full"
           loading="lazy"
-          data-page={String(tuitionThumbPage)}
-          data-ends-at={earlyBirdEndsAt}
-          data-alt-early={tuitionThumbAlt.early}
-          data-alt-regular={tuitionThumbAlt.regular}
         />
       </button>
       <div class="mt-2 flex flex-wrap items-center gap-x-4 gap-y-1">
-        <span
-          id="tuition-thumb-hint"
-          class="text-xs"
-          style="color: var(--color-fcs-muted);"
-          data-hint-early={tuitionThumbHint.early}
-          data-hint-regular={tuitionThumbHint.regular}
-        >{earlyBirdEnded ? tuitionThumbHint.regular : tuitionThumbHint.early}</span>
+        <span class="text-xs" style="color: var(--color-fcs-muted);">{tuitionThumbHint}</span>
         <a href="/FCS_2026-2027_Tuition_Payment_Schedule.pdf" target="_blank" rel="noopener"
           class="inline-flex items-center gap-1.5 text-xs font-semibold hover:underline" style="color: var(--color-fcs-green);">
           <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
@@ -252,12 +226,12 @@ const textbooks = [
           &times;
         </button>
       </div>
-      {[1, 2, 3].map((page) => (
+      {[1, 2].map((page) => (
         <img
           src={`/images/resources/tuition-schedule-2026-27-p${page}.png`}
           alt={isZh
             ? `2026-2027 學費繳費說明第 ${page} 頁`
-            : `2026-2027 tuition payment schedule, page ${page} of 3`}
+            : `2026-2027 tuition payment schedule, page ${page} of 2`}
           loading="lazy"
         />
       ))}
@@ -331,31 +305,6 @@ const textbooks = [
         if (event.target === dialog) dialog.close();
       });
     }
-
-    // The tuition thumbnail is baked at build time to whichever pricing page is
-    // in effect; re-check here so a deploy that predates the Early Bird
-    // deadline still flips over to the regular-price page on the day.
-    function updateTuitionThumb() {
-      const thumb = document.getElementById('tuition-thumb') as HTMLImageElement | null;
-      const hint = document.getElementById('tuition-thumb-hint');
-      const endsAt = thumb?.dataset.endsAt;
-      if (!thumb || !endsAt) return;
-
-      const today = new Date();
-      today.setHours(0, 0, 0, 0);
-      const ended = today >= new Date(`${endsAt}T00:00:00`);
-      const page = ended ? '2' : '1';
-      if (thumb.dataset.page === page) return;
-
-      thumb.dataset.page = page;
-      thumb.src = `/images/resources/tuition-schedule-2026-27-thumb${page}.png`;
-      const alt = ended ? thumb.dataset.altRegular : thumb.dataset.altEarly;
-      if (alt) thumb.alt = alt;
-      const hintCopy = ended ? hint?.dataset.hintRegular : hint?.dataset.hintEarly;
-      if (hint && hintCopy) hint.textContent = hintCopy;
-    }
-
-    updateTuitionThumb();
   </script>
 
   <!-- Quick Links -->
