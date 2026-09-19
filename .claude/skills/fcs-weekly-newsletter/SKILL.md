@@ -23,12 +23,20 @@ generated from it, so they cannot drift.
 | | What | Where it lands |
 |---|---|---|
 | **Web page** | `/enews/<token>/` while a draft, `/enews/<date>/` once published — both locales | generated |
-| **Email** | `/enews-email/<slug>.html` — a preview page with the subject line and send steps, wrapping the real email in an iframe | generated |
+| **Email** | `/enews-email/<token>.html` — a preview page with the subject line and send steps, wrapping the real email in an iframe. Stays at this same `<token>` URL even after the issue publishes (see `emailToken` in `newsletters.ts`) — unlike the web page, it does NOT move to a dated URL | generated |
 
 The email is **not** hand-filled any more. `src/lib/email.ts` renders it from the
 same issue data — table layout, inline styles, both languages stacked, skip-to-
 English anchors, absolute image URLs. Do not hand-write email HTML, and do not
 edit the generated files; fix the data or the renderer.
+
+**The email is sent after publishing, same as the web page** — the "Read on the
+web" link inside it points at the issue's real slug (dated once published), so
+sending only after Step 7 means that link already works in the copy parents
+receive. What's different from a plain dated URL is that the *preview page you
+copy it from* keeps its unguessable hex token forever, rather than becoming
+`/enews-email/<date>.html` — a random hex string is a lot less inviting to
+wander onto than a diary-like sequence of dates. See Step 7.
 
 Because `public/` deploys wholesale, every image URL in the email resolves as
 soon as the issue is pushed — **even while it is still a draft.** So the email is
@@ -490,12 +498,25 @@ approved — there is no cost to pushing a draft repeatedly.
 
 Only when the user says the issue is approved:
 
-1. **Delete the whole `draft` line** from the issue — delete it, don't blank the
-   token.
+1. **Move the `draft` token into `emailToken` — don't just delete the line.**
+   Change
+   ```ts
+   draft: "9f3a1c",
+   ```
+   to
+   ```ts
+   emailToken: "9f3a1c",
+   ```
+   (same hex value, new field name). This is what keeps the email-preview page
+   at its existing unguessable URL after publish, instead of it jumping to a
+   guessable dated one — see `emailToken`'s doc comment in `newsletters.ts` for
+   why. Getting this backwards — deleting `draft` without adding `emailToken`
+   — silently retires the email preview a step early; getting it right is a
+   rename, not a deletion.
    - If the build then fails with `[enews] Refusing to publish`, an unresolved
-     gap remains. **Stop and report it** — restore the `draft` token and tell the
-     user what is missing. Do not delete the gap, and do not set
-     `publishWithGaps`, unless they explicitly say to publish anyway.
+     gap remains. **Stop and report it** — restore the `draft` token (undo the
+     rename) and tell the user what is missing. Do not delete the gap, and do
+     not set `publishWithGaps`, unless they explicitly say to publish anyway.
 2. `npm run build`, then confirm `/enews/` and `/enews/archive/` now exist and the
    draft banner is gone.
 3. Commit and push:
@@ -507,11 +528,13 @@ git push
 gh run watch
 ```
 
-Deleting that one line is what makes it the current issue, adds it to the archive,
-and turns on the footer link and the `/news` card. The issue also moves from its
-tokenized review URL to the clean dated one, so the review links start 404ing —
-intended, since a review link should not outlive the review. Tell the user, so
-nobody is confused by a dead link they shared earlier.
+That rename is what makes it the current issue, adds it to the archive, and
+turns on the footer link and the `/news` card. The issue's **web page** moves
+from its tokenized review URL to the clean dated one, so `/enews/<token>/`
+starts 404ing — intended, since a review link should not outlive the review.
+Tell the user, so nobody is confused by a dead link they shared earlier. The
+**email-preview page**, by contrast, stays at `/enews-email/<token>.html` — same
+URL as before, still reachable (see Step 7).
 
 Then confirm the images are live on the published page:
 
@@ -530,10 +553,10 @@ push. Publishing in Step 6 rebuilds it once more, which is what swaps its "Read
 on the web" link from the review URL to the published dated one — so **send the
 copy that exists after Step 6**, not one saved earlier.
 
-Give the user the preview URL for the published slug:
+Give the user the SAME preview URL from Step 5 — it did not change:
 
 ```
-https://fremontchineseschool.org/enews-email/<YYYY-MM-DD>.html
+https://fremontchineseschool.org/enews-email/<token>.html
 ```
 
 That page carries the subject line and the send steps, so there is nothing to
@@ -547,6 +570,28 @@ displays, including in clients that block remote images.
 
 This skill drafts and publishes the web page and generates the email. It has no
 access to the school's mailing list — a human sends it.
+
+## Step 8 — Retire old email previews (housekeeping)
+
+Do this before drafting a NEW issue (i.e. treat it as part of next week's
+Step 0), not as part of finishing this one — there is no rush, and it is
+easiest to judge "does anyone still need this" with a week's hindsight rather
+than immediately after sending.
+
+`emailToken` is what keeps a published issue's `/enews-email/<token>.html` page
+alive (Step 6). Left alone, every issue ever sent accumulates one, forever. From
+time to time — not necessarily every week — sweep `src/data/newsletters.ts` for
+published issues (no `draft` field) whose `emailToken` is no longer needed for
+reference, and delete just that field (leave everything else, including the
+issue itself, untouched). That issue's `/enews-email/` page then stops being
+generated at all on the next build.
+
+**Ask the user which issues to retire; don't decide on your own.** A reasonable
+opening question is "keep the last N issues' email previews reachable, retire
+anything older?", but the actual cutoff is theirs to set. Never touch an
+issue's `emailToken` the user hasn't identified, and never touch `def1ea`'s
+`draft` field — that entry is a deliberately-kept troubleshooting artifact (see
+its own comment in the data), unrelated to this cleanup.
 
 ### If a section belongs to only one artifact
 

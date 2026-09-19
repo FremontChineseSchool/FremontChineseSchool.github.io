@@ -197,6 +197,23 @@ export type NewsletterIssue = {
    */
   draft?: string;
   /**
+   * The review token for the EMAIL preview page (`/enews-email/<token>.html`),
+   * kept independent of `draft` so the two can diverge at publish time.
+   * `emailSlug()` (below) falls back to `draft` when this is unset, so a
+   * plain draft-in-progress needs nothing extra — this field only matters at
+   * Step 7 (Go live): instead of just deleting `draft`, MOVE its value here
+   * (`emailToken: "<the same token>"`) before removing it. That keeps the
+   * email-preview page — what actually gets copy-pasted into Gmail — at the
+   * SAME unguessable-hex URL after publish, rather than jumping to a
+   * guessable dated one the moment the issue goes live.
+   *
+   * A later, separate, deliberate cleanup pass removes this field once an old
+   * issue's email preview is no longer needed for reference, which is what
+   * retires that issue's `/enews-email/` page for good. Never remove it as a
+   * side effect of publishing — only publishing ever ADDS it.
+   */
+  emailToken?: string;
+  /**
    * Known unresolved items, in plain internal prose — "the classroom-use flyer
    * is being regenerated", "Chinese captions need the principal's read". Listed
    * loudly at the top of the draft page so a reviewer cannot miss them, and
@@ -303,6 +320,10 @@ export const issues: NewsletterIssue[] = [
       en: "Horseshoe driveway closed for construction — park in Visitor Parking; fire drill recap, plus a TOCFL info session this Saturday (9/19).",
       zh: "校門口圓環車道因施工封閉，請改停訪客停車場；本期回顧消防演習花絮，並預告本週六（9/19）TOCFL說明會。",
     },
+    // Kept from the original `draft: "6f67c3"` token so the email-preview page
+    // stays at its unguessable review URL rather than jumping to a guessable
+    // dated one now that this issue is published.
+    emailToken: "6f67c3",
     sections: [
       {
         kind: "prose",
@@ -3130,6 +3151,19 @@ export const hasIssues = publishedIssues.length > 0;
  */
 export function issueSlug(issue: NewsletterIssue): string {
   return issue.draft ?? issue.date;
+}
+
+/**
+ * The URL segment for the issue's EMAIL preview page, or `undefined` if it has
+ * none. Falls back to `draft` so an issue still being drafted gets a preview
+ * page without `emailToken` ever needing to be set by hand — `emailToken`
+ * only has to be assigned explicitly at publish time (Step 7 moves the token
+ * from `draft` into it), to keep this page's URL from changing there. Once an
+ * issue is published AND has had `emailToken` removed by a deliberate cleanup
+ * pass, both fall through to `undefined` and the page stops existing.
+ */
+export function emailSlug(issue: NewsletterIssue): string | undefined {
+  return issue.emailToken ?? issue.draft;
 }
 
 /** Walk every string in a value, however deeply nested. */

@@ -7,17 +7,23 @@
 import type { APIRoute } from "astro";
 import {
   sortedIssues,
-  issueSlug,
+  emailSlug,
   collectGaps,
   type NewsletterIssue,
 } from "../../data/newsletters";
 import { emailSubject } from "../../lib/email";
 
+// Keyed by emailSlug (the persistent email review token), NOT issueSlug (the
+// web page's slug, which flips to the dated URL at publish). An issue with no
+// emailToken — never assigned one, or one a deliberate cleanup pass removed —
+// gets no email preview page at all, which is what retires one for good.
 export function getStaticPaths() {
-  return sortedIssues.map((issue) => ({
-    params: { issue: issueSlug(issue) },
-    props: { issue },
-  }));
+  return sortedIssues
+    .filter((issue) => emailSlug(issue) !== undefined)
+    .map((issue) => ({
+      params: { issue: emailSlug(issue) },
+      props: { issue },
+    }));
 }
 
 const esc = (s: string) =>
@@ -25,7 +31,7 @@ const esc = (s: string) =>
 
 export const GET: APIRoute = ({ params, props }) => {
   const issue = (props as any).issue as NewsletterIssue;
-  const slug = issueSlug(issue);
+  const slug = emailSlug(issue);
   const gaps = collectGaps(issue);
   const subject = emailSubject(issue);
 

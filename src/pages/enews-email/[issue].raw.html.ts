@@ -8,14 +8,18 @@
 // issue is pushed — even while the issue is still a draft. That is what lets
 // the email be reviewed at the same time as the page.
 import type { APIRoute } from "astro";
-import { sortedIssues, issueSlug } from "../../data/newsletters";
+import { sortedIssues, emailSlug } from "../../data/newsletters";
 import { renderIssueEmail, emailSubject } from "../../lib/email";
 
+// Keyed by emailSlug, same as the sibling [issue].html.ts — this must stay
+// filtered identically, since it's the iframe source that page embeds.
 export function getStaticPaths() {
-  return sortedIssues.map((issue) => ({
-    params: { issue: issueSlug(issue) },
-    props: { issue },
-  }));
+  return sortedIssues
+    .filter((issue) => emailSlug(issue) !== undefined)
+    .map((issue) => ({
+      params: { issue: emailSlug(issue) },
+      props: { issue },
+    }));
 }
 
 export const GET: APIRoute = ({ props }) => {
