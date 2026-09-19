@@ -303,7 +303,6 @@ export const issues: NewsletterIssue[] = [
       en: "Horseshoe driveway closed for construction — park in Visitor Parking; fire drill recap, plus a TOCFL info session this Saturday (9/19).",
       zh: "校門口圓環車道因施工封閉，請改停訪客停車場；本期回顧消防演習花絮，並預告本週六（9/19）TOCFL說明會。",
     },
-    draft: "6f67c3",
     sections: [
       {
         kind: "prose",
