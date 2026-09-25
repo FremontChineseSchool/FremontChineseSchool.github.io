@@ -249,6 +249,618 @@ export type NewsletterIssue = {
  */
 export const issues: NewsletterIssue[] = [
   {
+    // Replicated from the .eml Angela sent via MailKing (2026-09-25, 10:00
+    // PDT). Draft token generated with `openssl rand -hex 3`.
+    //
+    // Fourteen images embedded in the sent HTML (verified by opening each
+    // one, not inferred from surrounding markup):
+    // - Masthead banner and the WASC seal are evergreen chrome, not issue
+    //   content (both already live in src/lib/email.ts / the site header).
+    // - Picture Day schedule table (A Note from the Principal) — new,
+    //   committed as enews-2026-09-25-picture-day-schedule.jpg (a flat-color
+    //   graphic; re-exported at JPEG quality 85, 604 KB -> 477 KB with no
+    //   loss of legibility on the small text, checked by eye). Transcribed
+    //   the full 38-row table as a list block underneath, since this is a
+    //   data table, not a photo — exactly the "baked-in text" case the
+    //   caption guidance calls out.
+    // - Teacher mooncake photo (Week 6 School Update) — new, committed as
+    //   enews-2026-09-25-mooncakes.jpg (already 836x627 / 100 KB; recompressing
+    //   at quality 85 came out larger, so kept the sent JPEG as-is).
+    // - Two teacher-award photos (Week 6 School Update) — new, committed as
+    //   enews-2026-09-25-teacher-award-anccs.jpg (the 5-teacher ANCCS award
+    //   photo) and enews-2026-09-25-teacher-award-30yr.jpg (Yu-Chi Tung
+    //   Honda's 30-year award photo). Both kept as sent (recompressing at
+    //   quality 85 came out larger in both cases).
+    // - Golden Autumn Carnival / Hanfu Festival flyer (General Announcements)
+    //   — new, committed as enews-2026-09-25-golden-autumn-carnival.jpg
+    //   (already 1182x1600 / 404 KB JPEG; recompressing at quality 85 came
+    //   out larger, so kept as sent).
+    // - TOCFL/CCCC test registration flyer — visually identical (same dates,
+    //   fees, and site details) to the flyer already committed as
+    //   enews-2026-09-11-tocfl-cccc.jpg (reused the last two issues too), so
+    //   reused again rather than duplicated.
+    // - Double Ten T-shirt design contest flyer — visually identical to the
+    //   already-committed enews-2026-09-11-tshirt-contest.jpg (same deadline,
+    //   prizes, age groups), reused rather than duplicated.
+    // - SF Sun Yat-Sen Memorial Hall essay contest flyer — byte-identical
+    //   (verified by hash) to enews-2026-09-04-essay-contest.jpg. Carried
+    //   forward silently a second time: this week's sent email again drops it
+    //   in with no heading or restated text, positioned identically between
+    //   the T-shirt contest and the Volunteer Service Award, exactly as the
+    //   9/18 issue's own note describes. Reusing that entry's subhead/caption
+    //   verbatim again.
+    // - Classroom Use Guidelines flyer — byte-identical (verified by hash) to
+    //   enews-2026-08-21-classroom-use-guidelines.png, reused.
+    // - Volunteer-team photo (Join Our Volunteer Team) — byte-identical
+    //   (verified by hash) to enews-2026-08-14-volunteer-team.jpg, reused.
+    // The two gold-sponsor logos are byte-identical to the ones already
+    // committed under public/images/sponsors/ — hrefs re-verified against
+    // this week's sent HTML (ivymax.com, fremontunitedautoservice.com),
+    // unchanged.
+    //
+    // Fixes made transcribing the copy:
+    // - The sent email's own heading again reads "第五週更新 / Week 5 Update" —
+    //   the same "Week 5" label the 9/18 issue used. Going by the pattern the
+    //   last several issues actually follow (the counter advances once per
+    //   Saturday of school held, and 9/04 — Labor Day, no school — did not
+    //   advance it), 9/19 was a normal school Saturday, so this is the 6th
+    //   school Saturday of the term. Used "Week 6 School Update" here instead
+    //   of repeating "Week 5", matching the "Week 3/4/5 School Update" title
+    //   convention used every prior issue.
+    // - Normalized the hyphen dashes in the principal's note to em dashes to
+    //   match the site's style elsewhere in this file.
+    // - The TOCFL/CCCC registration and Double Ten T-shirt contest items in
+    //   General Announcements are word-for-word unchanged from the 9/18 issue
+    //   (same dates, fees, and links), so that copy is carried forward rather
+    //   than retranscribed.
+    //
+    // Evergreen sections carried forward verbatim from the most recent issue:
+    // School Calendar (same two download links), Join Our Volunteer Team,
+    // Donate & Double Your Contribution, the sponsor roster.
+    date: "2026-09-25",
+    label: { en: "September 25, 2026", zh: "2026年9月25日" },
+    summary: {
+      en: "Picture Day is this Saturday (9/26) — the full class schedule and photo-location map are inside, plus Mid-Autumn wishes and news of five teacher awards.",
+      zh: "本週六（9/26）是拍照日，內文附上各班詳細時間與集合地點；並提前祝大家中秋節快樂，恭喜多位老師榮獲優良教師獎。",
+    },
+    draft: "70548e",
+    sections: [
+      {
+        kind: "prose",
+        title: { en: "A Note from the Principal", zh: "校長的話" },
+        blocks: [
+          {
+            block: "prose",
+            text: { en: "Dear FCS Families,", zh: "各位家長好：" },
+          },
+          {
+            block: "prose",
+            text: {
+              en: "Hope everyone's had a great week so far! This Friday, 9/25, is the Mid-Autumn Festival — wishing you and your families a very happy Mid-Autumn Festival ahead of time, filled with togetherness and joy!",
+              zh: "希望大家這週都過得順利！本週五（9/25）就是中秋節了，在此提前祝大家中秋節快樂，闔家團圓、平安喜樂！",
+            },
+          },
+          {
+            block: "prose",
+            text: {
+              en: "This Saturday, 9/26, is Picture Day, the main event for this week! Please see the schedule and meeting-location map below for your class's photo time and where to gather.",
+              zh: "本週六（9/26）是本學期的拍照日（Picture Day），也是本週的主要活動！各班詳細拍照時間及集合地點，請參考下方時間表及地圖。",
+            },
+          },
+          {
+            block: "image",
+            src: "/images/news/enews-2026-09-25-picture-day-schedule.jpg",
+            alt: {
+              en: "Picture Day schedule table listing each class's photo time and meeting location.",
+              zh: "拍照日時間表，列出各班拍照時間與集合地點。",
+            },
+            caption: {
+              en: "Saturday, September 26, 2026. Unless noted otherwise below, meet at the Fire Assembly Zone; classes marked below instead take photos in their own classroom, at the dance studio, or at the basketball court.",
+              zh: "2026年9月26日（週六）。除下方特別標註者外，請至消防集合區集合；標註的班級則改為教室內、舞蹈教室或籃球場拍照。",
+            },
+          },
+          {
+            block: "list",
+            items: [
+              { en: "**P1 (Painting 1):** 9:05–9:10am — take photos in classroom", zh: "**P1 西畫一：**9:05–9:10am — 教室內拍照" },
+              { en: "**AB1 (Abacus 1 Beginner):** 9:10–9:15am — take photos in classroom", zh: "**AB1 珠心算一：**9:10–9:15am — 教室內拍照" },
+              { en: "**C8:** 9:15–9:20am — Fire Assembly Zone", zh: "**C8：**9:15–9:20am — 消防集合區" },
+              { en: "**C7:** 9:20–9:25am — Fire Assembly Zone", zh: "**C7：**9:20–9:25am — 消防集合區" },
+              { en: "**C6:** 9:25–9:30am — Fire Assembly Zone", zh: "**C6：**9:25–9:30am — 消防集合區" },
+              { en: "**C5:** 9:30–9:35am — Fire Assembly Zone", zh: "**C5：**9:30–9:35am — 消防集合區" },
+              { en: "**C4:** 9:35–9:40am — Fire Assembly Zone", zh: "**C4：**9:35–9:40am — 消防集合區" },
+              { en: "**T8:** 9:40–9:45am — Fire Assembly Zone", zh: "**T8：**9:40–9:45am — 消防集合區" },
+              { en: "**T7:** 10:00–10:05am — Fire Assembly Zone", zh: "**T7：**10:00–10:05am — 消防集合區" },
+              { en: "**T6:** 10:05–10:10am — Fire Assembly Zone", zh: "**T6：**10:05–10:10am — 消防集合區" },
+              { en: "**T5:** 10:10–10:15am — Fire Assembly Zone", zh: "**T5：**10:10–10:15am — 消防集合區" },
+              { en: "**T4:** 10:15–10:20am — Fire Assembly Zone", zh: "**T4：**10:15–10:20am — 消防集合區" },
+              { en: "**X1 (Chinese Yoyo 1):** 10:20–10:25am — Court Yard", zh: "**X1 扯鈴一：**10:20–10:25am — 中庭" },
+              { en: "**H1 (Craft):** 10:25–10:30am — take photos in classroom", zh: "**H1 美勞：**10:25–10:30am — 教室內拍照" },
+              { en: "**AB2 (Abacus 2 Bridge):** 10:30–10:35am — take photos in classroom", zh: "**AB2 珠心算二：**10:30–10:35am — 教室內拍照" },
+              { en: "**P2 (Painting 2):** 10:35–10:40am — take photos in classroom", zh: "**P2 西畫二：**10:35–10:40am — 教室內拍照" },
+              { en: "**YG1 (Adult Yoga 1):** 10:40–10:45am — take photos at dance studio", zh: "**YG1 成人纖體瑜珈塑身：**10:40–10:45am — 舞蹈教室拍照" },
+              { en: "**BK1 (Basketball 1):** 10:45–10:50am — no need to go to Court Yard, photos taken at basketball court", zh: "**BK1 籃球一：**10:45–10:50am — 免至中庭；請於籃球場拍照" },
+              { en: "**AC1:** 11:00–11:05am — Fire Assembly Zone", zh: "**AC1：**11:00–11:05am — 消防集合區" },
+              { en: "**AC2:** 11:05–11:10am — Fire Assembly Zone", zh: "**AC2：**11:05–11:10am — 消防集合區" },
+              { en: "**AC3:** 11:10–11:15am — Fire Assembly Zone", zh: "**AC3：**11:10–11:15am — 消防集合區" },
+              { en: "**AC4:** 11:15–11:20am — Fire Assembly Zone", zh: "**AC4：**11:15–11:20am — 消防集合區" },
+              { en: "**AP:** 11:20–11:25am — Fire Assembly Zone", zh: "**AP：**11:20–11:25am — 消防集合區" },
+              { en: "**T3:** 11:25–11:30am — Fire Assembly Zone", zh: "**T3：**11:25–11:30am — 消防集合區" },
+              { en: "**X2 (Chinese Yoyo 2):** 11:30–11:35am — Court Yard", zh: "**X2 扯鈴二：**11:30–11:35am — 中庭" },
+              { en: "**BK2 (Basketball 2):** 11:35–11:40am — no need to go to Court Yard, photos taken at basketball court", zh: "**BK2 籃球二：**11:35–11:40am — 免至中庭；請於籃球場拍照" },
+              { en: "**AB3 (Abacus 3 Intermediate):** 11:40–11:45am — take photos in classroom", zh: "**AB3 珠心算三：**11:40–11:45am — 教室內拍照" },
+              { en: "**P3 (Painting 3):** 11:45–11:50am — take photos in classroom", zh: "**P3 西畫三：**11:45–11:50am — 教室內拍照" },
+              { en: "**H3 (Sewing class):** 11:50–11:55am — take photos in classroom", zh: "**H3 縫紉課：**11:50–11:55am — 教室內拍照" },
+              { en: "**PS1 (Adult Power Sculpt 1):** 11:55am–12:00pm — take photos at dance studio", zh: "**PS1 成人燃力舞塑：**11:55am–12:00pm — 舞蹈教室拍照" },
+              { en: "**T2:** 12:15–12:20pm — Fire Assembly Zone", zh: "**T2：**12:15–12:20pm — 消防集合區" },
+              { en: "**T1:** 12:20–12:25pm — Fire Assembly Zone", zh: "**T1：**12:20–12:25pm — 消防集合區" },
+              { en: "**K1:** 12:25–12:30pm — Fire Assembly Zone", zh: "**K1：**12:25–12:30pm — 消防集合區" },
+              { en: "**PK:** 12:30–12:35pm — Fire Assembly Zone", zh: "**PK：**12:30–12:35pm — 消防集合區" },
+              { en: "**C3:** 12:35–12:40pm — Fire Assembly Zone", zh: "**C3：**12:35–12:40pm — 消防集合區" },
+              { en: "**C2:** 12:40–12:45pm — Fire Assembly Zone", zh: "**C2：**12:40–12:45pm — 消防集合區" },
+              { en: "**C1:** 12:45–12:50pm — Fire Assembly Zone", zh: "**C1：**12:45–12:50pm — 消防集合區" },
+              { en: "**CP1 (Chinese Painting/Calligraphy):** 12:50–12:55pm — take photos in classroom", zh: "**CP1 國畫書法：**12:50–12:55pm — 教室內拍照" },
+            ],
+          },
+          {
+            block: "prose",
+            text: {
+              en: "Also, a friendly reminder to sign up for the Food Festival (happening 10/10)! We'd love to see everyone participate; [sign-up link here](https://docs.google.com/spreadsheets/d/1xAovGpUbWEt7fn1SUvb72Np8KWqXKiqudI8NqqAOs0s/edit).",
+              zh: "另外也提醒大家別忘了報名美食節（Food Festival，10/10 舉行）！歡迎大家踴躍參加，[報名連結如下](https://docs.google.com/spreadsheets/d/1xAovGpUbWEt7fn1SUvb72Np8KWqXKiqudI8NqqAOs0s/edit)。",
+            },
+          },
+        ],
+        signoff: {
+          en: "Warmly, Angela — Principal, Fremont Chinese School",
+          zh: "謹上　夏芷筠　費利蒙中文學校校長",
+        },
+      },
+      {
+        kind: "prose",
+        title: { en: "Week 6 School Update", zh: "第六週學校近況" },
+        blocks: [
+          {
+            block: "subhead",
+            text: {
+              en: "Mid-Autumn Mooncakes for Our Teachers",
+              zh: "中秋節前，感謝老師的月餅心意",
+            },
+          },
+          {
+            block: "image",
+            src: "/images/news/enews-2026-09-25-mooncakes.jpg",
+            alt: {
+              en: "A group of teachers and staff posing together after receiving mooncakes ahead of the Mid-Autumn Festival.",
+              zh: "老師與教職員在收到中秋月餅後合影留念。",
+            },
+          },
+          {
+            block: "prose",
+            text: {
+              en: "Ahead of the Mid-Autumn Festival, we handed out mooncakes to all our teachers as a small thank-you for their hard work this semester! [More photos here](https://photos.app.goo.gl/2qfC7r1RYQrt3dLd6).",
+              zh: "中秋節前，我們為老師們準備了月餅，感謝每一位老師這學期以來的辛勤付出！[照片請見連結](https://photos.app.goo.gl/2qfC7r1RYQrt3dLd6)。",
+            },
+          },
+          {
+            block: "subhead",
+            text: {
+              en: "2026 ANCCS & Overseas Community Affairs Council Teacher Awards",
+              zh: "2026 北加州中文學校聯合會暨僑務委員會教師獎",
+            },
+          },
+          {
+            block: "image",
+            src: "/images/news/enews-2026-09-25-teacher-award-anccs.jpg",
+            alt: {
+              en: "Teachers 張樂濱, 張郁君, 莊幼春, 溫淑齡, and 呂慧慈 holding their award plaques at the 2026 ANCCS Outstanding Teacher Award ceremony.",
+              zh: "張樂濱、張郁君、莊幼春、溫淑齡、呂慧慈五位老師手持獎牌，於 2026 北加州中文學校聯合會優良教師頒獎典禮合影。",
+            },
+          },
+          {
+            block: "image",
+            src: "/images/news/enews-2026-09-25-teacher-award-30yr.jpg",
+            alt: {
+              en: "Teacher Yu-Chi Tung Honda (董玉琪) receiving the Overseas Community Affairs Council's 30-Year Outstanding Teacher award.",
+              zh: "董玉琪老師領取僑務委員會僑民學校教師獎勵「30年優良教師」獎項。",
+            },
+          },
+          {
+            block: "prose",
+            text: {
+              en: "We'd also like to congratulate teachers 張樂濱, 張郁君, 莊幼春, 溫淑齡, and 呂慧慈 on receiving the 2026 ANCCS (Association of Northern California Chinese Schools) Outstanding Teacher Award, and teacher 董玉琪 (Yu-Chi Tung Honda) on receiving the Overseas Community Affairs Council's \"30-Year Outstanding Teacher\" honor! Thank you to all of our teachers for your dedication, professionalism, and care in teaching our students!",
+              zh: "同時也要恭喜張樂濱老師、張郁君老師、莊幼春老師、溫淑齡老師、呂慧慈老師榮獲 2026 北加州中文學校聯合會優良教師獎；並恭喜董玉琪老師（Yu-Chi Tung Honda）榮獲僑務委員會僑民學校教師獎勵「30年優良教師」！感謝每一位老師長期投入中文教育，以熱忱、專業與愛心陪伴孩子學習，為海外中文教育與文化傳承付出心力。優良教師，實至名歸！",
+            },
+          },
+          {
+            block: "subhead",
+            text: {
+              en: "TOCFL Information Session Recap",
+              zh: "TOCFL 說明會回顧",
+            },
+          },
+          {
+            block: "prose",
+            text: {
+              en: "Also, last week's Bay Area TOCFL (Test of Chinese as a Foreign Language) Information Session went smoothly, thank you to everyone who attended! If you missed it or would like to revisit the information, feel free to [view the session slides here](https://drive.google.com/file/d/1BO9Bbh1Ixu_5uzJ4FDrhrq_QbooPD8QP/view).",
+              zh: "另外，上週舉辦的舊金山灣區華語文能力測驗（TOCFL）說明會也順利完成，感謝所有出席的家長！如果錯過或想再次了解相關資訊，歡迎[點此觀看說明會投影片](https://drive.google.com/file/d/1BO9Bbh1Ixu_5uzJ4FDrhrq_QbooPD8QP/view)。",
+            },
+          },
+        ],
+      },
+      {
+        kind: "prose",
+        title: {
+          en: "School Calendar 2026–2027",
+          zh: "學校行事曆 2026–2027",
+        },
+        blocks: [
+          {
+            block: "prose",
+            text: { en: "Coming event(s):", zh: "近期活動：" },
+          },
+          {
+            block: "list",
+            items: [
+              {
+                en: "**9/26/2026** — Picture Day",
+                zh: "**9/26/2026** — 拍照日",
+              },
+              {
+                en: "**10/3/2026** — Midterm Exam",
+                zh: "**10/3/2026** — 期中考試",
+              },
+              {
+                en: "**10/10/2026** — Street Food Festival; Academic Contest sign-up starts",
+                zh: "**10/10/2026** — 街頭美食園遊會、學術競賽報名開始",
+              },
+            ],
+          },
+        ],
+        links: [
+          {
+            label: { en: "Download calendar (Chinese)", zh: "下載行事曆（中文版）" },
+            href: "https://drive.google.com/file/d/1kUl_nhpdAC0WLE0r6smb2fSjDUzRmSdX/view",
+          },
+          {
+            label: { en: "Download calendar (English)", zh: "下載行事曆（英文版）" },
+            href: "https://drive.google.com/file/d/1mHm8B4-LnNZkqqOY8qMvG7OReWaconzM/view",
+          },
+        ],
+      },
+      {
+        kind: "prose",
+        title: { en: "General Announcements", zh: "其他公告" },
+        numbered: true,
+        blocks: [
+          {
+            block: "subhead",
+            text: {
+              en: "Golden Autumn Carnival — Hanfu Festival",
+              zh: "金秋嘉年華・古風漢服廟會",
+            },
+          },
+          {
+            block: "image",
+            src: "/images/news/enews-2026-09-25-golden-autumn-carnival.jpg",
+            alt: {
+              en: "Flyer for the Golden Autumn Carnival Hanfu Festival, a community event hosted by Bodhi Meditation San Francisco.",
+              zh: "金秋嘉年華・古風漢服廟會宣傳單，由舊金山菩提禪修中心主辦。",
+            },
+            caption: {
+              en: "Sunday, September 27, 2026, 10:00 AM – 5:00 PM, at the County Fair Building, Golden Gate Park, 1199 9th Ave, San Francisco. Free event.",
+              zh: "2026年9月27日（週日）上午10點至下午5點，於金門公園 County Fair Building（1199 9th Ave, San Francisco）舉行。免費活動。",
+            },
+          },
+          {
+            block: "prose",
+            text: {
+              en: "Our FCS Chinese Yoyo Team will be performing at this event — come out and cheer them on!",
+              zh: "費利蒙中文學校扯鈴隊將在本次活動中演出，歡迎大家前往為孩子們加油！",
+            },
+          },
+          {
+            block: "subhead",
+            text: {
+              en: "2026 TOCFL & CCCC Test Registration",
+              zh: "2026 華語文能力測驗（TOCFL）暨兒童華語文能力測驗（CCCC）報名",
+            },
+          },
+          {
+            // Visually identical to the 9/11 and 9/18 issues' flyer (same
+            // dates, fees, and site details) — reused rather than duplicated.
+            block: "image",
+            src: "/images/news/enews-2026-09-11-tocfl-cccc.jpg",
+            alt: {
+              en: "Flyer for the 2026 Bay Area TOCFL and CCCC Chinese proficiency tests, with dates, fees, and contact info.",
+              zh: "2026年度舊金山灣區華語文能力測驗宣傳單，列出測驗日期、費用與聯絡方式。",
+            },
+            caption: {
+              en: "Test date: November 8, 2026, 11 AM–1 PM, at two sites — the Bay Area Overseas Chinese Culture and Education Service Center, 100 S. Milpitas Blvd., Milpitas (TOCFL and CCCC), and the North California Chinese Culture and Learning Center, 275 6th Ave., San Francisco (TOCFL only). Registration deadline: October 1, 2026; results in mid-January 2027. Fees: CCCC $30, TOCFL $40.",
+              zh: "測驗日期：2026年11月8日，上午11點至下午1點，共兩處考場——金山灣區僑教服務中心（100 S. Milpitas Blvd., Milpitas，可測 TOCFL 與 CCCC）及北加州中華文化學習中心（275 6th Avenue, San Francisco，僅測 TOCFL）。報名截止日期：2026年10月1日；成績公佈日期：2027年1月中旬。報名費：CCCC $30、TOCFL $40。",
+            },
+          },
+          {
+            block: "prose",
+            text: {
+              en: "The Association of Northern California Chinese Schools (ANCCS) and the Taipei Economic and Cultural Office in San Francisco (TECO in SF) are co-hosting the 2026 Test of Chinese as a Foreign Language (TOCFL) and Children's Chinese Competency Certification (CCCC). Students are encouraged to sign up and get a sense of their Chinese proficiency and learning progress. The school is coordinating registration for all participating students — please register promptly if you're interested. [More info](https://drive.google.com/file/d/1C68SpNiEUSWaZzGZAkos4jVaRlxYwIIg/view).",
+              zh: "北加州中文學校聯合會與駐舊金山台北文化辦事處，即將共同辦理2026年度「華語文能力測驗」（TOCFL）及「兒童華語文能力測驗」（CCCC），鼓勵各位學生踴躍報名參加，藉此瞭解自己的中文程度及學習成果。目前由校方統一辦理報名，欲報考的學生請從速報名。[詳情請參閱](https://drive.google.com/file/d/1C68SpNiEUSWaZzGZAkos4jVaRlxYwIIg/view)。",
+            },
+          },
+          {
+            block: "list",
+            items: [
+              {
+                en: "**Test Date:** November 8, 2026",
+                zh: "**測驗日期：**2026年11月8日",
+              },
+              {
+                en: "**Test Time:** 11:00 AM (TOCFL: 2 hours; CCCC: 1 hour)",
+                zh: "**測驗時間：**上午11點（華測 TOCFL：2小時；兒測 CCCC：1小時）",
+              },
+              {
+                en: "**Test Site:** Bay Area Overseas Chinese Culture and Education Service Center, 100 S. Milpitas Blvd., Milpitas, CA 95035",
+                zh: "**測驗地點：**灣區華僑文教中心，100 S. Milpitas Blvd., Milpitas, CA 95035",
+              },
+              {
+                en: "**FCS Registration Deadline:** September 30, 2026",
+                zh: "**本校報名截止日期：**2026年9月30日",
+              },
+            ],
+          },
+          {
+            block: "prose",
+            text: {
+              en: "**1) Children's Chinese Competency Certification (CCCC)** — for Classes T3–T8, C3–C8",
+              zh: "**1）兒童華語文能力測驗 CCCC** — 適用 T3–T8、C3–C8 班級",
+            },
+          },
+          {
+            block: "list",
+            items: [
+              {
+                en: "**Test Fee:** $30 (Traditional or Simplified version)",
+                zh: "**報名費：**$30（正體或簡體字版本）",
+              },
+              {
+                en: "**Registration form:** [forms.gle/W8msEjLzsVfWqYHY8](https://forms.gle/W8msEjLzsVfWqYHY8)",
+                zh: "**報名表：**[forms.gle/W8msEjLzsVfWqYHY8](https://forms.gle/W8msEjLzsVfWqYHY8)",
+              },
+              {
+                en: "**More info:** [CCCC_LR_2023.pdf](https://tocfl.edu.tw/assets/files/literature/CCCC_LR_2023.pdf)",
+                zh: "**詳情請參閱：**[CCCC_LR_2023.pdf](https://tocfl.edu.tw/assets/files/literature/CCCC_LR_2023.pdf)",
+              },
+            ],
+          },
+          {
+            block: "prose",
+            text: {
+              en: "**2) Test of Chinese as a Foreign Language (TOCFL)** — for Class T8 and all AC classes",
+              zh: "**2）華語文能力測驗 TOCFL** — 適用 T8 及所有 AC 班級",
+            },
+          },
+          {
+            block: "list",
+            items: [
+              {
+                en: "**Test Fee:** $40 (Traditional or Simplified version)",
+                zh: "**報名費：**$40（正體或簡體字版本）",
+              },
+              {
+                en: "**Registration form:** [forms.gle/M5Ak4oi9ZXvPaW3S9](https://forms.gle/M5Ak4oi9ZXvPaW3S9)",
+                zh: "**報名表：**[forms.gle/M5Ak4oi9ZXvPaW3S9](https://forms.gle/M5Ak4oi9ZXvPaW3S9)",
+              },
+              {
+                en: "**More info:** [Information of TOCFL Listening & Reading (PDF)](https://www.roc-taiwan.org/uploads/sites/160/2016/01/Information-of-TOCFL-Listening-Reading.pdf)",
+                zh: "**詳情請參閱：**[TOCFL 聽力與閱讀測驗說明 (PDF)](https://www.roc-taiwan.org/uploads/sites/160/2016/01/Information-of-TOCFL-Listening-Reading.pdf)",
+              },
+            ],
+          },
+          {
+            block: "prose",
+            text: {
+              en: "For questions about the tests, please contact Rose ([culture-contest@fremontchineseschool.org](mailto:culture-contest@fremontchineseschool.org)), or come by the FCS Office (classroom #229) Saturdays 11 AM – 1 PM.",
+              zh: "如有任何疑問，請聯繫 Rose（[culture-contest@fremontchineseschool.org](mailto:culture-contest@fremontchineseschool.org)），或於週六上午11點至下午1點親臨FCS辦公室（229教室）洽詢。",
+            },
+          },
+          {
+            block: "subhead",
+            text: {
+              en: "Double Ten National Day T-Shirt Design Contest",
+              zh: "雙十國慶「創意文創T-shirt」設計大賽",
+            },
+          },
+          {
+            // Visually identical to the 9/11 and 9/18 issues' flyer (same
+            // deadline, prizes, age groups) — reused rather than duplicated.
+            block: "image",
+            src: "/images/news/enews-2026-09-11-tshirt-contest.jpg",
+            alt: {
+              en: "Flyer for the Double Ten National Day T-shirt design contest, with a QR code to register.",
+              zh: "雙十國慶「創意文創T-shirt」設計大賽宣傳單，並附報名 QR code。",
+            },
+            caption: {
+              en: "Theme: \"My National Day, My Style.\" Age groups: 5–8, 9–12, 13+. Designs must include at least one of: National Day, culture, or creativity. Deadline: October 3, 2026. Prizes: 1st $150, 2nd $80, 3rd $50, honorable mention $20.",
+              zh: "比賽主題：「我的國慶，我的風格」。年齡分組：5–8歲、9–12歲、13歲以上。設計須包含國慶、文化、創意元素至少一項。截止日期：2026年10月3日。獎金：特優 $150、優選 $80、佳作 $50、入選 $20。",
+            },
+          },
+          {
+            block: "prose",
+            text: {
+              en: "Hosted by the Association of Northern California Chinese Schools and co-sponsored by the San Jose International Jaycees, this contest invites students to design their own Double Ten National Day T-shirt!",
+              zh: "北加州中文學校聯合會主辦、聖荷西國際傑人會協辦，歡迎同學們發揮創意，設計專屬雙十國慶T-shirt！",
+            },
+          },
+          {
+            block: "list",
+            items: [
+              { en: "Early/Lower Elementary (ages 5–8)", zh: "幼兒／低年級組（5–8歲）" },
+              { en: "Upper Elementary/Middle (ages 9–12)", zh: "中高年級組（9–12歲）" },
+              { en: "Teen (ages 13+)", zh: "青少年組（13歲以上）" },
+            ],
+          },
+          {
+            block: "prose",
+            text: {
+              en: "For full details and registration, scan the QR code on the flyer or visit [this link](https://drive.google.com/file/d/1LgfldFTDf_ChYeQxIXdbFfuS1RHwkMN0/view).",
+              zh: "詳情與報名請掃描海報上的 QR code，或參考[這個連結](https://drive.google.com/file/d/1LgfldFTDf_ChYeQxIXdbFfuS1RHwkMN0/view)。",
+            },
+          },
+          {
+            block: "subhead",
+            text: {
+              en: "SF Sun Yat-Sen Memorial Hall Essay Contest",
+              zh: "金山國父紀念館徵文比賽",
+            },
+          },
+          {
+            // Byte-identical to the 9/04 and 9/18 issues' graphic (verified by
+            // hash) — reused rather than duplicated. No restated text again
+            // this week, so the caption is carried forward as-is.
+            block: "image",
+            src: "/images/news/enews-2026-09-04-essay-contest.jpg",
+            alt: {
+              en: "Flyer for the Dr. Sun Yat-Sen Memorial Hall of SF's essay contest for Chinese school students.",
+              zh: "金山國父紀念館徵文比賽宣傳單，徵求曾就讀中文學校的青少年學生投稿。",
+            },
+            caption: {
+              en: "Open to students ages 12–22 who have attended a Chinese school. Write 800–1200 characters in Chinese (handwritten or typed; no AI-generated writing) on one of two topics about Dr. Sun Yat-sen. Submit by email to sskidspreschool@yahoo.com by **October 15, 2026**; winners are announced October 25. Prizes: 1st $500, 2nd $300, 3rd $200, honorable mention $100 each. Winners must attend the awards ceremony on November 7, 2026 at 11am at the Memorial Hall (838 Stockton St, SF) and give brief remarks. Contact: (510) 449-7375 (Director Yang Kun-shan).",
+              zh: "曾就讀中文學校、年齡 12–22 歲的青少年學生皆可投稿。以中文書寫（手寫或打字，嚴禁使用 AI 寫作），字數 800 至 1200 字，就孫中山先生相關的兩個題目擇一發揮。請於 **2026 年 10 月 15 日**前 email 至 sskidspreschool@yahoo.com，10 月 25 日公佈得獎名單。獎金：第一名 $500、第二名 $300、第三名 $200，佳作若干名各 $100。得獎人須於 2026 年 11 月 7 日上午 11 點親自出席在金山國父紀念館（838 Stockton St, SF）舉辦的頒獎典禮並簡短致詞。聯絡電話：(510) 449-7375（楊昆山館長）。",
+            },
+          },
+          {
+            block: "subhead",
+            text: { en: "Volunteer Service Award", zh: "學生志工服務獎" },
+          },
+          {
+            block: "prose",
+            text: {
+              en: "🔥 The Association of Northern California Chinese Schools (ANCCS) Student Volunteer Service Award is now open for applications! This award recognizes Chinese school students for their community service hours, with Bronze, Silver, and Gold tiers for both Teens and Young Adults.",
+              zh: "🔥 北加州中文學校聯合會學生志工服務獎開始報名！本獎項表彰中文學校學生的社區服務時數，Teen 組與 Young Adult 組皆設有銅、銀、金三個獎項。",
+            },
+          },
+          {
+            block: "list",
+            items: [
+              {
+                en: "**Teen** (ages 11–15): 🥉 Bronze 50–74 hrs ｜ 🥈 Silver 75–99 hrs ｜ 🥇 Gold 100+ hrs",
+                zh: "**Teen**（年齡 11–15 歲）：🥉 銅獎 50–74 小時 ｜ 🥈 銀獎 75–99 小時 ｜ 🥇 金獎 100 小時以上",
+              },
+              {
+                en: "**Young Adult** (16+): 🥉 Bronze 100–174 hrs ｜ 🥈 Silver 175–249 hrs ｜ 🥇 Gold 250+ hrs",
+                zh: "**Young Adult**（年齡 16 歲以上）：🥉 銅獎 100–174 小時 ｜ 🥈 銀獎 175–249 小時 ｜ 🥇 金獎 250 小時以上",
+              },
+            ],
+          },
+          {
+            block: "prose",
+            text: {
+              en: "Application deadline: **October 1, 2026**. Details at [www.anccs.org](https://www.anccs.org).",
+              zh: "申請截止日：**2026 年 10 月 1 日**。詳情請上官網：[www.anccs.org](https://www.anccs.org)。",
+            },
+          },
+        ],
+      },
+      {
+        kind: "flyer",
+        title: { en: "Classroom Use Policy", zh: "教室使用規則" },
+        // Byte-identical to the 8/21 issue's regenerated graphic (verified by
+        // hash) — reused rather than duplicated.
+        image: "/images/news/enews-2026-08-21-classroom-use-guidelines.png",
+        alt: {
+          en: "Classroom use guidelines flyer listing nine rules for using Irvington High School classrooms.",
+          zh: "教室使用規則宣傳單，列出使用 Irvington High School 教室的九項規定。",
+        },
+        caption: {
+          en: "We share Irvington High School's classrooms: no food, leave desks and floors clean, return desks to where you found them, and don't use the equipment, drawers, fridge, microwave, or anything on the teacher's desk.",
+          zh: "本校借用 Irvington High School 教室上課：請勿在教室內飲食，下課前清理桌面與地面、將桌椅歸回原位，並請勿使用教室內的設備、抽屜、冰箱、微波爐或講桌上的物品。",
+        },
+      },
+      {
+        kind: "callout",
+        title: { en: "Join Our Volunteer Team", zh: "加入幹事團隊" },
+        blocks: [
+          {
+            // Byte-identical to the photo in the 8/14 issue (verified by
+            // hash), so the committed file is reused rather than duplicated.
+            block: "image",
+            src: "/images/news/enews-2026-08-14-volunteer-team.jpg",
+            alt: {
+              en: "FCS parent volunteers and staff standing together behind a Fremont Chinese School banner.",
+              zh: "費利蒙中文學校家長義工與教職員在校旗前合影。",
+            },
+          },
+          {
+            block: "prose",
+            text: {
+              en: "💪 **Help build the FCS community — volunteer roles for the 2026–27 school year.**",
+              zh: "💪 **攜手打造費利蒙大家庭 — 2026–27 學年義工招募。**",
+            },
+          },
+          {
+            block: "prose",
+            text: {
+              en: "We're excited that many new parents have already joined our volunteer team this year — thank you! We can always use more help. From event planning to photography, translation to administration, there's a role to fit your skills and schedule. Parents matched to a good-fit role are also exempt from traffic and crossing duty. [See the open positions](https://drive.google.com/file/d/1500DSGZhrjpR4s9M4s8_OLxgXv7k5ePN/view).",
+              zh: "我們很高興今年已有許多新家長加入幹事團隊，謝謝大家的付出！我們仍歡迎更多家長加入 — 從活動規劃、攝影、翻譯到行政，總能找到適合您的角色。找到合適崗位的家長，還可免除交通導護值勤。[查看義工職缺一覽](https://drive.google.com/file/d/1500DSGZhrjpR4s9M4s8_OLxgXv7k5ePN/view)。",
+            },
+          },
+        ],
+        cta: {
+          label: {
+            en: "Volunteer sign-up 2026–27",
+            zh: "2026–27 學年義工報名表",
+          },
+          href: "https://forms.gle/MtdWWWUWagNWP1u8A",
+        },
+      },
+      {
+        kind: "callout",
+        title: {
+          en: "Donate & Double Your Contribution",
+          zh: "捐款與雙倍貢獻",
+        },
+        blocks: [
+          {
+            block: "prose",
+            text: {
+              en: "FCS is a non-profit 501(c) organization. Donations are tax-deductible (IRS tax ID: **94-2978949**) and help Fremont Chinese School continue to operate, teach Chinese courses, and pass on Chinese culture.",
+              zh: "費利蒙中文學校是一家非營利性 501(c) 組織。您可以透過向費利蒙中文學校捐款來享受稅務抵減（IRS tax ID: **94-2978949**）。您的捐款將幫助本校繼續運營、教授中文課程並傳承中華文化。",
+            },
+          },
+          {
+            block: "prose",
+            text: {
+              en: "**Double your contribution:** thank you for volunteering at school! Your employer may offer volunteer cash rewards — please consider donating those rewards to Fremont Chinese School. [Instructions and an example](https://docs.google.com/presentation/d/1Op2TlZ4wFSz7epqziWHmEauqEa5FnqRJ5yJofqQhpqs/edit).",
+              zh: "**雙倍貢獻：**感謝您在學校擔任義工！您的雇主也許提供義工獎勵金，歡迎將這筆獎勵金捐助給學校。[捐款方式說明與範例](https://docs.google.com/presentation/d/1Op2TlZ4wFSz7epqziWHmEauqEa5FnqRJ5yJofqQhpqs/edit)。",
+            },
+          },
+        ],
+        cta: {
+          label: { en: "Donate", zh: "前往捐款" },
+          href: "/donate",
+        },
+      },
+      {
+        kind: "sponsors",
+        title: {
+          en: "2026 Yearbook Gold Sponsors",
+          zh: "2026 年刊金牌贊助商",
+        },
+        logos: [
+          {
+            name: "IvyMAX 飛達教育",
+            image: "/images/sponsors/ivymax.jpg",
+            href: "https://ivymax.com",
+          },
+          {
+            name: "Fremont United Auto Service Inc. 聯合汽車修理中心",
+            image: "/images/sponsors/fremont-united-auto.jpg",
+            href: "https://www.fremontunitedautoservice.com/",
+          },
+        ],
+      },
+    ],
+  },
+  {
     // Replicated from the .eml Angela sent via MailKing (2026-09-18, 10:01
     // PDT). Draft token generated with `openssl rand -hex 3`.
     //
