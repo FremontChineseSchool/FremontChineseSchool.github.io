@@ -323,7 +323,10 @@ export const issues: NewsletterIssue[] = [
       en: "Picture Day is this Saturday (9/26) — the full class schedule and photo-location map are inside, plus Mid-Autumn wishes and news of five teacher awards.",
       zh: "本週六（9/26）是拍照日，內文附上各班詳細時間與集合地點；並提前祝大家中秋節快樂，恭喜多位老師榮獲優良教師獎。",
     },
-    draft: "70548e",
+    // Kept from the original `draft: "70548e"` token so the email-preview page
+    // stays at its unguessable review URL rather than jumping to a guessable
+    // dated one now that this issue is published.
+    emailToken: "70548e",
     sections: [
       {
         kind: "prose",
