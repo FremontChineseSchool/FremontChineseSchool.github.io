@@ -288,8 +288,13 @@ export const issues: NewsletterIssue[] = [
     // below was otherwise word-for-word unchanged from the last two issues,
     // including a "FCS Registration Deadline: September 30, 2026" bullet and
     // an "October 1, 2026" registration-deadline clause in the flyer caption —
-    // both already past by this issue's 10/2 send date. Per instruction, both
-    // deadline mentions were removed rather than updated or caveated.
+    // both already past by this issue's 10/2 send date. On a second pass, per
+    // instruction, the whole section was reframed as informational rather
+    // than just dropping the two stale dates: every registration call-to-
+    // action, fee, registration-form link, and the registration-questions
+    // contact came out, replaced by one line noting FCS's registration window
+    // for this round has already closed. The flyer and its date/time/site
+    // stay, since the test itself is still happening.
     date: "2026-10-02",
     label: { en: "October 2, 2026", zh: "2026年10月2日" },
     summary: {
@@ -415,13 +420,15 @@ export const issues: NewsletterIssue[] = [
           {
             block: "subhead",
             text: {
-              en: "2026 TOCFL & CCCC Test Registration",
-              zh: "2026 華語文能力測驗（TOCFL）暨兒童華語文能力測驗（CCCC）報名",
+              en: "2026 TOCFL & CCCC Test",
+              zh: "2026 華語文能力測驗（TOCFL）暨兒童華語文能力測驗（CCCC）",
             },
           },
           {
             // Byte-identical to the 9/11, 9/18, and 9/25 issues' flyer
-            // (verified by hash) — reused rather than duplicated.
+            // (verified by hash) — reused rather than duplicated. Kept here
+            // purely as a record of the test, even though its own
+            // registration-form QR/links are no longer actionable.
             block: "image",
             src: "/images/news/enews-2026-09-11-tocfl-cccc.jpg",
             alt: {
@@ -429,21 +436,23 @@ export const issues: NewsletterIssue[] = [
               zh: "2026年度舊金山灣區華語文能力測驗宣傳單，列出測驗日期、費用與聯絡方式。",
             },
             caption: {
-              en: "Test date: November 8, 2026, 11 AM–1 PM, at two sites — the Bay Area Overseas Chinese Culture and Education Service Center, 100 S. Milpitas Blvd., Milpitas (TOCFL and CCCC), and the North California Chinese Culture and Learning Center, 275 6th Ave., San Francisco (TOCFL only). Results in mid-January 2027. Fees: CCCC $30, TOCFL $40.",
-              zh: "測驗日期：2026年11月8日，上午11點至下午1點，共兩處考場——金山灣區僑教服務中心（100 S. Milpitas Blvd., Milpitas，可測 TOCFL 與 CCCC）及北加州中華文化學習中心（275 6th Avenue, San Francisco，僅測 TOCFL）。成績公佈日期：2027年1月中旬。報名費：CCCC $30、TOCFL $40。",
+              en: "Test date: November 8, 2026, 11 AM–1 PM, at two sites — the Bay Area Overseas Chinese Culture and Education Service Center, 100 S. Milpitas Blvd., Milpitas (TOCFL and CCCC), and the North California Chinese Culture and Learning Center, 275 6th Ave., San Francisco (TOCFL only). Results in mid-January 2027.",
+              zh: "測驗日期：2026年11月8日，上午11點至下午1點，共兩處考場——金山灣區僑教服務中心（100 S. Milpitas Blvd., Milpitas，可測 TOCFL 與 CCCC）及北加州中華文化學習中心（275 6th Avenue, San Francisco，僅測 TOCFL）。成績公佈日期：2027年1月中旬。",
             },
           },
           {
             block: "prose",
             text: {
-              en: "The Association of Northern California Chinese Schools (ANCCS) and the Taipei Economic and Cultural Office in San Francisco (TECO in SF) are co-hosting the 2026 Test of Chinese as a Foreign Language (TOCFL) and Children's Chinese Competency Certification (CCCC). Students are encouraged to sign up and get a sense of their Chinese proficiency and learning progress. The school is coordinating registration for all participating students — please register promptly if you're interested. [More info](https://drive.google.com/file/d/1C68SpNiEUSWaZzGZAkos4jVaRlxYwIIg/view).",
-              zh: "北加州中文學校聯合會與駐舊金山台北文化辦事處，即將共同辦理2026年度「華語文能力測驗」（TOCFL）及「兒童華語文能力測驗」（CCCC），鼓勵各位學生踴躍報名參加，藉此瞭解自己的中文程度及學習成果。目前由校方統一辦理報名，欲報考的學生請從速報名。[詳情請參閱](https://drive.google.com/file/d/1C68SpNiEUSWaZzGZAkos4jVaRlxYwIIg/view)。",
+              en: "The Association of Northern California Chinese Schools (ANCCS) and the Taipei Economic and Cultural Office in San Francisco (TECO in SF) are co-hosting the 2026 Test of Chinese as a Foreign Language (TOCFL) and Children's Chinese Competency Certification (CCCC) — standardized tests that let students check their Chinese proficiency and learning progress. **FCS's registration window for this round has already closed**; students who signed up will test on the date above.",
+              zh: "北加州中文學校聯合會與駐舊金山台北文化辦事處共同辦理2026年度「華語文能力測驗」（TOCFL）及「兒童華語文能力測驗」（CCCC），讓學生藉此瞭解自己的中文程度及學習成果。**本校報名已截止**，已完成報名的學生將於上述日期參加測驗。",
             },
           },
           {
-            // "FCS Registration Deadline: September 30, 2026" bullet removed
-            // on review — it had already passed as of this issue's 10/2 send
-            // date (see the big comment at the top of this issue).
+            // Registration deadline, fees, registration-form links, and the
+            // registration-questions contact all removed on review (per
+            // instruction): with FCS's registration window closed, this
+            // section is informational only — the test is happening, not
+            // something a family can still sign up for.
             block: "list",
             items: [
               {
@@ -458,62 +467,11 @@ export const issues: NewsletterIssue[] = [
                 en: "**Test Site:** Bay Area Overseas Chinese Culture and Education Service Center, 100 S. Milpitas Blvd., Milpitas, CA 95035",
                 zh: "**測驗地點：**灣區華僑文教中心，100 S. Milpitas Blvd., Milpitas, CA 95035",
               },
-            ],
-          },
-          {
-            block: "prose",
-            text: {
-              en: "**1) Children's Chinese Competency Certification (CCCC)** — for Classes T3–T8, C3–C8",
-              zh: "**1）兒童華語文能力測驗 CCCC** — 適用 T3–T8、C3–C8 班級",
-            },
-          },
-          {
-            block: "list",
-            items: [
               {
-                en: "**Test Fee:** $30 (Traditional or Simplified version)",
-                zh: "**報名費：**$30（正體或簡體字版本）",
-              },
-              {
-                en: "**Registration form:** [forms.gle/W8msEjLzsVfWqYHY8](https://forms.gle/W8msEjLzsVfWqYHY8)",
-                zh: "**報名表：**[forms.gle/W8msEjLzsVfWqYHY8](https://forms.gle/W8msEjLzsVfWqYHY8)",
-              },
-              {
-                en: "**More info:** [CCCC_LR_2023.pdf](https://tocfl.edu.tw/assets/files/literature/CCCC_LR_2023.pdf)",
-                zh: "**詳情請參閱：**[CCCC_LR_2023.pdf](https://tocfl.edu.tw/assets/files/literature/CCCC_LR_2023.pdf)",
+                en: "**Applies to:** CCCC for Classes T3–T8, C3–C8; TOCFL for Class T8 and all AC classes",
+                zh: "**適用對象：**CCCC 適用 T3–T8、C3–C8 班級；TOCFL 適用 T8 及所有 AC 班級",
               },
             ],
-          },
-          {
-            block: "prose",
-            text: {
-              en: "**2) Test of Chinese as a Foreign Language (TOCFL)** — for Class T8 and all AC classes",
-              zh: "**2）華語文能力測驗 TOCFL** — 適用 T8 及所有 AC 班級",
-            },
-          },
-          {
-            block: "list",
-            items: [
-              {
-                en: "**Test Fee:** $40 (Traditional or Simplified version)",
-                zh: "**報名費：**$40（正體或簡體字版本）",
-              },
-              {
-                en: "**Registration form:** [forms.gle/M5Ak4oi9ZXvPaW3S9](https://forms.gle/M5Ak4oi9ZXvPaW3S9)",
-                zh: "**報名表：**[forms.gle/M5Ak4oi9ZXvPaW3S9](https://forms.gle/M5Ak4oi9ZXvPaW3S9)",
-              },
-              {
-                en: "**More info:** [Information of TOCFL Listening & Reading (PDF)](https://www.roc-taiwan.org/uploads/sites/160/2016/01/Information-of-TOCFL-Listening-Reading.pdf)",
-                zh: "**詳情請參閱：**[TOCFL 聽力與閱讀測驗說明 (PDF)](https://www.roc-taiwan.org/uploads/sites/160/2016/01/Information-of-TOCFL-Listening-Reading.pdf)",
-              },
-            ],
-          },
-          {
-            block: "prose",
-            text: {
-              en: "For questions about the tests, please contact Rose ([culture-contest@fremontchineseschool.org](mailto:culture-contest@fremontchineseschool.org)), or come by the FCS Office (classroom #229) Saturdays 11 AM – 1 PM.",
-              zh: "如有任何疑問，請聯繫 Rose（[culture-contest@fremontchineseschool.org](mailto:culture-contest@fremontchineseschool.org)），或於週六上午11點至下午1點親臨FCS辦公室（229教室）洽詢。",
-            },
           },
           {
             block: "subhead",
