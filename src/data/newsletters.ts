@@ -284,12 +284,12 @@ export const issues: NewsletterIssue[] = [
     // this week's sent HTML (ivymax.com, fremontunitedautoservice.com),
     // unchanged.
     //
-    // Flagged rather than silently fixed or dropped: the TOCFL/CCCC section
-    // below is otherwise word-for-word unchanged from the last two issues,
-    // including the bullet "FCS Registration Deadline: September 30, 2026" —
-    // which has already passed as of this issue's 10/2 send date. Recorded as
-    // a gap rather than guessed at (remove the bullet? note registration is
-    // closed? was the deadline actually extended and just not mentioned?).
+    // Flagged during drafting and resolved on review: the TOCFL/CCCC section
+    // below was otherwise word-for-word unchanged from the last two issues,
+    // including a "FCS Registration Deadline: September 30, 2026" bullet and
+    // an "October 1, 2026" registration-deadline clause in the flyer caption —
+    // both already past by this issue's 10/2 send date. Per instruction, both
+    // deadline mentions were removed rather than updated or caveated.
     date: "2026-10-02",
     label: { en: "October 2, 2026", zh: "2026年10月2日" },
     summary: {
@@ -297,9 +297,6 @@ export const issues: NewsletterIssue[] = [
       zh: "拍照日照片已出爐；本週六（10/3）期中考，美食節（10/10）仍開放班級報名。",
     },
     draft: "584161",
-    gaps: [
-      "The TOCFL/CCCC General Announcements item carries forward the same \"FCS Registration Deadline: September 30, 2026\" bullet from the last two issues, which has already passed by this issue's 10/2 send date. Confirm with Angela whether to remove that bullet, note that FCS registration has closed, or that the deadline was actually extended.",
-    ],
     sections: [
       {
         kind: "prose",
@@ -432,8 +429,8 @@ export const issues: NewsletterIssue[] = [
               zh: "2026年度舊金山灣區華語文能力測驗宣傳單，列出測驗日期、費用與聯絡方式。",
             },
             caption: {
-              en: "Test date: November 8, 2026, 11 AM–1 PM, at two sites — the Bay Area Overseas Chinese Culture and Education Service Center, 100 S. Milpitas Blvd., Milpitas (TOCFL and CCCC), and the North California Chinese Culture and Learning Center, 275 6th Ave., San Francisco (TOCFL only). Registration deadline: October 1, 2026; results in mid-January 2027. Fees: CCCC $30, TOCFL $40.",
-              zh: "測驗日期：2026年11月8日，上午11點至下午1點，共兩處考場——金山灣區僑教服務中心（100 S. Milpitas Blvd., Milpitas，可測 TOCFL 與 CCCC）及北加州中華文化學習中心（275 6th Avenue, San Francisco，僅測 TOCFL）。報名截止日期：2026年10月1日；成績公佈日期：2027年1月中旬。報名費：CCCC $30、TOCFL $40。",
+              en: "Test date: November 8, 2026, 11 AM–1 PM, at two sites — the Bay Area Overseas Chinese Culture and Education Service Center, 100 S. Milpitas Blvd., Milpitas (TOCFL and CCCC), and the North California Chinese Culture and Learning Center, 275 6th Ave., San Francisco (TOCFL only). Results in mid-January 2027. Fees: CCCC $30, TOCFL $40.",
+              zh: "測驗日期：2026年11月8日，上午11點至下午1點，共兩處考場——金山灣區僑教服務中心（100 S. Milpitas Blvd., Milpitas，可測 TOCFL 與 CCCC）及北加州中華文化學習中心（275 6th Avenue, San Francisco，僅測 TOCFL）。成績公佈日期：2027年1月中旬。報名費：CCCC $30、TOCFL $40。",
             },
           },
           {
@@ -444,12 +441,9 @@ export const issues: NewsletterIssue[] = [
             },
           },
           {
-            // TODO(angela): "FCS Registration Deadline: September 30, 2026"
-            // has already passed as of this issue's 10/2 send date — carried
-            // forward verbatim from the source email. See the issue-level
-            // `gaps` note; confirm before publishing whether this bullet
-            // should be removed, updated, or left as a record that FCS
-            // registration has closed.
+            // "FCS Registration Deadline: September 30, 2026" bullet removed
+            // on review — it had already passed as of this issue's 10/2 send
+            // date (see the big comment at the top of this issue).
             block: "list",
             items: [
               {
@@ -463,10 +457,6 @@ export const issues: NewsletterIssue[] = [
               {
                 en: "**Test Site:** Bay Area Overseas Chinese Culture and Education Service Center, 100 S. Milpitas Blvd., Milpitas, CA 95035",
                 zh: "**測驗地點：**灣區華僑文教中心，100 S. Milpitas Blvd., Milpitas, CA 95035",
-              },
-              {
-                en: "**FCS Registration Deadline:** September 30, 2026",
-                zh: "**本校報名截止日期：**2026年9月30日",
               },
             ],
           },
