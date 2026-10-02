@@ -301,7 +301,10 @@ export const issues: NewsletterIssue[] = [
       en: "Picture Day photos are in, midterms are this Saturday (10/3), and the Food Festival (10/10) is still open for class sign-ups.",
       zh: "拍照日照片已出爐；本週六（10/3）期中考，美食節（10/10）仍開放班級報名。",
     },
-    draft: "584161",
+    // Kept from the original `draft: "584161"` token so the email-preview
+    // page stays at its unguessable review URL rather than jumping to a
+    // guessable dated one now that this issue is published.
+    emailToken: "584161",
     sections: [
       {
         kind: "prose",
