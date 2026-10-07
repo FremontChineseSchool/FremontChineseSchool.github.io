@@ -249,6 +249,291 @@ export type NewsletterIssue = {
  */
 export const issues: NewsletterIssue[] = [
   {
+    // Drafted from the .eml Angela sent via MailKing (2026-10-07, 3:11 AM
+    // PDT). Draft token generated with `openssl rand -hex 3`.
+    //
+    // Seven images embedded in the sent HTML (verified by opening each one,
+    // not inferred from surrounding markup):
+    // - Masthead banner and the WASC seal are evergreen chrome, not issue
+    //   content (both already live in src/lib/email.ts / the site header).
+    // - Street Food Festival menu flyer (Week 8 School Update) — new, despite
+    //   an alt attribute of "Booth setup photo placeholder" left over in the
+    //   sent HTML (a MailKing template label, not a real gap — the flyer
+    //   itself is finished, with a full menu). Committed as
+    //   enews-2026-10-09-food-festival.jpg (already 1200px wide / 277 KB, kept
+    //   as sent).
+    // - Staff meeting recap photo (Week 8 School Update) — new, despite an alt
+    //   attribute of "Staff meeting photo placeholder" (same MailKing
+    //   leftover, not a gap — it's a real photo). Committed as
+    //   enews-2026-10-09-staff-meeting.jpg; re-exported from the sent 1.9 MB
+    //   PNG to JPEG at quality 85 (370 KB) since it's a photo, not flat-color
+    //   art.
+    // - Classroom Use Guidelines flyer — byte-identical (verified by hash) to
+    //   enews-2026-08-21-classroom-use-guidelines.png, reused.
+    // - Volunteer-team photo (Join Our Volunteer Team) — byte-identical
+    //   (verified by hash) to enews-2026-10-02-volunteer-team.jpg, reused.
+    // The two gold-sponsor logos are byte-identical to the ones already
+    // committed under public/images/sponsors/ — hrefs re-verified against this
+    // week's sent HTML (ivymax.com, fremontunitedautoservice.com), unchanged.
+    //
+    // No General Announcements this week (no TOCFL/CCCC or T-shirt-contest
+    // items carried in the sent email), so that section is omitted rather than
+    // padded. Join Our Volunteer Team and Donate & Double Your Contribution
+    // carried forward using the site's established wording (evergreen
+    // boilerplate), since the sent email's phrasing is a close paraphrase of
+    // the same standard copy.
+    date: "2026-10-09",
+    label: { en: "October 9, 2026", zh: "2026年10月9日" },
+    summary: {
+      en: "The Street Food Festival is tomorrow (10/10, 9:30 AM–12:30 PM) — full menu inside — plus a reminder to complete the Academic Contest survey and a recap of last week's staff meeting.",
+      zh: "街頭美食園遊會明天登場（10/10，上午9:30–中午12:30），內附完整菜單；並提醒填寫學術比賽問卷，同時回顧上週教職員大會。",
+    },
+    draft: "78d96e",
+    sections: [
+      {
+        kind: "prose",
+        title: { en: "A Note from the Principal", zh: "校長的話" },
+        blocks: [
+          {
+            block: "prose",
+            text: { en: "Dear FCS Families,", zh: "各位家長好：" },
+          },
+          {
+            block: "prose",
+            text: {
+              en: "Hope everyone's had a great week so far! Tomorrow, 10/10, is our much-anticipated Food Festival! Please feel free to invite your friends and family to stop by, enjoy some delicious food, and cheer on our classes!",
+              zh: "希望大家這週都過得順利！明天（10/10）就是我們期待已久的美食節（Food Festival）了！歡迎大家邀請親朋好友一起來逛逛、品嚐美食，為各班加油打氣！",
+            },
+          },
+          {
+            block: "prose",
+            text: {
+              en: "Thank you to all the teachers, parents, and students who have helped get everything ready — we can't wait to see everyone there!",
+              zh: "感謝每一位參與籌備的老師、家長和同學，期待明天在現場見到大家！",
+            },
+          },
+          {
+            block: "prose",
+            text: {
+              en: "Also, a friendly reminder: please take 2 minutes to fill out the Academic Contest survey by tomorrow, 10/10! The contest is a long-standing FCS tradition, planned this year for Saturday, December 19, and it runs entirely on parent volunteers, from preparing materials to proctoring on the day. Even if your child isn't planning to participate or you're not able to volunteer, please let us know in the [survey](https://forms.gle/GX23p5XPBBAP8xoV8).",
+              zh: "溫馨提醒：學術比賽（Academic Contest）是本校多年來的傳統，今年預定於12月19日（六）舉行，從賽前籌備到當天監考都需要許多家長志工的協助。請在明天（10/10）前花兩分鐘填寫[學術比賽問卷](https://forms.gle/GX23p5XPBBAP8xoV8)，即使孩子不打算參加比賽，或您無法擔任志工，也請填寫問卷告訴我們！",
+            },
+          },
+        ],
+        signoff: {
+          en: "Warmly, Angela — Principal, Fremont Chinese School",
+          zh: "謹上　夏芷筠　費利蒙中文學校校長",
+        },
+      },
+      {
+        kind: "prose",
+        title: { en: "Week 8 School Update", zh: "第八週學校近況" },
+        blocks: [
+          {
+            block: "subhead",
+            text: {
+              en: "The Food Festival Is Happening Tomorrow!",
+              zh: "美食節（Food Festival）明天登場！",
+            },
+          },
+          {
+            block: "image",
+            src: "/images/news/enews-2026-10-09-food-festival.jpg",
+            alt: {
+              en: "Flyer for the FCS Street Food Festival listing the full menu of food, drinks, and games by booth.",
+              zh: "費利蒙中文學校街頭美食園遊會宣傳單，列出各攤位的美食、飲品與遊戲項目。",
+            },
+            caption: {
+              en: "Saturday, October 10, 9:30 AM–12:30 PM. Menu highlights: braised pork rice, curry chicken rice, scallion pancakes, egg tarts, and snow cones, plus ring toss, a used book and toy sale, and Korean ear acupoint service.",
+              zh: "10月10日（六）上午9:30–中午12:30。美食精選：滷肉飯、咖哩雞飯、蔥油餅、蛋塔、雪花冰等；另有套圈圈遊戲、二手書玩具義賣及韓國耳穴貼服務。",
+            },
+          },
+          {
+            block: "prose",
+            text: {
+              en: "Time: Saturday, October 10, 9:30 AM – 12:30 PM.",
+              zh: "時間：10月10日（六）上午9:30 – 中午12:30。",
+            },
+          },
+          {
+            block: "prose",
+            text: {
+              en: "This year's booths have something for everyone! Food includes braised pork rice, curry chicken rice, pan-fried pork buns, fish cake noodles, egg tarts, scallion pancakes, spring rolls, Spam musubi, and tea eggs. For sweets and drinks, there's cotton candy, snow cones, cream puffs, mung bean barley dessert, aiyu lemonade, wintermelon tea, and hot cocoa. Plus games like ring toss, used books and toys, and even a Korean ear acupoint service!",
+              zh: "今年的攤位內容豐富多元，大人小孩都能找到自己的最愛！美食有滷肉飯、咖哩雞飯、水煎包、魷魚焿麵線、蛋塔、蔥油餅、春捲、Spam 飯糰、茶葉蛋；甜點飲品有棉花糖、雪花冰、泡芙、綠豆薏仁湯、愛玉檸檬、冬瓜茶、熱可可；還有套圈圈等趣味遊戲、二手書與玩具義賣，甚至還有韓國耳穴貼服務！",
+            },
+          },
+          {
+            block: "prose",
+            text: {
+              en: "Please bring your friends and family along to join the fun! All proceeds go directly to each class's fund, which goes right back to the kids. Your support means so much to our students!",
+              zh: "邀請您帶著親朋好友一起來參加！所有義賣收入將直接歸入各班班費，並全數回饋給孩子們。您的每一份支持，都是對孩子們最好的鼓勵！",
+            },
+          },
+          {
+            block: "subhead",
+            text: {
+              en: "Week 7 Recap: Staff Meeting",
+              zh: "第七週回顧：教職員大會",
+            },
+          },
+          {
+            block: "image",
+            src: "/images/news/enews-2026-10-09-staff-meeting.jpg",
+            alt: {
+              en: "Teachers and staff gathered in a classroom for the FCS staff meeting.",
+              zh: "老師與教職員齊聚教室，參加費利蒙中文學校教職員大會。",
+            },
+          },
+          {
+            block: "prose",
+            text: {
+              en: "Last week we held our staff meeting, and it was a great success! Thank you to all our teachers and staff for joining — we planned lots of exciting things to come, so stay tuned! [More photos here](https://photos.app.goo.gl/dUm6ubfHGQkMUnCA6).",
+              zh: "上週我們順利舉行了教職員大會，會議非常成功！感謝所有老師與幹部的參與，大家一起規劃了許多精彩的活動，敬請期待！[更多照片請見連結](https://photos.app.goo.gl/dUm6ubfHGQkMUnCA6)。",
+            },
+          },
+        ],
+      },
+      {
+        kind: "prose",
+        title: {
+          en: "School Calendar 2026–2027",
+          zh: "學校行事曆 2026–2027",
+        },
+        blocks: [
+          {
+            block: "prose",
+            text: { en: "Coming event(s):", zh: "近期活動：" },
+          },
+          {
+            block: "list",
+            items: [
+              {
+                en: "**10/10/2026** — Street Food Festival; Academic Contest sign-up starts",
+                zh: "**10/10/2026** — 街頭美食園遊會、學術競賽報名開始",
+              },
+              {
+                en: "**10/24/2026** — All Parent Assembly",
+                zh: "**10/24/2026** — 全校家長大會",
+              },
+              {
+                en: "**10/31/2026** — Halloween Event",
+                zh: "**10/31/2026** — 萬聖節活動",
+              },
+            ],
+          },
+        ],
+        links: [
+          {
+            label: { en: "Download calendar (Chinese)", zh: "下載行事曆（中文版）" },
+            href: "https://drive.google.com/file/d/1kUl_nhpdAC0WLE0r6smb2fSjDUzRmSdX/view",
+          },
+          {
+            label: { en: "Download calendar (English)", zh: "下載行事曆（英文版）" },
+            href: "https://drive.google.com/file/d/1mHm8B4-LnNZkqqOY8qMvG7OReWaconzM/view",
+          },
+        ],
+      },
+      {
+        kind: "flyer",
+        title: { en: "Classroom Use Policy", zh: "教室使用規則" },
+        // Byte-identical to the 8/21 issue's regenerated graphic (verified by
+        // hash) — reused rather than duplicated.
+        image: "/images/news/enews-2026-08-21-classroom-use-guidelines.png",
+        alt: {
+          en: "Classroom use guidelines flyer listing nine rules for using Irvington High School classrooms.",
+          zh: "教室使用規則宣傳單，列出使用 Irvington High School 教室的九項規定。",
+        },
+        caption: {
+          en: "We share Irvington High School's classrooms: no food, leave desks and floors clean, return desks to where you found them, and don't use the equipment, drawers, fridge, microwave, or anything on the teacher's desk.",
+          zh: "本校借用 Irvington High School 教室上課：請勿在教室內飲食，下課前清理桌面與地面、將桌椅歸回原位，並請勿使用教室內的設備、抽屜、冰箱、微波爐或講桌上的物品。",
+        },
+      },
+      {
+        kind: "callout",
+        title: { en: "Join Our Volunteer Team", zh: "加入幹事團隊" },
+        blocks: [
+          {
+            // Byte-identical to the 10/2 issue's photo (verified by hash) —
+            // reused rather than duplicated.
+            block: "image",
+            src: "/images/news/enews-2026-10-02-volunteer-team.jpg",
+            alt: {
+              en: "FCS parent volunteers and staff posing together for the 2026–27 committee group photo.",
+              zh: "費利蒙中文學校 26-27 學年幹事會成員合影。",
+            },
+          },
+          {
+            block: "prose",
+            text: {
+              en: "💪 **Help build the FCS community — volunteer roles for the 2026–27 school year.**",
+              zh: "💪 **攜手打造費利蒙大家庭 — 2026–27 學年義工招募。**",
+            },
+          },
+          {
+            block: "prose",
+            text: {
+              en: "We're excited that many new parents have already joined our volunteer team this year — thank you! We can always use more help. From event planning to photography, translation to administration, there's a role to fit your skills and schedule. Parents matched to a good-fit role are also exempt from traffic and crossing duty. [See the open positions](https://drive.google.com/file/d/1500DSGZhrjpR4s9M4s8_OLxgXv7k5ePN/view).",
+              zh: "我們很高興今年已有許多新家長加入幹事團隊，謝謝大家的付出！我們仍歡迎更多家長加入 — 從活動規劃、攝影、翻譯到行政，總能找到適合您的角色。找到合適崗位的家長，還可免除交通導護值勤。[查看義工職缺一覽](https://drive.google.com/file/d/1500DSGZhrjpR4s9M4s8_OLxgXv7k5ePN/view)。",
+            },
+          },
+        ],
+        cta: {
+          label: {
+            en: "Volunteer sign-up 2026–27",
+            zh: "2026–27 學年義工報名表",
+          },
+          href: "https://forms.gle/MtdWWWUWagNWP1u8A",
+        },
+      },
+      {
+        kind: "callout",
+        title: {
+          en: "Donate & Double Your Contribution",
+          zh: "捐款與雙倍貢獻",
+        },
+        blocks: [
+          {
+            block: "prose",
+            text: {
+              en: "FCS is a non-profit 501(c) organization. Donations are tax-deductible (IRS tax ID: **94-2978949**) and help Fremont Chinese School continue to operate, teach Chinese courses, and pass on Chinese culture.",
+              zh: "費利蒙中文學校是一家非營利性 501(c) 組織。您可以透過向費利蒙中文學校捐款來享受稅務抵減（IRS tax ID: **94-2978949**）。您的捐款將幫助本校繼續運營、教授中文課程並傳承中華文化。",
+            },
+          },
+          {
+            block: "prose",
+            text: {
+              en: "**Double your contribution:** thank you for volunteering at school! Your employer may offer volunteer cash rewards — please consider donating those rewards to Fremont Chinese School. [Instructions and an example](https://docs.google.com/presentation/d/1Op2TlZ4wFSz7epqziWHmEauqEa5FnqRJ5yJofqQhpqs/edit).",
+              zh: "**雙倍貢獻：**感謝您在學校擔任義工！您的雇主也許提供義工獎勵金，歡迎將這筆獎勵金捐助給學校。[捐款方式說明與範例](https://docs.google.com/presentation/d/1Op2TlZ4wFSz7epqziWHmEauqEa5FnqRJ5yJofqQhpqs/edit)。",
+            },
+          },
+        ],
+        cta: {
+          label: { en: "Donate", zh: "前往捐款" },
+          href: "/donate",
+        },
+      },
+      {
+        kind: "sponsors",
+        title: {
+          en: "2026 Yearbook Gold Sponsors",
+          zh: "2026 年刊金牌贊助商",
+        },
+        logos: [
+          {
+            name: "IvyMAX 飛達教育",
+            image: "/images/sponsors/ivymax.jpg",
+            href: "https://ivymax.com",
+          },
+          {
+            name: "Fremont United Auto Service Inc. 聯合汽車修理中心",
+            image: "/images/sponsors/fremont-united-auto.jpg",
+            href: "https://www.fremontunitedautoservice.com/",
+          },
+        ],
+      },
+    ],
+  },
+  {
     // Replicated from the .eml Angela sent via MailKing (2026-10-02, 10:01
     // PDT). Draft token generated with `openssl rand -hex 3`.
     //
