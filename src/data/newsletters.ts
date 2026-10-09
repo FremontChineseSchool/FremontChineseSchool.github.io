@@ -288,7 +288,7 @@ export const issues: NewsletterIssue[] = [
       en: "The Street Food Festival is tomorrow (10/10, 9:30 AM–12:30 PM) — full menu inside — plus a reminder to complete the Academic Contest survey and a recap of last week's staff meeting.",
       zh: "街頭美食園遊會明天登場（10/10，上午9:30–中午12:30），內附完整菜單；並提醒填寫學術比賽問卷，同時回顧上週教職員大會。",
     },
-    draft: "78d96e",
+    emailToken: "78d96e",
     sections: [
       {
         kind: "prose",
