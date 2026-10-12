@@ -23,6 +23,11 @@ export const links = {
   acAbsenceForm: 'https://drive.google.com/file/d/1xbyIlzgvoZFpABZNK03L2-6sK2XSKXCI/view',
   acExcuseForm: 'https://drive.google.com/file/d/11KBdtFJ8iQYHGd4d8K4GWIMlQ2ceX2G0/view',
   tutorApplication: 'https://forms.gle/Aerk6mbhpEPfJEep9',
+  // FCS's custom-built contest sign-up app (the old fcsapp.fremontchineseschool.org
+  // subdomain no longer resolves; the app itself lives on at faypier.com).
+  contestLogin: 'https://fcsapp.faypier.com/users/login',
+  contestRules: 'https://fcsapp.faypier.com/users/rules',
+  contestSignupGuide: 'https://drive.google.com/file/d/1_ChzQCTDuUgqQQSQ1NIIvr6FuIGM0q7B/view',
   legacyEvents: 'https://fremontchineseschool.org/events',
   legacyNews: 'https://fremontchineseschool.org/index.php',
   facebook: 'https://facebook.com/fremontchineseschool',
@@ -846,9 +851,16 @@ export const content = {
       ],
       resourcesTitle: 'Current year resources',
       resourcesNote:
-        'Rules and registration materials for the 2025–2026 school year will be posted here when available. Questions? Email the Academic Contest coordinator.',
-      rulesLabel: 'Contest rules (coming soon)',
-      registerLabel: 'Register for the contest (coming soon)',
+        'Students sign up for the internal contest through the FCS Academic Contest website. Create an account, then choose up to three events, making sure their time slots and age groups don’t conflict. The rules page lists the events and age groups. Questions? Email the Academic Contest coordinator.',
+      keyDatesTitle: '2026–2027 key dates',
+      keyDates: [
+        { date: 'Sat, Oct 10, 2026', label: 'Online sign-up opens' },
+        { date: 'Sat, Nov 7, 2026', label: 'Sign-up deadline — late entries are not accepted' },
+        { date: 'Sat, Dec 19, 2026', label: 'Academic Contest Day' },
+      ],
+      rulesLabel: 'Contest schedule & rules (Chinese)',
+      registerLabel: 'FCS Academic Contest online sign-up / login',
+      signupGuideLabel: 'How to sign up (step-by-step guide)',
       contactLabel: 'Email ac@fremontchineseschool.org',
     },
     donate: {
@@ -1677,9 +1689,16 @@ export const content = {
       ],
       resourcesTitle: '本學年相關資料',
       resourcesNote:
-        '2025–2026 學年的比賽規則及報名資料將於公布後登載於此。如有疑問，歡迎來信聯絡學術比賽負責人。',
-      rulesLabel: '比賽規則（即將公布）',
-      registerLabel: '學術比賽報名（即將開放）',
+        '校內學術比賽一律透過本校學術比賽網站報名。請先註冊帳號，再選填參賽項目（每位學生限報三項），並確認各項目的比賽時段及年齡分組沒有衝突。比賽項目及年齡分組請參閱賽程及規定頁面。如有疑問，歡迎來信聯絡學術比賽負責人。',
+      keyDatesTitle: '2026–2027 學年重要日期',
+      keyDates: [
+        { date: '2026 年 10 月 10 日（六）', label: '網路報名開始' },
+        { date: '2026 年 11 月 7 日（六）', label: '報名截止，逾時不予受理' },
+        { date: '2026 年 12 月 19 日（六）', label: '學術比賽日' },
+      ],
+      rulesLabel: '校內學術比賽賽程及規定',
+      registerLabel: '校內學術比賽網站報名／登入',
+      signupGuideLabel: '學術比賽網站登入流程',
       contactLabel: '聯絡 ac@fremontchineseschool.org',
     },
     donate: {
