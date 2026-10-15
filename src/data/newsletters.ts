@@ -106,7 +106,7 @@ export type IssueSection =
       kind: "prose";
       blocks: Block[];
       numbered?: boolean;
-      /** e.g. "Warmly, Angela — Principal" — rendered in a lighter style. */
+      /** e.g. "Warmly,\nAngela\nPrincipal" — rendered in a lighter style; `\n` breaks the line. */
       signoff?: Localized;
     })
   /** A highlighted block with an optional button — volunteer calls, donations. */
@@ -314,8 +314,8 @@ export const issues: NewsletterIssue[] = [
           },
         ],
         signoff: {
-          en: "Warmly, Angela, Principal, Fremont Chinese School",
-          zh: "謹上　夏芷筠　費利蒙中文學校校長",
+          en: "Warmly,\nAngela\nPrincipal, Fremont Chinese School",
+          zh: "謹上\n夏芷筠\n費利蒙中文學校校長",
         },
       },
       {

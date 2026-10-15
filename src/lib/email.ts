@@ -11,9 +11,10 @@
 //     the site's Noto Serif TC / Inter do not load in mail clients.
 //  5. Buttons are <a> styled inline, not <button>.
 //  6. Absolute image URLs. Relative paths do not resolve in a mail client.
-//  7. Both languages stacked — Chinese then English — with "skip to English"
-//     jump links. Outlook desktop ignores in-mail anchors; that is a known,
-//     accepted gap, not a bug. Never hide a language with CSS.
+//  7. Both languages stacked — Chinese then English — within each section.
+//     No "skip to English" jump links: in-mail anchors work unreliably
+//     (Gmail/Outlook) and the principal dropped them (2026-10-15). Never hide
+//     a language with CSS.
 //  8. Colours are the site's Jade & Gold tokens, hardcoded because email
 //     cannot read CSS variables. Gold is a FILL; text on gold is ink
 //     (#221F1A), never white — white on #D8A832 fails contrast.
@@ -128,11 +129,8 @@ function ctaButton(label: string, href: string): string {
   return `<table role="presentation" cellpadding="0" cellspacing="0" style="margin:10px auto 4px;"><tr><td align="center" bgcolor="${C.gold}" style="border-radius:999px;"><a href="${abs(href)}" style="display:inline-block;padding:10px 22px;font-family:Arial,sans-serif;font-size:14px;font-weight:bold;color:${C.ink};text-decoration:none;">${label}</a></td></tr></table>`;
 }
 
-function heading(title: string, anchor?: string): string {
-  const skip = anchor
-    ? `<div style="font-size:11px;text-align:center;margin-bottom:8px;"><a href="#${anchor}" style="color:${C.jadeDeep};">跳到英文 Skip to English ↓</a></div>`
-    : "";
-  return `<h2 style="color:${C.jadeDeep};font-size:16px;text-align:center;border-bottom:2px solid ${C.jade};padding-bottom:6px;margin:28px 0 14px;">${title}</h2>${skip}`;
+function heading(title: string): string {
+  return `<h2 style="color:${C.jadeDeep};font-size:16px;text-align:center;border-bottom:2px solid ${C.jade};padding-bottom:6px;margin:28px 0 14px;">${title}</h2>`;
 }
 
 function row(inner: string, align = "left"): string {
@@ -141,7 +139,6 @@ function row(inner: string, align = "left"): string {
 
 function sectionHtml(section: IssueSection, i: number): string {
   const title = `${section.title.zh} / ${section.title.en}`;
-  const anchor = `sec${i}-en`;
 
   if (section.kind === "sponsors") {
     const cells = section.logos
@@ -176,7 +173,7 @@ function sectionHtml(section: IssueSection, i: number): string {
   const en = blocksHtml(section.blocks, "en", numbered);
   const signoff =
     section.kind === "prose" && section.signoff
-      ? { zh: `<p style="${P}">${inlineEmail(section.signoff.zh)}</p>`, en: `<p style="${P}">${inlineEmail(section.signoff.en)}</p>` }
+      ? { zh: `<p style="${P}">${inlineEmail(section.signoff.zh).replace(/\n/g, "<br>")}</p>`, en: `<p style="${P}">${inlineEmail(section.signoff.en).replace(/\n/g, "<br>")}</p>` }
       : { zh: "", en: "" };
   const cta =
     section.kind === "callout" && section.cta
@@ -184,15 +181,15 @@ function sectionHtml(section: IssueSection, i: number): string {
       : "";
 
   const body =
-    zh + signoff.zh + `<div id="${anchor}" style="margin-top:14px;">` + en + signoff.en + "</div>" + linksRow(section) + cta;
+    zh + signoff.zh + `<div style="margin-top:14px;">` + en + signoff.en + "</div>" + linksRow(section) + cta;
 
   if (section.kind === "callout") {
     return row(
-      heading(title, anchor) +
+      heading(title) +
         `<table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="background-color:${C.goldTint};border-left:4px solid ${C.gold};"><tr><td style="padding:14px 16px;font-family:${FONT};">${body}</td></tr></table>`,
     );
   }
-  return row(heading(title, anchor) + body);
+  return row(heading(title) + body);
 }
 
 /** Format an ISO date as the school writes it in the subject line: M/D/YYYY. */
@@ -214,8 +211,7 @@ export function renderIssueEmail(issue: NewsletterIssue): string {
   const masthead = row(
     `<a href="${SITE}/"><img src="${SITE}/images/logo.png" width="260" alt="Fremont Chinese School 費利蒙中文學校" style="display:block;width:100%;max-width:260px;height:auto;border:0;margin:0 auto 4px;"></a>
      <div style="font-size:15px;font-weight:bold;color:${C.jadeDeep};margin-top:6px;">FCS eNews ${displayDate(issue.date)}</div>
-     <div style="font-size:12px;margin-top:8px;"><a href="${issueUrl}" style="color:${C.jadeDeep};text-decoration:underline;">在網頁上閱讀 / Read on the web</a></div>
-     <div style="font-size:12px;margin-top:6px;"><a href="#sec0-en" style="color:${C.jadeDeep};text-decoration:underline;">Skip to English ↓</a></div>`,
+     <div style="font-size:12px;margin-top:8px;"><a href="${issueUrl}" style="color:${C.jadeDeep};text-decoration:underline;">在網頁上閱讀 / Read on the web</a></div>`,
     "center",
   );
 

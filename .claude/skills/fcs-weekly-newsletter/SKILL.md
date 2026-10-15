@@ -26,8 +26,8 @@ generated from it, so they cannot drift.
 | **Email** | `/enews-email/<token>.html` — a preview page with the subject line and send steps, wrapping the real email in an iframe. Stays at this same `<token>` URL even after the issue publishes (see `emailToken` in `newsletters.ts`) — unlike the web page, it does NOT move to a dated URL | generated |
 
 The email is **not** hand-filled any more. `src/lib/email.ts` renders it from the
-same issue data — table layout, inline styles, both languages stacked, skip-to-
-English anchors, absolute image URLs. Do not hand-write email HTML, and do not
+same issue data — table layout, inline styles, both languages stacked per
+section, absolute image URLs. Do not hand-write email HTML, and do not
 edit the generated files; fix the data or the renderer.
 
 **The email is sent after publishing, same as the web page** — the "Read on the

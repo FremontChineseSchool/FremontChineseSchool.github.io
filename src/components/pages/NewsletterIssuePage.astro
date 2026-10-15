@@ -209,7 +209,7 @@ function subheadNumbers(blocks: Block[]): Map<number, number> {
             )); })()}
 
             {section.kind === "prose" && section.signoff && (
-              <p class="mt-4 text-sm italic" style="color: var(--color-fcs-muted);">
+              <p class="mt-4 text-sm italic whitespace-pre-line" style="color: var(--color-fcs-muted);">
                 {section.signoff[lang]}
               </p>
             )}
