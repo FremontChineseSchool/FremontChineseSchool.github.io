@@ -281,7 +281,7 @@ export const issues: NewsletterIssue[] = [
       en: "Thank you for a fantastic Food Festival, with triple last year's participation, plus Academic Contest sign-up news and the AC Parent Briefing this Saturday, 10/17.",
       zh: "感謝大家參與美食園遊會，參與人數是去年的三倍！另有學術比賽報名消息，以及本週六（10/17）的高中中文學分班家長說明會。",
     },
-    draft: "743ea3",
+    emailToken: "743ea3",
     sections: [
       {
         kind: "prose",
