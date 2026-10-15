@@ -37,15 +37,14 @@ const C = {
 
 const FONT = "Arial,'PingFang TC','Microsoft JhengHei',sans-serif";
 
-/** Evergreen email-only content. Not in the issue data because it never
- *  changes, and not on the website because the footer already carries it. */
-const FOLLOW_US = {
-  title: "追蹤我們，探索新網站 / Follow Us & Explore Our New Website",
-  zh: "想看更多校園活動花絮、精彩瞬間嗎？追蹤費利蒙中文學校的社群媒體，第一時間掌握最新消息，也歡迎分享給親朋好友！",
-  en: "Want more behind-the-scenes moments and event highlights? Follow Fremont Chinese School on social media for the latest news, and don't forget to share with friends and family!",
-};
-const WASC =
-  "費利蒙中文學校高中中文學分班：獲得西部學校與學院協會 (WASC) 學校認證委員會認證。";
+/** Evergreen email-only content: social icons. Not in the issue data because
+ *  it never changes, and not on the website because the footer already
+ *  carries it. Icons only, no heading or blurb — the principal's call
+ *  (2026-10-13). PNG, not SVG: Gmail does not render SVG images. */
+const SOCIAL = [
+  { name: "Facebook", href: "https://facebook.com/fremontchineseschool", icon: "/images/social/facebook.png" },
+  { name: "Instagram", href: "https://www.instagram.com/fremontchineseschool/", icon: "/images/social/instagram.png" },
+];
 
 function esc(s: string): string {
   return s
@@ -221,18 +220,17 @@ export function renderIssueEmail(issue: NewsletterIssue): string {
   );
 
   const followUs = row(
-    heading(FOLLOW_US.title) +
-      `<p style="${P}">${FOLLOW_US.zh}</p><p style="${P}">${FOLLOW_US.en}</p>
-       <div style="font-size:14px;line-height:1.7;">
-         <a href="https://facebook.com/fremontchineseschool" style="color:${C.jadeDeep};">Facebook</a> &nbsp;·&nbsp;
-         <a href="https://www.instagram.com/fremontchineseschool/" style="color:${C.jadeDeep};">Instagram</a> &nbsp;·&nbsp;
-         <a href="${SITE}/" style="color:${C.jadeDeep};">fremontchineseschool.org</a>
-       </div>`,
+    `<div style="padding-top:28px;">` +
+    SOCIAL.map(
+      (n) =>
+        `<a href="${n.href}" style="display:inline-block;margin:0 6px;"><img src="${SITE}${n.icon}" width="40" height="40" alt="${n.name}" style="display:inline-block;width:40px;height:40px;border:0;"></a>`,
+    ).join("") +
+    `</div>`,
     "center",
   );
 
   const footer = row(
-    `<div style="font-size:12px;color:${C.inkSoft};padding-top:30px;">${WASC}<br><br>
+    `<div style="font-size:12px;color:${C.inkSoft};padding-top:30px;">
      費利蒙中文學校 / Fremont Chinese School<br>
      <a href="${SITE}/" style="color:${C.inkSoft};">fremontchineseschool.org</a><br>
      PO Box 1309, Fremont, CA 94538</div>`,

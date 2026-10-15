@@ -156,6 +156,12 @@ section rather than writing filler**. A quiet week is legitimately one `note`.
 
 - **Principal's note** (校長的話) — the week's theme or announcement.
 - **Calendar/schedule changes** — first day, no-school days, deadlines.
+  The **School Calendar** section's "Coming events" list shows **every event
+  within one month of the send date** (the principal's standing rule). Pull
+  them from the school's public Google Calendar — the same iCal feed
+  `src/data/calendar-feed.ts` reads — with Chinese names from
+  `src/data/calendar.ts`, and add any dated event the issue itself announces
+  that the calendar lacks. Drop events already past.
 - **Logistics** — parking, drop-off routes, room changes. Construction and
   room reassignments make this a recurring section, not a one-off.
 - **Volunteer needs** — open roles plus the sign-up link.
@@ -598,7 +604,7 @@ its own comment in the data), unrelated to this cleanup.
 Both artifacts render from the same sections, which is the point. For the rare
 exception, set `only: "email"` or `only: "web"` on the section.
 
-Evergreen email boilerplate is NOT that: the Follow Us block and the WASC line
+Evergreen email boilerplate is NOT that: the social icons
 live in `src/lib/email.ts` because they never change issue to issue. Don't add
 them to the data.
 

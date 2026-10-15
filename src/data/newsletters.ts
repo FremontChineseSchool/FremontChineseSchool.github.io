@@ -79,7 +79,7 @@ type SectionBase = {
    * section that genuinely belongs to only one.
    *
    * `"email"` — goes in the email, not on the page. `"web"` — the reverse.
-   * Evergreen email boilerplate (Follow Us, the WASC line) is NOT this: it
+   * Evergreen email boilerplate (the social icons) is NOT this: it
    * lives in src/lib/email.ts because it never changes issue to issue.
    */
   only?: "web" | "email";
@@ -248,6 +248,306 @@ export type NewsletterIssue = {
  * Footer.astro). The first real issue turns the whole section on.
  */
 export const issues: NewsletterIssue[] = [
+  {
+    // Composed from Angela's notes in conversation (2026-10-13). Draft token
+    // generated with `openssl rand -hex 3`.
+    //
+    // "AC parent meeting" = the Accredited Curriculum (學分班) credit-class
+    // parent meeting, per Vincent Kan's request in the screenshot Angela
+    // shared (attendance rules; B or above to advance) — not the Academic
+    // Contest. Date/time/room from the briefing flyer Angela supplied
+    // (Sat 10/17, 9:15–10:15 AM, IHS Room 218). Per Angela, the Week 8 recap
+    // and the briefing are separate top-level sections (not subheads of a
+    // "Week 9 School Update") so each section's zh/en sit together in the email.
+    //
+    // General Announcements: the NCACLS AP webinar (10/25) from promo text
+    // Angela pasted, plus 許笑濃's 2027 AP Chinese exam outline (three page
+    // images Angela supplied, combined into public/2027_AP_Chinese_Exam_
+    // Outline.pdf). t.ly/PbsS3 used exactly as given — it sits behind a
+    // Cloudflare bot check, so its destination could not be verified.
+    //
+    // Recurring sections carried forward from 10/9 on Angela's instruction:
+    // calendar, donate, gold sponsors (same two). Calendar lists every event
+    // in the school's public Google Calendar within one month of the send
+    // date (10/16–11/16, per Angela), plus the 10/17 AC briefing from its
+    // flyer (not in the Google Calendar).
+    // Classroom Use Policy and Join Our Volunteer Team not requested this week.
+    // Social links: email gets them from src/lib/email.ts, web from the footer.
+    date: "2026-10-16",
+    label: { en: "October 16, 2026", zh: "2026年10月16日" },
+    summary: {
+      en: "Thank you for a fantastic Food Festival — triple last year's participation — plus Academic Contest sign-up news and the AC Parent Briefing this Saturday, 10/17.",
+      zh: "感謝大家參與美食園遊會，參與人數是去年的三倍！另有學術比賽報名消息，以及本週六（10/17）的高中中文學分班家長說明會。",
+    },
+    draft: "743ea3",
+    sections: [
+      {
+        kind: "prose",
+        title: { en: "A Note from the Principal", zh: "校長的話" },
+        blocks: [
+          {
+            block: "prose",
+            text: { en: "Dear FCS Families,", zh: "各位家長好：" },
+          },
+          {
+            block: "prose",
+            text: {
+              en: "What a Food Festival! Thank you to everyone who came out last Saturday — kids and adults alike had so much fun, and it was wonderful to see our whole community together. You'll find a recap and photos below.",
+              zh: "這次的美食園遊會真是太成功了！感謝上週六所有到場支持的朋友，大人小孩都玩得非常開心，看到整個 FCS 大家庭齊聚一堂，真的很感動。活動回顧與照片請見下方。",
+            },
+          },
+          {
+            block: "prose",
+            text: {
+              en: "Looking ahead, Academic Contest sign-ups are coming up soon! Thank you in advance to everyone who responded to our initial survey — your feedback has been a big help as we plan. Please keep an eye on your inbox: we'll send out an official sign-up email shortly.",
+              zh: "接下來，學術比賽（Academic Contest）即將開放報名！先感謝所有填寫初步問卷的家長，您的回饋對我們的籌備幫助很大。請留意您的信箱，我們很快就會寄出正式的報名通知。",
+            },
+          },
+          {
+            block: "prose",
+            text: {
+              en: "We'll also be holding a parent briefing this Saturday, 10/17, for families of our AC (credit class) students — please see the details further down in this newsletter.",
+              zh: "此外，本週六（10/17）我們將為學分班（AC）學生家長舉行家長說明會，詳情請見本期下方說明。",
+            },
+          },
+        ],
+        signoff: {
+          en: "Warmly, Angela — Principal, Fremont Chinese School",
+          zh: "謹上　夏芷筠　費利蒙中文學校校長",
+        },
+      },
+      {
+        kind: "prose",
+        title: { en: "Week 8 Recap: Food Festival", zh: "第八週回顧：美食園遊會" },
+        blocks: [
+          {
+            block: "image",
+            src: "/images/news/enews-2026-10-16-food-festival-collage.jpg",
+            alt: {
+              en: "Photo collage from the FCS Food Festival: volunteers celebrating with the day's proceeds, kids playing ring toss and carnival games, class booths serving boba tea, noodles, and cotton candy, and students at a snack and prize stand.",
+              zh: "費利蒙中文學校美食園遊會照片集錦：志工們開心展示義賣所得、孩子們玩套圈圈等遊戲、各班攤位供應珍珠奶茶、麵線與棉花糖，以及同學們在零食與獎品攤位前的身影。",
+            },
+          },
+          {
+            block: "prose",
+            text: {
+              en: "Thank you to every class, family, and volunteer who took part! Participation this year was **3 times** last year's, and together our classes raised thousands of dollars. [See the results by class](https://docs.google.com/spreadsheets/d/1xAovGpUbWEt7fn1SUvb72Np8KWqXKiqudI8NqqAOs0s/edit).",
+              zh: "感謝所有參與的班級、家庭與志工！今年的參與人數是去年的**三倍**，各班合計募得數千美元。[查看各班成果](https://docs.google.com/spreadsheets/d/1xAovGpUbWEt7fn1SUvb72Np8KWqXKiqudI8NqqAOs0s/edit)。",
+            },
+          },
+          {
+            block: "prose",
+            text: {
+              en: "[More photos here](https://photos.app.goo.gl/h8rNLjSfJjV3sAhs7).",
+              zh: "[更多照片請見連結](https://photos.app.goo.gl/h8rNLjSfJjV3sAhs7)。",
+            },
+          },
+        ],
+      },
+      {
+        kind: "prose",
+        title: { en: "AC Parent Briefing", zh: "高中中文學分班家長說明會" },
+        blocks: [
+          {
+            block: "image",
+            src: "/images/news/enews-2026-10-16-ac-parent-briefing.jpg",
+            alt: {
+              en: "Flyer for the High School Chinese Accredited Curriculum (AC) Parent Briefing, with the agenda, date, time, and room.",
+              zh: "高中中文學分班家長說明會宣傳單，列出議程、日期、時間與教室。",
+            },
+            caption: {
+              en: "Saturday, 10/17/2026, 9:15–10:15 AM, Irvington High School Room 218. For parents of students currently enrolled in high school AC classes only. Agenda: what the AC class is, why FCS AC, enrollment qualifications, the FCS AC placement test, and AC class policy. Questions: principal@fremontchineseschool.org.",
+              zh: "2026年10月17日（六）上午9:15–10:15，Irvington High School 218 教室。僅限目前就讀高中學分班學生之家長參加。議程：認識學分班、為何選擇 FCS 學分班、選課資格、FCS 學分班分班考試，以及學分班規定。洽詢：principal@fremontchineseschool.org。",
+            },
+          },
+          {
+            block: "prose",
+            text: {
+              en: "This Saturday, we'll hold a briefing for parents of students currently enrolled in our high school Accredited Curriculum (AC) classes. We'll go over AC class policies — including attendance rules and the requirement of a **B or above** to advance to the next level — along with enrollment qualifications and the AC placement test.",
+              zh: "本週六將為目前就讀高中中文學分班（AC）學生的家長舉行說明會，向家長說明學分班規定（包括出缺席規定，以及成績須達 **B 以上**才能升上下一級），並介紹選課資格與學分班分班考試。",
+            },
+          },
+          {
+            block: "list",
+            items: [
+              { en: "**When:** Saturday, 10/17, 9:15–10:15 AM", zh: "**時間：**10月17日（六）上午9:15–10:15" },
+              { en: "**Where:** Irvington High School, Room 218", zh: "**地點：**Irvington High School 218 教室" },
+            ],
+          },
+          {
+            block: "prose",
+            text: {
+              en: "AC policies and forms are also available on our [AC Resources](/ac-resources) page. Questions? Email [principal@fremontchineseschool.org](mailto:principal@fremontchineseschool.org).",
+              zh: "學分班規章與相關表格亦可於[學分班資源](/zh/ac-resources)頁面查閱。如有疑問，請來信 [principal@fremontchineseschool.org](mailto:principal@fremontchineseschool.org)。",
+            },
+          },
+        ],
+      },
+      {
+        kind: "prose",
+        title: {
+          en: "School Calendar 2026–2027",
+          zh: "學校行事曆 2026–2027",
+        },
+        blocks: [
+          {
+            block: "prose",
+            text: { en: "Coming event(s):", zh: "近期活動：" },
+          },
+          {
+            block: "list",
+            items: [
+              {
+                en: "**10/17/2026** — AC Parent Briefing (9:15–10:15 AM, Room 218)",
+                zh: "**10/17/2026** — 高中中文學分班家長說明會（上午9:15–10:15，218 教室）",
+              },
+              {
+                en: "**10/24/2026** — All Parent Assembly",
+                zh: "**10/24/2026** — 全校家長大會",
+              },
+              {
+                en: "**10/31/2026** — Halloween Event",
+                zh: "**10/31/2026** — 萬聖節活動",
+              },
+              {
+                en: "**11/7/2026** — Academic Contest sign-up ends; AC Makeup Class 1; Staff Meeting",
+                zh: "**11/7/2026** — 學術比賽報名截止、學分班補課一、教職員會議",
+              },
+              {
+                en: "**11/14/2026** — Fundraising Food Festival",
+                zh: "**11/14/2026** — 募款小吃義賣",
+              },
+            ],
+          },
+        ],
+        links: [
+          {
+            label: { en: "Download calendar (Chinese)", zh: "下載行事曆（中文版）" },
+            href: "https://drive.google.com/file/d/1kUl_nhpdAC0WLE0r6smb2fSjDUzRmSdX/view",
+          },
+          {
+            label: { en: "Download calendar (English)", zh: "下載行事曆（英文版）" },
+            href: "https://drive.google.com/file/d/1mHm8B4-LnNZkqqOY8qMvG7OReWaconzM/view",
+          },
+        ],
+      },
+      {
+        kind: "prose",
+        title: { en: "General Announcements", zh: "其他公告" },
+        numbered: true,
+        blocks: [
+          {
+            block: "subhead",
+            text: {
+              en: "Online Talk: Teaching AP Chinese Under the 2027 Exam Changes",
+              zh: "線上講座：AP新變革下 中文學校教學的策略與實踐",
+            },
+          },
+          {
+            block: "prose",
+            text: {
+              en: "許笑濃, founding president of the National Council of Associations of Chinese Language Schools (全美中文學校聯合總會), hosts an online talk on teaching strategies for the 2027 AP Chinese exam changes: **Sunday, 10/25, 4 PM Pacific** (6 PM Central, 7 PM Eastern). [Register here](https://t.ly/PbsS3).",
+              zh: "全美中文學校聯合總會創會總會長許笑濃主講線上講座，聚焦2027年AP中文考試新變革下的教學策略：**10/25（週日）美西 4pm**（美中 6pm，美東 7pm）。[點此報名](https://t.ly/PbsS3)。",
+            },
+          },
+          {
+            block: "subhead",
+            text: {
+              en: "2027 AP Chinese Exam: Key Changes",
+              zh: "2027年AP中文考試重點大綱",
+            },
+          },
+          {
+            block: "prose",
+            text: {
+              en: "許笑濃 has also put together an outline of what's changing, based on College Board's AP Central (dated 8/7/2026). Highlights:",
+              zh: "許笑濃總編亦依據 College Board AP Central 官方公告與課綱，整理了2027年AP中文考試重點大綱（8/7/2026）。重點如下：",
+            },
+          },
+          {
+            block: "list",
+            items: [
+              {
+                en: "**Fully digital:** the exam is taken in College Board's Bluebook app; students need wired headphones. Listening audio plays only once.",
+                zh: "**全面數位化：**考試全面透過 Bluebook 應用程式作答，考生須配戴有線耳麥；聽力音檔僅播放一次。",
+              },
+              {
+                en: "**New order, shorter exam:** free response (Section I) now comes first, then multiple choice (Section II) — about 1 hr 45 min to 2 hrs in total, down from 2 hrs 15 min.",
+                zh: "**順序調整、時間縮短：**改為先完成自由作答（Section I），再進行選擇題（Section II），全程約1小時45分鐘至2小時，比舊制的2小時15分鐘略短。",
+              },
+              {
+                en: "**New Course Project:** replaces the cultural presentation and simulated conversation. Students research an official topic (released each January — **music** for 2027), then give a Project Presentation (20%) and answer four recorded Project Q&A questions (15%).",
+                zh: "**新制 Course Project：**取代舊制的臨場文化簡報與模擬對話。學生依每年1月公布的研究主題（2027年為**音樂**）準備，考試時進行專題簡報（Project Presentation，佔20%）並即席回答4道預錄提問（Project Q&A，佔15%）。",
+              },
+              {
+                en: "**PPR due April 30:** students submit a Personalized Project Reference outline through AP Digital Portfolio, to refer to during the presentation.",
+                zh: "**PPR 4月30日前繳交：**考生須透過 AP Digital Portfolio 繳交「個人化專題大綱」（PPR），作為簡報時的參考依據。",
+              },
+              {
+                en: "**AI rules:** AI may help with research, but the presentation and Q&A must be the student's own work.",
+                zh: "**AI 使用規範：**研究階段可使用 AI 協助，但正式的簡報與問答內容必須由學生獨立完成。",
+              },
+            ],
+          },
+          {
+            block: "prose",
+            text: {
+              en: "[Read the full outline (PDF, in Chinese)](/2027_AP_Chinese_Exam_Outline.pdf) — including the six themes, scoring rubric, and PPR planning table.",
+              zh: "[下載完整大綱（PDF）](/2027_AP_Chinese_Exam_Outline.pdf)，內含六大主題、評分標準表與 PPR 規劃參考表。",
+            },
+          },
+        ],
+      },
+      {
+        kind: "callout",
+        title: {
+          en: "Donate & Double Your Contribution",
+          zh: "捐款與雙倍貢獻",
+        },
+        blocks: [
+          {
+            block: "prose",
+            text: {
+              en: "FCS is a non-profit 501(c) organization. Donations are tax-deductible (IRS tax ID: **94-2978949**) and help Fremont Chinese School continue to operate, teach Chinese courses, and pass on Chinese culture.",
+              zh: "費利蒙中文學校是一家非營利性 501(c) 組織。您可以透過向費利蒙中文學校捐款來享受稅務抵減（IRS tax ID: **94-2978949**）。您的捐款將幫助本校繼續運營、教授中文課程並傳承中華文化。",
+            },
+          },
+          {
+            block: "prose",
+            text: {
+              en: "**Double your contribution:** thank you for volunteering at school! Your employer may offer volunteer cash rewards — please consider donating those rewards to Fremont Chinese School. [Instructions and an example](https://docs.google.com/presentation/d/1Op2TlZ4wFSz7epqziWHmEauqEa5FnqRJ5yJofqQhpqs/edit).",
+              zh: "**雙倍貢獻：**感謝您在學校擔任義工！您的雇主也許提供義工獎勵金，歡迎將這筆獎勵金捐助給學校。[捐款方式說明與範例](https://docs.google.com/presentation/d/1Op2TlZ4wFSz7epqziWHmEauqEa5FnqRJ5yJofqQhpqs/edit)。",
+            },
+          },
+        ],
+        cta: {
+          label: { en: "Donate", zh: "前往捐款" },
+          href: "/donate",
+        },
+      },
+      {
+        kind: "sponsors",
+        title: {
+          en: "2026 Yearbook Gold Sponsors",
+          zh: "2026 年刊金牌贊助商",
+        },
+        logos: [
+          {
+            name: "IvyMAX 飛達教育",
+            image: "/images/sponsors/ivymax.jpg",
+            href: "https://ivymax.com",
+          },
+          {
+            name: "Fremont United Auto Service Inc. 聯合汽車修理中心",
+            image: "/images/sponsors/fremont-united-auto.jpg",
+            // href omitted: fremontunitedautoservice.com had no DNS records
+            // on 2026-10-13 (domain registered, site down; Angela confirmed
+            // it's down). Logo runs unlinked; restore the href once it resolves.
+          },
+        ],
+      },
+    ],
+  },
   {
     // Drafted from the .eml Angela sent via MailKing (2026-10-07, 3:11 AM
     // PDT). Draft token generated with `openssl rand -hex 3`.
@@ -1552,7 +1852,7 @@ export const issues: NewsletterIssue[] = [
     // - Volunteer-team photo (Join Our Volunteer Team) — byte-identical
     //   (verified by hash) to enews-2026-08-14-volunteer-team.jpg, reused.
     // The masthead logo and the WASC seal are evergreen chrome, not issue
-    // content (WASC line already lives in src/lib/email.ts).
+    // content (the WASC line was email.ts boilerplate at the time; since removed).
     // The two gold-sponsor logos are the recurring ones already committed
     // under public/images/sponsors/ — hrefs re-verified against this week's
     // sent HTML (ivymax.com, fremontunitedautoservice.com), unchanged.
@@ -2127,7 +2427,7 @@ export const issues: NewsletterIssue[] = [
     // - Volunteer-team photo (Join Our Volunteer Team) — byte-identical
     //   (verified by hash) to enews-2026-08-14-volunteer-team.jpg, reused.
     // The masthead logo and the WASC seal are evergreen chrome, not issue
-    // content (WASC line already lives in src/lib/email.ts).
+    // content (the WASC line was email.ts boilerplate at the time; since removed).
     // The two gold-sponsor logos are the recurring ones already committed
     // under public/images/sponsors/ — hrefs re-verified against this week's
     // sent HTML (ivymax.com, fremontunitedautoservice.com), unchanged.
