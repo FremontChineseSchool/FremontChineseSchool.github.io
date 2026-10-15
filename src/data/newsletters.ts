@@ -270,7 +270,8 @@ export const issues: NewsletterIssue[] = [
     // calendar, donate, gold sponsors (same two). Calendar lists every event
     // in the school's public Google Calendar within one month of the send
     // date (10/16–11/16, per Angela), plus the 10/17 AC briefing from its
-    // flyer (not in the Google Calendar).
+    // flyer (not in the Google Calendar) — minus 11/7 and 11/14, which Angela
+    // asked to drop from this issue.
     // Classroom Use Policy and Join Our Volunteer Team not requested this week.
     // Social links: email gets them from src/lib/email.ts, web from the footer.
     date: "2026-10-16",
@@ -409,14 +410,6 @@ export const issues: NewsletterIssue[] = [
                 en: "**10/31/2026** — Halloween Event",
                 zh: "**10/31/2026** — 萬聖節活動",
               },
-              {
-                en: "**11/7/2026** — Academic Contest sign-up ends; AC Makeup Class 1; Staff Meeting",
-                zh: "**11/7/2026** — 學術比賽報名截止、學分班補課一、教職員會議",
-              },
-              {
-                en: "**11/14/2026** — Fundraising Food Festival",
-                zh: "**11/14/2026** — 募款小吃義賣",
-              },
             ],
           },
         ],
@@ -446,8 +439,8 @@ export const issues: NewsletterIssue[] = [
           {
             block: "prose",
             text: {
-              en: "許笑濃, founding president of the National Council of Associations of Chinese Language Schools (全美中文學校聯合總會), hosts an online talk on teaching strategies for the 2027 AP Chinese exam changes: **Sunday, 10/25, 4 PM Pacific** (6 PM Central, 7 PM Eastern). [Register here](https://t.ly/PbsS3).",
-              zh: "全美中文學校聯合總會創會總會長許笑濃主講線上講座，聚焦2027年AP中文考試新變革下的教學策略：**10/25（週日）美西 4pm**（美中 6pm，美東 7pm）。[點此報名](https://t.ly/PbsS3)。",
+              en: "Online talk on the 2027 AP Chinese exam changes, led by 許笑濃 of the National Council of Associations of Chinese Language Schools: **Sunday, 10/25, 4 PM Pacific**. [Register here](https://t.ly/PbsS3).",
+              zh: "全美中文學校聯合總會許笑濃主講AP中文新變革線上講座：**10/25（週日）美西 4pm**。[點此報名](https://t.ly/PbsS3)。",
             },
           },
           {
