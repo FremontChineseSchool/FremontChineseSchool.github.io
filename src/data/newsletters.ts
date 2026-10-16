@@ -357,10 +357,6 @@ export const issues: NewsletterIssue[] = [
               en: "Flyer for the High School Chinese Accredited Curriculum (AC) Parent Briefing, with the agenda, date, time, and room.",
               zh: "高中中文學分班家長說明會宣傳單，列出議程、日期、時間與教室。",
             },
-            caption: {
-              en: "Saturday, 10/17/2026, 9:15–10:15 AM, Irvington High School Room 218. For parents of students currently enrolled in high school AC classes only. Agenda: what the AC class is, why FCS AC, enrollment qualifications, the FCS AC placement test, and AC class policy. Questions: principal@fremontchineseschool.org.",
-              zh: "2026年10月17日（六）上午9:15–10:15，Irvington High School 218 教室。僅限目前就讀高中學分班學生之家長參加。議程：認識學分班、為何選擇 FCS 學分班、選課資格、FCS 學分班分班考試，以及學分班規定。洽詢：principal@fremontchineseschool.org。",
-            },
           },
           {
             block: "prose",

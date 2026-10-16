@@ -28,6 +28,8 @@ const TEST_TO = 'angelala24@gmail.com';
 // 'https://fremontchineseschool.org/enews-email/9f3a1c.raw.html'.
 // Leave blank to test the latest published issue.
 const TEST_EMAIL_URL = '';
+// Display name on the From line (the address is still principal@).
+const SENDER_NAME = 'Angela Ha';
 
 const TZ = 'America/Los_Angeles';
 const SEND_WEEKDAY = 5;   // Friday (1 = Monday ... 7 = Sunday)
@@ -114,7 +116,7 @@ function send_(emailUrl, to, subject, webUrl, html) {
     to,
     subject,
     'This email is best viewed with images on.' + (webUrl ? ' Read it on the web: ' + webUrl : ''),
-    { htmlBody: body }
+    { htmlBody: body, name: SENDER_NAME }
   );
 }
 
