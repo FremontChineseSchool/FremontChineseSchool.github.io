@@ -161,7 +161,8 @@ section rather than writing filler**. A quiet week is legitimately one `note`.
   them from the school's public Google Calendar — the same iCal feed
   `src/data/calendar-feed.ts` reads — with Chinese names from
   `src/data/calendar.ts`, and add any dated event the issue itself announces
-  that the calendar lacks. Drop events already past.
+  that the calendar lacks. Drop events already past. The list's lead-in prose
+  is bolded: `{ en: "**Coming event(s):**", zh: "**近期活動：**" }`.
 - **Logistics** — parking, drop-off routes, room changes. Construction and
   room reassignments make this a recurring section, not a one-off.
 - **Volunteer needs** — open roles plus the sign-up link.

@@ -390,7 +390,7 @@ export const issues: NewsletterIssue[] = [
         blocks: [
           {
             block: "prose",
-            text: { en: "Coming event(s):", zh: "近期活動：" },
+            text: { en: "**Coming event(s):**", zh: "**近期活動：**" },
           },
           {
             block: "list",
@@ -692,7 +692,7 @@ export const issues: NewsletterIssue[] = [
         blocks: [
           {
             block: "prose",
-            text: { en: "Coming event(s):", zh: "近期活動：" },
+            text: { en: "**Coming event(s):**", zh: "**近期活動：**" },
           },
           {
             block: "list",
@@ -955,7 +955,7 @@ export const issues: NewsletterIssue[] = [
         blocks: [
           {
             block: "prose",
-            text: { en: "Coming event(s):", zh: "近期活動：" },
+            text: { en: "**Coming event(s):**", zh: "**近期活動：**" },
           },
           {
             block: "list",
@@ -1433,7 +1433,7 @@ export const issues: NewsletterIssue[] = [
         blocks: [
           {
             block: "prose",
-            text: { en: "Coming event(s):", zh: "近期活動：" },
+            text: { en: "**Coming event(s):**", zh: "**近期活動：**" },
           },
           {
             block: "list",
@@ -2004,7 +2004,7 @@ export const issues: NewsletterIssue[] = [
         blocks: [
           {
             block: "prose",
-            text: { en: "Coming event(s):", zh: "近期活動：" },
+            text: { en: "**Coming event(s):**", zh: "**近期活動：**" },
           },
           {
             block: "list",
@@ -2558,7 +2558,7 @@ export const issues: NewsletterIssue[] = [
         blocks: [
           {
             block: "prose",
-            text: { en: "Coming event(s):", zh: "近期活動：" },
+            text: { en: "**Coming event(s):**", zh: "**近期活動：**" },
           },
           {
             block: "list",
@@ -3026,7 +3026,7 @@ export const issues: NewsletterIssue[] = [
         blocks: [
           {
             block: "prose",
-            text: { en: "Coming event(s):", zh: "近期活動：" },
+            text: { en: "**Coming event(s):**", zh: "**近期活動：**" },
           },
           {
             block: "list",
@@ -3403,7 +3403,7 @@ export const issues: NewsletterIssue[] = [
         blocks: [
           {
             block: "prose",
-            text: { en: "Coming event(s):", zh: "近期活動：" },
+            text: { en: "**Coming event(s):**", zh: "**近期活動：**" },
           },
           {
             block: "list",
@@ -3734,7 +3734,7 @@ export const issues: NewsletterIssue[] = [
         blocks: [
           {
             block: "prose",
-            text: { en: "Coming event(s):", zh: "近期活動：" },
+            text: { en: "**Coming event(s):**", zh: "**近期活動：**" },
           },
           {
             block: "list",
@@ -4090,7 +4090,7 @@ export const issues: NewsletterIssue[] = [
         blocks: [
           {
             block: "prose",
-            text: { en: "Coming event(s):", zh: "近期活動：" },
+            text: { en: "**Coming event(s):**", zh: "**近期活動：**" },
           },
           {
             block: "list",
@@ -4475,7 +4475,7 @@ export const issues: NewsletterIssue[] = [
         blocks: [
           {
             block: "prose",
-            text: { en: "Coming event(s):", zh: "近期活動：" },
+            text: { en: "**Coming event(s):**", zh: "**近期活動：**" },
           },
           {
             block: "list",
