@@ -352,7 +352,7 @@ export const issues: NewsletterIssue[] = [
         blocks: [
           {
             block: "image",
-            src: "/images/news/enews-2026-10-16-ac-parent-briefing.jpg",
+            src: "/images/news/enews-2026-10-16-ac-parent-briefing-v2.jpg",
             alt: {
               en: "Flyer for the High School Chinese Accredited Curriculum (AC) Parent Briefing, with the agenda, date, time, and room.",
               zh: "高中中文學分班家長說明會宣傳單，列出議程、日期、時間與教室。",
@@ -375,8 +375,8 @@ export const issues: NewsletterIssue[] = [
           {
             block: "prose",
             text: {
-              en: "AC policies and forms are also available on our [AC Resources](/ac-resources) page. Questions? Email [principal@fremontchineseschool.org](mailto:principal@fremontchineseschool.org).",
-              zh: "學分班規章與相關表格亦可於[學分班資源](/zh/ac-resources)頁面查閱。如有疑問，請來信 [principal@fremontchineseschool.org](mailto:principal@fremontchineseschool.org)。",
+              en: "AC policies and forms are also available on our [AC Resources](/ac-resources) page. Questions? Email [ac_score@fremontchineseschool.org](mailto:ac_score@fremontchineseschool.org).",
+              zh: "學分班規章與相關表格亦可於[學分班資源](/zh/ac-resources)頁面查閱。如有疑問，請來信 [ac_score@fremontchineseschool.org](mailto:ac_score@fremontchineseschool.org)。",
             },
           },
         ],
