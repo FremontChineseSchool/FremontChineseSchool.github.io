@@ -249,6 +249,183 @@ export type NewsletterIssue = {
  */
 export const issues: NewsletterIssue[] = [
   {
+    // Composed from the draft Angela pasted in conversation (2026-10-19).
+    // Draft token generated with `openssl rand -hex 3`.
+    //
+    // All Parent Assembly time (11:10 AM–12:00 PM, corrected by Angela from
+    // her first answer) and room (218) confirmed by Angela on 2026-10-19. Halloween sign-up link is the
+    // "2026/10/31 FCS Halloween event volunteer signup" sheet (anyone with
+    // the link can edit), so the section is worded as a volunteer sign-up.
+    // The draft's issue-level heading ("第十週更新 / Week 10 Update") has no
+    // field in the data model and is omitted. No em dashes, per Angela.
+    //
+    // Calendar: 10/24 and 10/31 from her draft; 10/24 also carries the
+    // Academic Contest sign-up opening (moved to 10/24 in calendar.ts).
+    // Donate and gold sponsors carried forward (her standing request);
+    // Fremont United Auto logo still unlinked (site down as of 10/13).
+    date: "2026-10-23",
+    label: { en: "October 23, 2026", zh: "2026年10月23日" },
+    summary: {
+      en: "The All Parent Assembly is this Saturday, 10/24, Academic Contest sign-up opens the same day, and volunteers are needed for the 10/31 Halloween event.",
+      zh: "本週六（10/24）舉行全校家長大會，學術比賽同日開放報名；10/31 萬聖節活動誠徵家長志工。",
+    },
+    draft: "d8296a",
+    sections: [
+      {
+        kind: "prose",
+        title: { en: "A Note from the Principal", zh: "校長的話" },
+        blocks: [
+          { block: "prose", text: { en: "Dear FCS Families,", zh: "各位家長好：" } },
+          {
+            block: "prose",
+            text: {
+              en: "Hope everyone's had a great week so far! This Saturday, 10/24, is our All Parent Assembly, from 11:10 AM to 12:00 PM in the Parent Room (Room 218). It's a wonderful chance for us to connect in person, and we warmly invite every family to join. Details are below.",
+              zh: "希望大家這週都過得順利！本週六（10/24）將舉行全校家長大會，時間為上午 11:10 至中午 12:00，地點在 Irvington High School 家長室（Parent Room，218 教室）。這是學校與家長面對面交流的好機會，誠摯邀請每一位家長出席，詳情請見下方說明。",
+            },
+          },
+          {
+            block: "prose",
+            text: {
+              en: "Thank you as well to the parents who joined last Saturday's AC (Accredited Curriculum) Parent Briefing!",
+              zh: "也要感謝上週六出席高中中文學分班（AC）家長說明會的家長們！",
+            },
+          },
+          {
+            block: "prose",
+            text: {
+              en: "The official Academic Contest sign-up email will go out this Saturday, 10/24, so please keep an eye on your inbox.",
+              zh: "學術比賽（Academic Contest）的正式報名通知信將於本週六（10/24）寄出，請留意您的信箱。",
+            },
+          },
+          {
+            block: "prose",
+            text: {
+              en: "And our Halloween event (10/31) is just around the corner. Parents, please sign up using the link below!",
+              zh: "另外，萬聖節活動（10/31）也即將到來，歡迎家長踴躍報名，報名連結請見下方說明。",
+            },
+          },
+        ],
+        signoff: {
+          en: "Warmly,\nAngela\nPrincipal, Fremont Chinese School",
+          zh: "謹上\n夏芷筠\n費利蒙中文學校校長",
+        },
+      },
+      {
+        kind: "prose",
+        title: { en: "All Parent Assembly", zh: "全校家長大會" },
+        blocks: [
+          {
+            block: "prose",
+            text: {
+              en: "All FCS parents are warmly invited! We'll share school updates and news, and we look forward to connecting with you in person.",
+              zh: "誠摯邀請全校家長參加！我們將與大家分享學校近況與最新消息，也期待在現場與您面對面交流。",
+            },
+          },
+          {
+            block: "list",
+            items: [
+              { en: "**Date:** Saturday, October 24", zh: "**日期：**10月24日（六）" },
+              { en: "**Time:** 11:10 AM–12:00 PM", zh: "**時間：**上午 11:10–中午 12:00" },
+              {
+                en: "**Location:** Parent Room (Room 218), Irvington High School",
+                zh: "**地點：**Irvington High School 家長室（Parent Room，218 教室）",
+              },
+            ],
+          },
+          { block: "prose", text: { en: "We hope to see you Saturday!", zh: "期待週六見到大家！" } },
+        ],
+      },
+      {
+        kind: "prose",
+        title: { en: "Halloween Event Sign-up", zh: "萬聖節活動報名" },
+        blocks: [
+          {
+            block: "prose",
+            text: {
+              en: "Our Halloween event is happening Saturday, October 31! Parents, please [sign up here](https://docs.google.com/spreadsheets/d/1gHyMzDr1Df_6hcO85VOGnGJSN0D4SiX3uCh3SjdHduY/edit).",
+              zh: "萬聖節活動將於 10月31日（六）舉行！歡迎家長[點此報名](https://docs.google.com/spreadsheets/d/1gHyMzDr1Df_6hcO85VOGnGJSN0D4SiX3uCh3SjdHduY/edit)。",
+            },
+          },
+        ],
+      },
+      {
+        kind: "prose",
+        title: { en: "School Calendar 2026–2027", zh: "學校行事曆 2026–2027" },
+        blocks: [
+          { block: "prose", text: { en: "**Coming event(s):**", zh: "**近期活動：**" } },
+          {
+            block: "list",
+            items: [
+              {
+                en: "**10/24/2026**: All Parent Assembly (11:10 AM–12:00 PM, Parent Room, Room 218); Academic Contest sign-up opens",
+                zh: "**10/24/2026**：全校家長大會（上午 11:10–中午 12:00，家長室 218 教室）、學術比賽開放報名",
+              },
+              { en: "**10/31/2026**: Halloween Event", zh: "**10/31/2026**：萬聖節活動" },
+            ],
+          },
+        ],
+        links: [
+          {
+            label: { en: "Download calendar (Chinese)", zh: "下載行事曆（中文版）" },
+            href: "https://drive.google.com/file/d/1kUl_nhpdAC0WLE0r6smb2fSjDUzRmSdX/view",
+          },
+          {
+            label: { en: "Download calendar (English)", zh: "下載行事曆（英文版）" },
+            href: "https://drive.google.com/file/d/1mHm8B4-LnNZkqqOY8qMvG7OReWaconzM/view",
+          },
+        ],
+      },
+      {
+        kind: "callout",
+        title: {
+          en: "Donate & Double Your Contribution",
+          zh: "捐款與雙倍貢獻",
+        },
+        blocks: [
+          {
+            block: "prose",
+            text: {
+              en: "FCS is a non-profit 501(c) organization. Donations are tax-deductible (IRS tax ID: **94-2978949**) and help Fremont Chinese School continue to operate, teach Chinese courses, and pass on Chinese culture.",
+              zh: "費利蒙中文學校是一家非營利性 501(c) 組織。您可以透過向費利蒙中文學校捐款來享受稅務抵減（IRS tax ID: **94-2978949**）。您的捐款將幫助本校繼續運營、教授中文課程並傳承中華文化。",
+            },
+          },
+          {
+            block: "prose",
+            text: {
+              en: "**Double your contribution:** thank you for volunteering at school! Your employer may offer volunteer cash rewards, so please consider donating those rewards to Fremont Chinese School. [Instructions and an example](https://docs.google.com/presentation/d/1Op2TlZ4wFSz7epqziWHmEauqEa5FnqRJ5yJofqQhpqs/edit).",
+              zh: "**雙倍貢獻：**感謝您在學校擔任義工！您的雇主也許提供義工獎勵金，歡迎將這筆獎勵金捐助給學校。[捐款方式說明與範例](https://docs.google.com/presentation/d/1Op2TlZ4wFSz7epqziWHmEauqEa5FnqRJ5yJofqQhpqs/edit)。",
+            },
+          },
+        ],
+        cta: {
+          label: { en: "Donate", zh: "前往捐款" },
+          href: "/donate",
+        },
+      },
+      {
+        kind: "sponsors",
+        title: {
+          en: "2026 Yearbook Gold Sponsors",
+          zh: "2026 年刊金牌贊助商",
+        },
+        logos: [
+          {
+            name: "IvyMAX 飛達教育",
+            image: "/images/sponsors/ivymax.jpg",
+            href: "https://ivymax.com",
+          },
+          {
+            name: "Fremont United Auto Service Inc. 聯合汽車修理中心",
+            image: "/images/sponsors/fremont-united-auto.jpg",
+            // href omitted: fremontunitedautoservice.com had no DNS records
+            // on 2026-10-13 (domain registered, site down; Angela confirmed
+            // it's down). Logo runs unlinked; restore the href once it resolves.
+          },
+        ],
+      },
+    ],
+  },
+  {
     // Composed from Angela's notes in conversation (2026-10-13). Draft token
     // generated with `openssl rand -hex 3`.
     //
