@@ -28,6 +28,9 @@ export const links = {
   contestLogin: 'https://fcsapp.faypier.com/users/login',
   contestRules: 'https://fcsapp.faypier.com/users/rules',
   contestSignupGuide: 'https://drive.google.com/file/d/1_ChzQCTDuUgqQQSQ1NIIvr6FuIGM0q7B/view',
+  // ANCCS's own page for the regional contest (dates, rules, speech topics, read-aloud
+  // passages). Its URL is year-specific — update it each school year.
+  anccsContest: 'https://sites.google.com/anccs.org/2027-academy-contest',
   legacyEvents: 'https://fremontchineseschool.org/events',
   legacyNews: 'https://fremontchineseschool.org/index.php',
   facebook: 'https://facebook.com/fremontchineseschool',
@@ -796,6 +799,7 @@ export const content = {
         {
           name: 'ANCCS Competitions (北加州中文學校聯合會競賽)',
           body: 'FCS students participate in the Association of Northern California Chinese Schools competitions, including Analects interpretation, parent-child storytelling, and multimedia categories.',
+          route: 'academic-contest',
         },
         {
           name: 'Chinese Yo-Yo (扯鈴) Showcase',
@@ -849,7 +853,7 @@ export const content = {
           body: 'Written tests covering vocabulary, reading comprehension, and language skills, organized by level.',
         },
       ],
-      resourcesTitle: 'Current year resources',
+      resourcesTitle: 'FCS internal contest — 2026–27',
       resourcesNote:
         'Students sign up for the internal contest through the FCS Academic Contest website. Create an account, then choose up to three events, making sure their time slots and age groups don’t conflict. The rules page lists the events and age groups. Questions? Email the Academic Contest coordinator.',
       keyDatesTitle: '2026–2027 key dates',
@@ -862,6 +866,18 @@ export const content = {
       registerLabel: 'FCS Academic Contest online sign-up / login',
       signupGuideLabel: 'How to sign up (step-by-step guide)',
       contactLabel: 'Email ac@fremontchineseschool.org',
+      anccsTitle: 'ANCCS regional contest — 2027',
+      anccsBody:
+        'After our internal contest, FCS students go on to represent the school at the ANCCS (Association of Northern California Chinese Schools) Academic Contest. Students don’t register with ANCCS themselves — FCS registers and pays for its contestants as a member school. Each student may enter only one category.',
+      anccsKeyDatesTitle: 'Key dates',
+      anccsKeyDates: [
+        { date: 'Mon, Feb 8, 2027', label: 'ANCCS registration deadline (FCS registers on behalf of students)' },
+        { date: 'Sun, Mar 21, 2027', label: 'Contest day — check-in 1:00 pm, contest 1:30 pm · Lynbrook High School, 1280 Johnson Ave, San Jose' },
+        { date: 'Sat, Mar 27, 2027', label: 'Awards ceremony, 2:00 pm · Culture Center of TECO, 100 S. Milpitas Blvd, Milpitas' },
+      ],
+      anccsResourcesNote:
+        'The ANCCS contest site has this year’s guidelines and judging criteria, Mandarin and Cantonese speech topics, read-aloud passages (Zhuyin and Pinyin, plus CSL/CFL), sample tests, and practice recordings.',
+      anccsLinkLabel: 'ANCCS 2027 Academic Contest site — rules, topics & passages',
     },
     donate: {
       title: 'Support FCS',
@@ -1634,6 +1650,7 @@ export const content = {
         {
           name: 'ANCCS 競賽',
           body: '本校學生參加北加州中文學校聯合會（ANCCS）舉辦的論語朗誦、親子說故事及多媒體等各項比賽。',
+          route: 'academic-contest',
         },
         {
           name: '扯鈴成果展 Chinese Yo-Yo Showcase',
@@ -1687,7 +1704,7 @@ export const content = {
           body: '依程度分組的筆試，內容涵蓋詞彙、閱讀理解及語言能力。',
         },
       ],
-      resourcesTitle: '本學年相關資料',
+      resourcesTitle: '校內學術比賽 — 2026–27 學年',
       resourcesNote:
         '校內學術比賽一律透過本校學術比賽網站報名。請先註冊帳號，再選填參賽項目（每位學生限報三項），並確認各項目的比賽時段及年齡分組沒有衝突。比賽項目及年齡分組請參閱賽程及規定頁面。如有疑問，歡迎來信聯絡學術比賽負責人。',
       keyDatesTitle: '2026–2027 學年重要日期',
@@ -1700,6 +1717,18 @@ export const content = {
       registerLabel: '校內學術比賽網站報名／登入',
       signupGuideLabel: '學術比賽網站登入流程',
       contactLabel: '聯絡 ac@fremontchineseschool.org',
+      anccsTitle: 'ANCCS 北加州中文學校聯合會學術比賽 — 2027',
+      anccsBody:
+        '校內比賽結束後，本校學生將代表費利蒙中文學校參加 ANCCS（北加州中文學校聯合會）學術比賽。學生不需自行向 ANCCS 報名，由本校以會員學校身分統一報名、統一繳費。每名學生只限參加一項比賽。',
+      anccsKeyDatesTitle: '重要日期',
+      anccsKeyDates: [
+        { date: '2027 年 2 月 8 日（一）', label: 'ANCCS 報名截止（由本校統一報名）' },
+        { date: '2027 年 3 月 21 日（日）', label: '比賽日 — 下午 1:00 報到，1:30 開始比賽・Lynbrook 高中（1280 Johnson Ave, San Jose）' },
+        { date: '2027 年 3 月 27 日（六）', label: '頒獎典禮，下午 2:00・金山灣區華僑文教中心（100 S. Milpitas Blvd, Milpitas）' },
+      ],
+      anccsResourcesNote:
+        'ANCCS 比賽網站提供本年度比賽須知及評審細則、國粵語演講題目、朗讀稿（注音符號、漢語拼音及 CSL/CFL 版本）、試題及答案卷樣本，以及模擬比賽錄音。',
+      anccsLinkLabel: 'ANCCS 2027 學術比賽網站 — 比賽須知、題目及朗讀稿',
     },
     donate: {
       title: '支持本校',
