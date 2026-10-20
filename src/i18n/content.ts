@@ -858,7 +858,7 @@ export const content = {
         'Students sign up for the internal contest through the FCS Academic Contest website. Create an account, then choose up to three events, making sure their time slots and age groups don’t conflict. The rules page lists the events and age groups. Questions? Email the Academic Contest coordinator.',
       keyDatesTitle: '2026–2027 key dates',
       keyDates: [
-        { date: 'Sat, Oct 10, 2026', label: 'Online sign-up opens' },
+        { date: 'Sat, Oct 24, 2026', label: 'Online sign-up opens' },
         { date: 'Sat, Nov 7, 2026', label: 'Sign-up deadline — late entries are not accepted' },
         { date: 'Sat, Dec 19, 2026', label: 'Academic Contest Day' },
       ],
@@ -1709,7 +1709,7 @@ export const content = {
         '校內學術比賽一律透過本校學術比賽網站報名。請先註冊帳號，再選填參賽項目（每位學生限報三項），並確認各項目的比賽時段及年齡分組沒有衝突。比賽項目及年齡分組請參閱賽程及規定頁面。如有疑問，歡迎來信聯絡學術比賽負責人。',
       keyDatesTitle: '2026–2027 學年重要日期',
       keyDates: [
-        { date: '2026 年 10 月 10 日（六）', label: '網路報名開始' },
+        { date: '2026 年 10 月 24 日（六）', label: '網路報名開始' },
         { date: '2026 年 11 月 7 日（六）', label: '報名截止，逾時不予受理' },
         { date: '2026 年 12 月 19 日（六）', label: '學術比賽日' },
       ],

@@ -53,10 +53,12 @@ export const calendarEntries: CalendarEntry[] = [
   ]},
   { date: '2026-10-10', week: 8,    sem: 1, events: [
     { text: 'Street Food Festival', textZh: '小吃義賣', type: 'event' },
-    { text: 'Academic Contest Sign-up Starts', textZh: '學術比賽報名開始', type: 'ac' },
   ]},
   { date: '2026-10-17', week: 9,    sem: 1, events: [] },
-  { date: '2026-10-24', week: 10,   sem: 1, events: [{ text: 'All Parent Assembly', textZh: '家長大會', type: 'event' }] },
+  { date: '2026-10-24', week: 10,   sem: 1, events: [
+    { text: 'All Parent Assembly', textZh: '家長大會', type: 'event' },
+    { text: 'Academic Contest Sign-up Starts', textZh: '學術比賽報名開始', type: 'ac' },
+  ]},
   { date: '2026-10-31', week: 11,   sem: 1, events: [{ text: 'Halloween Event', textZh: '萬聖節活動', type: 'event' }] },
   { date: '2026-11-07', week: 12,   sem: 1, events: [
     { text: 'Academic Contest Sign-up Ends', textZh: '學術比賽報名截止', type: 'ac' },
