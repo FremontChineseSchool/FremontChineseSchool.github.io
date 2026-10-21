@@ -316,6 +316,30 @@ export const issues: NewsletterIssue[] = [
       },
       {
         kind: "prose",
+        title: {
+          en: "Week 9 Recap: AC Parent Briefing",
+          zh: "第九週回顧：高中中文學分班家長說明會",
+        },
+        blocks: [
+          {
+            block: "image",
+            src: "/images/news/enews-2026-10-23-ac-briefing-recap.jpg",
+            alt: {
+              en: "Parents seated in a classroom listening to a presenter at the AC Parent Briefing.",
+              zh: "家長們在教室中聆聽高中中文學分班家長說明會的簡報。",
+            },
+          },
+          {
+            block: "prose",
+            text: {
+              en: "Last Saturday, 10/17, we held our AC (Accredited Curriculum) Parent Briefing in Room 218. Thank you to all the parents who came to learn about our AC classes, enrollment qualifications, the placement test, and class policies!",
+              zh: "上週六（10/17）我們在 218 教室舉行了高中中文學分班（AC）家長說明會。感謝所有出席的家長，與我們一起了解學分班課程、選課資格、分班考試及班級規定！",
+            },
+          },
+        ],
+      },
+      {
+        kind: "prose",
         title: { en: "All Parent Assembly", zh: "全校家長大會" },
         blocks: [
           {
@@ -353,8 +377,15 @@ export const issues: NewsletterIssue[] = [
           {
             block: "prose",
             text: {
-              en: "Our Halloween event is happening Saturday, October 31! Parents, please [sign up here](https://docs.google.com/spreadsheets/d/1gHyMzDr1Df_6hcO85VOGnGJSN0D4SiX3uCh3SjdHduY/edit).",
-              zh: "萬聖節活動將於 10月31日（六）舉行！歡迎家長[點此報名](https://docs.google.com/spreadsheets/d/1gHyMzDr1Df_6hcO85VOGnGJSN0D4SiX3uCh3SjdHduY/edit)。",
+              en: "🎃 Halloween at FCS is one of the events our kids look forward to all year! On **Saturday, October 31**, come help us hand out candy, cheer on the costumes, and create a fun, memorable experience for our kids. It's a blast for grown-ups too!",
+              zh: "🎃 萬聖節活動是孩子們每年最期待的活動之一！**10月31日（六）**，邀請家長一起來幫忙發糖果、為孩子們的變裝造型喝采，一起為孩子們打造歡樂又難忘的萬聖節。大人們也會玩得很開心喔！",
+            },
+          },
+          {
+            block: "prose",
+            text: {
+              en: "**[Sign up to help here](https://docs.google.com/spreadsheets/d/1gHyMzDr1Df_6hcO85VOGnGJSN0D4SiX3uCh3SjdHduY/edit)**, and let's make it a spooktacular day!",
+              zh: "**[點此報名當志工](https://docs.google.com/spreadsheets/d/1gHyMzDr1Df_6hcO85VOGnGJSN0D4SiX3uCh3SjdHduY/edit)**，一起讓這一天充滿歡笑！",
             },
           },
         ],
