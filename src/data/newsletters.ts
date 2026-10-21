@@ -259,6 +259,10 @@ export const issues: NewsletterIssue[] = [
     // The draft's issue-level heading ("第十週更新 / Week 10 Update") has no
     // field in the data model and is omitted. No em dashes, per Angela.
     //
+    // General Announcements: Double Ten T-shirt contest awards (4 FCS winners,
+    // per Han's message Angela shared); facts from ocacnews.net/article/432983,
+    // photo is OCAC's (reuse allowed with credit to 僑新聞).
+    //
     // Calendar: 10/24 and 10/31 from her draft; 10/24 also carries the
     // Academic Contest sign-up opening (moved to 10/24 in calendar.ts).
     // Donate and gold sponsors carried forward (her standing request);
@@ -279,8 +283,8 @@ export const issues: NewsletterIssue[] = [
           {
             block: "prose",
             text: {
-              en: "Hope everyone's had a great week so far! This Saturday, 10/24, is our All Parent Assembly, from 11:10 AM to 12:00 PM in the Parent Room (Room 218). It's a wonderful chance for us to connect in person, and we warmly invite every family to join. Details are below.",
-              zh: "希望大家這週都過得順利！本週六（10/24）將舉行全校家長大會，時間為上午 11:10 至中午 12:00，地點在 Irvington High School 家長室（Parent Room，218 教室）。這是學校與家長面對面交流的好機會，誠摯邀請每一位家長出席，詳情請見下方說明。",
+              en: "Hope everyone's had a great week so far! This Saturday, 10/24, is our All Parent Assembly, from 11:10 AM to 12:00 PM in the Parent Room (Room 218). Room parents are required to attend (or send a replacement), and every family is warmly welcome to come learn more about how our school works and our plans for the year. Details are below.",
+              zh: "希望大家這週都過得順利！本週六（10/24）將舉行全校家長大會，時間為上午 11:10 至中午 12:00，地點在 Irvington High School 家長室（Parent Room，218 教室）。各班班級家長代表務必出席（或安排代理人），也誠摯歡迎所有家長一同參加，進一步了解學校的運作與本學年的規劃。詳情請見下方說明。",
             },
           },
           {
@@ -317,8 +321,15 @@ export const issues: NewsletterIssue[] = [
           {
             block: "prose",
             text: {
-              en: "All FCS parents are warmly invited! We'll share school updates and news, and we look forward to connecting with you in person.",
-              zh: "誠摯邀請全校家長參加！我們將與大家分享學校近況與最新消息，也期待在現場與您面對面交流。",
+              en: "**Room parents are required to attend.** If you can't make it, please find a replacement to attend in your place.",
+              zh: "**各班班級家長代表（Room Parent）務必出席**，如無法出席，請安排代理人代為參加。",
+            },
+          },
+          {
+            block: "prose",
+            text: {
+              en: "All other parents are warmly welcome too! Come learn more about how our school works and our plans for the year, and connect with us in person.",
+              zh: "也誠摯歡迎所有家長一同參加！歡迎來進一步了解學校的運作方式與本學年的規劃，也期待在現場與您面對面交流。",
             },
           },
           {
@@ -372,6 +383,36 @@ export const issues: NewsletterIssue[] = [
           {
             label: { en: "Download calendar (English)", zh: "下載行事曆（英文版）" },
             href: "https://drive.google.com/file/d/1mHm8B4-LnNZkqqOY8qMvG7OReWaconzM/view",
+          },
+        ],
+      },
+      {
+        kind: "prose",
+        title: { en: "General Announcements", zh: "其他公告" },
+        numbered: true,
+        blocks: [
+          {
+            block: "subhead",
+            text: {
+              en: "Congratulations to Our Double Ten T-Shirt Design Contest Winners!",
+              zh: "恭喜本校學生榮獲雙十國慶創意 T 恤設計比賽獎項！",
+            },
+          },
+          {
+            block: "image",
+            src: "/images/news/enews-2026-10-23-tshirt-contest-awards.jpg",
+            alt: {
+              en: "Award winners holding their certificates with organizers and guests at the Double Ten creative T-shirt design contest ceremony.",
+              zh: "雙十國慶創意 T 恤設計比賽頒獎典禮上，得獎學生手持獎狀與主辦單位及貴賓合影。",
+            },
+            caption: { en: "Photo: OCAC News (僑新聞)", zh: "照片來源：僑新聞" },
+          },
+          {
+            block: "prose",
+            text: {
+              en: "Four FCS students received awards in the Northern California Chinese School Association's Double Ten creative T-shirt design contest! The awards ceremony was held on 10/18 at the Culture Center of TECO in San Francisco, with 62 entries from Bay Area students. Congratulations to our young designers! [Read the news story](https://ocacnews.net/article/432983) (in Chinese).",
+              zh: "本校共有 4 位學生在北加州中文學校聯合會主辦的「國慶創意 T 恤設計大賽」中獲獎！頒獎典禮已於 10月18日在金山灣區文教中心舉行，本次比賽共收到 62 件作品。恭喜我們的小小設計師！[閱讀僑新聞報導](https://ocacnews.net/article/432983)。",
+            },
           },
         ],
       },
