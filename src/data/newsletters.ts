@@ -300,8 +300,8 @@ export const issues: NewsletterIssue[] = [
           {
             block: "prose",
             text: {
-              en: "The official Academic Contest sign-up email will go out this Saturday, 10/24, so please keep an eye on your inbox. **Sign-up runs from 10/24 through 11/7**, and late entries can't be accepted. [Contest details here](/academic-contest).",
-              zh: "學術比賽（Academic Contest）的正式報名通知信將於本週六（10/24）寄出，請留意您的信箱。**報名期間為 10/24 至 11/7**，逾時不予受理。[比賽詳情請見此](/academic-contest)。",
+              en: "The official Academic Contest sign-up email will go out this Saturday, 10/24, so please keep an eye on your inbox. **Sign-up runs from 10/24 through 11/7**. [Contest details here](/academic-contest).",
+              zh: "學術比賽（Academic Contest）的正式報名通知信將於本週六（10/24）寄出，請留意您的信箱。**報名期間為 10/24 至 11/7**。[比賽詳情請見此](/academic-contest)。",
             },
           },
           {
