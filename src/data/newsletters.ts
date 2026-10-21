@@ -265,13 +265,16 @@ export const issues: NewsletterIssue[] = [
     //
     // Calendar: 10/24 and 10/31 from her draft; 10/24 also carries the
     // Academic Contest sign-up opening (moved to 10/24 in calendar.ts).
+    // Sign-up window 10/24–11/7 confirmed by Angela 2026-10-20 (the deadline
+    // was not extended after all), so the 11/7 deadline is back in the
+    // calendar and the principal's note.
     // Donate and gold sponsors carried forward (her standing request);
     // Fremont United Auto logo still unlinked (site down as of 10/13).
     date: "2026-10-23",
     label: { en: "October 23, 2026", zh: "2026年10月23日" },
     summary: {
-      en: "The All Parent Assembly is this Saturday, 10/24, Academic Contest sign-up opens the same day, and volunteers are needed for the 10/31 Halloween event.",
-      zh: "本週六（10/24）舉行全校家長大會，學術比賽同日開放報名；10/31 萬聖節活動誠徵家長志工。",
+      en: "The All Parent Assembly is this Saturday, 10/24, Academic Contest sign-up runs 10/24 through 11/7, and volunteers are needed for the 10/31 Halloween event.",
+      zh: "本週六（10/24）舉行全校家長大會；學術比賽報名期間為 10/24 至 11/7；10/31 萬聖節活動誠徵家長志工。",
     },
     draft: "d8296a",
     sections: [
@@ -297,8 +300,8 @@ export const issues: NewsletterIssue[] = [
           {
             block: "prose",
             text: {
-              en: "The official Academic Contest sign-up email will go out this Saturday, 10/24, so please keep an eye on your inbox.",
-              zh: "學術比賽（Academic Contest）的正式報名通知信將於本週六（10/24）寄出，請留意您的信箱。",
+              en: "The official Academic Contest sign-up email will go out this Saturday, 10/24, so please keep an eye on your inbox. **Sign-up runs from 10/24 through 11/7**, and late entries can't be accepted. [Contest details here](/academic-contest).",
+              zh: "學術比賽（Academic Contest）的正式報名通知信將於本週六（10/24）寄出，請留意您的信箱。**報名期間為 10/24 至 11/7**，逾時不予受理。[比賽詳情請見此](/academic-contest)。",
             },
           },
           {
@@ -313,30 +316,6 @@ export const issues: NewsletterIssue[] = [
           en: "Warmly,\nAngela\nPrincipal, Fremont Chinese School",
           zh: "謹上\n夏芷筠\n費利蒙中文學校校長",
         },
-      },
-      {
-        kind: "prose",
-        title: {
-          en: "Week 9 Recap: AC Parent Briefing",
-          zh: "第九週回顧：高中中文學分班家長說明會",
-        },
-        blocks: [
-          {
-            block: "image",
-            src: "/images/news/enews-2026-10-23-ac-briefing-recap.jpg",
-            alt: {
-              en: "Parents seated in a classroom listening to a presenter at the AC Parent Briefing.",
-              zh: "家長們在教室中聆聽高中中文學分班家長說明會的簡報。",
-            },
-          },
-          {
-            block: "prose",
-            text: {
-              en: "Last Saturday, 10/17, we held our AC (Accredited Curriculum) Parent Briefing in Room 218. Thank you to all the parents who came to learn about our AC classes, enrollment qualifications, the placement test, and class policies!",
-              zh: "上週六（10/17）我們在 218 教室舉行了高中中文學分班（AC）家長說明會。感謝所有出席的家長，與我們一起了解學分班課程、選課資格、分班考試及班級規定！",
-            },
-          },
-        ],
       },
       {
         kind: "prose",
@@ -392,6 +371,30 @@ export const issues: NewsletterIssue[] = [
       },
       {
         kind: "prose",
+        title: {
+          en: "Week 9 Recap: AC Parent Briefing",
+          zh: "第九週回顧：高中中文學分班家長說明會",
+        },
+        blocks: [
+          {
+            block: "image",
+            src: "/images/news/enews-2026-10-23-ac-briefing-recap-cropped.jpg",
+            alt: {
+              en: "Parents seated in a classroom listening to a presenter at the AC Parent Briefing.",
+              zh: "家長們在教室中聆聽高中中文學分班家長說明會的簡報。",
+            },
+          },
+          {
+            block: "prose",
+            text: {
+              en: "Last Saturday, 10/17, we held our AC (Accredited Curriculum) Parent Briefing in Room 218. Thank you to all the parents who came to learn about our AC classes, enrollment qualifications, the placement test, and class policies!",
+              zh: "上週六（10/17）我們在 218 教室舉行了高中中文學分班（AC）家長說明會。感謝所有出席的家長，與我們一起了解學分班課程、選課資格、分班考試及班級規定！",
+            },
+          },
+        ],
+      },
+      {
+        kind: "prose",
         title: { en: "School Calendar 2026–2027", zh: "學校行事曆 2026–2027" },
         blocks: [
           { block: "prose", text: { en: "**Coming event(s):**", zh: "**近期活動：**" } },
@@ -403,6 +406,7 @@ export const issues: NewsletterIssue[] = [
                 zh: "**10/24/2026**：全校家長大會（上午 11:10–中午 12:00，家長室 218 教室）、學術比賽開放報名",
               },
               { en: "**10/31/2026**: Halloween Event", zh: "**10/31/2026**：萬聖節活動" },
+              { en: "**11/7/2026**: Academic Contest sign-up deadline", zh: "**11/7/2026**：學術比賽報名截止" },
             ],
           },
         ],
