@@ -286,15 +286,8 @@ export const issues: NewsletterIssue[] = [
           {
             block: "prose",
             text: {
-              en: "Hope everyone's had a great week so far! This Saturday, 10/24, is our All Parent Assembly, from 11:10 AM to 12:00 PM in the Parent Room (Room 218). Room parents are required to attend (or send a replacement), and every family is warmly welcome to come learn more about how our school works and our plans for the year. Details are below.",
-              zh: "希望大家這週都過得順利！本週六（10/24）將舉行全校家長大會，時間為上午 11:10 至中午 12:00，地點在 Irvington High School 家長室（Parent Room，218 教室）。各班班級家長代表務必出席（或安排代理人），也誠摯歡迎所有家長一同參加，進一步了解學校的運作與本學年的規劃。詳情請見下方說明。",
-            },
-          },
-          {
-            block: "prose",
-            text: {
-              en: "Thank you as well to the parents who joined last Saturday's AC (Accredited Curriculum) Parent Briefing!",
-              zh: "也要感謝上週六出席高中中文學分班（AC）家長說明會的家長們！",
+              en: "Hope everyone's had a great week so far! This Saturday, 10/24, is our All Parent Assembly. We hope to see you there; details are below.",
+              zh: "希望大家這週都過得順利！本週六（10/24）將舉行全校家長大會，期待見到大家，詳情請見下方說明。",
             },
           },
           {
