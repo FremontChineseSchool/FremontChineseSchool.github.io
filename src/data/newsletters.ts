@@ -325,29 +325,10 @@ export const issues: NewsletterIssue[] = [
           {
             block: "prose",
             text: {
-              en: "**Room parents are required to attend.** If you can't make it, please find a replacement to attend in your place.",
-              zh: "**各班班級家長代表（Room Parent）務必出席**，如無法出席，請安排代理人代為參加。",
+              en: "**Room parents are required to attend** (or send a replacement), and all parents are welcome to come learn about how our school works and our plans for the year. **Saturday, 10/24, 11:10 AM–12:00 PM**, Irvington High School - Parent Room 218.",
+              zh: "**各班班級家長代表務必出席**（如無法出席，請安排代理人），也歡迎所有家長參加，了解學校的運作與本學年的規劃。**10/24（六）上午 11:10–中午 12:00**，Irvington High School - 家長室 218。",
             },
           },
-          {
-            block: "prose",
-            text: {
-              en: "All other parents are warmly welcome too! Come learn more about how our school works and our plans for the year, and connect with us in person.",
-              zh: "也誠摯歡迎所有家長一同參加！歡迎來進一步了解學校的運作方式與本學年的規劃，也期待在現場與您面對面交流。",
-            },
-          },
-          {
-            block: "list",
-            items: [
-              { en: "**Date:** Saturday, October 24", zh: "**日期：**10月24日（六）" },
-              { en: "**Time:** 11:10 AM–12:00 PM", zh: "**時間：**上午 11:10–中午 12:00" },
-              {
-                en: "**Location:** Irvington High School - Parent Room 218",
-                zh: "**地點：**Irvington High School - 家長室 218",
-              },
-            ],
-          },
-          { block: "prose", text: { en: "We hope to see you Saturday!", zh: "期待週六見到大家！" } },
         ],
       },
       {
