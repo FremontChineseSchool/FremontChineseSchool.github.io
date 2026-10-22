@@ -276,7 +276,7 @@ export const issues: NewsletterIssue[] = [
       en: "The All Parent Assembly is this Saturday, 10/24, Academic Contest sign-up runs 10/24 through 11/7, and volunteers are needed for the 10/31 Halloween event.",
       zh: "本週六（10/24）舉行全校家長大會；學術比賽報名期間為 10/24 至 11/7；10/31 萬聖節活動誠徵家長志工。",
     },
-    draft: "d8296a",
+    emailToken: "d8296a",
     sections: [
       {
         kind: "prose",
