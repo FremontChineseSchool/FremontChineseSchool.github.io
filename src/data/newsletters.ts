@@ -315,6 +315,14 @@ export const issues: NewsletterIssue[] = [
         title: { en: "All Parent Assembly", zh: "全校家長大會" },
         blocks: [
           {
+            block: "image",
+            src: "/images/news/enews-2026-10-23-all-parent-assembly.jpg",
+            alt: {
+              en: "All Parent Assembly flyer inviting parents to help shape the school community, with the date, time, and room.",
+              zh: "全體家長大會宣傳單，邀請家長一同參與學校社群的決策，並列出日期、時間與教室。",
+            },
+          },
+          {
             block: "prose",
             text: {
               en: "**Room parents are required to attend.** If you can't make it, please find a replacement to attend in your place.",
@@ -334,8 +342,8 @@ export const issues: NewsletterIssue[] = [
               { en: "**Date:** Saturday, October 24", zh: "**日期：**10月24日（六）" },
               { en: "**Time:** 11:10 AM–12:00 PM", zh: "**時間：**上午 11:10–中午 12:00" },
               {
-                en: "**Location:** Parent Room (Room 218), Irvington High School",
-                zh: "**地點：**Irvington High School 家長室（Parent Room，218 教室）",
+                en: "**Location:** Irvington High School - Parent Room 218",
+                zh: "**地點：**Irvington High School - 家長室 218",
               },
             ],
           },
@@ -395,8 +403,8 @@ export const issues: NewsletterIssue[] = [
             block: "list",
             items: [
               {
-                en: "**10/24/2026**: All Parent Assembly (11:10 AM–12:00 PM, Parent Room, Room 218); Academic Contest sign-up opens",
-                zh: "**10/24/2026**：全校家長大會（上午 11:10–中午 12:00，家長室 218 教室）、學術比賽開放報名",
+                en: "**10/24/2026**: All Parent Assembly (11:10 AM–12:00 PM, Irvington High School - Parent Room 218); Academic Contest sign-up opens",
+                zh: "**10/24/2026**：全校家長大會（上午 11:10–中午 12:00，Irvington High School - 家長室 218）、學術比賽開放報名",
               },
               { en: "**10/31/2026**: Halloween Event", zh: "**10/31/2026**：萬聖節活動" },
               { en: "**11/7/2026**: Academic Contest sign-up deadline", zh: "**11/7/2026**：學術比賽報名截止" },
