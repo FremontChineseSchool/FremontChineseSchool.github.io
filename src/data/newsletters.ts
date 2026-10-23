@@ -373,6 +373,13 @@ export const issues: NewsletterIssue[] = [
               zh: "上週六（10/17）我們在 218 教室舉行了高中中文學分班（AC）家長說明會。感謝所有出席的家長，與我們一起了解學分班課程、選課資格、分班考試及班級規定！",
             },
           },
+          {
+            block: "prose",
+            text: {
+              en: "[More photos from this week here](https://photos.app.goo.gl/fTFTsxpkZdr72XHn7).",
+              zh: "[本週更多照片請見連結](https://photos.app.goo.gl/fTFTsxpkZdr72XHn7)。",
+            },
+          },
         ],
       },
       {
