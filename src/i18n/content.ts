@@ -32,6 +32,10 @@ export const links = {
   // ANCCS's own page for the regional contest (dates, rules, speech topics, read-aloud
   // passages). Its URL is year-specific — update it each school year.
   anccsContest: 'https://sites.google.com/anccs.org/2027-academy-contest',
+  // 2027 ANCCS read-aloud passages (linked from the ANCCS contest site).
+  readAloudNativeZhuyin: 'https://drive.google.com/file/d/1eMJl47NV-42H7E3vMKIc7SyWeq57zcHO/view',
+  readAloudNativePinyin: 'https://drive.google.com/file/d/1Qb3vkmTX-6118MEH-KzwY_NMp4PIMtdr/view',
+  readAloudCslPinyin: 'https://drive.google.com/file/d/1Bu8oELDuP2mnKyQQxKK_5pkiPjNMxwy7/view',
   legacyEvents: 'https://fremontchineseschool.org/events',
   legacyNews: 'https://fremontchineseschool.org/index.php',
   facebook: 'https://facebook.com/fremontchineseschool',
@@ -849,8 +853,19 @@ export const content = {
           ],
         },
         {
-          name: 'Reading Aloud (朗讀)',
-          body: 'Students read a provided passage aloud in Mandarin or Cantonese. Judged on accuracy, tones, and pacing.',
+          name: 'Reading Aloud — Native Speakers (國、粵語朗讀)',
+          body: 'For students who speak Chinese at home. Students read a provided passage aloud in Mandarin or Cantonese. Judged on accuracy, tones, and pacing.',
+          links: [
+            { label: 'Read-aloud passages (Zhuyin)', href: links.readAloudNativeZhuyin },
+            { label: 'Read-aloud passages (Pinyin)', href: links.readAloudNativePinyin },
+          ],
+        },
+        {
+          name: 'Reading Aloud — Bilingual / CSL (CSL/CFL 朗讀)',
+          body: 'For students learning Chinese as a second or foreign language. Students read a provided passage aloud in Mandarin, with its own set of passages. Judged on accuracy, tones, and pacing.',
+          links: [
+            { label: 'CSL/CFL read-aloud passages (Pinyin)', href: links.readAloudCslPinyin },
+          ],
         },
         {
           name: 'Brush Calligraphy (毛筆書法)',
@@ -1708,8 +1723,19 @@ export const content = {
           ],
         },
         {
-          name: '朗讀',
-          body: '學生以國語或粵語朗讀指定篇章，評分標準包括準確度、聲調與節奏。',
+          name: '國、粵語朗讀',
+          body: '適合在家以中文為母語的學生。學生以國語或粵語朗讀指定篇章，評分標準包括準確度、聲調與節奏。',
+          links: [
+            { label: '朗讀稿（注音符號）', href: links.readAloudNativeZhuyin },
+            { label: '朗讀稿（漢語拼音）', href: links.readAloudNativePinyin },
+          ],
+        },
+        {
+          name: 'CSL/CFL 朗讀（雙語組）',
+          body: '適合以中文為第二語言或外語學習的學生。學生以國語朗讀專屬的指定篇章，評分標準包括準確度、聲調與節奏。',
+          links: [
+            { label: 'CSL/CFL 朗讀稿（漢語拼音）', href: links.readAloudCslPinyin },
+          ],
         },
         {
           name: '毛筆書法',
