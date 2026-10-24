@@ -12,6 +12,12 @@
       "runtimeExecutable": "npm",
       "runtimeArgs": ["run", "preview"],
       "port": 4321
+    },
+    {
+      "name": "dashboard-preview",
+      "runtimeExecutable": "node",
+      "runtimeArgs": ["-e", "require('http').createServer((q,s)=>{s.setHeader('content-type','text/html; charset=utf-8');s.end(require('fs').readFileSync('.dashboard-preview/index.html'))}).listen(4399,'127.0.0.1')"],
+      "port": 4399
     }
   ]
 }

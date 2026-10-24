@@ -27,3 +27,6 @@ calendar-unmapped.json
 # Local palette/design exploration renders (not shipped)
 palette-previews/
 
+
+# local dashboard preview (contains project-plan data)
+.dashboard-preview/

@@ -27,7 +27,7 @@ export const links = {
   // subdomain no longer resolves; the app itself lives on at faypier.com).
   contestLogin: 'https://fcsapp.faypier.com/users/login',
   contestRules: 'https://fcsapp.faypier.com/users/rules',
-  contestSignupGuide: 'https://drive.google.com/file/d/1_ChzQCTDuUgqQQSQ1NIIvr6FuIGM0q7B/view',
+  contestSignupGuide: 'https://drive.google.com/file/d/1dw8TimFXRXkcTLLKsja-vij4n7dFp1c4/view',
   // ANCCS's own page for the regional contest (dates, rules, speech topics, read-aloud
   // passages). Its URL is year-specific — update it each school year.
   anccsContest: 'https://sites.google.com/anccs.org/2027-academy-contest',
