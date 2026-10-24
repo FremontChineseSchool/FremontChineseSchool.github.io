@@ -133,8 +133,10 @@ function heading(title: string): string {
   return `<h2 style="color:${C.jadeDeep};font-size:16px;text-align:center;border-bottom:2px solid ${C.jade};padding-bottom:6px;margin:28px 0 14px;">${title}</h2>`;
 }
 
+// Side padding on every row: without it, phone mail apps (which shrink the
+// 600px table to the screen) run text right to the edge.
 function row(inner: string, align = "left"): string {
-  return `<tr><td align="${align}" style="font-family:${FONT};">${inner}</td></tr>`;
+  return `<tr><td align="${align}" style="font-family:${FONT};padding:0 16px;">${inner}</td></tr>`;
 }
 
 function sectionHtml(section: IssueSection, i: number): string {
@@ -235,7 +237,7 @@ export function renderIssueEmail(issue: NewsletterIssue): string {
 
   return `<table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="background-color:${C.paper};padding:24px 0;">
   <tr><td align="center">
-    <table role="presentation" width="600" cellpadding="0" cellspacing="0" style="background-color:${C.paper};max-width:600px;">
+    <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="background-color:${C.paper};width:100%;max-width:600px;">
 ${masthead}
 ${sections.map((s, i) => sectionHtml(s, i)).join("\n")}
 ${followUs}
