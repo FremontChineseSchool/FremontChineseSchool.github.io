@@ -17,6 +17,7 @@ export const links = {
   // Hosted in public/ — the school's own export of the tuition payment schedule.
   tuitionPdf: '/FCS_2026-2027_Tuition_Payment_Schedule.pdf',
   irsDetermination: 'https://drive.google.com/file/d/1BBgfNR6QzLA2d1-Ej8ezyW56Pf96eosf/view',
+  benevity: 'https://causes.benevity.org/causes/840-942978949',
   employerGivingGuide: 'https://docs.google.com/presentation/d/1Op2TlZ4wFSz7epqziWHmEauqEa5FnqRJ5yJofqQhpqs/edit?usp=sharing',
   acCreditTransfer: 'https://forms.gle/TntoF21REwrnnkfj9',
   acPolicies: 'https://drive.google.com/file/d/1EKDsFuUj3pV8eXTBhEE4cSHGpC1M_sPF/view',
@@ -891,6 +892,7 @@ export const content = {
         'Log into your company’s giving platform (often listed under "Charity" or "CSR" on your HR or internal hub page), search for "Fremont Chinese School" in Fremont, CA, and submit your matching gift or volunteer time.',
       ],
       employerGuideLabel: 'Step-by-step guide to donating volunteer grants',
+      employerBenevityLabel: 'FCS on Benevity (used by many company giving portals)',
       einHeading: 'Tax information',
       einLabel: 'EIN (Tax ID)',
       einNumber: '94-2978949',
@@ -1742,6 +1744,7 @@ export const content = {
         '請登入貴公司的捐款平台（通常在公司內部網頁或人資頁面中標示為 "Charity" 或 "CSR"），搜尋位於 Fremont, CA 的 "Fremont Chinese School"，即可申請捐款配對或提交義工時數。',
       ],
       employerGuideLabel: '義工獎勵捐款步驟說明',
+      employerBenevityLabel: '本校的 Benevity 頁面（許多公司捐款平台皆使用 Benevity）',
       einHeading: '稅務資訊',
       einLabel: '納稅人識別號（EIN）',
       einNumber: '94-2978949',
