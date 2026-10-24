@@ -871,10 +871,6 @@ export const content = {
           ],
         },
         {
-          name: 'Brush Calligraphy (毛筆書法)',
-          body: 'Students demonstrate Traditional Chinese calligraphy using a brush. Judged on stroke order, balance, and overall form.',
-        },
-        {
           name: 'Academic Tests',
           body: 'Written tests covering vocabulary, reading comprehension, and language skills, organized by level.',
         },
@@ -1741,10 +1737,6 @@ export const content = {
           links: [
             { label: 'CSL/CFL 朗讀稿（漢語拼音）', href: links.readAloudCslPinyin },
           ],
-        },
-        {
-          name: '毛筆書法',
-          body: '學生以毛筆書寫正體中文，評分標準包括筆順、結構平衡與整體美觀。',
         },
         {
           name: '學科測驗',
