@@ -840,6 +840,13 @@ export const content = {
         {
           name: 'Mandarin Speech (國語演講)',
           body: 'Students deliver a prepared speech in Mandarin on an assigned topic. Judged on pronunciation, fluency, expression, and content.',
+          topicsTitle: '2026–27 speech topics (Mandarin & Cantonese)',
+          topics: [
+            { group: 'Group A', text: '人工智慧時代，我們還需要學習中文嗎？', translation: 'In the age of AI, do we still need to learn Chinese?' },
+            { group: 'Group B', text: '我最難忘的一個假期', translation: 'My most unforgettable vacation' },
+            { group: 'Group C', text: '我最喜歡的一項運動', translation: 'My favorite sport' },
+            { group: 'Group D', text: '我最開心的一天', translation: 'The happiest day of my life' },
+          ],
         },
         {
           name: 'Reading Aloud (朗讀)',
@@ -1692,6 +1699,13 @@ export const content = {
         {
           name: '國語演講',
           body: '學生以國語發表準備好的演講，主題由主辦單位指定，評分標準包括發音、流暢度、表達與內容。',
+          topicsTitle: '2026–27 學年國、粵語演講比賽題目',
+          topics: [
+            { group: 'A 組', text: '人工智慧時代，我們還需要學習中文嗎？' },
+            { group: 'B 組', text: '我最難忘的一個假期' },
+            { group: 'C 組', text: '我最喜歡的一項運動' },
+            { group: 'D 組', text: '我最開心的一天' },
+          ],
         },
         {
           name: '朗讀',
