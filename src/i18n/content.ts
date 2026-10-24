@@ -855,7 +855,7 @@ export const content = {
         {
           code: 'RC',
           name: 'Reading Comprehension (閱讀測驗)',
-          body: 'A written test with multiple-choice, fill-in-the-blank, and short-answer questions.',
+          body: 'A written test with multiple-choice and short-answer questions.',
           groups: 'A, B, C, D',
         },
         {
@@ -1763,7 +1763,7 @@ export const content = {
         {
           code: 'RC',
           name: '閱讀測驗',
-          body: '筆試，題型包括選擇、填空及問答。',
+          body: '筆試，題型包括選擇及問答。',
           groups: 'A, B, C, D',
         },
         {
