@@ -80,6 +80,21 @@ const categoryIcons = [
     ))}
   </div>
 
+  <!-- General practice reference for all categories -->
+  <div class="mt-5 flex flex-col gap-2 rounded-[10px] p-4 sm:flex-row sm:items-center sm:justify-between sm:gap-4" style="background: var(--color-fcs-green-light);">
+    <p class="text-sm" style="color: var(--color-fcs-muted);">{c.samplesNote}</p>
+    <a
+      href={links.contestSamples}
+      target="_blank"
+      rel="noopener"
+      class="inline-flex shrink-0 items-center gap-2 text-sm font-semibold hover:underline"
+      style="color: var(--color-fcs-green);"
+    >
+      <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+      {c.samplesLabel}
+    </a>
+  </div>
+
   <!-- Current year resources -->
   <div class="mt-12 rounded-[10px] p-6" style="background: var(--color-fcs-white); border: 1px solid var(--color-fcs-border);">
     <h2 class="text-xl font-semibold" style="color: var(--color-fcs-green-dark);">{c.resourcesTitle}</h2>

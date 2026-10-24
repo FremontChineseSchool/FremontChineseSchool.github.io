@@ -36,6 +36,7 @@ export const links = {
   readAloudNativeZhuyin: 'https://drive.google.com/file/d/1eMJl47NV-42H7E3vMKIc7SyWeq57zcHO/view',
   readAloudNativePinyin: 'https://drive.google.com/file/d/1Qb3vkmTX-6118MEH-KzwY_NMp4PIMtdr/view',
   readAloudCslPinyin: 'https://drive.google.com/file/d/1Bu8oELDuP2mnKyQQxKK_5pkiPjNMxwy7/view',
+  contestSamples: 'https://drive.google.com/file/d/1A-uGdnyNsvjjjVi-lVCo2iqmOYwoA0v7/view',
   legacyEvents: 'https://fremontchineseschool.org/events',
   legacyNews: 'https://fremontchineseschool.org/index.php',
   facebook: 'https://facebook.com/fremontchineseschool',
@@ -840,6 +841,8 @@ export const content = {
       aboutBody:
         'The Academic Contest runs in two tiers: an internal FCS competition and the ANCCS (Association of Northern California Chinese Schools) regional contest. Students compete by grade group, and award winners are recognized at the Chinese New Year Celebration.',
       categoriesTitle: 'Contest categories',
+      samplesNote: 'For practice in any category, see examples of questions, topics, and answers from past contests.',
+      samplesLabel: 'Sample questions & answers from past contests',
       categories: [
         {
           name: 'Mandarin Speech (國語演講)',
@@ -1710,6 +1713,8 @@ export const content = {
       aboutBody:
         '學術比賽分兩個層次舉行：費利蒙中文學校內部比賽，以及 ANCCS（北加州中文學校聯合會）地區競賽。學生依年級分組競賽，得獎者將於新春聯歡會上接受表揚。',
       categoriesTitle: '競賽項目',
+      samplesNote: '各項目練習參考：歷屆比賽的試題、題目及答案卷樣本。',
+      samplesLabel: '歷屆比賽試題及答案卷樣本',
       categories: [
         {
           name: '國語演講',
