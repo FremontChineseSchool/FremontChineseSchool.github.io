@@ -852,7 +852,6 @@ export const content = {
         { group: 'B', birthDates: '09/02/2013 – 09/01/2016', ages: '10 to under 13' },
         { group: 'C', birthDates: '09/02/2016 – 09/01/2019', ages: '7 to under 10' },
         { group: 'D', birthDates: '09/02/2019 – 09/01/2022', ages: '4 to under 7' },
-        { group: 'CD', birthDates: '09/02/2016 – 09/01/2022', ages: '4 to under 10' },
       ],
       categories: [
         {
@@ -1770,7 +1769,6 @@ export const content = {
         { group: 'B', birthDates: '2013/09/02 – 2016/09/01', ages: '10 歲（含）至 13 歲（不含）' },
         { group: 'C', birthDates: '2016/09/02 – 2019/09/01', ages: '7 歲（含）至 10 歲（不含）' },
         { group: 'D', birthDates: '2019/09/02 – 2022/09/01', ages: '4 歲（含）至 7 歲（不含）' },
-        { group: 'CD', birthDates: '2016/09/02 – 2022/09/01', ages: '4 歲（含）至 10 歲（不含）' },
       ],
       categories: [
         {
