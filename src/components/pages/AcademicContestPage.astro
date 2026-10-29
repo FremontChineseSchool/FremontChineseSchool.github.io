@@ -38,6 +38,30 @@ const categoryIcons: Record<string, string> = {
     <p class="mt-3 leading-relaxed" style="color: var(--color-fcs-muted);">{c.aboutBody}</p>
   </div>
 
+  <!-- Age groups (A–D, CD) referenced by each category's "Groups" line -->
+  <h2 id="age-groups" class="mt-12 scroll-mt-24 text-xl font-semibold" style="color: var(--color-fcs-black);">{c.ageGroupsTitle}</h2>
+  <p class="mt-2 text-sm" style="color: var(--color-fcs-muted);">{c.ageGroupsNote}</p>
+  <div class="mt-4 overflow-x-auto rounded-[10px]" style="border: 1px solid var(--color-fcs-border);">
+    <table class="w-full text-sm" style="border-collapse: collapse;">
+      <thead>
+        <tr style="background: var(--color-fcs-green); color: white;">
+          <th scope="col" class="px-4 py-2 text-left text-xs font-semibold uppercase tracking-wider">{c.ageGroupsHeaders.group}</th>
+          <th scope="col" class="px-4 py-2 text-left text-xs font-semibold uppercase tracking-wider">{c.ageGroupsHeaders.birthDates}</th>
+          <th scope="col" class="px-4 py-2 text-left text-xs font-semibold uppercase tracking-wider">{c.ageGroupsHeaders.ages}</th>
+        </tr>
+      </thead>
+      <tbody>
+        {c.ageGroups.map((g, i) => (
+          <tr style={i > 0 ? "border-top: 1px solid var(--color-fcs-border);" : ""}>
+            <th scope="row" class="px-4 py-2.5 text-left font-semibold" style="color: var(--color-fcs-green-dark);">{g.group}</th>
+            <td class="whitespace-nowrap px-4 py-2.5 tabular-nums" style="color: var(--color-fcs-black);">{g.birthDates}</td>
+            <td class="px-4 py-2.5" style="color: var(--color-fcs-muted);">{g.ages}</td>
+          </tr>
+        ))}
+      </tbody>
+    </table>
+  </div>
+
   <!-- Categories -->
   <h2 class="mt-12 text-xl font-semibold" style="color: var(--color-fcs-black);">{c.categoriesTitle}</h2>
   <div class="mt-5 grid gap-4 sm:grid-cols-2">

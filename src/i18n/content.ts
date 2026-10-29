@@ -844,6 +844,16 @@ export const content = {
       samplesNote: 'For practice in any category, see examples of questions, topics, and answers from past contests.',
       samplesLabel: 'Sample questions & answers from past contests',
       groupsLabel: 'Groups',
+      ageGroupsTitle: 'Age groups',
+      ageGroupsNote: 'Each student’s group is set by birth date (age as of September 1, 2026).',
+      ageGroupsHeaders: { group: 'Group', birthDates: 'Birth dates', ages: 'Age' },
+      ageGroups: [
+        { group: 'A', birthDates: 'On or before 09/01/2013', ages: '13 or older' },
+        { group: 'B', birthDates: '09/02/2013 – 09/01/2016', ages: '10 to under 13' },
+        { group: 'C', birthDates: '09/02/2016 – 09/01/2019', ages: '7 to under 10' },
+        { group: 'D', birthDates: '09/02/2019 – 09/01/2022', ages: '4 to under 7' },
+        { group: 'CD', birthDates: '09/02/2016 – 09/01/2022', ages: '4 to under 10' },
+      ],
       categories: [
         {
           code: 'MI',
@@ -1752,6 +1762,16 @@ export const content = {
       samplesNote: '各項目練習參考：歷屆比賽的試題、題目及答案卷樣本。',
       samplesLabel: '歷屆比賽試題及答案卷樣本',
       groupsLabel: '組別',
+      ageGroupsTitle: '年齡分組表',
+      ageGroupsNote: '參賽組別依出生日期劃分（年齡以 2026 年 9 月 1 日計算）。',
+      ageGroupsHeaders: { group: '組別', birthDates: '出生日期', ages: '年齡' },
+      ageGroups: [
+        { group: 'A', birthDates: '2013/09/01（含）以前', ages: '13 歲（含）以上' },
+        { group: 'B', birthDates: '2013/09/02 – 2016/09/01', ages: '10 歲（含）至 13 歲（不含）' },
+        { group: 'C', birthDates: '2016/09/02 – 2019/09/01', ages: '7 歲（含）至 10 歲（不含）' },
+        { group: 'D', birthDates: '2019/09/02 – 2022/09/01', ages: '4 歲（含）至 7 歲（不含）' },
+        { group: 'CD', birthDates: '2016/09/02 – 2022/09/01', ages: '4 歲（含）至 10 歲（不含）' },
+      ],
       categories: [
         {
           code: 'MI',
