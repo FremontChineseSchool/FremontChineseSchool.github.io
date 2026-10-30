@@ -441,14 +441,6 @@ export const issues: NewsletterIssue[] = [
             },
           },
           {
-            block: "list",
-            items: [
-              { en: "**Booth helpers, 9–11 AM:** set up a booth and hand out candy", zh: "**攤位志工，上午 9:00–11:00：**佈置攤位、發糖果" },
-              { en: "**Booth helpers, 11 AM–1 PM:** hand out candy, then take down", zh: "**攤位志工，上午 11:00–下午 1:00：**發糖果、活動後收拾" },
-              { en: "**Events team, 9 AM–1 PM:** setup, courtyard runner, take-down", zh: "**活動組，上午 9:00–下午 1:00：**場地佈置、中庭支援、活動後收拾" },
-            ],
-          },
-          {
             block: "prose",
             text: {
               en: "**[Sign up to help here](https://docs.google.com/spreadsheets/d/1gHyMzDr1Df_6hcO85VOGnGJSN0D4SiX3uCh3SjdHduY/edit)**, and let's make it a spooktacular day!",
