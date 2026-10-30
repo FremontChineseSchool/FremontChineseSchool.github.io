@@ -249,6 +249,264 @@ export type NewsletterIssue = {
  */
 export const issues: NewsletterIssue[] = [
   {
+    // Composed from Angela's notes in conversation (2026-10-29). Draft token
+    // generated with `openssl rand -hex 3`.
+    //
+    // Week 10 recap: the All Parent Assembly deck (link below, anyone with the
+    // link can view) condensed to 10 bilingual takeaways at Angela's request,
+    // because the meeting was in Chinese. Left out of the takeaways: the FUSD
+    // AP textbook comment (deadline 10/27 already past) and the Halloween
+    // slide (its own section below). The Academic Contest bullet stays
+    // neutral: the deck lists options, not a decision.
+    //
+    // Board photo: two photos Angela sent, combined side by side (Katie left,
+    // the second photo assumed to be Alan Yang; flagged as a gap to confirm).
+    // Halloween details (courtyard, shifts) from the deck's Halloween slide.
+    // Calendar: every Google Calendar event 10/30–11/30.
+    // The principal's note is drafted for Angela's review (she gave no note).
+    date: "2026-10-30",
+    label: { en: "October 30, 2026", zh: "2026年10月30日" },
+    summary: {
+      en: "A bilingual recap of the All Parent Assembly, a welcome to our newest parent board member, and a last call for Halloween volunteers for tomorrow, 10/31.",
+      zh: "全校家長大會中英雙語重點回顧、歡迎新任家長代表校務委員，以及明天（10/31）萬聖節活動的最後志工招募。",
+    },
+    draft: "e969da",
+    gaps: [
+      "Katie's full name (and Chinese name, if she has one) for the board member announcement.",
+      "Confirm the second board photo is Alan Yang.",
+      "Angela to review the drafted principal's note.",
+    ],
+    sections: [
+      {
+        kind: "prose",
+        title: { en: "A Note from the Principal", zh: "校長的話" },
+        blocks: [
+          { block: "prose", text: { en: "Dear FCS Families,", zh: "各位家長好：" } },
+          {
+            block: "prose",
+            text: {
+              en: "Thank you to everyone who joined last Saturday's All Parent Assembly! Since the meeting was in Chinese, we've put together a recap of the key takeaways in both English and Chinese below, along with the slides and photos.",
+              zh: "感謝大家上週六撥空出席全校家長大會！由於會議以中文進行，我們在下方整理了中英雙語的重點回顧，並附上簡報與照片連結。",
+            },
+          },
+          {
+            block: "prose",
+            text: {
+              en: "Please also join me in welcoming Katie, our newest parent board member. And don't forget: our Halloween event is tomorrow, 10/31. We still need a few volunteers!",
+              zh: "也請大家一起歡迎新任家長代表校務委員 Katie。別忘了，萬聖節活動就在明天（10/31），我們還需要幾位志工幫忙！",
+            },
+          },
+        ],
+        signoff: {
+          en: "Warmly,\nAngela\nPrincipal, Fremont Chinese School",
+          zh: "謹上\n夏芷筠\n費利蒙中文學校校長",
+        },
+      },
+      {
+        kind: "prose",
+        title: {
+          en: "Week 10 Recap: All Parent Assembly",
+          zh: "第十週回顧：全校家長大會",
+        },
+        blocks: [
+          {
+            block: "prose",
+            text: {
+              en: "Here are the key takeaways from the 10/24 All Parent Assembly. [View the slides](https://docs.google.com/presentation/d/1tUO9zcd1mDt_T46gOM-F3Flo5eLdpiyFVV2e8ZZ4Ow4/edit) · [See the photos](TODO: ask Angela for the assembly photo album link)",
+              zh: "以下是 10/24 全校家長大會的重點整理。[查看簡報](https://docs.google.com/presentation/d/1tUO9zcd1mDt_T46gOM-F3Flo5eLdpiyFVV2e8ZZ4Ow4/edit) · [查看照片](TODO: ask Angela for the assembly photo album link)",
+            },
+          },
+          {
+            block: "list",
+            ordered: true,
+            items: [
+              {
+                en: "**New leadership:** Angela Ha (夏芷筠) is our principal and Chih Han Goh (吳志漢) is our vice principal. A wave of new volunteer staff has joined this year.",
+                zh: "**新任行政團隊：**夏芷筠擔任校長、吳志漢擔任副校長，今年也有許多新義工加入行政團隊，學校煥然一新。",
+              },
+              {
+                en: "**About FCS:** serving Fremont since 1972, a non-profit run entirely by volunteer staff, with WASC-accredited high school credit classes.",
+                zh: "**學校簡介：**本校自 1972 年起服務費利蒙社區，是由義工營運的非營利組織，高中學分班獲 WASC 認證。",
+              },
+              {
+                en: "**Teams that need you:** Safety (2 spots), Registration, Academic (TA program, 1 spot), Social Media (1 spot), and Academic Contest (1 spot). Stop by the office (Room 229) on Saturdays, 9 AM–12:30 PM, or email [principal@fremontchineseschool.org](mailto:principal@fremontchineseschool.org).",
+                zh: "**誠徵義工：**訓育組（2 名）、註冊組、教務組（TA 計畫，1 名）、社群媒體組（1 名）及學術比賽組（1 名）。歡迎週六上午 9:00–12:30 到辦公室（229 教室）洽詢，或來信 [principal@fremontchineseschool.org](mailto:principal@fremontchineseschool.org)。",
+              },
+              {
+                en: "**Enrollment is up:** 254 students this year, up from 233, with 335 class enrollments (up from 302).",
+                zh: "**學生人數成長：**今年共 254 位學生（去年 233 位），總報課人次 335（去年 302）。",
+              },
+              {
+                en: "**Technology:** our new bilingual website is live, and the FCS Parent Portal is in progress: one account per family, with online registration and payment (no more paper checks).",
+                zh: "**資訊專案：**全新中英雙語網站已上線；家長專區（Parent Portal）開發中，每個家庭一個帳號，可線上註冊與繳費，不再需要紙本支票。",
+              },
+              {
+                en: "**Budget:** the draft 2026–27 budget is about $290K and aims to break even. Payroll and classroom rent are over 80% of costs, and tuition alone doesn't cover them, so we rely on CD interest and donations to close the gap.",
+                zh: "**財務報告：**2026–27 學年預算草案約 $290K，目標收支平衡。薪資與教室租金佔支出八成以上，學費收入不足以支應全部開銷，需仰賴定存利息與捐款補足。",
+              },
+              {
+                en: "**Help more families find FCS:** family referrals brought in 38 new students this year. Tell friends about us, follow and share our Facebook and Instagram posts, and leave us a Google review once our business profile is live.",
+                zh: "**幫助更多家庭認識我們：**今年有 38 位新生來自家長推薦。歡迎推薦親友、追蹤並分享學校的 Facebook 與 Instagram，Google 商家頁面上線後也請幫忙留下評論。",
+              },
+              {
+                en: "**Sponsors and giving:** introduce local businesses to yearbook ad sponsorships, and check whether your employer matches donations or pays for volunteer hours, such as traffic duty. Donations are tax-deductible (EIN **94-2978949**).",
+                zh: "**贊助與捐款：**歡迎介紹在地商家刊登年刊廣告，也請查詢您的公司是否提供捐款對等或義工時數捐款（例如交通導護時數）。捐款可抵稅（EIN **94-2978949**）。",
+              },
+              {
+                en: "**Academic Contest:** we shared the parent survey results (33 of 54 families plan to enter) and talked through options for the contest's date and format.",
+                zh: "**學術比賽：**分享家長問卷結果（54 個回覆家庭中有 33 個計畫參賽），並討論比賽日期與形式的各種方案。",
+              },
+              {
+                en: "**55th anniversary T-shirts:** FCS turns 55 this year! Shirts designed by our Publication team are included with registration, and we're aiming to hand them out by the end of the year.",
+                zh: "**55 週年紀念 T 恤：**本校今年創校 55 週年！由出版組設計的紀念 T 恤隨註冊附贈，預計年底前發放。",
+              },
+            ],
+          },
+        ],
+      },
+      {
+        kind: "prose",
+        title: {
+          en: "Welcome Our New Parent Board Member",
+          zh: "歡迎新任家長代表校務委員",
+        },
+        blocks: [
+          {
+            block: "image",
+            src: "/images/news/enews-2026-10-30-parent-board-members.jpg",
+            alt: {
+              en: "Portraits of FCS's two parent board members: Katie on the left and Alan Yang on the right.",
+              zh: "本校兩位家長代表校務委員的照片：左為 Katie，右為楊展其（Alan Yang）。",
+            },
+            caption: {
+              en: "Katie (left) and Alan Yang (right), our two parent board members.",
+              zh: "家長代表校務委員：Katie（左）與楊展其 Alan Yang（右）。",
+            },
+          },
+          {
+            block: "prose",
+            text: {
+              en: "At the All Parent Assembly, parents voted in **Katie** as our newest parent representative on the School Board. She will serve alongside **Alan Yang (楊展其)** as one of our two parent board members. Welcome, Katie, and thank you both for serving our school community!",
+              zh: "在本次全校家長大會中，家長們投票選出 **Katie** 擔任新任家長代表校務委員，她將與 **楊展其（Alan Yang）** 一同擔任兩位家長代表校務委員。歡迎 Katie，也感謝兩位為學校付出！",
+            },
+          },
+          {
+            block: "prose",
+            text: {
+              en: "The School Board has five members: the principal, two former principals or vice principals, and two parent representatives elected at the All Parent Assembly. Parent representatives serve a one-year term and may be re-elected once.",
+              zh: "校務委員會設委員五人：現任校長為當然委員，另由歷任校長、副校長中遴選 2 名，其餘 2 名家長代表委員由家長大會選舉產生，任期 1 年，可連任 1 次。",
+            },
+          },
+        ],
+      },
+      {
+        kind: "prose",
+        title: { en: "Halloween Is Tomorrow!", zh: "萬聖節活動就在明天！" },
+        blocks: [
+          {
+            block: "prose",
+            text: {
+              en: "🎃 Our Halloween event is **tomorrow, Saturday, October 31**, in the courtyard (the fire drill assembly area). It's one of the events our kids look forward to all year, and we still need a few more parents to help hand out candy and make it a fun, memorable day!",
+              zh: "🎃 萬聖節活動就在**明天（10月31日，週六）**，地點在中庭（消防演習集合區）。這是孩子們每年最期待的活動之一，我們還需要幾位家長來幫忙發糖果，一起為孩子們打造歡樂又難忘的一天！",
+            },
+          },
+          {
+            block: "list",
+            items: [
+              { en: "**Booth helpers, 9–11 AM:** set up a booth and hand out candy", zh: "**攤位志工，上午 9:00–11:00：**佈置攤位、發糖果" },
+              { en: "**Booth helpers, 11 AM–1 PM:** hand out candy, then take down", zh: "**攤位志工，上午 11:00–下午 1:00：**發糖果、活動後收拾" },
+              { en: "**Events team, 9 AM–1 PM:** setup, courtyard runner, take-down", zh: "**活動組，上午 9:00–下午 1:00：**場地佈置、中庭支援、活動後收拾" },
+            ],
+          },
+          {
+            block: "prose",
+            text: {
+              en: "**[Sign up to help here](https://docs.google.com/spreadsheets/d/1gHyMzDr1Df_6hcO85VOGnGJSN0D4SiX3uCh3SjdHduY/edit)**, and let's make it a spooktacular day!",
+              zh: "**[點此報名當志工](https://docs.google.com/spreadsheets/d/1gHyMzDr1Df_6hcO85VOGnGJSN0D4SiX3uCh3SjdHduY/edit)**，一起讓這一天充滿歡笑！",
+            },
+          },
+        ],
+      },
+      {
+        kind: "prose",
+        title: { en: "School Calendar 2026–2027", zh: "學校行事曆 2026–2027" },
+        blocks: [
+          { block: "prose", text: { en: "**Coming event(s):**", zh: "**近期活動：**" } },
+          {
+            block: "list",
+            items: [
+              { en: "**10/31/2026**: Halloween Event", zh: "**10/31/2026**：萬聖節活動" },
+              {
+                en: "**11/7/2026**: Academic Contest sign-up ends; AC Makeup Class 1; Staff Meeting",
+                zh: "**11/7/2026**：學術比賽報名截止、學分班補課一、教職員會議",
+              },
+              { en: "**11/14/2026**: Fundraising Food Festival", zh: "**11/14/2026**：募款小吃義賣" },
+              { en: "**11/28/2026**: No school (Thanksgiving)", zh: "**11/28/2026**：不上課（感恩節）" },
+            ],
+          },
+        ],
+        links: [
+          {
+            label: { en: "Download calendar (Chinese)", zh: "下載行事曆（中文版）" },
+            href: "https://drive.google.com/file/d/1kUl_nhpdAC0WLE0r6smb2fSjDUzRmSdX/view",
+          },
+          {
+            label: { en: "Download calendar (English)", zh: "下載行事曆（英文版）" },
+            href: "https://drive.google.com/file/d/1mHm8B4-LnNZkqqOY8qMvG7OReWaconzM/view",
+          },
+        ],
+      },
+      {
+        kind: "callout",
+        title: {
+          en: "Donate & Double Your Contribution",
+          zh: "捐款與雙倍貢獻",
+        },
+        blocks: [
+          {
+            block: "prose",
+            text: {
+              en: "FCS is a non-profit 501(c) organization. Donations are tax-deductible (IRS tax ID: **94-2978949**) and help Fremont Chinese School continue to operate, teach Chinese courses, and pass on Chinese culture.",
+              zh: "費利蒙中文學校是一家非營利性 501(c) 組織。您可以透過向費利蒙中文學校捐款來享受稅務抵減（IRS tax ID: **94-2978949**）。您的捐款將幫助本校繼續運營、教授中文課程並傳承中華文化。",
+            },
+          },
+          {
+            block: "prose",
+            text: {
+              en: "**Double your contribution:** thank you for volunteering at school! Your employer may offer volunteer cash rewards, so please consider donating those rewards to Fremont Chinese School. [Instructions and an example](https://docs.google.com/presentation/d/1Op2TlZ4wFSz7epqziWHmEauqEa5FnqRJ5yJofqQhpqs/edit).",
+              zh: "**雙倍貢獻：**感謝您在學校擔任義工！您的雇主也許提供義工獎勵金，歡迎將這筆獎勵金捐助給學校。[捐款方式說明與範例](https://docs.google.com/presentation/d/1Op2TlZ4wFSz7epqziWHmEauqEa5FnqRJ5yJofqQhpqs/edit)。",
+            },
+          },
+        ],
+        cta: {
+          label: { en: "Donate", zh: "前往捐款" },
+          href: "/donate",
+        },
+      },
+      {
+        kind: "sponsors",
+        title: {
+          en: "2026 Yearbook Gold Sponsors",
+          zh: "2026 年刊金牌贊助商",
+        },
+        logos: [
+          {
+            name: "IvyMAX 飛達教育",
+            image: "/images/sponsors/ivymax.jpg",
+            href: "https://ivymax.com",
+          },
+          {
+            name: "Fremont United Auto Service Inc. 聯合汽車修理中心",
+            image: "/images/sponsors/fremont-united-auto.jpg",
+            // href omitted: fremontunitedautoservice.com had no DNS records
+            // on 2026-10-13 (domain registered, site down; Angela confirmed
+            // it's down). Logo runs unlinked; restore the href once it resolves.
+          },
+        ],
+      },
+    ],
+  },
+  {
     // Composed from the draft Angela pasted in conversation (2026-10-19).
     // Draft token generated with `openssl rand -hex 3`.
     //
