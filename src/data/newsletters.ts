@@ -260,7 +260,7 @@ export const issues: NewsletterIssue[] = [
     // neutral: the deck lists options, not a decision.
     //
     // Board photo: two photos Angela sent, combined side by side (Katie left,
-    // the second photo assumed to be Alan Yang; flagged as a gap to confirm).
+    // Alan Yang right, both confirmed by Angela); Katie Tseng = 曾毓心.
     // Halloween details (courtyard, shifts) from the deck's Halloween slide.
     // Calendar: every Google Calendar event 10/30–11/30.
     // The principal's note is drafted for Angela's review (she gave no note).
@@ -272,8 +272,6 @@ export const issues: NewsletterIssue[] = [
     },
     draft: "e969da",
     gaps: [
-      "Katie's full name (and Chinese name, if she has one) for the board member announcement.",
-      "Confirm the second board photo is Alan Yang.",
       "Angela to review the drafted principal's note.",
     ],
     sections: [
@@ -292,8 +290,8 @@ export const issues: NewsletterIssue[] = [
           {
             block: "prose",
             text: {
-              en: "Please also join me in welcoming Katie, our newest parent board member. And don't forget: our Halloween event is tomorrow, 10/31. We still need a few volunteers!",
-              zh: "也請大家一起歡迎新任家長代表校務委員 Katie。別忘了，萬聖節活動就在明天（10/31），我們還需要幾位志工幫忙！",
+              en: "Please also join me in welcoming Katie Tseng, our newest parent board member. And don't forget: our Halloween event is tomorrow, 10/31. We still need a few volunteers!",
+              zh: "也請大家一起歡迎新任家長代表校務委員曾毓心（Katie Tseng）。別忘了，萬聖節活動就在明天（10/31），我們還需要幾位志工幫忙！",
             },
           },
         ],
@@ -383,19 +381,19 @@ export const issues: NewsletterIssue[] = [
             block: "image",
             src: "/images/news/enews-2026-10-30-parent-board-members.jpg",
             alt: {
-              en: "Portraits of FCS's two parent board members: Katie on the left and Alan Yang on the right.",
-              zh: "本校兩位家長代表校務委員的照片：左為 Katie，右為楊展其（Alan Yang）。",
+              en: "Portraits of FCS's two parent board members: Katie Tseng on the left and Alan Yang on the right.",
+              zh: "本校兩位家長代表校務委員的照片：左為曾毓心（Katie Tseng），右為楊展其（Alan Yang）。",
             },
             caption: {
-              en: "Katie (left) and Alan Yang (right), our two parent board members.",
-              zh: "家長代表校務委員：Katie（左）與楊展其 Alan Yang（右）。",
+              en: "Katie Tseng (left) and Alan Yang (right), our two parent board members.",
+              zh: "家長代表校務委員：曾毓心 Katie Tseng（左）與楊展其 Alan Yang（右）。",
             },
           },
           {
             block: "prose",
             text: {
-              en: "At the All Parent Assembly, parents voted in **Katie** as our newest parent representative on the School Board. She will serve alongside **Alan Yang (楊展其)** as one of our two parent board members. Welcome, Katie, and thank you both for serving our school community! A heartfelt thank-you as well to all of our past parent board members for their service to FCS.",
-              zh: "在本次全校家長大會中，家長們投票選出 **Katie** 擔任新任家長代表校務委員，她將與 **楊展其（Alan Yang）** 一同擔任兩位家長代表校務委員。歡迎 Katie，也感謝兩位為學校付出！同時也衷心感謝歷任家長代表校務委員對學校的貢獻。",
+              en: "At the All Parent Assembly, parents voted in **Katie Tseng (曾毓心)** as our newest parent representative on the School Board. She will serve alongside **Alan Yang (楊展其)** as one of our two parent board members. Welcome, Katie, and thank you both for serving our school community! A heartfelt thank-you as well to all of our past parent board members for their service to FCS.",
+              zh: "在本次全校家長大會中，家長們投票選出 **曾毓心（Katie Tseng）** 擔任新任家長代表校務委員，她將與 **楊展其（Alan Yang）** 一同擔任兩位家長代表校務委員。歡迎 Katie，也感謝兩位為學校付出！同時也衷心感謝歷任家長代表校務委員對學校的貢獻。",
             },
           },
           {
