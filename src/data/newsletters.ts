@@ -310,10 +310,18 @@ export const issues: NewsletterIssue[] = [
         },
         blocks: [
           {
+            block: "image",
+            src: "/images/news/enews-2026-10-30-parent-assembly-vote.jpg",
+            alt: {
+              en: "Parents raising their hands to vote for the new parent board member at the All Parent Assembly.",
+              zh: "全校家長大會上，家長們舉手投票選出新任家長代表校務委員。",
+            },
+          },
+          {
             block: "prose",
             text: {
-              en: "Here are the key takeaways from the 10/24 All Parent Assembly. [View the slides](https://docs.google.com/presentation/d/1tUO9zcd1mDt_T46gOM-F3Flo5eLdpiyFVV2e8ZZ4Ow4/edit) · [See the photos](TODO: ask Angela for the assembly photo album link)",
-              zh: "以下是 10/24 全校家長大會的重點整理。[查看簡報](https://docs.google.com/presentation/d/1tUO9zcd1mDt_T46gOM-F3Flo5eLdpiyFVV2e8ZZ4Ow4/edit) · [查看照片](TODO: ask Angela for the assembly photo album link)",
+              en: "Here are the key takeaways from the 10/24 All Parent Assembly. [View the slides](https://docs.google.com/presentation/d/1tUO9zcd1mDt_T46gOM-F3Flo5eLdpiyFVV2e8ZZ4Ow4/edit) · [See the photos](https://photos.app.goo.gl/QyqR4W7rQbGtRYne9)",
+              zh: "以下是 10/24 全校家長大會的重點整理。[查看簡報](https://docs.google.com/presentation/d/1tUO9zcd1mDt_T46gOM-F3Flo5eLdpiyFVV2e8ZZ4Ow4/edit) · [查看照片](https://photos.app.goo.gl/QyqR4W7rQbGtRYne9)",
             },
           },
           {
@@ -386,8 +394,8 @@ export const issues: NewsletterIssue[] = [
           {
             block: "prose",
             text: {
-              en: "At the All Parent Assembly, parents voted in **Katie** as our newest parent representative on the School Board. She will serve alongside **Alan Yang (楊展其)** as one of our two parent board members. Welcome, Katie, and thank you both for serving our school community!",
-              zh: "在本次全校家長大會中，家長們投票選出 **Katie** 擔任新任家長代表校務委員，她將與 **楊展其（Alan Yang）** 一同擔任兩位家長代表校務委員。歡迎 Katie，也感謝兩位為學校付出！",
+              en: "At the All Parent Assembly, parents voted in **Katie** as our newest parent representative on the School Board. She will serve alongside **Alan Yang (楊展其)** as one of our two parent board members. Welcome, Katie, and thank you both for serving our school community! A heartfelt thank-you as well to all of our past parent board members for their service to FCS.",
+              zh: "在本次全校家長大會中，家長們投票選出 **Katie** 擔任新任家長代表校務委員，她將與 **楊展其（Alan Yang）** 一同擔任兩位家長代表校務委員。歡迎 Katie，也感謝兩位為學校付出！同時也衷心感謝歷任家長代表校務委員對學校的貢獻。",
             },
           },
           {
