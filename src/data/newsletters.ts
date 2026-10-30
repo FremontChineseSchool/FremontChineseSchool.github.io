@@ -262,6 +262,9 @@ export const issues: NewsletterIssue[] = [
     // Board photo: two photos Angela sent, combined side by side (Katie left,
     // Alan Yang right, both confirmed by Angela); Katie Tseng = 曾毓心.
     // Halloween details (courtyard, shifts) from the deck's Halloween slide.
+    // Halloween flyer: screenshot Angela sent (original export pending).
+    // Academic Contest reminder: dates, three-event limit, sign-up and
+    // contact links from the site's /academic-contest page (content.ts).
     // Calendar: every Google Calendar event 10/30–11/30.
     // The principal's note is drafted for Angela's review (she gave no note).
     date: "2026-10-30",
@@ -410,6 +413,20 @@ export const issues: NewsletterIssue[] = [
         title: { en: "Halloween Is Tomorrow!", zh: "萬聖節活動就在明天！" },
         blocks: [
           {
+            // Screenshot of the flyer (572px wide); Angela is looking for the
+            // original export. Swap the file in when it turns up.
+            block: "image",
+            src: "/images/news/enews-2026-10-30-halloween-flyer.jpg",
+            alt: {
+              en: "FCS Halloween flyer with a jack-o'-lantern, candy, and bats, inviting students to come in costume.",
+              zh: "費利蒙中文學校萬聖節活動宣傳單，以南瓜燈、糖果與蝙蝠裝飾，邀請學生變裝參加。",
+            },
+            caption: {
+              en: "Saturday, 10/31, 9:50 AM–12:15 PM at Irvington High School. Come to school in your favorite costume for an outdoor costume parade and treats! Candy and a photo booth.",
+              zh: "10/31（六）上午 9:50 至中午 12:15，Irvington High School。穿上你最喜歡的服裝來學校吧！我們將在戶外進行遊行，並收集美味的小點心。現場有糖果與拍照區。",
+            },
+          },
+          {
             block: "prose",
             text: {
               en: "🎃 Our Halloween event is **tomorrow, Saturday, October 31**, in the courtyard (the fire drill assembly area). It's one of the events our kids look forward to all year, and we still need a few more parents to help hand out candy and make it a fun, memorable day!",
@@ -429,6 +446,26 @@ export const issues: NewsletterIssue[] = [
             text: {
               en: "**[Sign up to help here](https://docs.google.com/spreadsheets/d/1gHyMzDr1Df_6hcO85VOGnGJSN0D4SiX3uCh3SjdHduY/edit)**, and let's make it a spooktacular day!",
               zh: "**[點此報名當志工](https://docs.google.com/spreadsheets/d/1gHyMzDr1Df_6hcO85VOGnGJSN0D4SiX3uCh3SjdHduY/edit)**，一起讓這一天充滿歡笑！",
+            },
+          },
+        ],
+      },
+      {
+        kind: "prose",
+        title: { en: "Academic Contest Sign-up Is Open", zh: "學術比賽開放報名中" },
+        blocks: [
+          {
+            block: "prose",
+            text: {
+              en: "A friendly reminder: Academic Contest sign-up is open now and **closes Saturday, 11/7**. The contest itself is on **Saturday, 12/19**. Students can choose up to three events; please make sure their time slots and age groups don't conflict.",
+              zh: "溫馨提醒：學術比賽（Academic Contest）現正開放報名，**報名將於 11/7（六）截止**，比賽日為 **12/19（六）**。每位學生最多可報名三個項目，請留意各項目的時段與年齡組別不要衝突。",
+            },
+          },
+          {
+            block: "prose",
+            text: {
+              en: "**[Sign up online here](https://fcsapp.faypier.com/users/login)** · [Contest details and step-by-step guide](/academic-contest). Questions? Email [ac@fremontchineseschool.org](mailto:ac@fremontchineseschool.org).",
+              zh: "**[點此線上報名](https://fcsapp.faypier.com/users/login)** · [比賽詳情與報名步驟說明](/zh/academic-contest)。如有疑問，請來信 [ac@fremontchineseschool.org](mailto:ac@fremontchineseschool.org)。",
             },
           },
         ],
