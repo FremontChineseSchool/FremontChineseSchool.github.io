@@ -266,7 +266,7 @@ export const issues: NewsletterIssue[] = [
     // Academic Contest reminder: dates, three-event limit, sign-up and
     // contact links from the site's /academic-contest page (content.ts).
     // Calendar: every Google Calendar event 10/30–11/30.
-    // The principal's note is drafted for Angela's review (she gave no note).
+    // The principal's note was drafted here and approved by Angela (2026-10-29).
     date: "2026-10-30",
     label: { en: "October 30, 2026", zh: "2026年10月30日" },
     summary: {
@@ -274,9 +274,6 @@ export const issues: NewsletterIssue[] = [
       zh: "全校家長大會中英雙語重點回顧、歡迎新任家長代表校務委員，以及明天（10/31）萬聖節活動的最後志工招募。",
     },
     draft: "e969da",
-    gaps: [
-      "Angela to review the drafted principal's note.",
-    ],
     sections: [
       {
         kind: "prose",
