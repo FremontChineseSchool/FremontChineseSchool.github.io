@@ -262,7 +262,7 @@ export const issues: NewsletterIssue[] = [
     // Board photo: two photos Angela sent, combined side by side (Katie left,
     // Alan Yang right, both confirmed by Angela); Katie Tseng = 曾毓心.
     // Halloween details (courtyard, shifts) from the deck's Halloween slide.
-    // Halloween flyer: screenshot Angela sent (original export pending).
+    // Halloween flyer: original export Angela sent.
     // Academic Contest reminder: dates, three-event limit, sign-up and
     // contact links from the site's /academic-contest page (content.ts).
     // Calendar: every Google Calendar event 10/30–11/30.
@@ -288,6 +288,13 @@ export const issues: NewsletterIssue[] = [
             text: {
               en: "Thank you to everyone who joined last Saturday's All Parent Assembly! Since the meeting was in Chinese, we've put together a recap of the key takeaways in both English and Chinese below, along with the slides and photos.",
               zh: "感謝大家上週六撥空出席全校家長大會！由於會議以中文進行，我們在下方整理了中英雙語的重點回顧，並附上簡報與照片連結。",
+            },
+          },
+          {
+            block: "prose",
+            text: {
+              en: "Academic Contest sign-up is open through **Saturday, 11/7**, so please sign up soon (details below). We're sorry the sign-up site was down for a day this week; it's back up now. Thank you for your patience!",
+              zh: "學術比賽報名開放至 **11/7（六）**，請把握時間報名（詳情請見下方說明）。本週報名網站曾短暫故障一天，造成不便敬請見諒，目前已恢復正常，謝謝大家的耐心！",
             },
           },
           {
@@ -413,10 +420,10 @@ export const issues: NewsletterIssue[] = [
         title: { en: "Halloween Is Tomorrow!", zh: "萬聖節活動就在明天！" },
         blocks: [
           {
-            // Screenshot of the flyer (572px wide); Angela is looking for the
-            // original export. Swap the file in when it turns up.
+            // Original flyer export from Angela. Unlike the screenshot she sent
+            // first, it carries no date/time, so the caption supplies them.
             block: "image",
-            src: "/images/news/enews-2026-10-30-halloween-flyer.jpg",
+            src: "/images/news/enews-2026-10-30-halloween-flyer-original.jpg",
             alt: {
               en: "FCS Halloween flyer with a jack-o'-lantern, candy, and bats, inviting students to come in costume.",
               zh: "費利蒙中文學校萬聖節活動宣傳單，以南瓜燈、糖果與蝙蝠裝飾，邀請學生變裝參加。",
