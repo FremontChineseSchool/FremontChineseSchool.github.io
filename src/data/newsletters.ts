@@ -406,15 +406,18 @@ export const issues: NewsletterIssue[] = [
           {
             block: "prose",
             text: {
-              en: "At the All Parent Assembly, parents voted in **Katie Tseng (曾毓心)** as our newest parent representative on the School Board. She will serve alongside **Alan Yang (楊展其)** as one of our two parent board members. Welcome, Katie, and thank you both for serving our school community! A heartfelt thank-you as well to all of our past parent board members for their service to FCS.",
-              zh: "在本次全校家長大會中，家長們投票選出 **曾毓心（Katie Tseng）** 擔任新任家長代表校務委員，她將與 **楊展其（Alan Yang）** 一同擔任兩位家長代表校務委員。歡迎 Katie，也感謝兩位為學校付出！同時也衷心感謝歷任家長代表校務委員對學校的貢獻。",
+              en: "At the All Parent Assembly, parents elected **Katie Tseng (曾毓心)** to the School Board, where she joins **Alan Yang (楊展其)** as one of our two parent representatives. Welcome, Katie, and thank you to all of our past parent board members!",
+              zh: "在全校家長大會中，家長們選出 **曾毓心（Katie Tseng）** 擔任家長代表校務委員，她將與 **楊展其（Alan Yang）** 一同代表家長參與校務。歡迎 Katie，也感謝歷任家長代表校務委員的付出！",
             },
           },
           {
+            // Board duties from the school regulations, section 4.4
+            // (old_website/regulations.html). Term length left out: the
+            // assembly slide says 1 year, the old regulations 2.
             block: "prose",
             text: {
-              en: "The School Board has five members: the principal, two former principals or vice principals, and two parent representatives elected at the All Parent Assembly. Parent representatives serve a one-year term and may be re-elected once.",
-              zh: "校務委員會設委員五人：現任校長為當然委員，另由歷任校長、副校長中遴選 2 名，其餘 2 名家長代表委員由家長大會選舉產生，任期 1 年，可連任 1 次。",
+              en: "The School Board is FCS's highest policy-making body. It sets the school's long-term direction, reviews the administrative team's work, approves the appointment of the principal and vice principal, and reports to parents on school operations and finances each semester.",
+              zh: "校務委員會是本校最高的審議與政策擬訂組織，負責規劃學校長短期發展方向、審議行政團隊的工作、同意校長與副校長的任用，並每學期向家長大會報告校務與財務。",
             },
           },
         ],
