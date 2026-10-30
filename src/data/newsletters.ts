@@ -328,8 +328,8 @@ export const issues: NewsletterIssue[] = [
           {
             block: "prose",
             text: {
-              en: "Here are the key takeaways from the 10/24 All Parent Assembly. [View the slides](https://docs.google.com/presentation/d/1tUO9zcd1mDt_T46gOM-F3Flo5eLdpiyFVV2e8ZZ4Ow4/edit) · [See the photos](https://photos.app.goo.gl/QyqR4W7rQbGtRYne9)",
-              zh: "以下是 10/24 全校家長大會的重點整理。[查看簡報](https://docs.google.com/presentation/d/1tUO9zcd1mDt_T46gOM-F3Flo5eLdpiyFVV2e8ZZ4Ow4/edit) · [查看照片](https://photos.app.goo.gl/QyqR4W7rQbGtRYne9)",
+              en: "Here are the key takeaways from the 10/24 All Parent Assembly. [View the slides](https://docs.google.com/presentation/d/1tUO9zcd1mDt_T46gOM-F3Flo5eLdpiyFVV2e8ZZ4Ow4/preview) · [See the photos](https://photos.app.goo.gl/QyqR4W7rQbGtRYne9)",
+              zh: "以下是 10/24 全校家長大會的重點整理。[查看簡報](https://docs.google.com/presentation/d/1tUO9zcd1mDt_T46gOM-F3Flo5eLdpiyFVV2e8ZZ4Ow4/preview) · [查看照片](https://photos.app.goo.gl/QyqR4W7rQbGtRYne9)",
             },
           },
           {
@@ -337,44 +337,44 @@ export const issues: NewsletterIssue[] = [
             ordered: true,
             items: [
               {
-                en: "**New leadership:** Angela Ha (夏芷筠) is our principal and Chih Han Goh (吳志漢) is our vice principal. A wave of new volunteer staff has joined this year.",
-                zh: "**新任行政團隊：**夏芷筠擔任校長、吳志漢擔任副校長，今年也有許多新義工加入行政團隊，學校煥然一新。",
+                en: "**New leadership:** Angela Ha is principal; Chih Han Goh (吳志漢) is vice principal.",
+                zh: "**新任行政團隊：**夏芷筠任校長，吳志漢任副校長。",
               },
               {
-                en: "**About FCS:** serving Fremont since 1972, a non-profit run entirely by volunteer staff, with WASC-accredited high school credit classes.",
-                zh: "**學校簡介：**本校自 1972 年起服務費利蒙社區，是由義工營運的非營利組織，高中學分班獲 WASC 認證。",
+                en: "**About FCS:** a volunteer-run non-profit since 1972, with WASC-accredited credit classes.",
+                zh: "**學校簡介：**1972 年創校，由義工營運的非營利組織，學分班獲 WASC 認證。",
               },
               {
-                en: "**Teams that need you:** Safety (2 spots), Registration, Academic (TA program, 1 spot), Social Media (1 spot), and Academic Contest (1 spot). Stop by the office (Room 229) on Saturdays, 9 AM–12:30 PM, or email [principal@fremontchineseschool.org](mailto:principal@fremontchineseschool.org).",
-                zh: "**誠徵義工：**訓育組（2 名）、註冊組、教務組（TA 計畫，1 名）、社群媒體組（1 名）及學術比賽組（1 名）。歡迎週六上午 9:00–12:30 到辦公室（229 教室）洽詢，或來信 [principal@fremontchineseschool.org](mailto:principal@fremontchineseschool.org)。",
+                en: "**Volunteers needed:** Safety, Registration, Academic, Social Media, and Contest teams.",
+                zh: "**誠徵義工：**訓育、註冊、教務、社群媒體及學術比賽組。",
               },
               {
-                en: "**Enrollment is up:** 254 students this year, up from 233, with 335 class enrollments (up from 302).",
-                zh: "**學生人數成長：**今年共 254 位學生（去年 233 位），總報課人次 335（去年 302）。",
+                en: "**Enrollment:** 254 students this year, up from 233.",
+                zh: "**學生人數：**今年 254 位學生，去年 233 位。",
               },
               {
-                en: "**Technology:** our new bilingual website is live, and the FCS Parent Portal is in progress: one account per family, with online registration and payment (no more paper checks).",
-                zh: "**資訊專案：**全新中英雙語網站已上線；家長專區（Parent Portal）開發中，每個家庭一個帳號，可線上註冊與繳費，不再需要紙本支票。",
+                en: "**Technology:** our new website is live; the Parent Portal (online registration and payment) is coming.",
+                zh: "**資訊專案：**新網站已上線，家長專區（線上註冊繳費）即將推出。",
               },
               {
-                en: "**Budget:** the draft 2026–27 budget is about $290K and aims to break even. Payroll and classroom rent are over 80% of costs, and tuition alone doesn't cover them, so we rely on CD interest and donations to close the gap.",
-                zh: "**財務報告：**2026–27 學年預算草案約 $290K，目標收支平衡。薪資與教室租金佔支出八成以上，學費收入不足以支應全部開銷，需仰賴定存利息與捐款補足。",
+                en: "**Budget:** about $290K and aiming to break even; tuition alone doesn't cover our costs.",
+                zh: "**財務：**預算約 $290K，力求收支平衡；學費不足以支應全部開銷。",
               },
               {
-                en: "**Help more families find FCS:** family referrals brought in 38 new students this year. Tell friends about us, follow and share our Facebook and Instagram posts, and leave us a Google review once our business profile is live.",
-                zh: "**幫助更多家庭認識我們：**今年有 38 位新生來自家長推薦。歡迎推薦親友、追蹤並分享學校的 Facebook 與 Instagram，Google 商家頁面上線後也請幫忙留下評論。",
+                en: "**Spread the word:** 38 new students came from family referrals. Tell friends and share our posts!",
+                zh: "**推薦親友：**今年 38 位新生來自家長推薦，歡迎分享學校資訊！",
               },
               {
-                en: "**Sponsors and giving:** introduce local businesses to yearbook ad sponsorships, and check whether your employer matches donations or pays for volunteer hours, such as traffic duty. Donations are tax-deductible (EIN **94-2978949**).",
-                zh: "**贊助與捐款：**歡迎介紹在地商家刊登年刊廣告，也請查詢您的公司是否提供捐款對等或義工時數捐款（例如交通導護時數）。捐款可抵稅（EIN **94-2978949**）。",
+                en: "**Giving:** donations are tax-deductible, and many employers match gifts or volunteer hours.",
+                zh: "**捐款：**捐款可抵稅，許多公司也提供捐款對等或義工時數捐款。",
               },
               {
-                en: "**Academic Contest:** we shared the parent survey results (33 of 54 families plan to enter) and talked through options for the contest's date and format.",
-                zh: "**學術比賽：**分享家長問卷結果（54 個回覆家庭中有 33 個計畫參賽），並討論比賽日期與形式的各種方案。",
+                en: "**Academic Contest:** 33 of 54 surveyed families plan to enter; we discussed timing.",
+                zh: "**學術比賽：**54 個受訪家庭中有 33 個計畫參賽，並討論了比賽時間。",
               },
               {
-                en: "**55th anniversary T-shirts:** FCS turns 55 this year! Shirts designed by our Publication team are included with registration, and we're aiming to hand them out by the end of the year.",
-                zh: "**55 週年紀念 T 恤：**本校今年創校 55 週年！由出版組設計的紀念 T 恤隨註冊附贈，預計年底前發放。",
+                en: "**55th anniversary:** commemorative T-shirts come with registration, expected by year's end.",
+                zh: "**55 週年：**紀念 T 恤隨註冊附贈，預計年底前發放。",
               },
             ],
           },
