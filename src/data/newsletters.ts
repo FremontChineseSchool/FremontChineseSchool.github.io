@@ -273,7 +273,7 @@ export const issues: NewsletterIssue[] = [
       en: "A bilingual recap of the All Parent Assembly, a welcome to our newest parent board member, and a last call for Halloween volunteers for tomorrow, 10/31.",
       zh: "全校家長大會中英雙語重點回顧、歡迎新任家長代表校務委員，以及明天（10/31）萬聖節活動的最後志工招募。",
     },
-    draft: "e969da",
+    emailToken: "e969da",
     sections: [
       {
         kind: "prose",
