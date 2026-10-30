@@ -375,6 +375,13 @@ export const issues: NewsletterIssue[] = [
               },
             ],
           },
+          {
+            block: "prose",
+            text: {
+              en: "The slides have a lot more detail, including the budget breakdown, enrollment by class, and which employers match gifts. **For more details, [check out the slides](https://docs.google.com/presentation/d/1tUO9zcd1mDt_T46gOM-F3Flo5eLdpiyFVV2e8ZZ4Ow4/preview)!**",
+              zh: "簡報中有更多詳細資訊，包括預算明細、各班人數，以及提供捐款對等的公司名單。**更多詳情請[參閱簡報](https://docs.google.com/presentation/d/1tUO9zcd1mDt_T46gOM-F3Flo5eLdpiyFVV2e8ZZ4Ow4/preview)！**",
+            },
+          },
         ],
       },
       {
