@@ -459,8 +459,9 @@ export const content = {
     courses: {
       title: 'Courses',
       eyebrow: 'Programs › Courses',
-      intro:
-        'What each class covers this year, written by the teacher who leads it. Use this page to choose a level, then pick your classes in the FCS Portal.',
+      intro: 'What each class covers this year, written by the teacher who leads it.',
+      // Appended to the intro once registration is open (REGISTRATION_OPEN).
+      introRegister: 'Use this page to choose a level, then pick your classes in the FCS Portal.',
       // Short link text used by Programs, Teachers and Electives to reach this page.
       linkLabel: 'What each class covers this year →',
       registerTitle: 'Ready to register for {year}?',
@@ -1411,8 +1412,8 @@ export const content = {
     courses: {
       title: '課程介紹',
       eyebrow: '課程 › 課程介紹',
-      intro:
-        '各班本學年的課程重點，由任課老師親自撰寫。請先在此選擇適合的程度，再到 FCS Portal 選課。',
+      intro: '各班本學年的課程重點，由任課老師親自撰寫。',
+      introRegister: '請先在此選擇適合的程度，再到 FCS Portal 選課。',
       linkLabel: '各班本學年課程重點 →',
       registerTitle: '準備好報名 {year} 學年了嗎？',
       registerBody: '在 Portal 選課時，每門課旁都會以中英文顯示相同的課程介紹。',

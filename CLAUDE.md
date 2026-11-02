@@ -90,7 +90,7 @@ Staff edit it in the FCS portal (`FremontChineseSchool/portal`), per class per s
 year, in English and Chinese. The site reads it like the school calendar: fetched at
 build time, with a committed fallback.
 
-- **`src/data/portal.ts`** — the constants: the portal's Supabase REST URL, its anon/
+- **`src/data/portal.ts`** — the constants (incl. `REGISTRATION_OPEN`, which gates the "Register in the Portal" callout on /courses — flip it when registration opens): the portal's Supabase REST URL, its anon/
   publishable key (public by design — it ships in the portal's own frontend bundle —
   so it is committed, not a secret), the portal's public URL, and `portalToSiteCode`
   (the portal calls Pre-K `TPK`; this site calls it `PK`).

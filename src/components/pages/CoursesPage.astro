@@ -3,7 +3,7 @@ import { content } from "../../i18n/content";
 import { localizedPath, type Lang } from "../../i18n/ui";
 import { classLabel, teachersForClass } from "../../data/teachers";
 import { courseDescriptions, courseSchoolYear, type CourseDescription } from "../../data/course-descriptions";
-import { PORTAL_URL } from "../../data/portal";
+import { PORTAL_URL, REGISTRATION_OPEN } from "../../data/portal";
 
 interface Props {
   lang: Lang;
@@ -37,9 +37,10 @@ function body(course: CourseDescription): { text: string; lang: Lang; tagged: bo
 <section style="background: var(--color-fcs-white);" class="mx-auto max-w-3xl px-4 py-14">
   <p class="eyebrow">{c.eyebrow}</p>
   <h1 class="mt-2 text-3xl font-semibold sm:text-4xl" style="letter-spacing: -0.02em; color: var(--color-fcs-black);">{c.title}</h1>
-  <p class="mt-4 text-lg leading-relaxed" style="color: var(--color-fcs-muted);">{c.intro}</p>
+  <p class="mt-4 text-lg leading-relaxed" style="color: var(--color-fcs-muted);">{REGISTRATION_OPEN ? `${c.intro}${isZh ? "" : " "}${c.introRegister}` : c.intro}</p>
 
-  <!-- Register callout -->
+  <!-- Register callout: hidden until registration opens -->
+  {REGISTRATION_OPEN && (
   <div
     class="mt-6 flex flex-wrap items-center justify-between gap-4 rounded-[10px] p-5"
     style="background: var(--color-fcs-orange-light); border: 1px solid var(--color-fcs-border);"
@@ -55,6 +56,7 @@ function body(course: CourseDescription): { text: string; lang: Lang; tagged: bo
       {c.registerCta}
     </a>
   </div>
+  )}
 
   <nav class="mt-7 flex flex-wrap items-center gap-2" aria-label={c.jumpLabel}>
     <span class="text-xs font-semibold uppercase tracking-wide" style="color: var(--color-fcs-muted);">{c.jumpLabel}</span>
