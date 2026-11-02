@@ -1,6 +1,7 @@
 ---
 import { content } from "../../i18n/content";
-import { type Lang } from "../../i18n/ui";
+import { localizedPath, type Lang } from "../../i18n/ui";
+import { getCourseDescription } from "../../data/course-descriptions";
 import { teachersByGroup, groupLabels, classLabel, defaultPhotoFocus } from "../../data/teachers";
 
 interface Props {
@@ -22,7 +23,14 @@ const displayName = (t: { nameZh: string; nameEn: string }) =>
 const secondaryName = (t: { nameZh: string; nameEn: string }) =>
   isZh ? t.nameEn : `${t.nameZh} 老師`;
 
-const courseNotesLabel = isZh ? "本學年課程重點" : "What this year covers";
+// Language and AC classes have a card on /courses (id = class code); electives
+// have none there — they keep their own page, so their chips go to the matching
+// card on /electives instead. (Decided per class, not per teacher: a language
+// teacher can also advise an elective such as LSC.)
+const classHref = (code: string) =>
+  getCourseDescription(code)?.courseType === "elective"
+    ? `${localizedPath(lang, "electives")}#${code}`
+    : `${localizedPath(lang, "courses")}#${code}`;
 const emailLabelFor = (name: string) => (isZh ? `寄信給${name}` : `Email ${name}`);
 
 // Split an address at the @ so the template can offer a <wbr> there. Long
@@ -40,6 +48,10 @@ const emailParts = (email: string): [string, string] => {
 <section style="background: var(--color-fcs-white);" class="mx-auto max-w-3xl px-4 py-14">
   <h1 class="text-3xl font-semibold sm:text-4xl" style="letter-spacing: -0.02em; color: var(--color-fcs-black);">{c.title}</h1>
   <p class="mt-4 text-lg leading-relaxed" style="color: var(--color-fcs-muted);">{c.intro}</p>
+  <a href={localizedPath(lang, "courses")}
+    class="mt-3 inline-flex items-center gap-1.5 text-sm font-semibold hover:underline" style="color: var(--color-fcs-green);">
+    {content[lang].courses.linkLabel}
+  </a>
 
   <!-- Section jump links — 25 cards is a long scroll, and families arrive
        looking for one specific teacher. -->
@@ -109,15 +121,19 @@ const emailParts = (email: string): [string, string] => {
                      they are maintained. -->
                 <ul class="mt-3 flex flex-wrap gap-1.5" aria-label={c.teachesLabel}>
                   {t.classes.map((code) => (
-                    <li
-                      class="inline-flex items-center gap-1.5 rounded-full py-1 pl-1.5 pr-3 text-xs"
-                      style="background: var(--color-fcs-surface); border: 1px solid var(--color-fcs-border); color: var(--color-fcs-muted);"
-                    >
-                      <span
-                        class="rounded px-1.5 py-0.5 font-mono text-xs font-semibold"
-                        style="background: var(--color-fcs-green-light); color: var(--color-fcs-green);"
-                      >{code}</span>
-                      {classLabel(code, lang)}
+                    <li>
+                      <a
+                        href={classHref(code)}
+                        class="fcs-class-chip inline-flex items-center gap-1.5 rounded-full py-1 pl-1.5 pr-3 text-xs"
+                        style="background: var(--color-fcs-surface); border: 1px solid var(--color-fcs-border); color: var(--color-fcs-muted);"
+                      >
+                        <span
+                          class="rounded px-1.5 py-0.5 font-mono text-xs font-semibold"
+                          style="background: var(--color-fcs-green-light); color: var(--color-fcs-green);"
+                        >{code}</span>
+                        {classLabel(code, lang)}
+                        <span aria-hidden="true">→</span>
+                      </a>
                     </li>
                   ))}
                 </ul>
@@ -132,29 +148,6 @@ const emailParts = (email: string): [string, string] => {
                   <p class="mt-2 leading-relaxed" style="color: var(--color-fcs-muted);">{t.bio[lang]}</p>
                 ) : (
                   <p class="mt-4 text-sm italic" style="color: var(--color-fcs-muted);">{c.bioPending}</p>
-                )}
-
-                <!-- Collapsed by default: only 16 of the 23 language and AC
-                     classes have notes, and a closed disclosure keeps the
-                     roster scannable while making the gaps unremarkable.
-                     Native <details> needs no JS and is keyboard-accessible. -->
-                {t.courseNotes && (
-                  <details class="fcs-course-notes mt-4 rounded-[8px]" style="background: var(--color-fcs-surface); border: 1px solid var(--color-fcs-border);">
-                    <summary class="cursor-pointer list-none px-4 py-2.5 text-sm font-semibold" style="color: var(--color-fcs-green);">
-                      <span class="fcs-course-notes__marker" aria-hidden="true">▸</span>
-                      {courseNotesLabel}
-                    </summary>
-                    <div class="space-y-4 px-4 pb-4 pt-1">
-                      {t.courseNotes.map((n) => (
-                        <div>
-                          <p class="text-xs font-semibold" style="color: var(--color-fcs-deep-jade);">
-                            <span class="font-mono">{n.code}</span> · {classLabel(n.code, lang)}
-                          </p>
-                          <p class="mt-1 text-sm leading-relaxed" style="color: var(--color-fcs-muted);">{n[lang]}</p>
-                        </div>
-                      ))}
-                    </div>
-                  </details>
                 )}
 
                 <a
@@ -178,17 +171,6 @@ const emailParts = (email: string): [string, string] => {
 </section>
 
 <style>
-  /* Replace the native disclosure triangle with our own so it can be coloured
-     and rotated consistently across browsers (Safari still renders the default
-     marker without the -webkit- rule). */
-  .fcs-course-notes summary::-webkit-details-marker { display: none; }
-  .fcs-course-notes__marker {
-    display: inline-block;
-    margin-right: 0.35rem;
-    transition: transform 150ms ease;
-  }
-  .fcs-course-notes[open] .fcs-course-notes__marker { transform: rotate(90deg); }
-  @media (prefers-reduced-motion: reduce) {
-    .fcs-course-notes__marker { transition: none; }
-  }
+  .fcs-class-chip { text-decoration: none; min-height: 1.75rem; }
+  .fcs-class-chip:hover { border-color: var(--color-fcs-green); color: var(--color-fcs-green-dark); }
 </style>
