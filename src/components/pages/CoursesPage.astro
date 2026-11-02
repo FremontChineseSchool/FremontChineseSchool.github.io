@@ -1,0 +1,160 @@
+---
+import { content } from "../../i18n/content";
+import { localizedPath, type Lang } from "../../i18n/ui";
+import { classLabel, teachersForClass } from "../../data/teachers";
+import { courseDescriptions, courseSchoolYear, type CourseDescription } from "../../data/course-descriptions";
+import { PORTAL_URL } from "../../data/portal";
+
+interface Props {
+  lang: Lang;
+}
+const { lang } = Astro.props;
+const other: Lang = lang === "en" ? "zh" : "en";
+const c = content[lang].courses;
+const isZh = lang === "zh";
+
+// "2026-2027" -> "2026–27", for the register callout.
+const yearLabel = courseSchoolYear.replace(/^(\d{4})-\d{2}(\d{2})$/, "$1–$2");
+
+const teacherName = (t: { nameZh: string; nameEn: string }) => (isZh ? `${t.nameZh} 老師` : t.nameEn);
+
+// Electives keep their own page (/electives); only the two course types that
+// have no page of their own get cards here.
+const groups = [
+  { id: "language", ...c.language, courses: courseDescriptions.filter((x) => x.courseType === "chinese") },
+  { id: "ac", ...c.ac, courses: courseDescriptions.filter((x) => x.courseType === "ac") },
+];
+
+// What to show for a course on this page. Page language first; if it's missing,
+// the other language, tagged; if both are missing, the "coming soon" line.
+function body(course: CourseDescription): { text: string; lang: Lang; tagged: boolean } | null {
+  if (course[lang]) return { text: course[lang]!, lang, tagged: false };
+  if (course[other]) return { text: course[other]!, lang: other, tagged: true };
+  return null;
+}
+---
+
+<section style="background: var(--color-fcs-white);" class="mx-auto max-w-3xl px-4 py-14">
+  <p class="eyebrow">{c.eyebrow}</p>
+  <h1 class="mt-2 text-3xl font-semibold sm:text-4xl" style="letter-spacing: -0.02em; color: var(--color-fcs-black);">{c.title}</h1>
+  <p class="mt-4 text-lg leading-relaxed" style="color: var(--color-fcs-muted);">{c.intro}</p>
+
+  <!-- Register callout -->
+  <div
+    class="mt-6 flex flex-wrap items-center justify-between gap-4 rounded-[10px] p-5"
+    style="background: var(--color-fcs-orange-light); border: 1px solid var(--color-fcs-border);"
+  >
+    <div class="min-w-0 flex-1" style="flex-basis: 20rem;">
+      <p class="font-semibold" style="color: var(--color-fcs-black);">{c.registerTitle.replace("{year}", yearLabel)}</p>
+      <p class="text-sm" style="color: var(--color-fcs-muted);">{c.registerBody}</p>
+    </div>
+    <a
+      href={PORTAL_URL}
+      class="btn-primary inline-flex min-h-11 items-center rounded-[6px] px-5 text-sm font-semibold transition-colors"
+    >
+      {c.registerCta}
+    </a>
+  </div>
+
+  <nav class="mt-7 flex flex-wrap items-center gap-2" aria-label={c.jumpLabel}>
+    <span class="text-xs font-semibold uppercase tracking-wide" style="color: var(--color-fcs-muted);">{c.jumpLabel}</span>
+    {[...groups.map((g) => ({ id: g.id, label: g.label })), { id: "electives", label: c.electives.label }].map((j) => (
+      <a
+        href={`#${j.id}`}
+        class="rounded-full px-3 py-1 text-xs font-semibold transition-colors hover:underline"
+        style="background: var(--color-fcs-green-light); color: var(--color-fcs-green);"
+      >
+        {j.label}
+      </a>
+    ))}
+  </nav>
+
+  {groups.map((g) => (
+    <div class="mt-12">
+      <h2
+        id={g.id}
+        class="scroll-mt-24 border-b pb-2 text-xl font-semibold"
+        style="border-color: var(--color-fcs-border); color: var(--color-fcs-black);"
+      >
+        {g.label}
+      </h2>
+      <p class="mt-2.5 text-sm" style="color: var(--color-fcs-muted);">{g.intro}</p>
+
+      <div class="mt-5 space-y-3.5">
+        {g.courses.map((course) => {
+          const text = body(course);
+          const teachers = teachersForClass(course.code);
+          return (
+            <article
+              id={course.code}
+              class="scroll-mt-24 rounded-[10px] p-5 sm:px-6"
+              style="background: var(--color-fcs-white); border: 1px solid var(--color-fcs-border);"
+            >
+              <div class="flex flex-wrap items-baseline gap-x-2.5 gap-y-1.5">
+                <span
+                  class="rounded px-1.5 py-0.5 font-mono text-xs font-semibold"
+                  style="background: var(--color-fcs-green-light); color: var(--color-fcs-green);"
+                >{course.code}</span>
+                <h3 class="text-lg font-semibold leading-snug" style="color: var(--color-fcs-green-dark);">{classLabel(course.code, lang)}</h3>
+                <span class="text-sm" lang={other === "zh" ? "zh-Hant" : "en"} style="color: var(--color-fcs-muted);">{classLabel(course.code, other)}</span>
+              </div>
+
+              {text && !text.tagged && (
+                <p class="mt-2.5 leading-relaxed" style="color: var(--color-fcs-muted);">{text.text}</p>
+              )}
+              {text && text.tagged && (
+                <div class="mt-3 rounded-[8px] px-4 pb-3.5 pt-2.5" style="background: var(--color-fcs-surface); border: 1px solid var(--color-fcs-border);">
+                  <p class="pb-1 text-sm font-semibold" style="color: var(--color-fcs-green);">
+                    {c.coveredLabel}
+                    <span class="ml-1.5 rounded-full px-2 py-px text-xs font-normal" style="background: var(--color-fcs-green-light);">{c.onlyIn}</span>
+                  </p>
+                  <p class="text-sm leading-relaxed" lang={text.lang === "zh" ? "zh-Hant" : "en"} style="color: var(--color-fcs-muted);">{text.text}</p>
+                </div>
+              )}
+              {!text && (
+                <p class="mt-3 text-sm italic" style="color: var(--color-fcs-muted);">{c.comingSoon}</p>
+              )}
+
+              {teachers.length > 0 && (
+                <p class="mt-3 text-sm">
+                  <span style="color: var(--color-fcs-muted);">{c.taughtBy}</span>{" "}
+                  {teachers.map((t, i) => (
+                    <>
+                      {i > 0 && ", "}
+                      <a
+                        href={`${localizedPath(lang, "teachers")}#${t.id}`}
+                        class="font-semibold hover:underline"
+                        style="color: var(--color-fcs-green);"
+                      >{teacherName(t)}</a>
+                    </>
+                  ))}
+                </p>
+              )}
+            </article>
+          );
+        })}
+      </div>
+    </div>
+  ))}
+
+  <!-- Electives keep their own page -->
+  <div class="mt-12">
+    <h2
+      id="electives"
+      class="scroll-mt-24 border-b pb-2 text-xl font-semibold"
+      style="border-color: var(--color-fcs-border); color: var(--color-fcs-black);"
+    >
+      {c.electives.label}
+    </h2>
+    <div
+      class="mt-5 flex flex-wrap items-center justify-between gap-4 rounded-[10px] p-5 sm:px-6"
+      style="background: var(--color-fcs-white); border: 1px solid var(--color-fcs-border); border-top: 5px solid var(--color-fcs-green);"
+    >
+      <div class="min-w-0 flex-1" style="flex-basis: 20rem;">
+        <p class="font-semibold" style="color: var(--color-fcs-green-dark);">{c.electives.title}</p>
+        <p class="text-sm" style="color: var(--color-fcs-muted);">{c.electives.body}</p>
+      </div>
+      <a href={localizedPath(lang, "electives")} class="text-sm font-semibold hover:underline" style="color: var(--color-fcs-green);">{c.electives.cta}</a>
+    </div>
+  </div>
+</section>

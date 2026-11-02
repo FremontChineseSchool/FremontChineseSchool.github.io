@@ -9,7 +9,8 @@
     "postbuild": "pagefind --site dist",
     "preview": "astro preview",
     "astro": "astro",
-    "seed:courses": "tsx scripts/export-course-seed.ts"
+    "seed:courses": "tsx scripts/export-course-seed.ts",
+    "snapshot:courses": "tsx scripts/snapshot-courses.ts"
   },
   "dependencies": {
     "@astrojs/sitemap": "^3.7.3",

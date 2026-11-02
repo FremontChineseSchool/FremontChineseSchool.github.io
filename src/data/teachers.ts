@@ -670,3 +670,8 @@ export const teachers: Teacher[] = [
 export const teachersByGroup = groupOrder
   .map((group) => ({ group, members: teachers.filter((t) => t.group === group) }))
   .filter((g) => g.members.length > 0);
+
+/** Everyone who teaches a given class code (a class can have more than one section). */
+export function teachersForClass(code: string): Teacher[] {
+  return teachers.filter((t) => t.classes.includes(code));
+}
