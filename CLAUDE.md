@@ -83,6 +83,41 @@ index + UI assets to `dist/pagefind/` (gitignored, regenerated on every build).
   placeholder, result counts, etc.) are passed via the `translations` option when `lang`
   is `zh`.
 
+## Course descriptions (portal → build-time fetch → snapshot)
+
+Each class's "What this year covers" / 本學年課程重點 text is **not stored in this repo**.
+Staff edit it in the FCS portal (`FremontChineseSchool/portal`), per class per school
+year, in English and Chinese. The site reads it like the school calendar: fetched at
+build time, with a committed fallback.
+
+- **`src/data/portal.ts`** — the constants (incl. `REGISTRATION_OPEN`, which gates the "Register in the Portal" callout on /courses — flip it when registration opens): the portal's Supabase REST URL, its anon/
+  publishable key (public by design — it ships in the portal's own frontend bundle —
+  so it is committed, not a secret), the portal's public URL, and `portalToSiteCode`
+  (the portal calls Pre-K `TPK`; this site calls it `PK`).
+- **`src/data/course-descriptions.ts`** — top-level-await loader, modeled on
+  `calendar-feed.ts`: `POST …/rpc/public_course_descriptions` (`{}` = the newest
+  registration-open year), `console.log` on success, `console.warn` and fall back to
+  `course-descriptions.snapshot.json` on **any** failure (20 s timeout). Rows are deduped
+  by code (two sections = two rows). Exports `courseDescriptions`, `courseSchoolYear`
+  and `getCourseDescription(code)`. Either language can be `null`.
+  `PORTAL_COURSES_URL=<bad url> npm run build` forces the fallback for testing.
+- **`npm run snapshot:courses`** — refreshes the snapshot from the live portal
+  (`-- --year 2026-2027` for a specific year). Commit the result; re-run it when staff
+  have edited descriptions and you want the fallback to catch up, and at each new year.
+- **`/courses` + `/zh/courses`** (`CoursesPage.astro`) — one card per Chinese-language
+  and AC class (`id` = class code), names from `classLabel()`, description shown in full,
+  "Taught by" linking to `/teachers/#<id>` via `teachersForClass()`. If the page's
+  language is missing it shows the other language tagged "Chinese only" / 僅提供英文;
+  if both are missing, a "coming soon" line. Not in the top nav — linked from Programs,
+  Teachers and Electives. Page chrome copy lives in `content.*.courses`.
+- **Teachers** — class chips link to the course card (or to `/electives#<code>` for
+  electives). `teachers.ts` no longer has `courseNotes`.
+- **Electives** — each card uses the portal's description when it has one, else the
+  `description` in `content.ts`. Material fees, notes and the NEW / adults badges stay in
+  `content.ts`; the portal doesn't hold them.
+- `npm run seed:courses` writes `seed/course-descriptions-seed.json` (the text this repo
+  held before the portal took over) — a one-off for the portal's import, kept for reference.
+
 ## Deployment
 
 `.github/workflows/deploy.yml` builds and deploys `dist/` to GitHub Pages on every push

@@ -93,6 +93,8 @@ export const descriptions: Record<'en' | 'zh', Record<string, string>> = {
       'Staff resources for Fremont Chinese School teachers, TAs, and volunteers — report card templates, teaching materials, forms, and applications.',
     'fire-safety':
       'Fremont Chinese School\'s fire drill and evacuation plan — guidelines, standards for a successful drill, and FUSD fire safety resources.',
+    courses:
+      'What each Fremont Chinese School class covers this year — Pre-K through 8th grade, the WASC-accredited credit track, and electives — written by the teachers who lead them.',
     teachers:
       'Meet the teachers of Fremont Chinese School — the faculty behind our Pre-K–8 language classes, WASC-accredited credit track, and Saturday electives.',
     // Per-ISSUE eNews pages don't appear here — each issue supplies its own
@@ -141,6 +143,8 @@ export const descriptions: Record<'en' | 'zh', Record<string, string>> = {
       '費利蒙中文學校教職員資源——成績單範本、教學資源、各項表格與申請，供教師、助教及志工使用。',
     'fire-safety':
       '費利蒙中文學校消防演習與疏散計畫——疏散指引、成功演習標準，以及費利蒙聯合學區消防安全資源。',
+    courses:
+      '費利蒙中文學校各班本學年的課程重點——學前班至八年級、WASC 認證學分班與才藝選修——由任課老師親自撰寫。',
     teachers:
       '認識費利蒙中文學校的師資團隊——學前班至八年級中文課程、WASC 認證學分班，以及週六才藝選修課的任課教師。',
     enews:
@@ -448,6 +452,42 @@ export const content = {
       bioPending: 'Introduction coming soon.',
       scheduleNote:
         'Classroom assignments and class times are listed on the class schedule.',
+    },
+    // Page-level copy only. Every class's description comes from the FCS portal at
+    // build time (src/data/course-descriptions.ts); the names come from classLabel()
+    // in src/data/teachers.ts. `{year}` is filled in from the portal's school year.
+    courses: {
+      title: 'Courses',
+      eyebrow: 'Programs › Courses',
+      intro: 'What each class covers this year, written by the teacher who leads it.',
+      // Appended to the intro once registration is open (REGISTRATION_OPEN).
+      introRegister: 'Use this page to choose a level, then pick your classes in the FCS Portal.',
+      // Short link text used by Programs, Teachers and Electives to reach this page.
+      linkLabel: 'What each class covers this year →',
+      registerTitle: 'Ready to register for {year}?',
+      registerBody:
+        'The Portal shows these same descriptions, in English and Chinese, beside each class as you choose.',
+      registerCta: 'Register in the Portal',
+      jumpLabel: 'Jump to',
+      language: {
+        label: 'Chinese Language',
+        intro:
+          'Pre-K and Kindergarten, then 1st through 8th grade on two tracks: Traditional (T) and Bilingual (C).',
+      },
+      ac: {
+        label: 'Accredited Curriculum (AC)',
+        intro: 'WASC-accredited courses that count toward high-school language credit.',
+      },
+      electives: {
+        label: 'Electives',
+        title: 'Painting, abacus, yo-yo, dance, chess and more',
+        body: 'Electives are arranged by time slot, with material fees, on their own page.',
+        cta: 'Browse electives →',
+      },
+      taughtBy: 'Taught by',
+      coveredLabel: 'What this year covers',
+      onlyIn: 'Chinese only',
+      comingSoon: 'This year\u2019s details are coming soon.',
     },
     electives: {
       title: 'Elective Classes',
@@ -1368,6 +1408,35 @@ export const content = {
       teachesLabel: '任教班級',
       bioPending: '教師介紹即將更新。',
       scheduleNote: '各班教室與上課時間請參閱班級對照表。',
+    },
+    courses: {
+      title: '課程介紹',
+      eyebrow: '課程 › 課程介紹',
+      intro: '各班本學年的課程重點，由任課老師親自撰寫。',
+      introRegister: '請先在此選擇適合的程度，再到 FCS Portal 選課。',
+      linkLabel: '各班本學年課程重點 →',
+      registerTitle: '準備好報名 {year} 學年了嗎？',
+      registerBody: '在 Portal 選課時，每門課旁都會以中英文顯示相同的課程介紹。',
+      registerCta: '前往 Portal 報名',
+      jumpLabel: '快速前往',
+      language: {
+        label: '中文課程',
+        intro: '學前班與注音班，一至八年級分為傳統中文班（T）與雙語班（C）兩種班別。',
+      },
+      ac: {
+        label: 'AC 學分班',
+        intro: '通過 WASC 認證、可抵高中外語學分的課程。',
+      },
+      electives: {
+        label: '才藝選修',
+        title: '國畫、西畫、珠心算、扯鈴、舞蹈、棋藝等',
+        body: '選修課依上課時段排列，並列出教材費，請見選修課程頁面。',
+        cta: '瀏覽選修課程 →',
+      },
+      taughtBy: '任課老師',
+      coveredLabel: '本學年課程重點',
+      onlyIn: '僅提供英文',
+      comingSoon: '本學年課程重點即將公布。',
     },
     electives: {
       title: '才藝選修課程',

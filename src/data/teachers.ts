@@ -16,10 +16,12 @@
 //
 // Bios are trimmed to a consistent length (~100–130 characters of Chinese /
 // ~50–70 English words) from source entries that ranged from ~90 to ~700
-// characters. Syllabus-style content from those same entries is kept out of
-// `bio` and lives in `courseNotes` instead. Where the syllabus described an
-// ELECTIVE, it went into that elective's own description in content.ts, since
-// /electives is the page families browse when choosing one.
+// characters. The syllabus-style content from those same entries — each class's
+// "What this year covers" / 本學年課程重點 — is NOT kept here any more: it lives in
+// the FCS portal, where staff edit it per class per school year, and the site
+// pulls it in at build time (src/data/course-descriptions.ts) for /courses and
+// /electives. A teacher's `classes` list is still what links a course card to
+// its teacher.
 //
 // PHOTOS. Every teacher now has one. They are NOT a consistent set: resolutions
 // run from 268x386 to 1130x1279, backgrounds range from studio white to a
@@ -64,14 +66,6 @@ export type Teacher = {
   photoFocus?: string;
   tagline?: { en: string; zh: string };
   bio?: { en: string; zh: string };
-  /**
-   * Per-class notes on what the year covers, written by the teacher. Kept
-   * separate from `bio` — mixing the two is what made the source document's
-   * entries uneven, since some teachers wrote a biography, some a syllabus,
-   * and some both under one heading. Coverage is partial (16 of the 23
-   * language and AC classes), which is why the page collapses these.
-   */
-  courseNotes?: { code: string; en: string; zh: string }[];
 };
 
 export const groupLabels: Record<TeacherGroup, { en: string; zh: string }> = {
@@ -185,18 +179,6 @@ export const teachers: Teacher[] = [
       en: "From beginning Chinese to advanced reading and writing, Ms. Yin brings some 32 years of teaching experience and is one of the school's most senior teachers. Across those years she has kept to a patient, attentive, and thorough approach, helping children of every age build their Chinese step by step. She values the groundwork at each stage and reads each child's pace, so that steady accumulation turns into visible progress.",
       zh: "從基礎中文到進階閱讀寫作，尹清賢老師擁有約 32 年豐富的中文教學經驗，是費利蒙中文學校最資深的教師之一。多年教學歷程中，尹老師始終以耐心、細心與扎實的教學態度，陪伴不同年齡的孩子一步步建立中文能力。她重視每個學習階段的基礎訓練，也善於觀察孩子的學習步調，透過循序漸進的方式，讓學生在穩定累積中看見自己的進步。",
     },
-    courseNotes: [
-      {
-        code: "K1",
-        en: "K1 is where a child's Chinese begins. Ms. Yin starts from Zhuyin, pronunciation, and character recognition to lay down a correct foundation, in a relaxed and encouraging classroom that builds interest and confidence alongside skill.",
-        zh: "K1 是孩子接觸中文學習的重要起點。尹老師從注音、發音與識字開始，帶領孩子建立正確的中文基礎，在輕鬆、鼓勵的學習氛圍中，培養孩子對中文的興趣與信心。",
-      },
-      {
-        code: "T8",
-        en: "By eighth grade, Ms. Yin pushes further into reading comprehension, recitation, and writing, developing more mature expression and thinking — so that students are not only studying Chinese but genuinely using it to understand, express, and communicate.",
-        zh: "到了八年級，尹老師進一步帶領學生提升閱讀理解、朗讀與寫作能力，培養更成熟的中文表達與思考能力，讓孩子不只是「學中文」，更能真正運用中文理解、表達與溝通。",
-      },
-    ],
   },
   {
     id: "sophie-chiu",
@@ -211,18 +193,6 @@ export const teachers: Teacher[] = [
       en: "Ms. Chiu takes a step-by-step approach, guiding first-graders into reading and writing — starting with practicing their own names each day to build confidence. By fourth grade she introduces Hanyu Pinyin, so students can type in both Zhuyin and Pinyin and have more options open to them in later study.",
       zh: "邱老師以循序漸進的方式，帶領一年級孩子正式踏入識字與讀寫的世界，從每天練習寫自己的名字開始，建立閱讀與書寫的信心；到了四年級，再進一步教授漢語拼音，讓孩子除了注音之外也具備拼音輸入能力，為未來的中文學習增添更多選擇。",
     },
-    courseNotes: [
-      {
-        code: "T1",
-        en: "It starts with writing your own name. Ms. Chiu takes first-graders step by step through recognizing characters and practicing handwriting — the first move into reading and writing Chinese — with confidence built one repetition at a time.",
-        zh: "從「寫下自己的名字」開始，邱老師以循序漸進的方式，陪伴一年級孩子一步步認識漢字、練習書寫，開啟中文閱讀與寫作的第一步，讓孩子在一次次的練習中建立自信。",
-      },
-      {
-        code: "T4",
-        en: "A step up. Alongside the Zhuyin input they already know, fourth-graders begin Hanyu Pinyin, so they can type Chinese more than one way — a more flexible command of the language, and useful preparation for the study and digital life ahead.",
-        zh: "中文學習再進階！T4 班除了熟悉注音輸入，也開始學習漢語拼音，讓孩子掌握不同的中文輸入方式，培養更靈活的中文能力，為未來的學習與數位生活做好準備。",
-      },
-    ],
   },
   {
     id: "yvonne-cheng",
@@ -240,19 +210,6 @@ export const teachers: Teacher[] = [
       en: "Ms. Cheng draws on a wide range of interactive resources to build her students' Chinese across the board. Her classes combine multimedia materials, games, situational activities, and story performance, with guided questioning and group discussion that encourage students to think, analyze, and express themselves in Chinese — so the language becomes something they genuinely use.",
       zh: "鄭老師運用多元互動的教學資源，全面提升孩子的中文能力。課堂中結合多媒體教材、互動遊戲、情境活動與故事演出，並透過提問引導與小組討論，鼓勵學生以中文思考、分析與表達。她期望孩子不僅能流暢閱讀，更能自然運用所學寫出中文，讓中文成為日常生活中真正的語言。",
     },
-    courseNotes: [
-      {
-        code: "T2",
-        en: "Second grade introduces more phono-semantic characters built from radicals and components. The class continues first grade's image-based approach — understanding characters through the evolution of pictographs and indicatives — before moving step by step into the patterns behind radicals, components, and compound characters. Readings shift from poems and rhymes toward short passages and stories, supported by multimedia, games, and story performance.",
-        zh: "二年級開始接觸更多由部首、部件組成的形聲字。課程延續一年級的圖像化教學，從象形字、指示字的演變理解漢字，循序漸進認識部首、部件與形聲字的構字規律。教材也由詩歌、韻文逐漸過渡到短文與故事閱讀，並透過多媒體教材、互動遊戲與故事演出，建立聽、說、讀、寫的基礎。",
-      },
-      {
-        code: "T6",
-        en: "Sixth grade reaches an intermediate level, with deeper and more demanding material. Each lesson explores a different topic and vocabulary field — middle-school campus and after-school life, technology and computers in daily life, Chinese culture and social issues. Alongside analyzing text structure and building vocabulary, guided questioning, group discussion, and speaking activities develop reading comprehension, critical thinking, and communication.",
-        zh: "六年級已進入中級程度，課程內容更深入也更具挑戰性。每課帶領學生探索不同主題與詞彙領域，例如中學生的校園與課後生活、科技與電腦的日常應用，以及中國文化與社會議題。除了分析課文結構、累積詞彙外，也透過提問引導、小組討論與口語表達活動，培養閱讀理解、批判思考與溝通能力。",
-      },
-    
-    ],
   },
   {
     id: "shuping-lee",
@@ -267,19 +224,6 @@ export const teachers: Teacher[] = [
       en: "Ms. Lee taught for 10 years in Taiwanese elementary schools and has spent 15 years teaching Mandarin in Northern California, with deep experience in developing and adapting Chinese teaching materials. She teaches to each child's individual strengths, using recitation, songs, short plays, and illustrated writing to let students show what they have learned.",
       zh: "李老師曾任台灣小學教師 10 年、北加州華語教學 15 年，對中文教材的編寫與整合有豐富經驗。她主張適性教學，依據每位學童不同的特質開發潛能，並透過朗誦、歌謠、小話劇與圖文創作等多元形式，讓孩子具體展現中文學習的成果。",
     },
-    courseNotes: [
-      {
-        code: "T3",
-        en: "The class emphasizes reading aloud and rhyme practice, helping students internalize the rhythm and sound of Chinese. Character recognition is strengthened by taking characters apart into their components and putting them back together. Telling stories from pictures — both the speaking and the reading comprehension behind it — is a central part of the year.",
-        zh: "課堂著重課文朗讀與唸謠訓練，幫助學生熟練中文的音律感；並透過漢字部件的拆解與組合，強化認字能力。看圖說故事的口語表達與閱讀理解，也是本學年的重要環節。",
-      },
-      {
-        code: "T7",
-        en: "Alongside consolidating the Chinese students have built up over the years, seventh grade develops two-way translation between English and Chinese. Students work on group topic investigations through the term, and each student independently completes a topic report in Chinese by the end of the semester.",
-        zh: "在持續鞏固長期累積的中文實力之外，本學年也培養學生英翻中、中翻英的雙向翻譯能力。課堂中進行分組主題探究，學期末每位學生須獨立以中文完成一份主題報告。",
-      },
-    
-    ],
   },
   {
     id: "singyin-lin",
@@ -298,14 +242,6 @@ export const teachers: Teacher[] = [
       en: "Ms. Lin puts classroom participation and real language use first, aiming for an environment orderly and safe enough that students want to speak up. She combines images, stories, discussion, and speaking practice, weaving in calligraphy and cultural topics so students meet Chinese from several angles and connect it to their own lives.",
       zh: "林老師重視學生的課堂參與及實際語言運用，希望營造安心、有秩序且願意開口的學習環境，鼓勵學生主動思考、提問與表達。課堂中她結合圖片、故事、討論與口語練習，並適時融入書法與文化主題，讓學生從不同角度認識中文，並將中文與生活經驗連結。",
     },
-    courseNotes: [
-      {
-        code: "T5",
-        en: "Fifth grade builds further on reading, character recognition, and expression. Working from the textbook, students learn new characters, vocabulary, and key sentence patterns, then use guided reading and comprehension work to find the main point of a passage and read in context. Calligraphy, cultural topics, and creative activities are woven in through the year.",
-        zh: "五年級進一步提升中文閱讀、識字與表達能力。課程以課文為基礎，學習生字、詞語與重點句型，並透過課文導讀與閱讀理解，引導學生掌握文章重點、理解上下文，逐步累積詞彙量。課堂也會適時融入書法、文化主題與創意活動，讓學生從不同角度認識中文與中華文化。",
-      },
-    
-    ],
   },
   {
     id: "peichen-yang",
@@ -323,18 +259,6 @@ export const teachers: Teacher[] = [
       en: "Ms. Yang taught in Taiwan before joining FCS, with experience spanning Olympiad mathematics, elementary classrooms, and one-on-one tutoring — work that taught her to start from each child's individual needs and break hard ideas into clear, logical steps. In Chinese she emphasizes understanding, application, and expression: through games, real-life situations, conversation, reading, and writing, students build both skill and the confidence to speak up.",
       zh: "楊老師曾於台灣從事教育工作，具有奧林匹克數學教學、國小課堂教學及一對一家教等多元經驗，讓她重視孩子的個別差異，善於將複雜的內容拆解成清楚、有邏輯且容易理解的步驟。在中文教學上，她強調「理解、應用與表達」，希望孩子不只是記住中文，更能看懂、會用並且敢於表達；透過遊戲、情境活動、口語互動、閱讀與寫作，讓學生在有系統的學習中建立中文能力與自信。",
     },
-    courseNotes: [
-      {
-        code: "C1",
-        en: "For beginning learners, the focus is on building foundational listening, speaking, tone, and communication skills. Students also learn how Chinese characters are formed — through components, strokes, and character structure — so they understand how to recognize and write a character rather than simply memorize it, developing early reading and writing ability.",
-        zh: "從中文零起點開始，建立孩子的中文聽說、聲調及基礎溝通能力；同時透過漢字部件、筆畫與字形結構的邏輯拆解，幫助孩子理解「中文字怎麼看、怎麼認、怎麼寫」，培養初步的閱讀與書寫能力。",
-      },
-      {
-        code: "C8",
-        en: "Building on students' existing Chinese, eighth grade strengthens reading, writing, and speaking. Through conversation, role-play, themed discussion, and presentations, students apply what the textbook teaches to real situations. They are also encouraged to see the value of Chinese in an increasingly global world — more than a school subject, it becomes a tool for future study, travel, careers, and cross-cultural connection.",
-        zh: "在既有中文基礎上，強化學生的閱讀、寫作與口語表達能力，並透過情境對話、角色扮演、主題討論及專題發表，將課本所學實際運用於生活。同時引導學生思考中文在全球化時代的實際價值，讓中文不只是課堂上的學科，而是未來在學習、旅行、工作及跨文化交流中，與世界建立連結的重要能力。",
-      },
-    ],
   },
   {
     id: "sabrina-wun",
@@ -363,19 +287,6 @@ export const teachers: Teacher[] = [
     group: "language",
     classes: ["C3", "C6"],
     photo: "/images/teachers/cindy-chang.jpg",
-    courseNotes: [
-      {
-        code: "C3",
-        en: "Third-grade bilingual is designed for children who don't speak Chinese at home, using everyday topics and plenty of images to provide enough language input. Material starts from set patterns like 你好 and 我叫⋯, paired with common vocabulary — family members, colors, numbers, classroom objects — and simple exchanges such as “what's your name?” Students learn to introduce their family, describe colors, and count objects in short sentences, working toward Novice-level goals.",
-        zh: "雙語班三年級為家中不說中文的孩子設計，以生活化主題與大量圖片提供充足的語言輸入。教材從「你好」、「我叫⋯」等固定句型開始，搭配家庭成員、顏色、數字與教室物品等常見詞語，並安排「你叫什麼名字」這類簡單問答。孩子能用短句介紹家庭、描述顏色或數物品，逐步達到 Novice 階段的學習目標。",
-      },
-      {
-        code: "C6",
-        en: "Sixth-grade bilingual covers school activities, seasons and weather, festivals, transport, shopping, and giving simple reasons, targeting Novice High to Intermediate Low. Short passages, dialogues, and situational images build the ability to follow longer paragraphs, track sequence, and pick out main ideas, while connectives such as 如果…就… and 雖然…但是… come into use. Students describe a festival, the weather, or a shopping situation in five to eight sentences, and complete short writing, oral reports, or topic posters.",
-        zh: "雙語班六年級涵蓋學校活動、季節與天氣、節慶文化、交通、購物與簡單的理由說明，目標為 Novice High 至 Intermediate Low。透過短文、對話與情境圖片，引導孩子理解較長段落、掌握事件順序與主要訊息，並逐步使用「如果…就…」、「雖然…但是…」等連接詞。學生能以 5–8 句描述節慶、天氣或購物情境，並完成短文、口頭報告或主題海報。",
-      },
-    
-    ],
   },
   {
     id: "nicole-shieh",
@@ -393,18 +304,6 @@ export const teachers: Teacher[] = [
       en: "Ms. Shieh brings nine years of Chinese teaching experience, and teaches with care, patience, and genuine attention to every student. She works through games, crafts, and interactive activities so that children learn Chinese comfortably in an environment they enjoy. Her hope for every student is a happy relationship with the language, and confidence built one step at a time.",
       zh: "謝老師有九年的中文教學經驗，教學認真、有耐心，也非常關心每位學生，並以遊戲、勞作與互動活動等方式，讓學生在有趣的環境裡輕鬆學習中文。她希望每位學生都能開心學中文，並一步一步建立自信。",
     },
-    courseNotes: [
-      {
-        code: "C4",
-        en: "Step-by-step practice in listening, speaking, reading, and writing. The first hour covers the textbook; the second puts it to use through games, crafts, and interactive activities. Learning happens through play, and children build both ability and confidence in a relaxed bilingual environment.",
-        zh: "透過聽、說、讀、寫的循序練習，讓孩子一步一步學好中文。第一小時學習課本內容，第二小時則透過遊戲、勞作與互動活動，在輕鬆有趣的環境中練習所學，讓孩子邊玩邊學，逐步建立中文能力與自信。",
-      },
-      {
-        code: "LSC",
-        en: "A free, student-led conversation club Ms. Shieh advises. High-school students with strong Chinese run the group through games, activities, talent shows, and crafts, so members get to speak Chinese for fun rather than for a grade — the practice that builds confidence and keeps motivation up.",
-        zh: "謝老師擔任中文會話社團的指導老師。這是一個免費的社團，以學生帶學生的方式進行，由中文程度良好的高中生透過遊戲、活動、才藝表演與勞作帶領大家練習中文口說，讓學生在輕鬆愉快的氣氛中開口說中文，建立自信與學習動力。",
-      },
-    ],
   },
   {
     id: "rose-lau",
@@ -422,14 +321,6 @@ export const teachers: Teacher[] = [
       en: "Ms. Lau has long been dedicated to promoting Chinese as a heritage language and fostering an appreciation of Chinese culture. She is passionate about helping families find ways to strengthen their students' Chinese proficiency, including through proficiency testing and the school's online one-to-one tutoring program.",
       zh: "關老師長期熱衷於推廣中文教育及文化傳承，並持續協助家長，透過華語文能力測驗及學校的網路 1:1 輔導計畫，提升學生的中文能力。",
     },
-    courseNotes: [
-      {
-        code: "C5",
-        en: "The bilingual fifth-grade course develops listening, speaking, reading, and writing. Instruction focuses on sentence structure and usage, and on the vocabulary presented in the textbook. Regular listening and speaking activities build confidence in oral communication, and writing instruction develops simple one- to two-paragraph compositions. Cultural topics are incorporated throughout to deepen students' appreciation of the language and its context.",
-        zh: "雙語班五年級全面提升學生聽、說、讀、寫的中文能力。教學著重句子結構及其實際運用，以及課本中的詞彙。課堂安排定期的聽力與口語練習，提升口語表達能力與溝通信心；寫作方面，學生將學習撰寫一至兩段的短文。課程亦融入豐富的文化主題，加深學生對中華文化的認識與欣賞。",
-      },
-    
-    ],
   },
   {
     id: "anise-wang",
@@ -456,14 +347,6 @@ export const teachers: Teacher[] = [
     group: "ac",
     classes: ["AC1"],
     photo: "/images/teachers/amy-chang.jpg",
-    courseNotes: [
-      {
-        code: "AC1",
-        en: "Chinese Level 1 uses Integrated Chinese, Volume 1 to give beginning learners a solid foundation. Topics cover introductions, family, school life, friends, time, daily activities, food, shopping, and leisure, while students develop pronunciation, Pinyin, characters, vocabulary, and basic sentence structures. The course also emphasizes cultural learning through dialogues, role-play, group activities, and cultural comparison.",
-        zh: "中文第一級以《Integrated Chinese（中文聽說讀寫）》第一冊為主要教材，為初學者建立紮實的中文基礎。內容涵蓋自我介紹、家庭、學校生活、朋友、時間、日常活動、飲食、購物與休閒等主題，逐步學習發音、漢語拼音、漢字、詞彙及基本句型。課程同時重視文化學習，透過對話、角色扮演、小組活動與文化比較，認識華人文化與生活方式。",
-      },
-    
-    ],
   },
   {
     id: "catherine-ding",
@@ -531,13 +414,6 @@ export const teachers: Teacher[] = [
       en: "Ms. Shieh holds a master's degree in Teaching Chinese as a Foreign Language from National Taiwan Normal University and teaching credentials in both Taiwan and California. She currently teaches Chinese at Fremont Chinese School and City College of San Francisco. She hopes that AP Chinese students will not only be well prepared for the exam, but will also continue using Chinese after graduation, maintain their interest in the language and culture, and move forward to college and beyond with confidence and a broader global perspective.",
       zh: "謝老師畢業於國立臺灣師範大學華語文教學研究所，並具臺灣中等學校國文教師資格及加州中文單科教師資格。目前除任教於費利蒙中文學校，也於 City College of San Francisco 教授中文。她期許 AP 班學生不僅能為考試做好準備，更能在畢業後持續使用中文，保持對語言與文化的興趣，並帶著自信與更開闊的國際視野走向大學與未來。",
     },
-    courseNotes: [
-      {
-        code: "AP",
-        en: "Ms. Shieh's AP Chinese course follows the latest College Board course and exam framework and develops integrated skills in listening, speaking, reading, and writing. Through themes such as Families and Communities, Language and Culture, Art and Creativity, Technology, Contemporary Life, and Global Issues, students work with authentic materials, cultural comparisons, research projects, and AP-style tasks. Students practice reading, listening, email response, story narration, Project Presentation, and Q&A while strengthening communication skills, cultural understanding, and critical thinking in preparation for the AP Chinese exam and future advanced Chinese study.",
-        zh: "謝老師的 AP 中文課程依據 College Board 最新課程與考試架構設計，透過家庭與社區、語言與文化、藝術與創意、科技、當代生活及全球議題，整合聽、說、讀、寫四項能力。課程結合真實語料、文化比較、專題研究及 AP 題型練習，包含閱讀、聽力、電子郵件回覆、故事敘述、Project Presentation 與 Q&A，幫助學生提升中文溝通、文化理解與思辨能力，熟悉 AP 考試並為未來進階中文學習做好準備。",
-      },
-    ],
   },
   {
     id: "maureen-li",
@@ -670,3 +546,8 @@ export const teachers: Teacher[] = [
 export const teachersByGroup = groupOrder
   .map((group) => ({ group, members: teachers.filter((t) => t.group === group) }))
   .filter((g) => g.members.length > 0);
+
+/** Everyone who teaches a given class code (a class can have more than one section). */
+export function teachersForClass(code: string): Teacher[] {
+  return teachers.filter((t) => t.classes.includes(code));
+}

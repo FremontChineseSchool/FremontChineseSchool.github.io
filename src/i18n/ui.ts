@@ -37,6 +37,9 @@ export const routes: Record<string, string> = {
   'news-archive': 'news-archive',
   electives: 'electives',
   teachers: 'teachers',
+  // Per-class "what this year covers" cards. Not in navOrder — reached from
+  // Programs, Teachers and Electives.
+  courses: 'courses',
   // Weekly eNews. `enews` is the latest issue; individual issues live one level
   // deeper at /enews/<YYYY-MM-DD>/ and are generated from
   // src/data/newsletters.ts rather than listed here — BaseLayout resolves those
