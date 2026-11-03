@@ -249,6 +249,226 @@ export type NewsletterIssue = {
  */
 export const issues: NewsletterIssue[] = [
   {
+    // Composed from the draft Angela pasted in conversation (2026-11-02).
+    // Draft token generated with `openssl rand -hex 3`.
+    // Halloween collage: 9-photo collage Angela sent in conversation.
+    // Food festival items: only those already claimed on the item sheet, with
+    // prices where the sheet gives one; only 碗粿 and 牛舌餅 are pre-orderable.
+    // Calendar: every Google Calendar event 11/6–12/6, plus the 12/19
+    // contest from Angela's draft.
+    date: "2026-11-06",
+    label: { en: "November 6, 2026", zh: "2026年11月6日" },
+    summary: {
+      en: "A Halloween recap with photos, pre-orders for the 11/14 Fundraising Food Festival, and a last reminder that Academic Contest sign-up closes tomorrow, 11/7.",
+      zh: "萬聖節活動回顧與照片、11/14 募款小吃義賣預訂資訊，以及學術比賽報名明天（11/7）截止的最後提醒。",
+    },
+    draft: "746d8a",
+    gaps: [
+      "Food Festival: time, location, and pre-order deadline still needed (marked TBD in the section).",
+    ],
+    sections: [
+      {
+        kind: "prose",
+        title: { en: "A Note from the Principal", zh: "校長的話" },
+        blocks: [
+          { block: "prose", text: { en: "Dear FCS Families,", zh: "各位家長好：" } },
+          {
+            block: "prose",
+            text: {
+              en: "Our Halloween event was a huge success! Thank you to all the kids who came dressed up, and to the parent volunteers and teachers who helped hand out candy and keep everything running smoothly. Everyone's energy made it such a fun day. You'll find a recap and photos below.",
+              zh: "萬聖節活動辦得非常成功！感謝所有穿上服裝來參加的孩子們，以及幫忙發糖果、維持現場秩序的志工家長與老師們，大家的熱情讓這一天充滿歡笑。活動回顧與照片請見下方。",
+            },
+          },
+          {
+            block: "prose",
+            text: {
+              en: "Looking ahead, on **Saturday, 11/14**, we'll hold a smaller fundraising food festival. Some items are best pre-ordered, and you'll find the order link below.",
+              zh: "接下來，**11/14（六）**我們將舉辦一場小型的募款小吃義賣，部分品項建議事先預訂，預訂連結請見下方說明。",
+            },
+          },
+          {
+            block: "prose",
+            text: {
+              en: "One more reminder: Academic Contest sign-up closes **tomorrow, Saturday, 11/7**, so please sign up soon if you haven't yet!",
+              zh: "另外提醒，學術比賽報名將於**明天 11/7（六）**截止，還沒報名的同學請把握時間！",
+            },
+          },
+        ],
+        signoff: {
+          en: "Warmly,\nAngela\nPrincipal, Fremont Chinese School",
+          zh: "謹上\n夏芷筠\n費利蒙中文學校校長",
+        },
+      },
+      {
+        kind: "prose",
+        title: { en: "Week 11 Recap: Halloween Event", zh: "第十一週回顧：萬聖節活動" },
+        blocks: [
+          {
+            block: "image",
+            src: "/images/news/enews-2026-11-06-halloween-collage.jpg",
+            alt: {
+              en: "Collage of nine photos from the FCS Halloween event: students in costumes, inflatable dinosaurs, the photo booth, and volunteers handing out treats.",
+              zh: "費利蒙中文學校萬聖節活動九宮格照片：穿著造型服裝的學生、充氣恐龍、拍照區，以及發放點心的志工。",
+            },
+          },
+          {
+            block: "prose",
+            text: {
+              en: "Last Saturday's (10/31) Halloween event was a blast! Our students showed off their creative costumes in the outdoor parade, collected treats, and made plenty of fun memories at the photo booth. Thank you to all the classes, families, and volunteers who took part!",
+              zh: "上週六（10/31）的萬聖節活動圓滿落幕！孩子們穿著各式各樣的造型服裝參加戶外遊行、領取糖果，也在拍照區留下了許多可愛的回憶。感謝所有參與的班級、家長與志工！",
+            },
+          },
+          {
+            block: "prose",
+            text: {
+              en: "[See more photos here](https://photos.app.goo.gl/yEfaYGV4FYnYJWFHA)",
+              zh: "[更多照片請點此查看](https://photos.app.goo.gl/yEfaYGV4FYnYJWFHA)",
+            },
+          },
+        ],
+      },
+      {
+        kind: "prose",
+        title: { en: "Fundraising Food Festival (11/14)", zh: "募款小吃義賣（11/14）" },
+        blocks: [
+          {
+            block: "prose",
+            text: {
+              en: "On Saturday, November 14, we'll hold a smaller food festival. Come enjoy some delicious food and support our school!",
+              zh: "11月14日（六）我們將舉辦一場小型的小吃義賣，邀請大家來品嚐美食、為學校加油！",
+            },
+          },
+          {
+            block: "list",
+            items: [
+              { en: "**Date:** Saturday, November 14", zh: "**日期：**11月14日（六）" },
+              { en: "**Time:** TBD", zh: "**時間：**待定" },
+              { en: "**Location:** TBD", zh: "**地點：**待定" },
+            ],
+          },
+          {
+            block: "prose",
+            text: {
+              en: "We recommend pre-ordering some items, so you can be sure your favorites don't sell out. **[Fill out the order form here](TODO: ask Angela for the Google order form URL)**. Pre-order deadline: TBD.",
+              zh: "部分品項建議事先預訂，預訂後可確保您喜歡的品項不會售完。**[請點此填寫預訂表單](TODO: ask Angela for the Google order form URL)**。預訂截止日期：待定。",
+            },
+          },
+          { block: "prose", text: { en: "Items planned so far include:", zh: "目前預計供應的品項包括：" } },
+          {
+            block: "list",
+            items: [
+              { en: "Braised Pork Rice, $6", zh: "滷肉飯 $6" },
+              { en: "Wan Gui (Savory Rice Pudding), $5 (pre-order recommended)", zh: "碗粿 $5（建議預訂）" },
+              { en: "Beef Tongue Cookies, $3 (pre-order recommended)", zh: "牛舌餅 $3（建議預訂）" },
+              { en: "Tuna Onigiri, $3", zh: "鮪魚三角飯團 $3" },
+              { en: "Bubble Tea", zh: "珍珠奶茶" },
+              { en: "Cotton Candy", zh: "棉花糖" },
+            ],
+          },
+          { block: "prose", text: { en: "*Menu subject to change.", zh: "*品項以現場為準。" } },
+        ],
+      },
+      {
+        kind: "prose",
+        title: { en: "Academic Contest Sign-up Closes Tomorrow", zh: "學術比賽報名即將截止" },
+        blocks: [
+          {
+            block: "prose",
+            text: {
+              en: "Reminder: Academic Contest sign-up closes **tomorrow, Saturday, 11/7**. The contest itself is on **Saturday, 12/19**. Students can choose up to three events; please make sure their time slots and age groups don't conflict.",
+              zh: "提醒：學術比賽（Academic Contest）報名將於**明天 11/7（六）**截止，比賽日為 **12/19（六）**。每位學生最多可報名三個項目，請留意各項目的時段與年齡組別不要衝突。",
+            },
+          },
+          {
+            block: "prose",
+            text: {
+              en: "**[Sign up online here](https://fcsapp.faypier.com/users/login)** · [Contest details and step-by-step guide](/academic-contest). Questions? Email [ac@fremontchineseschool.org](mailto:ac@fremontchineseschool.org).",
+              zh: "**[點此線上報名](https://fcsapp.faypier.com/users/login)** · [比賽詳情與報名步驟說明](/zh/academic-contest)。如有疑問，請來信 [ac@fremontchineseschool.org](mailto:ac@fremontchineseschool.org)。",
+            },
+          },
+        ],
+      },
+      {
+        kind: "prose",
+        title: { en: "School Calendar 2026–2027", zh: "學校行事曆 2026–2027" },
+        blocks: [
+          { block: "prose", text: { en: "**Coming event(s):**", zh: "**近期活動：**" } },
+          {
+            block: "list",
+            items: [
+              {
+                en: "**11/7/2026**: Academic Contest sign-up ends; AC Makeup Class 1; Staff Meeting",
+                zh: "**11/7/2026**：學術比賽報名截止、學分班補課一、教職員會議",
+              },
+              { en: "**11/14/2026**: Fundraising Food Festival", zh: "**11/14/2026**：募款小吃義賣" },
+              { en: "**11/28/2026**: No school (Thanksgiving)", zh: "**11/28/2026**：不上課（感恩節）" },
+              { en: "**12/5/2026**: AC Makeup Class 2", zh: "**12/5/2026**：學分班補課二" },
+              { en: "**12/19/2026**: Academic Contest", zh: "**12/19/2026**：學術比賽" },
+            ],
+          },
+        ],
+        links: [
+          {
+            label: { en: "Download calendar (Chinese)", zh: "下載行事曆（中文版）" },
+            href: "https://drive.google.com/file/d/1kUl_nhpdAC0WLE0r6smb2fSjDUzRmSdX/view",
+          },
+          {
+            label: { en: "Download calendar (English)", zh: "下載行事曆（英文版）" },
+            href: "https://drive.google.com/file/d/1mHm8B4-LnNZkqqOY8qMvG7OReWaconzM/view",
+          },
+        ],
+      },
+      {
+        kind: "callout",
+        title: {
+          en: "Donate & Double Your Contribution",
+          zh: "捐款與雙倍貢獻",
+        },
+        blocks: [
+          {
+            block: "prose",
+            text: {
+              en: "FCS is a non-profit 501(c) organization. Donations are tax-deductible (IRS tax ID: **94-2978949**) and help Fremont Chinese School continue to operate, teach Chinese courses, and pass on Chinese culture.",
+              zh: "費利蒙中文學校是一家非營利性 501(c) 組織。您可以透過向費利蒙中文學校捐款來享受稅務抵減（IRS tax ID: **94-2978949**）。您的捐款將幫助本校繼續運營、教授中文課程並傳承中華文化。",
+            },
+          },
+          {
+            block: "prose",
+            text: {
+              en: "**Double your contribution:** thank you for volunteering at school! Your employer may offer volunteer cash rewards, so please consider donating those rewards to Fremont Chinese School. [Instructions and an example](https://docs.google.com/presentation/d/1Op2TlZ4wFSz7epqziWHmEauqEa5FnqRJ5yJofqQhpqs/edit).",
+              zh: "**雙倍貢獻：**感謝您在學校擔任義工！您的雇主也許提供義工獎勵金，歡迎將這筆獎勵金捐助給學校。[捐款方式說明與範例](https://docs.google.com/presentation/d/1Op2TlZ4wFSz7epqziWHmEauqEa5FnqRJ5yJofqQhpqs/edit)。",
+            },
+          },
+        ],
+        cta: {
+          label: { en: "Donate", zh: "前往捐款" },
+          href: "/donate",
+        },
+      },
+      {
+        kind: "sponsors",
+        title: {
+          en: "2026 Yearbook Gold Sponsors",
+          zh: "2026 年刊金牌贊助商",
+        },
+        logos: [
+          {
+            name: "IvyMAX 飛達教育",
+            image: "/images/sponsors/ivymax.jpg",
+            href: "https://ivymax.com",
+          },
+          {
+            name: "Fremont United Auto Service Inc. 聯合汽車修理中心",
+            image: "/images/sponsors/fremont-united-auto.jpg",
+            // href omitted: fremontunitedautoservice.com had no DNS records
+            // on 2026-10-13 (domain registered, site down; Angela confirmed
+            // it's down). Logo runs unlinked; restore the href once it resolves.
+          },
+        ],
+      },
+    ],
+  },
+  {
     // Composed from Angela's notes in conversation (2026-10-29). Draft token
     // generated with `openssl rand -hex 3`.
     //
