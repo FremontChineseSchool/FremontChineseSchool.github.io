@@ -252,9 +252,10 @@ export const issues: NewsletterIssue[] = [
     // Composed from the draft Angela pasted in conversation (2026-11-02).
     // Draft token generated with `openssl rand -hex 3`.
     // Halloween collage: 9-photo collage Angela sent in conversation.
-    // Food festival: time, place, and purpose (2027 Lunar New Year
-    // celebration) from Angela's Canva flyer; items from the item sheet plus
-    // the flyer's bread. Pre-orders are 碗粿 only, via a Google Form.
+    // Food festival: time, place (in front of the office, Room 229), and
+    // purpose (2027 Lunar New Year celebration) from Angela's updated flyer.
+    // No menu list in the text: the flyer shows it (Angela, 2026-11-05).
+    // Pre-orders are 碗粿 only, via a Google Form.
     // AC flyer: Angela's export; 12:30 PM cutoff and 9 AM–1 PM from it.
     // ANCCS winter market: flyer from Angela; the two links are what its QR
     // codes encode (Zeffy token pre-purchase, Zeffy free admission), and the
@@ -267,7 +268,7 @@ export const issues: NewsletterIssue[] = [
       en: "A Halloween recap with photos, pre-orders for the 11/14 Fundraising Food Festival, and a last reminder that Academic Contest sign-up closes tomorrow, 11/7.",
       zh: "萬聖節活動回顧與照片、11/14 募款小吃義賣預訂資訊，以及學術比賽報名明天（11/7）截止的最後提醒。",
     },
-    draft: "746d8a",
+    emailToken: "746d8a",
     sections: [
       {
         kind: "prose",
@@ -339,30 +340,22 @@ export const issues: NewsletterIssue[] = [
         blocks: [
           {
             block: "image",
-            src: "/images/news/enews-2026-11-06-food-festival-flyer.jpg",
+            src: "/images/news/enews-2026-11-06-food-festival-flyer-v2.jpg",
             alt: {
-              en: "FCS Food Fundraising flyer with pictures of bread, bubble tea, braised pork rice, and Wan Gui.",
-              zh: "費利蒙中文學校小吃義賣宣傳單，圖示麵包、珍珠奶茶、滷肉飯與碗粿。",
+              en: "FCS Food Fundraising flyer picturing the menu, from braised pork rice and Wan Gui to boba milk tea and cotton candy.",
+              zh: "費利蒙中文學校小吃義賣宣傳單，圖示滷肉飯、碗粿、珍珠奶茶、棉花糖等菜單品項。",
             },
             caption: {
-              en: "Saturday, 11/14/2026, 9:30 AM–12:15 PM, Irvington High School Courtyard. Bread, bubble tea, braised pork rice, Wan Gui, and more. Proceeds support our 2027 Lunar New Year celebration.",
-              zh: "2026/11/14（六）上午 9:30 至中午 12:15，Irvington High School 中庭。麵包、珍珠奶茶、滷肉飯、碗粿等。義賣所得將用於 2027 年新春聯歡活動。",
+              en: "Saturday, 11/14/2026, 9:30 AM–12:15 PM, Irvington High School, in front of the office (Room 229). Proceeds support our 2027 Lunar New Year celebration.",
+              zh: "2026/11/14（六）上午 9:30 至中午 12:15，Irvington High School 辦公室前（229 室）。義賣所得將用於 2027 年新春聯歡活動。",
             },
           },
           {
             block: "prose",
             text: {
-              en: "On Saturday, November 14, we'll hold a smaller food festival. Come enjoy some delicious food and help bring our 2027 Lunar New Year celebration to life!",
-              zh: "11月14日（六）我們將舉辦一場小型的小吃義賣，邀請大家來品嚐美食，一起為 2027 年新春聯歡活動籌款！",
+              en: "Come enjoy some delicious food and help bring our 2027 Lunar New Year celebration to life!",
+              zh: "邀請大家來品嚐美食，一起為 2027 年新春聯歡活動籌款！",
             },
-          },
-          {
-            block: "list",
-            items: [
-              { en: "**Date:** Saturday, November 14", zh: "**日期：**11月14日（六）" },
-              { en: "**Time:** 9:30 AM–12:15 PM", zh: "**時間：**上午 9:30 至中午 12:15" },
-              { en: "**Location:** Irvington High School Courtyard", zh: "**地點：**Irvington High School 中庭" },
-            ],
           },
           {
             block: "prose",
@@ -371,20 +364,6 @@ export const issues: NewsletterIssue[] = [
               zh: "**碗粿開放預訂**，預訂後就不怕售完！**[請點此預訂](https://forms.gle/SJdZSEpdo3PdDdZ87)**，預訂截止：**11/11（三）**。碗粿每份 $5，11/14 取餐時付款。",
             },
           },
-          { block: "prose", text: { en: "Items planned so far include:", zh: "目前預計供應的品項包括：" } },
-          {
-            block: "list",
-            items: [
-              { en: "Braised Pork Rice, $6", zh: "滷肉飯 $6" },
-              { en: "Wan Gui (Taiwanese Savory Rice Pudding), $5 (pre-order available)", zh: "碗粿 $5（可預訂）" },
-              { en: "Beef Tongue Cookies, $3", zh: "牛舌餅 $3" },
-              { en: "Tuna Onigiri, $3", zh: "鮪魚三角飯團 $3" },
-              { en: "Bubble Tea", zh: "珍珠奶茶" },
-              { en: "Cotton Candy", zh: "棉花糖" },
-              { en: "Bread", zh: "麵包" },
-            ],
-          },
-          { block: "prose", text: { en: "*Menu subject to change.", zh: "*品項以現場為準。" } },
         ],
       },
       {
