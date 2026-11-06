@@ -267,7 +267,6 @@ export const issues: NewsletterIssue[] = [
     draft: "746d8a",
     gaps: [
       "Food Festival: 碗粿 pre-order deadline still needed (marked TBD in the section).",
-      "Food Festival flyer image: waiting on a PNG download from Canva.",
     ],
     sections: [
       {
@@ -334,6 +333,18 @@ export const issues: NewsletterIssue[] = [
         kind: "prose",
         title: { en: "Fundraising Food Festival (11/14)", zh: "募款小吃義賣（11/14）" },
         blocks: [
+          {
+            block: "image",
+            src: "/images/news/enews-2026-11-06-food-festival-flyer.jpg",
+            alt: {
+              en: "FCS Food Fundraising flyer with pictures of bread, bubble tea, braised pork rice, and Wan Gui.",
+              zh: "費利蒙中文學校小吃義賣宣傳單，圖示麵包、珍珠奶茶、滷肉飯與碗粿。",
+            },
+            caption: {
+              en: "Saturday, 11/14/2026, 9:30 AM–12:15 PM, Irvington High School Courtyard. Bread, bubble tea, braised pork rice, Wan Gui, and more. Proceeds support our 2027 Lunar New Year celebration.",
+              zh: "2026/11/14（六）上午 9:30 至中午 12:15，Irvington High School 中庭。麵包、珍珠奶茶、滷肉飯、碗粿等。義賣所得將用於 2027 年新春聯歡活動。",
+            },
+          },
           {
             block: "prose",
             text: {
