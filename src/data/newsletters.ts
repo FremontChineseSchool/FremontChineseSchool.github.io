@@ -472,8 +472,8 @@ export const issues: NewsletterIssue[] = [
           {
             block: "prose",
             text: {
-              en: "The Association of Northern California Chinese Schools (ANCCS) invites families to its Winter Cultural & Creative Market on **Sunday, 12/6, 1:00–4:00 PM** at the 南灣華僑文教中心 (100 S Milpitas Blvd, Milpitas). Enjoy Chinese book sharing, booths of gently used books and toys, a passport challenge, and a chance for kids to tell a story on stage. Every participant gets a Chinese book and a gift, plus a lucky draw!",
-              zh: "北加州中文學校聯合會誠邀大家參加「冬藏惜福文化創意市集」，時間為 **12月6日（日）下午 1:00 至 4:00**，地點在南灣華僑文教中心（100 S Milpitas Blvd, Milpitas）。現場有中文好書分享、九成新書籍與玩具創意攤位、冬藏小達人護照任務，以及美姿美儀與「故事我來說」上台機會。參加即贈中文好書與精美參加禮，還有幸運大抽獎！",
+              en: "Join the Association of Northern California Chinese Schools (ANCCS) at the 南灣華僑文教中心 (100 S Milpitas Blvd, Milpitas). Admission is free with registration.",
+              zh: "歡迎參加北加州中文學校聯合會主辦的市集，地點在南灣華僑文教中心（100 S Milpitas Blvd, Milpitas），免費報名入場。",
             },
           },
           {
