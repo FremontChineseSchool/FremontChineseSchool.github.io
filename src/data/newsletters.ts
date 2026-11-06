@@ -303,28 +303,32 @@ export const issues: NewsletterIssue[] = [
       },
       {
         kind: "prose",
-        title: { en: "Week 11 Recap: Halloween Event", zh: "第十一週回顧：萬聖節活動" },
+        title: { en: "Academic Contest Sign-up Closes Tomorrow", zh: "學術比賽報名即將截止" },
         blocks: [
           {
             block: "image",
-            src: "/images/news/enews-2026-11-06-halloween-collage.jpg",
+            src: "/images/news/enews-2026-11-06-ac-registration-flyer.jpg",
             alt: {
-              en: "Collage of nine photos from the FCS Halloween event: students in costumes, inflatable dinosaurs, the photo booth, and volunteers handing out treats.",
-              zh: "費利蒙中文學校萬聖節活動九宮格照片：穿著造型服裝的學生、充氣恐龍、拍照區，以及發放點心的志工。",
+              en: "FCS 2026 Academic Contest registration flyer showing a student writing at a desk, with the sign-up deadline and contest date.",
+              zh: "費利蒙中文學校 2026 學術比賽報名宣傳單，畫面為學生伏案書寫，並列出報名截止與比賽日期。",
+            },
+            caption: {
+              en: "Sign-up ends Saturday, 11/7/2026, at 12:30 PM. Contest: Saturday, 12/19/2026, 9 AM–1 PM.",
+              zh: "報名截止：2026/11/7（六）中午 12:30。比賽時間：2026/12/19（六）上午 9 點至下午 1 點。",
             },
           },
           {
             block: "prose",
             text: {
-              en: "Last Saturday's (10/31) Halloween event was a blast! Our students showed off their creative costumes in the outdoor parade, collected treats, and made plenty of fun memories at the photo booth. Thank you to all the classes, families, and volunteers who took part!",
-              zh: "上週六（10/31）的萬聖節活動圓滿落幕！孩子們穿著各式各樣的造型服裝參加戶外遊行、領取糖果，也在拍照區留下了許多可愛的回憶。感謝所有參與的班級、家長與志工！",
+              en: "Reminder: Academic Contest sign-up closes **tomorrow, Saturday, 11/7, at 12:30 PM**. The contest itself is on **Saturday, 12/19**. Students can choose up to three events; please make sure their time slots and age groups don't conflict.",
+              zh: "提醒：學術比賽（Academic Contest）報名將於**明天 11/7（六）中午 12:30** 截止，比賽日為 **12/19（六）**。每位學生最多可報名三個項目，請留意各項目的時段與年齡組別不要衝突。",
             },
           },
           {
             block: "prose",
             text: {
-              en: "[See more photos here](https://photos.app.goo.gl/yEfaYGV4FYnYJWFHA)",
-              zh: "[更多照片請點此查看](https://photos.app.goo.gl/yEfaYGV4FYnYJWFHA)",
+              en: "**[Sign up online here](https://fcsapp.faypier.com/users/login)** · [Contest details and step-by-step guide](/academic-contest). Questions? Email [ac@fremontchineseschool.org](mailto:ac@fremontchineseschool.org).",
+              zh: "**[點此線上報名](https://fcsapp.faypier.com/users/login)** · [比賽詳情與報名步驟說明](/zh/academic-contest)。如有疑問，請來信 [ac@fremontchineseschool.org](mailto:ac@fremontchineseschool.org)。",
             },
           },
         ],
@@ -385,32 +389,28 @@ export const issues: NewsletterIssue[] = [
       },
       {
         kind: "prose",
-        title: { en: "Academic Contest Sign-up Closes Tomorrow", zh: "學術比賽報名即將截止" },
+        title: { en: "Week 11 Recap: Halloween Event", zh: "第十一週回顧：萬聖節活動" },
         blocks: [
           {
             block: "image",
-            src: "/images/news/enews-2026-11-06-ac-registration-flyer.jpg",
+            src: "/images/news/enews-2026-11-06-halloween-collage.jpg",
             alt: {
-              en: "FCS 2026 Academic Contest registration flyer showing a student writing at a desk, with the sign-up deadline and contest date.",
-              zh: "費利蒙中文學校 2026 學術比賽報名宣傳單，畫面為學生伏案書寫，並列出報名截止與比賽日期。",
-            },
-            caption: {
-              en: "Sign-up ends Saturday, 11/7/2026, at 12:30 PM. Contest: Saturday, 12/19/2026, 9 AM–1 PM.",
-              zh: "報名截止：2026/11/7（六）中午 12:30。比賽時間：2026/12/19（六）上午 9 點至下午 1 點。",
+              en: "Collage of nine photos from the FCS Halloween event: students in costumes, inflatable dinosaurs, the photo booth, and volunteers handing out treats.",
+              zh: "費利蒙中文學校萬聖節活動九宮格照片：穿著造型服裝的學生、充氣恐龍、拍照區，以及發放點心的志工。",
             },
           },
           {
             block: "prose",
             text: {
-              en: "Reminder: Academic Contest sign-up closes **tomorrow, Saturday, 11/7, at 12:30 PM**. The contest itself is on **Saturday, 12/19**. Students can choose up to three events; please make sure their time slots and age groups don't conflict.",
-              zh: "提醒：學術比賽（Academic Contest）報名將於**明天 11/7（六）中午 12:30** 截止，比賽日為 **12/19（六）**。每位學生最多可報名三個項目，請留意各項目的時段與年齡組別不要衝突。",
+              en: "Last Saturday's (10/31) Halloween event was a blast! Our students showed off their creative costumes in the outdoor parade, collected treats, and made plenty of fun memories at the photo booth. Thank you to all the classes, families, and volunteers who took part!",
+              zh: "上週六（10/31）的萬聖節活動圓滿落幕！孩子們穿著各式各樣的造型服裝參加戶外遊行、領取糖果，也在拍照區留下了許多可愛的回憶。感謝所有參與的班級、家長與志工！",
             },
           },
           {
             block: "prose",
             text: {
-              en: "**[Sign up online here](https://fcsapp.faypier.com/users/login)** · [Contest details and step-by-step guide](/academic-contest). Questions? Email [ac@fremontchineseschool.org](mailto:ac@fremontchineseschool.org).",
-              zh: "**[點此線上報名](https://fcsapp.faypier.com/users/login)** · [比賽詳情與報名步驟說明](/zh/academic-contest)。如有疑問，請來信 [ac@fremontchineseschool.org](mailto:ac@fremontchineseschool.org)。",
+              en: "[See more photos here](https://photos.app.goo.gl/yEfaYGV4FYnYJWFHA)",
+              zh: "[更多照片請點此查看](https://photos.app.goo.gl/yEfaYGV4FYnYJWFHA)",
             },
           },
         ],
