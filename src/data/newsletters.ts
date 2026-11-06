@@ -265,9 +265,6 @@ export const issues: NewsletterIssue[] = [
       zh: "萬聖節活動回顧與照片、11/14 募款小吃義賣預訂資訊，以及學術比賽報名明天（11/7）截止的最後提醒。",
     },
     draft: "746d8a",
-    gaps: [
-      "Food Festival: 碗粿 pre-order deadline still needed (marked TBD in the section).",
-    ],
     sections: [
       {
         kind: "prose",
@@ -367,8 +364,8 @@ export const issues: NewsletterIssue[] = [
           {
             block: "prose",
             text: {
-              en: "**碗粿 (Wan Gui) is available for pre-order**, so you can be sure to get yours before it sells out. **[Pre-order here](TODO: ask Angela for the Google Form URL)**. Pre-order deadline: TBD.",
-              zh: "**碗粿開放預訂**，預訂後就不怕售完！**[請點此預訂](TODO: ask Angela for the Google Form URL)**。預訂截止日期：待定。",
+              en: "**碗粿 (Wan Gui) is available for pre-order**, so you can be sure to get yours before it sells out. **[Pre-order here](https://forms.gle/SJdZSEpdo3PdDdZ87)** by **Wednesday, 11/11**. Wan Gui is $5 each; pay when you pick up on 11/14.",
+              zh: "**碗粿開放預訂**，預訂後就不怕售完！**[請點此預訂](https://forms.gle/SJdZSEpdo3PdDdZ87)**，預訂截止：**11/11（三）**。碗粿每份 $5，11/14 取餐時付款。",
             },
           },
           { block: "prose", text: { en: "Items planned so far include:", zh: "目前預計供應的品項包括：" } },
