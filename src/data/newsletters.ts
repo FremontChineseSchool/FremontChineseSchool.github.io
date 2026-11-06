@@ -313,10 +313,6 @@ export const issues: NewsletterIssue[] = [
               en: "FCS 2026 Academic Contest registration flyer showing a student writing at a desk, with the sign-up deadline and contest date.",
               zh: "費利蒙中文學校 2026 學術比賽報名宣傳單，畫面為學生伏案書寫，並列出報名截止與比賽日期。",
             },
-            caption: {
-              en: "Sign-up ends Saturday, 11/7/2026, at 12:30 PM. Contest: Saturday, 12/19/2026, 9 AM–1 PM.",
-              zh: "報名截止：2026/11/7（六）中午 12:30。比賽時間：2026/12/19（六）上午 9 點至下午 1 點。",
-            },
           },
           {
             block: "prose",
@@ -344,10 +340,6 @@ export const issues: NewsletterIssue[] = [
             alt: {
               en: "FCS Food Fundraising flyer picturing the menu, from braised pork rice and Wan Gui to boba milk tea and cotton candy.",
               zh: "費利蒙中文學校小吃義賣宣傳單，圖示滷肉飯、碗粿、珍珠奶茶、棉花糖等菜單品項。",
-            },
-            caption: {
-              en: "Saturday, 11/14/2026, 9:30 AM–12:15 PM, Irvington High School, in front of the office (Room 229). Proceeds support our 2027 Lunar New Year celebration.",
-              zh: "2026/11/14（六）上午 9:30 至中午 12:15，Irvington High School 辦公室前（229 室）。義賣所得將用於 2027 年新春聯歡活動。",
             },
           },
           {
@@ -442,10 +434,6 @@ export const issues: NewsletterIssue[] = [
             alt: {
               en: "Flyer for the ANCCS 2026 Winter Cultural & Creative Market, with the date, activities, schedule, and QR codes for tokens and free admission.",
               zh: "北加州中文學校聯合會 2026 冬藏惜福文化創意市集宣傳單，列出日期、活動內容、流程，以及代幣預購與免費入場的 QR Code。",
-            },
-            caption: {
-              en: "Sunday, 12/6, 1:00–4:00 PM. Schedule: 1:30 etiquette and poise show, 2:30 storytelling, 3:30 raffle.",
-              zh: "12月6日（日）下午 1:00 至 4:00。活動流程：1:30 美姿美儀秀一秀、2:30 說故事時間、3:30 摸彩時間。",
             },
           },
           {
