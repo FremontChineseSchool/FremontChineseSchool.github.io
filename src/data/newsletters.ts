@@ -256,6 +256,9 @@ export const issues: NewsletterIssue[] = [
     // celebration) from Angela's Canva flyer; items from the item sheet plus
     // the flyer's bread. Pre-orders are 碗粿 only, via a Google Form.
     // AC flyer: Angela's export; 12:30 PM cutoff and 9 AM–1 PM from it.
+    // ANCCS winter market: flyer from Angela; the two links are what its QR
+    // codes encode (Zeffy token pre-purchase, Zeffy free admission), and the
+    // street address is from those Zeffy pages.
     // Calendar: every Google Calendar event 11/6–12/6, plus the 12/19
     // contest from Angela's draft.
     date: "2026-11-06",
@@ -439,6 +442,46 @@ export const issues: NewsletterIssue[] = [
           {
             label: { en: "Download calendar (English)", zh: "下載行事曆（英文版）" },
             href: "https://drive.google.com/file/d/1mHm8B4-LnNZkqqOY8qMvG7OReWaconzM/view",
+          },
+        ],
+      },
+      {
+        kind: "prose",
+        title: { en: "General Announcements", zh: "其他公告" },
+        numbered: true,
+        blocks: [
+          {
+            block: "subhead",
+            text: {
+              en: "ANCCS 2026 Winter Cultural & Creative Market (12/6)",
+              zh: "北加州中文學校聯合會 2026 冬藏惜福文化創意市集（12/6）",
+            },
+          },
+          {
+            block: "image",
+            src: "/images/news/enews-2026-11-06-anccs-winter-market.jpg",
+            alt: {
+              en: "Flyer for the ANCCS 2026 Winter Cultural & Creative Market, with the date, activities, schedule, and QR codes for tokens and free admission.",
+              zh: "北加州中文學校聯合會 2026 冬藏惜福文化創意市集宣傳單，列出日期、活動內容、流程，以及代幣預購與免費入場的 QR Code。",
+            },
+            caption: {
+              en: "Sunday, 12/6, 1:00–4:00 PM. Schedule: 1:30 etiquette and poise show, 2:30 storytelling, 3:30 raffle.",
+              zh: "12月6日（日）下午 1:00 至 4:00。活動流程：1:30 美姿美儀秀一秀、2:30 說故事時間、3:30 摸彩時間。",
+            },
+          },
+          {
+            block: "prose",
+            text: {
+              en: "The Association of Northern California Chinese Schools (ANCCS) invites families to its Winter Cultural & Creative Market on **Sunday, 12/6, 1:00–4:00 PM** at the 南灣華僑文教中心 (100 S Milpitas Blvd, Milpitas). Enjoy Chinese book sharing, booths of gently used books and toys, a passport challenge, and a chance for kids to tell a story on stage. Every participant gets a Chinese book and a gift, plus a lucky draw!",
+              zh: "北加州中文學校聯合會誠邀大家參加「冬藏惜福文化創意市集」，時間為 **12月6日（日）下午 1:00 至 4:00**，地點在南灣華僑文教中心（100 S Milpitas Blvd, Milpitas）。現場有中文好書分享、九成新書籍與玩具創意攤位、冬藏小達人護照任務，以及美姿美儀與「故事我來說」上台機會。參加即贈中文好書與精美參加禮，還有幸運大抽獎！",
+            },
+          },
+          {
+            block: "prose",
+            text: {
+              en: "**[Register for free admission](https://www.zeffy.com/en-US/ticketing/copy-40)** (storytelling sign-up is here too) · [Pre-purchase tokens](https://www.zeffy.com/en-US/ticketing/5b63d089-6760-473c-8b70-95c938aecdb8)",
+              zh: "**[免費報名入場](https://www.zeffy.com/en-US/ticketing/copy-40)**（上台說故事也在此報名）· [預購代幣](https://www.zeffy.com/en-US/ticketing/5b63d089-6760-473c-8b70-95c938aecdb8)",
+            },
           },
         ],
       },
