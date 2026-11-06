@@ -252,8 +252,10 @@ export const issues: NewsletterIssue[] = [
     // Composed from the draft Angela pasted in conversation (2026-11-02).
     // Draft token generated with `openssl rand -hex 3`.
     // Halloween collage: 9-photo collage Angela sent in conversation.
-    // Food festival items: only those already claimed on the item sheet, with
-    // prices where the sheet gives one; only 碗粿 and 牛舌餅 are pre-orderable.
+    // Food festival: time, place, and purpose (2027 Lunar New Year
+    // celebration) from Angela's Canva flyer; items from the item sheet plus
+    // the flyer's bread. Pre-orders are 碗粿 only, via a Google Form.
+    // AC flyer: Angela's export; 12:30 PM cutoff and 9 AM–1 PM from it.
     // Calendar: every Google Calendar event 11/6–12/6, plus the 12/19
     // contest from Angela's draft.
     date: "2026-11-06",
@@ -264,7 +266,8 @@ export const issues: NewsletterIssue[] = [
     },
     draft: "746d8a",
     gaps: [
-      "Food Festival: time, location, and pre-order deadline still needed (marked TBD in the section).",
+      "Food Festival: 碗粿 pre-order deadline still needed (marked TBD in the section).",
+      "Food Festival flyer image: waiting on a PNG download from Canva.",
     ],
     sections: [
       {
@@ -282,8 +285,8 @@ export const issues: NewsletterIssue[] = [
           {
             block: "prose",
             text: {
-              en: "Looking ahead, on **Saturday, 11/14**, we'll hold a smaller fundraising food festival. Some items are best pre-ordered, and you'll find the order link below.",
-              zh: "接下來，**11/14（六）**我們將舉辦一場小型的募款小吃義賣，部分品項建議事先預訂，預訂連結請見下方說明。",
+              en: "Looking ahead, on **Saturday, 11/14**, we'll hold a smaller fundraising food festival to support our 2027 Lunar New Year celebration. You can pre-order 碗粿 (Wan Gui) using the link below.",
+              zh: "接下來，**11/14（六）**我們將舉辦一場小型的募款小吃義賣，為 2027 年新春聯歡活動籌款。碗粿可事先預訂，預訂連結請見下方說明。",
             },
           },
           {
@@ -334,23 +337,23 @@ export const issues: NewsletterIssue[] = [
           {
             block: "prose",
             text: {
-              en: "On Saturday, November 14, we'll hold a smaller food festival. Come enjoy some delicious food and support our school!",
-              zh: "11月14日（六）我們將舉辦一場小型的小吃義賣，邀請大家來品嚐美食、為學校加油！",
+              en: "On Saturday, November 14, we'll hold a smaller food festival. Come enjoy some delicious food and help bring our 2027 Lunar New Year celebration to life!",
+              zh: "11月14日（六）我們將舉辦一場小型的小吃義賣，邀請大家來品嚐美食，一起為 2027 年新春聯歡活動籌款！",
             },
           },
           {
             block: "list",
             items: [
               { en: "**Date:** Saturday, November 14", zh: "**日期：**11月14日（六）" },
-              { en: "**Time:** TBD", zh: "**時間：**待定" },
-              { en: "**Location:** TBD", zh: "**地點：**待定" },
+              { en: "**Time:** 9:30 AM–12:15 PM", zh: "**時間：**上午 9:30 至中午 12:15" },
+              { en: "**Location:** Irvington High School Courtyard", zh: "**地點：**Irvington High School 中庭" },
             ],
           },
           {
             block: "prose",
             text: {
-              en: "We recommend pre-ordering some items, so you can be sure your favorites don't sell out. **[Fill out the order form here](TODO: ask Angela for the Google order form URL)**. Pre-order deadline: TBD.",
-              zh: "部分品項建議事先預訂，預訂後可確保您喜歡的品項不會售完。**[請點此填寫預訂表單](TODO: ask Angela for the Google order form URL)**。預訂截止日期：待定。",
+              en: "**碗粿 (Wan Gui) is available for pre-order**, so you can be sure to get yours before it sells out. **[Pre-order here](TODO: ask Angela for the Google Form URL)**. Pre-order deadline: TBD.",
+              zh: "**碗粿開放預訂**，預訂後就不怕售完！**[請點此預訂](TODO: ask Angela for the Google Form URL)**。預訂截止日期：待定。",
             },
           },
           { block: "prose", text: { en: "Items planned so far include:", zh: "目前預計供應的品項包括：" } },
@@ -358,11 +361,12 @@ export const issues: NewsletterIssue[] = [
             block: "list",
             items: [
               { en: "Braised Pork Rice, $6", zh: "滷肉飯 $6" },
-              { en: "Wan Gui (Savory Rice Pudding), $5 (pre-order recommended)", zh: "碗粿 $5（建議預訂）" },
-              { en: "Beef Tongue Cookies, $3 (pre-order recommended)", zh: "牛舌餅 $3（建議預訂）" },
+              { en: "Wan Gui (Taiwanese Savory Rice Pudding), $5 (pre-order available)", zh: "碗粿 $5（可預訂）" },
+              { en: "Beef Tongue Cookies, $3", zh: "牛舌餅 $3" },
               { en: "Tuna Onigiri, $3", zh: "鮪魚三角飯團 $3" },
               { en: "Bubble Tea", zh: "珍珠奶茶" },
               { en: "Cotton Candy", zh: "棉花糖" },
+              { en: "Bread", zh: "麵包" },
             ],
           },
           { block: "prose", text: { en: "*Menu subject to change.", zh: "*品項以現場為準。" } },
@@ -373,10 +377,22 @@ export const issues: NewsletterIssue[] = [
         title: { en: "Academic Contest Sign-up Closes Tomorrow", zh: "學術比賽報名即將截止" },
         blocks: [
           {
+            block: "image",
+            src: "/images/news/enews-2026-11-06-ac-registration-flyer.jpg",
+            alt: {
+              en: "FCS 2026 Academic Contest registration flyer showing a student writing at a desk, with the sign-up deadline and contest date.",
+              zh: "費利蒙中文學校 2026 學術比賽報名宣傳單，畫面為學生伏案書寫，並列出報名截止與比賽日期。",
+            },
+            caption: {
+              en: "Sign-up ends Saturday, 11/7/2026, at 12:30 PM. Contest: Saturday, 12/19/2026, 9 AM–1 PM.",
+              zh: "報名截止：2026/11/7（六）中午 12:30。比賽時間：2026/12/19（六）上午 9 點至下午 1 點。",
+            },
+          },
+          {
             block: "prose",
             text: {
-              en: "Reminder: Academic Contest sign-up closes **tomorrow, Saturday, 11/7**. The contest itself is on **Saturday, 12/19**. Students can choose up to three events; please make sure their time slots and age groups don't conflict.",
-              zh: "提醒：學術比賽（Academic Contest）報名將於**明天 11/7（六）**截止，比賽日為 **12/19（六）**。每位學生最多可報名三個項目，請留意各項目的時段與年齡組別不要衝突。",
+              en: "Reminder: Academic Contest sign-up closes **tomorrow, Saturday, 11/7, at 12:30 PM**. The contest itself is on **Saturday, 12/19**. Students can choose up to three events; please make sure their time slots and age groups don't conflict.",
+              zh: "提醒：學術比賽（Academic Contest）報名將於**明天 11/7（六）中午 12:30** 截止，比賽日為 **12/19（六）**。每位學生最多可報名三個項目，請留意各項目的時段與年齡組別不要衝突。",
             },
           },
           {
