@@ -102,9 +102,24 @@ function buildEntries(raw: RawEvent[]): CalendarEntry[] {
     const known = enrichment[r.text];
     if (!known) unmappedEvents.push({ text: r.text, date: r.date });
     const info = known ?? { textZh: r.text, type: inferType(r.text) };
-    const list = byDate.get(r.date) ?? [];
-    list.push({ text: r.text, textZh: info.textZh, type: info.type });
-    byDate.set(r.date, list);
+    // The table has one row per Saturday. An event on another day (e.g. a
+    // Sunday dinner) goes in its week's Saturday row, tagged with its own date.
+    const d = new Date(r.date + "T12:00:00");
+    const offset = (d.getDay() + 1) % 7; // days since the previous Saturday
+    let { text } = r;
+    let { textZh } = info;
+    if (offset !== 0) {
+      const md = `${d.getMonth() + 1}/${d.getDate()}`;
+      const en = d.toLocaleDateString("en-US", { weekday: "short" });
+      const zh = "日一二三四五六"[d.getDay()];
+      text = `${text} (${en} ${md})`;
+      textZh = `${textZh}（${md} 週${zh}）`;
+      d.setDate(d.getDate() - offset);
+    }
+    const key = d.toISOString().slice(0, 10);
+    const list = byDate.get(key) ?? [];
+    list.push({ text, textZh, type: info.type });
+    byDate.set(key, list);
   }
 
   // Aug–Dec = semester 1, Jan–Jul = semester 2.

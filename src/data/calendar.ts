@@ -35,6 +35,7 @@ export interface CalendarEntry {
 // shows up — with its English title and a keyword-guessed type/color.
 export const extraEventInfo: Record<string, { textZh: string; type: EventType }> = {
   // 'New Event Title': { textZh: '中文名稱', type: 'event' },
+  'Teacher Appreciation Dinner': { textZh: '教師感謝晚宴', type: 'event' },
 };
 
 export const calendarEntries: CalendarEntry[] = [
@@ -115,7 +116,7 @@ export const calendarEntries: CalendarEntry[] = [
   { date: '2027-05-22', week: 34,   sem: 2, events: [
     { text: 'Last Day of the School Year', textZh: '本學年最後一天', type: 'milestone' },
     { text: 'Graduation Ceremony', textZh: '畢業典禮', type: 'event' },
-    { text: 'Teacher Appreciation Dinner', textZh: '教師感謝晚宴', type: 'event' },
+    { text: 'Teacher Appreciation Dinner (Sun 5/23)', textZh: '教師感謝晚宴（5/23 週日）', type: 'event' },
     { text: 'Yearbook Distribution', textZh: '發放年刊', type: 'event' },
   ]},
 ];
