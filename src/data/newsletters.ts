@@ -258,7 +258,8 @@ export const issues: NewsletterIssue[] = [
     // at FCS, retired nearly ten years, taught Angela in 5th grade in 1998,
     // will substitute one AC class). Angela's mom (1998 room parent) is in
     // both photos. Essay contest: Sing Tao story Angela linked; it names no
-    // FCS winners, so the names come from Angela.
+    // FCS winners, so the names come from Angela (all three 優秀作品獎;
+    // no photo, per Angela).
     date: "2026-11-13",
     label: { en: "November 13, 2026", zh: "2026年11月13日" },
     summary: {
@@ -268,7 +269,6 @@ export const issues: NewsletterIssue[] = [
     draft: "c2784e",
     gaps: [
       "Principal's note was drafted by Claude; waiting for Angela's OK.",
-      "Essay contest: photo and the three students' names still to come from Angela.",
     ],
     sections: [
       {
@@ -413,15 +413,15 @@ export const issues: NewsletterIssue[] = [
           {
             block: "subhead",
             text: {
-              en: "Honorable Mentions in the Sun Yat-sen Birthday Essay Contest",
-              zh: "國父誕辰紀念徵文比賽佳作",
+              en: "Awards in the Sun Yat-sen Birthday Essay Contest",
+              zh: "國父誕辰紀念徵文比賽獲獎",
             },
           },
           {
             block: "prose",
             text: {
-              en: "Congratulations to our AP teacher 謝明暐老師 (Ms. Mingwei Shieh) and three students, who received honorable mentions in the essay contest commemorating Dr. Sun Yat-sen's birthday! [Read the news story](https://www.singtaousa.com/2026/11/08/news/usa/bay-area-commemorates-sun-yat-sen-2/) (in Chinese).",
-              zh: "恭喜 AP 班謝明暐老師與三位學生榮獲國父誕辰紀念徵文比賽佳作！[閱讀星島日報報導](https://www.singtaousa.com/2026/11/08/news/usa/bay-area-commemorates-sun-yat-sen-2/)。",
+              en: "Congratulations to our AP teacher 謝明暐老師 (Ms. Mingwei Shieh) and her students 劉怡婷, 譚嘉甯 and 高予仙, who each received an Excellence Award (優秀作品獎) in the essay contest commemorating Dr. Sun Yat-sen's birthday! [Read the news story](https://www.singtaousa.com/2026/11/08/news/usa/bay-area-commemorates-sun-yat-sen-2/) (in Chinese).",
+              zh: "恭喜 AP 班謝明暐老師與劉怡婷、譚嘉甯、高予仙三位同學，榮獲國父誕辰紀念徵文比賽優秀作品獎！[閱讀星島日報報導](https://www.singtaousa.com/2026/11/08/news/usa/bay-area-commemorates-sun-yat-sen-2/)。",
             },
           },
         ],
