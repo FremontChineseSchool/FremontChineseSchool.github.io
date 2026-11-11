@@ -254,6 +254,11 @@ export const issues: NewsletterIssue[] = [
     // the office. Draft token generated with `openssl rand -hex 3`.
     // 碗粿 pre-orders closed 11/11, so only pickup is mentioned.
     // Calendar: every Google Calendar event 11/13–12/13.
+    // Teacher visit: facts from Angela's social media post (28 years teaching
+    // at FCS, retired nearly ten years, taught Angela in 5th grade in 1998,
+    // will substitute one AC class). Angela's mom (1998 room parent) is in
+    // both photos. Essay contest: Sing Tao story Angela linked; it names no
+    // FCS winners, so the names come from Angela.
     date: "2026-11-13",
     label: { en: "November 13, 2026", zh: "2026年11月13日" },
     summary: {
@@ -261,7 +266,10 @@ export const issues: NewsletterIssue[] = [
       zh: "募款小吃義賣就在明天（11/14）！歡迎到辦公室前（229 室）品嚐美食，一起為 2027 年新春聯歡活動籌款。",
     },
     draft: "c2784e",
-    gaps: ["Principal's note was drafted by Claude; waiting for Angela's OK."],
+    gaps: [
+      "Principal's note was drafted by Claude; waiting for Angela's OK.",
+      "Essay contest: photo and the three students' names still to come from Angela.",
+    ],
     sections: [
       {
         kind: "prose",
@@ -273,6 +281,13 @@ export const issues: NewsletterIssue[] = [
             text: {
               en: "Our Fundraising Food Festival is **tomorrow, Saturday, 11/14**! Please stop by in front of the office (Room 229) during school to grab a snack or lunch. Every purchase helps bring our 2027 Lunar New Year celebration to life. A big thank-you to the parent volunteers who are cooking and running the tables!",
               zh: "募款小吃義賣就在**明天 11/14（六）**！上課期間歡迎到辦公室前（229 室）買點心或午餐，每一份購買都是在為 2027 年新春聯歡活動出一份力。也特別感謝負責準備美食、顧攤位的志工家長們！",
+            },
+          },
+          {
+            block: "prose",
+            text: {
+              en: "This week I also had a very special visitor: my 5th grade teacher, 周麗芳老師, came back to FCS (more below). Seeing her again, in the same school where she taught me, meant so much to me, and it motivates me to keep serving this community.",
+              zh: "這週我也迎來一位非常特別的訪客：我五年級的老師周麗芳老師回校探視（詳見下方）。能在當年她教我的學校與她重逢，對我意義非凡，也更激勵我繼續為這個社區服務。",
             },
           },
         ],
@@ -304,6 +319,46 @@ export const issues: NewsletterIssue[] = [
       },
       {
         kind: "prose",
+        title: { en: "Week 12 Recap: A Visit from 周麗芳老師", zh: "第十二週回顧：周麗芳老師回校探視" },
+        blocks: [
+          {
+            block: "image",
+            src: "/images/news/enews-2026-11-13-teacher-visit.jpg",
+            alt: {
+              en: "Principal Angela Ha smiling with her former teacher 周麗芳老師 and her mom in a classroom at FCS.",
+              zh: "夏芷筠校長與周麗芳老師及夏校長的母親在費利蒙中文學校教室內合影。",
+            },
+            caption: {
+              en: "From left: Principal Angela Ha, 周麗芳老師, and Angela's mom, who was the class room parent back in 1998.",
+              zh: "左起：夏芷筠校長、周麗芳老師，以及當年擔任班級家長的夏校長母親。",
+            },
+          },
+          {
+            block: "image",
+            src: "/images/news/enews-2026-11-13-class-53-1998.jpg",
+            alt: {
+              en: "1998 class photo of FCS Class 53, with 周麗芳老師 and a young Angela Ha labeled.",
+              zh: "1998 年費利蒙中文學校第 53 班合照，標示出周麗芳老師與當年的夏芷筠。",
+            },
+          },
+          {
+            block: "prose",
+            text: {
+              en: "周麗芳老師 taught Chinese at FCS for 28 years and retired nearly ten years ago. Last Saturday she came back to visit Principal Angela Ha, one of her 5th grade students in 1998. 周老師 has also kindly offered to substitute for one of our AC classes. Thank you, 周老師!",
+              zh: "周麗芳老師在本校任教中文長達 28 年，退休將近十年。上週六她回校探視現任校長夏芷筠（周老師 1998 年授課的五年級學生），展現深厚的師生傳承。周老師此行也熱心表示將協助代課學分班一次，謝謝周老師！",
+            },
+          },
+          {
+            block: "prose",
+            text: {
+              en: "[See this week's photos](https://photos.app.goo.gl/mFWTe51bTxERLmrQ9)",
+              zh: "[查看本週照片](https://photos.app.goo.gl/mFWTe51bTxERLmrQ9)",
+            },
+          },
+        ],
+      },
+      {
+        kind: "prose",
         title: { en: "School Calendar 2026–2027", zh: "學校行事曆 2026–2027" },
         blocks: [
           { block: "prose", text: { en: "**Coming event(s):**", zh: "**近期活動：**" } },
@@ -328,6 +383,46 @@ export const issues: NewsletterIssue[] = [
           {
             label: { en: "Download calendar (English)", zh: "下載行事曆（英文版）" },
             href: "https://drive.google.com/file/d/1mHm8B4-LnNZkqqOY8qMvG7OReWaconzM/view",
+          },
+        ],
+      },
+      {
+        kind: "prose",
+        title: { en: "General Announcements", zh: "其他公告" },
+        numbered: true,
+        blocks: [
+          {
+            block: "subhead",
+            text: { en: "Good Luck on the TOCFL!", zh: "TOCFL 考試加油！" },
+          },
+          {
+            block: "image",
+            src: "/images/news/enews-2026-11-13-tocfl-students.jpg",
+            alt: {
+              en: "Five FCS students and a staff member standing outside the test center on TOCFL test day.",
+              zh: "TOCFL 考試當天，五位學生與一位老師在考場外合影。",
+            },
+          },
+          {
+            block: "prose",
+            text: {
+              en: "Last Sunday (11/8), our students took the TOCFL (Test of Chinese as a Foreign Language). Great job, everyone! Thank you also to Rose for the snacks and drinks she thoughtfully prepared for them.",
+              zh: "上週日（11/8）學生們參加了 TOCFL 華語文能力測驗，加油學生們！也謝謝 Rose 為他們細心準備的點心與飲料。",
+            },
+          },
+          {
+            block: "subhead",
+            text: {
+              en: "Honorable Mentions in the Sun Yat-sen Birthday Essay Contest",
+              zh: "國父誕辰紀念徵文比賽佳作",
+            },
+          },
+          {
+            block: "prose",
+            text: {
+              en: "Congratulations to our AP teacher 謝明暐老師 (Ms. Mingwei Shieh) and three students, who received honorable mentions in the essay contest commemorating Dr. Sun Yat-sen's birthday! [Read the news story](https://www.singtaousa.com/2026/11/08/news/usa/bay-area-commemorates-sun-yat-sen-2/) (in Chinese).",
+              zh: "恭喜 AP 班謝明暐老師與三位學生榮獲國父誕辰紀念徵文比賽佳作！[閱讀星島日報報導](https://www.singtaousa.com/2026/11/08/news/usa/bay-area-commemorates-sun-yat-sen-2/)。",
+            },
           },
         ],
       },
