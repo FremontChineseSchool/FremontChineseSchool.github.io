@@ -257,7 +257,7 @@ export const issues: NewsletterIssue[] = [
     // Teacher visit: facts from Angela's social media post (28 years teaching
     // at FCS, retired nearly ten years, taught Angela in 5th grade in 1998,
     // will substitute one AC class). Angela's mom (1998 room parent) is in
-    // both photos. Essay contest: Sing Tao story Angela linked; it names no
+    // both photos; Angela confirmed she is on the right in the recent one. Essay contest: Sing Tao story Angela linked; it names no
     // FCS winners, so the names come from Angela (all three 優秀作品獎;
     // no photo, per Angela).
     date: "2026-11-13",

@@ -8,7 +8,7 @@
  * Every Friday at 10:00 AM Pacific it reads
  *   https://fremontchineseschool.org/enews-email/latest.json
  * (the newest PUBLISHED issue — drafts never appear there) and emails that
- * issue to the parents list. It only sends when:
+ * issue to the parents list, cc'ing the teachers list. It only sends when:
  *   - the issue is dated within the past week (so a week with no new issue
  *     sends nothing, rather than re-sending last week's), and
  *   - that issue has not already been sent.
@@ -23,6 +23,8 @@
 
 const LATEST_URL = 'https://fremontchineseschool.org/enews-email/latest.json';
 const PARENTS = 'parents@fremontchineseschool.org';
+// Teachers get every parent send as a cc (from the 11/13/2026 issue on).
+const TEACHERS = 'teachers@fremontchineseschool.org';
 const TEST_TO = 'angelala24@gmail.com';
 // To test a DRAFT before it is published, paste its email link here, e.g.
 // 'https://fremontchineseschool.org/enews-email/9f3a1c.raw.html'.
@@ -62,9 +64,9 @@ function weeklySend() {
               '). Nothing was sent. Once this week\'s issue is published, run sendNowToParents.');
       return;
     }
-    send_(latest.emailUrl, PARENTS, latest.subject, latest.webUrl);
+    send_(latest.emailUrl, PARENTS, latest.subject, latest.webUrl, null, TEACHERS);
     props.setProperty('lastSentDate', latest.date);
-    report_('Sent the ' + latest.date + ' eNews to ' + PARENTS + '.');
+    report_('Sent the ' + latest.date + ' eNews to ' + PARENTS + ' (cc ' + TEACHERS + ').');
   } catch (err) {
     report_('The scheduled eNews send FAILED: ' + err + '\nNothing was sent to parents.');
     throw err;
@@ -80,9 +82,9 @@ function sendNowToParents() {
   if (props.getProperty('lastSentDate') === latest.date) {
     throw new Error('The ' + latest.date + ' eNews was already sent to parents.');
   }
-  send_(latest.emailUrl, PARENTS, latest.subject, latest.webUrl);
+  send_(latest.emailUrl, PARENTS, latest.subject, latest.webUrl, null, TEACHERS);
   props.setProperty('lastSentDate', latest.date);
-  report_('Sent the ' + latest.date + ' eNews to ' + PARENTS + ' (manual send).');
+  report_('Sent the ' + latest.date + ' eNews to ' + PARENTS + ' (cc ' + TEACHERS + ', manual send).');
 }
 
 /** Day-before check: sends a [TEST] copy to TEST_TO only. */
@@ -110,13 +112,15 @@ function fetchText_(url) {
   return UrlFetchApp.fetch(url + sep + 't=' + Date.now()).getContentText('UTF-8');
 }
 
-function send_(emailUrl, to, subject, webUrl, html) {
+function send_(emailUrl, to, subject, webUrl, html, cc) {
   const body = html || fetchText_(emailUrl);
+  const options = { htmlBody: body, name: SENDER_NAME };
+  if (cc) options.cc = cc;
   GmailApp.sendEmail(
     to,
     subject,
     'This email is best viewed with images on.' + (webUrl ? ' Read it on the web: ' + webUrl : ''),
-    { htmlBody: body, name: SENDER_NAME }
+    options
   );
 }
 
