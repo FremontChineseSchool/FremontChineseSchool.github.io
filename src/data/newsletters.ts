@@ -249,6 +249,139 @@ export type NewsletterIssue = {
  */
 export const issues: NewsletterIssue[] = [
   {
+    // Composed from Angela's notes in conversation (2026-11-10): the food
+    // festival is the headline; reuse the 11/6 flyer and point families to
+    // the office. Draft token generated with `openssl rand -hex 3`.
+    // 碗粿 pre-orders closed 11/11, so only pickup is mentioned.
+    // Calendar: every Google Calendar event 11/13–12/13.
+    date: "2026-11-13",
+    label: { en: "November 13, 2026", zh: "2026年11月13日" },
+    summary: {
+      en: "Our Fundraising Food Festival is tomorrow, 11/14! Stop by in front of the office (Room 229) to grab a bite and support our 2027 Lunar New Year celebration.",
+      zh: "募款小吃義賣就在明天（11/14）！歡迎到辦公室前（229 室）品嚐美食，一起為 2027 年新春聯歡活動籌款。",
+    },
+    draft: "c2784e",
+    gaps: ["Principal's note was drafted by Claude; waiting for Angela's OK."],
+    sections: [
+      {
+        kind: "prose",
+        title: { en: "A Note from the Principal", zh: "校長的話" },
+        blocks: [
+          { block: "prose", text: { en: "Dear FCS Families,", zh: "各位家長好：" } },
+          {
+            block: "prose",
+            text: {
+              en: "Our Fundraising Food Festival is **tomorrow, Saturday, 11/14**! Please stop by in front of the office (Room 229) during school to grab a snack or lunch. Every purchase helps bring our 2027 Lunar New Year celebration to life. A big thank-you to the parent volunteers who are cooking and running the tables!",
+              zh: "募款小吃義賣就在**明天 11/14（六）**！上課期間歡迎到辦公室前（229 室）買點心或午餐，每一份購買都是在為 2027 年新春聯歡活動出一份力。也特別感謝負責準備美食、顧攤位的志工家長們！",
+            },
+          },
+        ],
+        signoff: {
+          en: "Warmly,\nAngela\nPrincipal, Fremont Chinese School",
+          zh: "謹上\n夏芷筠\n費利蒙中文學校校長",
+        },
+      },
+      {
+        kind: "prose",
+        title: { en: "Food Festival Is Tomorrow!", zh: "小吃義賣就在明天！" },
+        blocks: [
+          {
+            block: "image",
+            src: "/images/news/enews-2026-11-06-food-festival-flyer-v2.jpg",
+            alt: {
+              en: "FCS Food Fundraising flyer picturing the menu, from braised pork rice and Wan Gui to boba milk tea and cotton candy.",
+              zh: "費利蒙中文學校小吃義賣宣傳單，圖示滷肉飯、碗粿、珍珠奶茶、棉花糖等菜單品項。",
+            },
+          },
+          {
+            block: "prose",
+            text: {
+              en: "Pre-ordered 碗粿 (Wan Gui)? Pick it up at the table and pay there.",
+              zh: "已預訂碗粿的家長，請至攤位取餐並付款。",
+            },
+          },
+        ],
+      },
+      {
+        kind: "prose",
+        title: { en: "School Calendar 2026–2027", zh: "學校行事曆 2026–2027" },
+        blocks: [
+          { block: "prose", text: { en: "**Coming event(s):**", zh: "**近期活動：**" } },
+          {
+            block: "list",
+            items: [
+              { en: "**11/14/2026**: Fundraising Food Festival", zh: "**11/14/2026**：募款小吃義賣" },
+              { en: "**11/28/2026**: No school (Thanksgiving)", zh: "**11/28/2026**：不上課（感恩節）" },
+              { en: "**12/5/2026**: AC Makeup Class 2", zh: "**12/5/2026**：學分班補課二" },
+              {
+                en: "**12/12/2026**: Final Exam; Last Day of 1st Semester",
+                zh: "**12/12/2026**：期末考、第一學期最後一天",
+              },
+            ],
+          },
+        ],
+        links: [
+          {
+            label: { en: "Download calendar (Chinese)", zh: "下載行事曆（中文版）" },
+            href: "https://drive.google.com/file/d/1kUl_nhpdAC0WLE0r6smb2fSjDUzRmSdX/view",
+          },
+          {
+            label: { en: "Download calendar (English)", zh: "下載行事曆（英文版）" },
+            href: "https://drive.google.com/file/d/1mHm8B4-LnNZkqqOY8qMvG7OReWaconzM/view",
+          },
+        ],
+      },
+      {
+        kind: "callout",
+        title: {
+          en: "Donate & Double Your Contribution",
+          zh: "捐款與雙倍貢獻",
+        },
+        blocks: [
+          {
+            block: "prose",
+            text: {
+              en: "FCS is a non-profit 501(c) organization. Donations are tax-deductible (IRS tax ID: **94-2978949**) and help Fremont Chinese School continue to operate, teach Chinese courses, and pass on Chinese culture.",
+              zh: "費利蒙中文學校是一家非營利性 501(c) 組織。您可以透過向費利蒙中文學校捐款來享受稅務抵減（IRS tax ID: **94-2978949**）。您的捐款將幫助本校繼續運營、教授中文課程並傳承中華文化。",
+            },
+          },
+          {
+            block: "prose",
+            text: {
+              en: "**Double your contribution:** thank you for volunteering at school! Your employer may offer volunteer cash rewards, so please consider donating those rewards to Fremont Chinese School. [Instructions and an example](https://docs.google.com/presentation/d/1Op2TlZ4wFSz7epqziWHmEauqEa5FnqRJ5yJofqQhpqs/edit).",
+              zh: "**雙倍貢獻：**感謝您在學校擔任義工！您的雇主也許提供義工獎勵金，歡迎將這筆獎勵金捐助給學校。[捐款方式說明與範例](https://docs.google.com/presentation/d/1Op2TlZ4wFSz7epqziWHmEauqEa5FnqRJ5yJofqQhpqs/edit)。",
+            },
+          },
+        ],
+        cta: {
+          label: { en: "Donate", zh: "前往捐款" },
+          href: "/donate",
+        },
+      },
+      {
+        kind: "sponsors",
+        title: {
+          en: "2026 Yearbook Gold Sponsors",
+          zh: "2026 年刊金牌贊助商",
+        },
+        logos: [
+          {
+            name: "IvyMAX 飛達教育",
+            image: "/images/sponsors/ivymax.jpg",
+            href: "https://ivymax.com",
+          },
+          {
+            name: "Fremont United Auto Service Inc. 聯合汽車修理中心",
+            image: "/images/sponsors/fremont-united-auto.jpg",
+            // href omitted: fremontunitedautoservice.com had no DNS records
+            // on 2026-10-13 (domain registered, site down; Angela confirmed
+            // it's down). Logo runs unlinked; restore the href once it resolves.
+          },
+        ],
+      },
+    ],
+  },
+  {
     // Composed from the draft Angela pasted in conversation (2026-11-02).
     // Draft token generated with `openssl rand -hex 3`.
     // Halloween collage: 9-photo collage Angela sent in conversation.
