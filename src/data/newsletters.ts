@@ -266,10 +266,7 @@ export const issues: NewsletterIssue[] = [
       en: "Our Fundraising Food Festival is tomorrow, 11/14! Stop by in front of the office (Room 229) to grab a bite and support our 2027 Lunar New Year celebration.",
       zh: "募款小吃義賣就在明天（11/14）！歡迎到辦公室前（229 室）品嚐美食，一起為 2027 年新春聯歡活動籌款。",
     },
-    draft: "c2784e",
-    gaps: [
-      "Principal's note was drafted by Claude; waiting for Angela's OK.",
-    ],
+    emailToken: "c2784e",
     sections: [
       {
         kind: "prose",
