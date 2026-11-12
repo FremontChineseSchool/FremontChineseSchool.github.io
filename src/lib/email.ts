@@ -82,8 +82,8 @@ function inlineEmail(text: string): string {
 const P = `margin:0 0 12px;font-size:14px;line-height:1.7;color:${C.ink};`;
 
 /** One locale's worth of a section's blocks. */
-function blocksHtml(blocks: Block[], lang: "en" | "zh", numbered: boolean): string {
-  let n = 0;
+function blocksHtml(blocks: Block[], lang: "en" | "zh", numbered: boolean, start = 0): string {
+  let n = start;
   return blocks
     .map((b) => {
       if (b.block === "subhead") {
@@ -110,6 +110,25 @@ function blocksHtml(blocks: Block[], lang: "en" | "zh", numbered: boolean): stri
         return `<img src="${abs(b.src)}" width="560" alt="${esc(b.alt.en)}" style="display:block;width:100%;max-width:560px;height:auto;border-radius:6px;margin:0 0 8px;">${cap}`;
       }
       return "";
+    })
+    .join("\n");
+}
+
+/** Split at each subhead; render every item as its Chinese then its English. */
+function numberedPairs(blocks: Block[]): string {
+  const groups: Block[][] = [];
+  for (const b of blocks) {
+    if (b.block === "subhead" || groups.length === 0) groups.push([]);
+    groups[groups.length - 1].push(b);
+  }
+  let n = 0;
+  return groups
+    .map((g) => {
+      const start = n;
+      if (g[0].block === "subhead") n += 1;
+      const zh = blocksHtml(g, "zh", true, start);
+      const en = blocksHtml(g, "en", true, start);
+      return zh + `<div style="margin-top:14px;">` + en + "</div>";
     })
     .join("\n");
 }
@@ -173,6 +192,9 @@ function sectionHtml(section: IssueSection, i: number): string {
   const numbered = section.kind === "prose" && !!section.numbered;
   const zh = blocksHtml(section.blocks, "zh", numbered);
   const en = blocksHtml(section.blocks, "en", numbered);
+  // Numbered sections hold several unrelated items, so each item gets its own
+  // Chinese-then-English pair instead of all Chinese followed by all English.
+  const pairs = numbered ? numberedPairs(section.blocks) : null;
   const signoff =
     section.kind === "prose" && section.signoff
       ? { zh: `<p style="${P}">${inlineEmail(section.signoff.zh).replace(/\n/g, "<br>")}</p>`, en: `<p style="${P}">${inlineEmail(section.signoff.en).replace(/\n/g, "<br>")}</p>` }
@@ -182,8 +204,9 @@ function sectionHtml(section: IssueSection, i: number): string {
       ? ctaButton(`${section.cta.label.zh} / ${section.cta.label.en}`, section.cta.href)
       : "";
 
-  const body =
-    zh + signoff.zh + `<div style="margin-top:14px;">` + en + signoff.en + "</div>" + linksRow(section) + cta;
+  const body = pairs
+    ? pairs + signoff.zh + signoff.en + linksRow(section) + cta
+    : zh + signoff.zh + `<div style="margin-top:14px;">` + en + signoff.en + "</div>" + linksRow(section) + cta;
 
   if (section.kind === "callout") {
     return row(
