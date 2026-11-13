@@ -258,8 +258,9 @@ export const issues: NewsletterIssue[] = [
     // at FCS, retired nearly ten years, taught Angela in 5th grade in 1998,
     // will substitute one AC class). Angela's mom (1998 room parent) is in
     // both photos; Angela confirmed she is on the right in the recent one. Essay contest: Sing Tao story Angela linked; it names no
-    // FCS winners, so the names come from Angela (all three 優秀作品獎;
-    // no photo, per Angela).
+    // FCS winners, so the names come from Angela (all three 優秀作品獎).
+    // Photo added 11/12; 高以斌 entered but did not win, so the caption names
+    // everyone without labeling who won (the text already says).
     date: "2026-11-13",
     label: { en: "November 13, 2026", zh: "2026年11月13日" },
     summary: {
@@ -412,6 +413,18 @@ export const issues: NewsletterIssue[] = [
             text: {
               en: "Awards in the Sun Yat-sen Birthday Essay Contest",
               zh: "國父誕辰紀念徵文比賽獲獎",
+            },
+          },
+          {
+            block: "image",
+            src: "/images/news/enews-2026-11-13-essay-contest-awards.jpg",
+            alt: {
+              en: "Three FCS students holding their essay contest certificates beside a bust of Dr. Sun Yat-sen, with a classmate holding a Fremont Chinese School sign and their teacher.",
+              zh: "三位學生手持徵文比賽獎狀，與同學及老師在國父銅像旁合影。",
+            },
+            caption: {
+              en: "From left: 劉怡婷, 譚嘉甯, 高以斌, Deborah老師 and 高予仙.",
+              zh: "照片左起：劉怡婷、譚嘉甯、高以斌、Deborah老師、高予仙。",
             },
           },
           {
