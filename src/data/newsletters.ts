@@ -280,13 +280,6 @@ export const issues: NewsletterIssue[] = [
               zh: "感謝大家讓上週六的募款小吃義賣圓滿成功！我們一起募得**超過 $2,000**，將全數用於 2027 年新春聯歡活動的摸彩獎品。特別感謝準備美食、佈置與顧攤位的志工家長們，也謝謝每一個前來捧場的家庭。",
             },
           },
-          {
-            block: "prose",
-            text: {
-              en: "A reminder that there is **no school on 11/28** for Thanksgiving. Wishing everyone a warm holiday with family!",
-              zh: "提醒大家，**11/28 感恩節週末不上課**。祝大家與家人共度溫馨的假期！",
-            },
-          },
         ],
         signoff: {
           en: "Warmly,\nAngela\nPrincipal, Fremont Chinese School",
