@@ -253,7 +253,8 @@ export const issues: NewsletterIssue[] = [
     // 11/14 Food Festival, which raised over $2,000 for the 2027 Lunar New
     // Year raffle prizes. Collage built by Claude from five photos Angela
     // sent; the rice-ball photo is cropped to drop a classroom poster.
-    // Calendar: every Google Calendar event 11/20–12/20.
+    // Calendar: every Google Calendar event 11/20–12/20, plus the ANCCS
+    // market (12/6), whose 11/6 announcement and flyer are carried forward.
     // Draft token generated with `openssl rand -hex 3`.
     date: "2026-11-20",
     label: { en: "November 20, 2026", zh: "2026年11月20日" },
@@ -323,6 +324,10 @@ export const issues: NewsletterIssue[] = [
               { en: "**11/28/2026**: No school (Thanksgiving)", zh: "**11/28/2026**：不上課（感恩節）" },
               { en: "**12/5/2026**: AC Makeup Class 2", zh: "**12/5/2026**：學分班補課二" },
               {
+                en: "**12/6/2026** (Sun): ANCCS Winter Cultural & Creative Market",
+                zh: "**12/6/2026**（日）：北加州中文學校聯合會冬藏惜福文化創意市集",
+              },
+              {
                 en: "**12/12/2026**: Final Exam; Last Day of 1st Semester",
                 zh: "**12/12/2026**：期末考、第一學期最後一天",
               },
@@ -341,6 +346,42 @@ export const issues: NewsletterIssue[] = [
           {
             label: { en: "Download calendar (English)", zh: "下載行事曆（英文版）" },
             href: "https://drive.google.com/file/d/1mHm8B4-LnNZkqqOY8qMvG7OReWaconzM/view",
+          },
+        ],
+      },
+      {
+        kind: "prose",
+        title: { en: "General Announcements", zh: "其他公告" },
+        numbered: true,
+        blocks: [
+          {
+            block: "subhead",
+            text: {
+              en: "ANCCS 2026 Winter Cultural & Creative Market (12/6)",
+              zh: "北加州中文學校聯合會 2026 冬藏惜福文化創意市集（12/6）",
+            },
+          },
+          {
+            block: "image",
+            src: "/images/news/enews-2026-11-06-anccs-winter-market.jpg",
+            alt: {
+              en: "Flyer for the ANCCS 2026 Winter Cultural & Creative Market, with the date, activities, schedule, and QR codes for tokens and free admission.",
+              zh: "北加州中文學校聯合會 2026 冬藏惜福文化創意市集宣傳單，列出日期、活動內容、流程，以及代幣預購與免費入場的 QR Code。",
+            },
+          },
+          {
+            block: "prose",
+            text: {
+              en: "Join the Association of Northern California Chinese Schools (ANCCS) at the 南灣華僑文教中心 (100 S Milpitas Blvd, Milpitas). Admission is free with registration.",
+              zh: "歡迎參加北加州中文學校聯合會主辦的市集，地點在南灣華僑文教中心（100 S Milpitas Blvd, Milpitas），免費報名入場。",
+            },
+          },
+          {
+            block: "prose",
+            text: {
+              en: "**[Register for free admission](https://www.zeffy.com/en-US/ticketing/copy-40)** (storytelling sign-up is here too) · [Pre-purchase tokens](https://www.zeffy.com/en-US/ticketing/5b63d089-6760-473c-8b70-95c938aecdb8)",
+              zh: "**[免費報名入場](https://www.zeffy.com/en-US/ticketing/copy-40)**（上台說故事也在此報名）· [預購代幣](https://www.zeffy.com/en-US/ticketing/5b63d089-6760-473c-8b70-95c938aecdb8)",
+            },
           },
         ],
       },
