@@ -251,8 +251,8 @@ export const issues: NewsletterIssue[] = [
   {
     // Composed from Angela's notes in conversation (2026-11-19): celebrate the
     // 11/14 Food Festival, which raised over $2,000 for the 2027 Lunar New
-    // Year raffle prizes. Photos #9 (crowd) and #20 (volunteers) picked by
-    // Claude from Angela's album "2026/11/14 小吃義賣&中文課紀錄".
+    // Year raffle prizes. Collage built by Claude from five photos Angela
+    // sent; the rice-ball photo is cropped to drop a classroom poster.
     // Calendar: every Google Calendar event 11/20–12/20.
     // Draft token generated with `openssl rand -hex 3`.
     date: "2026-11-20",
@@ -264,7 +264,6 @@ export const issues: NewsletterIssue[] = [
     draft: "222f6b",
     gaps: [
       "Principal's note was drafted by Claude; waiting for Angela's OK.",
-      "Food Festival photos were picked by Claude from the album; waiting for Angela's OK.",
     ],
     sections: [
       {
@@ -298,18 +297,10 @@ export const issues: NewsletterIssue[] = [
         blocks: [
           {
             block: "image",
-            src: "/images/news/enews-2026-11-20-food-festival-crowd.jpg",
+            src: "/images/news/enews-2026-11-20-food-festival-collage.jpg",
             alt: {
-              en: "Families and students crowding the hallway outside the FCS office to buy food at the fundraising food festival.",
-              zh: "募款小吃義賣當天，家長與學生擠滿辦公室外的走廊排隊購買美食。",
-            },
-          },
-          {
-            block: "image",
-            src: "/images/news/enews-2026-11-20-food-festival-volunteers.jpg",
-            alt: {
-              en: "Parent volunteers standing behind the food festival tables of drinks, snacks and a cotton candy machine.",
-              zh: "志工家長們站在擺滿飲料、點心與棉花糖機的義賣攤位後合影。",
+              en: "Collage from the Food Festival: parent volunteers behind tables of boba and snacks, families lining the hallway, volunteers selling persimmons, rows of 碗粿, and volunteers making rice balls.",
+              zh: "小吃義賣拼貼照：志工家長站在珍奶與點心攤位後、家長學生在走廊排隊、志工義賣柿子、整桌碗粿，以及志工現場製作飯糰。",
             },
           },
           {
