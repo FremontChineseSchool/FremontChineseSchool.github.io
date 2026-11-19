@@ -277,7 +277,7 @@ export const issues: NewsletterIssue[] = [
             block: "prose",
             text: {
               en: "Thank you for making last Saturday's Fundraising Food Festival such a success! Together we raised **over $2,000**, which will go toward the raffle prizes at our 2027 Lunar New Year celebration. A huge thank-you to the parent volunteers who cooked, set up and ran the tables, and to every family who stopped by for a bite.",
-              zh: "感謝大家讓上週六的募款小吃義賣圓滿成功！我們一起募得**超過 $2,000**，將全數用於 2027 年新春聯歡活動的摸彩獎品。特別感謝準備美食、佈置與顧攤位的志工家長們，也謝謝每一個前來捧場的家庭。",
+              zh: "感謝大家讓上週六的募款小吃義賣圓滿成功！我們一起募得**超過 $2,000**，將用於 2027 年新春聯歡活動的摸彩獎品。特別感謝準備美食、佈置與顧攤位的志工家長們，也謝謝每一個前來捧場的家庭。",
             },
           },
         ],
