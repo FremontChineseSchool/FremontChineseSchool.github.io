@@ -251,9 +251,8 @@ export const issues: NewsletterIssue[] = [
   {
     // Composed from Angela's notes in conversation (2026-11-19): celebrate the
     // 11/14 Food Festival, which raised over $2,000 for the 2027 Lunar New
-    // Year raffle prizes. Collage is Angela's "Street Snack Fundraiser"
-    // design; Claude blurred a classroom poster in the rice-ball photo
-    // ("COMMUNISM BEGINS") at her request.
+    // Year raffle prizes. Collage built by Claude from five photos Angela
+    // sent; the rice-ball photo is cropped to drop a classroom poster.
     // Calendar: every Google Calendar event 11/20–12/20, plus the ANCCS
     // market (12/6), whose 11/6 announcement and flyer are carried forward.
     // Proctor call condensed from Carol Wu's 學術競賽組 email Angela pasted.
@@ -290,10 +289,10 @@ export const issues: NewsletterIssue[] = [
         blocks: [
           {
             block: "image",
-            src: "/images/news/enews-2026-11-20-street-snack-collage.jpg",
+            src: "/images/news/enews-2026-11-20-food-festival-collage.jpg",
             alt: {
-              en: "\"Street Snack Fundraiser\" collage: families lined up at the food tables, volunteers making rice balls and cotton candy, and the parent volunteer team behind tables of boba and persimmons.",
-              zh: "「Street Snack Fundraiser」拼貼照：家長學生在攤位前排隊、志工製作飯糰與棉花糖，以及志工家長們站在珍奶與柿子攤位後合影。",
+              en: "Collage from the Food Festival: parent volunteers behind tables of boba and snacks, families lining the hallway, volunteers selling persimmons, rows of 碗粿, and volunteers making rice balls.",
+              zh: "小吃義賣拼貼照：志工家長站在珍奶與點心攤位後、家長學生在走廊排隊、志工義賣柿子、整桌碗粿，以及志工現場製作飯糰。",
             },
           },
           {
