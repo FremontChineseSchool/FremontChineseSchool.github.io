@@ -249,6 +249,185 @@ export type NewsletterIssue = {
  */
 export const issues: NewsletterIssue[] = [
   {
+    // Composed 2026-11-19, ahead of time: no school 11/28 (Thanksgiving), so
+    // Angela asked to prepare this issue early. Thanksgiving card is Angela's
+    // graphic (Chinese only), so the English caption translates it.
+    // Calendar, ANCCS market and proctor call carried forward from 11/20.
+    // MUST NOT be published before the 11/20 send (Fri 11/20 10 AM): the
+    // sender only mails latest.json's issue, and a future-dated latest would
+    // make it skip 11/20.
+    date: "2026-11-27",
+    label: { en: "November 27, 2026", zh: "2026年11月27日" },
+    summary: {
+      en: "Happy Thanksgiving from FCS! No school on 11/28; see you on 12/5.",
+      zh: "費利蒙中文學校祝大家感恩節快樂！11/28 不上課，12/5 見！",
+    },
+    draft: "ca55ff",
+    gaps: [
+      "Hold until after the 11/20 issue is sent (Fri 11/20 10 AM); publishing earlier makes the sender skip 11/20.",
+    ],
+    sections: [
+      {
+        kind: "flyer",
+        title: { en: "Happy Thanksgiving!", zh: "感恩節快樂！" },
+        image: "/images/news/enews-2026-11-27-thanksgiving.jpg",
+        alt: {
+          en: "Fremont Chinese School Thanksgiving card with a turkey in a pilgrim hat, a pumpkin, and autumn leaves.",
+          zh: "費利蒙中文學校感恩節賀卡，畫有戴著清教徒帽的火雞、南瓜與秋葉。",
+        },
+        caption: {
+          en: "At FCS, we are so grateful for all of your support. We appreciate and love you all. Happy Thanksgiving! There is **no school on Saturday, 11/28**; see you on **12/5**.",
+          zh: "**11/28（六）不上課**，我們 **12/5** 見！",
+        },
+      },
+      {
+        kind: "prose",
+        title: { en: "School Calendar 2026–2027", zh: "學校行事曆 2026–2027" },
+        blocks: [
+          { block: "prose", text: { en: "**Coming event(s):**", zh: "**近期活動：**" } },
+          {
+            block: "list",
+            items: [
+              { en: "**11/28/2026**: No school (Thanksgiving)", zh: "**11/28/2026**：不上課（感恩節）" },
+              {
+                en: "**12/1/2026**: Academic Contest proctor sign-up deadline",
+                zh: "**12/1/2026**：學術比賽監考登記截止",
+              },
+              { en: "**12/5/2026**: AC Makeup Class 2", zh: "**12/5/2026**：學分班補課二" },
+              {
+                en: "**12/6/2026** (Sun): ANCCS Winter Cultural & Creative Market",
+                zh: "**12/6/2026**（日）：北加州中文學校聯合會冬藏惜福文化創意市集",
+              },
+              {
+                en: "**12/12/2026**: Final Exam; Last Day of 1st Semester; Academic Contest proctor briefing (11 AM, Room 218)",
+                zh: "**12/12/2026**：期末考、第一學期最後一天；學術比賽監考說明會（上午 11 點，218 室）",
+              },
+              {
+                en: "**12/19/2026**: Academic Contest; no classes (1st semester ends)",
+                zh: "**12/19/2026**：學術比賽；不上課（第一學期結束）",
+              },
+            ],
+          },
+        ],
+        links: [
+          {
+            label: { en: "Download calendar (Chinese)", zh: "下載行事曆（中文版）" },
+            href: "https://drive.google.com/file/d/1kUl_nhpdAC0WLE0r6smb2fSjDUzRmSdX/view",
+          },
+          {
+            label: { en: "Download calendar (English)", zh: "下載行事曆（英文版）" },
+            href: "https://drive.google.com/file/d/1mHm8B4-LnNZkqqOY8qMvG7OReWaconzM/view",
+          },
+        ],
+      },
+      {
+        kind: "prose",
+        title: { en: "General Announcements", zh: "其他公告" },
+        numbered: true,
+        blocks: [
+          {
+            block: "subhead",
+            text: {
+              en: "ANCCS 2026 Winter Cultural & Creative Market (12/6)",
+              zh: "北加州中文學校聯合會 2026 冬藏惜福文化創意市集（12/6）",
+            },
+          },
+          {
+            block: "image",
+            src: "/images/news/enews-2026-11-06-anccs-winter-market.jpg",
+            alt: {
+              en: "Flyer for the ANCCS 2026 Winter Cultural & Creative Market, with the date, activities, schedule, and QR codes for tokens and free admission.",
+              zh: "北加州中文學校聯合會 2026 冬藏惜福文化創意市集宣傳單，列出日期、活動內容、流程，以及代幣預購與免費入場的 QR Code。",
+            },
+          },
+          {
+            block: "prose",
+            text: {
+              en: "Join the Association of Northern California Chinese Schools (ANCCS) at the 南灣華僑文教中心 (100 S Milpitas Blvd, Milpitas). Admission is free with registration.",
+              zh: "歡迎參加北加州中文學校聯合會主辦的市集，地點在南灣華僑文教中心（100 S Milpitas Blvd, Milpitas），免費報名入場。",
+            },
+          },
+          {
+            block: "prose",
+            text: {
+              en: "**[Register for free admission](https://www.zeffy.com/en-US/ticketing/copy-40)** (storytelling sign-up is here too) · [Pre-purchase tokens](https://www.zeffy.com/en-US/ticketing/5b63d089-6760-473c-8b70-95c938aecdb8)",
+              zh: "**[免費報名入場](https://www.zeffy.com/en-US/ticketing/copy-40)**（上台說故事也在此報名）· [預購代幣](https://www.zeffy.com/en-US/ticketing/5b63d089-6760-473c-8b70-95c938aecdb8)",
+            },
+          },
+          {
+            block: "subhead",
+            text: {
+              en: "Academic Contest Proctors Needed (sign up by 12/1)",
+              zh: "學術比賽徵求監考家長（12/1 前登記）",
+            },
+          },
+          {
+            block: "prose",
+            text: {
+              en: "Our Academic Contest is on **Saturday, 12/19, 9 AM to 1 PM** at Irvington High School, and we need **28 parent volunteers** to help proctor. It's easy, and it **waives one regular safety patrol duty**. Please pick at least two time slots; we'll assign slots based on need. Proctors attend a short briefing on **12/12 at 11 AM in Room 218**.",
+              zh: "本學年校內學術比賽將於 **12/19（六）上午 9 點至下午 1 點**在 Irvington High School 舉行，需要 **28 位家長**協助監考。監考很簡單，並可**免除一次常規安全巡邏**。請至少填寫兩個時段，實際時段將依人力安排。監考說明會於 **12/12 上午 11 點，218 室**舉行。",
+            },
+          },
+          {
+            block: "prose",
+            text: {
+              en: "**[Sign up to proctor](https://forms.gle/6CueVhwX93d3GDgcA)** by **12/1**. Thank you!",
+              zh: "**[監考登記](https://forms.gle/6CueVhwX93d3GDgcA)**，請於 **12/1** 前完成。謝謝大家！",
+            },
+          },
+        ],
+      },
+      {
+        kind: "callout",
+        title: {
+          en: "Donate & Double Your Contribution",
+          zh: "捐款與雙倍貢獻",
+        },
+        blocks: [
+          {
+            block: "prose",
+            text: {
+              en: "FCS is a non-profit 501(c) organization. Donations are tax-deductible (IRS tax ID: **94-2978949**) and help Fremont Chinese School continue to operate, teach Chinese courses, and pass on Chinese culture.",
+              zh: "費利蒙中文學校是一家非營利性 501(c) 組織。您可以透過向費利蒙中文學校捐款來享受稅務抵減（IRS tax ID: **94-2978949**）。您的捐款將幫助本校繼續運營、教授中文課程並傳承中華文化。",
+            },
+          },
+          {
+            block: "prose",
+            text: {
+              en: "**Double your contribution:** thank you for volunteering at school! Your employer may offer volunteer cash rewards, so please consider donating those rewards to Fremont Chinese School. [Instructions and an example](https://docs.google.com/presentation/d/1Op2TlZ4wFSz7epqziWHmEauqEa5FnqRJ5yJofqQhpqs/edit).",
+              zh: "**雙倍貢獻：**感謝您在學校擔任義工！您的雇主也許提供義工獎勵金，歡迎將這筆獎勵金捐助給學校。[捐款方式說明與範例](https://docs.google.com/presentation/d/1Op2TlZ4wFSz7epqziWHmEauqEa5FnqRJ5yJofqQhpqs/edit)。",
+            },
+          },
+        ],
+        cta: {
+          label: { en: "Donate", zh: "前往捐款" },
+          href: "/donate",
+        },
+      },
+      {
+        kind: "sponsors",
+        title: {
+          en: "2026 Yearbook Gold Sponsors",
+          zh: "2026 年刊金牌贊助商",
+        },
+        logos: [
+          {
+            name: "IvyMAX 飛達教育",
+            image: "/images/sponsors/ivymax.jpg",
+            href: "https://ivymax.com",
+          },
+          {
+            name: "Fremont United Auto Service Inc. 聯合汽車修理中心",
+            image: "/images/sponsors/fremont-united-auto.jpg",
+            // href omitted: fremontunitedautoservice.com had no DNS records
+            // on 2026-10-13 (domain registered, site down; Angela confirmed
+            // it's down). Logo runs unlinked; restore the href once it resolves.
+          },
+        ],
+      },
+    ],
+  },
+  {
     // Composed from Angela's notes in conversation (2026-11-19): celebrate the
     // 11/14 Food Festival, which raised over $2,000 for the 2027 Lunar New
     // Year raffle prizes. Collage built by Claude from five photos Angela
