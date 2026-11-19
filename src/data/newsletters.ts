@@ -561,6 +561,20 @@ export const issues: NewsletterIssue[] = [
           {
             block: "subhead",
             text: {
+              en: "55th Anniversary T-Shirts: Order Extras by 11/21",
+              zh: "55 週年紀念 T 恤加購（11/21 截止）",
+            },
+          },
+          {
+            block: "prose",
+            text: {
+              en: "To celebrate FCS's 55th anniversary, every student, teacher and staff member will receive a free commemorative t-shirt. Parents, TAs and family members can order their own for **$15 each**. **[Order by Saturday, 11/21](https://docs.google.com/forms/d/e/1FAIpQLSfuxPGDAcZEM2l1v6BJouUnHA22naKaKZOMhzV6j05sjBUmqA/viewform)**.",
+              zh: "為慶祝創校 55 週年，每位學生、老師及行政人員都將獲贈一件紀念 T 恤。家長、助教或家人如想擁有一件，歡迎加購，**每件 $15**。**[請於 11/21（六）前填表](https://docs.google.com/forms/d/e/1FAIpQLSfuxPGDAcZEM2l1v6BJouUnHA22naKaKZOMhzV6j05sjBUmqA/viewform)**。",
+            },
+          },
+          {
+            block: "subhead",
+            text: {
               en: "ANCCS 2026 Winter Cultural & Creative Market (12/6)",
               zh: "北加州中文學校聯合會 2026 冬藏惜福文化創意市集（12/6）",
             },
