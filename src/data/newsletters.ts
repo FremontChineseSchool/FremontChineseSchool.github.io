@@ -255,6 +255,7 @@ export const issues: NewsletterIssue[] = [
     // sent; the rice-ball photo is cropped to drop a classroom poster.
     // Calendar: every Google Calendar event 11/20–12/20, plus the ANCCS
     // market (12/6), whose 11/6 announcement and flyer are carried forward.
+    // Proctor call condensed from Carol Wu's 學術競賽組 email Angela pasted.
     // Draft token generated with `openssl rand -hex 3`.
     date: "2026-11-20",
     label: { en: "November 20, 2026", zh: "2026年11月20日" },
@@ -322,14 +323,18 @@ export const issues: NewsletterIssue[] = [
             block: "list",
             items: [
               { en: "**11/28/2026**: No school (Thanksgiving)", zh: "**11/28/2026**：不上課（感恩節）" },
+              {
+                en: "**12/1/2026**: Academic Contest proctor sign-up deadline",
+                zh: "**12/1/2026**：學術比賽監考登記截止",
+              },
               { en: "**12/5/2026**: AC Makeup Class 2", zh: "**12/5/2026**：學分班補課二" },
               {
                 en: "**12/6/2026** (Sun): ANCCS Winter Cultural & Creative Market",
                 zh: "**12/6/2026**（日）：北加州中文學校聯合會冬藏惜福文化創意市集",
               },
               {
-                en: "**12/12/2026**: Final Exam; Last Day of 1st Semester",
-                zh: "**12/12/2026**：期末考、第一學期最後一天",
+                en: "**12/12/2026**: Final Exam; Last Day of 1st Semester; Academic Contest proctor briefing (11 AM, Room 218)",
+                zh: "**12/12/2026**：期末考、第一學期最後一天；學術比賽監考說明會（上午 11 點，218 室）",
               },
               {
                 en: "**12/19/2026**: Academic Contest; no classes (1st semester ends)",
@@ -381,6 +386,27 @@ export const issues: NewsletterIssue[] = [
             text: {
               en: "**[Register for free admission](https://www.zeffy.com/en-US/ticketing/copy-40)** (storytelling sign-up is here too) · [Pre-purchase tokens](https://www.zeffy.com/en-US/ticketing/5b63d089-6760-473c-8b70-95c938aecdb8)",
               zh: "**[免費報名入場](https://www.zeffy.com/en-US/ticketing/copy-40)**（上台說故事也在此報名）· [預購代幣](https://www.zeffy.com/en-US/ticketing/5b63d089-6760-473c-8b70-95c938aecdb8)",
+            },
+          },
+          {
+            block: "subhead",
+            text: {
+              en: "Academic Contest Proctors Needed (sign up by 12/1)",
+              zh: "學術比賽徵求監考家長（12/1 前登記）",
+            },
+          },
+          {
+            block: "prose",
+            text: {
+              en: "Our Academic Contest is on **Saturday, 12/19, 9 AM to 1 PM** at Irvington High School, and we need **28 parent volunteers** to help proctor. It's easy, and it **waives one regular safety patrol duty**. Please pick at least two time slots; we'll assign slots based on need. Proctors attend a short briefing on **12/12 at 11 AM in Room 218**.",
+              zh: "本學年校內學術比賽將於 **12/19（六）上午 9 點至下午 1 點**在 Irvington High School 舉行，需要 **28 位家長**協助監考。監考很簡單，並可**免除一次常規安全巡邏**。請至少填寫兩個時段，實際時段將依人力安排。監考說明會於 **12/12 上午 11 點，218 室**舉行。",
+            },
+          },
+          {
+            block: "prose",
+            text: {
+              en: "**[Sign up to proctor](https://forms.gle/6CueVhwX93d3GDgcA)** by **12/1**. Thank you!",
+              zh: "**[監考登記](https://forms.gle/6CueVhwX93d3GDgcA)**，請於 **12/1** 前完成。謝謝大家！",
             },
           },
         ],
