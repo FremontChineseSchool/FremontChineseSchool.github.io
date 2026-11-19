@@ -258,9 +258,8 @@ export const issues: NewsletterIssue[] = [
     // Angela asked to prepare this issue early. Thanksgiving card is Angela's
     // graphic (Chinese only), so the English caption translates it.
     // Calendar, ANCCS market and proctor call carried forward from 11/20.
-    // MUST NOT be published before the 11/20 send (Fri 11/20 10 AM): the
-    // sender only mails latest.json's issue, and a future-dated latest would
-    // make it skip 11/20.
+    // Approved 11/19 and published early (Angela traveling); releaseCutoff
+    // keeps it out of latest.json until 11/26, after the 11/20 send.
     date: "2026-11-27",
     label: { en: "November 27, 2026", zh: "2026年11月27日" },
     headline: { en: "NO SCHOOL 11/28", zh: "11/28 不上課" },
@@ -268,10 +267,7 @@ export const issues: NewsletterIssue[] = [
       en: "Happy Thanksgiving from FCS! No school on 11/28; see you on 12/5.",
       zh: "費利蒙中文學校祝大家感恩節快樂！11/28 不上課，12/5 見！",
     },
-    draft: "ca55ff",
-    gaps: [
-      "Hold until after the 11/20 issue is sent (Fri 11/20 10 AM); publishing earlier makes the sender skip 11/20.",
-    ],
+    emailToken: "ca55ff",
     sections: [
       {
         kind: "flyer",
@@ -6112,9 +6108,30 @@ export const sortedIssues: NewsletterIssue[] = [...issues].sort((a, b) =>
   b.date.localeCompare(a.date),
 );
 
-/** Approved issues only, newest first. */
+/**
+ * The last date (YYYY-MM-DD, Pacific) whose issues count as released: today
+ * plus one day, so an issue can still be published the Thursday before its
+ * Friday date, as usual.
+ *
+ * An approved issue dated later than this is SCHEDULED: its pages are built
+ * but it stays out of listings and out of /enews-email/latest.json, so the
+ * Friday sender doesn't see it early (it would skip the current week's issue
+ * as "not this week"). The site rebuilds on a schedule (deploy.yml), so the
+ * issue is released automatically the day before its date. This lets the
+ * principal approve an issue a week or more ahead, e.g. while traveling.
+ */
+const releaseCutoff: string = (() => {
+  const today = new Intl.DateTimeFormat("en-CA", {
+    timeZone: "America/Los_Angeles",
+  }).format(new Date());
+  const d = new Date(`${today}T12:00:00Z`);
+  d.setUTCDate(d.getUTCDate() + 1);
+  return d.toISOString().slice(0, 10);
+})();
+
+/** Approved and released issues only, newest first. */
 export const publishedIssues: NewsletterIssue[] = sortedIssues.filter(
-  (i) => !i.draft,
+  (i) => !i.draft && i.date <= releaseCutoff,
 );
 
 /** The issue /enews/ shows. `undefined` until something is published. */
