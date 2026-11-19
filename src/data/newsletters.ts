@@ -155,6 +155,11 @@ export type NewsletterIssue = {
   /** Human-readable date for display. */
   label: Localized;
   /**
+   * Optional urgent one-liner, e.g. "NO SCHOOL 11/28". Appended to the email
+   * subject and shown in red under the masthead, so it reads before opening.
+   */
+  headline?: Localized;
+  /**
    * One sentence, ~120–160 chars: used as the page's meta description and as
    * the blurb in the archive list. Lead with what's actually in the issue.
    */
@@ -258,6 +263,7 @@ export const issues: NewsletterIssue[] = [
     // make it skip 11/20.
     date: "2026-11-27",
     label: { en: "November 27, 2026", zh: "2026年11月27日" },
+    headline: { en: "NO SCHOOL 11/28", zh: "11/28 不上課" },
     summary: {
       en: "Happy Thanksgiving from FCS! No school on 11/28; see you on 12/5.",
       zh: "費利蒙中文學校祝大家感恩節快樂！11/28 不上課，12/5 見！",
@@ -269,7 +275,7 @@ export const issues: NewsletterIssue[] = [
     sections: [
       {
         kind: "flyer",
-        title: { en: "Happy Thanksgiving!", zh: "感恩節快樂！" },
+        title: { en: "Happy Thanksgiving! NO SCHOOL 11/28", zh: "感恩節快樂！11/28 不上課" },
         image: "/images/news/enews-2026-11-27-thanksgiving.jpg",
         alt: {
           en: "Fremont Chinese School Thanksgiving card with a turkey in a pilgrim hat, a pumpkin, and autumn leaves.",

@@ -225,7 +225,8 @@ function displayDate(iso: string): string {
 
 /** The subject line previous issues used. */
 export function emailSubject(issue: NewsletterIssue): string {
-  return `費利蒙中文學校 FCS eNews ${displayDate(issue.date)}`;
+  const base = `費利蒙中文學校 FCS eNews ${displayDate(issue.date)}`;
+  return issue.headline ? `${base}｜${issue.headline.zh} / ${issue.headline.en}` : base;
 }
 
 /** The email itself — the fragment that gets pasted into Gmail. */
@@ -236,6 +237,7 @@ export function renderIssueEmail(issue: NewsletterIssue): string {
   const masthead = row(
     `<a href="${SITE}/"><img src="${SITE}/images/logo.png" width="260" alt="Fremont Chinese School 費利蒙中文學校" style="display:block;width:100%;max-width:260px;height:auto;border:0;margin:0 auto 4px;"></a>
      <div style="font-size:15px;font-weight:bold;color:${C.jadeDeep};margin-top:6px;">FCS eNews ${displayDate(issue.date)}</div>
+     ${issue.headline ? `<div style="font-size:18px;font-weight:bold;color:#B42318;margin-top:8px;">${esc(issue.headline.zh)} / ${esc(issue.headline.en)}</div>` : ""}
      <div style="font-size:12px;margin-top:8px;"><a href="${issueUrl}" style="color:${C.jadeDeep};text-decoration:underline;">在網頁上閱讀 / Read on the web</a></div>`,
     "center",
   );
