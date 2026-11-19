@@ -263,10 +263,7 @@ export const issues: NewsletterIssue[] = [
       en: "Thank you! Our Fundraising Food Festival raised over $2,000 for the 2027 Lunar New Year raffle prizes.",
       zh: "謝謝大家！募款小吃義賣共募得超過 $2,000，將用於 2027 年新春聯歡摸彩獎品。",
     },
-    draft: "222f6b",
-    gaps: [
-      "Principal's note was drafted by Claude; waiting for Angela's OK.",
-    ],
+    emailToken: "222f6b",
     sections: [
       {
         kind: "prose",
